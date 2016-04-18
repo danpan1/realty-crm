@@ -71,13 +71,13 @@ reload@1.1.7
 retry@1.0.6
 routepolicy@1.0.9
 sanjo:jasmine@1.0.1
+seba:minifiers-autoprefixer@1.0.1
 service-configuration@1.0.8
 session@1.1.4
 sha@1.0.6
 spacebars@1.0.10
 spacebars-compiler@1.0.10
 srp@1.0.7
-standard-minifier-css@1.0.5
 standard-minifier-js@1.0.5
 templating@1.1.8
 templating-tools@1.0.3
