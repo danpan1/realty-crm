@@ -5,30 +5,28 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
 import uiRouter from 'angular-ui-router';
-import './socially.html';
-import {name as PartiesList} from '../partiesList/partiesList';
-import {name as Navigation} from '../navigation/navigation';
-import {name as PartyDetails} from '../partyDetails/partyDetails';
+import './crm.view.html';
+import {name as myList} from '../myList/myList.component';
+import {name as Navigation} from '../navigation/navigation.component';
 import ngMaterial from 'angular-material';
 
-class Socially {
+class Crm {
 }
 
-const name = 'socially';
+const name = 'crm';
 
 // create a module
 export default angular.module(name, [
   angularMeteor,
   uiRouter,
   Navigation,
-  PartyDetails,
   ngMaterial,
-  PartiesList,
+  myList,
   'accounts.ui'
 ]).component(name, {
-  templateUrl: `imports/ui/components/${name}/${name}.html`,
+  templateUrl: `imports/ui/components/${name}/${name}.view.html`,
   controllerAs: name,
-  controller: Socially
+  controller: Crm
 }).config(config)
   .run(run);
 
@@ -37,7 +35,7 @@ function config($locationProvider, $urlRouterProvider,$mdIconProvider) {
 
   $locationProvider.html5Mode(true);
 
-  $urlRouterProvider.otherwise('/parties');
+  $urlRouterProvider.otherwise('/my/list');
 
   const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
 
