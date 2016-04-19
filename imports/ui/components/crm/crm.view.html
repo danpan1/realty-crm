@@ -5,24 +5,32 @@
         <md-button class="menu" hide-gt-sm ng-click="crm.toggleList()" aria-label="Show User List">
             <md-icon md-svg-icon="menu"></md-icon>
         </md-button>
-        <h1>Starter App</h1>
+        <div class="brand-logo"></div>
+        <span flex class="flex"></span>
+        <div class="today-date">
+            <span class="time">9:00</span>
+            <span class="weekday">Вторник</span>
+            <span class="divider">/</span>
+            <span class="day">31 Января</span>
+        </div>
     </md-toolbar>
 
     <!-- Container #2 (in wireframe) -->
     <div flex layout="row">
-
-        <!-- Container #3 (in wireframe) -->
-        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left"
-                    layout="column">
-
-            <md-button>
-                Добавить
-            </md-button>
-            <md-list layout="column">
-                <md-list-item ng-repeat="it in crm.users" href="{{it.href}}">
-                    <md-button ng-click="crm.selectUser(it)" ng-class="{'selected' : it === crm.selected }">
-                        {{it.name}}
-                    </md-button>
+        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" layout="column">
+            <md-button class="add-btn">Добавить</md-button>
+            <md-list layout="column" class="menu-block">
+                <md-list-item class="menu-item">
+                    <md-button class="menu-item-link selected">CRM</md-button>
+                </md-list-item>
+                <md-list-item class="menu-item">
+                    <md-button class="menu-item-link">Сообщения</md-button>
+                </md-list-item>
+                <md-list-item class="menu-item">
+                    <md-button class="menu-item-link">Документы</md-button>
+                </md-list-item>
+                <md-list-item class="menu-item">
+                    <md-button class="menu-item-link">Настройки</md-button>
                 </md-list-item>
             </md-list>
         </md-sidenav>

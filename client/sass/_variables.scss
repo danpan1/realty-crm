@@ -1,0 +1,17 @@
+@import 'helpers';
+
+@include font('OpenSans-Light', OpenSans-Light);
+@include font('OpenSans-Regular', OpenSans-Regular);
+@include font('OpenSans-Semibold', OpenSans-Semibold);
+
+$primary-color: #333;
+$secondary-color: #fff;
+
+$link-color: #fff;
+
+$body-font-family: 'OpenSans-Semibold', sans-serif;
+$body-font-size: 14px;
+$body-font-color: $primary-color;
+
+$select-border-color: #a3a3a3;
+$select-border-color-alt: #3a7de3;
