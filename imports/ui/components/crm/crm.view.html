@@ -14,10 +14,13 @@
         <!-- Container #3 (in wireframe) -->
         <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left"
                     layout="column">
+
+            <md-button>
+                Добавить
+            </md-button>
             <md-list layout="column">
-                <md-list-item ng-repeat="it in crm.users">
+                <md-list-item ng-repeat="it in crm.users" href="{{it.href}}">
                     <md-button ng-click="crm.selectUser(it)" ng-class="{'selected' : it === crm.selected }">
-                        <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
                         {{it.name}}
                     </md-button>
                 </md-list-item>
@@ -26,13 +29,7 @@
 
         <!-- Container #4 (in wireframe) -->
         <md-content flex id="content">
-            <md-icon md-svg-icon="{{crm.selected.avatar}}" class="avatar"></md-icon>
-            <h2>{{crm.selected.name}}</h2>
-            <p>{{crm.selected.content}}</p>
-
-            <md-button class="share" md-no-ink ng-click="crm.share($event)" aria-label="Share">
-                <md-icon md-svg-icon="share"></md-icon>
-            </md-button>
+            <ui-view></ui-view>
         </md-content>
 
     </div>
