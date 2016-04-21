@@ -31,52 +31,9 @@
             </md-list>
         </md-sidenav>
         <md-content flex class="workarea">
-            <div class="crm-panel">
-                <ul class="crm-menu">
-                    <li class="crm-menu-item selected">
-                        <a href="#" class="crm-menu-item-link">
-                            <span class="crm-menu-icon icon-objects"></span>
-                            <span class="crm-menu-name">Объекты</span>
-                        </a>
-                    </li>
-                    <li class="crm-menu-item">
-                        <a href="#" class="crm-menu-item-link">
-                            <span class="crm-menu-icon icon-clients"></span>
-                            <span class="crm-menu-name">Клиенты</span>
-                        </a>
-                    </li>
-                    <li class="crm-menu-item">
-                        <a href="#" class="crm-menu-item-link">
-                            <span class="crm-menu-icon icon-my-business"></span>
-                            <span class="crm-menu-name">Мои дела</span>
-                        </a>
-                    </li>
-                    <li class="crm-menu-item">
-                        <a href="#" class="crm-menu-item-link">
-                            <span class="crm-menu-icon icon-report"></span>
-                            <span class="crm-menu-name">Отчет</span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="crm-address-panel">
-                    <md-button class="btn-back">
-                        <md-icon md-svg-icon="svg/icon-arrow-left.svg"></md-icon>
-                    </md-button>
-                    <span class="address">ул.Таганская д.15 к.1  кв.20</span>
-                </div>
-                <div class="objects-panel">
-                    <ul class="objects-menu">
-                        <li class="objects-menu-item"><a class="objects-menu-link selected" href="#">Реклама</a></li>
-                        <li class="objects-menu-item"><a class="objects-menu-link" href="#">Объект</a></li>
-                    </ul>
-                    <ul class="objects-submenu">
-                        <li class="objects-submenu-item"><a class="objects-submenu-link selected" href="#">Подготовка</a></li>
-                        <li class="objects-submenu-item"><a class="objects-submenu-link" href="#">Рекламировать</a></li>
-                        <li class="objects-submenu-item"><a class="objects-submenu-link" href="#">Связи</a></li>
-                        <li class="objects-submenu-item"><a class="objects-submenu-link" href="#">Соц. сети</a></li>
-                        <li class="objects-submenu-item"><a class="objects-submenu-link" href="#">Предложение</a></li>
-                    </ul>
-                </div>
+            Picked metro : {{crm.pickedMetroIds}}
+            <div layout="row">
+                <subway-chips ng-model="crm.pickedMetroIds"></subway-chips>
             </div>
             <h1 class="content-title">Шансы на сделку</h1>
             <div class="content-block first-content-block">

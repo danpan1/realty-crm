@@ -8,6 +8,7 @@ import uiRouter from 'angular-ui-router';
 import './crm.view.html';
 import {name as myList} from '../myList/myList.component';
 import {name as messages} from '../messages/messages.component';
+import {name as SubwayChips}from '/imports/ui/core/subwayChips/subwayChips.component.js';
 import ngMaterial from 'angular-material';
 /**
  * Main App Controller for the Angular Material Starter App
@@ -22,7 +23,7 @@ function Crm( $mdSidenav, $mdBottomSheet, $log ) {
   // $log.debug( "instanceOf() ");
 
   var self = this;
-
+  self.pickedMetroIds =  ["Tr7cMnxu8cr7BbzvE","ktYzMPsmw72Sej3cQ"];
   self.selected     = null;
   self.users        = [ ];
   self.selectUser   = selectUser;
@@ -128,6 +129,7 @@ const name = 'crm';
 export default angular.module(name, [
   angularMeteor,
   uiRouter,
+  SubwayChips,
   messages,
   ngMaterial,
   myList,
