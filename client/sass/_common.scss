@@ -2,6 +2,7 @@
 @import 'variables';
 @import 'animation';
 @import 'icons';
+@import 'components';
 
 html, body {
     margin: 0;
@@ -19,6 +20,29 @@ img {
 ul {
     padding-left: 0;
     list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    color: $primary-color;
+}
+
+a {
+    text-decoration: none;
+    color: $link-color;
+}
+
+p {
+    font-family: 'OpenSans-Regular';
+}
+
+crm {
+    max-width: 1280px;
+}
+
+.md-button {
+    font-size: 15px;
+    color: $primary-color;
 }
 
 md-toolbar {
@@ -90,8 +114,7 @@ md-list {
     height: 36px;
     margin: 30px 8px 35px 14px;
     background-color: #baed21;
-    border-radius: 3px;
-    box-shadow: 1.5px 2.6px 3px rgba(157, 157, 157, 0.36);
+    @extend %button;
     text-transform: capitalize;
     color: #575757;
     &:before {
@@ -111,8 +134,7 @@ md-content {
 }
 
 .workarea {
-    padding: 0 25px;
-    overflow: hidden;
+    padding-right: 20px;
 }
 
 .crm-menu {
@@ -121,7 +143,7 @@ md-content {
 
 .crm-menu-item {
     display: inline-block;
-    margin: 10px;
+    margin: 10px 25px 10px 10px;
     padding: 19px 10px 9px;
     &.selected {
         background-color: #bbdefb;
@@ -161,6 +183,8 @@ md-content {
 }
 
 .address {
+    display: inline-block;
+    margin-left: 6px;
     vertical-align: top;
     font-size: 30px;
     color: #000;
@@ -207,4 +231,257 @@ md-content {
 .objects-submenu-item {
     display: inline-block;
     margin: 0 14px;
+}
+
+.content-title {
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-family: 'OpenSans-Light';
+    font-size: 30px;
+}
+
+.content-block {
+    margin: 30px 0 15px;
+    padding: 5px 10px 10px 20px;
+    border: 1px solid $border-color;
+    background: #fff;
+}
+
+.first-content-block {
+    margin: 0;
+}
+
+.content-block-title {
+    font-family: 'OpenSans-Light';
+    font-size: 41px;
+}
+
+.content-block-text-title {
+    margin: 15px 0 0;
+    font-family: 'OpenSans-Regular';
+    font-size: 24px;
+}
+
+.content-block-text-desc {
+    margin: 10px 0;
+    font-family: 'OpenSans-Regular';
+}
+
+.add-photo {
+    width: 182px;
+    height: 36px;
+    font-family: 'OpenSans-Regular';
+    background-color: #f7f7f7;
+    @extend %button;
+    text-transform: none;
+}
+
+.added-photos {
+    padding: 20px 10px;
+    border: 1px solid $border-color;
+    background: #fff;
+}
+
+.added-photo-list {
+    justify-content: space-around;    
+}
+
+.added-photo-item {
+    position: relative;
+    margin: 18px 0;
+    padding: 0 3px;
+    text-align: center;
+}
+
+.btn-yes {
+    width: 73px;
+    height: 36px;
+    min-width: initial;
+    background-color: #f7f7f7;
+    @extend %button;
+}
+
+.btn-no {
+    width: 76px;
+    height: 36px;
+    min-width: initial;
+    background-color: #03a9f4;
+    @extend %button;
+    color: #fff;
+}
+
+.btn-blue {
+    @extend %button;
+    @extend %blue-button;
+    text-transform: none;
+    color: #fff;
+}
+
+.btn-remove-photo {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    background: url('img/common/btn-remove-photo.png') no-repeat;
+    width: 21px;
+    height: 21px;
+    min-width: initial;
+    min-height: initial;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+}
+
+.btn-make-main-photo {
+    @include centerer(true, false);
+    bottom: 15px;
+    width: 207px;
+    height: 34px;
+    min-width: initial;
+    min-height: initial;
+    font-size: 14px;
+    text-transform: none;
+    background-color: rgba(33, 150, 243, 0.7);
+    color: #fff;
+}
+
+.buy-title-container {
+    margin: 10px 0;
+}
+
+.buy-title {
+    width: 100%;
+    max-width: 706px;
+    padding: 8px;
+    font-family: 'OpenSans-Regular';
+    font-size: 20px;
+    border: 1px solid $border-color;
+    @include placeholder {
+        color: #a9a9a9;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+
+.buy-title-size {
+    margin-left: 3px;
+    font-family: 'OpenSans-Regular';
+    font-size: 20px;
+}
+
+.buy-message-container {
+    margin: 8px 0;
+    padding-right: 48px;
+}
+
+.buy-message {
+    width: 100%;
+    max-width: 1058px;
+    padding: 10px 10px 80px 10px;
+    line-height: 25px;
+    border: 1px solid $border-color;
+    resize: none;
+    &:focus {
+        outline: none;
+    }
+}
+
+.form-group {
+    margin-bottom: 8px;
+}
+
+.square-checkbox {
+    width: 20px;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    &:checked + .square-label > .checkbox-alt:before {
+        display: block;
+        width: 10px;
+        height: 10px;
+        margin: 4px;
+        background-color: #02b8e7;
+        content: '';
+    }
+}
+
+.square-label {
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 0 5px -24px;
+    padding-top: 8px;
+    font-family: 'OpenSans-Regular';
+}
+
+.checkbox-alt {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin: 0 7px 3px 0;
+    vertical-align: middle;
+    line-height: 30px;
+    border: 1px solid #00c3e9;
+    background: #fff;
+}
+
+.btn-save-container {
+    max-width: 1120px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-save {
+    width: 100%;
+    height: 75px;
+    margin: 0;
+    padding: 0;
+    font-family: 'OpenSans-Regular';
+    font-size: 30px;
+    color: #575757;
+    background-color: #baed21;
+    @extend %button;
+}
+
+.fixed-block {
+    max-width: 1040px;
+}
+
+select {
+    position: relative;
+    min-width: 216px;
+    padding: 5px 14px;
+    font-family: 'OpenSans-Regular';
+    border: 1px solid #6fb8e4;
+    border-radius: 0;
+    -webkit-appearance: none;
+    box-shadow: none;
+    background: #fff;
+    &:focus {
+        outline: none;
+    }
+}
+
+.checkbox-wrapper { 
+    margin-left: 53px;
+}
+
+.generate-new-desc {
+    max-width: 291px;
+    margin: 20px 0;
+}
+
+.select-container {
+    position: relative;
+    display: inline-block;
+    &:before {
+        z-index: 1;
+        @include pseudo(auto, 0);
+        top: 13px;
+        right: 10px;
+        display: block;
+        line-height: 0;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        border-top: 6px solid #000;
+    }
 }

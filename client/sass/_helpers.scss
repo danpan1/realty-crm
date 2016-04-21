@@ -30,6 +30,15 @@
     }
 }
 
+@mixin placeholder {
+    $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+    @each $placeholder in $placeholders {
+        &:#{$placeholder}-placeholder {
+            @content;
+        }
+    }
+}
+
 %hide-text {
     text-indent: 110%;
     white-space: nowrap;
