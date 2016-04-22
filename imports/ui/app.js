@@ -7,8 +7,8 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 
-import config from './config'
-import runBlock from './runBlock'
+import config from './config';
+import runBlock from './runBlock';
 import {name as Layout}from '/imports/ui/layout/layout.component';
 
 // import {name as myList} from '../myList/myList.component';

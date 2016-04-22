@@ -7,8 +7,8 @@ import angularMeteor from 'angular-meteor';
 import './layout.view.html';
 
 class Layout {
+  /* @ngInject */
   constructor($mdSidenav) {
-    'ngInject';
     this.$mdSidenav = $mdSidenav;
     this.sideNavItems = [
       {name:'Объекты', uisref:'realty'},
