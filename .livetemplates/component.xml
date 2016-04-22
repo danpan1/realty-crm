@@ -1,0 +1,13 @@
+}<template name="compon" value="import angular from 'angular';&#10;import angularMeteor from 'angular-meteor';&#10;&#10;import './$name$.view.html';&#10;&#10;class $NameCamel$ {&#10;  /* @ngInject */&#10;  constructor($scope, $reactive) {&#10;    $reactive(this).attach($scope);&#10;  }&#10;&#10;}&#10;&#10;const moduleName = '$nameCamel$';&#10;&#10;// create a module&#10;export default angular.module(moduleName, [&#10;  angularMeteor&#10;]).component(moduleName, {&#10;  templateUrl: 'imports/ui/$parentState$/$name$/$name$.view.html',&#10;  bindings: {&#10;  },&#10;  controllerAs: moduleName,&#10;  controller: $NameCamel$&#10;})&#10;  .config(config);&#10;&#10;function config($stateProvider) {&#10;  'ngInject';&#10;  $stateProvider&#10;    .state('$parentState$.$url$', {&#10;      url: '/$url$',&#10;      template: '&lt;$name$/&gt;'&#10;    });&#10;}&#10;" toReformat="true" toShortenFQNames="true">
+    <variable name="NameCamel" expression="capitalize(camelCase(fileNameWithoutExtension()))" defaultValue="" alwaysStopAt="true" />
+    <variable name="nameCamel" expression="camelCase(fileNameWithoutExtension())" defaultValue="" alwaysStopAt="true" />
+    <variable name="name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="parentState" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="url" expression="firstWord(spaceSeparated(fileNameWithoutExtension()))" defaultValue="" alwaysStopAt="true" />
+    <context>
+        <option name="JAVA_SCRIPT" value="true" />
+        <option name="JS_EXPRESSION" value="true" />
+        <option name="JSX_HTML" value="true" />
+        <option name="JS_STATEMENT" value="true" />
+    </context>
+</template>
