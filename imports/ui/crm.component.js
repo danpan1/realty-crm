@@ -33,26 +33,26 @@ function Crm( $mdSidenav, $mdBottomSheet, $log ) {
   // Load all registered users
 
   // usersService
-    // .loadAll()
-    // .then( function( users ) {
-      self.users    = [
-        {
-          name: 'CRM',
-          href : '/my/list'
-        },
-        {
-          name: 'Сообщения',
-          href : '/messages'
-        },
-        {
-          name: 'Документы',
-        },
-        {
-          name: 'Настройки',
-        },
-      ];
-      self.selected = self.users[0];
-    // });
+  // .loadAll()
+  // .then( function( users ) {
+  self.users    = [
+    {
+      name: 'CRM',
+      href : '/my/list'
+    },
+    {
+      name: 'Сообщения',
+      href : '/messages'
+    },
+    {
+      name: 'Документы',
+    },
+    {
+      name: 'Настройки',
+    },
+  ];
+  self.selected = self.users[0];
+  // });
 
   // *********************************
   // Internal methods
@@ -120,11 +120,8 @@ function Crm( $mdSidenav, $mdBottomSheet, $log ) {
   }
 }
 
-// class Crm {
-// }
 
 const name = 'crm';
-
 // create a module
 export default angular.module(name, [
   angularMeteor,
@@ -140,48 +137,3 @@ export default angular.module(name, [
   controller: Crm
 }).config(config)
   .run(run);
-const URL_AVATAR_ICONS = 'svg/avatars.svg';
-const URL_ICON_MENU    = 'svg/menu.svg';
-const URL_ICON_SHARE   = 'svg/share.svg';
-function config($locationProvider, $urlRouterProvider,$mdIconProvider) {
-  'ngInject';
-
-  $locationProvider.html5Mode(true);
-
-  $urlRouterProvider.otherwise('/my/list');
-
-  const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
-
-  $mdIconProvider
-    .defaultIconSet( URL_AVATAR_ICONS, 128 )
-    .icon('menu' ,URL_ICON_MENU, 24)
-    .icon('share',URL_ICON_SHARE, 24);
-
-  $mdIconProvider
-    .iconSet('social',
-      iconPath + 'svg-sprite-social.svg')
-    .iconSet('action',
-      iconPath + 'svg-sprite-action.svg')
-    .iconSet('communication',
-      iconPath + 'svg-sprite-communication.svg')
-    .iconSet('content',
-      iconPath + 'svg-sprite-content.svg')
-    .iconSet('toggle',
-      iconPath + 'svg-sprite-toggle.svg')
-    .iconSet('navigation',
-      iconPath + 'svg-sprite-navigation.svg')
-    .iconSet('image',
-      iconPath + 'svg-sprite-image.svg');
-}
-
-function run($rootScope, $state) {
-  'ngInject';
-
-  $rootScope.$on('$stateChangeError',
-    (event, toState, toParams, fromState, fromParams, error) => {
-      if(error === 'AUTH_REQUIRED') {
-        $state.go('parties');
-      }
-    }
-  );
-}

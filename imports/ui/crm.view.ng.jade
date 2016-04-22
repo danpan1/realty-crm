@@ -1,0 +1,201 @@
+div(flex='', layout='column')
+    md-toolbar(layout='row')
+        md-button.menu(hide-gt-sm='', ng-click='crm.toggleList()', aria-label='Show User List')
+            md-icon(md-svg-icon='menu' ng-click='crm.selectUser()')
+        .brand-logo
+        span.flex(flex='')
+        .today-date
+            span.time 9:00
+            span.weekday Вторник
+            span.divider /
+            span.day 31 Января
+    div(flex='', layout='row')
+        md-sidenav(md-is-locked-open="$mdMedia('gt-sm')", md-component-id='left', layout='column')
+            md-button.add-btn Добавить
+            md-list.menu-block(layout='column')
+                md-list-item.menu-item
+                    md-button.menu-item-link.selected CRM
+                md-list-item.menu-item
+                    md-button.menu-item-link Сообщения
+                md-list-item.menu-item
+                    md-button.menu-item-link Документы
+                md-list-item.menu-item
+                    md-button.menu-item-link Настройки
+        md-content.workarea(flex='')
+            | Picked привет metro : {{crm.pickedMetroIds}}
+            div(layout='row')
+                subway-chips(ng-model='crm.pickedMetroIds')
+            h1.content-title Шансы на сделку
+            .content-block.first-content-block
+                div(layout='row', layout-align='center center')
+                    div(flex='35')
+                        h1.content-block-title 1) Фото 20%
+                    div(flex='25')
+                        md-button.add-photo Добавить фотографии
+                    div(flex='40')
+                        .content-block-text
+                            h3.content-block-text-title Ответ модератора:
+                            p.content-block-text-desc Не качественные.
+                            p.content-block-text-desc
+                                | Закажите профессиональные
+                                a(href='#') в 2 клика
+            .added-photos
+                .added-photo-list(layout='row', layout-wrap='')
+                    .added-photo-item(flex='30')
+                        md-button.btn-remove-photo
+                        md-button.btn-make-main-photo Сделать главным фото
+                        img(src='img/common/photo-1.jpg', alt='Фото-1')
+                    .added-photo-item(flex='30')
+                        md-button.btn-remove-photo
+                        img(src='img/common/photo-1.jpg', alt='Фото-1')
+                    .added-photo-item(flex='30')
+                        md-button.btn-remove-photo
+                        img(src='img/common/photo-1.jpg', alt='Фото-1')
+                    .added-photo-item(flex='30')
+                        md-button.btn-remove-photo
+                        img(src='img/common/photo-1.jpg', alt='Фото-1')
+                    .added-photo-item(flex='30')
+                        md-button.btn-remove-photo
+                        img(src='img/common/photo-1.jpg', alt='Фото-1')
+                    .added-photo-item(flex='30')
+                        md-button.btn-remove-photo
+                        img(src='img/common/photo-1.jpg', alt='Фото-1')
+                    .added-photo-item(flex='30')
+                        md-button.btn-remove-photo
+                        img(src='img/common/photo-1.jpg', alt='Фото-1')
+                    .added-photo-item(flex='30')
+                        md-button.btn-remove-photo
+                        img(src='img/common/photo-1.jpg', alt='Фото-1')
+                    .added-photo-item(flex='30')
+                        md-button.btn-remove-photo
+                        img(src='img/common/photo-1.jpg', alt='Фото-1')
+            .content-block
+                div(layout='row', layout-align='center center')
+                    div(flex='35')
+                        h1.content-block-title 2) Просмотр 0%
+                    div(flex='25')
+                        md-button.btn-yes Да
+                        md-button.btn-no Нет
+                    div(flex='40')
+                        .content-block-text
+                            h3.content-block-text-title Ответ модератора:
+                            p.content-block-text-desc Без просмотра сложно совершать сделки. Посмотрите.
+                            p.content-block-text-desc
+                                a(href='#') «Как делать эффективный просмотр»
+            .content-block
+                div(layout='row', layout-align='center center')
+                    div(flex='60')
+                        h1.content-block-title 3) Качество рекламы 50%
+                    div(flex='40')
+                        .content-block-text
+                            h3.content-block-text-title Ответ модератора:
+                            p.content-block-text-desc Текст текст
+                            p.content-block-text-desc вторая строка
+                div(layout='column')
+                    .buy-title-container(flex='')
+                        input.buy-title(flex='', type='text', placeholder='Уникальный продающий заголовок 65 символов, который тебя цепляет')
+                        span.buy-title-size 65
+                    .buy-message-container(flex='')
+                        textarea.buy-message(flex='', name='buy-message', id='')
+                    .fixed-block
+                        div(flex='', layout='row')
+                            div(flex='65', layout='row')
+                                div(flex='')
+                                    .form-group
+                                        input#checkbox1.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox1')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             Мебель
+                                    .form-group
+                                        input#checkbox2.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox2')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             Кух. Мебель
+                                    .form-group
+                                        input#checkbox3.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox3')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             Телевизор
+                                div(flex='')
+                                    .form-group
+                                        input#checkbox4.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox4')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             Холодильник
+                                    .form-group
+                                        input#checkbox5.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox5')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             Стир. машина
+                                    .form-group
+                                        input#checkbox6.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox6')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             С животными
+                                div(flex='')
+                                    .form-group
+                                        input#checkbox7.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox7')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             С детьми
+                                    .form-group
+                                        input#checkbox8.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox8')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             Балкон
+                                    .form-group
+                                        input#checkbox9.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox9')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             Лифт
+                                    .form-group
+                                        input#checkbox10.square-checkbox(type='checkbox')
+                                        label.square-label(for='checkbox10')
+                                            span.btn-refresh
+                                            span.checkbox-alt
+                                            |                                             Wi-Fi
+                            div(flex='35')
+                                .form-group.checkbox-wrapper
+                                    label.square-label(for='checkbox7')
+                                        span.btn-refresh
+                                        |                                         Вид из окна
+                                    .select-container
+                                        select.view-from-window
+                                            option(value='Улица') Улица
+                                            option(value='Двор') Двор
+                                            option(value='Улица') Улица
+                                            option(value='Двор') Двор
+                    md-button.btn-blue.generate-new-desc Сгенерировать новое описание
+            .content-block
+                div(layout='row', layout-align='center center')
+                    div(flex='60')
+                        h1.content-block-title 4) Объем рекламы 10%
+                    div(flex='40')
+                        .content-block-text
+                            h3.content-block-text-title Ответ модератора:
+                            p.content-block-text-desc Текст текст
+                            p.content-block-text-desc вторая строка
+            .content-block
+                div(layout='row', layout-align='center center')
+                    div(flex='35')
+                        h1.content-block-title 5) Эксклюзив 0%
+                    div(flex='25')
+                        md-button.btn-yes Да
+                        md-button.btn-no Нет
+                    div(flex='40')
+                        .content-block-text
+                            h3.content-block-text-title Ответ модератора:
+                            p.content-block-text-desc Пройдите интенсив
+                            p.content-block-text-desc
+                                a(href='#') «Как умело закрывать на эксклюзив за 10 минут»
+            .btn-save-container
+                md-button.btn-save Сохранить

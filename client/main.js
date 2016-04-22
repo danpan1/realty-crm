@@ -2,12 +2,12 @@ import angular from 'angular';
 
 import { Meteor } from 'meteor/meteor';
 
-import { name as Crm } from '../imports/ui/components/crm/crm.component';
+import { name as App } from '/imports/ui/app';
 angular
   .module('sidenavDemo1', ['ngMaterial']);
 function onReady() {
   angular.bootstrap(document, [
-    Crm
+    App
   ], {
     strictDi: true
   });

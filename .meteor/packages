@@ -25,3 +25,5 @@ tmeasday:publish-counts
 planettraining:material-design-icons
 fourseven:scss
 seba:minifiers-autoprefixer
+
+civilframe:angular-jade
