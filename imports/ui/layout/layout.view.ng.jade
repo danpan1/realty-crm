@@ -1,1 +1,18 @@
-div Привет layout
+
+
+// Container #1 (see wireframe)
+md-toolbar(layout='row')
+    md-button.menu(hide-gt-md='', ng-click='layout.toggleList()')
+        md-icon(md-svg-icon='menu')
+
+// Container #2
+div(flex='', layout='row')
+    // Container #3
+    md-sidenav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left")
+        md-list
+            md-list-item(ng-repeat="item in layout.sideNavItems" ui-sref='{{item.uisref}}')
+                md-button {{item.name}}
+
+    // Container #4
+    md-content#content(flex='')
+        ui-view
