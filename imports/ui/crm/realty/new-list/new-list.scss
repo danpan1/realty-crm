@@ -1,23 +1,23 @@
 .newList {
   &_ID {
-    width: 90px;
+    width: 9rem;
   }
   &_Address {
-    width: 155px;
+    width: 15.5rem;
   }
   &_Price {
-    width: 115px;
+    width: 11.5rem;
   }
   &_Photo {
-    width: 140px;
+    width: 14rem;
   }
   &_Info {
-    width: 110px;
+    width: 11rem;
   }
-  &_Conditions {
-    //width: 145px;
-  }
+  /*&_Conditions {
+    width: auto;
+  }*/
   &_Actions {
-    width: 140px;
+    width: 14rem;
   }
 }
