@@ -5,12 +5,12 @@ import {Meteor} from 'meteor/meteor';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 
+import {name as layout} from '/imports/ui/layout/layout.component';
 import {name as CRM} from '/imports/ui/crm/crm.module';
 import {name as CallCenter}from '/imports/ui/call-center/call-center.component';
-import {name as layout}from '/imports/ui/layout/layout.component';
 
 angular
-  .module('app', ['app.custom', CRM, CallCenter, layout]).config(config).run(run);
+  .module('app', ['app.custom', layout, CRM, CallCenter]).config(config).run(run);
 
 angular
   .module('app.custom', [uiRouter, ngMaterial, 'accounts.ui']);

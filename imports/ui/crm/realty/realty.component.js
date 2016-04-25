@@ -7,9 +7,9 @@ const moduleName = 'realty';
 
 class Realty {
   /* @ngInject */
-  constructor($scope, $reactive) {
-    $reactive(this).attach($scope);
-  }
+  // constructor($scope, $reactive) {
+  //   $reactive(this).attach($scope);
+  // }
 
 }
 // create a module

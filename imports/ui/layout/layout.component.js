@@ -18,7 +18,7 @@ class Layout {
       // {name:'Собщения', uisref:'realty'},
       // {name:'Документы', uisref:'realty'},
       // {name:'Настройки', uisref:'realty'},
-      {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
+      // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'}
       // {name:'Модератор', uisref:'realty'}
     ];
@@ -46,9 +46,9 @@ function config($mdIconProvider) {
   'ngInject';
   $mdIconProvider
     .icon('menu', URL_ICON_MENU, 24);
-  
-  const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
+  const planetPackageBower = '/packages/planettraining_material-design-icons/bower_components/';
 
+  const iconPath = planetPackageBower + 'material-design-icons/sprites/svg-sprite/';
 
   $mdIconProvider
     .iconSet('social',
