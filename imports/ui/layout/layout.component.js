@@ -39,10 +39,12 @@ export default angular.module(moduleName, [
   bindings: {},
   controllerAs: moduleName,
   controller: Layout
-}).config(config);
+})
+  .config(mdThemeConfig)
+  .config(mdIconConfig);
 
 const URL_ICON_MENU = 'svg/menu.svg';
-function config($mdIconProvider) {
+function mdIconConfig($mdIconProvider) {
   'ngInject';
   $mdIconProvider
     .icon('menu', URL_ICON_MENU, 24);
@@ -65,4 +67,10 @@ function config($mdIconProvider) {
       iconPath + 'svg-sprite-navigation.svg')
     .iconSet('image',
       iconPath + 'svg-sprite-image.svg');
+}
+
+function mdThemeConfig($mdThemingProvider) {
+  'ngInject';
+  $mdThemingProvider.theme('default')
+    .primaryPalette('blue');
 }
