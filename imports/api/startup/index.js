@@ -2,12 +2,12 @@ import {Meteor} from 'meteor/meteor';
 import {Realty} from '../realty';
 import getUniqueId from '../helpers/getUniqueId';
 Meteor.startup(function () {
-  let t = getUniqueId(Realty);
+  /*let t = getUniqueId(Realty);
   console.log(t);
   t = getUniqueId(Realty);
   console.log(t);
   t = getUniqueId(Realty);
-  console.log(t);
+  console.log(t);*/
   try {
     Realty.insert({_id: 'autoincrement', value: 0});
   } catch (err) {
