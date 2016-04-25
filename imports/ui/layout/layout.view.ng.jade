@@ -16,5 +16,9 @@ div(flex='', layout='row')
             ng-click='layout.toggleList()') {{item.name}}
 
     // Container #4
-    md-content#content(flex='')
-        ui-view
+    md-content#content(flex="",
+    md-whiteframe="4",
+    layout="column",
+    layout-align='space-between center')
+        div#mainContainer
+            ui-view
