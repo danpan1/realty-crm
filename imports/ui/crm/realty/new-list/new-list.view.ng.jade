@@ -2,13 +2,15 @@ div Фильтр
 div Список новые объекты
 .md-body-1(layout='column', layout-align='space-around stretch')
     .newList(layout='row', md-whiteframe='2', ng-repeat='realty in newList.realty')
+
         div(layout='column').newList_ID
             div(layout='row', layout-align='center center')
                 div {{realty.parseDetails.UID}}
             div(layout='row', layout-align='center center')
                 div сегодня
         md-divider
-        div(layout-padding='').newList_Address
+
+        div().newList_Address
             div(layout='column', layout-align='space-between')
                 div {{realty.address.street}} {{realty.address.meta.house}}
                 div {{realty.address.districtName}}
@@ -18,18 +20,22 @@ div Список новые объекты
 
         div(layout='row', layout-align='center center').newList_Price {{realty.price}}
         md-divider
-        div(layout-padding='').newList_Photo
+
+        div().newList_Photo
             div(layout='column', layout-align='space-between')
                 div Фото
         md-divider
-        div(layout-padding='').newList_Info
+
+        div().newList_Info
             div(layout='column', layout-align='space-between')
                 div {{realty.title}}
         md-divider
-        div(layout-padding='' flex="").newList_Conditions
+
+        div( flex="").newList_Conditions
             div(layout='column', layout-align='space-between')
                 div Удобства
         md-divider
-        div(layout-padding='').newList_Actions
+
+        div().newList_Actions
             div(layout='column', layout-align='space-between')
                 div Подробнее
