@@ -10,7 +10,8 @@ div(flex='', layout='row')
         md-list
             md-list-item(ng-repeat="item in layout.sideNavItems" ui-sref='{{item.uisref}}',
             layout="row",
-            layout-align='start') {{item.name}}
+            layout-align='start'
+            ng-click='layout.toggleList()') {{item.name}}
 
     // Container #4
     md-content#content(flex='')
