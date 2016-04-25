@@ -1,8 +1,10 @@
 /**
- * Created by Danpan on 25.04.16.
+ * Created by  Danpan on 25.04.16.
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+
+import {name as subwayChips} from '/imports/ui/shared/subway-chips/subway-chips.component';
 
 import './outgoing-call.view.html';
 
@@ -18,7 +20,8 @@ const moduleName = 'outgoingCall';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  subwayChips
 ]).component(moduleName, {
     templateUrl: 'imports/ui/call-center/outgoing-call/outgoing-call.view.html',
     bindings: {},

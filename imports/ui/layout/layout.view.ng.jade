@@ -8,7 +8,9 @@ div(flex='', layout='row')
     // Container #3
     md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left")
         md-list
-            md-list-item(ng-repeat="item in layout.sideNavItems" ui-sref='{{item.uisref}}',
+            md-list-item(ng-repeat="item in layout.sideNavItems",
+            ui-sref='{{item.uisref}}',
+            ui-sref-active="active",
             layout="row",
             layout-align='start'
             ng-click='layout.toggleList()') {{item.name}}

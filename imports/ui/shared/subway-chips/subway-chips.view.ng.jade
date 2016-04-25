@@ -1,8 +1,8 @@
 md-chips(ng-model='subwayChips.subwaysInForm',
 md-autocomplete-snap='',
 md-require-match='true',
-md-on-add='subwayChips.change()',
-md-on-remove='subwayChips.change()')
+md-on-add='subwayChips.changeChips()',
+md-on-remove='subwayChips.changeChips()')
     md-autocomplete(md-selected-item='subwayChips.selectedItem',
     md-search-text='subwayChips.searchText',
     md-search-text-change='subwayChips.searchTextChange(subwayChips.searchText)',

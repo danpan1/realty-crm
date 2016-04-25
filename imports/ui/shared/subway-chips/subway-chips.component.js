@@ -5,28 +5,14 @@ import {Meteor} from 'meteor/meteor';
 
 import './subway-chips.view.html';
 
-/**
- * subwayChips component
- */
-// function SubwayChips($scope, $reactive) {
-//   'ngInject';
-//   const vm = this;
-//   vm.change = change;
-//   function change() {
-//     console.log('asdf');
-//   }
-// }
-
 class SubwayChips {
   constructor($scope, $reactive) {
     'ngInject';
 
     $reactive(this).attach($scope);
-    // this.picked
     const vm = this;
     vm.subwaysInForm = [];
     vm.alreadyPicked = this.subwaysIdList || [];
-    // vm.query = "Тре";
     vm.subscribe('subwayChips', ()=> {
       return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), vm.alreadyPicked];
     }, {
@@ -48,7 +34,7 @@ class SubwayChips {
     });
   }
 
-  changeX() {
+  changeChips() {
     this.loaded = true;
     this.subwaysIdList = this.subwaysInForm.map((item)=> {
       return item._id;
@@ -71,7 +57,7 @@ const moduleName = 'subwayChips';
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-  templateUrl: `imports/ui/core/subwayChips/subwayChips.web.html`,
+  templateUrl: `imports/ui/shared/subway-chips/subway-chips.view.html`,
   controllerAs: moduleName,
   bindings: {
     subwaysIdList: '=ngModel'
