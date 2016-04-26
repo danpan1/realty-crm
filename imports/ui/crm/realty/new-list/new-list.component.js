@@ -1,18 +1,69 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
+import {Locations} from '/imports/api/locations';
+import {Realty} from '/imports/api/realty';
 import {name as realtyFilter} from '../realty-filter/realty-filter.component';
 
 import './new-list.view.html';
-import realty from './new-list-data';
 
 class NewList {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
+    const vm = this;
+    vm.perPage = 20;
+    vm.page = 1;
+    vm.sort = {
+      'updated_at': -1
+    };
 
-    this.realty = realty;
-    console.log(this.realty[0]);
+    vm.subscribe('newList', () => {
+      return [
+        //фильтр для pagination
+        {
+          limit: parseInt(vm.perPage),
+          skip: parseInt((vm.getReactively('page') - 1) * vm.perPage),
+          sort: vm.getReactively('sort')
+        },
+        //фильтр клиента
+        // {
+        //   squareTotalFrom: vm.getReactively('filter.squareTotalFrom'),
+        //   squareTotalTo: vm.getReactively('filter.squareTotalTo'),
+        //   floorFrom: vm.getReactively('filter.floorFrom'),
+        //   floorTo: vm.getReactively('filter.floorTo'),
+        //   priceTo: vm.getReactively('filter.priceTo'),
+        //   priceFrom: vm.getReactively('filter.priceFrom'),
+        //   roomcount: vm.getReactively('filter.roomcount'),
+        //   type: vm.getReactively('filter.type'),
+        //   subways: vm.getReactively('filter.subways'),
+        //   districts: vm.getReactively('filter.districts')
+        // }
+      ];
+    }, {
+      onReady: function() {
+        vm.loaded = true;
+      }
+    });
+
+    vm.helpers({
+      realty: () => {
+        return Realty.find({status: 'list'}, {sort: vm.getReactively('sort')});
+      },
+      // realtyCount: () => {
+      //   return Counts.get('realtyCount');
+      // },
+      // district: ()=> {
+      //   return Locations.find({
+      //     type: {$in: ['district', 'area']}
+      //   });
+      // },
+      // subway: ()=> {
+      //   return Locations.find({
+      //     type: 'subway'
+      //   });
+      // }
+    });
   }
 
 }
