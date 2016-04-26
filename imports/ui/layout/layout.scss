@@ -1,9 +1,16 @@
 md-sidenav{
-  max-width: 25rem;
+  max-width: 250px;
 }
 md-list-item.active{
   background: aqua;
 }
 #mainContainer{
-  width: 97.6rem; // 1024 - 24px -24px
+  width: 1024px; //97.6rem 1024px - 24px -24px
+}
+md-content{
+  background-color: rgb(250,250,250);
+}
+
+md-tabs{
+  background: rgb(255,255,255);
 }

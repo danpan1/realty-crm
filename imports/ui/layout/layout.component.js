@@ -11,7 +11,7 @@ class Layout {
   constructor($mdSidenav) {
     this.$mdSidenav = $mdSidenav;
     this.sideNavItems = [
-      {name: 'Объекты', uisref: 'crm.realty.new'},
+      {name: 'Объекты', uisref: 'crm.realty.list.new'},
       {name: 'Клиенты', uisref: 'crm.clients'},
       // {name:'Дела', uisref:'realty'},
       // {name:'Отчет', uisref:'realty'},

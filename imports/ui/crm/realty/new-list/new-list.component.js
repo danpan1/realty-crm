@@ -1,6 +1,8 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
+import {name as realtyFilter} from '../realty-filter/realty-filter.component';
+
 import './new-list.view.html';
 import realty from './new-list-data';
 
@@ -19,6 +21,7 @@ const moduleName = 'newList';
 
 // create a module
 export default angular.module(moduleName, [
+  realtyFilter,
   angularMeteor
 ]).component(moduleName, {
     templateUrl: 'imports/ui/crm/realty/new-list/new-list.view.html',
