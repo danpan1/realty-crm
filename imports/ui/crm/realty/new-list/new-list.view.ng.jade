@@ -1,41 +1,75 @@
 div Фильтр
 div Список новые объекты
 .md-body-1(layout='column', layout-align='space-around stretch')
-    .newList(layout='row', md-whiteframe='2', ng-repeat='realty in newList.realty')
+    .newList(layout='row', md-whiteframe='2', ng-repeat='realty in newList.realty').mv-8
 
-        div(layout='column').newList_ID
-            div(layout='row', layout-align='center center')
+        div(layout='column').newList_ID.p-8
+            div(layout='row')
+                div Сегодня
+            div(layout='row')
                 div {{realty.parseDetails.UID}}
-            div(layout='row', layout-align='center center')
-                div сегодня
         md-divider
 
-        div().newList_Address
+        div().newList_Address.p-8
             div(layout='column', layout-align='space-between')
-                div {{realty.address.street}} {{realty.address.meta.house}}
-                div {{realty.address.districtName}}
-                div {{realty.address.areaName}}
-                div {{realty.address.metroName}}
+                div
+                    div.metro-color
+                    div.metro-name {{realty.address.metroName}}
+                div(class='address-info')
+                    div {{realty.address.street}} {{realty.address.meta.house}}
+                    div {{realty.address.districtName}}
+                    div {{realty.address.areaName}}
         md-divider
 
-        div(layout='row', layout-align='center center').newList_Price {{realty.price}}
+        div(layout='column').newList_Price.p-8
+            div.price {{realty.price}}
+            div.type-repair Евроремонт
+            div.type-owner Лояльный
+            div.favorites В избранное
         md-divider
 
         div().newList_Photo
             div(layout='column', layout-align='space-between')
-                div Фото
+                div.apartment-pic
+                    img(src='img/common/photo-3.jpg')
+                    div().icon-zoom
         md-divider
 
-        div().newList_Info
+        div().newList_Info.p-8
             div(layout='column', layout-align='space-between')
                 div {{realty.title}}
         md-divider
 
-        div( flex="auto").newList_Conditions
-            div(layout='column', layout-align='space-between')
-                div Удобства
+        div().newList_Conditions.p-8
+            div(layout='row', layout-wrap, layout-align='space-around')
+                - for (var i = 0; i < 12; i++)
+                    img(src='img/icons/icon-tv.png')
         md-divider
 
-        div().newList_Actions
-            div(layout='column', layout-align='space-between')
-                div Подробнее
+        div(layout='column').newList_Actions
+            div(flex layout='row', layout-align='center center')
+                md-button(md-no-ink='' class='md-primary') Подробнее
+
+    div.ph-32
+        p.
+            Сдается на длительный срок однокомнатная квартира (студия), в районе останкино (телецентр). Квартира расположена на втором этаже, пятиэтажного (панельного) дома. Квартира после качественного ремонта. Полы ламинат, стеклопакеты, балкон застеклен, новая сантехника. Мебелирована полностью, встроенный кухонный гарнитур, бытовая техника: холодильник, стиральная машина, духовой шкаф, кондиционер, варочная панель (газовая). Общая площадь квартиры 33 квад. Метра, санузел совмещен. Окна выходят на парк останкино , тeлецентр. Ближайшее метро телецентр 2-3 мин пешком. Вднх, алексеевская, владыкино 15 минут трансп. Для славян, из животных можно не большую собачку. Аренда 40 тыс. Коммунальные платежи по счетчикам свет, вода приблизительно около 1300р. Залог 40 тыс. Показ с 9- 21 в любой день недели. Информация для агенств : звонить только о договоренности просмотров, никакие другие предложения не принимаются, ничего продвигать не нужно! Спасибо за понимание! Собственник.
+        div(layout='row')
+            md-button.md-raised.md-warn.btn-get-object Взять объект
+            span(flex)
+            md-button Закрыть
+        div(flex='55')
+            h3.md-title Номер собственника +7 925 111 22 33  Александр
+            p Объект успешно сохранен в разделе «Мои объекты»!
+            p Прямо сейчас позвоните и договоритесь о просмотре и создайте ниже время просмотра этого объекта
+            
+            div(layout='row' layout-align='start center')
+                md-datepicker(flex='45' ng-model='myDate' md-placeholder='Enter date')
+                md-input-container(flex='15').md-block
+                    md-select
+                        md-option(value='часов') часов
+                div(flex='5' hide-xs hide-sm)
+                md-input-container(flex='15').md-block
+                    md-select
+                        md-option(value='минут') минут
+                
+            md-button.md-raised.md-primary.btn-plan-object Запланировать просмотр объекта
