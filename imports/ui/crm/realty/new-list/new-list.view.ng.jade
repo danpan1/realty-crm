@@ -6,22 +6,22 @@ realty-filter
             div(layout='row')
                 div Сегодня
             div(layout='row')
-                div {{realty.parseDetails.UID}}
+                div {{::realty.parseDetails.UID}}
         md-divider
 
         div().newList_Address.p-8
             div(layout='column', layout-align='space-between')
                 div
                     div.metro-color
-                    div.metro-name {{realty.address.metroName}}
+                    div.metro-name {{::realty.address.metroName}}
                 div(class='address-info')
-                    div {{realty.address.street}} {{realty.address.meta.house}}
-                    div {{realty.address.districtName}}
-                    div {{realty.address.areaName}}
+                    div {{::realty.address.street}} {{::realty.address.meta.house}}
+                    div {{::realty.address.districtName}}
+                    div {{::realty.address.areaName}}
         md-divider
 
         div(layout='column').newList_Price.p-8
-            div.price {{realty.price}}
+            div.price {{::realty.price}}
             div.type-repair Евроремонт
             div.type-owner Лояльный
             div.favorites В избранное
@@ -30,13 +30,13 @@ realty-filter
         div().newList_Photo
             div(layout='column', layout-align='space-between')
                 div.apartment-pic
-                    img(src='img/common/photo-3.jpg')
+                    img(ng-src='{{::realty.image || "realty_no_image.png"}}')
                     div().icon-zoom
         md-divider
 
         div().newList_Info.p-8
             div(layout='column', layout-align='space-between')
-                div {{realty.title}}
+                div {{::realty.title}}
         md-divider
 
         div().newList_Conditions.p-8
