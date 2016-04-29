@@ -1,37 +1,58 @@
 .crm-menu-icon {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .icon-report {
-    background: url('img/icons/icon-report.png') no-repeat;
-    width: 23px;
-    height: 24px;
+  background: url('img/icons/icon-report.png') no-repeat;
+  width: 23px;
+  height: 24px;
 }
 
 .icon-my-business {
-    background: url('img/icons/icon-my-business.png') no-repeat;
-    width: 26px;
-    height: 26px;
+  background: url('img/icons/icon-my-business.png') no-repeat;
+  width: 26px;
+  height: 26px;
 }
 
 .icon-objects {
-    background: url('img/icons/icon-objects.png') no-repeat;
-    width: 18px;
-    height: 26px;
+  background: url('img/icons/icon-objects.png') no-repeat;
+  width: 18px;
+  height: 26px;
 }
 
 .icon-clients {
-    background: url('img/icons/icon-clients.png') no-repeat;
-    width: 32px;
-    height: 26px;
+  background: url('img/icons/icon-clients.png') no-repeat;
+  width: 32px;
+  height: 26px;
 }
 
 .btn-refresh {
+  display: inline-block;
+  background: url('img/icons/icon-refresh.png') no-repeat;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.icon-zoom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url('img/icons/icon-zoom.png') no-repeat;
+  width: 48px;
+  height: 48px;
+  visibility: hidden;
+}
+
+.icon-bookmark:before {
     display: inline-block;
-    background: url('img/icons/icon-refresh.png') no-repeat;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+    background: url('img/icons/icon-bookmark.png') no-repeat;
+    width: 13px;
+    height: 17px;
+    margin-right: 4px;
     vertical-align: middle;
+    content: '';
 }
