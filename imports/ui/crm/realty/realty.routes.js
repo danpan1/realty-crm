@@ -17,5 +17,9 @@ export default function routes($stateProvider) {
     .state('crm.realty.list.new', {
       url: '/new',
       template: '<new-list/>'
+    })
+    .state('crm.realty.list.inWork', {
+      url: '/inwork',
+      template: '<in-work-list/>'
     });
 }
