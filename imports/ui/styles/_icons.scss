@@ -46,3 +46,13 @@
   height: 48px;
   visibility: hidden;
 }
+
+.icon-bookmark:before {
+    display: inline-block;
+    background: url('img/icons/icon-bookmark.png') no-repeat;
+    width: 13px;
+    height: 17px;
+    margin-right: 4px;
+    vertical-align: middle;
+    content: '';
+}

@@ -48,7 +48,7 @@ div Список новые объекты
 
         div(layout='column').newList_Actions
             div(flex layout='row', layout-align='center center')
-                md-button(md-no-ink='' class='md-primary') Подробнее
+                md-button(md-no-ink='').md-primary Подробнее
 
     div.ph-32
         p.
@@ -73,3 +73,47 @@ div Список новые объекты
                         md-option(value='минут') минут
                 
             md-button.md-raised.md-primary.btn-plan-object Запланировать просмотр объекта
+
+
+.md-body-1(layout='column', layout-align='space-around stretch')
+    .workList(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
+        div(layout='column').workList_Photo
+            div(layout='column', layout-align='space-between')
+                div.apartment-pic
+                    img(src='img/common/photo-3.jpg')
+                    div().icon-zoom
+        md-divider
+
+        div().workList_Price.p-8
+            div(layout='column', layout-align='space-between')
+                div
+                    div.price 3 комн. 40000
+                    div ул. Генерала Антонова
+                    div д. 15 к.1 кв. 208
+        md-divider
+
+        div(layout='column' layout-align='space-around center').workList_Progress.p-8
+            div.md-title.orange 55% / 100%
+            div.orange Срочно улучшить
+        md-divider
+
+        div(layout='column' layout-align='space-around center').workList_Advertisement.p-8
+            div.md-title.orange 55% / 100%
+            div.orange Выжать максимум
+        md-divider
+        
+        div(layout='column').workList_Actions.p-8
+            div(layout='row' layout-align='space-between').mb-8
+                div(flex='25').icon-bookmark Сегодня
+                div(flex='45') 15:00 Анна
+                div(flex='35') 8(925) 111-22-33
+            div(layout='row' layout-align='space-between').mb-8
+                div(flex='25').icon-bookmark Завтра
+                div(flex='45') 17:00 Андрей
+                div(flex='35') 8(925) 111-22-33
+            div(layout='row' layout-align='space-between').mb-8
+                div(flex='25').icon-bookmark 01.01
+                div(flex='45') 17:00 Андрей
+                div(flex='35') 8(925) 111-22-33
+            md-button(md-no-ink='').md-primary поставить задачу
+        md-divider

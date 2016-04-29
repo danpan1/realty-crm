@@ -81,3 +81,19 @@
 .btn-plan-object {
   margin: 6px 0;
 }
+
+.workList {
+  border: 1px solid #f3f3f3;
+  &_Progress,
+  &_Advertisement {
+    width: 16rem;
+  }
+  &_Actions {
+    width: 38rem;
+    background: #fffde7;
+  }
+}
+
+.orange {
+  color: #ff5722;
+}
