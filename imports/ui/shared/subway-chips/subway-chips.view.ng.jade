@@ -7,7 +7,7 @@ md-on-remove='subwayChips.changeChips()')
     md-search-text='subwayChips.searchText',
     md-search-text-change='subwayChips.searchTextChange(subwayChips.searchText)',
     md-items='item in subwayChips.subwaysSuggestionList',
-    placeholder='Поиск по метро',
+    placeholder='Метро',
     md-no-cache='true')
         span(md-highlight-text='subwayChips.searchText') ({{item.meta.lineId}}) {{item.name}}
         md-not-found

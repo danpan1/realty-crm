@@ -1,4 +1,5 @@
-realty-filter
+realty-filter(filter = "newList.filter")
+div {{newList.filter}}
 .md-body-1(layout='column', layout-align='space-around stretch')
     .newList(layout='row', md-whiteframe='2', ng-repeat='realty in newList.realty').mv-8
 
@@ -15,7 +16,8 @@ realty-filter
                     div.metro-color
                     div.metro-name {{::realty.address.metroName}}
                 div(class='address-info')
-                    div {{::realty.address.street}} {{::realty.address.meta.house}}
+                    //div {{::realty.address.street}} {{::realty.address.meta.house}}
+                    div {{::realty.address.street}}
                     div {{::realty.address.districtName}}
                     div {{::realty.address.areaName}}
         md-divider
@@ -49,72 +51,72 @@ realty-filter
             div(flex layout='row', layout-align='center center')
                 md-button(md-no-ink='').md-primary Подробнее
 
-    div.ph-32
-        p.
-            Сдается на длительный срок однокомнатная квартира (студия), в районе останкино (телецентр). Квартира расположена на втором этаже, пятиэтажного (панельного) дома. Квартира после качественного ремонта. Полы ламинат, стеклопакеты, балкон застеклен, новая сантехника. Мебелирована полностью, встроенный кухонный гарнитур, бытовая техника: холодильник, стиральная машина, духовой шкаф, кондиционер, варочная панель (газовая). Общая площадь квартиры 33 квад. Метра, санузел совмещен. Окна выходят на парк останкино , тeлецентр. Ближайшее метро телецентр 2-3 мин пешком. Вднх, алексеевская, владыкино 15 минут трансп. Для славян, из животных можно не большую собачку. Аренда 40 тыс. Коммунальные платежи по счетчикам свет, вода приблизительно около 1300р. Залог 40 тыс. Показ с 9- 21 в любой день недели. Информация для агенств : звонить только о договоренности просмотров, никакие другие предложения не принимаются, ничего продвигать не нужно! Спасибо за понимание! Собственник.
-        div(layout='row')
-            md-button.md-raised.md-warn.btn-get-object Взять объект
-
-            span(flex)
-            md-button Закрыть
-        div(flex='55')
-            h3.md-title Номер собственника +7 925 111 22 33  Александр
-            p Объект успешно сохранен в разделе «Мои объекты»!
-            p Прямо сейчас позвоните и договоритесь о просмотре и создайте ниже время просмотра этого объекта
-            
-            div(layout='row' layout-align='start center')
-                md-datepicker(flex='45' ng-model='myDate' md-placeholder='Enter date')
-                md-input-container(flex='15').md-block
-                    md-select
-                        md-option(value='часов') часов
-                div(flex='5' hide-xs hide-sm)
-                md-input-container(flex='15').md-block
-                    md-select
-                        md-option(value='минут') минут
-            md-button.md-raised.md-primary.btn-plan-object Запланировать просмотр объекта
-                
-
-
-
-.md-body-1(layout='column', layout-align='space-around stretch')
-    .workList(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
-        div(layout='column').workList_Photo
-            div(layout='column', layout-align='space-between')
-                div.apartment-pic
-                    img(src='img/common/photo-3.jpg')
-                    div().icon-zoom
-        md-divider
-
-        div().workList_Price.p-8
-            div(layout='column', layout-align='space-between')
-                div
-                    div.price 3 комн. 40000
-                    div ул. Генерала Антонова
-                    div д. 15 к.1 кв. 208
-        md-divider
-
-        div(layout='column' layout-align='space-around center').workList_Progress.p-8
-            div.md-title.orange 55% / 100%
-            div.orange Срочно улучшить
-        md-divider
-
-        div(layout='column' layout-align='space-around center').workList_Advertisement.p-8
-            div.md-title.orange 55% / 100%
-            div.orange Выжать максимум
-        md-divider
-        
-        div(layout='column').workList_Actions.p-8
-            div(layout='row' layout-align='space-between').mb-8
-                div(flex='25').icon-bookmark Сегодня
-                div(flex='45') 15:00 Анна
-                div(flex='35') 8(925) 111-22-33
-            div(layout='row' layout-align='space-between').mb-8
-                div(flex='25').icon-bookmark Завтра
-                div(flex='45') 17:00 Андрей
-                div(flex='35') 8(925) 111-22-33
-            div(layout='row' layout-align='space-between').mb-8
-                div(flex='25').icon-bookmark 01.01
-                div(flex='45') 17:00 Андрей
-                div(flex='35') 8(925) 111-22-33
-            md-button(md-no-ink='').md-primary поставить задачу
-        md-divider
+//    div.ph-32
+//        p.
+//            Сдается на длительный срок однокомнатная квартира (студия), в районе останкино (телецентр). Квартира расположена на втором этаже, пятиэтажного (панельного) дома. Квартира после качественного ремонта. Полы ламинат, стеклопакеты, балкон застеклен, новая сантехника. Мебелирована полностью, встроенный кухонный гарнитур, бытовая техника: холодильник, стиральная машина, духовой шкаф, кондиционер, варочная панель (газовая). Общая площадь квартиры 33 квад. Метра, санузел совмещен. Окна выходят на парк останкино , тeлецентр. Ближайшее метро телецентр 2-3 мин пешком. Вднх, алексеевская, владыкино 15 минут трансп. Для славян, из животных можно не большую собачку. Аренда 40 тыс. Коммунальные платежи по счетчикам свет, вода приблизительно около 1300р. Залог 40 тыс. Показ с 9- 21 в любой день недели. Информация для агенств : звонить только о договоренности просмотров, никакие другие предложения не принимаются, ничего продвигать не нужно! Спасибо за понимание! Собственник.
+//        div(layout='row')
+//            md-button.md-raised.md-warn.btn-get-object Взять объект
+//
+//            span(flex)
+//            md-button Закрыть
+//        div(flex='55')
+//            h3.md-title Номер собственника +7 925 111 22 33  Александр
+//            p Объект успешно сохранен в разделе «Мои объекты»!
+//            p Прямо сейчас позвоните и договоритесь о просмотре и создайте ниже время просмотра этого объекта
+//
+//            div(layout='row' layout-align='start center')
+//                md-datepicker(flex='45' ng-model='myDate' md-placeholder='Enter date')
+//                md-input-container(flex='15').md-block
+//                    md-select
+//                        md-option(value='часов') часов
+//                div(flex='5' hide-xs hide-sm)
+//                md-input-container(flex='15').md-block
+//                    md-select
+//                        md-option(value='минут') минут
+//            md-button.md-raised.md-primary.btn-plan-object Запланировать просмотр объекта
+//
+//
+//
+//
+//.md-body-1(layout='column', layout-align='space-around stretch')
+//    .workList(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
+//        div(layout='column').workList_Photo
+//            div(layout='column', layout-align='space-between')
+//                div.apartment-pic
+//                    img(src='img/common/photo-3.jpg')
+//                    div().icon-zoom
+//        md-divider
+//
+//        div().workList_Price.p-8
+//            div(layout='column', layout-align='space-between')
+//                div
+//                    div.price 3 комн. 40000
+//                    div ул. Генерала Антонова
+//                    div д. 15 к.1 кв. 208
+//        md-divider
+//
+//        div(layout='column' layout-align='space-around center').workList_Progress.p-8
+//            div.md-title.orange 55% / 100%
+//            div.orange Срочно улучшить
+//        md-divider
+//
+//        div(layout='column' layout-align='space-around center').workList_Advertisement.p-8
+//            div.md-title.orange 55% / 100%
+//            div.orange Выжать максимум
+//        md-divider
+//
+//        div(layout='column').workList_Actions.p-8
+//            div(layout='row' layout-align='space-between').mb-8
+//                div(flex='25').icon-bookmark Сегодня
+//                div(flex='45') 15:00 Анна
+//                div(flex='35') 8(925) 111-22-33
+//            div(layout='row' layout-align='space-between').mb-8
+//                div(flex='25').icon-bookmark Завтра
+//                div(flex='45') 17:00 Андрей
+//                div(flex='35') 8(925) 111-22-33
+//            div(layout='row' layout-align='space-between').mb-8
+//                div(flex='25').icon-bookmark 01.01
+//                div(flex='45') 17:00 Андрей
+//                div(flex='35') 8(925) 111-22-33
+//            md-button(md-no-ink='').md-primary поставить задачу
+//        md-divider

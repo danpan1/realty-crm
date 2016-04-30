@@ -27,18 +27,16 @@ class NewList {
           sort: vm.getReactively('sort')
         },
         //фильтр клиента
-        // {
-        //   squareTotalFrom: vm.getReactively('filter.squareTotalFrom'),
-        //   squareTotalTo: vm.getReactively('filter.squareTotalTo'),
-        //   floorFrom: vm.getReactively('filter.floorFrom'),
-        //   floorTo: vm.getReactively('filter.floorTo'),
-        //   priceTo: vm.getReactively('filter.priceTo'),
-        //   priceFrom: vm.getReactively('filter.priceFrom'),
-        //   roomcount: vm.getReactively('filter.roomcount'),
-        //   type: vm.getReactively('filter.type'),
-        //   subways: vm.getReactively('filter.subways'),
-        //   districts: vm.getReactively('filter.districts')
-        // }
+        {
+          floorFrom: vm.getReactively('filter.floorFrom'),
+          floorTo: vm.getReactively('filter.floorTo'),
+          priceTo: vm.getReactively('filter.priceTo'),
+          priceFrom: vm.getReactively('filter.priceFrom'),
+          roomcount: vm.getReactively('filter.roomcount'),
+          type: vm.getReactively('filter.type'),
+          subways: vm.getReactively('filter.subways'),
+          districts: vm.getReactively('filter.districts')
+        }
       ];
     }, {
       onReady: function() {
@@ -52,16 +50,6 @@ class NewList {
       },
       // realtyCount: () => {
       //   return Counts.get('realtyCount');
-      // },
-      // district: ()=> {
-      //   return Locations.find({
-      //     type: {$in: ['district', 'area']}
-      //   });
-      // },
-      // subway: ()=> {
-      //   return Locations.find({
-      //     type: 'subway'
-      //   });
       // }
     });
   }

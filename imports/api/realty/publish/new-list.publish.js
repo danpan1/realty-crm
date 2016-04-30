@@ -37,17 +37,6 @@ if (Meteor.isServer) {
           selector.floor = floor;
         }
 
-        let squareTotal = {};
-        if (search.squareTotalFrom) {
-          squareTotal.$gte = parseInt(search.squareTotalFrom);
-        }
-        if (search.squareTotalTo) {
-          squareTotal.$lte = parseInt(search.squareTotalTo);
-        }
-        if (!_.isEmpty(squareTotal)) {
-          selector.square = squareTotal;
-        }
-
         //values в виде строки
         if (search.roomcount && !_.isEmpty(search.roomcount)) {
           selector.roomcount = {$in: search.roomcount};
@@ -100,6 +89,7 @@ if (Meteor.isServer) {
         floormax: 1,
         status: 1
       };
+      console.log(selector);
       return Realty.find(selector, options);
       // }
 
