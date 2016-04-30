@@ -5,6 +5,7 @@ import {Locations} from '/imports/api/locations';
 import {Realty} from '/imports/api/realty';
 import {name as realtyFilter} from '../realty-filter/realty-filter.component';
 
+import {dictionary} from '../../../../api/dictionary/dictionary';
 import './new-list.view.html';
 
 class NewList {
@@ -12,6 +13,7 @@ class NewList {
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
     const vm = this;
+    this.dictionary = dictionary;
     vm.perPage = 20;
     vm.page = 1;
     vm.sort = {
@@ -32,14 +34,14 @@ class NewList {
           floorTo: vm.getReactively('filter.floorTo'),
           priceTo: vm.getReactively('filter.priceTo'),
           priceFrom: vm.getReactively('filter.priceFrom'),
-          roomcount: vm.getReactively('filter.roomcount'),
+          roomcount: vm.getReactively('roomcount'),
           type: vm.getReactively('filter.type'),
           subways: vm.getReactively('filter.subways'),
           districts: vm.getReactively('filter.districts')
         }
       ];
     }, {
-      onReady: function() {
+      onReady: function () {
         vm.loaded = true;
       }
     });
@@ -63,8 +65,8 @@ export default angular.module(moduleName, [
   realtyFilter,
   angularMeteor
 ]).component(moduleName, {
-    templateUrl: 'imports/ui/crm/realty/new-list/new-list.view.html',
-    bindings: {},
-    controllerAs: moduleName,
-    controller: NewList
-  });
+  templateUrl: 'imports/ui/crm/realty/new-list/new-list.view.html',
+  bindings: {},
+  controllerAs: moduleName,
+  controller: NewList
+});

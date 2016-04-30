@@ -11,7 +11,7 @@ if (Meteor.isServer) {
       };
 
       if (search) {
-
+        console.log(search);
         if (search.UID) {
           selector.UID = +search.UID;
         }
@@ -81,6 +81,8 @@ if (Meteor.isServer) {
         'address.areaName': 1,
         'address.districtName': 1,
         'operator.qualification': 1,
+        'details.renovation': 1,
+        'details.descr': 1,
         contacts: 1,
         'realtor.id': 1,
         roomcount: 1,

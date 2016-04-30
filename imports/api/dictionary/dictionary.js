@@ -25,8 +25,7 @@ export const dictionary = {
     {id: 'animal', name: 'С животными'},
     {id: 'children', name: 'С детьми'},
     {id: 'wifi', name: 'Wi-Fi'}
-  ]
-  ,
+  ],
   customerQualification: [
     {id: 0, name: 'Турист'},
     {id: 1, name: 'Ищет'},
