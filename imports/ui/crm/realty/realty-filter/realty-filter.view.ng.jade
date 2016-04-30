@@ -4,22 +4,28 @@ div(md-whiteframe="2").realty-list-filter
             subway-chips(ng-model = "realtyFilter.filter.subways")
             disctrict-chips(ng-model = "realtyFilter.filter.districts")
         div(layout="column" flex="33")
+
             md-input-container
                 label Выбрать ремонт
                 md-select(ng-model='realtyFilter.filter.renovation', multiple='true')
-                    md-optgroup(label='Выбрать ремонт')
-                        md-option(ng-value='renovation.id', ng-repeat="renovation in realtyFilter.dictionary.renovation ") {{renovation.name}}
+                    //md-optgroup(label='Выбрать ремонт')
+                    md-option(ng-value='renovation.id',
+                    ng-repeat="renovation in realtyFilter.dictionary.renovation ") {{renovation.name}}
+
             md-input-container
                 label Выбрать удобства
                 md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
-                    md-optgroup(label='Выбрать удобства')
-                        md-option(ng-value='condition.id', ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                    //md-optgroup(label='Выбрать удобства')
+                    md-option(ng-value='condition.id',
+                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
 
         div(layout="column" flex="33")
+
             div До метро
             md-input-container.md-block(md-no-float='')
                 input(ng-model='realtyFilter.filter.metroPeshkom', placeholder='минут')
             div пешком
+
             div(layout="row") Этаж
                 md-input-container.md-block(flex-gt-sm='')
                     label от
@@ -30,6 +36,7 @@ div(md-whiteframe="2").realty-list-filter
     div(layout="row")
 
         div(layout='row', layout-wrap='', flex='')
+
             div(flex='50')
                 md-checkbox(
                 ng-checked='realtyFilter.existsRoomcount(item)',

@@ -17,7 +17,8 @@ class NewList {
     vm.perPage = 20;
     vm.page = 1;
     vm.sort = {
-      'updated_at': -1
+      // 'updated_at': -1
+      'parseDetails.UID': -1
     };
 
     vm.subscribe('newList', () => {
