@@ -8,12 +8,14 @@ import routes from './crm.routes';
 import {name as ngLightbox} from '../shared/lightbox/lightbox';
 import {name as Realty}from './realty/realty.component';
 import {name as clients}from './clients/clients.component';
+import {name as layout} from '/imports/ui/layout/layout.component';
 
 const moduleName = 'app.crm';
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
-  ngLightbox,
+  layout,
+  // ngLightbox,
   clients,
   Realty
 ]).config(routes);

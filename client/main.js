@@ -5,13 +5,12 @@ import {Meteor} from 'meteor/meteor';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 
-import {name as layout} from '/imports/ui/layout/layout.component';
 import {name as CRM} from '/imports/ui/crm/crm.module';
 import {name as CallCenter}from '/imports/ui/call-center/call-center.component';
 import {name as auth}from '/imports/ui/auth/auth.module';
 
 angular
-  .module('app', ['app.custom', layout, CRM, CallCenter, auth]).config(config).run(run);
+  .module('app', ['app.custom', CRM, CallCenter, auth]).config(config).run(run);
 
 angular
   .module('app.custom', [uiRouter, ngMaterial, 'accounts.ui']);
@@ -33,16 +32,16 @@ if (Meteor.isCordova) {
 function config($locationProvider, $urlRouterProvider) {
   'ngInject';
   $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise('/realty/new');
+  $urlRouterProvider.otherwise('/realty/list/new');
 }
 
 function run($rootScope, $state) {
   'ngInject';
-  $rootScope.$on('$stateChangeError',
-    (event, toState, toParams, fromState, fromParams, error) => {
-      if (error === 'AUTH_REQUIRED') {
-        $state.go('login');
-      }
-    }
-  );
+  // $rootScope.$on('$stateChangeError',
+  //   (event, toState, toParams, fromState, fromParams, error) => {
+  //     if (error === 'AUTH_REQUIRED') {
+  //       $state.go('login');
+  //     }
+  //   }
+  // );
 }

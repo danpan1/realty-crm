@@ -3,7 +3,7 @@ export default function routes($stateProvider) {
   $stateProvider
     .state('crm', {
       abstract: true,
-      template: '<ui-view/>'
+      template: '<layout layout="column" flex tabIndex="-1" role="main"/>'
     })
   // Пока тут пусто. Может здесь будет layout индивидуальны. Danpan
 }
