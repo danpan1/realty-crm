@@ -37,11 +37,21 @@ function config($locationProvider, $urlRouterProvider) {
 
 function run($rootScope, $state) {
   'ngInject';
-  // $rootScope.$on('$stateChangeError',
-  //   (event, toState, toParams, fromState, fromParams, error) => {
-  //     if (error === 'AUTH_REQUIRED') {
-  //       $state.go('login');
-  //     }
-  //   }
-  // );
+  $rootScope.$on('$stateChangeError',
+    (event, toState, toParams, fromState, fromParams, error) => {
+      if (error === 'AUTH_REQUIRED') {
+        $state.go('auth.login');
+      }
+    }
+  );
+
+  $rootScope.$on('$stateChangeStart', function (event, toState, fromParams) {
+
+    if (Meteor.userId() == null && toState.name !== 'auth.login' && toState.name !== 'auth.register' && toState.name !== 'auth.resetpw') {
+      console.log(toState.name);
+      event.preventDefault();
+      console.log("Please login");
+      $state.go('auth.login');
+    }
+  });
 }
