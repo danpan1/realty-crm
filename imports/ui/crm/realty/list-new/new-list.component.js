@@ -50,7 +50,7 @@ class NewList {
     vm.helpers({
       realty: () => {
         return Realty.find({status: 'list'}, {sort: vm.getReactively('sort')});
-      },
+      }
       // realtyCount: () => {
       //   return Counts.get('realtyCount');
       // }
@@ -66,7 +66,7 @@ export default angular.module(moduleName, [
   realtyFilter,
   angularMeteor
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/crm/realty/new-list/new-list.view.html',
+  templateUrl: 'imports/ui/crm/realty/list-new/new-list.view.html',
   bindings: {},
   controllerAs: moduleName,
   controller: NewList

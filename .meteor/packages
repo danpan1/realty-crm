@@ -11,6 +11,7 @@ reactive-var            # Reactive variable for tracker
 tracker                 # Meteor's client-side reactive programming library
 standard-minifier-js    # JS minifier run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
+alanning:roles          # Роли в приложении
 
 # check
 

@@ -1,12 +1,12 @@
 /**
- * Created by Danpan on 29.04.16.
+ * Created by Danpan on 02.05.16.
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
-import './in-work-list.view.html';
+import './one-review.view.html';
 
-class InWorkList {
+class OneReview {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
@@ -14,14 +14,15 @@ class InWorkList {
 
 }
 
-const moduleName = 'inWorkList';
+const moduleName = 'oneReview';
 
 // create a module
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-    templateUrl: 'imports/ui/crm/realty/in-work-list/in-work-list.view.html',
+    templateUrl: 'imports/ui/crm/realty/one-review/one-review.view.html',
     bindings: {},
     controllerAs: moduleName,
-    controller: InWorkList
+    controller: OneReview
   });
+

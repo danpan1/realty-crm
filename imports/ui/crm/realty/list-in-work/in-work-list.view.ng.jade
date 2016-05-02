@@ -1,20 +1,21 @@
-realty-filter(filter = "inWorkList.filter" roomcount = "newList.roomcount")
+realty-filter(filter = "inWorkList.filter" roomcount = "inWorkList.roomcount")
 div {{inWorkList.filter}}
+//div {{inWorkList.realty}}
 .md-body-1(layout='column', layout-align='space-around stretch')
-    .workList(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
-        div(layout='column').workList_Photo
+    .workList(layout='row', md-whiteframe='2',ng-repeat='realty in inWorkList.realty').md-whiteframe-2dp.mv-8
+        div(layout='column' ui-sref="crm.realty.one({realtyId: '{{::realty._id}}'})").workList_Photo
             div(layout='column', layout-align='space-between')
                 div.apartment-pic
-                    img(src='img/common/photo-3.jpg')
+                    img(ng-src='{{::realty.image || "realty_no_image.png"}}')
                     div().icon-zoom
         md-divider
 
         div().workList_Price.p-8
             div(layout='column', layout-align='space-between')
                 div
-                    div.price 3 комн. 40000
-                    div ул. Генерала Антонова
-                    div д. 15 к.1 кв. 208
+                    div.price {{::realty.roomcount}} комн. {{::realty.price}}
+                    div {{::realty.address.street}}
+                    div д. {{::realty.address.meta.house}} к.? кв. ??
         md-divider
 
         div(layout='column' layout-align='space-around center').workList_Progress.p-8

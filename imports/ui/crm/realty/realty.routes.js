@@ -1,5 +1,5 @@
+/* @ngInject */
 export default function routes($stateProvider) {
-  'ngInject';
   $stateProvider
     .state('crm.realty', {
       abstract: true,
@@ -11,8 +11,20 @@ export default function routes($stateProvider) {
       template: '<realty-list-layout/>'
     })
     .state('crm.realty.one', {
-      url: '/one',
+      url: '/one/:realtyId',
       template: '<realty-one-layout/>'
+    })
+    .state('crm.realty.one.demonstrations', {
+      url: '/demonstrations',
+      template: '<one-demonstrations/>'
+    })
+    .state('crm.realty.one.review', {
+      url: '/review',
+      template: '<one-review/>'
+    })
+    .state('crm.realty.one.info', {
+      url: '/info',
+      template: '<one-info/>'
     })
     .state('crm.realty.list.new', {
       url: '/new',
