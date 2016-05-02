@@ -7,6 +7,8 @@ import angularMeteor from 'angular-meteor';
 import './one-demonstrations.view.html';
 
 class OneDemonstrations {
+
+  /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
   }
