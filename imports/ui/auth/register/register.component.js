@@ -1,15 +1,16 @@
 /**
- * Created by Danpan on 01.05.16.
+ * Created by Danpan on 02.05.16.
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 
-import './login.view.html';
+import './register.view.html';
 
-class Login {
-  /* @ngInject */
+class Register {
   constructor($scope, $reactive, $state) {
+    'ngInject';
+
     this.$state = $state;
 
     $reactive(this).attach($scope);
@@ -22,8 +23,8 @@ class Login {
     this.error = '';
   }
 
-  login() {
-    Meteor.loginWithPassword(this.credentials.email, this.credentials.password,
+  register() {
+    Accounts.createUser(this.credentials,
       this.$bindToContext((err) => {
         if (err) {
           this.error = err;
@@ -34,14 +35,15 @@ class Login {
     );
   }
 }
-const moduleName = 'login';
+
+const moduleName = 'register';
 
 // create a module
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-    templateUrl: 'imports/ui/auth/login/login.view.html',
+    templateUrl: 'imports/ui/auth/register/register.view.html',
     bindings: {},
     controllerAs: moduleName,
-    controller: Login
-  })
+    controller: Register
+  });

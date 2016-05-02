@@ -8,6 +8,10 @@ export default function routes($stateProvider) {
     .state('auth.login', {
       url: '/login',
       template: '<login/>'
+    })
+    .state('auth.register', {
+      url: '/register',
+      template: '<register/>'
     });
   // Пока тут пусто. Может здесь будет layout индивидуальны. Danpan
 }
