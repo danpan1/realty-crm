@@ -1,0 +1,47 @@
+.text-italic {
+    font-style: italic;
+}
+
+.text-semibold {
+    font-weight: 600;
+}
+
+.text-bold, strong {
+    font-weight: 700;
+}
+
+.text-strike {
+    text-decoration: line-through;
+}
+
+.text-super {
+    vertical-align: super;
+}
+
+.text-sub {
+    vertical-align: sub;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
