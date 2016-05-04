@@ -8,6 +8,6 @@ WORKDIR /app
 ADD . /app
 
 
-ONBUILD RUN meteor build --architecture=os.linux.x86_64 /tmp/app
+ONBUILD RUN meteor build --architecture=os.linux.x86_64 /build
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
