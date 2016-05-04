@@ -5,7 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
 import {Realty} from '/imports/api/realty';
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import {Counts} from 'meteor/tmeasday:publish-counts';
 import './in-work-list.view.html';
 
 class InWorkList {
@@ -42,7 +42,9 @@ class InWorkList {
 
     vm.helpers({
       realty: () => {
-        return Realty.find({status: 'sale'}, {sort: vm.sort});
+        return Realty.find(
+          {status: {$in: ['sale', 'taken', 'review', 'reviewed']}},
+          {sort: vm.sort});
       },
       realtyCount: () => {
         return Counts.get('realtyCount');

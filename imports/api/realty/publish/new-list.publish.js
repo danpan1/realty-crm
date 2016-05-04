@@ -1,6 +1,8 @@
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '../realty.model';
 import {_} from 'meteor/underscore';
+import { Counts } from 'meteor/tmeasday:publish-counts';
+
 if (Meteor.isServer) {
   Meteor.publish('newList', function (options, search) {
       let selector;
@@ -64,7 +66,7 @@ if (Meteor.isServer) {
         }
 
       }
-      // Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
+      Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
 
       // }
 

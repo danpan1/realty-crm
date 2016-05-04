@@ -1,9 +1,11 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import {Meteor} from 'meteor/meteor';
 
 import {Locations} from '/imports/api/locations';
 import {Realty} from '/imports/api/realty';
 import {name as realtyFilter} from '../realty-filter/realty-filter.component';
+import {Counts} from 'meteor/tmeasday:publish-counts';
 
 import {dictionary} from '../../../../api/dictionary/dictionary';
 import './new-list.view.html';
@@ -50,13 +52,16 @@ class NewList {
     vm.helpers({
       realty: () => {
         return Realty.find({status: 'list'}, {sort: vm.getReactively('sort')});
+      },
+      realtyCount: () => {
+        return Counts.get('realtyCount');
       }
-      // realtyCount: () => {
-      //   return Counts.get('realtyCount');
-      // }
     });
   }
 
+  static takeRealty(id) {
+    Meteor.call('takeRealty', id);
+  }
 }
 
 const moduleName = 'newList';

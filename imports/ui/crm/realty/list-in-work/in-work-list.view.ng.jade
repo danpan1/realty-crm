@@ -1,6 +1,6 @@
 realty-filter(filter = "inWorkList.filter" roomcount = "inWorkList.roomcount")
 div {{inWorkList.filter}}
-//div {{inWorkList.realty}}
+div {{inWorkList.realtyCount}} объектов в работе
 .md-body-1(layout='column', layout-align='space-around stretch')
     .workList(layout='row', md-whiteframe='2',ng-repeat='realty in inWorkList.realty').md-whiteframe-2dp.mv-8
         div(layout='column' ui-sref="crm.realty.one.info({realtyId: '{{::realty._id}}'})").workList_Photo

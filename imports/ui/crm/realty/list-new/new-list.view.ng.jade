@@ -1,5 +1,6 @@
 realty-filter(filter = "newList.filter" roomcount = "newList.roomcount")
 div {{newList.filter}}
+div {{newList.realtyCount}} объектов найдено
 .md-body-1(layout='column', layout-align='space-around stretch' )
     div(ng-repeat='realty in newList.realty' layout='column' md-whiteframe='2').mv-8.whiteBg
         div.newList(layout='row')
@@ -58,7 +59,7 @@ div {{newList.filter}}
         div.ph-32(ng-show="realty.ngShowDescr")
             p {{::realty.details.descr}}
             div(layout='row')
-                md-button.md-raised.md-warn.btn-get-object Взять объект
+                md-button(ng-click='newList.takeRealty(realty._id)').md-raised.md-warn.btn-get-object Взять объект
 
                 span(flex)
                 md-button(ng-click="realty.ngShowDescr =!realty.ngShowDescr") Закрыть

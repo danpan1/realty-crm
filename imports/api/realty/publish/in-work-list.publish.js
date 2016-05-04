@@ -17,7 +17,7 @@ if (Meteor.isServer) {
         selector = {
           $and: [
             {'realtor.id': this.userId},
-            {status: 'sale'}
+            {status: {$in: ['sale',  'taken', 'review', 'reviewed']}}
           ]
         };
 
