@@ -25,6 +25,21 @@ class Layout {
       {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'}
       // {name:'Модератор', uisref:'realty'}
     ];
+    this.actions = [{
+      name: 'Добавить',
+      type: 'toggle',
+      pages: [{
+        name: 'Клиента',
+        type: 'link',
+        state: '',
+        icon: ''
+      },{
+        name: 'Объект',
+        type: 'link',
+        state: '',
+        icon: ''
+      }]
+    }];
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {

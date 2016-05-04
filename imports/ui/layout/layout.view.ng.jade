@@ -11,6 +11,7 @@ md-toolbar(layout='row')
 div(flex='', layout='row')
     // Container #3
     md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left")
+        menu-toggle(section="layout.actions")
         md-list
             md-list-item(ng-repeat="item in layout.sideNavItems",
             ui-sref='{{item.uisref}}',
