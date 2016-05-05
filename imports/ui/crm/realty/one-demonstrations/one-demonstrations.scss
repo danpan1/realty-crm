@@ -1,0 +1,45 @@
+one-demonstrations {
+  md-whiteframe {
+      background-color: $white;
+  }
+  div[md-whiteframe] {
+    background-color: $white;
+  }
+  .md-title {
+    margin: 0;
+  }
+
+  .one-demonstrations-center-cell {
+    background-color: color($yellow, 50);
+    span {
+      display: inline-block;
+      margin: 0 4px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      &:first-child {
+        margin-left: 0;
+        border: none;
+      }
+    }
+  }
+}
+
+.one-demonstrations-text-divider {
+  width: 2px;
+  height: 14px;
+  margin: 0;
+  background-color: $black;
+  vertical-align: middle;
+}
+
+.one-demonstrations-btn-show {
+  color: #7c7c7c;
+}
+
+.one-demonstrations-new-label {
+  color: color($green, 500);
+}
+
+.one-demonstrations-icon-comfort {
+  margin: 0 8px 8px 8px;
+}
