@@ -3,13 +3,35 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import {Meteor} from 'meteor/meteor';
+import {Realty} from '/imports/api/realty';
 
 import './one-review.view.html';
 
 class OneReview {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $stateParams) {
+
     $reactive(this).attach($scope);
+
+    this.subscribe('oneInfo',() => {
+      return [
+        {},
+        true,
+        $stateParams.realtyId
+      ];
+    });
+
+    this.helpers({
+      realty: () => {
+        return Realty.findOne({});
+      }
+    });
+
+  }
+
+  upload() {
+    console.log(this.realty);
   }
 
 }

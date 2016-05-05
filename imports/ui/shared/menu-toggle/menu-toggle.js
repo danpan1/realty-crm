@@ -3,9 +3,9 @@ import angular from 'angular';
 import ngMaterial from 'angular-material';
 import './menu-toggle.view.html';
 
-const moduleName = 'menuToggle';
+const moduleName = 'ngMenuToggle';
 
-export default angular.module(moduleName,[ngMaterial]).directive(function () {
+export default angular.module(moduleName,[ngMaterial]).directive('menuToggle',function () {
   return {
     scope: {
       section: '='
