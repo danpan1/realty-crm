@@ -8,14 +8,30 @@ export const Clients = new Mongo.Collection('customer');
 Clients.Schema = new SimpleSchema({
   phone: {
     type: String,
-    optional: false
+    optional: true
   },
-  password: {
+  name:{
     type: String,
-    optional: false
+    optional: true
   },
-  selections: {
-    type: [Object],
+  filterQueryIds:{
+    type: Array,
+    optional: true
+  },
+  comissionLoyal: {
+    type: Date,
+    optional: true
+  },
+  searchStartDate:{
+    type: Date,
+    optional: true
+  },
+  realtorId:{
+    type: String,
+    optional: true
+  },
+  realtorNote:{
+    type: String,
     optional: true
   },
   /**
@@ -32,7 +48,9 @@ Clients.Schema = new SimpleSchema({
   }
 });
 /**
- * Характер
+ * filterQuery
+ * {"roomcount":["1","2"],"subways":["AHZMJwEyDRWwktCDH"],"districts":["EdhyC9pQm5SHBJZcu"],"renovation":[1,2],
+ * "conditions":["tv"],"metroPeshkom":"12","floorFrom":"1","floorTo":"12","priceFrom":"121","priceTo":"22222"}
  * tests
  realtyConditions =['tv', 'washer', 'children']
  client selections : [] - true

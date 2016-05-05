@@ -1,6 +1,19 @@
-div Имя
-div Contact phone
-div Клиеинту важно (текст длинный какой-то)
+md-input-container.md-block(flex-gt-sm='')
+    label Имя
+    input(ng-model='addClient.firstName')
+md-input-container.md-block(flex-gt-sm='')
+    label Телефон
+    input(name='postalCode', ng-model='addClient.postalCode', placeholder='79165315252', required='', ng-pattern='/^[0-9]{11}$/', md-maxlength='11')
+    div(ng-messages='userForm.postalCode.$error', role='alert', multiple='')
+        .my-message(ng-message='required') You must supply a phone.
+        .my-message(ng-message='pattern')
+            | That doesn't look like a phone.
+        .my-message(ng-message='md-maxlength')
+            | Слишком много цифр
+md-input-container.md-block
+    label Клиеинту важно (текст длинный какой-то)
+    textarea(ng-model='addClient.biography', md-maxlength='150', rows='5', md-select-on-focus='')
+
 div ищет с какого числа
 div ищет сколько дней
 div готов платить комиссию
