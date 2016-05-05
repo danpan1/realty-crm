@@ -2,27 +2,47 @@
  * Created by Danpan on 26.03.16.
  */
 import {Mongo} from 'meteor/mongo';
-import {SimpleSchema} from 'meteor/aldeed:collection2';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 export const ClientFilterQuery = new Mongo.Collection('clientFilterQuery');
 ClientFilterQuery.Schema = new SimpleSchema({
   roomcount: { //комнат
     type: Array,
     optional: true
   },
+  'roomcount.$': { //комнат
+    type: Number,
+    optional: true
+  },
   subways: { // Метро
     type: Array,
+    optional: true
+  },
+  'subways.$': { // Метро
+    type: String,
     optional: true
   },
   districts: {// районы
     type: Array,
     optional: true
   },
+  'districts.$': {// районы
+    type: String,
+    optional: true
+  },
   renovation: {  // Ремонт
     type: Array,
     optional: true
   },
+  'renovation.$': {  // Ремонт
+    type: Number,
+    optional: true
+  },
   conditions: {  // Удобства
     type: Array,
+    optional: true
+  },
+  'conditions.$': {  // Удобства
+    type: String,
     optional: true
   },
   metroPeshkom: {  // ДО метро пешком TODO пешком или на машине

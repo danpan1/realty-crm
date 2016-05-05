@@ -2,8 +2,8 @@
  * @type {Mongo.Collection}
  */
 import {Mongo} from 'meteor/mongo';
-import {SimpleSchema} from 'meteor/aldeed:collection2';
-export const Clients = new Mongo.Collection('customer');
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+export const Clients = new Mongo.Collection('clients');
 
 Clients.Schema = new SimpleSchema({
   phone: {
@@ -16,6 +16,10 @@ Clients.Schema = new SimpleSchema({
   },
   filterQueryIds:{
     type: Array,
+    optional: true
+  },
+  'filterQueryIds.$':{
+    type: String,
     optional: true
   },
   comissionLoyal: {
