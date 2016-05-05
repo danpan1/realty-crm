@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '../../../../api/dictionary/dictionary';
+import {dictionary} from '../../../../api/dictionary';
 import {name as discrictsAreaIdList} from '/imports/ui/shared/disctrict-chips/disctrict-chips.component';
 import './realty-filter.view.html';
 

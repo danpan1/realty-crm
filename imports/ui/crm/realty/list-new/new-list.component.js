@@ -7,7 +7,7 @@ import {Realty} from '/imports/api/realty';
 import {name as realtyFilter} from '../realty-filter/realty-filter.component';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 
-import {dictionary} from '../../../../api/dictionary/dictionary';
+import {dictionary} from '../../../../api/dictionary';
 import './new-list.view.html';
 
 class NewList {

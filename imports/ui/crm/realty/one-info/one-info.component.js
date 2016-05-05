@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '../../../../api/dictionary/dictionary';
+import {dictionary} from '../../../../api/dictionary';
 
 import './one-info.view.html';
 

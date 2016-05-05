@@ -14,6 +14,7 @@ class Layout {
     $reactive(this).attach($scope);
     this.$mdSidenav = $mdSidenav;
     this.sideNavItems = [
+      {name: 'Добавить клиента', uisref: 'crm.clients.add'},
       {name: 'Объекты', uisref: 'crm.realty.list.new'},
       {name: 'Клиенты', uisref: 'crm.clients'},
       // {name:'Дела', uisref:'realty'},
