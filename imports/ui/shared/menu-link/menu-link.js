@@ -3,9 +3,9 @@ import angular from 'angular';
 import ngMaterial from 'angular-material';
 import './menu-link.view.html';
 
-const moduleName = 'menuLink';
+const moduleName = 'ngMenuLink';
 
-export default angular.module(moduleName,[ngMaterial]).directive(function() {
+export default angular.module(moduleName,[ngMaterial]).directive('menuLink',function() {
     return {
       scope: {
         section: '='
@@ -23,3 +23,4 @@ export default angular.module(moduleName,[ngMaterial]).directive(function() {
       }
     };
 });
+
