@@ -25,6 +25,36 @@ md-input-container {
   font-size: 16px;
 }
 
+md-switch {
+  .md-label {
+    font-size: 16px;
+  }
+  
+  .md-bar {
+    background-color: rgba(255, 82, 82, 0.5);
+  }
+  
+  &.md-checked .md-bar {
+    background-color: rgba(111, 193, 122, 0.5) !important;
+  }
+
+  [disabled] .md-bar {
+    background-color: rgba(111, 193, 122, 0.5) !important;
+  }
+
+  .md-thumb {
+    background-color: rgb(255, 82, 82) !important;
+  }
+
+  &.md-checked .md-thumb {
+    background-color: rgb(111, 193, 122) !important;
+  }
+
+  [disabled] .md-thumb {
+    background-color: rgb(255, 82, 82) !important;
+  }
+}
+
 .topbar {
     height: 70px;
     background: #fff;

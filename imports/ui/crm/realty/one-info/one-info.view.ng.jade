@@ -2,8 +2,22 @@ div(layout="column", layout-align="space-around stretch")
     div
         img(ng-src="realty_no_image.png", md-whiteframe="2")
     div(layout="row", layout-align="space-between")
-        div(md-whiteframe='2' flex='30') Details
-        div(md-whiteframe='2' flex='20')
+        div(md-whiteframe='2' flex='30' layout-padding) 
+            div().md-subhead Область: #[strong Московская]
+            div().md-subhead Город: #[strong Москва]
+            div().md-subhead Метро: #[strong Лубянка 5 мин. пешом]
+            div().md-subhead Район: #[strong ЦАО]
+            div().md-subhead Тип здания: #[strong Кирпичный]
+            div().md-subhead Комнат: #[strong 3 комнатная]
+            div().md-subhead Срок: #[strong длительный]
+            div().md-subhead Цена: #[strong 38 000]
+            div().md-subhead Этаж: #[strong 10 из 55]
+            div().md-subhead Общая: #[strong 64 м#[sup 2]]
+            div().md-subhead Собственник: #[strong Лояльный]
+            div().md-subhead Уровень ремонта: #[strong Евроремонт]
+            div
+                md-button().md-primary.md-raised.ml-0 Изменить
+        div(md-whiteframe='2' flex='20').mh-16
             md-switch.md-warn(ng-model='oneInfo[condition.id]',
             aria-label='Switch 2',
             ng-true-value="'{{condition.id}}'",
@@ -51,8 +65,10 @@ div(layout="column", layout-align="space-around stretch")
             div
                 md-button().md-primary.md-raised.ml-0 Сохранить
 
-    div(md-whiteframe="2")
-        div Closed sdelka
+    div(md-whiteframe="2").one-info-closed.mv-16.p-16
+        h3().md-title Закрытие сделки
+        div
+            md-button().md-primary.md-raised.ml-0 Закрыть сделку и переместить объект в архив
 
 
 
