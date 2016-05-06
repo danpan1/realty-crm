@@ -43,7 +43,8 @@ class InWorkList {
     vm.helpers({
       realty: () => {
         return Realty.find(
-          {status: {$in: ['sale', 'taken', 'review', 'reviewed']}},
+          {status: {$in: ['sale']}},
+          // {status: {$in: ['sale', 'taken', 'review', 'reviewed']}},
           {sort: vm.sort});
       },
       realtyCount: () => {

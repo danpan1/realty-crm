@@ -11,6 +11,7 @@ if (Meteor.isServer) {
     if (Roles.userIsInRole(this.userId, ['business'])) {
       // console.log(id);
       // console.log(Realty.findOne({'_id': id}));
+      console.log(id);
       return Realty.find({'_id': id});
     }
 

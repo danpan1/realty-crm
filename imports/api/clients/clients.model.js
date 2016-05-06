@@ -5,6 +5,19 @@ import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 export const Clients = new Mongo.Collection('clients');
 
+Clients.allow({
+  insert() {
+    return true;
+  },
+  update(userId, party, fields, modifier) {
+    return userId && party.owner === userId;
+  },
+  remove(userId, party) {
+    return userId && party.owner === userId;
+  }
+});
+
+
 Clients.Schema = new SimpleSchema({
   phone: {
     type: String,
@@ -23,7 +36,7 @@ Clients.Schema = new SimpleSchema({
     optional: true
   },
   comissionLoyal: {
-    type: Date,
+    type: Boolean,
     optional: true
   },
   searchStartDate:{

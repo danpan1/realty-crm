@@ -1,0 +1,28 @@
+/**
+ * Created by Danpan on 06.05.16.
+ */
+import angular from 'angular';
+import angularMeteor from 'angular-meteor';
+
+import './client-card.view.html';
+
+class ClientCard {
+  /* @ngInject */
+  constructor($scope, $reactive) {
+    $reactive(this).attach($scope);
+  }
+
+}
+
+const moduleName = 'clientCard';
+
+// create a module
+export default angular.module(moduleName, [
+  angularMeteor
+]).component(moduleName, {
+  templateUrl: 'imports/ui/shared/client-card/client-card.view.html',
+  bindings: {client: '<'},
+  controllerAs: moduleName,
+  controller: ClientCard
+});
+
