@@ -10,4 +10,12 @@ one-info {
             min-height: 0;
         }
     }
+
+    .md-title {
+        margin: 0;
+    }
+}
+
+.one-info-closed .md-title {
+    margin-top: 0;
 }
