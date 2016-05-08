@@ -18,23 +18,23 @@ function operatorGet() {
       sort: {$natural: -1}
     });
     call = Realty.findOne({
-      status: 'call', 'operator.id': {'$lte': currentTime}
+      status: 'call', 'operator.id': this.userID
     }, {
       sort: {$natural: -1}
     });
     // потом просто новые
-    if (one) {
-      console.log('find object status = later');
-    } else if (call) {
+    if (call) {
       console.log('find object status = call');
-      one = Realty.findOne({status: 'call'}); //TODO сделать update на realtor id
+      one = call; //TODO сделать update на realtor id
+    } else if (one) {
+      console.log('find object status = later');
     } else {
       console.log('find object status = new');
       one = Realty.findOne({status: 'new'}, {sort: {$natural: -1}});
     }
 
     Realty.update({_id: one._id}, {
-      $set: {status: 'call', operator}
+      $set: {status: 'call', 'operator.id': this.userID}
     }, (error) => {
       if (error) {
         console.log(error);
