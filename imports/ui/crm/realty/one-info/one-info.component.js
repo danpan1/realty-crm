@@ -4,17 +4,47 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {dictionary} from '../../../../api/dictionary';
+import {Realty} from '/imports/api/realty';
 
 import './one-info.view.html';
 
 class OneInfo {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
-    // oneInfo
-  }
+    this.subscribe('oneInfo', () => {
+      return [
+        $stateParams.realtyId
+      ];
+    }, {
+      onReady(){
+        let realty = Realty.findOne({});
+      }
+    });
 
+    this.helpers({
+      realty: () => {
+        return Realty.findOne({});
+      }
+    });
+    // oneInfo
+    
+    this.slideNum = 0;
+    
+  }
+  
+  nextImage(boo, max) {
+      if(boo){
+          if(this.slideNum+1 > max) this.slideNum = 0;
+          else this.slideNum++;
+          console.log(this.slideNum + 1);
+      }else{
+          if(this.slideNum+1 == 0) this.slideNum = max;
+          else this.slideNum--;
+          console.log(this.slideNum - 1);
+      }
+  }
 }
 
 const moduleName = 'oneInfo';
