@@ -1,22 +1,20 @@
 /**
  * Created by Danpan on 26.03.16.
  */
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-
-AdSchema = new SimpleSchema({
+export const AdSchema = new SimpleSchema({
   admanId: { //id
     type: String,
     optional: true
   },
-  sale_title: { // Продающий заголовок
+  saleTitle: { // Продающий заголовок
     type: String,
     optional: true
   },
-// Продающее описание объекта
-  sale_descr: {
+  // Продающее описание объекта
+  saleDescr: {
     type: String,
     optional: true
   }
 });
-
-
