@@ -36,13 +36,11 @@ class OneInfo {
   
   nextImage(boo, max) {
       if(boo){
-          if(this.slideNum+1 > max) this.slideNum = 0;
+          if(this.slideNum + 1 >= max) this.slideNum = 0;
           else this.slideNum++;
-          console.log(this.slideNum + 1);
       }else{
-          if(this.slideNum+1 == 0) this.slideNum = max;
+          if(this.slideNum - 1 <= 0) this.slideNum = max - 1;
           else this.slideNum--;
-          console.log(this.slideNum - 1);
       }
   }
 }
@@ -54,9 +52,9 @@ export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/one-info/one-info.view.html',
-  bindings: {
+  bindings: {/*
     realty: '='
-  },
+  */},
   controllerAs: moduleName,
   controller: OneInfo
 });

@@ -2,7 +2,7 @@ div(layout="column", layout-align="space-around stretch")
     div(layout="row")
         div(flex="70")
             button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)") prev
-            img(flex="100" ng-src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}", md-whiteframe="2")
+            img(flex="100" src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}", md-whiteframe="2")
             button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)") next
     div(layout="row", layout-align="space-between")
         div(md-whiteframe='2' flex='80' layout-padding layout="row")  
