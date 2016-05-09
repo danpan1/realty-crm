@@ -6,6 +6,7 @@ import {Locations} from '/imports/api/locations';
 import {Realty} from '/imports/api/realty';
 import {name as realtyFilter} from '../realty-filter/realty-filter.component';
 import {Counts} from 'meteor/tmeasday:publish-counts';
+import {name as slideShow} from '/imports/ui/shared/slide-show/slide-show.component';
 
 import {dictionary} from '../../../../api/dictionary';
 import './new-list.view.html';
@@ -18,6 +19,8 @@ class NewList {
     this.dictionary = dictionary;
     vm.perPage = 20;
     vm.page = 1;
+    this.showSlider = false;
+    this.slideShowImages = [];
     vm.sort = {
       // 'updated_at': -1
       'parseDetails.UID': -1
@@ -62,6 +65,12 @@ class NewList {
   static takeRealty(id) {
     Meteor.call('takeRealty', id);
   }
+  
+  setSliderImages (images) {
+      this.showSlider = true;
+      this.slideShowImages = [images];
+  }
+  
 }
 
 const moduleName = 'newList';
@@ -69,7 +78,8 @@ const moduleName = 'newList';
 // create a module
 export default angular.module(moduleName, [
   realtyFilter,
-  angularMeteor
+  angularMeteor,
+  slideShow
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/list-new/new-list.view.html',
   bindings: {},

@@ -1,4 +1,5 @@
 realty-filter(filter = "newList.filter" roomcount = "newList.roomcount")
+slide-show(ng-model="newList.slideShowImages" isshown="newList.showSlider")
 div {{newList.filter}}
 div {{newList.realtyCount}} объектов найдено
 .md-body-1(layout='column', layout-align='space-around stretch' )
@@ -33,7 +34,7 @@ div {{newList.realtyCount}} объектов найдено
 
             div().newList_Photo
                 div(layout='column', layout-align='space-between')
-                    div.apartment-pic
+                    div.apartment-pic(ng-click="newList.setSliderImages(realty.image)")
                         img(ng-src='{{::realty.image || "realty_no_image.png"}}')
                         div().icon-zoom
             md-divider
