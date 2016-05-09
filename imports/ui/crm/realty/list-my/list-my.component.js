@@ -6,9 +6,9 @@ import angularMeteor from 'angular-meteor';
 
 import {Realty} from '/imports/api/realty';
 import {Counts} from 'meteor/tmeasday:publish-counts';
-import './in-work-list.view.html';
+import './list-my.view.html';
 
-class InWorkList {
+class ListMy {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
@@ -24,7 +24,7 @@ class InWorkList {
       'price': -1
     };
 
-    vm.subscribe('inWorkList', () => {
+    vm.subscribe('listMy', () => {
       return [
         {
           limit: parseInt(vm.perPage),
@@ -60,14 +60,14 @@ class InWorkList {
 
 }
 
-const moduleName = 'inWorkList';
+const moduleName = 'listMy';
 
 // create a module
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/crm/realty/list-in-work/in-work-list.view.html',
+  templateUrl: 'imports/ui/crm/realty/list-my/list-my.view.html',
   bindings: {},
   controllerAs: moduleName,
-  controller: InWorkList
+  controller: ListMy
 });

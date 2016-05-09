@@ -1,12 +1,12 @@
 /**
- * Created by Danpan on 25.04.16.
+ * Created by Danpan on 09.05.16.
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
-import './incoming-call.view.html';
+import './one-connections.view.html';
 
-class IncomingCall {
+class OneConnections {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
@@ -14,14 +14,14 @@ class IncomingCall {
 
 }
 
-const moduleName = 'incomingCall';
+const moduleName = 'oneConnections';
 
 // create a module
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-    templateUrl: 'imports/ui/call-center/incoming-call/incoming-call.view.html',
+    templateUrl: 'imports/ui/crm/realty/one-connections/one-connections.view.html',
     bindings: {},
     controllerAs: moduleName,
-    controller: IncomingCall
+    controller: OneConnections
   });

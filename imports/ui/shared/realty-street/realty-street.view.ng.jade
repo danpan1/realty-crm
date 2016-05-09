@@ -1,0 +1,37 @@
+
+div {{realtyStreet.selectedStreet}}
+div {{realtyStreet.selectedHouse}}
+md-autocomplete(flex='',
+required='',
+md-input-name='autocompleteFieldStreet',
+md-input-minlength='2',
+md-no-cache='realtyStreet.noCache',
+md-selected-item='realtyStreet.selectedStreet',
+md-selected-item-change='realtyStreet.clearHouse()',
+md-search-text='realtyStreet.searchTextStreet',
+md-items='item in realtyStreet.querySearch(realtyStreet.searchTextStreet)',
+md-item-text='item.value',
+md-floating-label='Выберите улицу')
+    md-item-template
+        span(md-highlight-text='realtyStreet.searchTextStreet') {{item.value}}
+    div(ng-messages='searchForm.autocompleteField.$error',
+    ng-if='searchForm.autocompleteField.$touched')
+        div(ng-message='required')
+            | You
+            b must
+            |  have a favorite state.
+        div(ng-message='minlength') Your entry is not long enough.
+        div(ng-message='maxlength') Your entry is too long.
+
+md-autocomplete(flex='',
+required='',
+md-input-name='autocompleteFieldHouse',
+md-input-minlength='1',
+md-no-cache='realtyStreet.noCache',
+md-selected-item='realtyStreet.selectedHouse',
+md-search-text='realtyStreet.searchTextHouse',
+md-items='item in realtyStreet.querySearchHouse(realtyStreet.searchTextHouse)',
+md-item-text='item.value',
+md-floating-label='Выберите дом')
+    md-item-template
+        span(md-highlight-text='realtyStreet.searchTextHouse') {{item.value}}

@@ -19,5 +19,9 @@ export default function routes($stateProvider) {
     .state('crm.clients.list.my', {
       url: '/my',
       template: '<list-my-clients/>'
+    })
+    .state('clients.list.hot', {
+      url: '/hot',
+      template: '<list-hot-clients/>'
     });
 }

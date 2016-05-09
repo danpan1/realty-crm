@@ -22,16 +22,28 @@ export default function routes($stateProvider) {
       url: '/review',
       template: '<one-review/>'
     })
+    .state('crm.realty.one.email', {
+      url: '/email',
+      template: '<one-email/>'
+    })
     .state('crm.realty.one.info', {
       url: '/info',
       template: '<one-info/>'
+    })
+    .state('crm.realty.one.connections', {
+      url: '/connections',
+      template: '<one-connections/>'
     })
     .state('crm.realty.list.new', {
       url: '/new',
       template: '<new-list/>'
     })
-    .state('crm.realty.list.inWork', {
-      url: '/inwork',
-      template: '<in-work-list/>'
+    .state('crm.realty.list.my', {
+      url: '/my',
+      template: '<list-my/>'
+    })
+    .state('crm.realty.list.archive', {
+      url: '/archive',
+      template: '<list-archive/>'
     });
 }

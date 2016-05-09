@@ -6,6 +6,7 @@ import {Meteor} from 'meteor/meteor';
 import angularMeteor from 'angular-meteor';
 import {name as realtyConditions} from '../../shared/realty-conditions/realty-conditions.component';
 import {name as subwayChips} from '/imports/ui/shared/subway-chips/subway-chips.component';
+import {name as realtyStreet} from '/imports/ui/shared/realty-street/realty-street.component';
 import {dictionary} from '/imports/api/dictionary';
 
 import './outgoing-call.view.html';
@@ -50,6 +51,7 @@ const moduleName = 'outgoingCall';
 export default angular.module(moduleName, [
   angularMeteor,
   realtyConditions,
+  realtyStreet,
   subwayChips
 ]).component(moduleName, {
   templateUrl: 'imports/ui/call-center/outgoing-call/outgoing-call.view.html',

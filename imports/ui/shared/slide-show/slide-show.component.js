@@ -12,40 +12,42 @@ class SlideShow {
     this.slideCount = 0;
     this.slideInnerStyle = {};
   }
-  
-  showSlides () {
-      // init and count slider width
-      this.sliderMaxWidth = this.slidesList.length * 1030 * 3;
-      this.slideInnerStyle = {'margin-left':this.slideMargin+'px','width':this.sliderMaxWidth+'px'};
+
+  showSlides() {
+    // init and count slider width
+    this.sliderMaxWidth = this.slidesList.length * 1030 * 3;
+    this.slideInnerStyle = {'margin-left': this.slideMargin + 'px', 'width': this.sliderMaxWidth + 'px'};
   }
-  
-  hideSlides () {
+
+  hideSlides() {
     this.isshown = false;
   }
-  
-  nextSlide (boo, max) {
+
+  nextSlide(boo, max) {
     max = 3;
-    if(boo){ // if next
-        if(this.slideCount + 1 >= max) {
-            this.slideCount = 0;
-            this.slideMargin = 0;
-        }
-        else {
-            this.slideCount++; 
-            this.slideMargin = -this.slideCount*1030;
-        };
-    }else{ // if previous
-        if(this.slideCount - 1 < 0) {
-            this.slideCount = max-1;
-            this.slideMargin = -(max-1)*1030;
-        }
-        else {
-            this.slideCount--;
-            this.slideMargin = -this.slideCount*1030;
-        };
+    if (boo) { // if next
+      if (this.slideCount + 1 >= max) {
+        this.slideCount = 0;
+        this.slideMargin = 0;
+      }
+      else {
+        this.slideCount++;
+        this.slideMargin = -this.slideCount * 1030;
+      }
+      ;
+    } else { // if previous
+      if (this.slideCount - 1 < 0) {
+        this.slideCount = max - 1;
+        this.slideMargin = -(max - 1) * 1030;
+      }
+      else {
+        this.slideCount--;
+        this.slideMargin = -this.slideCount * 1030;
+      }
+      ;
     }
     // move slider
-    this.slideInnerStyle = {'margin-left':this.slideMargin+'px','width':this.sliderMaxWidth+'px'};
+    this.slideInnerStyle = {'margin-left': this.slideMargin + 'px', 'width': this.sliderMaxWidth + 'px'};
   }
 
 }

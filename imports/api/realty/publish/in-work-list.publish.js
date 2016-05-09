@@ -8,7 +8,7 @@ import {Counts} from 'meteor/tmeasday:publish-counts';
 import {Roles} from 'meteor/alanning:roles';
 
 if (Meteor.isServer) {
-  Meteor.publish('inWorkList', function (options, details, id) {
+  Meteor.publish('listMy', function (options, details, id) {
 
       let selector;
 

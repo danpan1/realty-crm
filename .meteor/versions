@@ -101,7 +101,7 @@ ui@1.0.11
 underscore@1.0.8
 url@1.0.9
 velocity:console-reporter@0.2.1
-velocity:html-reporter@0.10.0
+velocity:html-reporter@0.10.1
 velocity:reports@1.0.0
 webapp@1.2.8
 webapp-hashing@1.0.9
