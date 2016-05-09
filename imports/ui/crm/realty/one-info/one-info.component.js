@@ -29,19 +29,27 @@ class OneInfo {
       }
     });
     // oneInfo
-    
+
     this.slideNum = 0;
-    
+
   }
-  
+
   nextImage(boo, max) {
-      if(boo){
-          if(this.slideNum + 1 >= max) this.slideNum = 0;
-          else this.slideNum++;
-      }else{
-          if(this.slideNum - 1 <= 0) this.slideNum = max - 1;
-          else this.slideNum--;
+    if (boo) {
+      if (this.slideNum + 1 >= max) {
+        this.slideNum = 0;
       }
+      else {
+        this.slideNum++;
+      }
+    } else {
+      if (this.slideNum - 1 <= 0) {
+        this.slideNum = max - 1;
+      }
+      else {
+        this.slideNum--;
+      }
+    }
   }
 }
 
@@ -52,9 +60,11 @@ export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/one-info/one-info.view.html',
-  bindings: {/*
-    realty: '='
-  */},
+  bindings: {
+    /*
+     realty: '='
+     */
+  },
   controllerAs: moduleName,
   controller: OneInfo
 });

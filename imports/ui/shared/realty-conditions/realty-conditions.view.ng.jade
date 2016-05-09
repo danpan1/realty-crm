@@ -1,0 +1,6 @@
+md-input-container
+    label Выбрать удобства
+    md-select(ng-model='realtyConditions.conditionsSelected', multiple='true')
+        //md-optgroup(label='Выбрать удобства')
+        md-option(ng-value='condition.id',
+        ng-repeat="condition in realtyConditions.conditionsDictionary ") {{condition.name}}

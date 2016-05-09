@@ -1,3 +1,38 @@
 div Страница исходящих звонков
 div {{outgoingCall.metro}}
-subway-chips(ng-model="outgoingCall.metro")
+div ТЕлефон {{outgoingCall.realty.contacts[0].phones[0].phone}} {{outgoingCall.realty.contacts[0].name}}
+div Перезвонить и не доступен
+
+div
+    realty-operation-type
+    realty-type
+    realty-type-period
+    div price {{outgoingCall.realty.price}}
+    div Сколько комнат
+    div Район
+    subway-chips
+    div До метро 15 минут пешком
+    div Улица
+    div Номер дома
+    div Номер квартиры
+    div ремонт
+    div Этаж {{outgoingCall.realty.floor}} из {{outgoingCall.realty.floormax}}
+
+    div площадь {{outgoingCall.realty.square}}
+        md-input-container.md-block(flex-gt-sm='')
+            label площадь
+            input(name='postalCode', ng-model='outgoingCall.realty.square', placeholder='12345', required='', ng-pattern='/^[0-9]{5}$/', md-maxlength='5')
+            div(ng-messages='userForm.postalCode.$error', role='alert', multiple='')
+
+    realty-conditions(ng-model='outgoingCall.realty.details.conditions')
+
+    md-radio-group(ng-model='outgoingCall.realty.operator.qualification')
+        md-radio-button(ng-repeat='qualification in outgoingCall.dictionary.qualification'
+        value='{{qualification.id}}') {{qualification.name}}
+
+    md-input-container.md-block
+        label Иформация о собственнике
+        textarea(ng-model='outgoingCall.realty.operator.comment', md-maxlength='150', rows='5', md-select-on-focus='')
+
+
+

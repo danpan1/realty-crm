@@ -1,9 +1,9 @@
 /**
  * Created by Danpan on 26.03.16.
  */
-
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 /*Тут адрес который показывается на карточках в списках*/
-AddressSchema = new SimpleSchema({
+export const AddressSchema = new SimpleSchema({
   value: {
     type: String,
     optional: true
@@ -46,8 +46,8 @@ AddressSchema = new SimpleSchema({
     type:Array,
     optional: true
   },
-  "subways.$": {
-    type:"String",
+  'subways.$': {
+    type:'String',
     optional: true
   },
   metroPeshkom: {

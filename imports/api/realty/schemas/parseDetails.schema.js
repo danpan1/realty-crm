@@ -1,7 +1,8 @@
 /**
  * Created by Danpan on 27.03.16.
  */
-ParseDetailsSchema = new SimpleSchema({
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+export const ParseDetailsSchema = new SimpleSchema({
   UID: { // UID приходит от Парсера
     type: Number,
     label: 'UID',
@@ -11,7 +12,7 @@ ParseDetailsSchema = new SimpleSchema({
   credate: { // дата создания от Парсера
     type: Date,
     optional: true,
-    label: "credate"
+    label: 'credate'
   },
   source: {  // источник . 2 - авито
     type: Number,
@@ -21,18 +22,18 @@ ParseDetailsSchema = new SimpleSchema({
   },
   images: { // При парсинге из строки делается Array
     type: Array,
-    label: "images Parsed",
+    label: 'images Parsed',
     optional: true
   },
-  "images.$": { //url картинки
+  'images.$': { //url картинки
     type: String,
-    label: "images.[]",
+    label: 'images.[]',
     optional: true
   },
   url: {  // URL
     type: String,
     optional: true,
-    label: "url"
+    label: 'url'
   },
   city: {
     type: String,
@@ -54,6 +55,6 @@ ParseDetailsSchema = new SimpleSchema({
     type: Object,
     optional: true,
     blackbox: true
-    
+
   }
 });
