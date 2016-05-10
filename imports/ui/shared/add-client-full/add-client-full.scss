@@ -1,0 +1,11 @@
+add-client-full {
+    md-content {
+        background-color: $white;
+    }
+}
+
+.add-client-full-small-select {
+  .md-select-value {
+    min-width: 50px;
+  }
+}
