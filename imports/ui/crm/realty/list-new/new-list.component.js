@@ -62,8 +62,12 @@ class NewList {
     });
   }
 
+  setSliderImages(images) {
+    console.log(images);
+    this.showSlider = true;
+    this.slideShowImages = images;
+  }
 
-  
 }
 
 const moduleName = 'newList';

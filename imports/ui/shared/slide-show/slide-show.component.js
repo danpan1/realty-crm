@@ -15,7 +15,7 @@ class SlideShow {
 
   showSlides() {
     // init and count slider width
-    this.sliderMaxWidth = this.slidesList.length * 1030 * 3;
+    this.sliderMaxWidth = this.slidesList.length * 1030 ;
     this.slideInnerStyle = {'margin-left': this.slideMargin + 'px', 'width': this.sliderMaxWidth + 'px'};
   }
 
@@ -24,7 +24,7 @@ class SlideShow {
   }
 
   nextSlide(boo, max) {
-    max = 3;
+    max = this.slidesList.length;
     if (boo) { // if next
       if (this.slideCount + 1 >= max) {
         this.slideCount = 0;
@@ -61,7 +61,7 @@ export default angular.module(moduleName, [
   templateUrl: `imports/ui/shared/slide-show/slide-show.view.html`,
   controllerAs: moduleName,
   bindings: {
-    slidesList: '=ngModel',
+    slidesList: '=',
     isshown: '='
   },
   controller: SlideShow

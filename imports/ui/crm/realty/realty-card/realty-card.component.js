@@ -19,9 +19,8 @@ class RealtyCard {
     Meteor.call('takeRealty', id);
   }
 
-  setSliderImages(images) {
-    this.showSlider = true;
-    this.slideShowImages = [images];
+  showSlider() {
+    this.slider({'images': this.realty.parseDetails.images});
   }
 }
 
@@ -33,7 +32,8 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/realty-card/realty-card.view.html',
   bindings: {
-    realty: '<'
+    realty: '<',
+    slider: '&'
   },
   controllerAs: moduleName,
   controller: RealtyCard

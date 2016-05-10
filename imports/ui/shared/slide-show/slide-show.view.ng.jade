@@ -3,9 +3,5 @@ div.slide__wrapper(ng-style="slideShow.sliderStyles" ng-if="slideShow.isshown")
     figure.slide__arrow.prev(ng-click="slideShow.nextSlide(false,slideShow.slidesList.length)") prev
     div.slide__inner(ng-style="slideShow.slideInnerStyle" ng-init="slideShow.showSlides()")
         div.slide__block(ng-repeat="slide in slideShow.slidesList")
-            img.slide__img(src="{{slide}}")
-        div.slide__block(ng-repeat="slide in slideShow.slidesList")
-            img.slide__img(src="{{slide}}")
-        div.slide__block(ng-repeat="slide in slideShow.slidesList")
-            img.slide__img(src="{{slide}}")
+            img.slide__img(ng-src="{{slide}}")
     figure.slide__arrow.next(ng-click="slideShow.nextSlide(true,slideShow.slidesList.length)") next

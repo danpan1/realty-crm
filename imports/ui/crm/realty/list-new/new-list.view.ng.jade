@@ -1,6 +1,8 @@
 realty-filter(filter = 'newList.filter' roomcount = 'newList.roomcount')
-slide-show(ng-model='newList.slideShowImages' isshown='newList.showSlider')
+slide-show(slides-list='newList.slideShowImages' isshown='newList.showSlider')
 div {{newList.filter}}
 div {{newList.realtyCount}} объектов найдено
 .md-body-1(layout='column', layout-align='space-around stretch' )
-    realty-card(ng-repeat='realty in newList.realty' realty='realty' show-slider="")
+    realty-card(ng-repeat='realty in newList.realty'
+    realty='realty'
+    slider='newList.setSliderImages(images)')
