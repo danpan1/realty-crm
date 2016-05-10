@@ -6,12 +6,14 @@ import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
 import {Clients} from '/imports/api/clients';
 import {ClientFilterQuery} from '/imports/api/client-filter-query';
+import {dictionary} from '/imports/api/dictionary';
 import './add-client.view.html';
 
 class AddClient {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
+    this.dictionary = dictionary;
     this.resetClient();
   }
 

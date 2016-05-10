@@ -1,4 +1,10 @@
 form( name="userForm" ng-submit='addClient.submit(userForm.$valid)')
+    md-input-container
+        label Status
+        md-select(ng-model='addClient.client.status')
+            md-option(ng-repeat='status in addClient.dictionary.clientStatuses', value='{{status}}')
+                | {{status}}
+
     md-input-container.md-block(flex-gt-sm='')
         label Имя
         input(ng-model='addClient.client.name' )
