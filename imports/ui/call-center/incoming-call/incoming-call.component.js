@@ -7,6 +7,7 @@ import {Meteor} from 'meteor/meteor';
 
 import {Realty} from '/imports/api/realty';
 import {Counts} from 'meteor/tmeasday:publish-counts';
+import {name as addClientHot} from '../../shared/add-client-full/add-client-full.component';
 import {dictionary} from '../../../api/dictionary';
 
 import './incoming-call.view.html';
@@ -58,7 +59,8 @@ const moduleName = 'incomingCall';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  addClientHot
 ]).component(moduleName, {
   templateUrl: 'imports/ui/call-center/incoming-call/incoming-call.view.html',
   bindings: {},
