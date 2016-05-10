@@ -59,7 +59,9 @@ export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/realty-street/realty-street.view.html',
-  bindings: {},
+  bindings: {
+    selectedStreet: '=ngModel'
+  },
   controllerAs: moduleName,
   controller: RealtyStreet
 });

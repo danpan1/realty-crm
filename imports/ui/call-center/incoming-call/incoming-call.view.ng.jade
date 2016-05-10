@@ -1,1 +1,6 @@
 div incoming
+div Всего недвижки найдено {{incomingCall.realty.length}}
+div {{incomingCall.street}}
+realty-street(ng-model= 'incomingCall.street')
+realty-card(ng-repeat='realty in incomingCall.realty'
+realty='realty')
