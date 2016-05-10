@@ -1,9 +1,11 @@
 @import "icons";
 @import "color-palette";
+@import "components";
 @import "typography";
 @import "helpers";
 @import "common";
 @import "../layout/layout";
+@import "../call-center/outgoing-call/outgoing-call";
 @import "../crm/realty/list-new/new-list";
 @import "../crm/realty/list-in-work/in-work-list";
 @import "../crm/realty/realty-filter/realty-filter";

@@ -41,6 +41,11 @@ one-review {
       }
     }
   }
+
+  .md-success {
+    min-width: 400px;
+    min-height: 52px;
+  }
 }
 
 .one-review-btn-group {
@@ -59,13 +64,4 @@ one-review {
 
 .one-review-board-green {
   color: #8dbc00;
-}
-
-.md-button.md-raised.btn-save,
-.md-button.md-raised.btn-save:hover {
-  min-width: 400px;
-  min-height: 52px;
-  font-size: 20px;
-  background-color: #baed21;
-  color: #575757
 }
