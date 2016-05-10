@@ -1,40 +1,143 @@
-div Страница исходящих звонков
-div {{outgoingCall.metro}}
-div ТЕлефон {{outgoingCall.realty.contacts[0].phones[0].phone}} {{outgoingCall.realty.contacts[0].name}}
-div Перезвонить и не доступен
+div(md-whiteframe='2').mt-16.ph-32.pv-16
+    div(layout='column')
+        div(flex)
+            strong().md-title 8 925 111 22 33
+            strong().md-title Александр
+        div(layout='row' layout-align="start start")
+            div(flex='65')
+                div(layout='row' layout-align='start center')
+                    md-input-container()
+                        label Сегодня
+                        md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                            md-option(ng-value='condition.id',
+                            ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                    md-input-container(flex-offset='5').outgoing-call-small-select
+                        label 14
+                        md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                            md-option(ng-value='condition.id',
+                            ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                    md-input-container(flex-offset='5').outgoing-call-small-select
+                        label 30
+                        md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                            md-option(ng-value='condition.id',
+                            ng-repeat="condition in realtyFilter.dictionary.conditions") {{condition.name}}
+                    md-button(flex-offset='5').md-primary.md-raised.outgoing-call-small-button
+                        md-icon(md-svg-src='svg/icon-alarm-white.svg')
+                    md-button(flex-offset='10').md-cyan.md-raised Не доступен
+                div(layout='row' layout-align='start center' flex='50')
+                    md-input-container(flex='30').mv-0
+                        input(ng-model='realtyFilter.filter.floorFrom' placeholder='+7')
+                    md-button(flex='30' flex-offset='5').md-amber.md-raised Агенство
+            div(flex='35')
+                div(layout='column' layout-align='center end')
+                    md-button().mr-0 Не актуально
+                    md-button().mr-0 Пропустить
 
-div
-    realty-operation-type
-    realty-type
-    realty-type-period
-    div price {{outgoingCall.realty.price}}
-    div Сколько комнат
-    div Район
-    subway-chips
-    div До метро 15 минут пешком
-    div Улица
-    div Номер дома
-    div Номер квартиры
-    div ремонт
-    div Этаж {{outgoingCall.realty.floor}} из {{outgoingCall.realty.floormax}}
+div(md-whiteframe='2').ph-32.pv-16
+    div(layout='column')
+        div(layout='row')
+            div(flex='60' layout='row' layout-align='space-between start')
+                md-input-container()
+                    label Аренда
+                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                        md-option(ng-value='condition.id',
+                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                md-input-container()
+                    label Квартиры
+                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                        md-option(ng-value='condition.id',
+                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                md-input-container()
+                    label Длительный
+                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                        md-option(ng-value='condition.id',
+                        ng-repeat="condition in realtyFilter.dictionary.conditions") {{condition.name}}
+                md-input-container()
+                    label 30 000
+                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                        md-option(ng-value='condition.id',
+                        ng-repeat="condition in realtyFilter.dictionary.conditions") {{condition.name}}
+            div(flex='40')
+                md-input-container(flex-offset='5')
+                    label 1,2
+                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                        md-option(ng-value='condition.id',
+                        ng-repeat="condition in realtyFilter.dictionary.conditions") {{condition.name}}
 
-    div площадь {{outgoingCall.realty.square}}
-        md-input-container.md-block(flex-gt-sm='')
-            label площадь
-            input(name='postalCode', ng-model='outgoingCall.realty.square', placeholder='12345', required='', ng-pattern='/^[0-9]{5}$/', md-maxlength='5')
-            div(ng-messages='userForm.postalCode.$error', role='alert', multiple='')
+        div(layout='row' layout-align='start end').mv-16
+            div(flex='60')
+                subway-chips(ng-model='outgoingCall.subway')
+            div(layout='row' layout-align='start end' flex='40' flex-offset='5')
+                label().md-subhead До метро
+                md-input-container(flex='10' flex-offset='5').mv-0.pb-0
+                    input(ng-model='realtyFilter.filter.floorFrom' placeholder='15')
+                md-input-container(flex-offset='5').mv-0.pb-0
+                    label Пешком
+                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                        md-option(ng-value='condition.id',
+                        ng-repeat="condition in realtyFilter.dictionary.conditions") {{condition.name}}
 
-    realty-conditions(ng-model='outgoingCall.realty.details.conditions')
+        div(layout='row' layout-align='start end').mv-16
+            div(flex='60')
+                disctrict-chips(ng-model='outgoingCall.disctrict')
+            div(layout='row' layout-align='start end' flex='40' flex-offset='5')
+                md-input-container().mv-0.pb-0
+                    input(ng-model='realtyFilter.filter.floorFrom' placeholder='Таганская')
+                md-input-container(flex='20' flex-offset='5').mv-0.pb-0
+                    input(ng-model='realtyFilter.filter.floorFrom' placeholder='12 с.1')
 
-    md-radio-group(ng-model='outgoingCall.realty.operator.qualification')
-        md-radio-button(ng-repeat='qualification in outgoingCall.dictionary.qualification'
-        value='{{qualification.id}}') {{qualification.name}}
+        div(layout='row' layout-align='start end').mv-16
+            div(flex='60')
+                div(layout='row' layout-align='start center')
+                    md-input-container(flex='50').mv-0.pb-0
+                        label Косметический
+                        md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                            md-option(ng-value='condition.id',
+                            ng-repeat="condition in realtyFilter.dictionary.conditions") {{condition.name}}
+                    md-input-container(flex='10' flex-offset='5').mv-0.pb-0
+                        input(ng-model='realtyFilter.filter.floorFrom' placeholder='1')
+                    label().md-subhead.mh-16 из
+                    md-input-container(flex='10').mv-0.pb-0
+                        input(ng-model='realtyFilter.filter.floorFrom' placeholder='25')
+            div(flex='40')
+                div(layout='row' layout-align='start center')
+                    md-input-container(flex='10').mv-0.pb-0
+                        input(ng-model='realtyFilter.filter.floorFrom' placeholder='100')
+                    #[label().md-subhead м#[sup 2]]
 
-    md-input-container.md-block
-        label Иформация о собственнике
-        textarea(ng-model='outgoingCall.realty.operator.comment', md-maxlength='150', rows='5', md-select-on-focus='')
+        div(layout='row').mv-16
+            div(flex='60')
+                div(layout='row' layout-wrap)
+                    div(flex='33')
+                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Мебель
+                    div(flex='33')
+                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Холодильник
+                    div(flex='33')
+                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary С детьми
+                    div(flex='33')
+                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Кух. мебель
+                    div(flex='33')
+                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Стир. машина
+                    div(flex='33')
+                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Балкон
+                    div(flex='33')
+                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Телевизор
+                    div(flex='33')
+                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary С животными
+                    div(flex='33')
+                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Лифт
+        div(layout='row').mv-16
+            div(flex='60')
+                h3().md-subhead Собственник:
+                div(layout='row')
+                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Плохо
+                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Нормально
+                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Лояльный
 
-    realty-street(ng-model='outgoingCall.realty.address.street')
-
+        div(layout='row')
+            md-input-container(flex='60')
+                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Комментарий колцентра о собственнике может быть в 2 строки')
+        div
+            md-button().md-success.md-raised.ml-0 Сохранить
 
 

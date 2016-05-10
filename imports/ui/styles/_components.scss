@@ -1,9 +1,47 @@
-%button {
-    border-radius: 3px;
-    box-shadow: 1.5px 2.6px 3px rgba(157, 157, 157, 0.36);
+.md-cyan {
+  color: $white;
+  &.md-raised {
+    color: $white;
+    background-color: color($cyan, 500);
+    &:not([disabled]) {
+      &:hover {
+        background-color: color($cyan, 500);
+      }
+      &.md-focused {
+        background-color: color($cyan, 500);
+      }
+    }
+  }
 }
 
-%blue-button {
-    background-color: #03a9f4;
-    color: #fff;
+.md-amber {
+  color: $white;
+  &.md-raised {
+    color: $white;
+    background-color: color($amber, 600);
+    &:not([disabled]) {
+      &:hover {
+        background-color: color($amber, 600);
+      }
+      &.md-focused {
+        background-color: color($amber, 600);
+      }
+    }
+  }
+}
+
+.md-success {
+  color: #575757;
+  &.md-raised {
+    color: #575757;
+    background-color: #baed21;
+    &:not([disabled]) {
+      &:hover {
+        background-color: #baed21;
+      }
+      &.md-focused {
+        background-color: #baed21;
+      }
+    }
+  }
 }
