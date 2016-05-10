@@ -11,13 +11,13 @@ if (Meteor.isServer) {
   Meteor.publish('listMy', function (options, details, id) {
 
       let selector;
-
+      console.log('listMy');
       if (Roles.userIsInRole(this.userId, ['realtor'])) {
 
         selector = {
           $and: [
             {'realtor.id': this.userId},
-            {status: {$in: ['sale',  'taken', 'review', 'reviewed']}}
+            {status: {$in: ['sale', 'taken', 'review', 'reviewed']}}
           ]
         };
 

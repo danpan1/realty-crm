@@ -6,22 +6,7 @@ import {Counts} from 'meteor/tmeasday:publish-counts';
 if (Meteor.isServer) {
   Meteor.publish('incomingCall', function (options, street) {
       let selector = {};
-      // console.log('incomingCall, street - ', street);
-      // if(Roles.userIsInRole(this.userId, ['realtor'])) {
-
-      // selector = {status: 'sale'};
-      // console.log(street);
-      // console.log('street.data', street.street.data);
-      if (street && street.data && street.data.street) {
-        console.log('incomingCall, street - ', street.data.street);
-        selector['address.meta.street'] = street.data.street;
-      }
-      Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
-
-      // }
-
-      //Отдаем объекты недвижимости если у юзера есть роль бизнес
-      // if(Roles.userIsInRole(this.userId, ['business'])) {
+      console.log('incomingCall');
       options.fields = {
         image: 1,
         price: 1,
@@ -44,10 +29,13 @@ if (Meteor.isServer) {
         floormax: 1,
         status: 1
       };
-      console.log(selector);
-      return Realty.find(selector, options);
-      // }
-
+      if (street && street.data && street.data.street) {
+        selector['address.meta.street'] = street.data.street;
+        console.log(selector);
+        return Realty.find(selector, options);
+      } else {
+        return [];
+      }
     }
   );
 }

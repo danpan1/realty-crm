@@ -3,10 +3,10 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {Meteor} from 'meteor/meteor';
+// import {Meteor} from 'meteor/meteor';
 
 import {Realty} from '/imports/api/realty';
-import {Counts} from 'meteor/tmeasday:publish-counts';
+// import {Counts} from 'meteor/tmeasday:publish-counts';
 import {name as addClientHot} from '../../shared/add-client-full/add-client-full.component';
 import {dictionary} from '../../../api/dictionary';
 
@@ -20,7 +20,7 @@ class IncomingCall {
     this.dictionary = dictionary;
     vm.perPage = 20;
     vm.page = 1;
-    this.street = 'fsdfsdf';
+    // this.street = 'fsdfsdf';
     vm.sort = {
       // 'updated_at': -1
       'parseDetails.UID': -1
@@ -45,10 +45,7 @@ class IncomingCall {
 
     vm.helpers({
       realty: () => {
-        return Realty.find({status: 'list'}, {sort: vm.getReactively('sort')});
-      },
-      realtyCount: () => {
-        return Counts.get('realtyCount');
+        return Realty.find({}, {sort: vm.getReactively('sort')});
       }
     });
   }
