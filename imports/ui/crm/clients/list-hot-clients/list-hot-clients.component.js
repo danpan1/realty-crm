@@ -24,7 +24,7 @@ export default angular.module(moduleName, [
     bindings: {},
     controllerAs: moduleName,
     controller: ListHotClients
-  })
+  });/*
   .config(config);
 
 function config($stateProvider) {
@@ -34,4 +34,4 @@ function config($stateProvider) {
       url: '/hot',
       template: '<list-hot-clients/>'
     });
-}
+}*/

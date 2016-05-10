@@ -10,6 +10,7 @@ class ClientCard {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
+    console.log(this.client.searchStartDate);
   }
 
 }

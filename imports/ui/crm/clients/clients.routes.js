@@ -20,7 +20,7 @@ export default function routes($stateProvider) {
       url: '/my',
       template: '<list-my-clients/>'
     })
-    .state('clients.list.hot', {
+    .state('crm.clients.list.hot', {
       url: '/hot',
       template: '<list-hot-clients/>'
     });

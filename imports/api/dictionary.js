@@ -15,6 +15,7 @@ export const dictionary = {
     {id: 2, name: '2 санузла'},
     {id: 3, name: '3 санузла'}
   ],
+  clientStatuses: ['archive', 'realtor', 'hot'],
   conditions: [
     {id: 'furniture', name: 'Мебель'},
     {id: 'kitchen_furniture', name: 'Кухонная мебель'},

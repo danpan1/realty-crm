@@ -1,4 +1,3 @@
 // import './subwayChips.publish';
-import './clients.publish';
-import './my-clients.publish';
+import './clients-list.publish';
 export * from './clients.model';

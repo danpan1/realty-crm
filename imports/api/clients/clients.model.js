@@ -17,38 +17,117 @@ Clients.allow({
   }
 });
 
-
 Clients.Schema = new SimpleSchema({
   phone: {
     type: String,
     optional: true
   },
-  name:{
+  name: {
     type: String,
     optional: true
   },
-  filterQueryIds:{
-    type: Array,
-    optional: true
-  },
-  'filterQueryIds.$':{
-    type: String,
-    optional: true
+  status: {//'realtor' - находится у риэлтора в работе (мои клиенты)
+    type: String
   },
   comissionLoyal: {
     type: Boolean,
     optional: true
   },
-  searchStartDate:{
+  searchStartDate: {
     type: Date,
     optional: true
   },
-  realtorId:{
+  realtorId: {
     type: String,
     optional: true
   },
-  realtorNote:{
+  realtorNote: {
     type: String,
+    optional: true
+  },
+  roomcount: { //комнат
+    type: Array,
+    optional: true
+  },
+  'roomcount.$': { //комнат
+    type: String,
+    optional: true
+  },
+  subwaysEmbeded: { // Метро заполненное
+    type: Array,
+    optional: true
+  },
+  'subwaysEmbeded.$': { // Метро
+    type: Object,
+    optional: true,
+    blackbox: true
+  },
+  districtsEmbeded: { // Метро заполненное
+    type: Array,
+    optional: true
+  },
+  'districtsEmbeded.$': { // Метро
+    type: String,
+    optional: true
+  },
+  subways: { // Метро
+    type: Array,
+    optional: true
+  },
+  'subways.$': { // Метро
+    type: String,
+    optional: true
+  },
+  districts: {// районы
+    type: Array,
+    optional: true
+  },
+  'districts.$': {// районы
+    type: String,
+    optional: true
+  },
+  renovation: {  // Ремонт
+    type: Array,
+    optional: true
+  },
+  'renovation.$': {  // Ремонт
+    type: Number,
+    optional: true
+  },
+  conditions: {  // Удобства
+    type: Array,
+    optional: true
+  },
+  'conditions.$': {  // Удобства
+    type: String,
+    optional: true
+  },
+  metroPeshkom: {  // ДО метро пешком TODO пешком или на машине
+    type: Number,
+    optional: true
+  },
+  floorFrom: {  // Этаж от
+    type: Number,
+    optional: true
+  },
+  floorTo: {  // Этаж до
+    type: Number,
+    optional: true
+  },
+  priceFrom: {  // Цена от
+    type: Number,
+    optional: true
+  },
+  priceTo: {  // Цена до
+    type: Number,
+    optional: true
+  },
+  type: {  //Аренда длительная например
+    type: Number,
+    optional: true
+  },
+  materials: {  //Тип дома
+    type: Number,
     optional: true
   },
   /**

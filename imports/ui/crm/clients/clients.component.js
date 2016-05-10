@@ -5,6 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {name as addClient} from './add-client/add-client.component';
 import {name as listMyClients} from './list-my-clients/list-my-clients.component';
+import {name as listHotClients} from './list-hot-clients/list-hot-clients.component';
 import routes from './clients.routes';
 
 import './clients.view.html';
@@ -23,6 +24,7 @@ const moduleName = 'clients';
 export default angular.module(moduleName, [
   angularMeteor,
   listMyClients,
+  listHotClients,
   addClient
 ]).component(moduleName, {
     templateUrl: 'imports/ui/crm/clients/clients.view.html',
