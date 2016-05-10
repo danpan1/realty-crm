@@ -8,7 +8,7 @@ import {Clients} from './clients.model';
 
 if (Meteor.isServer) {
 
-  Meteor.publish('myClients', function (filter, options) {
+  Meteor.publish('listClients', function (filter, options) {
 
     let selector = {};
 

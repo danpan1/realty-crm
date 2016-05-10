@@ -7,17 +7,17 @@ import angularMeteor from 'angular-meteor';
 import {Locations} from '/imports/api/locations';
 import {Meteor} from 'meteor/meteor';
 
-import './disctrict-chips.view.html';
+import './district-chips.view.html';
 
-class DisctrictChips {
+class DistrictChips {
   constructor($scope, $reactive) {
     'ngInject';
 
     $reactive(this).attach($scope);
     const vm = this;
     vm.districtsAreaInForm = [];
-    vm.alreadyPicked = this.discrictsAreaIdList || [];
-    vm.subscribe('disctrictAreaChips', ()=> {
+    vm.alreadyPicked = this.districtsAreaIdList || [];
+    vm.subscribe('districtsAreaChips', ()=> {
       return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), vm.alreadyPicked];
     }, {
       onReady: function () {
@@ -30,7 +30,7 @@ class DisctrictChips {
 
     vm.helpers({
       districtsAreaSuggestionList () {
-        console.log(Locations.find({}).fetch());
+        // console.log(Locations.find({}).fetch());
         return Locations.find({
           type: {$in: ['district', 'area']}
         });
@@ -40,8 +40,11 @@ class DisctrictChips {
 
   changeChips() {
     this.loaded = true;
-    this.discrictsAreaIdList = this.districtsAreaInForm.map((item)=> {
+    this.districtsAreaIdList = this.districtsAreaInForm.map((item)=> {
       return item._id;
+    });
+    this.districtsEmbeded = this.districtsAreaInForm.map((item)=> {
+      return item.name;
     });
   }
 
@@ -55,16 +58,17 @@ class DisctrictChips {
 
 }
 
-const moduleName = 'disctrictChips';
+const moduleName = 'districtChips';
 
 // create a module
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-    templateUrl: 'imports/ui/shared/disctrict-chips/disctrict-chips.view.html',
+    templateUrl: 'imports/ui/shared/district-chips/district-chips.view.html',
     bindings: {
-      discrictsAreaIdList: '=ngModel'
+      districtsAreaIdList: '=ngModel',
+      districtsEmbeded: '='
     },
     controllerAs: moduleName,
-    controller: DisctrictChips
+    controller: DistrictChips
   });

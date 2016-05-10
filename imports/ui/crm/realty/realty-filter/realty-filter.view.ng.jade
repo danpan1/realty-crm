@@ -1,8 +1,12 @@
 div(md-whiteframe='2').realty-list-filter.ph-16
     div(layout="row", layout-align="space-around start")
         div(layout='column' flex='33' layout-align='space-around none').input-ltd
-            subway-chips(ng-model = "realtyFilter.filter.subways")
-            disctrict-chips(ng-model = "realtyFilter.filter.districts")
+            subway-chips(ng-model = "realtyFilter.filter.subways"
+            subways-embeded = 'realtyFilter.subwaysEmbeded')
+
+            district-chips(ng-model = "realtyFilter.filter.districts"
+            districts-embeded = 'realtyFilter.districtsEmbeded')
+
         div(layout='column' flex='33' layout-align='space-around none' flex-offset='5').input-ltd
             md-input-container
                 label Выбрать ремонт
