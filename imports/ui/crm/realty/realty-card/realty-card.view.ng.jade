@@ -1,0 +1,76 @@
+div(layout='column' md-whiteframe='2').mv-8.whiteBg
+    div.newList(layout='row')
+
+        div(layout='column').newList_ID.p-8
+            div(layout='row')
+                div Сегодня
+            div(layout='row')
+                div {{::realtyCard.realty.parseDetails.UID}}
+        md-divider
+
+        div().newList_Address.p-8
+            div(layout='column', layout-align='space-between')
+                div
+                    div.metro-color.metro-color-green
+                    div.metro-name {{::realtyCard.realty.address.metroName}}
+                div(class='address-info')
+                    //div {{::realtyCard.realty.address.street}} {{::realtyCard.realty.address.meta.house}}
+                    div {{::realtyCard.realty.address.street}}
+                    div {{::realtyCard.realty.address.districtName}}
+                    div {{::realtyCard.realty.address.areaName}}
+        md-divider
+
+        div(layout='column').newList_Price.p-8
+            div.price {{::realtyCard.realty.price}}
+            div.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
+            div.type-owner {{::realtyCard.dictionary.qualification[realtyCard.realty.operator.qualification].name}}
+            //div.favorites В избранное
+        md-divider
+
+        div().newList_Photo
+            div(layout='column', layout-align='space-between')
+                div.apartment-pic(ng-click="realtyCard.setSliderImages(realty.image)")
+                    img(ng-src='{{::realtyCard.realty.image || "realty_no_image.png"}}')
+                    div().icon-zoom
+        md-divider
+
+        div().newList_Info.p-8
+            div(layout='column', layout-align='space-between')
+                div {{::realtyCard.realty.roomcount}}к квартира
+                div Длительный
+                div {{::realtyCard.dictionary.qualification[realty.details.materials].name || 'Не известно материалы'}}
+                div {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} эт. {{::realtyCard.realty.square}}м2
+        md-divider
+
+        div().newList_Conditions.p-8
+            div(layout='row', layout-wrap, layout-align='space-around')
+                - for (var i = 0; i < 12; i++)
+                    img(src='img/icons/icon-tv.png')
+        md-divider
+
+        div(layout='column').newList_Actions
+            div(flex layout='row', layout-align='center center')
+                md-button(md-no-ink='' ng-click="realty.ngShowDescr =!realty.ngShowDescr").md-primary Подробнее
+
+    div.ph-32(ng-show="realty.ngShowDescr")
+        p {{::realtyCard.realty.details.descr}}
+        div(layout='row')
+            md-button(ng-click='realtyCard.takeRealty(realtyCard.realty._id)').md-raised.md-warn.btn-get-object Взять объект
+
+            span(flex)
+            md-button(ng-click="realty.ngShowDescr =!realty.ngShowDescr") Закрыть
+        //div(flex='55')
+        //    h3.md-title Номер собственника +7 925 111 22 33  Александр
+        //    p Объект успешно сохранен в разделе «Мои объекты»!
+        //    p Прямо сейчас позвоните и договоритесь о просмотре и создайте ниже время просмотра этого объекта
+        //
+        //    div(layout='row' layout-align='start center')
+        //        md-datepicker(flex='45' ng-model='myDate' md-placeholder='Enter date')
+        //        md-input-container(flex='15').md-block
+        //            md-select
+        //                md-option(value='часов') часов
+        //        div(flex='5' hide-xs hide-sm)
+        //        md-input-container(flex='15').md-block
+        //            md-select
+        //                md-option(value='минут') минут
+        //    md-button.md-raised.md-primary.btn-plan-object Запланировать просмотр объекта

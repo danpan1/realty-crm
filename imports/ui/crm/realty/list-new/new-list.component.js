@@ -62,14 +62,7 @@ class NewList {
     });
   }
 
-  static takeRealty(id) {
-    Meteor.call('takeRealty', id);
-  }
-  
-  setSliderImages (images) {
-      this.showSlider = true;
-      this.slideShowImages = [images];
-  }
+
   
 }
 
