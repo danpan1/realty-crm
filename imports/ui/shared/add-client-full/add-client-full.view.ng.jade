@@ -1,6 +1,6 @@
 md-tabs(md-dynamic-height md-border-bottom)
     md-tab(label='1) Особенности клиента')
-        md-content().ph-32.pt-16
+        md-content().ph-32.pv-16
             div(layout='column')
                 div(layout='row')
                     div(flex='50')
@@ -69,7 +69,160 @@ md-tabs(md-dynamic-height md-border-bottom)
                             span(flex-offset='5').md-body-1 (Будет показано только агентам)
                         div
                             md-button().md-primary.md-raised Продолжить
-    md-tab(label='2) Требования к объекту')
-        md-content().ph-32.pt-16
-            h1().md-display-2 Tab one
-            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam aut rerum magnam illum eaque perspiciatis corporis fugit quas, accusantium veniam velit inventore, culpa quod nulla laborum maiores. Neque ad praesentium, tenetur labore adipisci perspiciatis asperiores dolore provident officia deserunt quas, sunt dolorem illum! Laboriosam asperiores, nesciunt autem alias tempore enim.
+    md-tab(label='2) Требования к объекту' md-active='true')
+        md-content().ph-32.pv-16
+            div(layout='column')
+                div(layout='row')
+                    div(flex='50')
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                label Аренда
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Квартиры
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                label Область
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Город
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+
+
+                div(layout='row')
+                    div(flex='80')
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Улица')
+                            md-input-container(flex flex-offset='5').mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Дом и корпус')
+                            md-input-container(flex flex-offset='5').mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Квартира (видите только вы)')
+
+                        div(layout='row' layout-align='start end').mv-16
+                            div(flex='30')
+                                subway-chips(ng-model='outgoingCall.subway')
+                            div(layout='row' layout-align='start end' flex-offset='5')
+                                label().md-subhead До метро
+                                md-input-container(flex='15' flex-offset='5').mv-0.pb-0
+                                    input(ng-model='realtyFilter.filter.floorFrom' placeholder='минут')
+                                md-input-container().mv-0.ml-8.md-body-1.pb-0
+                                    label пешком
+                                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                        md-option(ng-value='condition.id',
+                                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                
+                div(layout='row')
+                    div(flex='80')
+                        div(layout='row' layout-align='start end').mv-16
+                            md-input-container(flex).mv-0
+                                label Количество комнат
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            div(flex='33' flex-offset='5')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead.mb-0 Апартаменты
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead.mb-0 Пентхаус
+
+                div(layout='row')
+                    div(flex='50')
+                        div(layout='row' layout-align='start center').mv-16
+                            md-input-container(flex).mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Этаж')
+                            md-input-container(flex flex-offset='5').mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Этажей в доме')
+
+                div(layout='row')
+                    div(flex='80')
+                        div(layout='row' layout-align='start center').mv-16
+                            md-input-container(flex).mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Общая площадь м²')
+                            md-input-container(flex flex-offset='5').mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Жилая площадь м²')
+                            md-input-container(flex flex-offset='5').mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Кухня м²')
+                        div(layout='row' layout-align='start center').mv-16
+                            md-input-container(flex='30').mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Площадь комнат м²')
+
+                div(layout='row')
+                    div(flex='80')
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                label Лоджия
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Балкон
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Окна выходят на
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+
+                div(layout='row')
+                    div(flex='50')
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                label Ремонт
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Тип дома
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                label Пассажирских лифтов
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Грузовых лифтов
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+
+                div(layout='row').mv-16
+                    div(flex='60')
+                        div(layout='row' layout-wrap)
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Мебель
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Холодильник
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 С детьми
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Кух. мебель
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Стир. машина
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Балкон
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Телевизор
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 С животными
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Лифт
+
+div(layout='row').mv-16.mh-32
+    md-button().md-success.md-raised.md-title Добавить клиента!
+    md-button(md-no-ink flex-offset='10').md-primary.md-body-1 Вернуться на шаг назад
+
+
