@@ -1,1 +1,75 @@
-div add client asdfasdlfj
+md-tabs(md-dynamic-height md-border-bottom)
+    md-tab(label='1) Особенности клиента')
+        md-content().ph-32.pt-16
+            div(layout='column')
+                div(layout='row')
+                    div(flex='50')
+                        div(layout='row')
+                            label().md-subhead Готов платить комиссию
+                            div(flex-offset='5')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead Да
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead Нет
+                        div(layout='row').mv-16
+                            md-input-container().mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='+7 (XXX) XXX XX XX')
+                            md-input-container(flex-offset='5').mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Имя клиента')
+                        div(layout='row').mv-16
+                            md-input-container(flex='60').mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Сумма до которой он готов платить')
+                        div(layout='row' layout-align='start end').mv-16
+                            div().dots
+                                span().md-subhead На когда
+                            md-input-container(flex-offset='5').mv-0
+                                label Сейчас
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            md-input-container(flex-offset='5').add-client-full-small-select.mv-0
+                                label 14
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            md-input-container(flex-offset='5').add-client-full-small-select.mv-0
+                                label 30
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions") {{condition.name}}
+                        div(layout='row' layout-align='start end').mv-16
+                            div().dots
+                                span().md-subhead Сколько ищет
+                            md-input-container(flex-offset='5').add-client-full-small-select.mv-0
+                                label 14
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                            md-input-container(flex-offset='5').mv-0
+                                label дней
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions") {{condition.name}}
+                        div(layout='row').mv-16
+                            md-input-container().mv-0
+                                label Состав съемщиков
+                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    md-option(ng-value='condition.id',
+                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Напишите что клиенту важно (ваша заметка)')
+                        div().md-subhead Какой процент стоимости аренды вы хотите получить
+
+                div(layout='row')
+                    div(flex='80')
+                        div(layout='row' layout-align='start center').mv-16
+                            md-input-container(flex).mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='От прямого клиента')
+                            md-input-container(flex flex-offset='5').mv-0
+                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='От клиента другого агента')
+                            span(flex-offset='5').md-body-1 (Будет показано только агентам)
+                        div
+                            md-button().md-primary.md-raised Продолжить
+    md-tab(label='2) Требования к объекту')
+        md-content().ph-32.pt-16
+            h1().md-display-2 Tab one
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam aut rerum magnam illum eaque perspiciatis corporis fugit quas, accusantium veniam velit inventore, culpa quod nulla laborum maiores. Neque ad praesentium, tenetur labore adipisci perspiciatis asperiores dolore provident officia deserunt quas, sunt dolorem illum! Laboriosam asperiores, nesciunt autem alias tempore enim.
