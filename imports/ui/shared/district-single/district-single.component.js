@@ -14,19 +14,22 @@ class DistrictSingle {
     $reactive(this).attach($scope);
     const vm = this;
     vm.districtsAreaInForm = [];
-    vm.alreadyPicked = this.districtId || [];
+    vm.alreadyPicked = this.district || [];
     console.log(vm.alreadyPicked);
     vm.subscribe('district', ()=> {
       return [{sort: {name: 1}, limit: 4}, vm.getReactively('searchTextStreet'), vm.alreadyPicked];
     }, {
       onReady: function () {
         if (!vm.loaded) {
-          vm.districtId = Locations.find({
+          vm.district = Locations.findOne({
             type: 'district'
-          }).fetch();
+          });
         }
         vm.loaded = true;
       }
+    });
+    vm.subscribe('area', ()=> {
+      return [vm.getReactively('areaId')];
     });
 
     vm.helpers({
@@ -35,10 +38,20 @@ class DistrictSingle {
         return Locations.find({
           type: 'district'
         });
+      },
+      area(){
+        return Locations.findOne({
+          type: 'area'
+        });
       }
     });
   }
 
+  changeArea() {
+    if (this.district) {
+      this.areaId = this.district.parents[1];
+    }
+  }
 }
 
 const moduleName = 'districtSingle';
@@ -47,10 +60,11 @@ const moduleName = 'districtSingle';
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-    templateUrl: 'imports/ui/shared/district-single/district-single.view.html',
-    bindings: {
-      districtId: '=ngModel'
-    },
-    controllerAs: moduleName,
-    controller: DistrictSingle
-  });
+  templateUrl: 'imports/ui/shared/district-single/district-single.view.html',
+  bindings: {
+    district: '=ngModel',
+    area: '='
+  },
+  controllerAs: moduleName,
+  controller: DistrictSingle
+});

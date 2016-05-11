@@ -1,11 +1,12 @@
-
+div {{districtSingle.district}} district
+div {{districtSingle.area}} area
 md-autocomplete(flex='',
 required='',
 md-input-name='autocompleteFieldDistrict',
 md-input-minlength='2',
 md-no-cache='districtSingle.noCache',
-md-selected-item='districtSingle.selectedStreet',
-md-selected-item-change='districtSingle.clearHouse()',
+md-selected-item='districtSingle.district',
+md-selected-item-change='districtSingle.changeArea()',
 md-search-text='districtSingle.searchTextStreet',
 md-items='item in districtSingle.districtsAreaSuggestionList',
 md-item-text='item.name',

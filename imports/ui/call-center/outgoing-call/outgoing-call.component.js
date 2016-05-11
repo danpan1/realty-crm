@@ -58,7 +58,7 @@ class OutgoingCall {
         vm.realty = result;
         // vm.realty.address.subways = result.address.subways;
         // vm.subways22 = result.address.subways.slice();
-        vm.realty.address.districtIdForm = [vm.realty.address.districtId];
+        // vm.realty.address.districtIdForm = vm.realty.address.districtId;
         vm.isLoading = false;
         vm.operator = {};
         console.log('новый объект', vm.realty);

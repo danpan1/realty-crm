@@ -85,7 +85,8 @@ div(md-whiteframe='2').ph-32.pv-16
         div(layout='row' layout-align='start end').mv-16
             div(flex='60')
                 district-single(ng-model='outgoingCall.realty.address.districtId'
-                ng-if='outgoingCall.realty.address.districtId')
+                area = 'outgoingCall.realty.address.area'
+                ng-if='outgoingCall.realty.address')
 
             div(layout='row' layout-align='start end' flex='40' flex-offset='5')
                 md-input-container().mv-0.pb-0
