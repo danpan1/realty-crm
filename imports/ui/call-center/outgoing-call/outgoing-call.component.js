@@ -8,7 +8,7 @@ import {name as realtyConditions} from '../../shared/realty-conditions/realty-co
 import {name as subwayChips} from '/imports/ui/shared/subway-chips/subway-chips.component';
 import {name as realtyStreet} from '/imports/ui/shared/realty-street/realty-street.component';
 import {dictionary} from '/imports/api/dictionary';
-
+import {Realty} from '/imports/api/realty';
 import './outgoing-call.view.html';
 
 class OutgoingCall {
@@ -17,9 +17,32 @@ class OutgoingCall {
     $reactive(this).attach($scope);
     this.$timeout = $timeout;
     this.dictionary = dictionary;
+    this.realty = {
+      address: {}
+    };
+    const vm = this;
+
+    // vm.subscribe('outgoingCall', () => {
+    //   return [];
+    // }, {
+    //   onReady: function () {
+    //     vm.loaded = true;
+    //     let t = Realty.findOne({});
+    //     if (t) {
+    //       vm.subways22 = t.address.subways;
+    //     }
+    //   }
+    // });
+    //
+    // vm.helpers({
+    //   realty: () => {
+    //     let t = Realty.findOne({});
+    //     // vm.subways22 = t.address.subways;
+    //     return t;
+    //   }
+    // });
     // this.$localStorage = $localStorage;
     this.getNew();
-    this.newt = 123123123;
 
   }
 
@@ -27,12 +50,16 @@ class OutgoingCall {
     this.isLoading = true;
     const vm = this;
     Meteor.call('operatorGet', (error, result)=> {
+      // vm.realty.address.subways = ['FRmpz68NzBxzoPQJ7'];
+
       if (error) {
         console.log('error', error);
       }
 
       this.$timeout(()=> {
         vm.realty = result;
+        vm.realty.address.subways = result.address.subways;
+        vm.subways22 = result.address.subways.slice();
         vm.isLoading = false;
         vm.operator = {};
         console.log('новый объект', vm.realty);
@@ -41,8 +68,12 @@ class OutgoingCall {
           vm.isLoading = true;
         }
       });
+      // this.realty.address.subways = ['FRmpz68NzBxzoPQJ7'];
+
     });
+
   }
+
 }
 
 const moduleName = 'outgoingCall';
