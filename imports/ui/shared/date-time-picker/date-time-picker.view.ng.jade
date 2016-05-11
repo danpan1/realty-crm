@@ -1,0 +1,16 @@
+md-input-container()
+    label День
+    md-select(ng-model="dateTimePicker.day"
+        ng-change="dateTimePicker.setDate()")
+        md-option(ng-value='{{day}}',
+        ng-repeat='day in dateTimePicker.days') {{day | dateMonthRu}}
+md-input-container()
+    label Час
+    md-select(ng-model="dateTimePicker.hour" ng-change="dateTimePicker.setDate()")
+        md-option(ng-value='{{hour}}',
+        ng-repeat='hour in dateTimePicker.hours') {{hour}}
+md-input-container()
+    label Минуты
+    md-select(ng-model="dateTimePicker.min" ng-change="dateTimePicker.setDate()")
+        md-option(ng-value='{{min}}',
+        ng-repeat='min in dateTimePicker.mins') {{min}}

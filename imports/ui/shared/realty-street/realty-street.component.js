@@ -28,7 +28,7 @@ class RealtyStreet {
   }
 
   clearHouse() {
-    console.log('clearHouse');
+    // console.log('clearHouse');
     // this.selectedHouse = {value: ' '};
   }
 

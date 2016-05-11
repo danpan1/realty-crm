@@ -46,16 +46,11 @@ function operatorGet() {
   }
 }
 
-function operatorSave(operator, realty) {
+function operatorSave(realty) {
 
   if (Meteor.isServer) {
-    let operatorData = {
-      id: this.userId,
-      qualification: operator.qualification,
-      comment: operator.comment
-    };
+    realty.operator.id = this.userId;
     realty.status = 'list';
-    realty.operator = operatorData;
     Realty.update({_id: realty._id}, {
       $set: realty
     }, (error) => {
@@ -65,7 +60,6 @@ function operatorSave(operator, realty) {
         console.log('operator save success');
       }
     });
-
   }
 }
 
