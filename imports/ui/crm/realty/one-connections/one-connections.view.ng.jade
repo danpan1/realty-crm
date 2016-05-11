@@ -1,1 +1,12 @@
-div связи
+div.md-whiteframe-2dp(md-whiteframe="2")
+    md-tabs(md-dynamic-height md-border-bottom)
+        md-tab Ручная подброка
+        md-tab Автоподброка
+    div(layout="row")
+        p(flex="30") Цена
+        p(flex="70") Действия по клиенту на всем вашем аккаунте
+        
+div.md-whiteframe-2dp(md-whiteframe="2")
+    client-card(ng-repeat='client in oneConnections.clients' client='client')
+    
+    
