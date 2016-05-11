@@ -11,15 +11,14 @@ if (Meteor.isServer) {
   Meteor.publish('listClients', function (filter, options) {
 
     let selector = {};
-
+    
+    console.log(filter);
+    console.log(this.userId);
+    
     if (filter) {
       if (filter.status) {
         selector.status = filter.status;
       }
-      if (filter.realtorId) {
-        selector.realtorId = filter.realtorId;
-      }
-
     }
 
     return Clients.find(selector,options);

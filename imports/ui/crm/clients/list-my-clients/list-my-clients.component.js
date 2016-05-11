@@ -9,16 +9,32 @@ import {Clients} from '/imports/api/clients';
 
 class ListMyClients {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
-
-    this.subscribe('myClients');
-
+    
+    let vm = this;
+    vm.status = $stateParams.status;
+    vm.selectedTab = '';
+    switch($stateParams.status){
+        case 'hot':
+            vm.selectedTab = 0;
+            break;
+        case 'realtor':
+            vm.selectedTab = 1;
+            break;
+        case 'archive':
+            vm.selectedTab = 2;
+            break;
+    }
+    this.subscribe('listClients', () => {
+        return [{status:vm.getReactively('status')}]
+      });
     this.helpers({
       clients() {
         return Clients.find();
       }
     });
+    
   }
 
 }

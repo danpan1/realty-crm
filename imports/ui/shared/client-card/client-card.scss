@@ -1,0 +1,25 @@
+.client-card{
+    &__no-margin{
+        margin: 0;
+    }
+    &__note{
+        margin-top: 2px;
+    }
+    &__link{
+        color:rgb(33,150,243);
+        text-decoration: none;
+        &_p{
+            margin: 2px 0;
+        }
+    }
+    &__price{
+        margin: 0;
+        font-weight: 700 !important;
+    }
+    &__right-label{
+        margin: 3px 0;
+        &:first-child{
+            margin-top: 12px;
+        }
+    }
+}
