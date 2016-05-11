@@ -1,11 +1,26 @@
 add-client-full {
-    md-content {
-        background-color: $white;
-    }
+  md-content {
+    background-color: $white;
+  }
+
+  md-tabs {
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 
+                0 2px 2px 0 rgba(0, 0, 0, 0.14), 
+                0 3px 1px -2px rgba(0, 0, 0, 0.12);
+  }
+
+  .md-success {
+    min-width: 400px;
+    min-height: 52px;
+  }
 }
 
 .add-client-full-small-select {
   .md-select-value {
-    min-width: 50px;
+  min-width: 50px;
   }
+}
+
+md-input-container .md-errors-spacer {
+  min-height: 0;
 }

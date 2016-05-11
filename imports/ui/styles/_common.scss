@@ -15,7 +15,7 @@
 }
 
 .dots {
-    background-image: linear-gradient(to right, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.26) 33%, transparent 0%);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 33%, transparent 0%);
     background-repeat: repeat-x;
     background-position: 0 bottom;
     background-size: 4px 1px;
@@ -27,28 +27,3 @@
         line-height: 10px;
     }
 }
-
-// md-switch .md-bar {
-//     background-color: rgba(255, 82, 82, 0.5);
-// }
-
-// md-switch.md-checked .md-bar {
-//     background-color: rgba(111, 193, 122, 0.5) !important;
-// }
-
-// md-switch[disabled] .md-bar {
-//     background-color: rgba(111, 193, 122, 0.5) !important;
-// }
-
-
-// md-switch .md-thumb {
-//     background-color: rgb(255, 82, 82) !important;
-// }
-
-// md-switch.md-checked .md-thumb {
-//     background-color: rgb(111, 193, 122) !important;
-// }
-
-// md-switch[disabled] .md-thumb {
-//     background-color: rgb(255, 82, 82) !important;
-// }
