@@ -1,14 +1,4 @@
 div(ng-if="!clients.currentClient") Layout по клиентам
-    div
-        md-button.md-primary(ng-click="clients.onChangeFilterStatus('hot')") Горячие клиенты
-        md-button.md-primary(ng-click="clients.onChangeFilterStatus('realtor')") В работе
-        md-button.md-primary(ng-click="clients.onChangeFilterStatus('all')") Все
-        md-button.md-primary(ng-click="clients.onChangeFilterStatus('archive')") Архив
-        md-button.md-primary(ng-click="clients.onChangeFilterStatus('')") Скрыть фильтр
-    
-    div {{listMyClients.clients}}
-    div 
-        client-card(ng-repeat='client in clients.clients' client='client')
-    
+    ui-view
 div(ng-if="clients.currentClient")
     client-info(currentclient="'Super'")

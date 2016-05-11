@@ -11,18 +11,25 @@ class ListMyClients {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
+    
     let vm = this;
     
-    this.subscribe('listClients', () => {
-        return [{status:'realtor'}]
-    });
-    this.helpers({
-      clients() {
-        return Clients.find();
-      }
-    });
+    let status = 'hot';
+    
+      this.subscribe('listClients', () => {
+          return [{status:vm.getReactively('status')}]
+        });
+      this.helpers({
+        clients() {
+          return Clients.find();
+        }
+      });
     
   }
+     
+  onChangeFilterStatus (status) {
+      this.status = status;
+  } 
 
 }
 
