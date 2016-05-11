@@ -7,6 +7,7 @@ import angularMeteor from 'angular-meteor';
 import {name as realtyConditions} from '../../shared/realty-conditions/realty-conditions.component';
 import {name as subwayChips} from '/imports/ui/shared/subway-chips/subway-chips.component';
 import {name as realtyStreet} from '/imports/ui/shared/realty-street/realty-street.component';
+import {name as districtSingle} from '/imports/ui/shared/district-single/district-single.component';
 import {dictionary} from '/imports/api/dictionary';
 import {Realty} from '/imports/api/realty';
 import './outgoing-call.view.html';
@@ -17,9 +18,6 @@ class OutgoingCall {
     $reactive(this).attach($scope);
     this.$timeout = $timeout;
     this.dictionary = dictionary;
-    this.realty = {
-      address: {}
-    };
     const vm = this;
 
     // vm.subscribe('outgoingCall', () => {
@@ -58,8 +56,9 @@ class OutgoingCall {
 
       this.$timeout(()=> {
         vm.realty = result;
-        vm.realty.address.subways = result.address.subways;
-        vm.subways22 = result.address.subways.slice();
+        // vm.realty.address.subways = result.address.subways;
+        // vm.subways22 = result.address.subways.slice();
+        vm.realty.address.districtIdForm = [vm.realty.address.districtId];
         vm.isLoading = false;
         vm.operator = {};
         console.log('новый объект', vm.realty);
@@ -83,6 +82,7 @@ export default angular.module(moduleName, [
   angularMeteor,
   realtyConditions,
   realtyStreet,
+  districtSingle,
   subwayChips
 ]).component(moduleName, {
   templateUrl: 'imports/ui/call-center/outgoing-call/outgoing-call.view.html',

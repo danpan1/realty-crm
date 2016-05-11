@@ -1,0 +1,22 @@
+
+md-autocomplete(flex='',
+required='',
+md-input-name='autocompleteFieldDistrict',
+md-input-minlength='2',
+md-no-cache='districtSingle.noCache',
+md-selected-item='districtSingle.selectedStreet',
+md-selected-item-change='districtSingle.clearHouse()',
+md-search-text='districtSingle.searchTextStreet',
+md-items='item in districtSingle.districtsAreaSuggestionList',
+md-item-text='item.name',
+md-floating-label='Район')
+    md-item-template
+        span(md-highlight-text='districtSingle.searchTextStreet') {{item.name}}
+    div(ng-messages='searchForm.autocompleteField.$error',
+    ng-if='searchForm.autocompleteField.$touched')
+        div(ng-message='required')
+            | You
+            b must
+            |  have a favorite state.
+        div(ng-message='minlength') Your entry is not long enough.
+        div(ng-message='maxlength') Your entry is too long.

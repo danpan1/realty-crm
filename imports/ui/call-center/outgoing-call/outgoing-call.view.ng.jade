@@ -68,9 +68,9 @@ div(md-whiteframe='2').ph-32.pv-16
         div(layout='row' layout-align='start end').mv-16
             div(flex='60')
                 div {{outgoingCall.realty.address.subways}}
-                subway-chips(ng-model='outgoingCall.subways22'
+                subway-chips(ng-model='outgoingCall.realty.address.subways'
                 subways-embeded='outgoingCall.subwaysEmbeded'
-                already-picked = 'outgoingCall.subways22')
+                ng-if='outgoingCall.realty.address.subways')
 
             div(layout='row' layout-align='start end' flex='40' flex-offset='5')
                 label().md-subhead До метро
@@ -84,7 +84,8 @@ div(md-whiteframe='2').ph-32.pv-16
         // РАЙОН ИЛИ ОКРУГ
         div(layout='row' layout-align='start end').mv-16
             div(flex='60')
-                district-chips(ng-model='outgoingCall.realty.address.districtId')
+                district-single(ng-model='outgoingCall.realty.address.districtId'
+                ng-if='outgoingCall.realty.address.districtId')
 
             div(layout='row' layout-align='start end' flex='40' flex-offset='5')
                 md-input-container().mv-0.pb-0

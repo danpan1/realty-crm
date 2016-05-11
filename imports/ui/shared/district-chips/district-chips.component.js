@@ -17,12 +17,15 @@ class DistrictChips {
     const vm = this;
     vm.districtsAreaInForm = [];
     vm.alreadyPicked = this.districtsAreaIdList || [];
+    console.log(vm.alreadyPicked);
     vm.subscribe('districtsAreaChips', ()=> {
       return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), vm.alreadyPicked];
     }, {
       onReady: function () {
         if (!vm.loaded) {
-          vm.districtsAreaInForm = vm.districtsAreaSuggestionList;
+          vm.districtsAreaInForm = Locations.find({
+            type: {$in: ['district', 'area']}
+          }).fetch();;
         }
         vm.loaded = true;
       }

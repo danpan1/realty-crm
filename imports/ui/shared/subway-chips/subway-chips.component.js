@@ -18,7 +18,9 @@ class SubwayChips {
     }, {
       onReady: function () {
         if (!vm.loaded) {
-          vm.subwaysInForm = vm.subwaysSuggestionList;
+          vm.subwaysInForm = Locations.find({
+            type: 'subway'
+          }).fetch();
         }
         vm.loaded = true;
       }
