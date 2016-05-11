@@ -13,5 +13,9 @@ export default function routes($stateProvider) {
     .state('call-center.outgoing', {
       url: '/outgoing',
       template: '<outgoing-call/>'
+    })
+    .state('call-center.moderator', {
+      url: '/moderator',
+      template: '<moderator/>'
     });
 }

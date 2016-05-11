@@ -4,6 +4,7 @@ import routes from './call-center.routes';
 
 import {name as outgoingCall} from './outgoing-call/outgoing-call.component';
 import {name as incomingCall} from './incoming-call/incoming-call.component';
+import {name as moderator} from './moderator/moderator.component';
 
 const moduleName = 'callCenter';
 
@@ -11,6 +12,7 @@ const moduleName = 'callCenter';
 export default angular.module(moduleName, [
     angularMeteor,
     incomingCall,
+    moderator,
     outgoingCall
   ])
   .config(routes);

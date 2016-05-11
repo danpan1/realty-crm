@@ -27,8 +27,8 @@ class Layout {
       // {name:'Документы', uisref:'realty'},
       // {name:'Настройки', uisref:'realty'},
       {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
-      {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'}
-      // {name:'Модератор', uisref:'realty'}
+      {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
+      {name:'Модератор', uisref:'call-center.moderator'}
     ];
     this.actions = [{
       name: 'Добавить',
