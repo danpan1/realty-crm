@@ -18,7 +18,7 @@ class Layout {
       // {name: 'Объекты', uisref: 'crm.realty.list.new'},
       {name: 'Мои объекты', uisref: 'crm.realty.list.my'},
       {name: 'Новые объекты', uisref: 'crm.realty.list.new'},
-      {name: 'Архив объекты', uisref: 'crm.realty.list.archive'+'({status: \'archive\'})'},
+      {name: 'Архив объекты', uisref: 'crm.realty.list.my'+'({status: \'archive\'})'},
       {name: 'Мои Клиенты', uisref: 'crm.clients.list.my'+'({status: \'realtor\'})'},
       {name: 'Горячие Клиенты', uisref: 'crm.clients.list.my'+'({status: \'hot\'})'},
       // {name:'Дела', uisref:'realty'},

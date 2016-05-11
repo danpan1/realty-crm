@@ -1,9 +1,9 @@
 div
-    md-button.md-primary(ng-click="listMyClients.onChangeFilterStatus('hot')") Горячие клиенты
-    md-button.md-primary(ng-click="listMyClients.onChangeFilterStatus('realtor')") Мои клиенты
-    //md-button.md-primary(ng-click="listMyClients.onChangeFilterStatus('all')") Все
-    md-button.md-primary(ng-click="listMyClients.onChangeFilterStatus('archive')") Архив
-    //md-button.md-primary(ng-click="listMyClients.onChangeFilterStatus('')") Скрыть фильтр
+    md-button.md-primary(ui-sref="crm.clients.list.my({status: \'hot\'})") Горячие клиенты
+    md-button.md-primary(ui-sref="crm.clients.list.my({status: \'realtor\'})") Мои клиенты
+    //md-button.md-primary(ui-sref="crm.clients.list.my({status: \'all\'})") Все
+    md-button.md-primary(ui-sref="crm.clients.list.my({status: \'archive\'})") Архив
+    //md-button.md-primary(ui-sref="crm.clients.list.my({status: \'\'})") Скрыть фильтр
     
 div 
     client-card(ng-repeat='client in listMyClients.clients' client='client')

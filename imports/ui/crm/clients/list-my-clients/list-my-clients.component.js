@@ -25,11 +25,6 @@ class ListMyClients {
     });
     
   }
-     
-  onChangeFilterStatus (status) {
-      console.log(status);
-      this.status = status;
-  } 
 
 }
 
