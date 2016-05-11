@@ -7,7 +7,6 @@ import {name as addClient} from './add-client/add-client.component';
 import {name as ClientCard} from '/imports/ui/shared/client-card/client-card.component';
 import {Clients} from '/imports/api/clients';
 import {name as listMyClients} from './list-my-clients/list-my-clients.component';
-//import {name as listHotClients} from './list-hot-clients/list-hot-clients.component';
 //import {name as currentClient} from '/imports/ui/shared/client-info/client-info.component';
 import routes from './clients.routes';
 
@@ -27,7 +26,6 @@ const moduleName = 'clients';
 export default angular.module(moduleName, [
   angularMeteor,
   listMyClients,
-  //listHotClients,
   addClient,
   //currentClient
 ]).component(moduleName, {
