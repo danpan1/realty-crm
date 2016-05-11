@@ -1,4 +1,4 @@
-div(ng-if="!clients.currentClient") Layout по клиентам
+div(ng-if="!clients.currentClient" ng-cloak) Layout по клиентам
     ui-view
 div(ng-if="clients.currentClient")
     client-info(currentclient="'Super'")

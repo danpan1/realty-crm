@@ -14,7 +14,18 @@ class ListMyClients {
     
     let vm = this;
     vm.status = $stateParams.status;
-    
+    vm.selectedTab = '';
+    switch($stateParams.status){
+        case 'hot':
+            vm.selectedTab = 0;
+            break;
+        case 'realtor':
+            vm.selectedTab = 1;
+            break;
+        case 'archive':
+            vm.selectedTab = 2;
+            break;
+    }
     this.subscribe('listClients', () => {
         return [{status:vm.getReactively('status')}]
       });
