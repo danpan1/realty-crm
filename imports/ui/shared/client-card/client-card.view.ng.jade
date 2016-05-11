@@ -1,54 +1,40 @@
 div(md-whiteframe='2').mv-16
-    div Realty
     div {{oneDemonstrations.realty}}
-    div Queries
     div {{oneDemonstrations.clientFilterQueries}}
     div(layout='column')
         div(layout='row')
             div(flex='20').ph-16.pv-8
-                h3().md-title.text-bold 30000
-                p().md-body-1 Готов платить комиссию = {{clientCard.client.comissionLoyal}}
+                h3().md-title.text-bold(ng-click="clientCard.sendCurrentClient(clientCard.client)") 30000
+                p().md-body-1 {{clientCard.client.comissionLoyal == true ? 'Готов ' : 'Не готов ' }} платить комиссию
                 p().md-body-1 на сейчас
-                p().md-body-1 ищет 14 дней
+                p().md-body-1 ищет {{clientCard.searchDuration}} дней
             md-divider
-            div(flex='60').one-demonstrations-center-cell.ph-16.pv-8
-                span().md-subhead.text-bold 1 мая 17:00
-                span().one-demonstrations-text-divider
-                span().md-subhead.text-bold через 3:00
-                span().one-demonstrations-text-divider
-                span().md-subhead.text-bold 8 925 111 22 33
-                span().one-demonstrations-text-divider
-                span().md-subhead.text-bold Александр
+            div(flex='60' layout="column").one-demonstrations-center-cell.ph-16.pv-8
+                p(ng-if="clientCard.isCommonClient")
+                    span().md-subhead.text-bold 1 мая 17:00 | 
+                    span().md-subhead.text-bold через 3:00
                 p().md-body-1 {{clientCard.client.realtorNote}}
-            md-divider
-            div(flex='20')
-                md-button().md-primary Отправить отчет
-                md-button().md-caption.one-demonstrations-btn-show.mv-0 Перенести показ
-        div(layout='row')
-        div(layout='row')
-    md-divider
-    div(layout='column')
+            div(flex='20' layout="column")
+                p(ng-if="!clientCard.isArchiveClient")
+                    a(href="") 15 связей
+                p(ng-if="clientCard.isCommonClient")
+                    a(href="") 10 предложений
+                p(ng-if="clientCard.isCommonClient")
+                    a(href="") 2 показа
+                p(ng-if="clientCard.isCommonClient")
+                    a(href="") Добавить объекты
         div(layout='row')
             div(flex='20').ph-16.pv-8
-                h3().md-title.text-bold.text-uppercase.one-demonstrations-new-label Новый
-                h3().md-title.text-bold.text-uppercase {{clientCard.client.name}}
-                h3().md-title.text-bold.text-uppercase {{clientCard.client.phone}}
-            md-divider
-            div(flex='30').ph-16.pv-8
-                div
+                div(ng-if="!clientCard.isHotClient")
+                    p.md-subhead.text-bold {{clientCard.client.phone}}
+                    p.md-subhead.text-bold {{clientCard.client.name}}
+                h3().md-title.text-bold.text-uppercase.one-demonstrations-new-label(ng-if="clientCard.isHotClient") Новый
+            div(flex='60' layout="row").one-demonstrations-center-cell.ph-16.pv-8
+                div(flex='45').ph-16.pv-8
                     span().metro-color.metro-color-pink
                     span().address-info.md-body-1 Таганская, 10 мин. пешком, р-н. Аэропорт, ул.Таганская 15 к1
-            md-divider
-            div(flex='30').ph-16.pv-8
-                span().md-body-1 2, 3 комнат, длительная, этаж 2+, Кирпичный, 50-75м²
-            md-divider
-            div(flex='20').ph-16.pv-8
+                div(flex='55').ph-16.pv-8
+                    span().md-body-1 2, 3 комнат, длительная, этаж 2+, Кирпичный, 50-75м²
+            div(flex='20')
                 div(layout='row', layout-wrap, layout-align='space-around')
-                    img(src='img/icons/icon-tv.png').one-demonstrations-icon-comfort
-                    img(src='img/icons/icon-tv.png').one-demonstrations-icon-comfort
-                    img(src='img/icons/icon-tv.png').one-demonstrations-icon-comfort
-                    img(src='img/icons/icon-tv.png').one-demonstrations-icon-comfort
-                    img(src='img/icons/icon-tv.png').one-demonstrations-icon-comfort
-                    img(src='img/icons/icon-tv.png').one-demonstrations-icon-comfort
-                    img(src='img/icons/icon-tv.png').one-demonstrations-icon-comfort
-                    img(src='img/icons/icon-tv.png').one-demonstrations-icon-comfort
+                    img(src='img/icons/icon-tv.png' ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]").one-demonstrations-icon-comfort
