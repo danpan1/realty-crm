@@ -30,7 +30,10 @@ export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/client-card/client-card.view.html',
-  bindings: {client: '<'},
+  bindings: {
+      client: '<',
+      assort:'<'  
+  },
   controllerAs: moduleName,
   controller: ClientCard
 });

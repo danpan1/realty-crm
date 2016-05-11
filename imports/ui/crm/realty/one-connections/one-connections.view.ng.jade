@@ -1,12 +1,12 @@
 div.md-whiteframe-2dp(md-whiteframe="2")
-    md-tabs(md-dynamic-height md-border-bottom)
-        md-tab Ручная подброка
-        md-tab Автоподброка
+    md-tabs(md-dynamic-height md-border-bottom md-selected="oneConnections.selectedTab")
+        md-tab(ui-sref="crm.realty.one.connections({assort:'manual'})") Ручная подброка
+        md-tab(ui-sref="crm.realty.one.connections({assort:'auto'})") Автоподброка
     div(layout="row")
         p(flex="30") Цена
         p(flex="70") Действия по клиенту на всем вашем аккаунте
         
 div.md-whiteframe-2dp(md-whiteframe="2")
-    client-card(ng-repeat='client in oneConnections.clients' client='client')
+    client-card(ng-repeat='client in oneConnections.clients' client='client' assort="oneConnections.assort")
     
     

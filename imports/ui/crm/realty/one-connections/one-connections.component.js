@@ -10,8 +10,22 @@ import './one-connections.view.html';
 
 class OneConnections {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
+    
+    let vm = this;
+    vm.assort = $stateParams.assort;
+    vm.selectedTab = '';
+    switch($stateParams.assort){
+        case 'manual':
+            vm.selectedTab = 0;
+            break;
+        case 'auto':
+            vm.selectedTab = 1;
+            break;
+        default:
+            vm.selectedTab = 0;
+    }
     
     this.subscribe('listClients');
 

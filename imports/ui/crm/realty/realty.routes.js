@@ -31,8 +31,9 @@ export default function routes($stateProvider) {
       template: '<one-info/>'
     })
     .state('crm.realty.one.connections', {
-      url: '/connections',
-      template: '<one-connections/>'
+      url: '/connections?:assort',
+      template: '<one-connections/>',
+      controller: function ($state, $stateParams) {}
     })
     .state('crm.realty.list.new', {
       url: '/new',
