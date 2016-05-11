@@ -11,8 +11,11 @@ class ListMyClients {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
+    let vm = this;
 
-    this.subscribe('myClients');
+    this.subscribe('listClients', () => {
+        return [{status:'active',realtorId:true}, vm.getReactively('query')]
+    });
 
     this.helpers({
       clients() {

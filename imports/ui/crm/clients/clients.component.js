@@ -16,9 +16,9 @@ class Clients {
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
     
-    $scope.$on('sendingCurrentClient', function (event, data) {
+    /*$scope.$on('sendingCurrentClient', function (event, data) {
         console.log(data); // Данные, которые нам прислали
-    });
+    });*/
     
   }
   

@@ -6,5 +6,5 @@ div(ng-if="!clients.currentClient") Layout по клиентам
         md-button.md-primary(ui-sref="crm.clients.list.my") Архив
         md-button.md-primary(ui-sref="crm.clients.list.my") Скрыть фильтр
     ui-view
-div(ng-if="!clients.currentClient")
+div(ng-if="clients.currentClient")
     client-info(currentclient="'Super'")

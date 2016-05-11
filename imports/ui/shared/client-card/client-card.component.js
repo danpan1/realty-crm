@@ -10,6 +10,7 @@ class ClientCard {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
+    console.log(client);
     this.isCommonClient = this.client.status == 'active' ? true : true;
     this.isHotClient = this.client.status == 'hot' ? true : false;
     this.isArchiveClient = this.client.status == 'archive' ? true : false;
@@ -18,7 +19,7 @@ class ClientCard {
   
   sendCurrentClient (client) {
       console.log(client);
-      ClientCard.$scope.$emit('sendingCurrentClient', client);
+      /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
   }
 
 }

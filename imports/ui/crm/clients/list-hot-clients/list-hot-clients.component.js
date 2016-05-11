@@ -3,13 +3,25 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-
+import {name as ClientCard} from '/imports/ui/shared/client-card/client-card.component';
 import './list-hot-clients.view.html';
+import {Clients} from '/imports/api/clients';
 
 class ListHotClients {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
+    let vm = this;
+
+    this.subscribe('listClients', () => {
+        return [{status:'hot',realtorId:true}, vm.getReactively('query')]
+    });
+
+    this.helpers({
+      clients() {
+        return Clients.find();
+      }
+    });
   }
 
 }

@@ -12,7 +12,6 @@ class RealtyFilter {
   constructor($scope, $reactive, $timeout) {
     this.$timeout = $timeout;
     $reactive(this).attach($scope);
-    console.log(dictionary);
     this.filter = {};
     this.filter.roomcount = [];
     this.dictionary = dictionary;
