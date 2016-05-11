@@ -17,7 +17,7 @@ class DistrictSingle {
     vm.alreadyPicked = this.district || [];
     console.log(vm.alreadyPicked);
     vm.subscribe('district', ()=> {
-      return [{sort: {name: 1}, limit: 4}, vm.getReactively('searchTextStreet'), vm.alreadyPicked];
+      return [{sort: {name: 1}, limit: 4}, vm.getReactively('searchTextDistrict'), vm.alreadyPicked];
     }, {
       onReady: function () {
         if (!vm.loaded) {
@@ -48,7 +48,8 @@ class DistrictSingle {
   }
 
   changeArea() {
-    if (this.district) {
+    console.log(this.district);
+    if (this.district && this.district.parents) {
       this.areaId = this.district.parents[1];
     }
   }

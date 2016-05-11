@@ -29,7 +29,7 @@ class RealtyStreet {
 
   clearHouse() {
     console.log('clearHouse');
-    this.selectedHouse = {value: ' '};
+    // this.selectedHouse = {value: ' '};
   }
 
   querySearchHouse(query) {
@@ -60,7 +60,8 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/realty-street/realty-street.view.html',
   bindings: {
-    selectedStreet: '=ngModel'
+    selectedStreet: '=ngModel',
+    selectedHouse:'=house'
   },
   controllerAs: moduleName,
   controller: RealtyStreet

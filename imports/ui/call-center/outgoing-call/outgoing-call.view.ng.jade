@@ -67,7 +67,6 @@ div(md-whiteframe='2').ph-32.pv-16
 
         div(layout='row' layout-align='start end').mv-16
             div(flex='60')
-                div {{outgoingCall.realty.address.subways}}
                 subway-chips(ng-model='outgoingCall.realty.address.subways'
                 subways-embeded='outgoingCall.subwaysEmbeded'
                 ng-if='outgoingCall.realty.address.subways')
@@ -81,70 +80,58 @@ div(md-whiteframe='2').ph-32.pv-16
                     md-select(ng-model='outgoingCall.realty.address.metroTransport')
                         md-option(ng-value='transport.id',
                         ng-repeat="transport in outgoingCall.dictionary.transport") {{transport.name}}
-        // РАЙОН ИЛИ ОКРУГ
+        // РАЙОН
         div(layout='row' layout-align='start end').mv-16
             div(flex='60')
                 district-single(ng-model='outgoingCall.realty.address.districtId'
                 area = 'outgoingCall.realty.address.area'
-                ng-if='outgoingCall.realty.address')
+                ng-if='outgoingCall.realty.address.districtName')
 
             div(layout='row' layout-align='start end' flex='40' flex-offset='5')
-                md-input-container().mv-0.pb-0
-                    input(ng-model='realtyFilter.filter.floorFrom' placeholder='Таганская')
-                md-input-container(flex='20' flex-offset='5').mv-0.pb-0
-                    input(ng-model='realtyFilter.filter.floorFrom' placeholder='12 с.1')
+                realty-street(ng-model='outgoingCall.realty.address.meta.street'
+                house = 'outgoingCall.realty.address.meta.house')
+                //md-input-container().mv-0.pb-0
+                //    input(ng-model='realtyFilter.filter.floorFrom' placeholder='Таганская')
+                //md-input-container(flex='20' flex-offset='5').mv-0.pb-0
+                //    input(ng-model='realtyFilter.filter.floorFrom' placeholder='12 с.1')
 
         div(layout='row' layout-align='start end').mv-16
             div(flex='60')
                 div(layout='row' layout-align='start center')
                     md-input-container(flex='50').mv-0.pb-0
-                        label Косметический
-                        md-select(ng-model='realtyFilter.filter.conditions')
-                            md-option(ng-value='condition.id',
-                            ng-repeat="condition in realtyFilter.dictionary.conditions") {{condition.name}}
+                        label Ремонт
+                        md-select(ng-model='outgoingCall.realty.details.renovation')
+                            md-option(ng-value='renovation.id',
+                            ng-repeat="renovation in outgoingCall.dictionary.renovation") {{renovation.name}}
                     md-input-container(flex='10' flex-offset='5').mv-0.pb-0
-                        input(ng-model='realtyFilter.filter.floorFrom' placeholder='1')
+                        input(ng-model='outgoingCall.realty.floor' placeholder='Этаж')
                     label().md-subhead.mh-16 из
                     md-input-container(flex='10').mv-0.pb-0
-                        input(ng-model='realtyFilter.filter.floorFrom' placeholder='25')
+                        input(ng-model='outgoingCall.realty.floormax' placeholder='Этажей')
             div(flex='40')
                 div(layout='row' layout-align='start center')
                     md-input-container(flex='10').mv-0.pb-0
-                        input(ng-model='realtyFilter.filter.floorFrom' placeholder='100')
+                        input(ng-model='outgoingCall.realty.square' placeholder='Площадь')
                     #[label().md-subhead м#[sup 2]]
 
         div(layout='row').mv-16
             div(flex='60')
                 div(layout='row' layout-wrap)
-                    div(flex='33')
-                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Мебель
-                    div(flex='33')
-                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Холодильник
-                    div(flex='33')
-                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 С детьми
-                    div(flex='33')
-                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Кух. мебель
-                    div(flex='33')
-                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Стир. машина
-                    div(flex='33')
-                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Балкон
-                    div(flex='33')
-                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Телевизор
-                    div(flex='33')
-                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 С животными
-                    div(flex='33')
-                        md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-body-1 Лифт
+                    realty-conditions(ng-model='outgoingCall.conditionssss')
         div(layout='row').mv-16
             div(flex='60')
                 h3().md-subhead Собственник:
                 div(layout='row')
-                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Плохо
-                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Нормально
-                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary Лояльный
+                    md-radio-group(ng-model='outgoingCall.realty.operator.qualification')
+                        md-radio-button.md-primary(value='{{qualification.id}}'
+                        ng-repeat='qualification in outgoingCall.dictionary.qualification') {{qualification.name}}
 
         div(layout='row')
-            md-input-container(flex='60')
-                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Комментарий колцентра о собственнике может быть в 2 строки')
+            md-input-container.md-block(flex='60')
+                label Комментарий о собственнике
+                textarea(ng-model='outgoingCall.realty.operator.comment',
+                md-maxlength='150', rows='5',
+                md-select-on-focus='')
         div
             md-button().md-success.md-raised.ml-0 Сохранить
 

@@ -1,5 +1,3 @@
-div {{districtSingle.district}} district
-div {{districtSingle.area}} area
 md-autocomplete(flex='',
 required='',
 md-input-name='autocompleteFieldDistrict',
@@ -7,12 +5,12 @@ md-input-minlength='2',
 md-no-cache='districtSingle.noCache',
 md-selected-item='districtSingle.district',
 md-selected-item-change='districtSingle.changeArea()',
-md-search-text='districtSingle.searchTextStreet',
+md-search-text='districtSingle.searchTextDistrict',
 md-items='item in districtSingle.districtsAreaSuggestionList',
 md-item-text='item.name',
 md-floating-label='Район')
     md-item-template
-        span(md-highlight-text='districtSingle.searchTextStreet') {{item.name}}
+        span(md-highlight-text='districtSingle.searchTextDistrict') {{item.name}}
     div(ng-messages='searchForm.autocompleteField.$error',
     ng-if='searchForm.autocompleteField.$touched')
         div(ng-message='required')
