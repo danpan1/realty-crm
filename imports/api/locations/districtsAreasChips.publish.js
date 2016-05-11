@@ -5,7 +5,7 @@ import {Locations} from './locations.model';
 
 if (Meteor.isServer) {
 
-  Meteor.publish('disctrictAreaChips', function (options, searchString, selectedItems) {
+  Meteor.publish('districtsAreaChips', function (options, searchString, selectedItems) {
 
     let selector = {
       type: {$in: ['district', 'area']}

@@ -1,4 +1,4 @@
 import './subwayChips.publish';
-import './disctrictsAreasChips.publish';
+import './districtsAreasChips.publish';
 
 export * from './locations.model';

@@ -26,7 +26,6 @@ class SubwayChips {
 
     vm.helpers({
       subwaysSuggestionList () {
-        console.log(Locations.find({}).fetch());
         return Locations.find({
           type: 'subway'
         });
@@ -38,6 +37,9 @@ class SubwayChips {
     this.loaded = true;
     this.subwaysIdList = this.subwaysInForm.map((item)=> {
       return item._id;
+    });
+    this.subwaysEmbeded = this.subwaysInForm.map((item)=> {
+      return {name: item.name, line: item.meta.lineId};
     });
   }
 
@@ -60,7 +62,8 @@ export default angular.module(moduleName, [
   templateUrl: `imports/ui/shared/subway-chips/subway-chips.view.html`,
   controllerAs: moduleName,
   bindings: {
-    subwaysIdList: '=ngModel'
+    subwaysIdList: '=ngModel',
+    subwaysEmbeded: '='
   },
   controller: SubwayChips
 });
