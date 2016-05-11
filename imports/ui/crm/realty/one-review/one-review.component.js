@@ -14,12 +14,17 @@ class OneReview {
 
     $reactive(this).attach($scope);
 
+    let vm = this;
+
     this.subscribe('oneInfo',() => {
       return [
-        {},
-        true,
         $stateParams.realtyId
       ];
+    }, {
+      onReady() {
+        vm.realty = Realty.findOne({});
+        vm.prepareRealty();
+      }
     });
 
     this.helpers({
@@ -30,9 +35,7 @@ class OneReview {
 
   }
 
-  upload() {
-    console.log(this.realty);
-  }
+  prepareRealty() {}
 
 }
 
