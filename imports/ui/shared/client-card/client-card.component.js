@@ -10,10 +10,9 @@ class ClientCard {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
-    console.log(client);
-    this.isCommonClient = this.client.status == 'active' ? true : true;
+    /*this.isCommonClient = this.client.status == 'active' ? true : true;
     this.isHotClient = this.client.status == 'hot' ? true : false;
-    this.isArchiveClient = this.client.status == 'archive' ? true : false;
+    this.isArchiveClient = this.client.status == 'archive' ? true : false;*/
     this.searchDuration = parseInt((new Date().getTime() - this.client.searchStartDate.getTime()) / 86400000);
   }
   

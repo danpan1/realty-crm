@@ -12,16 +12,16 @@ class ListMyClients {
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
     let vm = this;
-
+    
     this.subscribe('listClients', () => {
-        return [{status:'active',realtorId:true}, vm.getReactively('query')]
+        return [{status:'realtor'}]
     });
-
     this.helpers({
       clients() {
         return Clients.find();
       }
     });
+    
   }
 
 }

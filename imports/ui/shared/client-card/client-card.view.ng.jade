@@ -10,25 +10,25 @@ div(md-whiteframe='2').mv-16
                 p().md-body-1 ищет {{clientCard.searchDuration}} дней
             md-divider
             div(flex='60' layout="column").one-demonstrations-center-cell.ph-16.pv-8
-                p(ng-if="clientCard.isCommonClient")
+                p(ng-if="clientCard.client.status == 'realtor'")
                     span().md-subhead.text-bold 1 мая 17:00 | 
                     span().md-subhead.text-bold через 3:00
                 p().md-body-1 {{clientCard.client.realtorNote}}
             div(flex='20' layout="column")
-                p(ng-if="!clientCard.isArchiveClient")
+                p(ng-if="clientCard.client.status != 'archive'")
                     a(href="") 15 связей
-                p(ng-if="clientCard.isCommonClient")
+                p(ng-if="clientCard.client.status == 'realtor'")
                     a(href="") 10 предложений
-                p(ng-if="clientCard.isCommonClient")
+                p(ng-if="clientCard.client.status == 'realtor'")
                     a(href="") 2 показа
-                p(ng-if="clientCard.isCommonClient")
+                p(ng-if="clientCard.client.status == 'realtor'")
                     a(href="") Добавить объекты
         div(layout='row')
             div(flex='20').ph-16.pv-8
-                div(ng-if="!clientCard.isHotClient")
+                div(ng-if="clientCard.client.status != 'hot'")
                     p.md-subhead.text-bold {{clientCard.client.phone}}
                     p.md-subhead.text-bold {{clientCard.client.name}}
-                h3().md-title.text-bold.text-uppercase.one-demonstrations-new-label(ng-if="clientCard.isHotClient") Новый
+                h3().md-title.text-bold.text-uppercase.one-demonstrations-new-label(ng-if="clientCard.client.status == 'hot'") Новый
             div(flex='60' layout="row").one-demonstrations-center-cell.ph-16.pv-8
                 div(flex='45').ph-16.pv-8
                     span().metro-color.metro-color-pink

@@ -14,7 +14,7 @@ class ListHotClients {
     let vm = this;
 
     this.subscribe('listClients', () => {
-        return [{status:'hot',realtorId:true}, vm.getReactively('query')]
+        return [{status:'hot',realtorId:true}]
     });
 
     this.helpers({
