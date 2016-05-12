@@ -7,6 +7,11 @@ import {name as addClient} from './add-client/add-client.component';
 import {name as ClientCard} from '/imports/ui/shared/client-card/client-card.component';
 import {Clients} from '/imports/api/clients';
 import {name as listMyClients} from './list-my-clients/list-my-clients.component';
+import {name as clientDetails} from './client-details/client-details.component';
+import {name as clientRelations} from './client-details/client-relations/client-relations.component';
+import {name as clientShows} from './client-details/client-shows/client-shows.component';
+import {name as clientOffers} from './client-details/client-offers/client-offers.component';
+import {name as clientInfo} from './client-details/client-info/client-info.component';
 //import {name as currentClient} from '/imports/ui/shared/client-info/client-info.component';
 import routes from './clients.routes';
 
@@ -27,6 +32,11 @@ export default angular.module(moduleName, [
   angularMeteor,
   listMyClients,
   addClient,
+  clientDetails,
+  clientRelations,
+  clientShows,
+  clientOffers,
+  clientInfo
   //currentClient
 ]).component(moduleName, {
     templateUrl: 'imports/ui/crm/clients/clients.view.html',

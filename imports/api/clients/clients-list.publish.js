@@ -19,6 +19,9 @@ if (Meteor.isServer) {
       if (filter.status) {
         selector.status = filter.status;
       }
+      if (filter._id) {
+        selector._id = filter._id;
+      }
     }
 
     return Clients.find(selector,options);

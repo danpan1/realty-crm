@@ -4,25 +4,24 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
-import './client-info.view.html';
+import './client-offers.view.html';
 
-class ClientInfo {
+class ClientOffers {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
-    console.log(this.currentclient);
   }
 }
 
-const moduleName = 'clientInfo';
+const moduleName = 'clientOffers';
 
 // create a module
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/shared/client-info/client-info.view.html',
-  bindings: {currentclient: '<'},
+  templateUrl: 'imports/ui/crm/clients/client-details/client-offers/client-offers.view.html',
+  bindings: {},
   controllerAs: moduleName,
-  controller: ClientInfo
+  controller: ClientOffers
 });
 

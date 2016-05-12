@@ -14,21 +14,30 @@ div(md-whiteframe='2').mv-16
                     span().text-bold 1 мая 17:00 | 
                     span().text-bold через 3:00
                 p().md-body-1.client-card__note {{clientCard.client.realtorNote}}
-            div.pv-8.ph-8(flex='20' layout="column")
+            div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.client.status") 
                 p.client-card__link_p(ng-if="clientCard.client.status != 'archive'")
-                    a.client-card__link(href="") 15 связей
+                    a.client-card__link(ui-sref="crm.clients.details({activetab: \'relations\', client:clientCard.client._id})" href="") 15 связей
+                p.text-uppercase.client-card__btn_buy-client(ng-if="clientCard.client.status == 'hot'") Купить за 150 руб.
                 p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
-                    a.client-card__link(href="") 10 предложений
+                    a.client-card__link(ui-sref="crm.clients.details({activetab: \'offers\', client:clientCard.client._id})" href="") 10 предложений
                 p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
-                    a.client-card__link(href="") 2 показа
+                    a.client-card__link(ui-sref="crm.clients.details({activetab: \'shows\', client:clientCard.client._id})" href="") 2 показа
                 p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
                     a.client-card__link(href="") Добавить объекты
+            div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.assort == 'manual'")
+                p.text-uppercase.client-card__btn_blue-view Назначить показ
+                p.text-uppercase.client-card__btn_buy-client Купить за 150 руб.
+                p.client-card__btn_hide скрыть
+            div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.assort == 'auto'")
+                p.text-uppercase.client-card__btn_blue-view Предложить объект
+                p.text-uppercase.client-card__btn_buy-client Купить за 150 руб.
         div(layout='row')
             div(flex='25').ph-16.pv-8
-                div(ng-if="clientCard.client.status != 'hot'")
+                div(ng-if="clientCard.client.status != 'hot' && !clientCard.assort")
                     p.md-body-1.client-card__right-label {{clientCard.client.phone}}
                     p.md-body-1.client-card__right-label {{clientCard.client.name}}
-                h3().md-title.text-bold.text-uppercase.one-demonstrations-new-label(ng-if="clientCard.client.status == 'hot'") Новый
+                h3().md-title.text-bold.text-uppercase.one-demonstrations-new-label(ng-if="clientCard.client.status == 'hot' && !clientCard.assort") Новый
+                h3().md-title.text-bold.text-uppercase.one-demonstrations-new-label(ng-if="clientCard.assort") Новая связь
             div(flex='55' layout="row").one-demonstrations-center-cell.ph-16.pv-8
                 div(flex='45').ph-16.pv-8
                     span().metro-color.metro-color-pink
@@ -36,5 +45,5 @@ div(md-whiteframe='2').mv-16
                 div(flex='55').ph-16.pv-8
                     span().md-body-1 2, 3 комнат, длительная, этаж 2+, Кирпичный, 50-75м²
             div(flex='20')
-                div(layout='row', layout-wrap, layout-align='space-around')
+                div.ph-16(layout='row', layout-wrap, layout-align='space-around')
                     img(src='img/icons/icon-tv.png' ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]").one-demonstrations-icon-comfort
