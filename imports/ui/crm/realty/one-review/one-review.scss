@@ -17,6 +17,14 @@ one-review {
         display: block;
       }
     }
+
+    .one-review-photo {
+      height: 250px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
     .one-review-btn-set-photo {
       display: none;
       @include centerer(true, false);

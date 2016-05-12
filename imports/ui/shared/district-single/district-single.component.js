@@ -15,7 +15,7 @@ class DistrictSingle {
     const vm = this;
     vm.districtsAreaInForm = [];
     vm.alreadyPicked = this.district || [];
-    console.log(vm.alreadyPicked);
+    // console.log(vm.alreadyPicked);
     vm.subscribe('district', ()=> {
       return [{sort: {name: 1}, limit: 4}, vm.getReactively('searchTextDistrict'), vm.alreadyPicked];
     }, {
@@ -48,7 +48,7 @@ class DistrictSingle {
   }
 
   changeArea() {
-    console.log(this.district);
+    // console.log(this.district);
     if (this.district && this.district.parents) {
       this.areaId = this.district.parents[1];
     }
