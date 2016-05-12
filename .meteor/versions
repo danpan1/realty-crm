@@ -9,7 +9,6 @@ aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
 allow-deny@1.0.4
-amplify@1.0.0
 angular-templates@1.0.2
 autoupdate@1.2.9
 babel-compiler@6.6.4
@@ -83,7 +82,6 @@ reactive-var@1.0.9
 reload@1.1.8
 retry@1.0.7
 routepolicy@1.0.10
-sanjo:jasmine@1.0.1
 seba:minifiers-autoprefixer@1.0.1
 service-configuration@1.0.9
 session@1.1.5
@@ -100,8 +98,5 @@ tracker@1.0.13
 ui@1.0.11
 underscore@1.0.8
 url@1.0.9
-velocity:console-reporter@0.2.1
-velocity:html-reporter@0.10.1
-velocity:reports@1.0.0
 webapp@1.2.8
 webapp-hashing@1.0.9
