@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '../../../../api/dictionary';
+import {dictionary} from '../../../api/dictionary';
 import {Meteor} from 'meteor/meteor';
 
 import './realty-card.view.html';
@@ -30,7 +30,7 @@ const moduleName = 'realtyCard';
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/crm/realty/realty-card/realty-card.view.html',
+  templateUrl: 'imports/ui/shared/realty-card/realty-card.view.html',
   bindings: {
     realty: '<',
     slider: '&'

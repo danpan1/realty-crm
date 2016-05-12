@@ -4,11 +4,11 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Realty} from '/imports/api/realty';
-import {name as realtyCard} from '/imports/ui/shared/realty-card/realty-card.component';
+import {Counts} from 'meteor/tmeasday:publish-counts';
 
-import './client-relations.view.html';
+import './client-connections.view.html';
 
-class ClientRelations {
+class ClientConnections {
   /* @ngInject */
   constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
@@ -24,16 +24,17 @@ class ClientRelations {
             break;
         default:
             vm.selectedTab = 0;
-    }   
-    
+    }
     
     vm.perPage = 20;
     vm.page = 1;
     this.showSlider = false;
     this.slideShowImages = [];
     vm.sort = {
+      // 'updated_at': -1
       'parseDetails.UID': -1
     };
+
     vm.subscribe('newList', () => {
       return [
         //фильтр для pagination
@@ -70,18 +71,24 @@ class ClientRelations {
     });
     
   }
+  
+  setSliderImages(images) {
+      console.log(images);
+      this.showSlider = true;
+      this.slideShowImages = images;
+  }
+    
 }
 
-const moduleName = 'clientRelations';
+const moduleName = 'clientConnections';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor,
-  realtyCard
+  angularMeteor
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/crm/clients/client-details/client-relations/client-relations.view.html',
+  templateUrl: 'imports/ui/crm/clients/client-details/client-connections/client-connections.view.html',
   bindings: {},
   controllerAs: moduleName,
-  controller: ClientRelations
+  controller: ClientConnections
 });
 

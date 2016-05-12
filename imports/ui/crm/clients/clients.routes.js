@@ -17,25 +17,25 @@ export default function routes($stateProvider) {
       template: '<add-client/>'
     })
     .state('crm.clients.details', {
-      url: '/current?:activetab&:client',
+      url: '/current',
       template: '<client-details/>',
       controller: function ($state, $stateParams) {}
     })
-        .state('crm.clients.details.relations', {
-          url: '/relations&:assort',
-          template: '<client-relations/>',
+        .state('crm.clients.details.connections', {
+          url: '/connections?:client&:assort&:activetab',
+          template: '<client-connections/>',
           controller: function ($state, $stateParams) {}
         })
-        .state('crm.clients.details.shows', {
-          url: '/shows',
-          template: '<client-shows/>'
+        .state('crm.clients.details.demonstration', {
+          url: '/demonstration?:client&:activetab',
+          template: '<client-demonstration/>'
         })
-        .state('crm.clients.details.offers', {
-          url: '/offers',
-          template: '<client-offers/>'
+        .state('crm.clients.details.email', {
+          url: '/email?:client&:activetab',
+          template: '<client-email/>'
         })
         .state('crm.clients.details.info', {
-          url: '/info',
+          url: '/info?:client&:activetab',
           template: '<client-info/>'
         })
     

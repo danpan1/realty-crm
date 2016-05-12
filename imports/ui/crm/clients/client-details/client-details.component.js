@@ -17,7 +17,11 @@ class ClientDetails {
     vm.selectedTab = '';
     
     this.subscribe('listClients', () => {
-        return [{_id:vm.getReactively('_id')}]
+        if(vm._id){
+            return [{_id:vm.getReactively('_id')}];
+        }else{
+            return [];
+        }
       });
     this.helpers({
       clients() {
@@ -25,17 +29,14 @@ class ClientDetails {
       }
     });
     
-    vm.client = this.clients[0];
-    console.log(vm.client);
-    
     switch($stateParams.activetab){
-        case 'relations':
+        case 'connections':
             vm.selectedTab = 0;
             break;
-        case 'shows':
+        case 'demonstration':
             vm.selectedTab = 1;
             break;
-        case 'offers':
+        case 'email':
             vm.selectedTab = 2;
             break;
         case 'info':
