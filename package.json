@@ -1,5 +1,5 @@
 {
-  "name": "crm getrent",
+  "name": "crm-getrent",
   "private": true,
   "scripts": {
     "start": "meteor run"
