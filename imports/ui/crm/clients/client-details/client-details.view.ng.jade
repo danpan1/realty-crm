@@ -1,9 +1,11 @@
 {{clientInfo.clients}}
 section(ng-repeat="client in clientDetails.clients")
-    h1 {{client.name}} {{client.phone}}
+    div(layout="row")
+        md-button.md-raised.md-default(ui-sref="crm.clients.list.my") Back
+        h1 {{client._id}} {{client.name}} {{client.phone}}
     md-tabs(md-dynamic-height md-selected="clientDetails.selectedTab")
-        md-tab(ui-sref="crm.clients.details.relations") Связи
-        md-tab(ui-sref="crm.clients.details.shows") Показы
-        md-tab(ui-sref="crm.clients.details.offers") Отправить предложение
-        md-tab(ui-sref="crm.clients.details.info") Инфо о клиенте
+        md-tab(ui-sref="crm.clients.details.connections({client:client._id, assort: 'manual', activetab: 'connections'})") Связи
+        md-tab(ui-sref="crm.clients.details.demonstration({client:client._id, activetab: 'demonstration'})") Показы
+        md-tab(ui-sref="crm.clients.details.email({client:client._id, activetab: 'email'})") Отправить предложение
+        md-tab(ui-sref="crm.clients.details.info({client:client._id, activetab: 'info'})") Инфо о клиенте
     ui-view

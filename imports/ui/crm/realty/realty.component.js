@@ -10,7 +10,7 @@ import {name as oneConnections} from './one-connections/one-connections.componen
 import {name as oneEmail} from './one-email/one-email.component';
 import {name as oneReview} from './one-review/one-review.component';
 import {name as oneInfo} from './one-info/one-info.component';
-import {name as realtyCard} from './realty-card/realty-card.component';
+import {name as realtyCard} from '/imports/ui/shared/realty-card/realty-card.component';
 import routes from './realty.routes.js';
 import './realty.view.html';
 const moduleName = 'realty';

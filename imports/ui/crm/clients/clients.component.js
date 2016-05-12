@@ -8,9 +8,9 @@ import {name as ClientCard} from '/imports/ui/shared/client-card/client-card.com
 import {Clients} from '/imports/api/clients';
 import {name as listMyClients} from './list-my-clients/list-my-clients.component';
 import {name as clientDetails} from './client-details/client-details.component';
-import {name as clientRelations} from './client-details/client-relations/client-relations.component';
-import {name as clientShows} from './client-details/client-shows/client-shows.component';
-import {name as clientOffers} from './client-details/client-offers/client-offers.component';
+import {name as clientConnections} from './client-details/client-connections/client-connections.component';
+import {name as clientDemonstration} from './client-details/client-demonstration/client-demonstration.component';
+import {name as clientEmail} from './client-details/client-email/client-email.component';
 import {name as clientInfo} from './client-details/client-info/client-info.component';
 //import {name as currentClient} from '/imports/ui/shared/client-info/client-info.component';
 import routes from './clients.routes';
@@ -33,9 +33,9 @@ export default angular.module(moduleName, [
   listMyClients,
   addClient,
   clientDetails,
-  clientRelations,
-  clientShows,
-  clientOffers,
+  clientConnections,
+  clientDemonstration,
+  clientEmail,
   clientInfo
   //currentClient
 ]).component(moduleName, {

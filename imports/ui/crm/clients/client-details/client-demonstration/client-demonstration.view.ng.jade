@@ -7,8 +7,9 @@ div.md-whiteframe-2dp(md-whiteframe="2")
         div.ph-8(flex="35") Дата, время и адрес показа
         div.ph-8(flex="15") Действия
         
-div.md-whiteframe-2dp(md-whiteframe="2") {{clientRelations.objects}}
-    h1 Here will be list of object cards assorted by {{clientRelations.assort}}
-    object-card
+div.md-whiteframe-2dp(md-whiteframe="2")
+    realty-card(ng-repeat='realty in clientDemonstration.realty'
+                realty='realty'
+                slider='clientDemonstration.setSliderImages(images)')
     
     

@@ -16,6 +16,8 @@ div.md-whiteframe-2dp(md-whiteframe="2")
         
 div.md-whiteframe-2dp(md-whiteframe="2") {{clientRelations.objects}}
     h1 Here will be list of object cards assorted by {{clientRelations.assort}}
-    object-card
+    realty-card(ng-repeat='realty in newList.realty'
+                realty='realty'
+                slider='newList.setSliderImages(images)')
     
     

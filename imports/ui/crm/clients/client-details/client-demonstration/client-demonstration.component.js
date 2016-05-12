@@ -4,36 +4,26 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Realty} from '/imports/api/realty';
-import {name as realtyCard} from '/imports/ui/shared/realty-card/realty-card.component';
 
-import './client-relations.view.html';
+import './client-demonstration.view.html';
 
-class ClientRelations {
+class ClientDemonstration {
   /* @ngInject */
   constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
     var vm = this;
-    vm.assort = $stateParams.assort ? $stateParams.assort : 'manual' ;
-    vm.selectedTab = '';
-    switch($stateParams.assort){
-        case 'manual':
-            vm.selectedTab = 0;
-            break;
-        case 'auto':
-            vm.selectedTab = 1;
-            break;
-        default:
-            vm.selectedTab = 0;
-    }   
     
+    console.log($stateParams);
     
     vm.perPage = 20;
     vm.page = 1;
     this.showSlider = false;
     this.slideShowImages = [];
     vm.sort = {
+      // 'updated_at': -1
       'parseDetails.UID': -1
     };
+
     vm.subscribe('newList', () => {
       return [
         //фильтр для pagination
@@ -72,16 +62,15 @@ class ClientRelations {
   }
 }
 
-const moduleName = 'clientRelations';
+const moduleName = 'clientDemonstration';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor,
-  realtyCard
+  angularMeteor
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/crm/clients/client-details/client-relations/client-relations.view.html',
+  templateUrl: 'imports/ui/crm/clients/client-details/client-demonstration/client-demonstration.view.html',
   bindings: {},
   controllerAs: moduleName,
-  controller: ClientRelations
+  controller: ClientDemonstration
 });
 
