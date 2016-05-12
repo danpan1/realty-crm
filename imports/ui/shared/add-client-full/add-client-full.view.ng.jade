@@ -7,47 +7,57 @@ md-tabs(md-dynamic-height md-border-bottom)
 
                         div(layout='row').mv-16
                             md-input-container().mv-0
-                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='+7 (XXX) XXX XX XX')
+                                label Телефон
+                                input(ng-model='addClientFull.client.phone',
+                                placeholder='7 (XXX) XXX XX XX',
+                                ng-pattern='/^[0-9]{11}$/',
+                                md-maxlength='11')
                             md-input-container(flex-offset='5').mv-0
-                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Имя клиента')
+                                label Имя клиента
+                                input(ng-model='addClientFull.client.name')
                         div(layout='row')
                             label().md-subhead Готов платить комиссию
-                            div(flex-offset='5')
-                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead Да
-                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead Нет
+                            md-radio-group(ng-model='addClientFull.client.comissionLoyal' flex-offset='5')
+                                md-radio-button.md-primary.md-subhead(value='true')  Да
+                                md-radio-button.md-primary.md-subhead(value='false') Нет
+
                         div(layout='row').mv-16
                             md-input-container(flex='60').mv-0
-                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Сумма до которой он готов платить')
+                                input(ng-model='addClientFull.client.comission'
+                                placeholder='Сумма до которой он готов платить комиссию')
                         div(layout='row' layout-align='start end').mv-16
                             div().dots
                                 span().md-subhead На когда
-                            md-datepicker(ng-model='myDate', md-placeholder='Enter date')
+                            md-datepicker(ng-model='addClientFull.client.searchEndDate', md-placeholder='Enter date')
 
                         div(layout='row' layout-align='start end').mv-16
                             div().dots
                                 span().md-subhead Когда начал поиск
-                            md-datepicker(ng-model='myDate2', md-placeholder='Enter date')
+                            md-datepicker(ng-model='addClientFull.client.searchStartDate', md-placeholder='Enter date')
+                        //СОСТАВ СЪЁМЩИкОВ
                         div(layout='row').mv-16
                             md-input-container().mv-0
                                 label Состав съемщиков
-                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
-                                    md-option(ng-value='condition.id',
-                                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                                md-select(ng-model='addClientFull.client.composition')
+                                    md-option(ng-value='composition.id',
+                                    ng-repeat="composition in addClientFull.dictionary.composition ") {{composition.name}}
                         div(layout='row').mv-16
                             md-input-container(flex).mv-0
-                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Напишите что клиенту важно (ваша заметка)')
+                                label Клиеинту важно (текст длинный какой-то)
+                                textarea(ng-model='addClientFull.client.realtorNote', md-maxlength='150', rows='5', md-select-on-focus='' )
                 //        div().md-subhead Какой процент стоимости аренды вы хотите получить
                 //
-                //div(layout='row')
-                //    div(flex='80')
+                div(layout='row')
+                    div(flex='80')
+                        div
+                            md-button().md-primary.md-raised Продолжить
                 //        div(layout='row' layout-align='start center').mv-16
                 //            md-input-container(flex).mv-0
                 //                input(ng-model='realtyFilter.filter.floorFrom' placeholder='От прямого клиента')
                 //            md-input-container(flex flex-offset='5').mv-0
                 //                input(ng-model='realtyFilter.filter.floorFrom' placeholder='От клиента другого агента')
-                //            span(flex-offset='5').md-body-1 (Будет показано только агентам)
-                        div
-                            md-button().md-primary.md-raised Продолжить
+                            span(flex-offset='5').md-body-1 (Будет показано только агентам)
+
     md-tab(label='2) Требования к объекту' md-active='true')
         md-content().ph-32.pv-16
             div(layout='column')
@@ -80,25 +90,28 @@ md-tabs(md-dynamic-height md-border-bottom)
                 div(layout='row')
                     div(flex='80')
                         div(layout='row').mv-16
-                            md-input-container(flex).mv-0
-                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Улица')
-                            md-input-container(flex flex-offset='5').mv-0
-                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Дом и корпус')
-                            md-input-container(flex flex-offset='5').mv-0
-                                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Квартира (видите только вы)')
+                            district-chips(ng-model='addClientFull.client.districts'
+                            districts-embeded = 'addClientFull.client.districtsEmbeded')
+                        //    md-input-container(flex).mv-0
+                        //        input(ng-model='realtyFilter.filter.floorFrom' placeholder='Улица')
+                        //    md-input-container(flex flex-offset='5').mv-0
+                        //        input(ng-model='realtyFilter.filter.floorFrom' placeholder='Дом и корпус')
+                        //    md-input-container(flex flex-offset='5').mv-0
+                        //        input(ng-model='realtyFilter.filter.floorFrom' placeholder='Квартира (видите только вы)')
 
                         div(layout='row' layout-align='start end').mv-16
                             div(flex='30')
-                                subway-chips(ng-model='outgoingCall.subway')
+                                subway-chips(ng-model='addClientFull.client.subways'
+                                subways-embeded = 'addClientFull.client.subwaysEmbeded')
                             div(layout='row' layout-align='start end' flex-offset='5')
                                 label().md-subhead До метро
                                 md-input-container(flex='15' flex-offset='5').mv-0.pb-0
-                                    input(ng-model='realtyFilter.filter.floorFrom' placeholder='минут')
+                                    input(ng-model='addClientFull.client.metroPeshkom' placeholder='минут')
                                 md-input-container().mv-0.ml-8.md-body-1.pb-0
                                     label пешком
-                                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
-                                        md-option(ng-value='condition.id',
-                                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                                    //md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                                    //    md-option(ng-value='condition.id',
+                                    //    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
                 
                 div(layout='row')
                     div(flex='80')

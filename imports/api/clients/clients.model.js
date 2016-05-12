@@ -29,8 +29,20 @@ Clients.Schema = new SimpleSchema({
   status: {//'realtor' - находится у риэлтора в работе (мои клиенты)
     type: String
   },
+  comission: {
+    type: Number,
+    optional: true
+  },
   comissionLoyal: {
     type: Boolean,
+    optional: true
+  },
+  composition: {
+    type: String,
+    optional: true
+  },
+  searchEndDate: {
+    type: Date,
     optional: true
   },
   searchStartDate: {
