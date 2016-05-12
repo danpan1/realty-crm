@@ -2,11 +2,17 @@
 md-toolbar(layout='row')
     md-button.menu(hide-gt-md='', ng-click='layout.toggleList()')
         md-icon(md-svg-icon='menu')
+    span(flex)
+    span {{layout.user.emails[0].address}}
+    span(flex="5")
+    span(ng-click='layout.logout()', ui-sref='auth.login') logOut
 
 // Container #2
 div(flex='', layout='row')
     // Container #3
     md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left")
+        menu-toggle(section="layout.actions")
+        md-button.md-raised.md-warn(ui-sref='crm.clients.add') Добавить клиента
         md-list
             md-list-item(ng-repeat="item in layout.sideNavItems",
             ui-sref='{{item.uisref}}',

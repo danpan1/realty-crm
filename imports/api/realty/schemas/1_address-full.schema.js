@@ -2,7 +2,7 @@
  * Created by Danpan on 26.03.16.
  */
 
-export default AddressFullSchema = new SimpleSchema({
+export const AddressFullSchema = new SimpleSchema({
   // country: 'Россия',
   country: {
     type: String,

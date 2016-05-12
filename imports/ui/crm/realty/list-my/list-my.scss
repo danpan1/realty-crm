@@ -1,0 +1,23 @@
+
+.workList {
+  border: 1px solid #f3f3f3;
+  &_Progress,
+  &_Advertisement {
+    width: 16rem;
+  }
+  &_Actions {
+    width: 38rem;
+    background: #fffde7;
+  }
+  &_Photo {
+    width: 14rem;
+    img {
+      max-width: 14rem;
+      max-height: 10.5rem;
+    }
+  }
+}
+
+.orange {
+  color: #ff5722;
+}

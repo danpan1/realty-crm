@@ -1,0 +1,9 @@
+md-tabs(md-dynamic-height md-selected="listMyClients.selectedTab")
+    md-tab(ui-sref="crm.clients.list.my({status: \'hot\'})") Горячие клиенты
+    md-tab(ui-sref="crm.clients.list.my({status: \'realtor\'})") Мои клиенты
+    //md-tab(ui-sref="crm.clients.list.my({status: \'all\'})") Все
+    md-tab(ui-sref="crm.clients.list.my({status: \'archive\'})") Архив
+    //md-tab(ui-sref="crm.clients.list.my({status: \'\'})") Скрыть фильтр
+    
+div 
+    client-card(ng-repeat='client in listMyClients.clients' client='client')
