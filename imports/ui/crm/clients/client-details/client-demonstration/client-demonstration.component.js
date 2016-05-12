@@ -60,6 +60,12 @@ class ClientDemonstration {
     });
     
   }
+  
+  setActiveRealty(realty) {
+      console.log(realty);
+      this.activeRealty = realty;
+  }
+  
 }
 
 const moduleName = 'clientDemonstration';

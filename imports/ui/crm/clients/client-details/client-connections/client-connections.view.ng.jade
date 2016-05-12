@@ -15,8 +15,19 @@ div.md-whiteframe-2dp(md-whiteframe="2")
         div.ph-8(flex="15") Действия
         
 div.md-whiteframe-2dp(md-whiteframe="2")
-    realty-card(ng-repeat='realty in clientConnections.realty'
-                realty='realty'
-                slider='clientConnections.setSliderImages(images)')
+    div
+        realty-card(ng-repeat='realty in clientConnections.realty'
+                    realty='realty'
+                    slider='clientConnections.setSliderImages(images)'
+                    ng-click="clientConnections.setActiveRealty(realty)")
+    div.ph-16.pv-16(ng-if="clientConnections.activeRealty")
+        div(layout="row")
+            p(flex="35") {{clientConnections.activeRealty.roomcount}} комнаты, длительная, Кирпичный, {{clientConnections.activeRealty.floor}}/{{clientConnections.activeRealty.floormax}}, 50м #[sup 2]
+            p(flex="65") Удобства
+        div {{clientConnections.activeRealty.details.descr}}
+        div(layout="row")
+            div(flex="90")
+            div(flex="10") 
+                md-button.md-default.md-raised(ng-click="clientConnections.activeRealty = undefined") Закрыть
     
     
