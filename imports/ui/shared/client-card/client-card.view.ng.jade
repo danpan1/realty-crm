@@ -23,7 +23,7 @@ div(md-whiteframe='2').mv-16
                 p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
                     a.client-card__link(ui-sref="crm.clients.details.demonstration({client:clientCard.client._id, activetab: 'shows'})" href="") 2 показа
                 p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
-                    a.client-card__link(href="") Добавить объекты
+                    a.client-card__link(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})" href="") Добавить объекты
             div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.assort == 'manual'")
                 p.text-uppercase.client-card__btn_blue-view Назначить показ
                 p.text-uppercase.client-card__btn_buy-client Купить за 150 руб.
