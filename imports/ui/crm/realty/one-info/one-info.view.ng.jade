@@ -10,18 +10,13 @@ div(layout="column", layout-align="space-around stretch")
             div(flex="33")
                 h2 Месторасположение
                 div
-                    div().md-subhead Область: #[strong Московская]
-                    div().md-subhead Город: #[strong Москва]
-                    div().md-subhead Метро: #[strong Лубянка 5 мин. пешом]
-                    div().md-subhead Район: #[strong ЦАО]
-                    div().md-subhead Тип здания: #[strong Кирпичный]
-                    div().md-subhead Комнат: #[strong 3 комнатная]
-                    div().md-subhead Срок: #[strong длительный]
-                    div().md-subhead Цена: #[strong 38 000]
-                    div().md-subhead Этаж: #[strong 10 из 55]
-                    div().md-subhead Общая: #[strong 64 м#[sup 2]]
-                    div().md-subhead Собственник: #[strong Лояльный]
-                    div().md-subhead Уровень ремонта: #[strong Евроремонт]
+                    div().md-subhead Область: #[strong {{oneInfo.realty.address.meta.region}}]
+                    div().md-subhead Город: #[strong {{oneInfo.realty.address.meta.city}}]
+                    div().md-subhead Район: #[strong {{oneInfo.realty.address.areaname}}]
+                    div().md-subhead Улица: #[strong {{oneInfo.realty.address.street}}]
+                    div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.meta.house}}]
+                    div().md-subhead Квартира: #[strong {{oneInfo.realty.address.meta.flat}}]
+                    div().md-subhead Метро: #[strong {{oneInfo.realty.address.metroName}} {{oneInfo.realty.address.metroPeshkom}} мин. пешком]
                     div
                         md-button().md-primary.md-raised.ml-0(ng-click="oneInfo.showEditDialog($event)") Изменить
            
@@ -36,8 +31,8 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Жилая площадь: #[strong{{oneInfo.realty.details.livingSquare}}]
                     div().md-subhead Площадь кухни: #[strong{{oneInfo.realty.details.kitchenSquare}}]
                     div().md-subhead Площадь комнат: 
-                        span(ng-repeat="room in oneInfo.realty.details.roomsSquare")
-                            | #[strong {{room}}]
+                        span(ng-repeat="i in [0,1,2,3]")
+                            | #[strong {{oneInfo.realty.details.roomsSquare[i]}}, ]
                     div().md-subhead Лоджия: #[strong{{oneInfo.realty.details.loggia}}]
                     div().md-subhead Балкон: #[strong{{oneInfo.realty.details.balcony}}]
                     div().md-subhead Пассажирских лифтов: #[strong{{oneInfo.realty.details.elevator}} ]
@@ -59,7 +54,7 @@ div(layout="column", layout-align="space-around stretch")
             md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
             aria-label='Switch 2'
             ng-repeat="condition in oneInfo.dictionary.conditions")
-                | {{condition.name}} - {{oneInfo.currentConditions[$index]}}
+                | {{condition.name}}
                 
     div(layout="row", layout-align="space-between")    
         div(layout="column" flex='50')
