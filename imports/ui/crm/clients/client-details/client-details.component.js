@@ -13,7 +13,7 @@ class ClientDetails {
     $reactive(this).attach($scope);
     
     let vm = this;
-    vm._id = $stateParams.client;
+    vm._id = $stateParams.client ? $stateParams.client : 'XXX';
     vm.selectedTab = '';
     
     this.subscribe('listClients', () => {
@@ -42,6 +42,8 @@ class ClientDetails {
         case 'info':
             vm.selectedTab = 3;
             break;
+        default:
+            vm.selectedTab = 0;
     }
     
   }

@@ -20,6 +20,7 @@ class OneInfo {
     }, {
       onReady(){
         let realty = Realty.findOne({});
+        console.log(realty);
       }
     });
 
@@ -29,11 +30,29 @@ class OneInfo {
       }
     });
     // oneInfo
-
     this.slideNum = 0;
-
+    this.conditions = ['futniture', 'animal', 'children'];
+    this.currentConditions = [];
+    
+    console.log(this.realty);
+    
+    for(var i in dictionary.conditions){
+        for(var n in this.conditions){
+            if(dictionary.conditions[i].id == this.conditions[n]){
+                this.currentConditions[i] = true;
+                console.log(this.currentConditions[i].presence);
+            }else{
+                this.currentConditions[i] = false;
+            }
+        }
+    }
+    console.log(this.currentConditions);
   }
-
+  
+  showRealty (realty) {
+      console.log(realty);
+  }
+  
   nextImage(boo, max) {
     if (boo) {
       if (this.slideNum + 1 >= max) {

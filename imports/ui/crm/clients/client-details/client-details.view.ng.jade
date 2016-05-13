@@ -1,7 +1,7 @@
 {{clientInfo.clients}}
 section(ng-repeat="client in clientDetails.clients")
     div(layout="row")
-        md-button.md-raised.md-default(ui-sref="crm.clients.list.my") Back
+        md-button.md-raised.md-default(ui-sref="crm.clients.list.my({status: \'realtor\'})") Back
         h1 {{client._id}} {{client.name}} {{client.phone}}
     md-tabs(md-dynamic-height md-selected="clientDetails.selectedTab")
         md-tab(ui-sref="crm.clients.details.connections({client:client._id, assort: 'manual', activetab: 'connections'})") Связи

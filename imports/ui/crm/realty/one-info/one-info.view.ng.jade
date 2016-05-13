@@ -1,4 +1,4 @@
-div(layout="column", layout-align="space-around stretch")
+div(layout="column", layout-align="space-around stretch" ng-click="showRealty(oneInfo.realty)")
     div(layout="row")
         div(flex="70")
             button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)") prev
@@ -53,12 +53,10 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead От клиента
                     div().md-subhead От клиента партнера
         div(md-whiteframe='2' flex='20').mh-16
-            md-switch.md-warn(ng-model='oneInfo[condition.id]',
-            aria-label='Switch 2',
-            ng-true-value="'{{condition.id}}'",
-            ng-false-value="",
+            md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
+            aria-label='Switch 2'
             ng-repeat="condition in oneInfo.dictionary.conditions")
-                | {{condition.name}}
+                | {{condition.name}} - {{oneInfo.currentConditions[$index]}}
                 
     div(layout="row", layout-align="space-between")    
         div(layout="column" flex='50')

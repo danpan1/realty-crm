@@ -15,7 +15,7 @@ class ClientDemonstration {
     
     console.log($stateParams);
     
-    vm.perPage = 20;
+    vm.perPage = 5;
     vm.page = 1;
     this.showSlider = false;
     this.slideShowImages = [];
@@ -61,11 +61,11 @@ class ClientDemonstration {
     
   }
   
-  setActiveRealty(realty) {
-      console.log(realty);
-      this.activeRealty = realty;
+  setSliderImages(images) {
+    console.log(images);
+    this.showSlider = true;
+    this.slideShowImages = images;
   }
-  
 }
 
 const moduleName = 'clientDemonstration';

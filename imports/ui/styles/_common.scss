@@ -27,3 +27,15 @@
         line-height: 10px;
     }
 }
+
+.color{
+    &-danger{
+        color:rgb(255,82,82);
+    }
+    &-primary{
+        color:rgb(33,150,243);
+    }
+    &-hide{
+        color:#898989;
+    }
+}

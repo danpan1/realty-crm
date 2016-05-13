@@ -78,11 +78,6 @@ class ClientConnections {
       this.slideShowImages = images;
   }
   
-  setActiveRealty(realty) {
-      console.log(realty);
-      this.activeRealty = realty;
-  }
-    
 }
 
 const moduleName = 'clientConnections';
