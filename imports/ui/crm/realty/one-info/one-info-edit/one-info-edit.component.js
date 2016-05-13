@@ -15,21 +15,26 @@ class OneInfoEdit {
     this.dictionary = dictionary;
   }
   
+  ngOnInit() {
+      if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
+  }
+  
   onChangeRealty (realtyId, conditions) {
-      this.currentConditions = [];
+      console.log(conditions)
+      this.currentconditions = [];
       for(var i in dictionary.conditions){
-          this.currentConditions[i] = {};
+          this.currentconditions[i] = {name: dictionary.conditions[i].name, presence: false};
       }
-      console.log(dictionary.conditions);
-      console.log(conditions);
       for(var i in conditions){
         for(var n in dictionary.conditions){
             if(conditions[i] == dictionary.conditions[n].id){
+                console.log(this.currentconditions[n])
                 this.currentconditions[n].presence = true;
-                console.log(this.currentconditions[n]);
+                break;
             }
         }
       }
+      console.log(this.currentconditions)
       
       
       Realty.update({_id: realtyId}, {

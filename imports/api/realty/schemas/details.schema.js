@@ -111,6 +111,18 @@ export const RentDetailsSchema = new SimpleSchema({
     }),
     optional: true
   },
+  //Состав съемщиков
+  composition: {
+    type: Array,
+    label: 'composition',
+    allowedValues: [true, false, null],
+    optional: true
+  },
+  'composition.$': {
+    type: Boolean,
+    label: 'composition.[]',
+    optional: true
+  },
   //Вид из окна в фильтре
   windowView: {
     type: Number,
