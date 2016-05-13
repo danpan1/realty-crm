@@ -54,7 +54,7 @@ div(layout="column", layout-align="space-around stretch")
             md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
             aria-label='Switch 2'
             ng-repeat="condition in oneInfo.dictionary.conditions")
-                | {{condition.name}} - {{oneInfo.currentConditions[$index]}}
+                | {{condition.name}}
                 
     div(layout="row", layout-align="space-between")    
         div(layout="column" flex='50')
