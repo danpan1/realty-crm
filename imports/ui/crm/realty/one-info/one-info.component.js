@@ -40,8 +40,33 @@ class OneInfo {
     console.log(this.currentConditions);
   }
   
+  onConditionsChange (realtyId) {
+    this.realty.details.conditions = [];
+    //this.currentConditions = [];
+    //for(var i in dictionary.conditions){
+    //    this.currentConditions[i] = {name: dictionary.conditions[i].id, presence: false};
+    //}
+    console.log(this.currentConditions);
+    for(var i in this.currentConditions){
+        if(this.currentConditions[i].presence == true){
+            console.log(this.currentConditions[i].name);
+            this.realty.details.conditions.push(this.currentConditions[i].name);
+        }
+    }
+    console.log(this.realty.details.conditions);
+    Realty.update({_id: realtyId}, {
+        $set: this.realty
+    }, (error) => {
+        if(error) {
+        console.log(error)
+        } else {
+            console.log('call recieved newObj');
+        }
+    });
+  }
+  
   setActiveConditions (conditions) {
-      console.log(this.currentConditions)
+      console.log(conditions)
       for(var i in conditions){
         for(var n in dictionary.conditions){
             this.currentConditions[n].name = dictionary.conditions[n].id;

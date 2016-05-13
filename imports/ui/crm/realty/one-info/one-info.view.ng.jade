@@ -1,4 +1,4 @@
-one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow" currentconditions="oneInfo.currentConditions")
+one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
     div(layout="row")
         div(flex="70")
@@ -50,55 +50,25 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Цена: #[strong{{oneInfo.realty.price}}]
                     div().md-subhead От клиента: #[strong{{oneInfo.realty.clientpercent}}]%
                     div().md-subhead От клиента партнера: #[strong{{oneInfo.realty.partnerpercent}}]%
-        div(md-whiteframe='2' flex='20').mh-16
+        div(md-whiteframe='2' flex='20').mh-16 {{oneInfo.currentConditions[$index].presence}}
             md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
             aria-label='Switch 2'
-            ng-repeat="condition in oneInfo.dictionary.conditions")
-                | {{condition.name}}
+            ng-repeat="condition in oneInfo.dictionary.conditions"
+            ng-click="oneInfo.onConditionsChange(oneInfo.realty._id)")
+                | {{condition.name}} - {{oneInfo.currentConditions[$index].presence}}
                 
     div(layout="row", layout-align="space-between")    
         div(layout="column" flex='50')
-            div(md-whiteframe='2').one-info-contacts.p-16
-                div(layout='column')
-                    h3().md-title Контакт №1
-                    div(layout='row' layout-align='space-between')
-                        div(flex='70')
-                            md-input-container(flex='80' md-no-float).md-block.m-0
-                                input(placeholder='Сикорский Олег Евгеньевич')
-                            md-input-container(flex='40' md-no-float).md-block.m-0
-                                input(placeholder='8 925 111 22 33')
-                            md-input-container(flex='40' md-no-float).md-block.m-0
-                                input(placeholder='8 925 111 44 55')
-                            md-button().md-primary.md-caption.ml-0 Добавить номер
-                        div(flex='30')
-                            md-input-container(md-no-float).md-block.m-0
-                                input(placeholder='Собственник')
-                            md-input-container(md-no-float).md-block.m-0
-                                input(placeholder='тестовая заметка')
-                            md-input-container(md-no-float).md-block.m-0
-                            input(placeholder='тестовая заметка')          
-            div(layout='column' md-whiteframe="2")
-                h3().md-title Контакт №2
+            div(md-whiteframe='2').one-info-contacts.p-16.mv-16
+                h3().md-title Контакты
                 div(layout='row' layout-align='space-between')
-                    div(flex='70')
-                        md-input-container(flex='80' md-no-float).md-block.m-0
-                            input(placeholder='Сикорский Олег Евгеньевич')
-                        md-input-container(flex='40' md-no-float).md-block.m-0
-                            input(placeholder='8 925 111 22 33')
-                        md-input-container(flex='40' md-no-float).md-block.m-0
-                            input(placeholder='8 925 111 44 55')
-                        md-button().md-primary.md-caption.ml-0 Добавить номер
-                    div(flex='30')
-                        md-input-container(md-no-float).md-block.m-0
-                            input(placeholder='Собственник')
-                        md-input-container(md-no-float).md-block.m-0
-                            input(placeholder='тестовая заметка')
-                        md-input-container(md-no-float).md-block.m-0
-                            input(placeholder='тестовая заметка')
-                div
-                    md-button().md-primary.md-raised.ml-0 Сохранить
+                    p.md-bold(flex="70") Олег 
+                    p.md-bold(flex="30") 8-923-455-67-67 
+                div(layout='row' layout-align='space-between')
+                    p.md-bold(flex="70") Игорь 
+                    p.md-bold(flex="30") 8-927-551-59-57 
 
-        div(md-whiteframe="2" flex='50').one-info-closed.mv-16.p-16
+        div(md-whiteframe="2" flex='50').one-info-closed.m-16.p-16
             h3().md-title Закрытие сделки
             div
                 md-button().md-primary.md-raised.ml-0 Закрыть сделку и переместить объект в архив
