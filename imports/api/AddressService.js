@@ -12,7 +12,7 @@ export class AddressService {
 
   static search(data) {
     // console.log('request', data);
-    console.log($);
+    // console.log($);
     return $.ajax({
       url: 'https://dadata.ru/api/v2/suggest/address',
       type: 'POST',

@@ -1,3 +1,7 @@
+div {{addRealtyFull.realty.street.value}}
+div {{addRealtyFull.realty.addRealtyFull.realty.full}}
+div {{addRealtyFull.realty.house.value}}
+div {{addRealtyFull.realty.house.data.city_district}}
 md-tabs(md-dynamic-height md-border-bottom)
     md-tab(label='1) Расположение' md-active='true')
         md-content().ph-32.pv-16
@@ -8,10 +12,11 @@ md-tabs(md-dynamic-height md-border-bottom)
                 div(layout='row')
                     div Москва
                 div(layout='row')
-                    realty-street(ng-model='addRealtyFull.realty.street' house='addRealtyFull.realty.house')
+                    realty-street(ng-model='addRealtyFull.realty.street' house='addRealtyFull.realty.house'
+                    dadata='addRealtyFull.realty.full')
                 div(layout='row')
-                    subway-chips(ng-model='addRealtyFull.realty.need.subways'
-                    subways-embeded = 'addRealtyFull.realty.need.embedded.subways')
+                    subway-chips(ng-model='addRealtyFull.realty.subways'
+                    subways-embeded = 'addRealtyFull.realty.embedded.subways')
                 div(layout='row')
                     district-chips(ng-model='addRealtyFull.realty.need.districts'
                 districts-embeded = 'addRealtyFull.realty.need.embedded.districts')
