@@ -1,0 +1,21 @@
+moderator {
+  div[md-whiteframe] {
+    background-color: $white;
+  }
+
+  md-card {
+    position: relative;
+    box-shadow: none;
+    border-radius: 0;
+    &:hover {
+      .btn-set-photo {
+        display: block;
+      }
+    }
+  }
+
+  .md-success {
+    min-width: 400px;
+    min-height: 52px;
+  }
+}

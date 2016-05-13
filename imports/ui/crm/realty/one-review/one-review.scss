@@ -13,31 +13,8 @@ one-review {
     box-shadow: none;
     border-radius: 0;
     &:hover {
-      .one-review-btn-set-photo {
+      .btn-set-photo {
         display: block;
-      }
-    }
-    .one-review-btn-set-photo {
-      display: none;
-      @include centerer(true, false);
-      bottom: 16px;
-    }
-
-    .one-review-btn-remove-photo {
-      position: absolute;
-      top: 3px;
-      right: 3px;
-      width: 24px;
-      height: 24px;
-      margin: 0;
-      padding: 0;
-      min-width: 24px;
-      min-height: 24px;
-      line-height: 24px;
-      border-radius: 0;
-      background-color: #525252;
-      &:hover {
-        background-color: #525252;
       }
     }
   }
