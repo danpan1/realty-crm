@@ -4,6 +4,7 @@ import {dictionary} from '../dictionary';
 export const Realty = new Mongo.Collection('realty');
 export const Parser = new Mongo.Collection('parser');
 import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
+import {Roles} from 'meteor/alanning:roles'
 import {AddressSchema} from './schemas/address.schema';
 import {AdSchema} from './schemas/ad.schema';
 import {ContactsSchema} from './schemas/contacts.schema';
@@ -17,17 +18,17 @@ import {RentDetailsSchema} from './schemas/details.schema';
 // mongorestore -h 127.0.0.1 --port 27017 -d getrent dump/meteor
 // mongodump -h 127.0.0.1 --port 27017 -d getrent dump2/meteor
 // db.realty.remove({status: {$ne:'new'}})
-// Realty.allow({
-//   update: function () {
-//     return Roles.userIsInRole(Meteor.userId(), ['business']);
-//   },
-//   insert: function () {
-//     return Roles.userIsInRole(Meteor.userId(), ['business']);
-//   },
-//   remove: function () {
-//     return Roles.userIsInRole(Meteor.userId(), ['business']);
-//   }
-// });
+Realty.allow({
+  update: function () {
+    return Roles.userIsInRole(Meteor.userId(), ['business']);
+  },
+  insert: function () {
+    return Roles.userIsInRole(Meteor.userId(), ['business']);
+  },
+  remove: function () {
+    return Roles.userIsInRole(Meteor.userId(), ['business']);
+  }
+});
 
 Realty.Schema = new SimpleSchema({
   //Это все относится к Карточка которые показываются в Листах

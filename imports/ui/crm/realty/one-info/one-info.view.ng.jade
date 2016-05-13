@@ -1,4 +1,5 @@
-div(layout="column", layout-align="space-around stretch" ng-click="showRealty(oneInfo.realty)")
+one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow" currentconditions="oneInfo.currentConditions")
+div(layout="column", layout-align="space-around stretch")
     div(layout="row")
         div(flex="70")
             button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)") prev
@@ -22,12 +23,12 @@ div(layout="column", layout-align="space-around stretch" ng-click="showRealty(on
                     div().md-subhead Собственник: #[strong Лояльный]
                     div().md-subhead Уровень ремонта: #[strong Евроремонт]
                     div
-                        md-button().md-primary.md-raised.ml-0 Изменить
+                        md-button().md-primary.md-raised.ml-0(ng-click="oneInfo.showEditDialog($event)") Изменить
            
             div(flex="33")  
                 h2 Объект
                 div
-                    div().md-subhead Тип здания: #[strong {{oneInfo.dictionary.materials[oneInfo.realty.type].name}}]
+                    div().md-subhead Тип здания: #[strong {{oneInfo.dictionary.materials[oneInfo.realty.details.materials].name}}]
                     div().md-subhead Комнат: #[strong {{ oneInfo.realty.roomcount}} комнат]
                     div().md-subhead Ремонт:#[strong {{oneInfo.dictionary.renovation[oneInfo.realty.details.renovation].name}}] 
                     div().md-subhead Этаж: #[strong{{oneInfo.realty.floor}} из {{oneInfo.realty.floormax}}]
@@ -46,12 +47,14 @@ div(layout="column", layout-align="space-around stretch" ng-click="showRealty(on
                 h2 Условия
                 div
                     div().md-subhead Состав съемщиков
-                    div().md-subhead 
-                    div().md-subhead Собственник
-                    div().md-subhead Срок
-                    div().md-subhead Цена
-                    div().md-subhead От клиента
-                    div().md-subhead От клиента партнера
+                    div(ng-repeat="position in oneInfo.dictionary.composition") 
+                        div().md-subhead(ng-if="oneInfo.realty.details.composition[$index]")#[strong{{position.name}}]
+                    p
+                    div().md-subhead Собственник #[strong{{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
+                    div().md-subhead Срок: #[strong{{oneInfo.realty.type == 3 ? 'посуточно' : 'длительный срок'}}]
+                    div().md-subhead Цена: #[strong{{oneInfo.realty.price}}]
+                    div().md-subhead От клиента: #[strong{{oneInfo.realty.clientpercent}}]%
+                    div().md-subhead От клиента партнера: #[strong{{oneInfo.realty.partnerpercent}}]%
         div(md-whiteframe='2' flex='20').mh-16
             md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
             aria-label='Switch 2'
