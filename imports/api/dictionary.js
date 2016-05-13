@@ -16,6 +16,15 @@ export const dictionary = {
     {id: 3, name: '3 санузла'}
   ],
   clientStatuses: ['archive', 'realtor', 'hot'],
+  composition: [
+    {id: 0, name: 'Для всех'},
+    {id: 1, name: 'Семейная пара'},
+    {id: 2, name: 'Одна женщина'},
+    {id: 3, name: 'Две женщины'},
+    {id: 4, name: 'Один мужчина'},
+    {id: 5, name: 'Двое мужчин'},
+    {id: 6, name: 'Более двух человек'}
+  ],
   conditions: [
     {id: 'furniture', name: 'Мебель'},
     {id: 'kitchen_furniture', name: 'Кухонная мебель'},
@@ -89,3 +98,5 @@ export const dictionary = {
     {id: 2, name: 'Вид на проезжую часть'}
   ]
 };
+
+
