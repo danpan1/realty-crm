@@ -1,0 +1,123 @@
+div(ng-if="oneInfoEdit.show")
+    div.one-info-edit__wrapper(ng-click="oneInfoEdit.show = false")
+    div.one-info-edit__block.ph-16(layout="column" ng-init="oneInfoEdit.ngOnInit()")
+        div.ph-16.one-info-edit__changes(layout="row" flex="90")
+            div(flex="50")
+                h2 Объект
+                div(layout="row")
+                    p Тип здания: 
+                    p
+                        md-input-container.mv-0.pb-0
+                            md-select(ng-model="oneInfoEdit.realty.details.materials")
+                                md-option(ng-value='material.id' ng-repeat="material in oneInfoEdit.dictionary.materials") {{material.name}}
+                div(layout="row")
+                    p Комнат:
+                    p 
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.roomcount")
+                div(layout="row")
+                    p Ремонт: 
+                    p
+                        md-input-container.mv-0.pb-0
+                            md-select(ng-model="oneInfoEdit.realty.details.renovation")
+                                md-option(ng-value='renovation.id' ng-repeat="renovation in oneInfoEdit.dictionary.renovation") {{renovation.name}}
+                div(layout="row")
+                    p Этаж:
+                    p
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.floor")
+                        | из
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.floormax")
+                div(layout="row")
+                    p Общая площадь: 
+                    p
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.square")
+                div(layout="row") 
+                    p Жилая площадь:
+                    p
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.details.livingSquare")
+                div(layout="row") 
+                    p Площадь кухни:
+                    p 
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.details.kitchenSquare")
+                div(layout="row") 
+                    p Площадь комнат:
+                    p 
+                        div(layout="row")
+                            md-input-container.mv-0.pb-0(ng-repeat="room in oneInfoEdit.realty.details.roomsSquare" flex="20")
+                                input(ng-model="room")
+                        // md-button(ng-click="oneInfoEdit.addRoomSquare()") Add // some unrecognised issue with this
+                div(layout="row") 
+                    p Лоджия:
+                    p
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.details.loggia")
+                div(layout="row") 
+                    p Балкон:
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.details.balcony")
+                div(layout="row") 
+                    p Пассажирских лифтов:
+                    p
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.details.elevator")
+                div(layout="row") 
+                    p Грузовых лифтов:
+                    p
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.details.elevatorBig")
+                div(layout="row") 
+                    p Окна выходят
+                    p 
+                        md-input-container.mv-0.pb-0
+                            md-select(ng-model="oneInfoEdit.realty.details.windowView")
+                                md-option(ng-value='window.id' ng-repeat="window in oneInfoEdit.dictionary.windowView") {{window.name}}
+                
+            div(flex="50")
+                div
+                    p Состав съемщиков
+                    p
+                        md-input-container.mv-0.pb-0
+                            md-checkbox(ng-model="oneInfoEdit.realty.details.composition[$index].id" ng-repeat="position in oneInfoEdit.dictionary.composition") {{position.name}}
+                div
+                    p Собственник
+                    p
+                        md-input-container.mv-0.pb-0
+                            md-select(ng-model="oneInfoEdit.realty.operator.qualification")
+                                md-option(ng-value='quality.id' ng-repeat="quality in oneInfoEdit.dictionary.qualification") {{quality.name}}
+                
+                div
+                    p Срок
+                    p
+                        md-input-container.mv-0.pb-0
+                            md-select(ng-model="oneInfoEdit.realty.type")
+                                md-option(ng-value='type.id' ng-repeat="type in oneInfoEdit.dictionary.type") {{type.name}}
+                div
+                    p Цена
+                    p
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.price")
+                div
+                    p От клиента
+                    p
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.clientpercent")
+                            | %
+                div
+                    p От клиента партнера
+                    p
+                        md-input-container.mv-0.pb-0
+                            input(ng-model="oneInfoEdit.realty.partnerpercent")            
+                            | %    
+                            
+                div(layout="row")
+                    p Удобства:
+                    p
+                        realty-conditions(ng-model='oneInfoEdit.realty.details.conditions' required='')   
+        div.ph-16.one-info-edit__buttons(flex="10")
+            md-button.md-raised.md-primary(ng-click="oneInfoEdit.onChangeRealty(oneInfoEdit.realty._id, oneInfoEdit.realty.details.conditions)") Save
+            md-button.md-raised.md-danger(ng-click="oneInfoEdit.show = false") Close

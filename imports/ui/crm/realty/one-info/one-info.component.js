@@ -5,12 +5,13 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {dictionary} from '../../../../api/dictionary';
 import {Realty} from '/imports/api/realty';
+import {name as OneInfoEdit} from './one-info-edit/one-info-edit.component';
 
 import './one-info.view.html';
 
 class OneInfo {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams) {
+  constructor($scope, $reactive, $stateParams, $mdDialog, $mdMedia) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.subscribe('oneInfo', () => {
@@ -20,7 +21,7 @@ class OneInfo {
     }, {
       onReady(){
         let realty = Realty.findOne({});
-        console.log(realty);
+        this.setActiveConditions(realty.details.conditions)
       }
     });
 
@@ -31,27 +32,26 @@ class OneInfo {
     });
     // oneInfo
     this.slideNum = 0;
-    this.conditions = ['futniture', 'animal', 'children'];
+    this.editDialogShow = false;
     this.currentConditions = [];
-    
-    console.log(this.realty);
-    
     for(var i in dictionary.conditions){
-        for(var n in this.conditions){
-            if(dictionary.conditions[i].id == this.conditions[n]){
-                this.currentConditions[i] = true;
-                console.log(this.currentConditions[i].presence);
-            }else{
-                this.currentConditions[i] = false;
-            }
-        }
+        this.currentConditions[i] = {};
     }
     console.log(this.currentConditions);
   }
   
-  showRealty (realty) {
-      console.log(realty);
-  }
+  setActiveConditions (conditions) {
+      console.log(this.currentConditions)
+      for(var i in conditions){
+        for(var n in dictionary.conditions){
+            this.currentConditions[n].name = dictionary.conditions[n].id;
+            if(conditions[i] == dictionary.conditions[n].id){
+                this.currentConditions[n].presence = true;
+                console.log(this.currentConditions[n]);
+            }
+        }
+    }
+  }  
   
   nextImage(boo, max) {
     if (boo) {
@@ -70,20 +70,22 @@ class OneInfo {
       }
     }
   }
+  
+  showEditDialog () {
+      this.editDialogShow = true;
+  }
+  
 }
 
 const moduleName = 'oneInfo';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  OneInfoEdit
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/one-info/one-info.view.html',
-  bindings: {
-    /*
-     realty: '='
-     */
-  },
+  bindings: {},
   controllerAs: moduleName,
   controller: OneInfo
 });
