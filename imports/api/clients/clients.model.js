@@ -32,24 +32,21 @@ Clients.Schema = new SimpleSchema({
     optional: true
   },
   name: {
-    type: String,
-    optional: true
+    type: String
   },
   need: { // Сама потребность по объекту
     type: clientNeedSchema,
     optional: true
   },
   phone: {
-    type: String,
-    optional: true
+    type: String
   },
   realtorId: { // Какой риэлтор курирует клиента
     type: String,
     optional: true
   },
   realtorNote: { // Заметка от риэлтора по клиенту или от колл-центра
-    type: String,
-    optional: true
+    type: String
   },
   status: {//'realtor' - находится у риэлтора в работе (мои клиенты)
     type: String
@@ -60,6 +57,10 @@ Clients.Schema = new SimpleSchema({
   },
   searchStartDate: { // Когда начал поиск
     type: Date,
+    optional: true
+  },
+  value:{
+    type: Number,
     optional: true
   }
 });

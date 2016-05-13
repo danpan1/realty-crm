@@ -127,7 +127,11 @@ Realty.Schema = new SimpleSchema({
   updatedAt: {
     type: Date,
     optional: true
-  } 
+  },
+  value: {
+    type: Number,
+    optional: true
+  }
 });
 
 //Каждый update  проставляет время udate now

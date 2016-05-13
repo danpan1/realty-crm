@@ -4,12 +4,17 @@
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 /*Тут адрес который показывается на карточках в списках*/
 export const clientNeedSchema = new SimpleSchema({
-  embedded:{
-    type: Object,
-    blackbox: true
-  },
   districts: {// районы
     type: [String],
+    optional: true
+  },
+  conditions: {// районы
+    type: [String],
+    optional: true
+  },
+  embedded:{
+    type: Object,
+    blackbox: true,
     optional: true
   },
   priceFrom: {  // Цена от
@@ -21,19 +26,11 @@ export const clientNeedSchema = new SimpleSchema({
     optional: true
   },
   roomcount: { //комнат
-    type: [String],
-    optional: true
-  },
-  'roomcount.$': { //комнат
-    type: String,
+    type: [Number],
     optional: true
   },
   subways: { // Метро
-    type: Array,
-    optional: true
-  },
-  'subways.$': { // Метро
-    type: String,
+    type: [String],
     optional: true
   }
 });

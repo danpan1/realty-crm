@@ -19,6 +19,7 @@ class AddClientFull {
   }
 
   submit(valid) {
+    console.log('submit');
     if (!valid) {
       alert('не все данные корректны');
       return;
@@ -32,6 +33,7 @@ class AddClientFull {
     // }
     console.log('inserted', this.client);
     // Clients.insert(this.client);
+    Meteor.call('addClient', this.client);
     this.resetClient();
   }
 

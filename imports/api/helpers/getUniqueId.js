@@ -1,6 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 
 const doAutoincrement = function(collection, callback) {
+  console.log('doAutoincrement');
   collection.rawCollection().findAndModify({
     _id: 'autoincrement'
   }, [], {
