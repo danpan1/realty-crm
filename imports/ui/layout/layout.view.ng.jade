@@ -13,6 +13,7 @@ div(flex='', layout='row')
     md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left")
         menu-toggle(section="layout.actions")
         md-button.md-raised.md-warn(ui-sref='crm.clients.add') Добавить клиента
+        md-button.md-raised.md-warn(ui-sref='crm.realty.add') Добавить Объект
         md-list
             md-list-item(ng-repeat="item in layout.sideNavItems",
             ui-sref='{{item.uisref}}',
