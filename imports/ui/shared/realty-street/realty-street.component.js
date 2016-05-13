@@ -49,6 +49,24 @@ class RealtyStreet {
       return res.suggestions;
     });
   }
+  querySearchHouseFinal(query) {
+    const vm = this;
+    console.log('request', query.unrestricted_value);
+    // console.log(vm.selectedStreet);
+    // query = vm.selectedStreet.value + ' ' + query;
+    return AddressService.search({
+      // 'from_bound': {'value': 'house'},
+      // 'to_bound': {'value': 'house'},
+      'locations': [{'region': 'москва'}],
+      'restrict_value': true,
+      query: query.unrestricted_value, count: 20
+    }).then((res)=> {
+      vm.suggestionsStreetList = res.suggestions;
+      vm.selectedData = res.suggestions[0];
+      console.log(res.suggestions);
+      return res.suggestions;
+    });
+  }
 
 }
 
@@ -61,7 +79,9 @@ export default angular.module(moduleName, [
   templateUrl: 'imports/ui/shared/realty-street/realty-street.view.html',
   bindings: {
     selectedStreet: '=ngModel',
-    selectedHouse:'=house'
+    selectedHouse:'=house',
+    selectedData: '=dadata'
+
   },
   controllerAs: moduleName,
   controller: RealtyStreet

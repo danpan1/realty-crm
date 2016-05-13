@@ -1,16 +1,18 @@
-md-chips(ng-model='districtChips.districtsAreaInForm',
-md-autocomplete-snap='',
-md-require-match='true',
-md-on-add='districtChips.changeChips()',
-md-on-remove='districtChips.changeChips()')
-    md-autocomplete(md-selected-item='districtChips.selectedItem',
-    md-search-text='districtChips.searchText',
-    md-search-text-change='districtChips.searchTextChange(districtChips.searchText)',
-    md-items='item in districtChips.districtsAreaSuggestionList',
-    placeholder='Район или округ',
-    md-no-cache='true')
-        span(md-highlight-text='districtChips.searchText') {{item.name}}
-        md-not-found
-            | Не найдено "{{districtChips.searchText}}"
-    md-chip-template
-        span {{$chip.name}}
+div().district
+    label Район или округ
+    md-chips(ng-model='districtChips.districtsAreaInForm',
+    md-autocomplete-snap='',
+    md-require-match='true',
+    md-on-add='districtChips.changeChips()',
+    md-on-remove='districtChips.changeChips()')
+        md-autocomplete(md-selected-item='districtChips.selectedItem',
+        md-search-text='districtChips.searchText',
+        md-search-text-change='districtChips.searchTextChange(districtChips.searchText)',
+        md-items='item in districtChips.districtsAreaSuggestionList',
+        placeholder='',
+        md-no-cache='true')
+            span(md-highlight-text='districtChips.searchText') {{item.name}}
+            md-not-found
+                | Не найдено "{{districtChips.searchText}}"
+        md-chip-template
+            span {{$chip.name}}

@@ -45,3 +45,28 @@
     }
   }
 }
+
+.metro-color {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.metro-color-green {
+  background-color: #388E3C;
+}
+
+.metro-color-pink {
+  background-color: color($pink, 500);
+}
+
+.metro-color{
+ &-1 {
+  background-color: color($pink, 500);
+ }
+ &-2 {
+  background-color: #388E3C;
+ }
+}

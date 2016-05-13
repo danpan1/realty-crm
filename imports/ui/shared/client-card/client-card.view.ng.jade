@@ -4,7 +4,7 @@ div(md-whiteframe='2').mv-16.client-card
     div(layout='column')
         div(layout='row')
             div(flex='25').ph-16.pv-8
-                h3().md-title.text-bold.client-card__price(ng-click="clientCard.sendCurrentClient(clientCard.client)") 30000
+                h3().md-title.text-bold.client-card__price(ng-click="clientCard.sendCurrentClient(clientCard.client)") {{clientCard.client.need.priceTo}}
                 p().md-body-1.client-card__right-label {{clientCard.client.comissionLoyal == true ? 'Готов ' : 'Не готов ' }} платить комиссию
                 p().md-body-1.client-card__right-label на сейчас
                 p().md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
@@ -41,9 +41,10 @@ div(md-whiteframe='2').mv-16.client-card
             div(flex='55' layout="row").one-demonstrations-center-cell.ph-16.pv-8
                 div(flex='45').ph-16.pv-8
                     span().metro-color.metro-color-pink
-                    span().address-info.md-body-1 Таганская, 10 мин. пешком, р-н. Аэропорт, ул.Таганская 15 к1
+                    span().address-info.md-body-1 {{clientCard.client.need.embedded.subways}} {{clientCard.client.need.embedded.districts}}
                 div(flex='55').ph-16.pv-8
-                    span().md-body-1 2, 3 комнат, длительная, этаж 2+, Кирпичный, 50-75м²
+                    span().md-body-1 {{clientCard.client.need.roomcount}} комнат, длительная
             div(flex='20')
                 div.ph-16(layout='row', layout-wrap, layout-align='space-around')
-                    img(src='img/icons/icon-tv.png' ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]").one-demonstrations-icon-comfort
+                    div {{clientCard.client.need.conditions}}
+                    //img(src='img/icons/icon-tv.png' ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]").one-demonstrations-icon-comfort

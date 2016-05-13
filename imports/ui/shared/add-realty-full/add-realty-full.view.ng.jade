@@ -1,0 +1,42 @@
+div {{addRealtyFull.realty.street.value}}
+div {{addRealtyFull.realty.addRealtyFull.realty.full}}
+div {{addRealtyFull.realty.house.value}}
+div {{addRealtyFull.realty.house.data.city_district}}
+md-tabs(md-dynamic-height md-border-bottom)
+    md-tab(label='1) Расположение' md-active='true')
+        md-content().ph-32.pv-16
+            div(layout='column')
+                div(layout='row')
+                    div Аренда
+                    div Квартиры
+                div(layout='row')
+                    div Москва
+                div(layout='row')
+                    realty-street(ng-model='addRealtyFull.realty.street' house='addRealtyFull.realty.house'
+                    dadata='addRealtyFull.realty.full')
+                div(layout='row')
+                    subway-chips(ng-model='addRealtyFull.realty.subways'
+                    subways-embeded = 'addRealtyFull.realty.embedded.subways')
+                div(layout='row')
+                    district-chips(ng-model='addRealtyFull.realty.need.districts'
+                districts-embeded = 'addRealtyFull.realty.need.embedded.districts')
+                div(layout='row')
+                    div До метро 15 минут пешком
+
+    md-tab(label='2) Параметры')
+        md-content().ph-32.pv-16
+            div(layout='column')
+                div(layout='row')
+                    div До метро 15 минут пешком
+
+    md-tab(label='3) Стоимость')
+        md-content().ph-32.pv-16
+            div(layout='column')
+                div(layout='row')
+                    div До метро 15 минут пешком
+
+div(layout='row').mv-16.mh-32
+    md-button(ng-click='addClientFull.submit(true)').md-success.md-raised.md-title Добавить клиента!
+    md-button(md-no-ink flex-offset='10').md-primary.md-body-1 Вернуться на шаг назад
+
+

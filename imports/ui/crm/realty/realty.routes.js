@@ -6,6 +6,10 @@ export default function routes($stateProvider) {
       url: '/realty',
       template: '<ui-view/>'
     })
+    .state('crm.realty.add', {
+      url: '/add',
+      template: '<add-realty-full/>'
+    })
     .state('crm.realty.list', {
       url: '/list',
       template: '<realty-list-layout/>'
