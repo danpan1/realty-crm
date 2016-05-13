@@ -32,7 +32,7 @@ md-content(layout='row', layout-align='center start', layout-fill='', layout-mar
                         | Password
                     input(type='password', ng-model='login.credentials.password', aria-label='password', required='')
                 div(layout='row', layout-align='space-between center')
-                    a.md-button(href='/password') Forgot password?
+                    a.md-button(href='/resetpw') Forgot password?
                     md-button.md-raised.md-primary(ng-click='login.login()', aria-label='login', ng-disabled='login.loginForm.$invalid()')
                         | Sign In
             md-toolbar.md-warn(ng-show='login.error', layout='row', layout-fill='', layout-padding='', layout-margin='')

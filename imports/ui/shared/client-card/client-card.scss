@@ -1,0 +1,44 @@
+.client-card{
+    background-color: white;
+    &__btn{
+        &_blue-view{
+            color:rgb(33,150,243);
+        }
+        &_buy-client{
+            color:rgb(255,82,82);
+        }
+        &_hide{
+            color:#898989;
+        }
+        &_buy-client,&_blue-view,&_hide{
+            cursor: pointer;
+            margin: 3px 0;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+    &__no-margin{
+        margin: 0;
+    }
+    &__note{
+        margin-top: 2px;
+    }
+    &__link{
+        color:rgb(33,150,243);
+        text-decoration: none;
+        &_p{
+            margin: 2px 0;
+        }
+    }
+    &__price{
+        margin: 0;
+        font-weight: 700 !important;
+    }
+    &__right-label{
+        margin: 3px 0;
+        &:first-child{
+            margin-top: 12px;
+        }
+    }
+}

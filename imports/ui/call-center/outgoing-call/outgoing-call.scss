@@ -1,0 +1,18 @@
+outgoing-call {
+  div[md-whiteframe] {
+    background-color: $white;
+  }
+
+  md-input-container .md-errors-spacer {
+    min-height: 0;
+  }
+
+  .md-success {
+    min-width: 256px;
+    min-height: 64px;
+  }
+}
+
+.outgoing-call-small-button {
+  min-width: 48px;
+}

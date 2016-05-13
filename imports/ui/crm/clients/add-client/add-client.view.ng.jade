@@ -1,0 +1,44 @@
+add-client-full(page-status='realtor')
+//form( name="userForm" ng-submit='addClient.submit(userForm.$valid)')
+//    md-input-container
+//        label Status
+//        md-select(ng-model='addClient.client.status')
+//            md-option(ng-repeat='status in addClient.dictionary.clientStatuses', value='{{status}}')
+//                | {{status}}
+//
+//    md-input-container.md-block(flex-gt-sm='')
+//        label Имя
+//        input(ng-model='addClient.client.name' )
+//    md-input-container.md-block(flex-gt-sm='')
+//        label Телефон
+//        input(name='phone', ng-model='addClient.client.phone',
+//        placeholder='79165315252',
+//        ng-pattern='/^[0-9]{11}$/',
+//        md-maxlength='11')
+//        //div(ng-messages='userForm.phone.$error', role='alert', multiple='')
+//        //    .my-message(ng-message='required') You must supply a phone.
+//        //    .my-message(ng-message='pattern')
+//        //        | That doesn't look like a phone.
+//        //    .my-message(ng-message='md-maxlength')
+//        //        | Слишком много цифр
+//    md-input-container.md-block
+//        label Клиеинту важно (текст длинный какой-то)
+//        textarea(ng-model='addClient.client.realtorNote', md-maxlength='150', rows='5', md-select-on-focus='' )
+//
+//    md-datepicker(ng-model='addClient.client.searchStartDate', md-placeholder='Дата начала поиска' )
+//
+//    div ищет сколько дней (Генериться автоматом по стартовой дате поиска)
+//    md-switch(ng-model='addClient.client.comissionLoyal', aria-label='Switch 1' class="md-primary" )
+//        | готов платить комиссию: {{ addClient.client.comissionLoyal }}
+//
+//    div Материалы дома ( думаю пока можно забить на материалы дома)
+//    realty-filter(filter = "addClient.filterQuery" roomcount = "addClient.roomcount")
+//
+//    subway-chips(ng-model='addClient.client.subways' subways-embeded = 'addClient.client.subwaysEmbeded')
+//
+//    district-chips(ng-model='addClient.client.districts' districts-embeded = 'addClient.client.districtsEmbeded')
+//
+//    md-button.md-raised.md-primary(type='submit') Добавить клиента
+//
+//
+//div {{addClient.client.filterQuery}}

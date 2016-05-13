@@ -1,0 +1,16 @@
+slide-show(slides-list='clientDemonstration.slideShowImages' isshown='clientDemonstration.showSlider')
+div.md-whiteframe-2dp(md-whiteframe="2")
+    div.ph-16.pv-16(layout="row")
+        div.ph-8(flex="10") Подано
+        div.ph-8(flex="20") Местоположение
+        div.ph-8(flex="10") Собственник
+        div.ph-8(flex="15") Фото
+        div.ph-8(flex="30") Дата, время и адрес показа
+        div.ph-8(flex="15") Действия
+        
+div.md-whiteframe-2dp(md-whiteframe="2")
+    realty-card(ng-repeat='realty in clientDemonstration.realty'
+                realty='realty'
+                realtylisttype="'demonstration'"
+                slider='clientDemonstration.setSliderImages(images)')
+    

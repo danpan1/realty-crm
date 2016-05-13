@@ -12,6 +12,9 @@ export default function routes($stateProvider) {
     .state('auth.register', {
       url: '/register',
       template: '<register/>'
+    })
+    .state('auth.resetpw', {
+      url: '/resetpw',
+      template: '<resetpw/>'
     });
-  // Пока тут пусто. Может здесь будет layout индивидуальны. Danpan
 }

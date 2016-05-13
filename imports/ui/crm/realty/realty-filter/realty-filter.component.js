@@ -3,8 +3,8 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '../../../../api/dictionary/dictionary';
-import {name as discrictsAreaIdList} from '/imports/ui/shared/disctrict-chips/disctrict-chips.component';
+import {dictionary} from '../../../../api/dictionary';
+import {name as districtsAreaIdList} from '/imports/ui/shared/district-chips/district-chips.component.js';
 import './realty-filter.view.html';
 
 class RealtyFilter {
@@ -12,7 +12,6 @@ class RealtyFilter {
   constructor($scope, $reactive, $timeout) {
     this.$timeout = $timeout;
     $reactive(this).attach($scope);
-    console.log(dictionary);
     this.filter = {};
     this.filter.roomcount = [];
     this.dictionary = dictionary;
@@ -46,7 +45,7 @@ const moduleName = 'realtyFilter';
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
-  discrictsAreaIdList
+  districtsAreaIdList
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/realty-filter/realty-filter.view.html',
   bindings: {

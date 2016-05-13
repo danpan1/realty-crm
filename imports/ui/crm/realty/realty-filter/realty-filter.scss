@@ -1,5 +1,18 @@
-.realty-list-filter{
-  //height: 200px;
+.realty-list-filter {
+  height: 210px;
   margin-bottom: 20px;
   background-color: white;
+  label {
+    font-size: 16px;
+    vertical-align: middle;
+  }
+  md-checkbox {
+    .md-label {
+        font-size: 16px;
+    }
+  }
+}
+
+.input-ltd {
+    height: 128px;
 }

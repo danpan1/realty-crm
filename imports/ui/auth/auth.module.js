@@ -7,11 +7,13 @@ import angularMeteor from 'angular-meteor';
 import routes from './auth.routes';
 import {name as login}from './login/login.component';
 import {name as register}from './register/register.component';
+import {name as resetpw}from './resetpw/resetpw.component';
 
 const moduleName = 'app.auth';
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
+  resetpw,
   register,
   login
 ]).config(routes);

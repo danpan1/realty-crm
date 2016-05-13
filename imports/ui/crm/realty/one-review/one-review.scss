@@ -1,0 +1,75 @@
+one-review {
+  .md-headline,
+  .md-title {
+    margin: 0;
+  }
+
+  div[md-whiteframe] {
+    background-color: $white;
+  }
+
+  md-card {
+    position: relative;
+    box-shadow: none;
+    border-radius: 0;
+    &:hover {
+      .one-review-btn-set-photo {
+        display: block;
+      }
+    }
+
+    .one-review-photo {
+      height: 250px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    .one-review-btn-set-photo {
+      display: none;
+      @include centerer(true, false);
+      bottom: 16px;
+    }
+
+    .one-review-btn-remove-photo {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      padding: 0;
+      min-width: 24px;
+      min-height: 24px;
+      line-height: 24px;
+      border-radius: 0;
+      background-color: #525252;
+      &:hover {
+        background-color: #525252;
+      }
+    }
+  }
+
+  .md-success {
+    min-width: 400px;
+    min-height: 52px;
+  }
+}
+
+.one-review-btn-group {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  .md-button {
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.one-review-board-red {
+  color: color($deep-orange, 500);
+}
+
+.one-review-board-green {
+  color: #8dbc00;
+}

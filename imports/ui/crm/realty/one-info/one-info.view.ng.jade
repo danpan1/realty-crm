@@ -1,0 +1,112 @@
+one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow" currentconditions="oneInfo.currentConditions")
+div(layout="column", layout-align="space-around stretch")
+    div(layout="row")
+        div(flex="70")
+            button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)") prev
+            img(flex="100" src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}", md-whiteframe="2")
+            button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)") next
+    div(layout="row", layout-align="space-between")
+        div(md-whiteframe='2' flex='80' layout-padding layout="row")  
+            div(flex="33")
+                h2 Месторасположение
+                div
+                    div().md-subhead Область: #[strong Московская]
+                    div().md-subhead Город: #[strong Москва]
+                    div().md-subhead Метро: #[strong Лубянка 5 мин. пешом]
+                    div().md-subhead Район: #[strong ЦАО]
+                    div().md-subhead Тип здания: #[strong Кирпичный]
+                    div().md-subhead Комнат: #[strong 3 комнатная]
+                    div().md-subhead Срок: #[strong длительный]
+                    div().md-subhead Цена: #[strong 38 000]
+                    div().md-subhead Этаж: #[strong 10 из 55]
+                    div().md-subhead Общая: #[strong 64 м#[sup 2]]
+                    div().md-subhead Собственник: #[strong Лояльный]
+                    div().md-subhead Уровень ремонта: #[strong Евроремонт]
+                    div
+                        md-button().md-primary.md-raised.ml-0(ng-click="oneInfo.showEditDialog($event)") Изменить
+           
+            div(flex="33")  
+                h2 Объект
+                div
+                    div().md-subhead Тип здания: #[strong {{oneInfo.dictionary.materials[oneInfo.realty.details.materials].name}}]
+                    div().md-subhead Комнат: #[strong {{ oneInfo.realty.roomcount}} комнат]
+                    div().md-subhead Ремонт:#[strong {{oneInfo.dictionary.renovation[oneInfo.realty.details.renovation].name}}] 
+                    div().md-subhead Этаж: #[strong{{oneInfo.realty.floor}} из {{oneInfo.realty.floormax}}]
+                    div().md-subhead Общая площадь: #[strong{{oneInfo.realty.square}}]  
+                    div().md-subhead Жилая площадь: #[strong{{oneInfo.realty.details.livingSquare}}]
+                    div().md-subhead Площадь кухни: #[strong{{oneInfo.realty.details.kitchenSquare}}]
+                    div().md-subhead Площадь комнат: 
+                        span(ng-repeat="room in oneInfo.realty.details.roomsSquare")
+                            | #[strong {{room}}]
+                    div().md-subhead Лоджия: #[strong{{oneInfo.realty.details.loggia}}]
+                    div().md-subhead Балкон: #[strong{{oneInfo.realty.details.balcony}}]
+                    div().md-subhead Пассажирских лифтов: #[strong{{oneInfo.realty.details.elevator}} ]
+                    div().md-subhead Грузовых лифтов: #[strong{{oneInfo.realty.details.elevatorBig}}]
+                    div().md-subhead Окна выходят #[strong {{oneInfo.realty.details.windowView == 1 ? ' во двор' : 'на улицу'}}]
+            div(flex="33")         
+                h2 Условия
+                div
+                    div().md-subhead Состав съемщиков
+                    div(ng-repeat="position in oneInfo.dictionary.composition") 
+                        div().md-subhead(ng-if="oneInfo.realty.details.composition[$index]")#[strong{{position.name}}]
+                    p
+                    div().md-subhead Собственник #[strong{{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
+                    div().md-subhead Срок: #[strong{{oneInfo.realty.type == 3 ? 'посуточно' : 'длительный срок'}}]
+                    div().md-subhead Цена: #[strong{{oneInfo.realty.price}}]
+                    div().md-subhead От клиента: #[strong{{oneInfo.realty.clientpercent}}]%
+                    div().md-subhead От клиента партнера: #[strong{{oneInfo.realty.partnerpercent}}]%
+        div(md-whiteframe='2' flex='20').mh-16
+            md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
+            aria-label='Switch 2'
+            ng-repeat="condition in oneInfo.dictionary.conditions")
+                | {{condition.name}} - {{oneInfo.currentConditions[$index]}}
+                
+    div(layout="row", layout-align="space-between")    
+        div(layout="column" flex='50')
+            div(md-whiteframe='2').one-info-contacts.p-16
+                div(layout='column')
+                    h3().md-title Контакт №1
+                    div(layout='row' layout-align='space-between')
+                        div(flex='70')
+                            md-input-container(flex='80' md-no-float).md-block.m-0
+                                input(placeholder='Сикорский Олег Евгеньевич')
+                            md-input-container(flex='40' md-no-float).md-block.m-0
+                                input(placeholder='8 925 111 22 33')
+                            md-input-container(flex='40' md-no-float).md-block.m-0
+                                input(placeholder='8 925 111 44 55')
+                            md-button().md-primary.md-caption.ml-0 Добавить номер
+                        div(flex='30')
+                            md-input-container(md-no-float).md-block.m-0
+                                input(placeholder='Собственник')
+                            md-input-container(md-no-float).md-block.m-0
+                                input(placeholder='тестовая заметка')
+                            md-input-container(md-no-float).md-block.m-0
+                            input(placeholder='тестовая заметка')          
+            div(layout='column' md-whiteframe="2")
+                h3().md-title Контакт №2
+                div(layout='row' layout-align='space-between')
+                    div(flex='70')
+                        md-input-container(flex='80' md-no-float).md-block.m-0
+                            input(placeholder='Сикорский Олег Евгеньевич')
+                        md-input-container(flex='40' md-no-float).md-block.m-0
+                            input(placeholder='8 925 111 22 33')
+                        md-input-container(flex='40' md-no-float).md-block.m-0
+                            input(placeholder='8 925 111 44 55')
+                        md-button().md-primary.md-caption.ml-0 Добавить номер
+                    div(flex='30')
+                        md-input-container(md-no-float).md-block.m-0
+                            input(placeholder='Собственник')
+                        md-input-container(md-no-float).md-block.m-0
+                            input(placeholder='тестовая заметка')
+                        md-input-container(md-no-float).md-block.m-0
+                            input(placeholder='тестовая заметка')
+                div
+                    md-button().md-primary.md-raised.ml-0 Сохранить
+
+        div(md-whiteframe="2" flex='50').one-info-closed.mv-16.p-16
+            h3().md-title Закрытие сделки
+            div
+                md-button().md-primary.md-raised.ml-0 Закрыть сделку и переместить объект в архив
+
+
+
