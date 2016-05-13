@@ -16,7 +16,7 @@ import {RentDetailsSchema} from './schemas/details.schema';
 
 // mongorestore -h 127.0.0.1 --port 27017 -d getrent dump/meteor
 // mongodump -h 127.0.0.1 --port 27017 -d getrent dump2/meteor
-
+// db.realty.remove({status: {$ne:'new'}})
 // Realty.allow({
 //   update: function () {
 //     return Roles.userIsInRole(Meteor.userId(), ['business']);
@@ -63,7 +63,7 @@ Realty.Schema = new SimpleSchema({
     label: 'roomcount',
     allowedValues: dictionary.roomcount,
     optional: true
-  }, //TODO количество комнат надо в call center чтобы забивали. Пока отказываем в парсинге
+  },
   square: {  // площадь помещений общая указывает на карточке
     type: Number,
     decimal: true,
@@ -127,7 +127,7 @@ Realty.Schema = new SimpleSchema({
   updatedAt: {
     type: Date,
     optional: true
-  }  //TODO Рифат прикрутить autoUpdate записывание sаты
+  } 
 });
 
 //Каждый update  проставляет время udate now
