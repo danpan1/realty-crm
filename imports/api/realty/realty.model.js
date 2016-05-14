@@ -62,7 +62,7 @@ Realty.Schema = new SimpleSchema({
   roomcount: {//Количество комнат ['1', '2', '3', '4+']
     type: String,
     label: 'roomcount',
-    allowedValues: dictionary.roomcount,
+    //allowedValues: dictionary.roomcount,
     optional: true
   },
   square: {  // площадь помещений общая указывает на карточке

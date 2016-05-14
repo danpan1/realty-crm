@@ -20,7 +20,7 @@ export const RentDetailsSchema = new SimpleSchema({
     optional: true
   },
   'roomsSquare.$': {
-    type: Number,
+    type: String,
     label: 'roomsSquare.[]',
     optional: true
   },

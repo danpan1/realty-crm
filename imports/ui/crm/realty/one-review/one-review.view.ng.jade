@@ -54,10 +54,7 @@ div(md-whiteframe='2').mt-0.mb-16.ph-32.pv-16
                     ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
     
     div(flex)
-        md-input-container().md-block
-          label Продающее объявление
-          textarea(ng-model='user.biography', md-maxlength='2000', rows='15', md-select-on-focus='')
-        md-button().md-primary.md-raised.ml-0 Сгенерировать новое описание
+        one-review-desc(realty='oneReview.realty')
 
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
