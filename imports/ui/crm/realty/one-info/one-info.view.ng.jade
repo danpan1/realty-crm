@@ -18,7 +18,7 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Квартира: #[strong {{oneInfo.realty.address.meta.flat}}]
                     div().md-subhead Метро: #[strong {{oneInfo.realty.address.metroName}} {{oneInfo.realty.address.metroPeshkom}} мин. пешком]
                     div
-                        md-button().md-primary.md-raised.ml-0(ng-click="oneInfo.showEditDialog($event)") Изменить
+                        md-button(ng-click="oneInfo.showEditDialog($event)").md-primary.md-raised.ml-0 Изменить
 
             div(flex="33")
                 h2 Объект
@@ -42,7 +42,7 @@ div(layout="column", layout-align="space-around stretch")
                 div
                     div().md-subhead Состав съемщиков
                     div(ng-repeat="position in oneInfo.dictionary.composition")
-                        div().md-subhead(ng-if="oneInfo.realty.details.composition[$index]") #[strong {{position.name}}]
+                        div(ng-if="oneInfo.realty.details.composition[$index]").md-subhead #[strong {{position.name}}]
                     //p
                     div().md-subhead Собственник #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
                     div().md-subhead Срок: #[strong {{oneInfo.realty.type == 3 ? 'посуточно' : 'длительный срок'}}]
