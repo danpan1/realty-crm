@@ -1,4 +1,4 @@
-div Hello Desc
+div
     div
         p
             md-button(ng-click="oneReviewDesc.changeDescTitleNumber(false)").md-raised Prev.
@@ -19,10 +19,10 @@ div Hello Desc
                 md-button(ng-click="oneReviewDesc.changeActiveBenefitNumber(false)" flex='50').md-raised P
                 md-button(ng-click="oneReviewDesc.changeActiveBenefitNumber(true)" flex='50').md-raised N
         div(layout='column' flex='70')
-            md-input-container().md-block(flex='30')
+            md-input-container(flex='30').md-block
                 md-select(ng-model="oneReviewDesc.activeBenefitObjectName" placeholder='Выберите выгоду')
                     md-option(ng-value='label' ng-repeat="label in oneReviewDesc.benefitsList" ng-click="oneReviewDesc.setActiveBenefitObjectNumber($index)") {{label}}
-            md-input-container().md-block(flex='30')
+            md-input-container(flex='30').md-block
                 md-select(ng-model="oneReviewDesc.activeBenefit.content[oneReviewDesc.activeBenefitNumber]" placeholder='{{oneReviewDesc.activeBenefit.label}}')
                     md-option(ng-value='name' ng-repeat="name in oneReviewDesc.activeBenefit.content" ng-click="oneReviewDesc.setActiveBenefitNumber($index)") {{name}}
             md-button(ng-click="oneReviewDesc.addDescDetail(name)").md-raised.md-primary Добавить описание
@@ -30,5 +30,4 @@ div Hello Desc
         textarea(ng-model="oneReviewDesc.descDetails")
          
         
-    {{oneReviewDesc.realty._id}}
-    md-button(ng-click="oneReviewDesc.saveNewDescription(oneReviewDesc.realty._id)").md-primary.md-raised.ml-0 Сгенерировать новое описание
+    md-button(ng-click="oneReviewDesc.saveNewDescription(oneReviewDesc.realty._id)").md-primary.md-raised.ml-0 Сохранить только текст
