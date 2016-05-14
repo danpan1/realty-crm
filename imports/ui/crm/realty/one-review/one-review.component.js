@@ -5,6 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty';
+import {name as OneReviewDesc} from './one-review-desc/one-review-desc.component';
 
 import './one-review.view.html';
 
@@ -78,7 +79,8 @@ const moduleName = 'oneReview';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  OneReviewDesc
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/one-review/one-review.view.html',
   bindings: {},
