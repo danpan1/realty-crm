@@ -42,20 +42,7 @@ div(md-whiteframe='2').mt-16.ph-32.pv-16
             p().md-body-1 Вторая строка
 
 div(md-whiteframe='2').mt-0.mb-16.ph-32.pv-16
-    div(layout='row')
-        div
-            md-input-container
-                label Выбрать удобства
-                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
-                    md-option(ng-value='condition.id',
-                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
-        div(flex-offset='10')
-            md-input-container
-                label Уникальный продающий заголовок 65 символов, который тебя цепляет
-                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
-                    md-option(ng-value='condition.id',
-                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
-    
+
     div(flex)
         one-review-desc(realty='oneReview.realty')
 
