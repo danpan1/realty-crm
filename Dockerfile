@@ -8,3 +8,4 @@ WORKDIR /bundle/programs/server
 RUN npm install
 
 WORKDIR /bundle
+RUN meteor npm install --save angular angular-ui-router angular-material angular-meteor
