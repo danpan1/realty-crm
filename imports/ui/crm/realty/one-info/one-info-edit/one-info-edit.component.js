@@ -15,21 +15,26 @@ class OneInfoEdit {
     this.dictionary = dictionary;
   }
   
-  onChangeRealty (realtyId, conditions) {
-      this.currentConditions = [];
+  ngOnInit() {
+      if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
+  }
+  
+  onChangeRealty (realtyId) { /*, conditions*/ /*, oneInfoEdit.realty.details.conditions*/
+      /*console.log(conditions)
+      this.currentconditions = [];
       for(var i in dictionary.conditions){
-          this.currentConditions[i] = {};
+          this.currentconditions[i] = {name: dictionary.conditions[i].name, presence: false};
       }
-      console.log(dictionary.conditions);
-      console.log(conditions);
       for(var i in conditions){
         for(var n in dictionary.conditions){
             if(conditions[i] == dictionary.conditions[n].id){
+                console.log(this.currentconditions[n])
                 this.currentconditions[n].presence = true;
-                console.log(this.currentconditions[n]);
+                break;
             }
         }
       }
+      console.log(this.currentconditions)*/
       
       
       Realty.update({_id: realtyId}, {
@@ -38,12 +43,6 @@ class OneInfoEdit {
         if(error) {
           console.log(error)
         } else {
-            /*if(callback){
-                if(typeof callback == 'function'){
-                    console.log(callback)
-                    callback();
-                }
-            }*/
             console.log('call recieved newObj');
         }
       });
@@ -79,10 +78,15 @@ export default angular.module(moduleName, [
   templateUrl: 'imports/ui/crm/realty/one-info/one-info-edit/one-info-edit.view.html',
   bindings: {
       realty: '=',
-      show: '=',
-      currentconditions: '='
+      show: '='
   },
   controllerAs: moduleName,
   controller: OneInfoEdit
 });
+
+/*
+                div(layout="row")
+                    p Удобства:
+                    p
+                        realty-conditions(ng-model='oneInfoEdit.realty.details.conditions' required='') */
 

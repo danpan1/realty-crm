@@ -10,7 +10,7 @@ import {name as CallCenter}from '/imports/ui/call-center/call-center.component';
 import {name as auth}from '/imports/ui/auth/auth.module';
 
 angular
-  .module('app', ['app.custom', CRM, CallCenter, auth]).config(config).run(run);
+  .module('app', ['app.custom','ngFileUpload', CRM, CallCenter, auth]).config(config).run(run);
 
 angular
   .module('app.custom', [uiRouter, ngMaterial, 'accounts.ui']);

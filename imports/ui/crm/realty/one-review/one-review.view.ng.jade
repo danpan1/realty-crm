@@ -1,9 +1,12 @@
 div(md-whiteframe='2').mv-16.ph-32.pv-16
+
     div(layout='row' layout-align='space-around start')
         div(flex='25')
             h3.md-headline.text-uppercase Фото 20%
         div(flex='25')
-            md-button(ng-click="oneReview.upload()").md-primary.md-raised Добавить фото
+            md-button(ng-click="oneReview.upload()"
+            ngf-select=''
+            ngf-change="oneReview.upload($files)").md-primary.md-raised Добавить фото
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Не качественные.

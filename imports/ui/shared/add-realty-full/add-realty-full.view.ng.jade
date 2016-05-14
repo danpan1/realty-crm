@@ -1,0 +1,116 @@
+div {{addRealtyFull.realty.street.value}}
+div {{addRealtyFull.realty.house.value}}
+div {{addRealtyFull.realty.house.data.city_district}}
+md-tabs(md-dynamic-height md-border-bottom)
+    md-tab(label='1) Расположение' md-active='true')
+        md-content().ph-32.pv-16
+            div(layout='column')
+                div(layout="column" layout-align="space-around start")
+                    div Тип сделки : Аренда
+                    div Недвижимость : Квартиры
+                    div Город : Москва
+                div(layout='row')
+                    realty-street(ng-model='addRealtyFull.locations.street' house='addRealtyFull.locations.house'
+                    dadata='addRealtyFull.locations.full' layout = 'row')
+                div(layout="row" layout-align="space-around center")
+                    subway-chips(ng-model='addRealtyFull.locations.subways'
+                    subways-embeded = 'addRealtyFull.locations.embedded.subways')
+                    district-chips(ng-model='addRealtyFull.locations.details.districts'
+                    districts-embeded = 'addRealtyFull.locations.details.embedded.districts')
+                div(layout='row')
+                    div До метро 15 минут пешком
+
+    md-tab(label='2) Параметры')
+        md-content().ph-32.pv-16
+            div(layout='column')
+                div(layout='row')
+                    div(flex='80')
+                        div(layout='row' layout-align='start end').mv-16
+                            md-input-container(flex).mv-0
+                                label Количество комнат
+                                md-select(ng-model='addRealtyFull.realty.details.roomcount')
+                                    md-option(ng-value='roomcount.id',
+                                    ng-repeat="roomcount in addRealtyFull.dictionary.roomcountBig") {{roomcount.name}}
+                            div(flex='33' flex-offset='5')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead.mb-0 Апартаменты
+                            div(flex='33')
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead.mb-0 Пентхаус
+
+                div(layout='row')
+                    div(flex='50')
+                        div(layout='row' layout-align='start center').mv-16
+                            md-input-container(flex).mv-0
+                                input(ng-model='addRealtyFull.realty.details.floorFrom' placeholder='Этаж')
+                            md-input-container(flex flex-offset='5').mv-0
+                                input(ng-model='addRealtyFull.realty.details.floorTo' placeholder='Этажей в доме')
+
+                div(layout='row')
+                    div(flex='80')
+                        div(layout='row' layout-align='start center').mv-16
+                            md-input-container(flex).mv-0
+                                input(ng-model='addRealtyFull.realty.details.squareTotal' placeholder='Общая площадь м²')
+                            md-input-container(flex flex-offset='5').mv-0
+                                input(ng-model='addRealtyFull.realty.details.squareLiving' placeholder='Жилая площадь м²')
+                            md-input-container(flex flex-offset='5').mv-0
+                                input(ng-model='addRealtyFull.realty.details.squareKitchen' placeholder='Кухня м²')
+
+                div(layout='row')
+                    div(flex='80')
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                label Лоджия
+                                md-select(ng-model='addRealtyFull.realty.details.loggia')
+                                    md-option(ng-value='balcony.id',
+                                    ng-repeat="balcony in addRealtyFull.dictionary.balcony ") {{balcony.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Балкон
+                                md-select(ng-model='addRealtyFull.realty.details.balcony')
+                                    md-option(ng-value='balcony.id',
+                                    ng-repeat="balcony in addRealtyFull.dictionary.balcony ") {{balcony.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Окна выходят на
+                                md-select(ng-model='addRealtyFull.realty.details.windowView')
+                                    md-option(ng-value='windowView.id',
+                                    ng-repeat="windowView in addRealtyFull.dictionary.windowView ") {{windowView.name}}
+
+                div(layout='row')
+                    div(flex='50')
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                label Ремонт
+                                md-select(ng-model='addRealtyFull.realty.details.renovation')
+                                    md-option(ng-value='renovation.id',
+                                    ng-repeat="renovation in addRealtyFull.dictionary.renovation ") {{renovation.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Тип дома
+                                md-select(ng-model='addRealtyFull.realty.details.materials')
+                                    md-option(ng-value='materials.id',
+                                    ng-repeat="materials in addRealtyFull.dictionary.materials ") {{materials.name}}
+                        div(layout='row').mv-16
+                            md-input-container(flex).mv-0
+                                label Пассажирских лифтов
+                                md-select(ng-model='addRealtyFull.realty.details.elevatorSmall')
+                                    md-option(ng-value='elevator.id',
+                                    ng-repeat="elevator in addRealtyFull.dictionary.elevator ") {{elevator.name}}
+                            md-input-container(flex flex-offset='5').mv-0
+                                label Грузовых лифтов
+                                md-select(ng-model='addRealtyFull.realty.details.elevatorBig')
+                                    md-option(ng-value='elevator.id',
+                                    ng-repeat="elevator in addRealtyFull.dictionary.elevator ") {{elevator.name}}
+
+                div(layout='row').mv-16
+                    div(flex='60')
+                        div(layout='row' layout-wrap)
+                            realty-conditions(ng-model='addRealtyFull.realty.details.conditions' )
+
+    md-tab(label='3) Стоимость')
+        md-content().ph-32.pv-16
+            div(layout='column')
+                div(layout='row')
+                    div До метро 15 минут пешком
+
+div(layout='row').mv-16.mh-32
+    md-button(ng-click='addRealtyFull.submit(true)').md-success.md-raised.md-title Добавить клиента!
+    md-button(md-no-ink flex-offset='10').md-primary.md-body-1 Вернуться на шаг назад
+
+

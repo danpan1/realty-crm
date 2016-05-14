@@ -1,18 +1,20 @@
-md-chips(ng-model='subwayChips.subwaysInForm',
-md-autocomplete-snap='',
-md-require-match='true',
-md-on-add='subwayChips.changeChips()',
-md-on-remove='subwayChips.changeChips()')
-    md-autocomplete(md-selected-item='subwayChips.selectedItem',
-    md-search-text='subwayChips.searchText',
-    md-search-text-change='subwayChips.searchTextChange(subwayChips.searchText)',
-    md-items='item in subwayChips.subwaysSuggestionList',
-    placeholder='Метро',
-    md-no-cache='true')
-        span(md-highlight-text='subwayChips.searchText') ({{item.meta.lineId}}) {{item.name}}
-        md-not-found
-            | Не найдено "{{subwayChips.searchText}}"
-    md-chip-template
-        span
-            em ({{$chip.meta.lineId}})
-            strong {{$chip.name}}
+div().metro
+    label Метро
+    md-chips(ng-model='subwayChips.subwaysInForm',
+    md-autocomplete-snap='',
+    md-require-match='true',
+    md-on-add='subwayChips.changeChips()',
+    md-on-remove='subwayChips.changeChips()')
+        md-autocomplete(md-selected-item='subwayChips.selectedItem',
+        md-search-text='subwayChips.searchText',
+        md-search-text-change='subwayChips.searchTextChange(subwayChips.searchText)',
+        md-items='item in subwayChips.subwaysSuggestionList',
+        placeholder='',
+        md-no-cache='true')
+            span(md-highlight-text='subwayChips.searchText') ({{item.meta.lineId}}) {{item.name}}
+            md-not-found
+                | Не найдено "{{subwayChips.searchText}}"
+        md-chip-template
+            span
+                span(class='metro-color metro-color-{{$chip.meta.lineId}}')
+                span().md-caption {{$chip.name}}

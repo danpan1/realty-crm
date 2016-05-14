@@ -37,11 +37,30 @@ class OneInfo {
     for(var i in dictionary.conditions){
         this.currentConditions[i] = {};
     }
-    console.log(this.currentConditions);
+    // console.log(this.currentConditions);
+  }
+  
+  onConditionsChange (condition) {
+    let index = this.realty.details.conditions.indexOf(condition);
+    if (index === -1) {
+      this.realty.details.conditions.push(condition);
+    }  else {
+      this.realty.details.conditions.splice(index, 1);
+    }
+    console.log(this.realty.details.conditions);
+    Realty.update({_id: this.realty._id}, {
+        $set: this.realty
+    }, (error) => {
+        if(error) {
+        console.log(error);
+        } else {
+            console.log('call recieved newObj');
+        }
+    });
   }
   
   setActiveConditions (conditions) {
-      console.log(this.currentConditions)
+      console.log(conditions)
       for(var i in conditions){
         for(var n in dictionary.conditions){
             this.currentConditions[n].name = dictionary.conditions[n].id;

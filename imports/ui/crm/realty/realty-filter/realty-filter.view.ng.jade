@@ -1,58 +1,77 @@
-div(md-whiteframe='2').realty-list-filter.ph-16
-    div(layout="row", layout-align="space-around start")
-        div(layout='column' flex='33' layout-align='space-around none').input-ltd
-            subway-chips(ng-model = "realtyFilter.filter.subways"
-            subways-embeded = 'realtyFilter.subwaysEmbeded')
+div(md-whiteframe='2').realty-list-filter.ph-32.pv-16
+    div(layout='row', layout-align="space-between center")
+        div(flex)
+            div(layout='column' layout-align='center none')
+                div(flex)
+                    subway-chips(ng-model = "realtyFilter.filter.subways"
+                    subways-embeded = 'realtyFilter.subwaysEmbeded' flex)
+                div(flex)
+                    district-chips(ng-model = "realtyFilter.filter.districts"
+                    districts-embeded = 'realtyFilter.districtsEmbeded' flex)
 
-            district-chips(ng-model = "realtyFilter.filter.districts"
-            districts-embeded = 'realtyFilter.districtsEmbeded')
+        div(flex='30' flex-offset='10')
+            div(layout='column')
+                md-input-container(flex).mt-32.mb-0
+                    label Выбрать ремонт
+                    md-select(ng-model='realtyFilter.filter.renovation', multiple='true')
+                        //md-optgroup(label='Выбрать ремонт')
+                        md-option(ng-value='renovation.id',
+                        ng-repeat="renovation in realtyFilter.dictionary.renovation ") {{renovation.name}}
+                md-input-container(flex).mt-32.mb-0
+                    label Выбрать удобства
+                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                        //md-optgroup(label='Выбрать удобства')
+                        md-option(ng-value='condition.id',
+                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
 
-        div(layout='column' flex='33' layout-align='space-around none' flex-offset='5').input-ltd
-            md-input-container
-                label Выбрать ремонт
-                md-select(ng-model='realtyFilter.filter.renovation', multiple='true')
-                    //md-optgroup(label='Выбрать ремонт')
-                    md-option(ng-value='renovation.id',
-                    ng-repeat="renovation in realtyFilter.dictionary.renovation ") {{renovation.name}}
-            md-input-container
-                label Выбрать удобства
-                md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
-                    //md-optgroup(label='Выбрать удобства')
-                    md-option(ng-value='condition.id',
-                    ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+        div(flex='25' flex-offset='10')
+            div(layout='row' layout-align='space-between none')
+                div(layout='column')
+                    div(layout='row' layout-align='space-between end').mt-32
+                        label(flex='30') До метро
+                        md-input-container(flex='20').mv-0.pv-0
+                            input(ng-model='realtyFilter.filter.metroPeshkom', placeholder='минут')
+                        md-input-container().mv-0.pb-0
+                            label пешком
+                            md-select(ng-model='outgoingCall.realty.address.metroTransport' required='')
+                                md-option(ng-value='transport.id',
+                                ng-repeat="transport in outgoingCall.dictionary.transport") {{transport.name}}
 
-        div(layout='column' flex='33' layout-align='space-around none' flex-offset='5').input-ltd
-            div(layout='row' layout-align="center center")
-                label До метро
-                md-input-container.md-block(md-no-float='')
-                    input(ng-model='realtyFilter.filter.metroPeshkom', placeholder='минут')
-                div пешком
-
-            div(layout='row' layout-align='center center') 
-                label.mt-16 Этаж
-                md-input-container(flex='20' flex-offset='10').md-block
-                    label от
-                    input(ng-model='realtyFilter.filter.floorFrom')
-                md-input-container(flex='20' flex-offset='10').md-block
-                    label до
-                    input(ng-model='realtyFilter.filter.floorTo')
-    div(layout="row" layout-align='start center').mt-16
-        div(layout='row')
-            div(flex)
+                    div(layout='row' layout-align='space-between end').mt-32
+                        label(flex='30') Этаж
+                        md-input-container(flex='20').mv-0.pv-0
+                            label от
+                            input(ng-model='realtyFilter.filter.floorFrom')
+                        span().hyphen
+                        md-input-container(flex='20').mv-0.pv-0
+                            label до
+                            input(ng-model='realtyFilter.filter.floorTo')
+    div(layout='row' layout-align='space-between center')
+        div(flex='35')
+            div(layout='row' layout-align='space-between end')
                 label Комнат 
                 md-checkbox(
                 ng-checked='realtyFilter.existsRoomcount(item)',
                 ng-repeat='item in realtyFilter.dictionary.roomcount',
                 ng-click='realtyFilter.toggleRoomcount(item)',
                 md-no-ink,
-                class='md-primary') {{ item }}
-        div(layout='row' flex-offset='10')
-            md-input-container(flex='25').md-block
-                label цена от
-                input(ng-model='realtyFilter.filter.priceFrom')
-            md-input-container(flex='25' flex-offset='10').md-block
-                label цена до
-                input(ng-model='realtyFilter.filter.priceTo')
+                class='md-primary') {{ item.name }}
+        div(flex='35' flex-offset='5')
+            div(layout='row' layout-align='space-between end')
+                md-input-container(flex='40')
+                    label цена от
+                    input(ng-model='realtyFilter.filter.priceFrom')
+                md-input-container(flex='40' flex-offset='10')
+                    label цена до
+                    input(ng-model='realtyFilter.filter.priceTo')
+        div(flex='30' flex-offset='10')
+            div(layout='row')
+                md-input-container(flex).mv-32
+                    label Кто будет проживать
+                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                        //md-optgroup(label='Выбрать удобства')
+                        md-option(ng-value='condition.id',
+                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
 
 //div {{realtyFilter.filter}}
 div {{realtyFilter.filter.roomcount}}

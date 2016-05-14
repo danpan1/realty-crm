@@ -11,8 +11,8 @@ import {name as oneEmail} from './one-email/one-email.component';
 import {name as oneReview} from './one-review/one-review.component';
 import {name as oneInfo} from './one-info/one-info.component';
 import {name as realtyCard} from '/imports/ui/shared/realty-card/realty-card.component';
+import {name as addRealtyFull} from '/imports/ui/shared/add-realty-full/add-realty-full.component';
 import routes from './realty.routes.js';
-import './realty.view.html';
 const moduleName = 'realty';
 
 class Realty {
@@ -25,6 +25,7 @@ class Realty {
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
+  addRealtyFull,
   realtyOneLayout,
   oneDemonstrations,
   oneInfo,

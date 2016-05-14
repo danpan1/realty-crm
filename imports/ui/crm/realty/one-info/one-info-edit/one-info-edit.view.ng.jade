@@ -48,28 +48,31 @@ div(ng-if="oneInfoEdit.show")
                     p Площадь комнат:
                     p 
                         div(layout="row")
-                            md-input-container.mv-0.pb-0(ng-repeat="room in oneInfoEdit.realty.details.roomsSquare" flex="20")
-                                input(ng-model="room")
-                        // md-button(ng-click="oneInfoEdit.addRoomSquare()") Add // some unrecognised issue with this
+                            md-input-container.mv-0.pb-0(ng-repeat="i in [0,1,2,3]" flex="20")
+                                input(ng-model="oneInfoEdit.realty.details.roomsSquare[i]")
                 div(layout="row") 
                     p Лоджия:
                     p
                         md-input-container.mv-0.pb-0
-                            input(ng-model="oneInfoEdit.realty.details.loggia")
+                            md-select(ng-model="oneInfoEdit.realty.details.loggia")
+                                md-option(ng-value='i' ng-repeat="i in [0,1,2,3,4]") {{i}}
                 div(layout="row") 
                     p Балкон:
                         md-input-container.mv-0.pb-0
-                            input(ng-model="oneInfoEdit.realty.details.balcony")
+                            md-select(ng-model="oneInfoEdit.realty.details.balcony")
+                                md-option(ng-value='i' ng-repeat="i in [0,1,2,3,4]") {{i}}
                 div(layout="row") 
                     p Пассажирских лифтов:
                     p
                         md-input-container.mv-0.pb-0
-                            input(ng-model="oneInfoEdit.realty.details.elevator")
+                            md-select(ng-model="oneInfoEdit.realty.details.elevator")
+                                md-option(ng-value='i' ng-repeat="i in [0,1,2,3,4]") {{i}}
                 div(layout="row") 
                     p Грузовых лифтов:
                     p
                         md-input-container.mv-0.pb-0
-                            input(ng-model="oneInfoEdit.realty.details.elevatorBig")
+                            md-select(ng-model="oneInfoEdit.realty.details.elevatorBig")
+                                md-option(ng-value='i' ng-repeat="i in [0,1,2,3,4]") {{i}}
                 div(layout="row") 
                     p Окна выходят
                     p 
@@ -80,9 +83,8 @@ div(ng-if="oneInfoEdit.show")
             div(flex="50")
                 div
                     p Состав съемщиков
-                    p
                         md-input-container.mv-0.pb-0
-                            md-checkbox(ng-model="oneInfoEdit.realty.details.composition[$index].id" ng-repeat="position in oneInfoEdit.dictionary.composition") {{position.name}}
+                            md-checkbox(ng-model="oneInfoEdit.realty.details.composition[$index]" ng-repeat="position in oneInfoEdit.dictionary.composition") {{position.name}}
                 div
                     p Собственник
                     p
@@ -113,11 +115,7 @@ div(ng-if="oneInfoEdit.show")
                         md-input-container.mv-0.pb-0
                             input(ng-model="oneInfoEdit.realty.partnerpercent")            
                             | %    
-                            
-                div(layout="row")
-                    p Удобства:
-                    p
-                        realty-conditions(ng-model='oneInfoEdit.realty.details.conditions' required='')   
+                              
         div.ph-16.one-info-edit__buttons(flex="10")
-            md-button.md-raised.md-primary(ng-click="oneInfoEdit.onChangeRealty(oneInfoEdit.realty._id, oneInfoEdit.realty.details.conditions)") Save
+            md-button.md-raised.md-primary(ng-click="oneInfoEdit.onChangeRealty(oneInfoEdit.realty._id)") Save
             md-button.md-raised.md-danger(ng-click="oneInfoEdit.show = false") Close

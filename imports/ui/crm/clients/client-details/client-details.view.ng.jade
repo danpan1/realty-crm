@@ -1,4 +1,4 @@
-{{clientInfo.clients}}
+div {{clientInfo.clients}}
 section(ng-repeat="client in clientDetails.clients")
     div(layout="row")
         md-button.md-raised.md-default(ui-sref="crm.clients.list.my({status: \'realtor\'})") Back
