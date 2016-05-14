@@ -6,7 +6,7 @@ import {Meteor} from 'meteor/meteor';
 import {Clients} from './clients.model';
 import {_} from 'meteor/underscore';
 import {Roles} from 'meteor/alanning:roles';
-import nextAutoincrement from '../helpers/getUniqueId'
+import nextAutoincrement from '../helpers/getUniqueId';
 Meteor.methods({
   addClient
 });
