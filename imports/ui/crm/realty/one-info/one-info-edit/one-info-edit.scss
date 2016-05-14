@@ -1,25 +1,50 @@
 .one-info-edit{
-    &__wrapper{
-        position: fixed;
-        left:0;
-        top:0;
-        width:100%;
-        height:100%;
-        background: rgba(0,0,0,.7);
-        z-index: 70;
+  &__wrapper{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 70;
+  }
+
+  &__block{
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 50px;
+    width: 80%;
+    height: 80%;
+    background: #fff;
+    z-index: 71;
+    md-input-container .md-errors-spacer {
+      min-height: 0;
     }
-    &__block{
-        position: fixed;
-        left:0;
-        right:0;
-        margin: 0 auto;
-        top:50px;
-        width:80%;
-        height:80%;
-        background: #fff;
-        z-index: 71;
+    label {
+      color: rgba(0, 0, 0, 0.54);
     }
-    &__changes{
-        overflow: auto;
-    }
+  }
+
+  &__changes{
+    overflow: auto;
+  }
+
+}
+.vertical-divider-1,
+.vertical-divider-2 {
+  position: absolute;
+  top: 9%;
+  width: 1px;
+  height: 77%;
+  border-left: 1px solid #f3f3f3;
+}
+
+.vertical-divider-1 {
+  left: 33%;
+}
+
+.vertical-divider-2 {
+  left: 66%;
 }
