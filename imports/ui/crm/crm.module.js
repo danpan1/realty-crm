@@ -5,7 +5,6 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import routes from './crm.routes';
-import {name as ngLightbox} from '../shared/lightbox/lightbox';
 //import {name as ngMenuToggle} from '../shared/menu-toggle/menu-toggle';
 //import {name as ngMenuLink} from '../shared/menu-link/menu-link';
 import {name as Realty}from './realty/realty.component';
@@ -17,7 +16,6 @@ const moduleName = 'app.crm';
 export default angular.module(moduleName, [
   angularMeteor,
   layout,
-  //ngLightbox,
   //ngMenuLink,
   //ngMenuToggle,
   clients,
