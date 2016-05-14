@@ -115,11 +115,7 @@ div(ng-if="oneInfoEdit.show")
                         md-input-container.mv-0.pb-0
                             input(ng-model="oneInfoEdit.realty.partnerpercent")            
                             | %    
-                            
-                div(layout="row")
-                    p Удобства:
-                    p
-                        realty-conditions(ng-model='oneInfoEdit.realty.details.conditions' required='')   
+                              
         div.ph-16.one-info-edit__buttons(flex="10")
-            md-button.md-raised.md-primary(ng-click="oneInfoEdit.onChangeRealty(oneInfoEdit.realty._id, oneInfoEdit.realty.details.conditions)") Save
+            md-button.md-raised.md-primary(ng-click="oneInfoEdit.onChangeRealty(oneInfoEdit.realty._id)") Save
             md-button.md-raised.md-danger(ng-click="oneInfoEdit.show = false") Close
