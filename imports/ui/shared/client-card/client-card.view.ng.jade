@@ -4,13 +4,13 @@ div(md-whiteframe='2').mv-16.client-card
     div(layout='column')
         div(layout='row')
             div(flex='25').ph-16.pv-8
-                h3().md-title.text-bold.client-card__price(ng-click="clientCard.sendCurrentClient(clientCard.client)") {{clientCard.client.need.priceTo}}
+                h3(ng-click="clientCard.sendCurrentClient(clientCard.client)").md-title.text-bold.client-card__price {{clientCard.client.need.priceTo}}
                 p().md-body-1.client-card__right-label {{clientCard.client.comissionLoyal == true ? 'Готов ' : 'Не готов ' }} платить комиссию
                 p().md-body-1.client-card__right-label на сейчас
                 p().md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8
-                p.md-title.client-card__no-margin(ng-if="clientCard.client.status == 'realtor'")
+                p(ng-if="clientCard.client.status == 'realtor'").md-title.client-card__no-margin
                     span().text-bold 1 мая 17:00 | 
                     span().text-bold через 3:00
                 p().md-body-1.client-card__note {{clientCard.client.realtorNote}}
@@ -36,14 +36,20 @@ div(md-whiteframe='2').mv-16.client-card
                 div(ng-if="clientCard.client.status != 'hot' && !clientCard.assort")
                     p.md-body-1.client-card__right-label {{clientCard.client.phone}}
                     p.md-body-1.client-card__right-label {{clientCard.client.name}}
-                h3().md-title.text-bold.text-uppercase.one-demonstrations-new-label(ng-if="clientCard.client.status == 'hot' && !clientCard.assort") Новый
-                h3().md-title.text-bold.text-uppercase.one-demonstrations-new-label(ng-if="clientCard.assort") Новая связь
+
+
+                h3(ng-if="clientCard.client.status == 'hot' && !clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новый
+                h3(ng-if="clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новая связь
+
+
+
+
             div(flex='55' layout="row").one-demonstrations-center-cell.ph-16.pv-8
                 div(flex='45').ph-16.pv-8
                     span().metro-color.metro-color-pink
                     span().address-info.md-body-1 {{clientCard.client.need.embedded.subways}} {{clientCard.client.need.embedded.districts}}
                 div(flex='55').ph-16.pv-8
-                    span().md-body-1 {{clientCard.client.need.roomcount}} комнат, длительная
+                    span().md-body-1 {{clientCard.client.need.roomcount}} комнат,  длительная
             div(flex='20')
                 div.ph-16(layout='row', layout-wrap, layout-align='space-around')
                     div {{clientCard.client.need.conditions}}
