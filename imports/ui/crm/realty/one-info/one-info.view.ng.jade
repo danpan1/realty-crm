@@ -10,9 +10,10 @@ div(layout="column", layout-align="space-around stretch")
             div(flex="33")
                 h2 Месторасположение
                 div
-                    div().md-subhead Область: #[strong {{oneInfo.realty.address.meta.region}}]
-                    div().md-subhead Город: #[strong {{oneInfo.realty.address.meta.city}}]
-                    div().md-subhead Район: #[strong {{oneInfo.realty.address.areaname}}]
+                    //div().md-subhead Область: #[strong {{oneInfo.realty.address.meta.region}}]
+                    div().md-subhead Город: #[strong Москва]
+                    div().md-subhead Округ: #[strong {{oneInfo.realty.address.areaName}}]
+                    div().md-subhead Район: #[strong {{oneInfo.realty.address.districtName}}]
                     div().md-subhead Улица: #[strong {{oneInfo.realty.address.street}}]
                     div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.meta.house}}]
                     div().md-subhead Квартира: #[strong {{oneInfo.realty.address.meta.flat}}]
@@ -59,12 +60,9 @@ div(layout="column", layout-align="space-around stretch")
         div(layout="column" flex='50')
             div(md-whiteframe='2').one-info-contacts.p-16.mv-16
                 h3().md-title Контакты
-                div(layout='row' layout-align='space-between')
-                    p.md-bold(flex="70") Олег
-                    p.md-bold(flex="30") 8-923-455-67-67
-                div(layout='row' layout-align='space-between')
-                    p.md-bold(flex="70") Игорь
-                    p.md-bold(flex="30") 8-927-551-59-57
+                div(layout='row' layout-align='space-between' ng-repeat='contact in oneInfo.realty.contacts')
+                    p.md-bold(flex="70") {{contact.name}}
+                    p.md-bold(flex="30") {{contact.phones[0].phone}}
 
         div(md-whiteframe="2" flex='50').one-info-closed.m-16.p-16
             h3().md-title Закрытие сделки
