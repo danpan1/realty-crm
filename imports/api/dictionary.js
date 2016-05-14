@@ -27,12 +27,13 @@ export const dictionary = {
   ],
   conditions: [
     {id: 'furniture', name: 'Мебель'},
-    {id: 'kitchen_furniture', name: 'Кухонная мебель'},
+    {id: 'kitchen_furniture', name: 'Кух. мебель'},
     {id: 'tv', name: 'Телевизор'},
     {id: 'refrigerator', name: 'Холодильник'},
-    {id: 'washer', name: 'Стиральная машина'},
+    {id: 'washer', name: 'Стир. машина'},
     {id: 'phone', name: 'Телефон'},
     {id: 'animal', name: 'С животными'},
+    {id: 'elevator', name: 'Лифт'},
     {id: 'children', name: 'С детьми'},
     {id: 'wifi', name: 'Wi-Fi'}
   ],
@@ -84,10 +85,10 @@ export const dictionary = {
     {id: 4, name: 'Капитальный'}
   ],
   roomcount: [
-    {id: 99, name: '4+'},
     {id: 1, name: '1'},
     {id: 2, name: '2'},
-    {id: 3, name: '3'}
+    {id: 3, name: '3'},
+    {id: 99, name: '4+'}
   ],
   roomcountBig: [
     {id: 1, name: '1'},

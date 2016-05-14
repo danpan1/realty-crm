@@ -55,7 +55,7 @@ div(md-whiteframe='2').realty-list-filter.ph-32.pv-16
                 ng-repeat='item in realtyFilter.dictionary.roomcount',
                 ng-click='realtyFilter.toggleRoomcount(item)',
                 md-no-ink,
-                class='md-primary') {{ item }}
+                class='md-primary') {{ item.name }}
         div(flex='35' flex-offset='5')
             div(layout='row' layout-align='space-between end')
                 md-input-container(flex='40')
