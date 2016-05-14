@@ -1,46 +1,46 @@
 .md-cyan {
-  color: $white;
+  color: $white !important;
   &.md-raised {
-    color: $white;
-    background-color: color($cyan, 500);
+    color: $white !important;
+    background-color: color($cyan, 500) !important;
     &:not([disabled]) {
       &:hover {
-        background-color: color($cyan, 500);
+        background-color: color($cyan, 500) !important;
       }
       &.md-focused {
-        background-color: color($cyan, 500);
+        background-color: color($cyan, 500) !important;
       }
     }
   }
 }
 
 .md-amber {
-  color: $white;
+  color: $white !important;
   &.md-raised {
-    color: $white;
-    background-color: color($amber, 600);
+    color: $white !important;
+    background-color: color($amber, 600) !important;
     &:not([disabled]) {
       &:hover {
-        background-color: color($amber, 600);
+        background-color: color($amber, 600) !important;
       }
       &.md-focused {
-        background-color: color($amber, 600);
+        background-color: color($amber, 600) !important;
       }
     }
   }
 }
 
 .md-success {
-  color: #575757;
+  color: #575757 !important;
   &.md-raised {
-    color: #575757;
-    background-color: #baed21;
+    color: #575757 !important;
+    background-color: #baed21 !important;
     &:not([disabled]) {
       &:hover {
-        background-color: #baed21;
+        background-color: #baed21 !important;
       }
       &.md-focused {
-        background-color: #baed21;
+        background-color: #baed21 !important;
       }
     }
   }
@@ -63,10 +63,40 @@
 }
 
 .metro-color{
- &-1 {
-  background-color: color($pink, 500);
- }
- &-2 {
-  background-color: #388E3C;
- }
+  &-1 {
+    background-color: #ea2134;
+  }
+  &-2 {
+    background-color: #388E3C;
+  }
+  &-3 {
+    background-color: #1a78be;
+  }
+  &-4 {
+    background-color: #2ec1f2;
+  }
+  &-5 {
+    background-color: #874d36;
+  }
+  &-6 {
+    background-color: #f38634;
+  }
+  &-7 {
+    background-color: #8d449b;
+  }
+  &-8 {
+    background-color: #fdcb3a;
+  }
+  &-9 {
+    background-color: #a1a2a3;
+  }
+  &-10 {
+    background-color: #b3d54c;
+  }
+  &-11 {
+    background-color: #7dcecd;
+  }
+  &-12 {
+    background-color: #adbfe0;
+  }
 }
