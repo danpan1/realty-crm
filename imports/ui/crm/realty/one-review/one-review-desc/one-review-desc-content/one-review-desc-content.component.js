@@ -79,7 +79,7 @@ class OneReviewDescContent {
   addDescDetail () {
       this.realty.details.descr = this.desc.details;
       this.desc.nextdetails = this.desc.details + ' ';
-      this.textVariable = this.activeBenefit.content[this.active.index] ? this.activeBenefit.content[this.active.index] : '';
+     // this.textVariable = this.activeBenefit.content[this.active.index] ? this.activeBenefit.content[this.active.index] : '';
       this.desc.details = this.desc.nextdetails + this.textVariable;
       this.compareLength = this.desc.nextdetails.length;
   }
@@ -89,7 +89,7 @@ class OneReviewDescContent {
       if(this.activeObject.index != undefined){
           this.activeBenefit.content = this.saleDescription[this.activeObject.index].value;
           this.activeBenefit.label = this.saleDescription[this.activeObject.index].name;
-          this.textVariable = this.activeBenefit.content[this.active.index] ? this.activeBenefit.content[this.active.index] : '';
+          this.textVariable = '';
           this.desc.details = this.desc.nextdetails + this.textVariable;
           this.active.index = -1;
       }
