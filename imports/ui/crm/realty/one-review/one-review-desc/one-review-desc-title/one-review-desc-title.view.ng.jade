@@ -1,0 +1,9 @@
+p
+    md-button(ng-click="oneReviewDescTitle.prevDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber == 0").md-raised Prev.
+    md-button(ng-click="oneReviewDescTitle.nextDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber >= oneReviewDescTitle.descTitle.length-1").md-raised Next
+md-input-container().md-block
+    label Заголовок
+    md-select(ng-model="oneReviewDescTitle.descTitle[oneReviewDescTitle.descTitleNumber]" placeholder='"Выберите готовый заголовок, который цепляет"')
+        md-option(ng-value='title' ng-repeat="title in oneReviewDescTitle.saleDescription[0].value" ng-click="oneReviewDescTitle.setDescTitle(title, $index)") {{title}}
+md-input-container().md-block
+    input(ng-model="oneReviewDescTitle.inputTitleDesc")

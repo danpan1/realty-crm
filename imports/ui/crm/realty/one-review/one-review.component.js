@@ -38,6 +38,20 @@ class OneReview {
 
   prepareRealty() {}
 
+  
+  /* Сохранение описания и заголовка на сервер */
+  saveNewDescription (realtyId) {
+      Realty.update({_id: realtyId}, {
+        $set: this.realty
+      }, (error) => {
+        if(error) {
+          console.log(error)
+        } else {
+            console.log('Description updated!');
+        }
+      });
+  }
+  
 }
 
 const moduleName = 'oneReview';
