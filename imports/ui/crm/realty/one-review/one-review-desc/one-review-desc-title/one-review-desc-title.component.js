@@ -5,7 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty';
-import {saleDescription} from '/imports/api/saleDescription';
+import {saleDescription, saleTitle} from '/imports/api/saleDescription';
 
 import './one-review-desc-title.view.html';
 
@@ -16,9 +16,9 @@ class OneReviewDescTitle {
     $reactive(this).attach($scope);
     /* Устанавливаем дефолтные значения для всех используемых в компоненте переменных */
     this.saleDescription = saleDescription;
-    this.descTitle = this.saleDescription[0].value;
-    this.descTitleNumber = 0;
+    this.descTitle = saleTitle;
     this.inputTitleDesc = '';
+    this.descTitleNumber = undefined;
   }
   
   /* Выбираем заголовок */
@@ -28,17 +28,23 @@ class OneReviewDescTitle {
       this.realty.title = this.inputTitleDesc;
   }
   nextDescTitleNumber () {
-      if(this.descTitleNumber + 1 >= this.descTitle.length) return false;
+      if(this.descTitleNumber == undefined) this.descTitleNumber = 0;
       else this.descTitleNumber++;
-      this.inputTitleDesc = this.descTitle[this.descTitleNumber];
+      this.inputTitleDesc = this.descTitle.value[this.descTitleNumber];
       this.realty.title = this.inputTitleDesc;
   }
   prevDescTitleNumber (){
-      if(this.descTitleNumber - 1 < 0) return false;
-      else this.descTitleNumber--;
-      this.inputTitleDesc = this.descTitle[this.descTitleNumber];
+      this.descTitleNumber--;
+      this.inputTitleDesc = this.descTitle.value[this.descTitleNumber];
       this.realty.title = this.inputTitleDesc;
   }
+  
+  controlKeyPress (text) {
+      if(text){
+        this.realty.title = text;
+      }
+  }
+  
 }
 
 const moduleName = 'oneReviewDescTitle';
