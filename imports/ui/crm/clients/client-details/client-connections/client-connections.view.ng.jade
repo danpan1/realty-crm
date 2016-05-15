@@ -1,3 +1,4 @@
+slide-show(slides-list='clientConnections.slideShowImages' isshown='clientConnections.showSlider')
 div.md-whiteframe-2dp(md-whiteframe="2")
     div(layout="row")
         md-tabs(md-dynamic-height md-border-bottom md-selected="clientConnections.selectedTab" flex="80")
@@ -15,8 +16,10 @@ div.md-whiteframe-2dp(md-whiteframe="2")
         div.ph-8(flex="15") Действия
         
 div.md-whiteframe-2dp(md-whiteframe="2")
-    realty-card(ng-repeat='realty in clientConnections.realty'
-                realty='realty'
-                slider='clientConnections.setSliderImages(images)')
+    div
+        realty-card(ng-repeat='realty in clientConnections.realty'
+                    realty='realty'
+                    realtylisttype="'connections'"
+                    slider='clientConnections.setSliderImages(images)')
     
     

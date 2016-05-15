@@ -1,6 +1,3 @@
-
-//div {{realtyStreet.selectedStreet}}
-//div {{realtyStreet.selectedHouse}}
 md-autocomplete(flex='',
 required='',
 md-input-name='autocompleteFieldStreet',
@@ -30,6 +27,7 @@ md-input-minlength='1',
 md-no-cache='realtyStreet.noCache',
 md-selected-item='realtyStreet.selectedHouse',
 md-search-text='realtyStreet.searchTextHouse',
+md-selected-item-change='realtyStreet.querySearchHouseFinal(realtyStreet.selectedHouse)',
 md-items='item in realtyStreet.querySearchHouse(realtyStreet.searchTextHouse)',
 md-item-text='item.value',
 md-floating-label='Выберите дом')

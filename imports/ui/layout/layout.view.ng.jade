@@ -1,18 +1,20 @@
 // Container #1 (see wireframe)
-md-toolbar(layout='row')
-    md-button.menu(hide-gt-md='', ng-click='layout.toggleList()')
-        md-icon(md-svg-icon='menu')
+md-toolbar(layout='row' layout-align='start center').ph-16
+    span().brand-logo
     span(flex)
-    span {{layout.user.emails[0].address}}
-    span(flex="5")
-    span(ng-click='layout.logout()', ui-sref='auth.login') logOut
+    span().md-body-1 {{layout.user.emails[0].address}}.mr-0
+    md-button(hide-gt-md='', ng-click='layout.toggleList()').md-icon-button.menu
+        md-icon(md-svg-icon='menu')
+    md-button(show-gt-md='' ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.btn-logout
+        md-icon(md-svg-icon='svg/icon-exit-to-app-white.svg')
 
 // Container #2
-div(flex='', layout='row')
+div(flex, layout='row')
     // Container #3
-    md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left")
+    md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left").pv-16
         menu-toggle(section="layout.actions")
-        md-button.md-raised.md-warn(ui-sref='crm.clients.add') Добавить клиента
+        md-button.md-success.md-warn(ui-sref='crm.clients.add') Добавить клиента
+        md-button.md-success.md-warn(ui-sref='crm.realty.add') Добавить Объект
         md-list
             md-list-item(ng-repeat="item in layout.sideNavItems",
             ui-sref='{{item.uisref}}',
@@ -22,9 +24,6 @@ div(flex='', layout='row')
             ng-click='layout.toggleList()') {{item.name}}
 
     // Container #4
-    md-content#content(flex="",
-    md-whiteframe="4",
-    layout="column",
-    layout-align='space-between center')
+    md-content#content(flex, md-whiteframe="4", layout="column", layout-align='space-between center').ml-16
         div#mainContainer
             ui-view

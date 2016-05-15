@@ -1,22 +1,41 @@
-md-sidenav{
-  max-width: 250px;
-  font-size: 16px;
+ui-view {
+  background-color: #f1f8fd;
 }
 
-md-list-item.active{
-  background: aqua;
+md-toolbar {
+  min-height: 50px !important;
+}
+
+md-sidenav{
+  max-width: 192px !important;
+  font-size: 16px !important;;
+  background-color: #f1f8fd !important;
+  box-shadow: none !important;
+  md-list-item {
+    color: #333 !important;
+    &.active{
+      color: #106cc8 !important;
+      background-color: #d3e9f4 !important;
+    }
+    .md-no-style.md-button,
+    .md-no-proxy.md-button {
+      font-weight: 400 !important;
+    }
+  }
 }
 
 #mainContainer{
   width: 1024px; //97.6rem 1024px - 24px -24px
 }
 
-md-content{
+#content{
+  margin-left: 16px;
   background-color: #f1f8fd;
+  box-shadow: none;
 }
 
 md-tabs{
-  background: $white;
+  background-color: $white;
   md-ink-bar {
     background-color: color($blue, 400);
   }
@@ -63,6 +82,10 @@ md-switch {
 
 .whiteBg {
   background: $white;
+}
+
+.small-select .md-select-value {
+  min-width: 50px;
 }
 
 .m-0 {
@@ -303,4 +326,13 @@ md-switch {
 
 .pr-32 {
   padding-right: 32px;
+}
+
+@media screen and (max-width: 1279px) {
+  .btn-logout {
+    display: none !important;
+  }
+  #content {
+    margin-left: 0;
+  }
 }

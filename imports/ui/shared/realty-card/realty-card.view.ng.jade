@@ -24,6 +24,7 @@ div(layout='column' md-whiteframe='2').mv-8.whiteBg
             div.price {{::realtyCard.realty.price}}
             div.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
             div.type-owner {{::realtyCard.dictionary.qualification[realtyCard.realty.operator.qualification].name}}
+            div.color-primary(ng-if="realtyCard.realtylisttype == 'demonstration'") Объявление
             //div.favorites В избранное
         md-divider
 
@@ -35,11 +36,17 @@ div(layout='column' md-whiteframe='2').mv-8.whiteBg
         md-divider
 
         div().newList_Info.p-8
-            div(layout='column', layout-align='space-between')
+            div(layout='column' layout-align='space-between' ng-if="!realtyCard.realtylisttype")
                 div {{::realtyCard.realty.roomcount}}к квартира
                 div Длительный
                 div {{::realtyCard.dictionary.qualification[realty.details.materials].name || 'Не известно материалы'}}
                 div {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} эт. {{::realtyCard.realty.square}}м2
+            div(ng-if="realtyCard.realtylisttype == 'demonstration'")
+                div.md-uppercase.md-bold 1 мая 17:00 | через 3:00
+                div.md-uppercase.md-bold {{::realtyCard.realty.address.street}}, д.{{::realtyCard.realty.address.meta.house}}, кв.208
+            div(ng-if="realtyCard.realtylisttype == 'connections'" layout="column" layout-align="space-between start")
+                div.md-bold {{::realtyCard.realty.contacts[0].name}} | {{::realtyCard.realty.contacts[0].phones[0].phone}}
+                div.md-uppercase.color-primary Объявление
         md-divider
 
         div().newList_Conditions.p-8
@@ -48,17 +55,49 @@ div(layout='column' md-whiteframe='2').mv-8.whiteBg
                     img(src='img/icons/icon-tv.png')
         md-divider
 
-        div(layout='column').newList_Actions
+        div(layout='column' layout-align="space-between left").newList_Actions
+            div(ng-if="realtyCard.realtylisttype == 'demonstration'")
+                div(ng-if="true")
+                    div.color-primary Отправить отчет
+                    div.color-hide Перенести показ
+                div(ng-if="false")
+                    div Риелтор
+                    div {{::realtyCard.realty.contacts[0].name}} 
+                    div {{::realtyCard.realty.contacts[0].phones[0].phone}}
+                    div.color-hide скрыть
+            div(ng-if="realtyCard.realtylisttype == 'connections'" layout="column" layout-align="space-between start")
+                div.md-uppercase.color-primary Назначить показ
+                div.md-uppercase.color-danger Купить за 150 руб.
+                div.color-hide(ng-click="console.log('sdfsdf')") скрыть
             div(flex layout='row', layout-align='center center')
                 md-button(md-no-ink='' ng-click="realty.ngShowDescr =!realty.ngShowDescr").md-primary Подробнее
+                
 
     div.ph-32(ng-show="realty.ngShowDescr")
-        p {{::realtyCard.realty.details.descr}}
-        div(layout='row')
-            md-button(ng-click='realtyCard.takeRealty(realtyCard.realty._id)').md-raised.md-warn.btn-get-object Взять объект
-
+        div(ng-if="!realtyCard.realtylisttype")
+            p {{::realtyCard.realty.details.descr}}
+            div(layout='row')
+                md-button(ng-click='realtyCard.takeRealty(realtyCard.realty._id)').md-raised.md-warn.btn-get-object Взять объект
             span(flex)
             md-button(ng-click="realty.ngShowDescr =!realty.ngShowDescr") Закрыть
+        div(ng-if="realtyCard.realtylisttype == 'connections'")
+            div(layout="row")
+                p(flex="35") {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
+                p(flex="65") Удобства
+            div {{::realtyCard.realty.details.descr}}
+            div(layout="row")
+                div(flex="90")
+                div(flex="10") 
+                    md-button.md-default.md-raised(ng-click="realty.ngShowDescr =!realty.ngShowDescr") Закрыть
+        div(ng-if="realtyCard.realtylisttype == 'demonstration'")
+            div(layout="row")
+                p(flex="35") {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
+                p(flex="65") Удобства
+            div  {{::realtyCard.realty.details.descr}}
+            div(layout="row")
+                div(flex="90") Риелтор {{::realtyCard.realty.contacts[0].name}} {{::realtyCard.realty.contacts[0].phones[0].phone}}
+                div(flex="10") 
+                    md-button(ng-click="realty.ngShowDescr =!realty.ngShowDescr") Закрыть
         //div(flex='55')
         //    h3.md-title Номер собственника +7 925 111 22 33  Александр
         //    p Объект успешно сохранен в разделе «Мои объекты»!

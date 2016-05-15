@@ -33,7 +33,8 @@ export default angular.module(moduleName, [
   templateUrl: 'imports/ui/shared/realty-card/realty-card.view.html',
   bindings: {
     realty: '<',
-    slider: '&'
+    slider: '&',
+    realtylisttype: '<'
   },
   controllerAs: moduleName,
   controller: RealtyCard

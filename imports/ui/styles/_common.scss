@@ -1,3 +1,10 @@
+.brand-logo {
+  display: inline-block;
+  background: url('../img/logos/brand-logo.png') no-repeat;
+  width: 176px;
+  height: 34px;
+}
+
 .metro-color {
   display: inline-block;
   width: 8px;
@@ -7,23 +14,61 @@
 }
 
 .metro-color-green {
-    background-color: #388E3C;
+  background-color: #388E3C;
 }
 
 .metro-color-pink {
-    background-color: color($pink, 500);
+  background-color: color($pink, 500);
 }
 
 .dots {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 33%, transparent 0%);
-    background-repeat: repeat-x;
-    background-position: 0 bottom;
-    background-size: 4px 1px;
-    margin-bottom: 3px;
-    width: 200px;
-    span {
-        background: $white;
-        padding-right: 5px;
-        line-height: 10px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 33%, transparent 0%);
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: 4px 1px;
+  margin-bottom: 3px;
+  width: 200px;
+  span {
+      background: $white;
+      padding-right: 5px;
+      line-height: 10px;
+  }
+}
+
+md-card {
+  .btn-set-photo {
+    display: none;
+    @include centerer(true, false);
+    bottom: 16px;
+  }
+
+  .btn-remove-photo {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    margin: 0;
+    padding: 0;
+    line-height: 24px;
+    border-radius: 0;
+    background-color: #525252;
+    &:hover {
+      background-color: #525252;
+    }
+  }
+}
+
+.color{
+    &-danger{
+        color:rgb(255,82,82);
+    }
+    &-primary{
+        color:rgb(33,150,243);
+    }
+    &-hide{
+        color:#898989;
     }
 }

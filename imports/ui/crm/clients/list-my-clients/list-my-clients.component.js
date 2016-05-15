@@ -13,7 +13,7 @@ class ListMyClients {
     $reactive(this).attach($scope);
     
     let vm = this;
-    vm.status = $stateParams.status;
+    vm.status = $stateParams.status ? $stateParams.status : 'hot';
     vm.selectedTab = '';
     switch($stateParams.status){
         case 'hot':
@@ -24,6 +24,9 @@ class ListMyClients {
             break;
         case 'archive':
             vm.selectedTab = 2;
+            break;
+        default:
+            vm.selectedTab = 0;
             break;
     }
     this.subscribe('listClients', () => {

@@ -5,12 +5,14 @@ export const RentDetailsSchema = new SimpleSchema({
   conditions: {
     type: Array,
     label: 'Conditions',
-    allowedValues: ['furniture', 'kitchen_furniture', 'phone', 'tv', 'wifi', 'refrigerator', 'washer', 'animal', 'children'],
     optional: true
   },
   'conditions.$': {
     type: String,
     label: 'Conditions.[]',
+    allowedValues: dictionary.conditions.map(function (item) {
+      return item.id;
+    }),
     optional: true
   },
   // площадь комнат
@@ -20,7 +22,7 @@ export const RentDetailsSchema = new SimpleSchema({
     optional: true
   },
   'roomsSquare.$': {
-    type: Number,
+    type: String,
     label: 'roomsSquare.[]',
     optional: true
   },
@@ -111,6 +113,18 @@ export const RentDetailsSchema = new SimpleSchema({
     }),
     optional: true
   },
+  //Состав съемщиков
+  composition: {
+    type: Array,
+    label: 'composition',
+    optional: true
+  },
+  'composition.$': {
+    type: Boolean,
+    label: 'composition.[]',
+    // // allowedValues: [true, false, null],
+    optional: true
+  },
   //Вид из окна в фильтре
   windowView: {
     type: Number,
@@ -133,3 +147,4 @@ export const RentDetailsSchema = new SimpleSchema({
     type: String
   }
 });
+

@@ -13,6 +13,14 @@ export const AddressSchema = new SimpleSchema({
     max: 20,
     optional: true
   },
+  city: {
+    type: String,
+    optional: true
+  },
+  country: {
+    type: String,
+    optional: true
+  },
   street: {
     type: String,
     optional: true

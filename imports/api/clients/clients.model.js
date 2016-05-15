@@ -3,6 +3,7 @@
  */
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {clientNeedSchema} from './client-need.schema';
 export const Clients = new Mongo.Collection('clients');
 
 Clients.allow({
@@ -18,176 +19,48 @@ Clients.allow({
 });
 
 Clients.Schema = new SimpleSchema({
-  phone: {
+  comission: { // размер комиссии
+    type: Number,
+    optional: true
+  },
+  composition: { // состав ищущих жильё
     type: String,
     optional: true
   },
+  comissionLoyal: { // платит или нет комиссию
+    type: Boolean,
+    optional: true
+  },
   name: {
+    type: String
+  },
+  need: { // Сама потребность по объекту
+    type: clientNeedSchema,
+    optional: true
+  },
+  phone: {
+    type: String
+  },
+  realtorId: { // Какой риэлтор курирует клиента
     type: String,
     optional: true
+  },
+  realtorNote: { // Заметка от риэлтора по клиенту или от колл-центра
+    type: String
   },
   status: {//'realtor' - находится у риэлтора в работе (мои клиенты)
     type: String
   },
-  comission: {
-    type: Number,
-    optional: true
-  },
-  comissionLoyal: {
-    type: Boolean,
-    optional: true
-  },
-  composition: {
-    type: String,
-    optional: true
-  },
-  searchEndDate: {
+  searchEndDate: { // На когда ищет
     type: Date,
     optional: true
   },
-  searchStartDate: {
+  searchStartDate: { // Когда начал поиск
     type: Date,
     optional: true
   },
-  realtorId: {
-    type: String,
-    optional: true
-  },
-  realtorNote: {
-    type: String,
-    optional: true
-  },
-  roomcount: { //комнат
-    type: Array,
-    optional: true
-  },
-  'roomcount.$': { //комнат
-    type: String,
-    optional: true
-  },
-  subwaysEmbeded: { // Метро заполненное
-    type: Array,
-    optional: true
-  },
-  'subwaysEmbeded.$': { // Метро
-    type: Object,
-    optional: true,
-    blackbox: true
-  },
-  districtsEmbeded: { // Метро заполненное
-    type: Array,
-    optional: true
-  },
-  'districtsEmbeded.$': { // Метро
-    type: String,
-    optional: true
-  },
-  subways: { // Метро
-    type: Array,
-    optional: true
-  },
-  'subways.$': { // Метро
-    type: String,
-    optional: true
-  },
-  districts: {// районы
-    type: Array,
-    optional: true
-  },
-  'districts.$': {// районы
-    type: String,
-    optional: true
-  },
-  renovation: {  // Ремонт
-    type: Array,
-    optional: true
-  },
-  'renovation.$': {  // Ремонт
+  value:{
     type: Number,
-    optional: true
-  },
-  conditions: {  // Удобства
-    type: Array,
-    optional: true
-  },
-  'conditions.$': {  // Удобства
-    type: String,
-    optional: true
-  },
-  metroPeshkom: {  // ДО метро пешком TODO пешком или на машине
-    type: Number,
-    optional: true
-  },
-  floorFrom: {  // Этаж от
-    type: Number,
-    optional: true
-  },
-  floorTo: {  // Этаж до
-    type: Number,
-    optional: true
-  },
-  priceFrom: {  // Цена от
-    type: Number,
-    optional: true
-  },
-  priceTo: {  // Цена до
-    type: Number,
-    optional: true
-  },
-  type: {  //Аренда длительная например
-    type: Number,
-    optional: true
-  },
-  renovation: {  //Тип дома
-    type: Number,
-    optional: true
-  },
-  materials: {  //Тип дома
-    type: Number,
-    optional: true
-  },
-  squareTotal:{
-    type: Number,
-    optional: true
-  },
-  squareLiving:{
-    type: Number,
-    optional: true
-  },
-  squareKitchen:{
-    type: Number,
-    optional: true
-  },
-  elevatorSmall:{
-    type: Number,
-    optional: true
-  },
-  elevatorBig:{
-    type: Number,
-    optional: true
-  },
-  loggia:{
-    type: Number,
-    optional: true
-  },
-  balcony:{
-    type: Number,
-    optional: true
-  },
-  windowView:{
-    type: Number,
-    optional: true
-  },
-  /**
-   * Срочность
-   * Вид оплаты
-   * Продолжительность поиска
-   * Причина долго поиска
-   * Индивидуальные особенности
-   * Характер клиента
-   */
-  meta: {
-    type: Object,
     optional: true
   }
 });

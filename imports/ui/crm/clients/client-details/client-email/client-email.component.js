@@ -3,6 +3,8 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import {Email} from 'meteor/email';
+import {Meteor} from 'meteor/meteor';
 
 import './client-email.view.html';
 
@@ -10,6 +12,11 @@ class ClientEmail {
   /* @ngInject */
   constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
+  }
+
+  send() {
+    console.log('sendTest em');
+    Meteor.call('sendTest');
   }
 }
 

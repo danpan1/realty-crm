@@ -15,7 +15,7 @@ class ClientDemonstration {
     
     console.log($stateParams);
     
-    vm.perPage = 20;
+    vm.perPage = 5;
     vm.page = 1;
     this.showSlider = false;
     this.slideShowImages = [];
@@ -59,6 +59,12 @@ class ClientDemonstration {
       }
     });
     
+  }
+  
+  setSliderImages(images) {
+    console.log(images);
+    this.showSlider = true;
+    this.slideShowImages = images;
   }
 }
 

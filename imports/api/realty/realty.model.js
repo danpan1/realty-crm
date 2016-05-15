@@ -4,6 +4,7 @@ import {dictionary} from '../dictionary';
 export const Realty = new Mongo.Collection('realty');
 export const Parser = new Mongo.Collection('parser');
 import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
+import {Roles} from 'meteor/alanning:roles'
 import {AddressSchema} from './schemas/address.schema';
 import {AdSchema} from './schemas/ad.schema';
 import {ContactsSchema} from './schemas/contacts.schema';
@@ -13,21 +14,22 @@ import {ReportsSchema} from './schemas/reports.schema';
 import {RentDetailsSchema} from './schemas/details.schema';
 // mongodump -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
 // mongorestore -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
+import {Meteor} from 'meteor/meteor';
 
 // mongorestore -h 127.0.0.1 --port 27017 -d getrent dump/meteor
 // mongodump -h 127.0.0.1 --port 27017 -d getrent dump2/meteor
-
-// Realty.allow({
-//   update: function () {
-//     return Roles.userIsInRole(Meteor.userId(), ['business']);
-//   },
-//   insert: function () {
-//     return Roles.userIsInRole(Meteor.userId(), ['business']);
-//   },
-//   remove: function () {
-//     return Roles.userIsInRole(Meteor.userId(), ['business']);
-//   }
-// });
+// db.realty.remove({status: {$ne:'new'}})
+Realty.allow({
+  update: function () {
+    return Roles.userIsInRole(Meteor.userId(), ['business']);
+  },
+  insert: function () {
+    return Roles.userIsInRole(Meteor.userId(), ['business']);
+  },
+  remove: function () {
+    return Roles.userIsInRole(Meteor.userId(), ['business']);
+  }
+});
 
 Realty.Schema = new SimpleSchema({
   //Это все относится к Карточка которые показываются в Листах
@@ -59,11 +61,11 @@ Realty.Schema = new SimpleSchema({
     max: 9999999999
   },
   roomcount: {//Количество комнат ['1', '2', '3', '4+']
-    type: String,
+    type: Number,
     label: 'roomcount',
-    allowedValues: dictionary.roomcount,
+    allowedValues: dictionary.roomcount.map((item)=> {return item.id;}),
     optional: true
-  }, //TODO количество комнат надо в call center чтобы забивали. Пока отказываем в парсинге
+  },
   square: {  // площадь помещений общая указывает на карточке
     type: Number,
     decimal: true,
@@ -127,7 +129,11 @@ Realty.Schema = new SimpleSchema({
   updatedAt: {
     type: Date,
     optional: true
-  }  //TODO Рифат прикрутить autoUpdate записывание sаты
+  },
+  value: {
+    type: Number,
+    optional: true
+  }
 });
 
 //Каждый update  проставляет время udate now

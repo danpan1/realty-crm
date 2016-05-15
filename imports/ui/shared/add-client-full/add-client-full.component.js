@@ -19,6 +19,7 @@ class AddClientFull {
   }
 
   submit(valid) {
+    console.log('submit');
     if (!valid) {
       alert('не все данные корректны');
       return;
@@ -31,22 +32,26 @@ class AddClientFull {
     //   this.client[key] = this.filterQuery[key];
     // }
     console.log('inserted', this.client);
-    Clients.insert(this.client);
+    // Clients.insert(this.client);
+    Meteor.call('addClient', this.client);
     this.resetClient();
   }
 
   resetClient() {
+    const vm = this;
     this.client = {
       name: '',
       phone: '',
-      status: 'realtor',
+      status: vm.pageStatus,
       comissionLoyal: false,
       searchStartDate: new Date(),
       realtorNote: '',
       subways: [],
       districts: [],
-      subwaysEmbeded: [],
-      districtsEmbeded: []
+      embedded: {
+        subways: [],
+        districts: []
+      }
     };
     this.filterQuery = {roomcount: []};
     this.roomcount = [];
@@ -60,7 +65,7 @@ export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/add-client-full/add-client-full.view.html',
-  bindings: {},
+  bindings: {pageStatus: '@'},
   controllerAs: moduleName,
   controller: AddClientFull
 });

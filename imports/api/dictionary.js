@@ -27,12 +27,13 @@ export const dictionary = {
   ],
   conditions: [
     {id: 'furniture', name: 'Мебель'},
-    {id: 'kitchen_furniture', name: 'Кухонная мебель'},
+    {id: 'kitchen_furniture', name: 'Кух. мебель'},
     {id: 'tv', name: 'Телевизор'},
     {id: 'refrigerator', name: 'Холодильник'},
-    {id: 'washer', name: 'Стиральная машина'},
+    {id: 'washer', name: 'Стир. машина'},
     {id: 'phone', name: 'Телефон'},
     {id: 'animal', name: 'С животными'},
+    {id: 'elevator', name: 'Лифт'},
     {id: 'children', name: 'С детьми'},
     {id: 'wifi', name: 'Wi-Fi'}
   ],
@@ -83,7 +84,24 @@ export const dictionary = {
     {id: 3, name: 'Качественный'},
     {id: 4, name: 'Капитальный'}
   ],
-  roomcount: ['1', '2', '3', '4+'],
+  roomcount: [
+    {id: 1, name: '1'},
+    {id: 2, name: '2'},
+    {id: 3, name: '3'},
+    {id: 99, name: '4+'}
+  ],
+  roomcountBig: [
+    {id: 1, name: '1'},
+    {id: 2, name: '2'},
+    {id: 3, name: '3'},
+    {id: 4, name: '4'},
+    {id: 5, name: '5'},
+    {id: 6, name: '6'},
+    {id: 7, name: '7'},
+    {id: 8, name: '8'},
+    {id: 9, name: '9'},
+    {id: 98, name: '10+'}
+  ],
   transport: [
     {id: 0, name: 'пешком'},
     {id: 1, name: 'общественный транспорт'}
