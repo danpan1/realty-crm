@@ -16,62 +16,91 @@ class OneReviewDescContent {
     $reactive(this).attach($scope);
     /* Устанавливаем дефолтные значения для всех используемых в компоненте переменных */
     this.saleDescription = saleDescription;
-    this.activeBenefitNumber = 0;
-    this.activeBenefitObject;
+    this.active = {
+        index:-1,
+        content:''
+    };
     this.activeBenefit = {content,label:''};
-    this.descDetails = '';
+    this.activeObject = {
+        object:'',
+        name:undefined,
+        index:undefined
+    };
+    this.desc = {
+        details:'',
+        nextdetails: '',
+        descTitleNumber: 0
+    }
+    this.compareLength = 0;
     this.descTitleNumber = 0;
-    this.activeBenefitObjectName = 'Местоположение';
-    this.activeBenefitObjectNumber = 0;
-    this.benefitsList = ['Местоположение','Жилая комната','Спальная комната','Ванная','Туалеты','Детали отделки','Стены, окна, потолки','Полы','Электричество и освещение','Обогрев, системы кондиционирования','Дополнительные комнаты','Простор, уединение, дополнительные удобства','Цена, оплата','Концовка','Конструкции и сохранность','Участки - только для загородки','Вход','Подвал','Портик, дворик, беседка, веранда, бассейн, гаражи, забор - только для загородки','Крыша']
+    this.benefitsList = saleDescription.map((item)=> {return item.name})
+    this.textVariable = "";
     this.setActiveBenefit();
   }
   
   /* Сохранение описания и заголовка на сервер */
   
   /* Выбираем вид выгоды */
-  setActiveBenefitObjectNumber(activeBenefitObjectNumber){
-      this.activeBenefitObjectNumber = activeBenefitObjectNumber;
-      this.activeBenefitObjectName = this.benefitsList[this.activeBenefitObjectNumber];
+  setActiveBenefitObjectNumber(activeNumber){
+      if(activeNumber){
+        this.activeObject.index = activeNumber;
+      }
+      this.activeObject.name = this.benefitsList[this.activeObject.index];
+      if(this.desc.nextdetails.length != this.compareLength) this.addDescDetail();
       this.setActiveBenefit();
   }
   nextActiveBenefitObjectNumber () {
-      if(this.activeBenefitObjectNumber + 1 >= this.saleDescription.length - 1) return false
-      else this.activeBenefitObjectNumber++;
-      this.activeBenefitObjectName = this.benefitsList[this.activeBenefitObjectNumber];
-      this.setActiveBenefit();
+      if(this.activeObject.index == undefined) this.activeObject.index = 0;
+      else this.activeObject.index++;
+      this.setActiveBenefitObjectNumber();
   }
   prevActiveBenefitObjectNumber () {
-      if(this.activeBenefitObjectNumber - 1 < 0) return false
-      else this.activeBenefitObjectNumber--;
-      this.activeBenefitObjectName = this.benefitsList[this.activeBenefitObjectNumber];
-      this.setActiveBenefit();
+      this.activeObject.index--;
+      this.setActiveBenefitObjectNumber();
   }
   
   /* Устанавливаем описание выбранного вида выгоды */
-  setActiveBenefitNumber (activeBenefitNumber) {
-      this.activeBenefitNumber = activeBenefitNumber;
-      this.activeBenefitContentName = this.benefitsList[activeBenefitNumber];
+  setActiveBenefitNumber (activeNumber) {
+      if(activeNumber) this.active.index = activeNumber;
+      this.textVariable = this.activeBenefit.content[this.active.index] ? this.activeBenefit.content[this.active.index] : '';
+      this.desc.details = this.desc.nextdetails + this.textVariable;
+      this.compareLength = this.desc.details.length;
   }
   nextActiveBenefitNumber () {
-      if(this.activeBenefitNumber + 1 >= this.saleDescription.length - 1) return false
-      else this.activeBenefitNumber++;
+      this.active.index++;
+      this.setActiveBenefitNumber();
   }
   prevActiveBenefitNumber () {
-      if(this.activeBenefitNumber - 1 < 0) return false
-      else this.activeBenefitNumber--;
+      this.active.index--;
+      this.setActiveBenefitNumber();
   }
   
   /* Добавляем текст к итоговому описанию */
   addDescDetail () {
-      this.descDetails += ' ' + this.activeBenefit.content[this.activeBenefitNumber];
-      this.realty.details.descr = this.descDetails;
+      this.realty.details.descr = this.desc.details;
+      this.desc.nextdetails = this.desc.details + ' ';
+     // this.textVariable = this.activeBenefit.content[this.active.index] ? this.activeBenefit.content[this.active.index] : '';
+      this.desc.details = this.desc.nextdetails + this.textVariable;
+      this.compareLength = this.desc.nextdetails.length;
   }
   
   /* Устанавливаем информацию о выбранном виде выгоды */
   setActiveBenefit () {
-      this.activeBenefit.content = this.saleDescription[this.activeBenefitObjectNumber].value;
-      this.activeBenefit.label = this.saleDescription[this.activeBenefitObjectNumber].name;
+      if(this.activeObject.index != undefined){
+          this.activeBenefit.content = this.saleDescription[this.activeObject.index].value;
+          this.activeBenefit.label = this.saleDescription[this.activeObject.index].name;
+          this.textVariable = '';
+          this.desc.details = this.desc.nextdetails + this.textVariable;
+          this.active.index = -1;
+      }
+  }
+  
+  /* Просто отслеживаем, что пользователь что-то нажал в textarea, значит, нужно это сохранить */
+  controlKeyPress (text) {
+      if(text){
+        this.compareLength = text.length;
+        this.realty.details.descr = text;
+      }
   }
 }
 

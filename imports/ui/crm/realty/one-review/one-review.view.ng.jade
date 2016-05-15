@@ -45,7 +45,7 @@ div(md-whiteframe='2').mt-0.mb-16.ph-32.pv-16
 
     div(flex)
         one-review-desc(realty='oneReview.realty')
-        md-button(ng-click="oneReview.saveNewDescription(oneReview.realty._id)").md-primary.md-raised.ml-0 Сгенерировать новое описание
+        md-button(ng-disabled='!oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000' ng-click='oneReview.saveNewDescription(oneReview.realty._id)').md-primary.md-raised.ml-0 Сгенерировать новое описание
 
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
