@@ -17,9 +17,12 @@ class AddRealtyFull {
     this.realty = {contacts: [{phones: []}]};
     this.activeTab = 0;
     this.state = $state;
+    this.fake = {
+      arenda: true
+    }
   }
 
-//ng-disabled='firstForm.$invalid || secondForm.$invalid || false'
+  //ng-disabled='firstForm.$invalid || secondForm.$invalid || false'
   submit(valid) {
     const vm = this;
     if (!valid) {
@@ -31,6 +34,7 @@ class AddRealtyFull {
      }
      this.realty.details.composition = compositionArr;*/
     this.realty.status = 'taken';
+    this.realty.type = 4;
     this.realty.address = {
       city: 'Москва',
       country: 'Россия',
