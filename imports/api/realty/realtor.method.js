@@ -75,6 +75,7 @@ export function addRealty(realty) {
           console.log(`Realty added : id=${nextValue}`);
         }
       });
+      return nextValue;
 
     }
   }

@@ -43,18 +43,18 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='50')
                             div(layout='row' layout-align='start center').mv-16
                                 md-input-container(flex).mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.floorFrom' placeholder='Этаж')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
                                 md-input-container(flex flex-offset='5').mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.floorTo' placeholder='Этажей в доме')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
                     div(layout='row')
                         div(flex='80')
                             div(layout='row' layout-align='start center').mv-16
                                 md-input-container(flex).mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.squareTotal' placeholder='Общая площадь м²')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
                                 md-input-container(flex flex-offset='5').mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.squareLiving' placeholder='Жилая площадь м²')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
                                 md-input-container(flex flex-offset='5').mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.squareKitchen' placeholder='Кухня м²')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
 
                     div(layout='row')
                         div(flex='80')
@@ -91,7 +91,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                             div(layout='row').mv-16
                                 md-input-container(flex).mv-0.form-required
                                     label Пассажирских лифтов
-                                    md-select(required ng-model='addRealtyFull.realty.details.elevatorSmall')
+                                    md-select(required ng-model='addRealtyFull.realty.details.elevator')
                                         md-option(ng-value='elevator.id',
                                         ng-repeat="elevator in addRealtyFull.dictionary.elevator ") {{elevator.name}}
                                 md-input-container(flex flex-offset='5').mv-0.form-required
