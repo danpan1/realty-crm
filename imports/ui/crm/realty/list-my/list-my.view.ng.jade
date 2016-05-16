@@ -19,8 +19,8 @@ div {{listMy.realtyCount}} объектов в работе
         md-divider
 
         div(layout='column' layout-align='space-around center').workList_Progress.p-8
-            div.md-title.orange 55% / 100%
-            div.orange Срочно улучшить
+            div.md-title.orange {{::realty.moderator.percent.total || 0}}% / 100%
+            div.orange {{(realty.moderator.percent.total !== 100) ? 'Срочно улучшить' : 'Максимально подготовлен'}}
         md-divider
 
         div(layout='column' layout-align='space-around center').workList_Advertisement.p-8
