@@ -4,7 +4,7 @@ div(md-whiteframe='1')
             md-icon(md-svg-src='svg/icon-arrow-left.svg')
         h3.md-headline {{realtyOneLayout.infoRealty.address.value}}
 div(md-whiteframe='1')
-    md-tabs()
+    md-tabs(md-selected="realtyOneLayout.selectedTab")
         //md-tab(label='Связи' ui-sref='crm.realty.one.connections({assort:\'manual\'})')
         //md-tab(label='Показы' ui-sref='crm.realty.one.demonstrations')
         md-tab(label='Подготовка {{realtyOneLayout.infoRealty.moderator.percent.total || 0}}%' ui-sref='crm.realty.one.review')
