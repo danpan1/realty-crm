@@ -14,7 +14,7 @@ one-review {
     border-radius: 0;
     &:hover {
       .one-review-btn-set-photo {
-        display: block;
+        display: block !important;
       }
     }
 

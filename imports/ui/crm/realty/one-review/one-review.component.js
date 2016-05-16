@@ -35,6 +35,22 @@ class OneReview {
 
   }
 
+  removeImage(image) {
+    this.realty.details.images = this.realty.details.images.filter((item) => {
+      return item.url != image.url;
+    });
+    if (this.realty.image == image.url) {
+      this.realty.image = '';
+    }
+    this.saveNewDescription();
+    this.s3DeleteImage(image);
+  }
+
+  setMainImage(image) {
+    this.realty.image = image.url;
+    this.saveNewDescription();
+  }
+
   // удаление фото из Amazon S3
   s3DeleteImage(image) {
     S3.delete(image.relative_url, (error)=> {
@@ -46,16 +62,6 @@ class OneReview {
   }
 
   // удаление фото из View
-  removeImage(image) {
-    this.realty.details.images = this.realty.details.images.filter((item) => {
-      return item.url != image.url;
-    });
-    if (this.realty.image == image.url) {
-      this.realty.image = '';
-    }
-    this.saveNewDescription();
-    this.s3DeleteImage(image);
-  }
 
   upload(files) {
     console.log('files', files);
@@ -118,9 +124,9 @@ class OneReview {
     }
     if (!this.realty.moderator.percent) {
       this.realty.moderator.percent = {
-        advertisement : 0,
-        photo : 0,
-        description : 0
+        advertisement: 0,
+        photo: 0,
+        description: 0
       };
     }
     let percent = this.realty.moderator.percent;
