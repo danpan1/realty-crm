@@ -14,10 +14,11 @@ class AddRealtyFull {
   constructor($scope, $reactive, $state) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
-    this.realty = {contacts : [{phones:[]}]};
+    this.realty = {contacts: [{phones: []}]};
     this.activeTab = 0;
     this.state = $state;
   }
+
 //ng-disabled='firstForm.$invalid || secondForm.$invalid || false'
   submit(valid) {
     const vm = this;
@@ -25,11 +26,11 @@ class AddRealtyFull {
       return;
     }
     /*var compositionArr = [false,false,false,false,false,false,false];
-    for(var i in this.realty.details.composition){
-        compositionArr[this.realty.details.composition[i]] = true;
-    }
-    this.realty.details.composition = compositionArr;*/
-    this.realty.status = 'sale';
+     for(var i in this.realty.details.composition){
+     compositionArr[this.realty.details.composition[i]] = true;
+     }
+     this.realty.details.composition = compositionArr;*/
+    this.realty.status = 'taken';
     this.realty.address = {
       city: 'Москва',
       country: 'Россия',
@@ -47,10 +48,10 @@ class AddRealtyFull {
       } else {
         console.log(`Realty added : cleintSide, ${vm.realty}`);
         console.log(result);
-        this.state.go('crm.realty.one.info', {realtyId: result}) ;
+        this.state.go('crm.realty.one.info', {realtyId: result});
       }
     });
-    
+
   }
 
 }

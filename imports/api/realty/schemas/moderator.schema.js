@@ -43,5 +43,10 @@ export const ModeratorSchema = new SimpleSchema({
   'percent.total': {
     type: Number,
     optional: true
+  },
+  status: {
+    type: String,
+    allowedValues : ['todo', 'inprogress', 'done'],
+    optional: true
   }
 });
