@@ -36,9 +36,32 @@ class OneReview {
 
   }
 
+  // удаление фото из Amazon S3
+  s3DeleteImage(image) {
+    S3.delete(image.relative_url, (error)=> {
+        if (error) {
+          console.log(error);
+        }
+      }
+    );
+  }
+
+  // удаление фото из View
+  removeImage(image) {
+    this.realty.details.images = this.realty.details.images.filter((item) => {
+      return item.url != image.url;
+    });
+    if (this.realty.image == image.url) {
+      this.realty.image = '';
+    }
+    this.saveNewDescription();
+    this.s3DeleteImage(image);
+  }
+
   upload(files) {
     console.log('files', files);
     const vm = this;
+    this.isUploading = true;
     S3.upload({
       files: files,
       path: ''
@@ -46,8 +69,11 @@ class OneReview {
       if (error) {
         console.log(error);
       } else {
-        vm.realty.details.images = [result];
-        console.log(result);
+        //TODO переделать. при добавлении возможно Array сразу
+        if (!vm.realty.details.images) {
+          vm.realty.details.images = [];
+        }
+        vm.realty.details.images.push(result);
         console.log('uploaded', result);
         vm.saveNewDescription();
       }
