@@ -5,16 +5,18 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {dictionary} from '/imports/api/dictionary';
 import {Meteor} from 'meteor/meteor';
+import {Realty} from '/imports/api/realty/realty.model';
 
 import './add-realty-full.view.html';
 
 class AddRealtyFull {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $state) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.realty = {};
     this.activeTab = 0;
+    this.state = $state;
   }
 //ng-disabled='firstForm.$invalid || secondForm.$invalid || false'
   submit(valid) {
@@ -38,11 +40,13 @@ class AddRealtyFull {
       value: vm.locations.full.unrestricted_value
     };
 
-    Meteor.call('addRealty', this.realty, (error) => {
+    Meteor.call('addRealty', this.realty, (error, result) => {
       if (error) {
         console.log(error);
       } else {
         console.log(`Realty added : cleintSide, ${vm.realty}`);
+        console.log(result);
+        this.state.go('crm.realty.one.info', {realtyId: result}) ;
       }
     });
     

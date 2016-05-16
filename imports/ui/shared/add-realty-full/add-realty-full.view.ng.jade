@@ -125,6 +125,6 @@ md-tabs(md-dynamic-height md-border-bottom)
             
 
 div(layout='row').mv-16.mh-32
-    md-button(ng-click='addRealtyFull.submit(true)' ui-sref="crm.realty.one.info({realtyId: addRealtyFull.nextId})" ng-if="addRealtyFull.activeTab == 2" ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-success.md-raised.md-title Добавить клиента!
+    md-button(ng-click='addRealtyFull.submit(true)' ng-if="addRealtyFull.activeTab == 2" ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-success.md-raised.md-title Добавить клиента!
     md-button(ng-click='addRealtyFull.activeTab = addRealtyFull.activeTab + 1' ng-if="addRealtyFull.activeTab != 2" ng-disabled="(firstForm.$invalid && addRealtyFull.activeTab == 0) || (secondForm.$invalid && addRealtyFull.activeTab == 1) || (thirdForm.$invalid && addRealtyFull.activeTab == 2) || (fourthForm.$invalid && addRealtyFull.activeTab == 3)").md-primart.md-raised Продолжить {{addRealtyFull.activeTab}}, 1:{{firstForm.$invalid}}, 2:{{secondForm.$invalid}}, 3:{{thirdForm.$invalid}}, 
     md-button(md-no-ink flex-offset='10' ng-click='addRealtyFull.activeTab = addRealtyFull.activeTab - 1' ng-if="addRealtyFull.activeTab != 0").md-primary.md-body-1 Вернуться на шаг назад
