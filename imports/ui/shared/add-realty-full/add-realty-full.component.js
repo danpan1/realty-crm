@@ -14,7 +14,7 @@ class AddRealtyFull {
   constructor($scope, $reactive, $state) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
-    this.realty = {};
+    this.realty = {contacts : [{phones:[]}]};
     this.activeTab = 0;
     this.state = $state;
   }
@@ -39,7 +39,8 @@ class AddRealtyFull {
       districtName: vm.locations.full.data.city_district,
       value: vm.locations.full.unrestricted_value
     };
-
+    console.log('this.realty', this.realty);
+    console.log('this.locations', this.locations);
     Meteor.call('addRealty', this.realty, (error, result) => {
       if (error) {
         console.log(error);
