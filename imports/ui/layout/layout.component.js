@@ -80,8 +80,31 @@ const URL_ICON_MENU = 'svg/menu.svg';
 function mdIconConfig($mdIconProvider) {
   'ngInject';
   $mdIconProvider
-    .icon('menu', URL_ICON_MENU, 24);
-  const planetPackageBower = '/packages/planettraining_material-design-icons/bower_components/';
+    .icon('menu', URL_ICON_MENU, 24)
+    .icon('conditions_elevator', 'svg/elevator.svg', 28)
+    .icon('conditions_children', 'svg/children.svg', 24)
+    .icon('conditions_furniture', 'svg/furniture.svg', 24)
+    .icon('conditions_kitchen_furniture', 'svg/kitchen_furniture.svg', 24)
+    .icon('conditions_tv', 'svg/tv.svg', 24)
+    .icon('conditions_refrigerator', 'svg/refrigerator.svg', 24)
+    .icon('conditions_washer', 'svg/washer.svg', 24)
+    .icon('conditions_phone', 'svg/phone.svg', 24)
+    .icon('conditions_animal', 'svg/animal.svg', 24)
+    .icon('conditions_wifi', 'svg/wifi.svg', 24);
+    
+  /*  
+  $mdIconProvider
+    .icon('cond_desktop', 'svg/cond_desktop.svg', 24)
+    .icon('cond_event_seat', 'svg/cond_event_seat.svg', 24)
+    .icon('cond_kitchen', 'svg/cond_kitchen.svg', 24)
+    .icon('cond_laundry', 'svg/cond_laundry.svg', 24)
+    .icon('cond_pets', 'svg/cond_pets.svg', 24)
+    .icon('cond_restaurant', 'svg/cond_restaurant.svg', 24)
+    .icon('cond_wifi', 'svg/cond_wifi.svg', 24);*/
+    
+    
+    
+  /*const planetPackageBower = '/packages/planettraining_material-design-icons/bower_components/';
 
   const iconPath = planetPackageBower + 'material-design-icons/sprites/svg-sprite/';
 
@@ -99,7 +122,7 @@ function mdIconConfig($mdIconProvider) {
     .iconSet('navigation',
       iconPath + 'svg-sprite-navigation.svg')
     .iconSet('image',
-      iconPath + 'svg-sprite-image.svg');
+      iconPath + 'svg-sprite-image.svg');*/
 }
 
 function mdThemeConfig($mdThemingProvider) {
