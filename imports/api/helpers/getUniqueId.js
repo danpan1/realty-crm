@@ -14,5 +14,6 @@ const doAutoincrement = function(collection, callback) {
 };
 
 export default function nextAutoincrement(collection) {
-  return Meteor.wrapAsync(doAutoincrement)(collection).value;
+    if(Meteor.wrapAsync(doAutoincrement)(collection)) return Meteor.wrapAsync(doAutoincrement)(collection).value;
+    else return 0;
 }

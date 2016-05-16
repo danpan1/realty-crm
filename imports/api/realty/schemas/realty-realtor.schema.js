@@ -54,5 +54,13 @@ export const RealtyRealtorSchema = new SimpleSchema({
   competitors: {
     type: Number,
     optional: true
+  },
+  clientpercent:{
+    type: Number,
+    optional: true
+  },
+  partnerpercent:{
+    type: Number,
+    optional: true
   }
 });

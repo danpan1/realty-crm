@@ -14,13 +14,19 @@ class AddRealtyFull {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.realty = {};
+    this.activeTab = 0;
   }
-
+//ng-disabled='firstForm.$invalid || secondForm.$invalid || false'
   submit(valid) {
     const vm = this;
     if (!valid) {
       return;
     }
+    var compositionArr = [false,false,false,false,false,false,false];
+    for(var i in this.realty.details.composition){
+        compositionArr[this.realty.details.composition[i]] = true;
+    }
+    this.realty.details.composition = compositionArr;
     this.realty.status = 'sale';
     this.realty.address = {
       city: 'Москва',
@@ -31,16 +37,15 @@ class AddRealtyFull {
       districtName: vm.locations.full.data.city_district,
       value: vm.locations.full.unrestricted_value
     };
-    console.log(this.realty);
 
-    // Meteor.call('addRealty', this.realty, (error) => {
-    //   if (error) {
-    //     console.log(error);
-    //   } else {
-    //     console.log(`Realty added : cleintSide, ${vm.realty}`);
-    //   }
-    // });
-
+    Meteor.call('addRealty', this.realty, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(`Realty added : cleintSide, ${vm.realty}`);
+      }
+    });
+    
   }
 
 }

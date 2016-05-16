@@ -12,6 +12,24 @@ class RealtyConditions {
     $reactive(this).attach($scope);
     this.conditionsDictionary = dictionary.conditions;
   }
+  
+  toggle  (item) {
+      if(!this.conditionsSelected){
+        this.conditionsSelected = [];
+        this.conditionsSelected.push(item);
+      }else{
+        var checkConditionExist = false;
+        for(var i in this.conditionsSelected){
+            if(this.conditionsSelected[i]==item) {
+                checkConditionExist = true;
+                this.conditionsSelected.splice(i,1);
+                break;
+            }
+        }
+        if(!checkConditionExist) this.conditionsSelected.push(item);
+      }
+  };
+      
 
 }
 
@@ -23,7 +41,8 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
     templateUrl: 'imports/ui/shared/realty-conditions/realty-conditions.view.html',
     bindings: {
-      conditionsSelected: '=ngModel'
+      conditionsSelected: '=ngModel',
+      checkbox: '='
     },
     controllerAs: moduleName,
     controller: RealtyConditions
