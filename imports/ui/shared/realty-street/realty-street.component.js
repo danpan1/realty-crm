@@ -13,7 +13,7 @@ class RealtyStreet {
 
   querySearch(query) {
     const vm = this;
-    console.log('request', query);
+    //console.log('request', query);
     return AddressService.search({
       'from_bound': {'value': 'street'},
       'to_bound': {'value': 'street'},
@@ -34,7 +34,7 @@ class RealtyStreet {
 
   querySearchHouse(query) {
     const vm = this;
-    console.log('request', query);
+    //console.log('request', query);
     // console.log(vm.selectedStreet);
     // query = vm.selectedStreet.value + ' ' + query;
     return AddressService.search({
@@ -51,7 +51,7 @@ class RealtyStreet {
   }
   querySearchHouseFinal(query) {
     const vm = this;
-    console.log('request', query.unrestricted_value);
+    //console.log('request', query.unrestricted_value);
     // console.log(vm.selectedStreet);
     // query = vm.selectedStreet.value + ' ' + query;
     return AddressService.search({
@@ -63,7 +63,7 @@ class RealtyStreet {
     }).then((res)=> {
       vm.suggestionsStreetList = res.suggestions;
       vm.selectedData = res.suggestions[0];
-      console.log(res.suggestions);
+      //console.log(res.suggestions);
       return res.suggestions;
     });
   }

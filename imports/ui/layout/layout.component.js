@@ -17,17 +17,17 @@ class Layout {
       // {name: 'Добавить клиента', uisref: 'crm.clients.add'},
       // {name: 'Объекты', uisref: 'crm.realty.list.new'},
       {name: 'Мои объекты', uisref: 'crm.realty.list.my'},
-      {name: 'Новые объекты', uisref: 'crm.realty.list.new'},
-      {name: 'Архив объекты', uisref: 'crm.realty.list.my'+'({status: \'archive\'})'},
+      // {name: 'Новые объекты', uisref: 'crm.realty.list.new'},
+      // {name: 'Архив объекты', uisref: 'crm.realty.list.my'+'({status: \'archive\'})'},
       {name: 'Мои Клиенты', uisref: 'crm.clients.list.my'+'({status: \'realtor\'})'},
-      {name: 'Горячие Клиенты', uisref: 'crm.clients.list.my'+'({status: \'hot\'})'},
+      // {name: 'Горячие Клиенты', uisref: 'crm.clients.list.my'+'({status: \'hot\'})'},
       // {name:'Дела', uisref:'realty'},
       // {name:'Отчет', uisref:'realty'},
       // {name:'Собщения', uisref:'realty'},
       // {name:'Документы', uisref:'realty'},
       // {name:'Настройки', uisref:'realty'},
-      {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
-      {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
+      // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
+      // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
       {name:'Модератор', uisref:'call-center.moderator'}
     ];
     this.actions = [{
