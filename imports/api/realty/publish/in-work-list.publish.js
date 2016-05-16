@@ -39,6 +39,7 @@ if (Meteor.isServer) {
             'address.street': 1,
             'address.meta.house': 1,
             'operator.qualification': 1,
+            'moderator.percent.total': 1,
             contacts: 1,
             realtor: 1,
             reports: 1,
