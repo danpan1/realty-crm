@@ -1,23 +1,70 @@
 
-.workList {
+.listMy {
+  > div {
+    background-color: #fff;
+  }
   border: 1px solid #f3f3f3;
+  &_Photo,
+  &_Address,
   &_Progress,
+  &_Advertisement,
+  &_Actions {
+    max-height: 10.4rem;
+  }
+
+  &_Photo {
+    width: 15.6rem;
+    img {
+      max-width: 156px;
+      max-height: 104px;
+    }
+  }
+  &_Address {
+    width: 15.8rem;
+  }
+  &_Progress {
+    width: 15.5rem;
+  }
   &_Advertisement {
-    width: 16rem;
+    width: 16.6rem;
   }
   &_Actions {
     width: 38rem;
-    background: #fffde7;
-  }
-  &_Photo {
-    width: 140px;
-    img {
-      max-width: 140px;
-      max-height: 140px;
+    background: #fffde7 !important;
+    .md-button {
+      margin: 0 0 0 16px;
+      min-height: 16px;
+      line-height: 16px;
+      text-align: left;
+      text-transform: lowercase;
+      color: #106cc8;
     }
   }
 }
 
 .orange {
   color: #ff5722;
+}
+
+.listMy_Address-item {
+  line-height: 27px;
+}
+
+.listMy_col {
+  padding: 15px 16px;
+  &:nth-child(1) {
+    width: 14.4rem;
+  }
+  &:nth-child(2) {
+    width: 17.9rem;
+  }
+  &:nth-child(3) {
+    width: 15rem;
+  }
+  &:nth-child(4) {
+    width: 16rem;
+  }
+  &:nth-child(5) {
+    width: 38rem;
+  }
 }
