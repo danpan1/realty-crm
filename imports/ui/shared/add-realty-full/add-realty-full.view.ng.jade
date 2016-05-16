@@ -31,7 +31,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                             div(layout='row' layout-align='start end').mv-16
                                 md-input-container(flex).mv-0.form-required
                                     label Количество комнат
-                                    md-select(required ng-model='addRealtyFull.realty.details.roomcount')
+                                    md-select(required ng-model='addRealtyFull.realty.roomcount')
                                         md-option(ng-value='roomcount.id',
                                         ng-repeat="roomcount in addRealtyFull.dictionary.roomcountBig") {{roomcount.name}}
                                 div(flex='33' flex-offset='5')
@@ -108,7 +108,19 @@ md-tabs(md-dynamic-height md-border-bottom)
     md-tab(label='3) Стоимость' md-active='addRealtyFull.activeTab == 2' ng-click='addRealtyFull.activeTab = 2' ng-disabled='firstForm.$invalid || secondForm.$invalid || false')
         md-content().ph-32.pv-16
             form(novalidate name="thirdForm")
+
                 div(layout='column')
+                    div(layout='row')
+                        md-input-container().mv-0
+                            label Телефон
+                            input(ng-model='addRealtyFull.realty.contacts[0].phones[0].phone',
+                            placeholder='7 (XXX) XXX XX XX',
+                            ng-pattern='/^[0-9]{11}$/',
+                            required='',
+                            md-maxlength='11')
+                        md-input-container(flex-offset='5').mv-0
+                            label Имя клиента
+                            input(ng-model='addRealtyFull.realty.contacts[0].name', required='')
                     div(layout='row')
                         md-input-container(flex).mv-0.form-required
                             input(required ng-model='addRealtyFull.realty.price' placeholder='Цена')
