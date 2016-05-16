@@ -1,13 +1,13 @@
 div(md-whiteframe='1')
     div(layout='row' layout-align='start center').topbar
-        md-button(aria-label='Вернуться назад' ui-sref="crm.realty.list.inWork").raised.realty-one-layout-btn-back
+        md-button(aria-label='Вернуться назад' ui-sref="crm.realty.list.my").raised.realty-one-layout-btn-back
             md-icon(md-svg-src='svg/icon-arrow-left.svg')
-        h3.md-headline ул.Таганская д.15 к.1  кв.20
+        h3.md-headline {{realtyOneLayout.infoRealty.address.value}}
 div(md-whiteframe='1')
-    md-tabs()
-        md-tab(label='Связи' ui-sref='crm.realty.one.connections({assort:\'manual\'})')
-        md-tab(label='Показы' ui-sref='crm.realty.one.demonstrations')
-        md-tab(label='Подготовка 40%' ui-sref='crm.realty.one.review')
-        md-tab(label='Отправить предложение' ui-sref='crm.realty.one.email')
+    md-tabs(md-selected="realtyOneLayout.selectedTab")
+        //md-tab(label='Связи' ui-sref='crm.realty.one.connections({assort:\'manual\'})')
+        //md-tab(label='Показы' ui-sref='crm.realty.one.demonstrations')
+        md-tab(label='Подготовка {{realtyOneLayout.infoRealty.moderator.percent.total || 0}}%' ui-sref='crm.realty.one.review')
+        //md-tab(label='Отправить предложение' ui-sref='crm.realty.one.email')
         md-tab(label='Инфо об объекте' ui-sref='crm.realty.one.info')
 ui-view

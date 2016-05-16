@@ -11,10 +11,9 @@ import './one-review.view.html';
 
 class OneReview {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams, Upload) {
+  constructor($scope, $reactive, $stateParams) {
 
     $reactive(this).attach($scope);
-    this.Upload = Upload;
     let vm = this;
 
     this.subscribe('oneInfo', () => {
@@ -36,18 +35,52 @@ class OneReview {
 
   }
 
-  upload(file) {
-    console.log('start upload');
-    console.log(S3);
+  removeImage(image) {
+    this.realty.details.images = this.realty.details.images.filter((item) => {
+      return item.url != image.url;
+    });
+    if (this.realty.image == image.url) {
+      this.realty.image = '';
+    }
+    this.saveNewDescription();
+    this.s3DeleteImage(image);
+  }
+
+  setMainImage(image) {
+    this.realty.image = image.url;
+    this.saveNewDescription();
+  }
+
+  // удаление фото из Amazon S3
+  s3DeleteImage(image) {
+    S3.delete(image.relative_url, (error)=> {
+        if (error) {
+          console.log(error);
+        }
+      }
+    );
+  }
+
+  // удаление фото из View
+
+  upload(files) {
+    console.log('files', files);
+    const vm = this;
+    this.isUploading = true;
     S3.upload({
-      files: file,
+      files: files,
       path: ''
     }, (error, result) => {
       if (error) {
         console.log(error);
       } else {
-        console.log('uploaded');
-        console.log(result);
+        //TODO переделать. при добавлении возможно Array сразу
+        if (!vm.realty.details.images) {
+          vm.realty.details.images = [];
+        }
+        vm.realty.details.images.push(result);
+        console.log('uploaded', result);
+        vm.saveNewDescription();
       }
       // else {
       //   vm.addImagesToRealty(result);
@@ -73,20 +106,45 @@ class OneReview {
     // });
   }
 
-  
-  /* Сохранение описания и заголовка на сервер */
-  saveNewDescription (realtyId) {
-      Realty.update({_id: realtyId}, {
-        $set: this.realty
-      }, (error) => {
-        if(error) {
-          console.log(error)
-        } else {
-            console.log('Description updated!');
-        }
-      });
+  isExclusive() {
+    this.realty.realtor.isExclusive = !this.realty.realtor.isExclusive;
+    this.saveNewDescription();
   }
-  
+
+  isCheckout() {
+    this.realty.realtor.isCheckout = !this.realty.realtor.isCheckout;
+    this.saveNewDescription();
+  }
+
+  /* Сохранение описания и заголовка на сервер */
+  saveNewDescription() {
+    // let moderator = this.realty.moderator;
+    if (!this.realty.moderator) {
+      this.realty.moderator = {};
+    }
+    if (!this.realty.moderator.percent) {
+      this.realty.moderator.percent = {
+        advertisement: 0,
+        photo: 0,
+        description: 0
+      };
+    }
+    let percent = this.realty.moderator.percent;
+    percent.isExclusive = (this.realty.realtor.isExclusive) ? 20 : 0;
+    percent.isCheckout = (this.realty.realtor.isCheckout) ? 20 : 0;
+    this.realty.moderator.percent.total = percent.photo + percent.advertisement + percent.description + percent.isExclusive + percent.isCheckout;
+    console.log(this.realty);
+    Realty.update({_id: this.realty._id}, {
+      $set: this.realty
+    }, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Description updated!');
+      }
+    });
+  }
+
 }
 
 const moduleName = 'oneReview';

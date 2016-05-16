@@ -1,10 +1,11 @@
 one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
+    // IMAGES
     div(layout="row")
         div(flex="70")
-            button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)") prev
-            img(flex="100" src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}", md-whiteframe="2")
-            button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)") next
+    //        button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)") prev
+    //        img(flex="100" src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}", md-whiteframe="2")
+    //        button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)") next
     div(layout="row", layout-align="space-between")
         div(md-whiteframe='2' flex='80' layout-padding layout="row")
             div(flex="33")
@@ -42,14 +43,14 @@ div(layout="column", layout-align="space-around stretch")
                 h2 Условия
                 div
                     div().md-subhead Состав съемщиков
-                    div(ng-repeat="position in oneInfo.dictionary.composition")
-                        div(ng-if="oneInfo.realty.details.composition[$index]").md-subhead #[strong {{position.name}}]
+                    div(ng-repeat="position in oneInfo.realty.details.composition")
+                        div().md-subhead #[strong {{oneInfo.dictionary.composition[position].name}} ]
                     //p
                     div().md-subhead Собственник #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
                     div().md-subhead Срок: #[strong {{oneInfo.realty.type == 3 ? 'посуточно' : 'длительный срок'}}]
                     div().md-subhead Цена: #[strong {{oneInfo.realty.price}}]
-                    div().md-subhead От клиента: #[strong {{oneInfo.realty.clientpercent}}]%
-                    div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.partnerpercent}}]%
+                    div().md-subhead От клиента: #[strong {{oneInfo.realty.realtor.clientpercent}}]%
+                    div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.realtor.partnerpercent}}]%
         div(md-whiteframe='2' flex='20').mh-16 {{oneInfo.currentConditions[$index].presence}}
             md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
             aria-label='Switch 2'

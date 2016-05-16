@@ -5,7 +5,7 @@ div {{listMy.realtyCount}} объектов в работе
     .workList(layout='row', md-whiteframe='2',ng-repeat='realty in listMy.realty').md-whiteframe-2dp.mv-8
         div(layout='column' ui-sref="crm.realty.one.info({realtyId: '{{::realty._id}}'})").workList_Photo
             div(layout='column', layout-align='space-between')
-                div.apartment-pic
+                div(layout="row" layout-align="center center").apartment-pic
                     img(ng-src='{{::realty.image || "realty_no_image.png"}}')
                     div().icon-zoom
         md-divider
@@ -15,12 +15,12 @@ div {{listMy.realtyCount}} объектов в работе
                 div
                     div.price {{::realty.roomcount}} комн. {{::realty.price}}
                     div {{::realty.address.street}}
-                    div д. {{::realty.address.meta.house}} к.? кв. ??
+                    div {{::realty.address.house}} {{::realty.address.flat}}
         md-divider
 
         div(layout='column' layout-align='space-around center').workList_Progress.p-8
-            div.md-title.orange 55% / 100%
-            div.orange Срочно улучшить
+            div.md-title.orange {{::realty.moderator.percent.total || 0}}% / 100%
+            div.orange {{(realty.moderator.percent.total !== 100) ? 'Срочно улучшить' : 'Максимально подготовлен'}}
         md-divider
 
         div(layout='column' layout-align='space-around center').workList_Advertisement.p-8

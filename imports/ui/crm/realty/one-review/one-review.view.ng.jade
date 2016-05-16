@@ -2,40 +2,42 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
 
     div(layout='row' layout-align='space-around start')
         div(flex='25')
-            h3.md-headline.text-uppercase Фото 20%
+            h3.md-headline.text-uppercase Фото {{(oneReview.realty.moderator.percent.photo || 0)}}%
         div(flex='25')
-            md-button(ng-click="oneReview.upload()"
-            ngf-select=''
-            ngf-change="oneReview.upload($files)").md-primary.md-raised Добавить фото
+            md-button(ng-click='oneReview.upload()'
+            ngf-select='',
+            ngf-multiple='true',
+            ngf-change='oneReview.upload($files)').md-primary.md-raised Добавить фото
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Не качественные.
-            p().md-body-1 Закажите профессиональные #[a(href="#") в 2 клика]
+            p().md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
 
 div(md-whiteframe='2').mv-16
     div(layout='row' layout-wrap layout-align='space-around')
-        div(flex="33" ng-repeat="image in oneReview.realty.parseDetails.images")
+        div(flex='33' ng-repeat='image in oneReview.realty.details.images')
             md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(aria-label).btn-remove-photo
+                md-button(ng-click='oneReview.setMainImage(image)').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
+                md-button(aria-label ng-click="oneReview.removeImage(image)").btn-remove-photo
                     md-icon(md-svg-icon='svg/icon-close-white.svg')
-                div.one-review-photo(style='background-image:url({{image}});')
+                div.one-review-photo(style='background-image:url({{image.url}});')
+
 div(md-whiteframe='2').mv-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
-            h3.md-headline.text-uppercase Просмотр 20%
+            h3.md-headline.text-uppercase Просмотр {{(oneReview.realty.realtor.isCheckout === undefined || oneReview.realty.realtor.isCheckout === false) ? '0%' : '100%'}}
             div().one-review-btn-group
-                md-button().md-primary.md-raised Была встреча
-                md-button(flex-offset='10').md-raised Не встречались
-        div(flex='50')
-            h3().md-headline Ответ от модератора:
-            p().md-body-1 Без просмотра сложно совершать сделки.
-            p().md-body-1 Посмотрите #[a(href="#") «Как делать эффективный просмотр»]
+                md-button(ng-disabled='oneReview.realty.realtor.isCheckout' ng-click = 'oneReview.isCheckout()').md-primary.md-raised Была встреча
+                md-button(flex-offset='10' ng-disabled='!oneReview.realty.realtor.isCheckout' ng-click = 'oneReview.isCheckout()').md-raised Не встречались
+        div(flex='50' )
+            h3(ng-if='!oneReview.realty.realtor.isCheckout').md-headline Ответ от модератора:
+            p(ng-if='!oneReview.realty.realtor.isCheckout').md-body-1 Без просмотра сложно совершать сделки.
+            p(ng-if='!oneReview.realty.realtor.isCheckout').md-body-1 Посмотрите #[a(href='#') «Как делать эффективный просмотр»]
 
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
-            h3.md-headline.text-uppercase Качество рекламы 50%
+            h3.md-headline.text-uppercase Качество рекламы {{(oneReview.realty.moderator.percent.description || 0)}}%
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Текст 1
@@ -45,12 +47,12 @@ div(md-whiteframe='2').mt-0.mb-16.ph-32.pv-16
 
     div(flex)
         one-review-desc(realty='oneReview.realty')
-        md-button(ng-disabled='!oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000' ng-click='oneReview.saveNewDescription(oneReview.realty._id)').md-primary.md-raised.ml-0 Сгенерировать новое описание
+        md-button(ng-disabled='!oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000' ng-click='oneReview.saveNewDescription(oneReview.realty._id)').md-primary.md-raised.ml-0 Сохранить только текст объявления
 
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
-            h3.md-headline.text-uppercase Объем рекламы 10%
+            h3.md-headline.text-uppercase Объем рекламы {{(oneReview.realty.moderator.percent.advertisement || 0)}}%
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Первая строка
@@ -59,28 +61,29 @@ div(md-whiteframe='2').mt-16.ph-32.pv-16
 div(md-whiteframe='2').ph-16
     div(layout='column' layout-padding)
         h4().md-title Платные доски
-        div(layout='row')
-            div(flex='25').md-body-1 Главные доски
-            div(flex='75').md-body-1.one-review-board-green Размещена и обновляется
-        div(layout='row')
-            div(flex='25').md-body-1 Остальные доски
-            div(flex='75').md-body-1.one-review-board-red Купить эффективную рекламу
+        //div(layout='row')
+        //    div(flex='25').md-body-1 Главные доски
+        //    div(flex='75').md-body-1.one-review-board-green Размещена и обновляется
+        //div(layout='row')
+        //    div(flex='25').md-body-1 Остальные доски
+        //    div(flex='75').md-body-1.one-review-board-red Купить эффективную рекламу
         div(layout='row')
             div(flex='25').md-body-1 GetRent.pro
-            div(flex='75').md-body-1.one-review-board-green Размещено!
+            div(flex='75' ng-if='oneReview.realty.moderator.percent.total === 100').md-body-1.one-review-board-green Размещено!
+            div(flex='75' ng-if='oneReview.realty.moderator.percent.total !== 100').md-body-1.one-review-board-red Не размещено! Наберите 100% по подготовке!
 
 
 div(md-whiteframe='2').mv-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
-            h3.md-headline.text-uppercase Эксклюзив 0%
+            h3.md-headline.text-uppercase Эксклюзив {{(oneReview.realty.realtor.isExclusive === undefined || oneReview.realty.realtor.isExclusive === false) ? '0%' : '100%'}}
             div().one-review-btn-group
-                md-button().md-primary.md-raised Эксклюзив
-                md-button(flex-offset='10').md-raised Не эксклюзив
-        div(flex='50')
-            h3().md-headline Ответ от модератора:
-            p().md-body-1 Пройдите интенсив
-            p().md-body-1 Посмотрите #[a(href="#") «Как умело закрывать на эксклюзив за 10 минут»]
+                md-button(ng-disabled='oneReview.realty.realtor.isExclusive' ng-click = 'oneReview.isExclusive()').md-primary.md-raised Эксклюзив
+                md-button(flex-offset='10' ng-disabled='!oneReview.realty.realtor.isExclusive' ng-click = 'oneReview.isExclusive()').md-raised Не эксклюзив
+        div(flex='50' )
+            h3(ng-if='!oneReview.realty.realtor.isExclusive').md-headline Ответ от модератора:
+            p(ng-if='!oneReview.realty.realtor.isExclusive').md-body-1 Пройдите интенсив
+            p(ng-if='!oneReview.realty.realtor.isExclusive').md-body-1 Посмотрите #[a(href='#') «Как умело закрывать на эксклюзив за 10 минут»]
 
 div(layout='column' layout-align='center center')
     md-button(flex='30').md-success.md-raised.md-title.mv-16 Сохранить

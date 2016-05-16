@@ -33,13 +33,16 @@ export const RealtyRealtorSchema = new SimpleSchema({
     max: 500
   },
   isExclusive: {
-    type: Number,
-    allowedValues: [0, 1],
+    type: Boolean,
     optional: true
   },
   isCommission: {
-    type: Number,
+    type: Boolean,
     allowedValues: [0, 1],
+    optional: true
+  },
+  isCheckout: {
+    type: Boolean,
     optional: true
   },
   commission: {
@@ -52,6 +55,14 @@ export const RealtyRealtorSchema = new SimpleSchema({
     optional: true
   },
   competitors: {
+    type: Number,
+    optional: true
+  },
+  clientpercent:{
+    type: Number,
+    optional: true
+  },
+  partnerpercent:{
     type: Number,
     optional: true
   }
