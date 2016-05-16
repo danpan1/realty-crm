@@ -13,8 +13,8 @@ div(flex, layout='row')
     // Container #3
     md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left").pv-16
         menu-toggle(section="layout.actions")
-        md-button.md-success.md-warn(ui-sref='crm.clients.add') Добавить клиента
-        md-button.md-success.md-warn(ui-sref='crm.realty.add') Добавить Объект
+        md-button.md-raised.md-success(ui-sref='crm.clients.add') Добавить клиента
+        md-button.md-raised.md-success(ui-sref='crm.realty.add') Добавить Объект
         md-list
             md-list-item(ng-repeat="item in layout.sideNavItems",
             ui-sref='{{item.uisref}}',
@@ -24,6 +24,6 @@ div(flex, layout='row')
             ng-click='layout.toggleList()') {{item.name}}
 
     // Container #4
-    md-content#content(flex, md-whiteframe="4", layout="column", layout-align='space-between center').ml-16
+    md-content#content(flex, md-whiteframe="4", layout="column", layout-align='space-between start').ml-16
         div#mainContainer
             ui-view
