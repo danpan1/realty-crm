@@ -22,6 +22,11 @@ class AddRealtyFull {
     if (!valid) {
       return;
     }
+    /*var compositionArr = [false,false,false,false,false,false,false];
+    for(var i in this.realty.details.composition){
+        compositionArr[this.realty.details.composition[i]] = true;
+    }
+    this.realty.details.composition = compositionArr;*/
     this.realty.status = 'sale';
     this.realty.address = {
       city: 'Москва',

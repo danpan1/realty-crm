@@ -1,6 +1,7 @@
 div {{addRealtyFull.realty.street.value}}
 div {{addRealtyFull.realty.house.value}}
 div {{addRealtyFull.realty.house.data.city_district}}
+div {{addRealtyFull.realty}}
 md-tabs(md-dynamic-height md-border-bottom)
     md-tab(label='1) Расположение' md-active='addRealtyFull.activeTab == 0' ng-click='addRealtyFull.activeTab = 0')
         md-content().ph-32.pv-16
@@ -15,9 +16,9 @@ md-tabs(md-dynamic-height md-border-bottom)
                         dadata='addRealtyFull.locations.full' layout = 'row')
                     div(layout="row" layout-align="space-around center")
                         subway-chips(ng-model='addRealtyFull.locations.subways'
-                        subways-embeded = 'addRealtyFull.locations.embedded.subways').form-required
+                        subways-embeded = 'addRealtyFull.locations.embedded.subways')
                         district-chips(ng-model='addRealtyFull.locations.details.districts'
-                        districts-embeded = 'addRealtyFull.locations.details.embedded.districts').form-required
+                        districts-embeded = 'addRealtyFull.locations.details.embedded.districts')
                     div(layout='row')
                         div До метро 15 минут пешком
 
@@ -42,18 +43,18 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='50')
                             div(layout='row' layout-align='start center').mv-16
                                 md-input-container(flex).mv-0.form-required
-                                    input(required ng-model='addRealtyFull.realty.details.floorFrom' placeholder='Этаж')
-                                md-input-container(flex flex-offset='5').mv-0
-                                    input(ng-model='addRealtyFull.realty.details.floorTo' placeholder='Этажей в доме')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.floorFrom' placeholder='Этаж')
+                                md-input-container(flex flex-offset='5').mv-0.form-required
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.floorTo' placeholder='Этажей в доме')
                     div(layout='row')
                         div(flex='80')
                             div(layout='row' layout-align='start center').mv-16
                                 md-input-container(flex).mv-0.form-required
-                                    input(required ng-model='addRealtyFull.realty.details.squareTotal' placeholder='Общая площадь м²')
-                                md-input-container(flex flex-offset='5').mv-0
-                                    input(ng-model='addRealtyFull.realty.details.squareLiving' placeholder='Жилая площадь м²')
-                                md-input-container(flex flex-offset='5').mv-0
-                                    input(ng-model='addRealtyFull.realty.details.squareKitchen' placeholder='Кухня м²')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.squareTotal' placeholder='Общая площадь м²')
+                                md-input-container(flex flex-offset='5').mv-0.form-required
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.squareLiving' placeholder='Жилая площадь м²')
+                                md-input-container(flex flex-offset='5').mv-0.form-required
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.squareKitchen' placeholder='Кухня м²')
 
                     div(layout='row')
                         div(flex='80')
@@ -63,14 +64,14 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     md-select(required ng-model='addRealtyFull.realty.details.loggia')
                                         md-option(ng-value='balcony.id',
                                         ng-repeat="balcony in addRealtyFull.dictionary.balcony ") {{balcony.name}}
-                                md-input-container(flex flex-offset='5').mv-0
+                                md-input-container(flex flex-offset='5').mv-0.form-required
                                     label Балкон
-                                    md-select(ng-model='addRealtyFull.realty.details.balcony')
+                                    md-select(required ng-model='addRealtyFull.realty.details.balcony')
                                         md-option(ng-value='balcony.id',
                                         ng-repeat="balcony in addRealtyFull.dictionary.balcony ") {{balcony.name}}
-                                md-input-container(flex flex-offset='5').mv-0
+                                md-input-container(flex flex-offset='5').mv-0.form-required
                                     label Окна выходят на
-                                    md-select(ng-model='addRealtyFull.realty.details.windowView')
+                                    md-select(required ng-model='addRealtyFull.realty.details.windowView')
                                         md-option(ng-value='windowView.id',
                                         ng-repeat="windowView in addRealtyFull.dictionary.windowView ") {{windowView.name}}
 
@@ -88,14 +89,14 @@ md-tabs(md-dynamic-height md-border-bottom)
                                         md-option(ng-value='materials.id',
                                         ng-repeat="materials in addRealtyFull.dictionary.materials ") {{materials.name}}
                             div(layout='row').mv-16
-                                md-input-container(flex).mv-0
+                                md-input-container(flex).mv-0.form-required
                                     label Пассажирских лифтов
-                                    md-select(ng-model='addRealtyFull.realty.details.elevatorSmall')
+                                    md-select(required ng-model='addRealtyFull.realty.details.elevatorSmall')
                                         md-option(ng-value='elevator.id',
                                         ng-repeat="elevator in addRealtyFull.dictionary.elevator ") {{elevator.name}}
-                                md-input-container(flex flex-offset='5').mv-0
+                                md-input-container(flex flex-offset='5').mv-0.form-required
                                     label Грузовых лифтов
-                                    md-select(ng-model='addRealtyFull.realty.details.elevatorBig')
+                                    md-select(required ng-model='addRealtyFull.realty.details.elevatorBig')
                                         md-option(ng-value='elevator.id',
                                         ng-repeat="elevator in addRealtyFull.dictionary.elevator ") {{elevator.name}}
 
@@ -116,17 +117,11 @@ md-tabs(md-dynamic-height md-border-bottom)
                                 md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
                     h3.md-bold.md-title Какой процент стоимости вы хотите получать
                     div(layout='row')
-                        md-input-container(flex).mv-0
-                            input(ng-model='addRealtyFull.realty.realtor.clientpercent' placeholder='От прямого клиента')
-                        md-input-container(flex).mv-0
-                            input(ng-model='addRealtyFull.realty.realtor.partnerpercent' placeholder='От клиента другого агента')
+                        md-input-container(flex).mv-0.form-required
+                            input(required ng-model='addRealtyFull.realty.realtor.clientpercent' placeholder='От прямого клиента')
+                        md-input-container(flex).mv-0.form-required
+                            input(required ng-model='addRealtyFull.realty.realtor.partnerpercent' placeholder='От клиента другого агента')
                         
-    md-tab(label='4) Шансы на сделку' md-active='addRealtyFull.activeTab == 3' ng-click='addRealtyFull.activeTab = 3' ng-disabled='firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid')
-        md-content().ph-32.pv-16
-            form(novalidate name="fourthForm")
-                div(layout='column')
-                    div(layout='row')
-                        p Здесь будут шансы на сделку
             
 
 div(layout='row').mv-16.mh-32
