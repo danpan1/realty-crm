@@ -8,8 +8,8 @@ md-selected-item-change='realtyStreet.clearHouse()',
 md-search-text='realtyStreet.searchTextStreet',
 md-items='item in realtyStreet.querySearch(realtyStreet.searchTextStreet)',
 md-item-text='item.value',
-md-floating-label='Выберите улицу')
-    md-item-template.form-required
+md-floating-label='Выберите улицу').form-required
+    md-item-template
         span(md-highlight-text='realtyStreet.searchTextStreet') {{item.value}}
     div(ng-messages='searchForm.autocompleteField.$error',
     ng-if='searchForm.autocompleteField.$touched')
@@ -30,6 +30,6 @@ md-search-text='realtyStreet.searchTextHouse',
 md-selected-item-change='realtyStreet.querySearchHouseFinal(realtyStreet.selectedHouse)',
 md-items='item in realtyStreet.querySearchHouse(realtyStreet.searchTextHouse)',
 md-item-text='item.value',
-md-floating-label='Выберите дом')
-    md-item-template.form-required
+md-floating-label='Выберите дом').form-required
+    md-item-template
         span(md-highlight-text='realtyStreet.searchTextHouse') {{item.value}}

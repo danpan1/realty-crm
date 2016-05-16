@@ -120,7 +120,7 @@ export const RentDetailsSchema = new SimpleSchema({
     optional: true
   },
   'composition.$': {
-    type: Boolean,
+    type: Number,
     label: 'composition.[]',
     // // allowedValues: [true, false, null],
     optional: true

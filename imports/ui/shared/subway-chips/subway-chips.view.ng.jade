@@ -2,7 +2,6 @@ div().metro
     label Метро
     md-chips(ng-model='subwayChips.subwaysInForm',
     md-autocomplete-snap='',
-    required='subwayChips.subwaysSuggestionList.length > 0',
     md-require-match='true',
     md-on-add='subwayChips.changeChips()',
     md-on-remove='subwayChips.changeChips()')
@@ -15,7 +14,7 @@ div().metro
             span(md-highlight-text='subwayChips.searchText') ({{item.meta.lineId}}) {{item.name}}
             md-not-found
                 | Не найдено "{{subwayChips.searchText}}"
-        md-chip-template.form-required
+        md-chip-template
             span
                 span(class='metro-color metro-color-{{$chip.meta.lineId}}')
                 span().md-caption {{$chip.name}}
