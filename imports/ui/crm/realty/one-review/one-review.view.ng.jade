@@ -25,10 +25,10 @@ div(md-whiteframe='2').mv-16
 div(md-whiteframe='2').mv-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
-            h3.md-headline.text-uppercase Просмотр 20%
+            h3.md-headline.text-uppercase Просмотр {{oneReview.realty.realtor.isCheckout ? '100%' : '0%'}}
             div().one-review-btn-group
-                md-button().md-primary.md-raised Была встреча
-                md-button(flex-offset='10').md-raised Не встречались
+                md-button(ng-disabled='oneReview.realty.realtor.isCheckout').md-primary.md-raised Была встреча
+                md-button(flex-offset='10' ng-disabled='!oneReview.realty.realtor.isCheckout').md-raised Не встречались
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Без просмотра сложно совершать сделки.
@@ -37,7 +37,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
-            h3.md-headline.text-uppercase Качество рекламы 50%
+            h3.md-headline.text-uppercase Качество рекламы {{oneReview.realty.moderator.percent.description + "%"}}
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Текст 1
@@ -52,7 +52,7 @@ div(md-whiteframe='2').mt-0.mb-16.ph-32.pv-16
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
-            h3.md-headline.text-uppercase Объем рекламы 10%
+            h3.md-headline.text-uppercase Объем рекламы {{oneReview.realty.moderator.percent.advertisment + "%" }}
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Первая строка
@@ -75,10 +75,10 @@ div(md-whiteframe='2').ph-16
 div(md-whiteframe='2').mv-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
-            h3.md-headline.text-uppercase Эксклюзив 0%
+            h3.md-headline.text-uppercase Эксклюзив {{oneReview.realty.realtor.isExclusive ? '0%' : '100%'}}
             div().one-review-btn-group
-                md-button().md-primary.md-raised Эксклюзив
-                md-button(flex-offset='10').md-raised Не эксклюзив
+                md-button(ng-disabled='oneReview.realty.realtor.isExclusive').md-primary.md-raised Эксклюзив
+                md-button(flex-offset='10' ng-disabled='!oneReview.realty.realtor.isExclusive').md-raised Не эксклюзив
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Пройдите интенсив

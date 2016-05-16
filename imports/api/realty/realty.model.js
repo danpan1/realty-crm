@@ -6,7 +6,7 @@ export const Parser = new Mongo.Collection('parser');
 import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
 import {Roles} from 'meteor/alanning:roles'
 import {AddressSchema} from './schemas/address.schema';
-import {AdSchema} from './schemas/ad.schema';
+import {ModeratorSchema} from './schemas/moderator.schema.js';
 import {ContactsSchema} from './schemas/contacts.schema';
 import {ParseDetailsSchema} from './schemas/parseDetails.schema';
 import {RealtyRealtorSchema} from './schemas/realty-realtor.schema';
@@ -32,10 +32,6 @@ Realty.allow({
 });
 Realty.Schema = new SimpleSchema({
   //Это все относится к Карточка которые показываются в Листах
-  ad: { //отчет рекламщика
-    type: AdSchema,
-    optional: true
-  },
   address: {
     type: AddressSchema
   },
@@ -65,6 +61,10 @@ Realty.Schema = new SimpleSchema({
   },
   image: { // картинка главная. появлется в списке
     type: String,
+    optional: true
+  },
+  moderator: { //отчет рекламщика
+    type: ModeratorSchema,
     optional: true
   },
   operator: {
@@ -115,7 +115,6 @@ Realty.Schema = new SimpleSchema({
     optional: true,
     max: 200
   },
-
   type: {   // Тип продажа вторичка(1) или продажа новостройки(2)  (3)аренда суточно (4) аренда долгосрочно (-1) не удалось определить.
     type: Number,
     max: 5,

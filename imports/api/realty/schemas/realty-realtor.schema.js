@@ -42,6 +42,11 @@ export const RealtyRealtorSchema = new SimpleSchema({
     allowedValues: [0, 1],
     optional: true
   },
+  isCheckout: {
+    type: Number,
+    allowedValues: [0, 1],
+    optional: true
+  },
   commission: {
     type: Number,
     optional: true
