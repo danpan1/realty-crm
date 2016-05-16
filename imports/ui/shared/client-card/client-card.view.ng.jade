@@ -55,7 +55,7 @@ div(md-whiteframe='2').mv-16.client-card
                 div(flex='55').ph-16.pv-8
                     p
                         span(ng-repeat="room in clientCard.client.need.roomcount").md-body-1 {{room}}
-                            span(ng-if="$index < clientCard.client.need.roomcount.length - 1"), 
+                            span(ng-if="$index < clientCard.client.need.roomcount.length - 1") ,
                         span() {{ }} комнат,  длительная
             div(flex='20')
                 div.ph-16(layout='row', layout-wrap, layout-align='start start')
