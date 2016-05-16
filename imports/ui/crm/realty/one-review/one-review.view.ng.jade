@@ -4,22 +4,25 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
         div(flex='25')
             h3.md-headline.text-uppercase Фото 20%
         div(flex='25')
-            md-button(ng-click="oneReview.upload()"
-            ngf-select=''
-            ngf-change="oneReview.upload($files)").md-primary.md-raised Добавить фото
+            md-button(ng-click='oneReview.upload()'
+            ngf-select='',
+            ngf-multiple='true',
+            ngf-change='oneReview.upload($files)').md-primary.md-raised Добавить фото
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Не качественные.
-            p().md-body-1 Закажите профессиональные #[a(href="#") в 2 клика]
+            p().md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
 
 div(md-whiteframe='2').mv-16
+    div {{oneReview.realty.details.images}}
     div(layout='row' layout-wrap layout-align='space-around')
-        div(flex="33" ng-repeat="image in oneReview.realty.parseDetails.images")
+        div(flex='33' ng-repeat='image in oneReview.realty.details.images')
             md-card
                 md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
                 md-button(aria-label).btn-remove-photo
                     md-icon(md-svg-icon='svg/icon-close-white.svg')
-                div.one-review-photo(style='background-image:url({{image}});')
+                div.one-review-photo(style='background-image:url({{image.url}});')
+
 div(md-whiteframe='2').mv-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
@@ -30,7 +33,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Без просмотра сложно совершать сделки.
-            p().md-body-1 Посмотрите #[a(href="#") «Как делать эффективный просмотр»]
+            p().md-body-1 Посмотрите #[a(href='#') «Как делать эффективный просмотр»]
 
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
@@ -80,7 +83,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Пройдите интенсив
-            p().md-body-1 Посмотрите #[a(href="#") «Как умело закрывать на эксклюзив за 10 минут»]
+            p().md-body-1 Посмотрите #[a(href='#') «Как умело закрывать на эксклюзив за 10 минут»]
 
 div(layout='column' layout-align='center center')
     md-button(flex='30').md-success.md-raised.md-title.mv-16 Сохранить

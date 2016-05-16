@@ -36,18 +36,20 @@ class OneReview {
 
   }
 
-  upload(file) {
-    console.log('start upload');
-    console.log(S3);
+  upload(files) {
+    console.log('files', files);
+    const vm = this;
     S3.upload({
-      files: file,
+      files: files,
       path: ''
     }, (error, result) => {
       if (error) {
         console.log(error);
       } else {
-        console.log('uploaded');
+        vm.realty.details.images = [result];
         console.log(result);
+        console.log('uploaded', result);
+        vm.saveNewDescription();
       }
       // else {
       //   vm.addImagesToRealty(result);
@@ -73,20 +75,20 @@ class OneReview {
     // });
   }
 
-  
+
   /* Сохранение описания и заголовка на сервер */
-  saveNewDescription (realtyId) {
-      Realty.update({_id: realtyId}, {
-        $set: this.realty
-      }, (error) => {
-        if(error) {
-          console.log(error)
-        } else {
-            console.log('Description updated!');
-        }
-      });
+  saveNewDescription() {
+    Realty.update({_id: this.realty._id}, {
+      $set: this.realty
+    }, (error) => {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log('Description updated!');
+      }
+    });
   }
-  
+
 }
 
 const moduleName = 'oneReview';

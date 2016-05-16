@@ -2,6 +2,36 @@
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {dictionary} from '../../dictionary';
 export const RentDetailsSchema = new SimpleSchema({
+  //Балкон
+  balcony: {
+    type: Number,
+    label: 'balcony',
+    allowedValues: dictionary.balcony.map(function (item) {
+      return item.id;
+    }),
+    optional: true
+  },
+  //Саунзел
+  bathroom: {
+    type: Number,
+    label: 'bathroom',
+    allowedValues: dictionary.bathroom.map(function (item) {
+      return item.id;
+    }),
+    optional: true
+  },
+  //Состав съемщиков
+  composition: {
+    type: Array,
+    label: 'composition',
+    optional: true
+  },
+  'composition.$': {
+    type: Boolean,
+    label: 'composition.[]',
+    // // allowedValues: [true, false, null],
+    optional: true
+  },
   conditions: {
     type: Array,
     label: 'Conditions',
@@ -15,66 +45,10 @@ export const RentDetailsSchema = new SimpleSchema({
     }),
     optional: true
   },
-  // площадь комнат
-  roomsSquare: {
-    type: Array,
-    label: 'roomsSquare',
-    optional: true
-  },
-  'roomsSquare.$': {
-    type: String,
-    label: 'roomsSquare.[]',
-    optional: true
-  },
-  livingSquare: {
-    type: Number,
-    label: 'Living square',
-    optional: true
-  },
-  kitchenSquare: {
-    type: Number,
-    label: 'Living square',
-    optional: true
-  },
   // Описание
   descr: {
     type: String,
     label: 'descr',
-    optional: true
-  },
-  renovation: {
-    type: Number,
-    label: 'renovation',
-    allowedValues: dictionary.renovation.map(function (item) {
-      return item.id;
-    }),
-    optional: true
-  },
-  //Балкон
-  balcony: {
-    type: Number,
-    label: 'balcony',
-    allowedValues: dictionary.balcony.map(function (item) {
-      return item.id;
-    }),
-    optional: true
-  },
-  // Лоджия
-  loggia: {
-    type: Number,
-    label: 'loggia',
-    allowedValues: dictionary.balcony.map(function (item) {
-      return item.id;
-    }),
-    optional: true
-  },
-  //Саунзел
-  bathroom: {
-    type: Number,
-    label: 'bathroom',
-    allowedValues: dictionary.bathroom.map(function (item) {
-      return item.id;
-    }),
     optional: true
   },
   //Лифт
@@ -95,11 +69,42 @@ export const RentDetailsSchema = new SimpleSchema({
     }),
     optional: true
   },
+  // изображения залитые риэлтором
+  images: {
+    type: [Object],
+    label: 'images',
+    optional: true
+  },
+  'images.$.url': {
+    type: String
+  },
+  'images.$.relative_url': {
+    type: String
+  },
   //Тип жилья в фильтре
   isNewBuilding: {
     type: Number,
     label: 'isNewBuilding',
     allowedValues: dictionary.isNewBuilding.map(function (item) {
+      return item.id;
+    }),
+    optional: true
+  },
+  kitchenSquare: {
+    type: Number,
+    label: 'Living square',
+    optional: true
+  },
+  livingSquare: {
+    type: Number,
+    label: 'Living square',
+    optional: true
+  },
+  // Лоджия
+  loggia: {
+    type: Number,
+    label: 'loggia',
+    allowedValues: dictionary.balcony.map(function (item) {
       return item.id;
     }),
     optional: true
@@ -113,16 +118,18 @@ export const RentDetailsSchema = new SimpleSchema({
     }),
     optional: true
   },
-  //Состав съемщиков
-  composition: {
-    type: Array,
-    label: 'composition',
+  renovation: {
+    type: Number,
+    label: 'renovation',
+    allowedValues: dictionary.renovation.map(function (item) {
+      return item.id;
+    }),
     optional: true
   },
-  'composition.$': {
-    type: Boolean,
-    label: 'composition.[]',
-    // // allowedValues: [true, false, null],
+  // площадь комнат
+  roomsSquare: {
+    type: [Number],
+    label: 'roomsSquare',
     optional: true
   },
   //Вид из окна в фильтре
@@ -133,18 +140,6 @@ export const RentDetailsSchema = new SimpleSchema({
       return item.id;
     }),
     optional: true
-  },
-  // изображения залитые риэлтором
-  images: {
-    type: [Object],
-    label: 'images',
-    optional: true
-  },
-  'images.$.url': {
-    type: String
-  },
-  'images.$.relative_url': {
-    type: String
   }
 });
 

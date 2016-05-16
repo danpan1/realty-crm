@@ -30,14 +30,25 @@ Realty.allow({
     return Roles.userIsInRole(Meteor.userId(), ['business']);
   }
 });
-
 Realty.Schema = new SimpleSchema({
   //Это все относится к Карточка которые показываются в Листах
+  ad: { //отчет рекламщика
+    type: AdSchema,
+    optional: true
+  },
   address: {
     type: AddressSchema
   },
   contacts: {
     type: [ContactsSchema],
+    optional: true
+  },
+  deposit: {  // Залог
+    type: Number,
+    optional: true
+  },
+  details: {
+    type: RentDetailsSchema,
     optional: true
   },
   floor: {  // Этаж помещения
@@ -56,15 +67,36 @@ Realty.Schema = new SimpleSchema({
     type: String,
     optional: true
   },
+  operator: {
+    type: RealtyOperatorSchema,
+    optional: true
+  }, //  TODOD в последнюю очередь реклама, рекламщик, продающий заголовок
+  parseDetails: {
+    /*когда человек на нашем сайте добавляет этого поля не будет*/
+    type: ParseDetailsSchema,
+    optional: true
+  }, //TODOD в последнюю очередь расписать схему. Может и не надо
   price: {
     type: Number,
     optional: true,
     max: 9999999999
   },
+  realtor: {
+    type: RealtyRealtorSchema,
+    optional: true
+  },
+  // reports: { // TODO Отчеты о показах. И сами показы. Возможно это надо в отдельную коллекцию. но пока пусть так
+  //   type: [ReportsSchema],
+  //   // minCount : 1,
+  //   maxCount: 100,
+  //   optional: true
+  // },
   roomcount: {//Количество комнат ['1', '2', '3', '4+']
     type: Number,
     label: 'roomcount',
-    allowedValues: dictionary.roomcount.map((item)=> {return item.id;}),
+    allowedValues: dictionary.roomcount.map((item)=> {
+      return item.id;
+    }),
     optional: true
   },
   square: {  // площадь помещений общая указывает на карточке
@@ -73,46 +105,15 @@ Realty.Schema = new SimpleSchema({
     optional: true,
     max: 9999999999
   },//TODO забить на decimal парсить до целых чисел
-  title: { // Title на авито. Загловок основной.
-    type: String,
-    optional: true,
-    max: 200
-  },
-  //TODO id генерить число
-  ID: {
-    type: Number,
-    max: 999999999,
-    optional: true
-  },
-
-  parseDetails: {
-    /*когда человек на нашем сайте добавляет этого поля не будет*/
-    type: ParseDetailsSchema,
-    optional: true
-  }, //TODOD в последнюю очередь расписать схему. Может и не надо
-
   status: {
     type: String,
     allowedValues: ['new', 'call', 'later', 'agency', 'analyze', 'list', 'taken', 'review',
       'reviewed', 'adman', 'sale', 'sold', 'archive', 'trash']
   },
-  realtor: {
-    type: RealtyRealtorSchema,
-    optional: true
-  },
-  operator: {
-    type: RealtyOperatorSchema,
-    optional: true
-  },
-  ad: { //отчет рекламщика
-    type: AdSchema,
-    optional: true
-  },  //  TODOD в последнюю очередь реклама, рекламщик, продающий заголовок
-  reports: { // TODO Отчеты о показах. И сами показы. Возможно это надо в отдельную коллекцию. но пока пусть так
-    type: [ReportsSchema],
-    // minCount : 1,
-    maxCount: 100,
-    optional: true
+  title: { // Title на авито. Загловок основной.
+    type: String,
+    optional: true,
+    max: 200
   },
 
   type: {   // Тип продажа вторичка(1) или продажа новостройки(2)  (3)аренда суточно (4) аренда долгосрочно (-1) не удалось определить.
@@ -120,20 +121,8 @@ Realty.Schema = new SimpleSchema({
     max: 5,
     optional: true
   },
-  details: {
-    type: RentDetailsSchema,
-    optional: true
-  },
-  deposit: {  // Залог
-    type: Number,
-    optional: true
-  },
   updatedAt: {
     type: Date,
-    optional: true
-  },
-  value: {
-    type: Number,
     optional: true
   }
 });
