@@ -11,10 +11,9 @@ import './one-review.view.html';
 
 class OneReview {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams, Upload) {
+  constructor($scope, $reactive, $stateParams) {
 
     $reactive(this).attach($scope);
-    this.Upload = Upload;
     let vm = this;
 
     this.subscribe('oneInfo', () => {
@@ -101,14 +100,39 @@ class OneReview {
     // });
   }
 
+  isExclusive() {
+    this.realty.realtor.isExclusive = !this.realty.realtor.isExclusive;
+    this.saveNewDescription();
+  }
+
+  isCheckout() {
+    this.realty.realtor.isCheckout = !this.realty.realtor.isCheckout;
+    this.saveNewDescription();
+  }
 
   /* Сохранение описания и заголовка на сервер */
   saveNewDescription() {
+    // let moderator = this.realty.moderator;
+    if (!this.realty.moderator) {
+      this.realty.moderator = {};
+    }
+    if (!this.realty.moderator.percent) {
+      this.realty.moderator.percent = {
+        advertisement : 0,
+        photo : 0,
+        description : 0
+      };
+    }
+    let percent = this.realty.moderator.percent;
+    percent.isExclusive = (this.realty.realtor.isExclusive) ? 20 : 0;
+    percent.isCheckout = (this.realty.realtor.isCheckout) ? 20 : 0;
+    this.realty.moderator.percent.total = percent.photo + percent.advertisement + percent.description + percent.isExclusive + percent.isCheckout;
+    console.log(this.realty);
     Realty.update({_id: this.realty._id}, {
       $set: this.realty
     }, (error) => {
       if (error) {
-        console.log(error)
+        console.log(error);
       } else {
         console.log('Description updated!');
       }

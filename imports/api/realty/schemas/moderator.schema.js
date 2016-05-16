@@ -5,10 +5,12 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 export const ModeratorSchema = new SimpleSchema({
   id: { //id
-    type: String
+    type: String,
+    optional : true
   },
   comment:{
-    type: Object
+    type: Object,
+    optional : true
   },
   'comment.photo':{
     type: String,
@@ -26,7 +28,7 @@ export const ModeratorSchema = new SimpleSchema({
     type: Object,
     optional: true
   },
-  'percent.advertisment': {
+  'percent.advertisement': {
     type: Number,
     optional: true
   },

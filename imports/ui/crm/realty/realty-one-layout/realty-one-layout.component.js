@@ -3,14 +3,21 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import {Realty} from '/imports/api/realty';
 
 import './realty-one-layout.view.html';
 
 class RealtyOneLayout {
   /* @ngInject */
-  // constructor($scope, $reactive) {
-  //   $reactive(this).attach($scope);
-  // }
+  constructor($scope, $reactive) {
+
+    $reactive(this).attach($scope);
+    this.helpers({
+      infoRealty: () => {
+        return Realty.findOne({});
+      }
+    });
+  }
 
 }
 
