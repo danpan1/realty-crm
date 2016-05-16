@@ -16,6 +16,7 @@ class AddClientFull {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.resetClient();
+    this.activeTab = 0;
   }
 
   submit(valid) {

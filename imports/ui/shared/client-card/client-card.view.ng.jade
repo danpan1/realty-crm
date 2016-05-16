@@ -46,11 +46,27 @@ div(md-whiteframe='2').mv-16.client-card
 
             div(flex='55' layout="row").one-demonstrations-center-cell.ph-16.pv-8
                 div(flex='45').ph-16.pv-8
-                    span().metro-color.metro-color-pink
-                    span().address-info.md-body-1 {{clientCard.client.need.embedded.subways}} {{clientCard.client.need.embedded.districts}}
+                    p(ng-repeat="subway in clientCard.client.need.embedded.subways")
+                        span().metro-color.metro-color-pink
+                        span() {{subway.name}}, 
+                        span() 10 минут пешком
+                    p
+                        span(ng-repeat="district in clientCard.client.need.embedded.districts") р-н {{district}}
                 div(flex='55').ph-16.pv-8
-                    span().md-body-1 {{clientCard.client.need.roomcount}} комнат,  длительная
+                    p
+                        span(ng-repeat="room in clientCard.client.need.roomcount").md-body-1 {{room}}
+                            span(ng-if="$index < clientCard.client.need.roomcount.length - 1"), 
+                        span() {{ }} комнат,  длительная
             div(flex='20')
-                div.ph-16(layout='row', layout-wrap, layout-align='space-around')
-                    div {{clientCard.client.need.conditions}}
-                    //img(src='img/icons/icon-tv.png' ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12]").one-demonstrations-icon-comfort
+                div.ph-16(layout='row', layout-wrap, layout-align='start start')
+                    div(flex="25" ng-repeat="condition in clientCard.client.need.conditions")
+                        md-icon(ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture')
+                        md-icon(ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture')
+                        md-icon(ng-if="condition == 'tv'" md-svg-icon='conditions_tv')
+                        md-icon(ng-if="condition == 'refrigerator'" md-svg-icon='conditions_refrigerator')
+                        md-icon(ng-if="condition == 'washer'" md-svg-icon='conditions_washer')
+                        md-icon(ng-if="condition == 'phone'" md-svg-icon='conditions_phone')
+                        md-icon(ng-if="condition == 'animal'" md-svg-icon='conditions_animal')
+                        md-icon(ng-if="condition == 'elevator'" md-svg-icon='conditions_elevator').icon-rotate-90
+                        md-icon(ng-if="condition == 'children'" md-svg-icon='conditions_children')
+                        md-icon(ng-if="condition == 'wifi'" md-svg-icon='conditions_wifi')
