@@ -1,7 +1,6 @@
 div {{addRealtyFull.realty.street.value}}
 div {{addRealtyFull.realty.house.value}}
 div {{addRealtyFull.realty.house.data.city_district}}
-div {{addRealtyFull.realty}}
 md-tabs(md-dynamic-height md-border-bottom)
     md-tab(label='1) Расположение' md-active='addRealtyFull.activeTab == 0' ng-click='addRealtyFull.activeTab = 0')
         md-content().ph-32.pv-16
@@ -43,7 +42,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='50')
                             div(layout='row' layout-align='start center').mv-16
                                 md-input-container(flex).mv-0.form-required
-                                    input(ng-maxlength="10" required ng-minlength="2" ng-model='addRealtyFull.realty.details.floorFrom' placeholder='Этаж')
+                                    input(required ng-model='addRealtyFull.realty.details.floorFrom' placeholder='Этаж')
                                 md-input-container(flex flex-offset='5').mv-0
                                     input(ng-model='addRealtyFull.realty.details.floorTo' placeholder='Этажей в доме')
                     div(layout='row')
@@ -105,7 +104,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                             div(layout='row' layout-wrap)
                                 realty-conditions(ng-model='addRealtyFull.realty.details.conditions' checkbox="true")
 
-    md-tab(label='3) Стоимость' md-active='addRealtyFull.activeTab == 2' ng-click='addRealtyFull.activeTab = 2' )
+    md-tab(label='3) Стоимость' md-active='addRealtyFull.activeTab == 2' ng-click='addRealtyFull.activeTab = 2' ng-disabled='firstForm.$invalid || secondForm.$invalid || false')
         md-content().ph-32.pv-16
             form(novalidate name="thirdForm")
                 div(layout='column')
