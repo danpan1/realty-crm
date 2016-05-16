@@ -2,6 +2,7 @@ div().district
     label Район или округ
     md-chips(ng-model='districtChips.districtsAreaInForm',
     md-autocomplete-snap='',
+    required='districtChips.districtsAreaSuggestionList.length > 0',
     md-require-match='true',
     md-on-add='districtChips.changeChips()',
     md-on-remove='districtChips.changeChips()')

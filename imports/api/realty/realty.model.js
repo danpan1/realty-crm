@@ -37,7 +37,8 @@ Realty.Schema = new SimpleSchema({
     type: AddressSchema
   },
   contacts: {
-    type: [ContactsSchema]
+    type: [ContactsSchema],
+    optional: true
   },
   floor: {  // Этаж помещения
     type: Number,
@@ -116,7 +117,8 @@ Realty.Schema = new SimpleSchema({
 
   type: {   // Тип продажа вторичка(1) или продажа новостройки(2)  (3)аренда суточно (4) аренда долгосрочно (-1) не удалось определить.
     type: Number,
-    max: 5
+    max: 5,
+    optional: true
   },
   details: {
     type: RentDetailsSchema,

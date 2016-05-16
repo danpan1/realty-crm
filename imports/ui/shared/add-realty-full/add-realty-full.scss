@@ -24,3 +24,11 @@ add-realty-full {
 md-input-container .md-errors-spacer {
   min-height: 0;
 }
+
+.form-required:after{
+    position: absolute;
+    content:'*';
+    right:0;
+    top:0;
+    color: red;
+}
