@@ -43,18 +43,18 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='50')
                             div(layout='row' layout-align='start center').mv-16
                                 md-input-container(flex).mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.floorFrom' placeholder='Этаж')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
                                 md-input-container(flex flex-offset='5').mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.floorTo' placeholder='Этажей в доме')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
                     div(layout='row')
                         div(flex='80')
                             div(layout='row' layout-align='start center').mv-16
                                 md-input-container(flex).mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.squareTotal' placeholder='Общая площадь м²')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
                                 md-input-container(flex flex-offset='5').mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.squareLiving' placeholder='Жилая площадь м²')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
                                 md-input-container(flex flex-offset='5').mv-0.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.squareKitchen' placeholder='Кухня м²')
+                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
 
                     div(layout='row')
                         div(flex='80')
@@ -91,7 +91,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                             div(layout='row').mv-16
                                 md-input-container(flex).mv-0.form-required
                                     label Пассажирских лифтов
-                                    md-select(required ng-model='addRealtyFull.realty.details.elevatorSmall')
+                                    md-select(required ng-model='addRealtyFull.realty.details.elevator')
                                         md-option(ng-value='elevator.id',
                                         ng-repeat="elevator in addRealtyFull.dictionary.elevator ") {{elevator.name}}
                                 md-input-container(flex flex-offset='5').mv-0.form-required
@@ -125,6 +125,6 @@ md-tabs(md-dynamic-height md-border-bottom)
             
 
 div(layout='row').mv-16.mh-32
-    md-button(ng-click='addRealtyFull.submit(true)' ng-if="addRealtyFull.activeTab == 2" ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-success.md-raised.md-title Добавить клиента!
+    md-button(ng-click='addRealtyFull.submit(true)' ui-sref="crm.realty.one.info({realtyId: addRealtyFull.nextId})" ng-if="addRealtyFull.activeTab == 2" ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-success.md-raised.md-title Добавить клиента!
     md-button(ng-click='addRealtyFull.activeTab = addRealtyFull.activeTab + 1' ng-if="addRealtyFull.activeTab != 2" ng-disabled="(firstForm.$invalid && addRealtyFull.activeTab == 0) || (secondForm.$invalid && addRealtyFull.activeTab == 1) || (thirdForm.$invalid && addRealtyFull.activeTab == 2) || (fourthForm.$invalid && addRealtyFull.activeTab == 3)").md-primart.md-raised Продолжить {{addRealtyFull.activeTab}}, 1:{{firstForm.$invalid}}, 2:{{secondForm.$invalid}}, 3:{{thirdForm.$invalid}}, 
     md-button(md-no-ink flex-offset='10' ng-click='addRealtyFull.activeTab = addRealtyFull.activeTab - 1' ng-if="addRealtyFull.activeTab != 0").md-primary.md-body-1 Вернуться на шаг назад
