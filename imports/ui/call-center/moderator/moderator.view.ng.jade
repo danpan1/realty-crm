@@ -1,3 +1,4 @@
+div {{moderator.realty}}
 div(md-whiteframe='2').mv-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
@@ -103,6 +104,6 @@ div(md-whiteframe='2').ph-32.pv-16
 
 div(layout='row').mt-32
     div(flex='30' flex-offset='5')
-        md-button().md-primary.md-raised Отклонить
+        md-button(ng-click='moderator.save(false)').md-primary.md-raised Отклонить
     div(flex='70')
-        md-button().md-success.md-raised.md-title Одобрить
+        md-button(ng-click='moderator.save(true)').md-success.md-raised.md-title Одобрить

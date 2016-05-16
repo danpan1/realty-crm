@@ -51,6 +51,14 @@ class OneReview {
     this.saveNewDescription();
   }
 
+  sendToModerator() {
+    if (!this.realty.moderator) {
+      this.realty.moderator = {};
+    }
+    this.realty.moderator.status = 'todo';
+    this.saveNewDescription();
+  }
+
   // удаление фото из Amazon S3
   s3DeleteImage(image) {
     S3.delete(image.relative_url, (error)=> {

@@ -107,8 +107,7 @@ Realty.Schema = new SimpleSchema({
   },//TODO забить на decimal парсить до целых чисел
   status: {
     type: String,
-    allowedValues: ['new', 'call', 'later', 'agency', 'analyze', 'list', 'taken', 'review',
-      'reviewed', 'adman', 'sale', 'sold', 'archive', 'trash']
+    allowedValues: ['new', 'call', 'later', 'agency', 'analyze', 'list', 'taken', 'sale', 'sold', 'archive', 'trash']
   },
   title: { // Title на авито. Загловок основной.
     type: String,

@@ -1,26 +1,43 @@
-div {{addRealtyFull.realty.street.value}}
-div {{addRealtyFull.realty.house.value}}
-div {{addRealtyFull.realty.house.data.city_district}}
-div {{addRealtyFull.realty}}
 md-tabs(md-dynamic-height md-border-bottom)
     md-tab(label='1) Расположение' md-active='addRealtyFull.activeTab == 0' ng-click='addRealtyFull.activeTab = 0')
         md-content().ph-32.pv-16
             form(novalidate name="firstForm")
                 div(layout='column')
-                    div(layout="column" layout-align="space-around start")
-                        div Тип сделки : Аренда
-                        div Недвижимость : Квартиры
-                        div Город : Москва
+
                     div(layout='row')
-                        realty-street(ng-model='addRealtyFull.locations.street' house='addRealtyFull.locations.house'
-                        dadata='addRealtyFull.locations.full' layout = 'row')
-                    div(layout="row" layout-align="space-around center")
-                        subway-chips(ng-model='addRealtyFull.locations.subways'
-                        subways-embeded = 'addRealtyFull.locations.embedded.subways')
-                        district-chips(ng-model='addRealtyFull.locations.details.districts'
-                        districts-embeded = 'addRealtyFull.locations.details.embedded.districts')
+                        div(flex='50')
+                            div(layout='row').mv-16
+                                md-input-container(flex).mv-0
+                                    md-select(required ng-model='addRealtyFull.fake.arenda')
+                                        md-option(ng-value='true') Аренда
+                                md-input-container(flex).mv-0
+                                    md-select(required ng-model='addRealtyFull.fake.arenda')
+                                        md-option(ng-value='true') Квартиры
+
+                            div(layout='row').mv-16
+                                md-input-container(flex).mv-0
+                                    label Город
+                                    md-select(required ng-model='addRealtyFull.fake.arenda')
+                                        md-option(ng-value='true') Москва
+
                     div(layout='row')
-                        div До метро 15 минут пешком
+                        div(flex='100')
+                            div(layout='row').mv-16
+                                realty-street(ng-model='addRealtyFull.locations.street' house='addRealtyFull.locations.house'
+                                dadata='addRealtyFull.locations.full' layout = 'row')
+
+                    div(layout='row')
+                        div(flex='100')
+                            div(layout='row')
+                                district-single(ng-model='addRealtyFull.locations.details.districts'
+                                districts-embeded = 'addRealtyFull.locations.details.embedded.districts')
+
+                    div(layout='row')
+                        div(flex='100')
+                            div(layout="row" )
+                                subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
+                                div До метро 15 минут пешком
+
 
     md-tab(label='2) Параметры' md-active='addRealtyFull.activeTab == 1' ng-click='addRealtyFull.activeTab = 1' ng-disabled='firstForm.$invalid')
         md-content().ph-32.pv-16
@@ -138,5 +155,7 @@ md-tabs(md-dynamic-height md-border-bottom)
 
 div(layout='row').mv-16.mh-32
     md-button(ng-click='addRealtyFull.submit(true)' ng-if="addRealtyFull.activeTab == 2" ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-success.md-raised.md-title Добавить клиента!
-    md-button(ng-click='addRealtyFull.activeTab = addRealtyFull.activeTab + 1' ng-if="addRealtyFull.activeTab != 2" ng-disabled="(firstForm.$invalid && addRealtyFull.activeTab == 0) || (secondForm.$invalid && addRealtyFull.activeTab == 1) || (thirdForm.$invalid && addRealtyFull.activeTab == 2) || (fourthForm.$invalid && addRealtyFull.activeTab == 3)").md-primart.md-raised Продолжить {{addRealtyFull.activeTab}}, 1:{{firstForm.$invalid}}, 2:{{secondForm.$invalid}}, 3:{{thirdForm.$invalid}}, 
+    md-button(ng-click='addRealtyFull.activeTab = addRealtyFull.activeTab + 1'
+    ng-if="addRealtyFull.activeTab != 2"
+    ng-disabled="(firstForm.$invalid && addRealtyFull.activeTab == 0) || (secondForm.$invalid && addRealtyFull.activeTab == 1) || (thirdForm.$invalid && addRealtyFull.activeTab == 2) || (fourthForm.$invalid && addRealtyFull.activeTab == 3)").md-primart.md-raised Продолжить
     md-button(md-no-ink flex-offset='10' ng-click='addRealtyFull.activeTab = addRealtyFull.activeTab - 1' ng-if="addRealtyFull.activeTab != 0").md-primary.md-body-1 Вернуться на шаг назад

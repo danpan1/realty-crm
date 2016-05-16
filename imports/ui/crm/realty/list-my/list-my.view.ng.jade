@@ -1,45 +1,51 @@
 realty-filter(filter = "listMy.filter" roomcount = "listMy.roomcount")
-div {{listMy.filter}}
-div {{listMy.realtyCount}} объектов в работе
+
 .md-body-1(layout='column', layout-align='space-around stretch')
-    .workList(layout='row', md-whiteframe='2',ng-repeat='realty in listMy.realty').md-whiteframe-2dp.mv-8
-        div(layout='column' ui-sref="crm.realty.one.info({realtyId: '{{::realty._id}}'})").workList_Photo
+    .listMy(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
+        div().listMy_col Фото
+        div().listMy_col Цена и адрес
+        div().listMy_col Подготовлен
+        div().listMy_col Реклама
+        div().listMy_col Действия
+
+.md-body-1(layout='column', layout-align='space-around stretch')
+    .listMy(layout='row', md-whiteframe='2',ng-repeat='realty in listMy.realty').md-whiteframe-2dp.mv-8
+        div(layout='column' layout-align='center center' ui-sref="crm.realty.one.info({realtyId: '{{::realty._id}}'})").listMy_Photo
             div(layout='column', layout-align='space-between')
-                div(layout="row" layout-align="center center").apartment-pic
+                div(layout='row' layout-align='center center').apartment-pic
                     img(ng-src='{{::realty.image || "realty_no_image.png"}}')
                     div().icon-zoom
         md-divider
 
-        div().workList_Price.p-8
+        div().listMy_Address.pv-8.ph-16
             div(layout='column', layout-align='space-between')
                 div
-                    div.price {{::realty.roomcount}} комн. {{::realty.price}}
-                    div {{::realty.address.street}}
-                    div {{::realty.address.house}} {{::realty.address.flat}}
+                    div().price.listMy_Address-item {{::realty.roomcount}} комн. {{::realty.price}}
+                    div().listMy_Address-item {{::realty.address.street}}
+                    div().listMy_Address-item {{::realty.address.house}} {{::realty.address.flat}}
         md-divider
 
-        div(layout='column' layout-align='space-around center').workList_Progress.p-8
-            div.md-title.orange {{::realty.moderator.percent.total || 0}}% / 100%
-            div.orange {{(realty.moderator.percent.total !== 100) ? 'Срочно улучшить' : 'Максимально подготовлен'}}
+        div(layout='column' layout-align='center center').listMy_Progress.p-8
+            div.md-title.orange.mv-8 {{::realty.moderator.percent.total || 0}}% / 100%
+            div.orange.mv-8 {{(realty.moderator.percent.total !== 100) ? 'Срочно улучшить' : 'Максимально подготовлен'}}
         md-divider
 
-        div(layout='column' layout-align='space-around center').workList_Advertisement.p-8
-            div.md-title.orange 55% / 100%
-            div.orange Выжать максимум
+        div(layout='column' layout-align='center center').listMy_Advertisement.p-8
+            div.md-title.orange.mv-8 55% / 100%
+            div.orange.mv-8 Выжать максимум
         md-divider
 
-        div(layout='column').workList_Actions.p-8
-            div(layout='row' layout-align='space-between').mb-8
-                div(flex='25').icon-bookmark Сегодня
-                div(flex='45') 15:00 Анна
+        div(layout='column').listMy_Actions.pv-8.pl-16.pr-32
+            div(layout='row' layout-align='space-around center').mb-8
+                div(flex='20').icon-bookmark 01.01
+                div(flex='45') 15:00 [К] Анна
                 div(flex='35') 8(925) 111-22-33
-            div(layout='row' layout-align='space-between').mb-8
-                div(flex='25').icon-bookmark Завтра
-                div(flex='45') 17:00 Андрей
+            div(layout='row' layout-align='space-around center').mb-8
+                div(flex='20').icon-bookmark 01.02
+                div(flex='45') 17:00 [Р] Андрей
                 div(flex='35') 8(925) 111-22-33
-            div(layout='row' layout-align='space-between').mb-8
-                div(flex='25').icon-bookmark 01.01
-                div(flex='45') 17:00 Андрей
+            div(layout='row' layout-align='space-around center').mb-8
+                div(flex='20').icon-bookmark 01.03
+                div(flex='45') 17:00 [Р] Андрей
                 div(flex='35') 8(925) 111-22-33
-            md-button(md-no-ink='').md-primary поставить задачу
-        md-divider
+            md-button(md-no-ink='').md-primary добавить показ
