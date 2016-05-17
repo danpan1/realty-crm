@@ -3,7 +3,12 @@ p
     md-button(ng-click="oneReviewDescTitle.nextDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber + 1 >= oneReviewDescTitle.descTitle.value.length").md-raised Next
 md-input-container().md-block
     label Заголовок
-    md-select(ng-model="oneReviewDescTitle.descTitle.value[oneReviewDescTitle.descTitleNumber]" placeholder='"Выберите готовый заголовок, который цепляет"')
-        md-option(ng-value='title' ng-repeat="title in oneReviewDescTitle.descTitle.value" ng-click="oneReviewDescTitle.setDescTitle(title, $index)") {{title}}
+    md-select(ng-model="oneReviewDescTitle.descTitle.value[oneReviewDescTitle.descTitleNumber]" placeholder='Выберите готовый заголовок, который цепляет')
+        md-option(ng-value='title'
+        ng-repeat="title in oneReviewDescTitle.descTitle.value"
+        ng-click="oneReviewDescTitle.setDescTitle(title, $index)") {{title}}
 md-input-container().md-block
-    input(ng-maxlength="65" ng-keydown="oneReviewDescTitle.controlKeyPress(this.oneReviewDescTitle.inputTitleDesc)" ng-model="oneReviewDescTitle.inputTitleDesc" )
+    input(ng-maxlength="65"
+    ng-keydown="oneReviewDescTitle.controlKeyPress(this.oneReviewDescTitle.inputTitleDesc)"
+    ng-model="oneReviewDescTitle.inputTitleDesc"
+    placeholder='или напишите сами продающий заголовок, который тебя цепляет')
