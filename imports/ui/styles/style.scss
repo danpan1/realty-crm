@@ -4,6 +4,8 @@
 @import "typography";
 @import "helpers";
 @import "common";
+@import "../auth/login/login";
+@import "../auth/register/register";
 @import "../shared/district-chips/district-chips";
 @import "../shared/subway-chips/subway-chips";
 @import "../shared/realty-conditions/realty-conditions";
