@@ -81,6 +81,17 @@ export const RentDetailsSchema = new SimpleSchema({
   'images.$.relative_url': {
     type: String
   },
+  thumbnails: {
+    type: [Object],
+    label: 'images',
+    optional: true
+  },
+  'thumbnails.$.url': {
+    type: String
+  },
+  'thumbnails.$.relative_url': {
+    type: String
+  },
   //Тип жилья в фильтре
   isNewBuilding: {
     type: Number,
