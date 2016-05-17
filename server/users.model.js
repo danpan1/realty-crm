@@ -3,16 +3,6 @@ import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 var Schema = {};
 
-createdAt
-emails
-heartbeat
-name
-phone
-realtorId
-roles
-services
-surName
-urlVk
 Schema.Users = new SimpleSchema({
   createdAt: {
     type: Date,
