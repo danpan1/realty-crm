@@ -8,6 +8,8 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
             ngf-select='',
             ngf-multiple='true',
             ngf-change='oneReview.upload($files)'
+            ngf-accept="'image/*'"
+            ngf-resize="{width: 320, height: 200, centerCrop: true}"
             ng-disabled='oneReview.uploadLength !== 0').md-primary.md-raised Добавить фото
             div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReview.uploadLength !== 0')
                 div Загружается фото...
