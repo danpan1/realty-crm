@@ -15,21 +15,13 @@ class OneReviewDescTitle {
 
     $reactive(this).attach($scope);
     /* Устанавливаем дефолтные значения для всех используемых в компоненте переменных */
+    let vm = this;
     this.saleDescription = saleDescription;
     this.descTitle = saleTitle;
     this.inputTitleDesc = 'a';
     this.descTitleNumber = undefined;
-  }
-  
-  setSomeTitle () {
-      var vm = this;
-      vm.inputTitleDesc = vm.realty.title;
-  }
-  onInit () {
-      var vm = this;
-      setTimeout( () => {
-        vm.setSomeTitle();
-      },1500);
+    
+    vm.inputTitleDesc = vm.realty.title;
   }
   
   /* Выбираем заголовок */

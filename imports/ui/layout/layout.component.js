@@ -81,6 +81,8 @@ function mdIconConfig($mdIconProvider) {
   'ngInject';
   $mdIconProvider
     .icon('menu', URL_ICON_MENU, 24)
+    .icon('skip_next', 'svg/skip_next.svg', 48)
+    .icon('skip_prev', 'svg/skip_previous.svg', 48)
     .icon('conditions_elevator', 'svg/elevator.svg', 28)
     .icon('conditions_children', 'svg/children.svg', 24)
     .icon('conditions_furniture', 'svg/furniture.svg', 24)

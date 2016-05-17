@@ -1,11 +1,12 @@
 'use strict';
 import angular from 'angular';
 
-const moduleName = 'ngTelFilter';
+const moduleName = 'ngPhoneFilter';
 
-export default angular.module(moduleName).directive('ngTelFilter',function () {
+export default angular.module(moduleName, []).directive('ngPhoneFilter',function () {
   return {
     require: 'ngModel',
+    /* @ngInject */
     link: function(scope, element, attrs, ngModelController) {
       ngModelController.$parsers.push(function(data) {
         if (!tel) { return ''; }

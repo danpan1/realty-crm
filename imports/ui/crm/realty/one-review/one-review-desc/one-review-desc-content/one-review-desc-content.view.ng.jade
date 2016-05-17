@@ -1,12 +1,16 @@
 div(layout='row' ng-init="oneReviewDescContent.onInit()")
-    div(layout='column' flex='30')
+    div(layout='column' flex='20')
         p(flex='30' layout='row' layout-align="center start")
-            md-button(ng-click="oneReviewDescContent.prevActiveBenefitObjectNumber(false)" ng-disabled='oneReviewDescContent.activeObject.index == -1 || !oneReviewDescContent.activeObject.index' flex='50').md-raised Previous
-            md-button(ng-click="oneReviewDescContent.nextActiveBenefitObjectNumber(true)" ng-disabled='oneReviewDescContent.activeObject.index + 1 >= oneReviewDescContent.benefitsList.length' flex='50').md-raised Next
+            md-button(ng-click="oneReviewDescContent.prevActiveBenefitObjectNumber(false)" ng-disabled='oneReviewDescContent.activeObject.index == -1 || !oneReviewDescContent.activeObject.index').little-button.md-icon-button.md-raised
+                md-icon(md-svg-icon='skip_prev')
+            md-button(ng-click="oneReviewDescContent.nextActiveBenefitObjectNumber(true)" ng-disabled='oneReviewDescContent.activeObject.index + 1 >= oneReviewDescContent.benefitsList.length').little-button.md-icon-button.md-raised
+                md-icon(md-svg-icon='skip_next')
         p(flex='30' layout='row' layout-align="center start")
-            md-button(ng-click="oneReviewDescContent.prevActiveBenefitNumber(false)" ng-disabled='oneReviewDescContent.active.index <= 0' flex='50').md-raised P
-            md-button(ng-click="oneReviewDescContent.nextActiveBenefitNumber(true)" ng-disabled='oneReviewDescContent.active.index + 1 >= oneReviewDescContent.activeBenefit.content.length' flex='50').md-raised N
-    div(layout='column' flex='70')
+            md-button(ng-click="oneReviewDescContent.prevActiveBenefitNumber(false)" ng-disabled='oneReviewDescContent.active.index <= 0').little-button.md-icon-button.md-raised
+                md-icon(md-svg-icon='skip_prev')
+            md-button(ng-click="oneReviewDescContent.nextActiveBenefitNumber(true)" ng-disabled='oneReviewDescContent.active.index + 1 >= oneReviewDescContent.activeBenefit.content.length').little-button.md-icon-button.md-raised
+                md-icon(md-svg-icon='skip_next')
+    div(layout='column' flex='80')
         md-input-container(flex='30').md-block
             md-select(ng-model="oneReviewDescContent.activeObject.name" placeholder='Выберите выгоду')
                 md-option(ng-value='label' ng-repeat="label in oneReviewDescContent.benefitsList" ng-click="oneReviewDescContent.setActiveBenefitObjectNumber($index)") {{label}}
