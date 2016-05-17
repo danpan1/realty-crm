@@ -17,6 +17,7 @@ class OneReviewDesc {
 
     $reactive(this).attach($scope);
     /* Устанавливаем дефолтные значения для всех используемых в компоненте переменных */
+    this.realty = {title : "1"}
    }
   
     
