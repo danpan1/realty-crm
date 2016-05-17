@@ -1,4 +1,4 @@
-div(layout='row')
+div(layout='row' ng-init="oneReviewDescContent.onInit()")
     div(layout='column' flex='30')
         p(flex='30' layout='row' layout-align="center start")
             md-button(ng-click="oneReviewDescContent.prevActiveBenefitObjectNumber(false)" ng-disabled='oneReviewDescContent.activeObject.index == -1 || !oneReviewDescContent.activeObject.index' flex='50').md-raised Previous
