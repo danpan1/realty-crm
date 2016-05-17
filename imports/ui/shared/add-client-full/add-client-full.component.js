@@ -12,10 +12,12 @@ import './add-client-full.view.html';
 
 class AddClientFull {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $state) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.resetClient();
+    this.activeTab = 0;
+    this.state = $state;
   }
 
   submit(valid) {
@@ -33,7 +35,14 @@ class AddClientFull {
     // }
     console.log('inserted', this.client);
     // Clients.insert(this.client);
-    Meteor.call('addClient', this.client);
+    Meteor.call('addClient', this.client, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+        this.state.go('crm.clients.details.connections', {client: result, assort: 'manual', activetab: 'connections'}) ;
+      }
+    });
     this.resetClient();
   }
 

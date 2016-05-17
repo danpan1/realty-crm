@@ -37,28 +37,22 @@ class OneInfo {
     for(var i in dictionary.conditions){
         this.currentConditions[i] = {};
     }
-    console.log(this.currentConditions);
+    // console.log(this.currentConditions);
   }
   
-  onConditionsChange (realtyId) {
-    this.realty.details.conditions = [];
-    //this.currentConditions = [];
-    //for(var i in dictionary.conditions){
-    //    this.currentConditions[i] = {name: dictionary.conditions[i].id, presence: false};
-    //}
-    console.log(this.currentConditions);
-    for(var i in this.currentConditions){
-        if(this.currentConditions[i].presence == true){
-            console.log(this.currentConditions[i].name);
-            this.realty.details.conditions.push(this.currentConditions[i].name);
-        }
+  onConditionsChange (condition) {
+    let index = this.realty.details.conditions.indexOf(condition);
+    if (index === -1) {
+      this.realty.details.conditions.push(condition);
+    }  else {
+      this.realty.details.conditions.splice(index, 1);
     }
     console.log(this.realty.details.conditions);
-    Realty.update({_id: realtyId}, {
+    Realty.update({_id: this.realty._id}, {
         $set: this.realty
     }, (error) => {
         if(error) {
-        console.log(error)
+        console.log(error);
         } else {
             console.log('call recieved newObj');
         }

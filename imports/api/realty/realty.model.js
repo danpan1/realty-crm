@@ -14,6 +14,7 @@ import {ReportsSchema} from './schemas/reports.schema';
 import {RentDetailsSchema} from './schemas/details.schema';
 // mongodump -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
 // mongorestore -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
+import {Meteor} from 'meteor/meteor';
 
 // mongorestore -h 127.0.0.1 --port 27017 -d getrent dump/meteor
 // mongodump -h 127.0.0.1 --port 27017 -d getrent dump2/meteor
@@ -60,9 +61,9 @@ Realty.Schema = new SimpleSchema({
     max: 9999999999
   },
   roomcount: {//Количество комнат ['1', '2', '3', '4+']
-    type: String,
+    type: Number,
     label: 'roomcount',
-    //allowedValues: dictionary.roomcount,
+    allowedValues: dictionary.roomcount.map((item)=> {return item.id;}),
     optional: true
   },
   square: {  // площадь помещений общая указывает на карточке
