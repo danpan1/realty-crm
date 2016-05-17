@@ -1,0 +1,8 @@
+.realty-conditions-spaces {
+  &:nth-child(3n+2) md-checkbox {
+    margin-left: 10px !important;
+  }
+  &:nth-child(3n+3) md-checkbox {
+    margin-left: 22px !important;
+  }
+}
