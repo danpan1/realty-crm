@@ -114,13 +114,13 @@ class OneReview {
     // });
   }
 
-  isExclusive() {
-    this.realty.realtor.isExclusive = !this.realty.realtor.isExclusive;
+  isExclusive(isExclusive) {
+    this.realty.realtor.isExclusive = isExclusive;
     this.saveNewDescription();
   }
 
-  isCheckout() {
-    this.realty.realtor.isCheckout = !this.realty.realtor.isCheckout;
+  isCheckout(isCheckout) {
+    this.realty.realtor.isCheckout = isCheckout;
     this.saveNewDescription();
   }
 

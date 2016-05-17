@@ -52,7 +52,7 @@ class AddRealtyFull {
       } else {
         console.log(`Realty added : cleintSide, ${vm.realty}`);
         console.log(result);
-        this.state.go('crm.realty.one.info', {realtyId: result});
+        this.state.go('crm.realty.one.review', {realtyId: result});
       }
     });
 
