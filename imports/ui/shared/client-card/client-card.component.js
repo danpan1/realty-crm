@@ -14,6 +14,10 @@ class ClientCard {
     this.isHotClient = this.client.status == 'hot' ? true : false;
     this.isArchiveClient = this.client.status == 'archive' ? true : false;*/
     this.searchDuration = parseInt((new Date().getTime() - this.client.searchStartDate.getTime()) / 86400000);
+    this.searchTarget = false;
+    if(this.client.searchEndDate){
+        this.searchTarget = parseInt((this.client.searchEndDate.getTime() - new Date().getTime()) / 86400000) > 0;
+    }
   }
   
   sendCurrentClient (client) {

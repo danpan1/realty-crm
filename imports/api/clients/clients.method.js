@@ -19,7 +19,14 @@ export function addClient(client) {
     }
     let nextValue = nextAutoincrement(Clients); // 1
     client._id = nextValue + '';
-    Clients.insert(client);
+    Clients.insert(client, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(`Client added : id=${nextValue}`);
+      }
+    });
+    return nextValue;
     // Clients.insert.update({_id: id}, {
     //   $set: {
     //     'realtor.reviewDate': date,
