@@ -2,11 +2,11 @@ one-info-edit(ng-if="oneInfo.realty" realty="oneInfo.realty" show="oneInfo.editD
 div(layout="column", layout-align="space-around stretch")
     // IMAGES
     div(layout="row" layout-align='center center')
-        div(flex).oneInfo-image-container.mv-16
+        div(md-whiteframe='2').oneInfo-image-container.mv-16
+            button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)").md-raised
+            button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)").md-raised
             div.oneInfo-image-inner
-                button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)")
-                img(src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}", md-whiteframe="2")
-                button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)")
+                img(src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}")
     div(layout="row", layout-align="space-between")
         div(md-whiteframe='2' flex='80' layout-padding layout="row")
             div(flex="33")
