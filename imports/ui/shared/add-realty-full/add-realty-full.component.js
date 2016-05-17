@@ -15,7 +15,7 @@ class AddRealtyFull {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.realty = {contacts: [{phones: []}]};
-    this.activeTab = 0;
+    this.activeTab = 2;
     this.state = $state;
     this.fake = {
       arenda: true
