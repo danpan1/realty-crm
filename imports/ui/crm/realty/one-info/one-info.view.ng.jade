@@ -17,8 +17,8 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Округ: #[strong {{oneInfo.realty.address.areaName}}]
                     div().md-subhead Район: #[strong {{oneInfo.realty.address.districtName}}]
                     div().md-subhead Улица: #[strong {{oneInfo.realty.address.street}}]
-                    div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.meta.house}}]
-                    div().md-subhead Квартира: #[strong {{oneInfo.realty.address.meta.flat}}]
+                    div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.house}}]
+                    div().md-subhead Квартира: #[strong {{oneInfo.realty.address.flat}}]
                     div().md-subhead Метро: #[strong {{oneInfo.realty.address.metroName}} {{oneInfo.realty.address.metroPeshkom}} мин. пешком]
                     div
                         md-button(ng-click="oneInfo.showEditDialog($event)").md-primary.md-raised.ml-0 Изменить
@@ -50,8 +50,8 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Собственник #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
                     div().md-subhead Срок: #[strong {{oneInfo.realty.type == 3 ? 'посуточно' : 'длительный срок'}}]
                     div().md-subhead Цена: #[strong {{oneInfo.realty.price | price}}]
-                    div().md-subhead От клиента: #[strong {{oneInfo.realty.clientpercent}}]%
-                    div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.partnerpercent}}]%
+                    div().md-subhead От клиента: #[strong {{oneInfo.realty.clientpercent || 0}}]%
+                    div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.partnerpercent || 0}}]%
         div(md-whiteframe='2' flex='20').mh-16 {{oneInfo.currentConditions[$index].presence}}
             md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
             aria-label='Switch 2'

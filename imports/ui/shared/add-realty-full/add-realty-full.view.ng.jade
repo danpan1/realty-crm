@@ -8,13 +8,13 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='70')
                             div(layout='row' layout-align='space-between start')
                                 md-input-container(flex)
-                                    md-select(required ng-model='addRealtyFull.fake.arenda')
+                                    md-select(ng-model='addRealtyFull.fake')
                                         md-option(ng-value='true') Аренда
                                 md-input-container(flex).ml-32
-                                    md-select(required ng-model='addRealtyFull.fake.arenda')
+                                    md-select(ng-model='addRealtyFull.fake')
                                         md-option(ng-value='true') Квартиры
                                 md-input-container(flex).ml-32
-                                    md-select(required ng-model='addRealtyFull.fake.arenda')
+                                    md-select(ng-model='addRealtyFull.fake')
                                         md-option(ng-value='true') Москва
 
                     div(layout='row').mt-16
@@ -24,7 +24,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                                 dadata='addRealtyFull.locations.full' layout = 'row' flex='66')
                                 md-input-container(flex='33').ml-32
                                     label Квартира
-                                    input(ng-model='addRealtyFull.realty.address.flat')
+                                    input(ng-model='addRealtyFull.locations.flat')
                                     span.bottom-label Видите только вы
 
                     div(layout='row', layout-align="space-between center")
@@ -94,7 +94,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                                         md-option(ng-value='balcony.id',
                                         ng-repeat="balcony in addRealtyFull.dictionary.balcony ") {{balcony.name}}
                                 md-input-container(flex).mv-0.ml-32.form-required
-                                    label Окна выходят на
+                                    label Вид из окон
                                     md-select(required ng-model='addRealtyFull.realty.details.windowView')
                                         md-option(ng-value='windowView.id',
                                         ng-repeat="windowView in addRealtyFull.dictionary.windowView ") {{windowView.name}}
@@ -152,7 +152,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     required='',
                                     md-maxlength='11')
                                 md-input-container(flex).mv-0.ml-32
-                                    label Имя клиента
+                                    label Имя собственника
                                     input(ng-model='addRealtyFull.realty.contacts[0].name', required='')
                     div(layout='row')
                         div(flex='45').mv-16
@@ -177,6 +177,6 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     input(ng-model='addRealtyFull.realty.realtor.partnerpercent' placeholder='От клиента другого агента')
 
                     div(layout='row').mv-32
-                        md-button(ng-click='addRealtyFull.submit(true)' ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-success.md-raised.md-title.mh-0 Добавить объект!
+                        md-button(ng-click='addRealtyFull.submit()' ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-success.md-raised.md-title.mh-0 Добавить объект!
                         md-button(md-no-ink ng-click='addRealtyFull.activeTab = 1').md-primary.md-body-1.ml-32 Вернуться на шаг назад
 
