@@ -15,6 +15,7 @@ class OneReviewDescContent {
 
     $reactive(this).attach($scope);
     /* Устанавливаем дефолтные значения для всех используемых в компоненте переменных */
+    let vm = this;
     this.saleDescription = saleDescription;
     this.active = {
         index:-1,
@@ -36,12 +37,13 @@ class OneReviewDescContent {
     this.benefitsList = saleDescription.map((item)=> {return item.name})
     this.textVariable = "";
     this.setActiveBenefit();
+    
+    vm.desc.details = vm.realty.details.descr;
   }
   
-  
+  /*
   setSomeDesc () {
       var vm = this;
-      vm.desc.details = vm.realty.details.descr;
   }
   
   onInit () {
@@ -49,7 +51,7 @@ class OneReviewDescContent {
       setTimeout( () => {
         vm.setSomeDesc();
       },1500);
-  }
+  }*/
   /* Сохранение описания и заголовка на сервер */
   
   /* Выбираем вид выгоды */
