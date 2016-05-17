@@ -88,8 +88,8 @@ div(ng-if="oneInfoEdit.show")
                         div(flex)
                             div
                                 label Состав съемщиков
-                                md-input-container
-                                    md-checkbox(ng-model="oneInfoEdit.realty.details.composition[$index]" ng-repeat="position in oneInfoEdit.dictionary.composition").md-primary {{position.name}}
+                                md-input-container(ng-repeat="position in oneInfoEdit.dictionary.composition")
+                                    md-checkbox(ng-model="oneInfoEdit.conditionsSelected[$index]").md-primary {{position.name}}
                             div
                                 md-input-container
                                     label Собственник

@@ -4,5 +4,5 @@ md-input-container(ng-if='!realtyConditions.checkbox')
         md-option(ng-value='condition.id',
         ng-repeat='condition in realtyConditions.conditionsDictionary') {{condition.name}}
 div(ng-if='realtyConditions.checkbox' layout='row' layout-wrap)
-    div(ng-repeat='condition in realtyConditions.conditionsDictionary' flex='33')
-        md-checkbox(ng-model='condition.boo' ng-click='realtyConditions.toggle(condition.id)').md-primary {{condition.name}}
+    div(ng-repeat='condition in realtyConditions.conditionsDictionary' flex='33').realty-conditions-spaces
+        md-checkbox(ng-model='condition.boo' ng-click='realtyConditions.toggle(condition.id)').md-primary.md-body-1 {{condition.name}}

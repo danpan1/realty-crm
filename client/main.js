@@ -32,7 +32,7 @@ if (Meteor.isCordova) {
 function config($locationProvider, $urlRouterProvider) {
   'ngInject';
   $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise('/realty/list/new');
+  $urlRouterProvider.otherwise('/realty/list/my');
 }
 
 function run($rootScope, $state) {

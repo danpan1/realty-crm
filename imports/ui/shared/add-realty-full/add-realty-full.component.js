@@ -19,7 +19,7 @@ class AddRealtyFull {
     this.state = $state;
     this.fake = {
       arenda: true
-    }
+    };
   }
 
   //ng-disabled='firstForm.$invalid || secondForm.$invalid || false'
