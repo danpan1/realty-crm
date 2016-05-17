@@ -7,6 +7,7 @@ import angularMeteor from 'angular-meteor';
 import routes from './crm.routes';
 //import {name as ngMenuToggle} from '../shared/menu-toggle/menu-toggle';
 //import {name as ngMenuLink} from '../shared/menu-link/menu-link';
+//import {name as ngPhoneFilter} from '../../api/filters/phone-filter.directive.js';
 import {name as Realty}from './realty/realty.component';
 import {name as clients}from './clients/clients.component';
 import {name as layout} from '/imports/ui/layout/layout.component';
@@ -18,6 +19,7 @@ export default angular.module(moduleName, [
   layout,
   //ngMenuLink,
   //ngMenuToggle,
+  //ngPhoneFilter,
   clients,
   Realty
 ]).config(routes);
