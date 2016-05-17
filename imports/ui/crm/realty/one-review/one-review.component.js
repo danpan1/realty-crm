@@ -16,7 +16,8 @@ class OneReview {
     $reactive(this).attach($scope);
     this.$timeout = $timeout;
     let vm = this;
-    this.uploadLength = 0;
+    this.uploadThumbsImagesLength = 0;
+    this.uploadNormalLength = 0;
     this.subscribe('oneInfo', () => {
       return [
         $stateParams.realtyId
@@ -62,20 +63,43 @@ class OneReview {
 
   // удаление фото из Amazon S3
   s3DeleteImage(image) {
+    // debugger
+    // let a = [1,2,3]
+    console.log(this.realty.details.thumbnails);
+    console.log(image);
+    let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+      return (item.url === image.url);
+    });
+
+    this.realty.details.thumbnails.splice(imageIndex, 1);
+    console.log(this.realty.details.images.length);
+    let bigImage = this.realty.details.images.splice(imageIndex, 1);
+    console.log(bigImage[0]);
+    console.log(this.realty.details.images.length);
+
     S3.delete(image.relative_url, (error)=> {
         if (error) {
           console.log(error);
         }
       }
     );
+
+    S3.delete(bigImage[0].relative_url, (error)=> {
+        if (error) {
+          console.log(error);
+        }
+      }
+    );
+
+    this.saveNewDescription();
   }
 
   // удаление фото из View
 
-  upload(files) {
+  uploadThumbImages(files) {
     console.log(files);
     if (files) {
-      this.uploadLength = files.length;
+      this.uploadThumbsImagesLength = files.length;
     }
     S3.upload({
       files: files,
@@ -84,30 +108,47 @@ class OneReview {
       if (error) {
         console.log(error);
       } else {
-        this.uploadLength--;
+        this.uploadThumbsImagesLength--;
+        if (!this.realty.details.thumbnails) {
+          this.realty.details.thumbnails = [];
+        }
+
+        this.$timeout(()=> {
+          console.log(result.url, 'small uploaded');
+          this.realty.details.thumbnails.push(result);
+          this.saveNewDescription();
+        }, 0);
+        // console.log('uploaded images', this.realty.details.images);
+      }
+    });
+  }
+
+
+  uploadNormalImages(files) {
+    console.log(files);
+    if (files) {
+      this.uploadNormalLength = files.length;
+    }
+    S3.upload({
+      files: files,
+      path: ''
+    }, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        this.uploadNormalLength--;
         if (!this.realty.details.images) {
           this.realty.details.images = [];
         }
 
         this.$timeout(()=> {
+          console.log(result.url, 'big uploaded');
           this.realty.details.images.push(result);
           this.saveNewDescription();
         }, 0);
         // console.log('uploaded images', this.realty.details.images);
       }
     });
-
-    // this.Upload.upload({
-    //   url: 'upload/url',
-    //   data: {file: file, 'username': $scope.username}
-    // }).then(function (resp) {
-    //   console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-    // }, function (resp) {
-    //   console.log('Error status: ' + resp.status);
-    // }, function (evt) {
-    //   var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-    //   console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-    // });
   }
 
   isExclusive(isExclusive) {
@@ -122,7 +163,7 @@ class OneReview {
 
   /* Сохранение описания и заголовка на сервер */
   saveNewDescription() {
-    if (this.uploadLength !== 0) {
+    if (this.uploadThumbsImagesLength !== 0 || this.uploadNormalLength !== 0) {
       return;
     }
     // console.log('saveNewDescription');
