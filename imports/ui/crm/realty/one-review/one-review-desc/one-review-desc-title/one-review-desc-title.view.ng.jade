@@ -1,4 +1,5 @@
-p
+p(ng-click="oneReviewDescTitle.setSomeTitle()") Set Title
+p(ng-init="oneReviewDescTitle.onInit()")
     md-button(ng-click="oneReviewDescTitle.prevDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber == 0 || !oneReviewDescTitle.descTitleNumber").md-raised Prev.
     md-button(ng-click="oneReviewDescTitle.nextDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber + 1 >= oneReviewDescTitle.descTitle.value.length").md-raised Next
 md-input-container().md-block
