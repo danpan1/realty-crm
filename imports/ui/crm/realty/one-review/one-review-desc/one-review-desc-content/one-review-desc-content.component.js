@@ -27,7 +27,7 @@ class OneReviewDescContent {
         index:undefined
     };
     this.desc = {
-        details:'',
+        details: '',
         nextdetails: '',
         descTitleNumber: 0
     }
@@ -38,6 +38,18 @@ class OneReviewDescContent {
     this.setActiveBenefit();
   }
   
+  
+  setSomeDesc () {
+      var vm = this;
+      vm.desc.details = vm.realty.details.descr;
+  }
+  
+  onInit () {
+      var vm = this;
+      setTimeout( () => {
+        vm.setSomeDesc();
+      },1500);
+  }
   /* Сохранение описания и заголовка на сервер */
   
   /* Выбираем вид выгоды */
@@ -113,7 +125,7 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
     templateUrl: 'imports/ui/crm/realty/one-review/one-review-desc/one-review-desc-content/one-review-desc-content.view.html',
     bindings: {
-        realty:'='
+        realty:'=ngModel'
     },
     controllerAs: moduleName,
     controller: OneReviewDescContent

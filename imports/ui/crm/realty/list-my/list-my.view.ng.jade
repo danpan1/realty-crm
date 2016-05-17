@@ -1,12 +1,12 @@
-realty-filter(filter = "listMy.filter" roomcount = "listMy.roomcount")
+//realty-filter(filter = "listMy.filter" roomcount = "listMy.roomcount")
 
 .md-body-1(layout='column', layout-align='space-around stretch')
     .listMy(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
         div().listMy_col Фото
-        div().listMy_col Цена и адрес
+        div().listMy_col Комнат/Цена/Адрес
         div().listMy_col Подготовлен
-        div().listMy_col Реклама
-        div().listMy_col Действия
+        div().listMy_col Реклама на GetRent
+        div().listMy_col Подробнее
 
 .md-body-1(layout='column', layout-align='space-around stretch')
     .listMy(layout='row', md-whiteframe='2',ng-repeat='realty in listMy.realty').md-whiteframe-2dp.mv-8
@@ -14,7 +14,7 @@ realty-filter(filter = "listMy.filter" roomcount = "listMy.roomcount")
             div(layout='column', layout-align='space-between')
                 div(layout='row' layout-align='center center').apartment-pic
                     img(ng-src='{{::realty.image || "realty_no_image.png"}}')
-                    div().icon-zoom
+                    //div().icon-zoom
         md-divider
 
         div().listMy_Address.pv-8.ph-16
@@ -25,27 +25,17 @@ realty-filter(filter = "listMy.filter" roomcount = "listMy.roomcount")
                     div().listMy_Address-item {{::realty.address.house}} {{::realty.address.flat}}
         md-divider
 
-        div(layout='column' layout-align='center center').listMy_Progress.p-8
+        div(layout='column' layout-align='center center' ui-sref="crm.realty.one.review({realtyId: '{{::realty._id}}'})").listMy_Progress.p-8
             div.md-title.orange.mv-8 {{::realty.moderator.percent.total || 0}}% / 100%
             div.orange.mv-8 {{(realty.moderator.percent.total !== 100) ? 'Срочно улучшить' : 'Максимально подготовлен'}}
         md-divider
 
         div(layout='column' layout-align='center center').listMy_Advertisement.p-8
-            div.md-title.orange.mv-8 55% / 100%
-            div.orange.mv-8 Выжать максимум
+            div(ng-if='realty.status === "sale"').md-title.orange.mv-8 100% / 100%
+            div(ng-if='realty.status !== "sale"').md-title.orange.mv-8 0% / 100%
+            div(ng-if='realty.status === "sale"').orange.mv-8 Размещено
+            div(ng-if='realty.status !== "sale"').orange.mv-8 Не размещено
         md-divider
 
-        div(layout='column').listMy_Actions.pv-8.pl-16.pr-32
-            div(layout='row' layout-align='space-around center').mb-8
-                div(flex='20').icon-bookmark 01.01
-                div(flex='45') 15:00 [К] Анна
-                div(flex='35') 8(925) 111-22-33
-            div(layout='row' layout-align='space-around center').mb-8
-                div(flex='20').icon-bookmark 01.02
-                div(flex='45') 17:00 [Р] Андрей
-                div(flex='35') 8(925) 111-22-33
-            div(layout='row' layout-align='space-around center').mb-8
-                div(flex='20').icon-bookmark 01.03
-                div(flex='45') 17:00 [Р] Андрей
-                div(flex='35') 8(925) 111-22-33
-            md-button(md-no-ink='').md-primary добавить показ
+        div(layout='column' layout-align='center center').listMy_Actions.pv-8.pl-16.pr-32
+            md-button(md-no-ink='').md-primary Инфо об объекте

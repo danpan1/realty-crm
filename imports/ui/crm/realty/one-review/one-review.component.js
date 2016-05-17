@@ -11,11 +11,12 @@ import './one-review.view.html';
 
 class OneReview {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams) {
+  constructor($scope, $reactive, $stateParams, $timeout) {
 
     $reactive(this).attach($scope);
+    this.$timeout = $timeout;
     let vm = this;
-
+    this.uploadLength = 0;
     this.subscribe('oneInfo', () => {
       return [
         $stateParams.realtyId
@@ -72,9 +73,10 @@ class OneReview {
   // удаление фото из View
 
   upload(files) {
-    console.log('files', files);
-    const vm = this;
-    this.isUploading = true;
+    console.log(files);
+    if (files) {
+      this.uploadLength = files.length;
+    }
     S3.upload({
       files: files,
       path: ''
@@ -82,23 +84,17 @@ class OneReview {
       if (error) {
         console.log(error);
       } else {
-        //TODO переделать. при добавлении возможно Array сразу
-        if (!vm.realty.details.images) {
-          vm.realty.details.images = [];
+        this.uploadLength--;
+        if (!this.realty.details.images) {
+          this.realty.details.images = [];
         }
-        vm.realty.details.images.push(result);
-        console.log('uploaded', result);
-        vm.saveNewDescription();
+
+        this.$timeout(()=> {
+          this.realty.details.images.push(result);
+          this.saveNewDescription();
+        }, 0);
+        // console.log('uploaded images', this.realty.details.images);
       }
-      // else {
-      //   vm.addImagesToRealty(result);
-      //   if (filesToUpload.length == index) {
-      //     vm.isUploading = false;
-      //     vm.uploader.clearQueue();
-      //   } else {
-      //     index++;
-      //   }
-      // }
     });
 
     // this.Upload.upload({
@@ -114,18 +110,23 @@ class OneReview {
     // });
   }
 
-  isExclusive() {
-    this.realty.realtor.isExclusive = !this.realty.realtor.isExclusive;
+  isExclusive(isExclusive) {
+    this.realty.realtor.isExclusive = isExclusive;
     this.saveNewDescription();
   }
 
-  isCheckout() {
-    this.realty.realtor.isCheckout = !this.realty.realtor.isCheckout;
+  isCheckout(isCheckout) {
+    this.realty.realtor.isCheckout = isCheckout;
     this.saveNewDescription();
   }
 
   /* Сохранение описания и заголовка на сервер */
   saveNewDescription() {
+    if (this.uploadLength !== 0) {
+      return;
+    }
+    // console.log('saveNewDescription');
+
     // let moderator = this.realty.moderator;
     if (!this.realty.moderator) {
       this.realty.moderator = {};

@@ -146,10 +146,10 @@ md-tabs(md-dynamic-height md-border-bottom)
                                 md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
                     h3.md-bold.md-title Какой процент стоимости вы хотите получать
                     div(layout='row')
-                        md-input-container(flex).mv-0.form-required
-                            input(required ng-model='addRealtyFull.realty.realtor.clientpercent' placeholder='От прямого клиента')
-                        md-input-container(flex).mv-0.form-required
-                            input(required ng-model='addRealtyFull.realty.realtor.partnerpercent' placeholder='От клиента другого агента')
+                        md-input-container(flex).mv-0
+                            input(ng-model='addRealtyFull.realty.realtor.clientpercent' placeholder='От прямого клиента')
+                        md-input-container(flex).mv-0
+                            input(ng-model='addRealtyFull.realty.realtor.partnerpercent' placeholder='От клиента другого агента')
                         
             
 

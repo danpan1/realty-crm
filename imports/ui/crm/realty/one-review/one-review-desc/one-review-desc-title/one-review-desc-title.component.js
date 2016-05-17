@@ -17,8 +17,19 @@ class OneReviewDescTitle {
     /* Устанавливаем дефолтные значения для всех используемых в компоненте переменных */
     this.saleDescription = saleDescription;
     this.descTitle = saleTitle;
-    this.inputTitleDesc = '';
+    this.inputTitleDesc = 'a';
     this.descTitleNumber = undefined;
+  }
+  
+  setSomeTitle () {
+      var vm = this;
+      vm.inputTitleDesc = vm.realty.title;
+  }
+  onInit () {
+      var vm = this;
+      setTimeout( () => {
+        vm.setSomeTitle();
+      },1500);
   }
   
   /* Выбираем заголовок */
@@ -55,7 +66,7 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
     templateUrl: 'imports/ui/crm/realty/one-review/one-review-desc/one-review-desc-title/one-review-desc-title.view.html',
     bindings: {
-        realty:'='
+        realty:'=ngModel'
     },
     controllerAs: moduleName,
     controller: OneReviewDescTitle

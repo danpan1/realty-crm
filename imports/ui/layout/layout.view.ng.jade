@@ -1,15 +1,16 @@
 // Container #1 (see wireframe)
-md-toolbar(layout='row' layout-align='start center').ph-16
-    span().brand-logo
-    span(flex)
-    span().md-body-1 {{layout.user.emails[0].address}}.mr-0
-    md-button(hide-gt-md='', ng-click='layout.toggleList()').md-icon-button.menu
-        md-icon(md-svg-icon='menu')
-    md-button(show-gt-md='' ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.btn-logout
-        md-icon(md-svg-icon='svg/icon-exit-to-app-white.svg')
+md-toolbar(layout='row' layout-align='center center').ph-16
+    div(layout='row' layout-align='center center' flex).toolbar-container
+        span().brand-logo
+        span(flex)
+        span().md-body-1 {{layout.user.emails[0].address}}.mr-0
+        md-button(hide-gt-md='', ng-click='layout.toggleList()').md-icon-button.menu
+            md-icon(md-svg-icon='menu')
+        md-button(show-gt-md='' ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.btn-logout
+            md-icon(md-svg-icon='svg/icon-exit-to-app-white.svg')
 
 // Container #2
-div(flex, layout='row')
+div(flex, layout='row' layout-align='center none')
     // Container #3
     md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left").pv-16
         menu-toggle(section="layout.actions")
@@ -24,6 +25,6 @@ div(flex, layout='row')
             ng-click='layout.toggleList()') {{item.name}}
 
     // Container #4
-    md-content#content(flex, md-whiteframe="4", layout="column", layout-align='space-between start').ml-16
+    md-content#content(layout-md = 'flex',md-whiteframe="4", layout="column", layout-align='space-between none')
         div#mainContainer
             ui-view
