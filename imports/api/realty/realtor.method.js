@@ -60,23 +60,26 @@ export function addRealty(realty) {
 
   if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, ['business'])) {
 
-    console.log('casdc');
-    if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, ['business'])) {
-      if (Roles.userIsInRole(this.userId, ['realtor'])) {
-        realty.realtor.id = this.userId;
+    if (Roles.userIsInRole(this.userId, ['realtor'])) {
+      if (!realty.realtor) {
+        realty.realtor = {};
       }
-      //Генерим уникальный ID
-      let nextValue = nextAutoincrement(Realty);
-      realty._id = nextValue + '';
-      Realty.insert(realty, (error) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(`Realty added : id=${nextValue}`);
-        }
-      });
-      return nextValue;
-
+      realty.realtor.id = this.userId;
+      realty.status = 'taken';
     }
+
+    //Генерим уникальный ID
+    realty._id = nextAutoincrement(Realty) + '';
+
+    Realty.insert(realty, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(`Realty added : id=${realty._id}`);
+      }
+    });
+
+    return realty._id;
   }
+
 }

@@ -30,23 +30,15 @@ if (Meteor.isServer) {
       if (Roles.userIsInRole(this.userId, ['business'])) {
         if (!details) {
           options.fields = {
-            'address.areaName': 1,
-            'address.districtName': 1,
-            'address.meta.house': 1,
-            'address.metroName': 1,
+            'address.house': 1,
+            'address.flat': 1,
             'address.street': 1,
-            'address.value': 1,
             'moderator.percent.total': 1,
-            'operator.qualification': 1,
-            contacts: 1,
-            floor: 1,
-            floormax: 1,
             image: 1,
             price: 1,
-            realtor: 1,
-            reports: 1,
+            // realtor: 1,
+            // reports: 1,
             roomcount: 1,
-            square: 1,
             status: 1,
             title: 1
           };

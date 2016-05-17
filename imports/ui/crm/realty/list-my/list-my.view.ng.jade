@@ -18,9 +18,9 @@
         div().listMy_Address.pv-8.ph-16
             div(layout='column', layout-align='space-between')
                 div
-                    div().price.listMy_Address-item {{::realty.roomcount}} комн. {{::realty.price}}
+                    div().price.listMy_Address-item {{::realty.roomcount}} комн. {{::realty.price | price}}
                     div().listMy_Address-item {{::realty.address.street}}
-                    div().listMy_Address-item {{::realty.address.house}} {{::realty.address.flat}}
+                    div().listMy_Address-item {{::realty.address.house}} кв. {{::realty.address.flat}}
         md-divider
 
         div(layout='column' layout-align='center center' ui-sref="crm.realty.one.review({realtyId: '{{::realty._id}}'})").listMy_Progress.p-8
