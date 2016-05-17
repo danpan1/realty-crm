@@ -25,7 +25,6 @@ one-info {
 	background: white;
 	width: 664px;
 	height: 442px;
-	margin: 0 auto;
 	text-align: center;
 	img {
 		max-height: 442px;
@@ -40,6 +39,8 @@ one-info {
 
 .slide__prev,
 .slide__next {
+	z-index: 100;
+
 	position: absolute;
   background: url('img/icons/icon-arrow-left.png') no-repeat;
   width: 42px;

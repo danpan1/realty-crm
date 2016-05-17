@@ -1,7 +1,7 @@
 one-info-edit(ng-if="oneInfo.realty" realty="oneInfo.realty" show="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
     // IMAGES
-    div(layout="row" layout-align='center center')
+    div(layout="row" layout-align='start center')
         div(md-whiteframe='2').oneInfo-image-container.mv-16
             button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)").md-raised
             button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)").md-raised
