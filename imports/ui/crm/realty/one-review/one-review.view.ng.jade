@@ -7,7 +7,11 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
             md-button(ng-click='oneReview.upload()'
             ngf-select='',
             ngf-multiple='true',
-            ngf-change='oneReview.upload($files)').md-primary.md-raised Добавить фото
+            ngf-change='oneReview.upload($files)'
+            ng-disabled='oneReview.uploadLength !== 0').md-primary.md-raised Добавить фото
+            div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReview.uploadLength !== 0')
+                div Загружается фото...
+                md-progress-circular(md-mode='indeterminate')
         div(flex='50')
             h3(ng-if='oneReview.realty.moderator.comment.photo').md-headline Ответ от модератора:
             p(ng-if='oneReview.realty.moderator.comment.photo').md-body-1 Не качественные.
