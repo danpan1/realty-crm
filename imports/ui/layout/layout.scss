@@ -1,6 +1,9 @@
 ui-view {
   background-color: #f1f8fd;
 }
+.toolbar-container {
+    max-width: 1216px !important;
+}
 
 md-toolbar {
   min-height: 50px !important;
