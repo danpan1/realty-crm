@@ -1,47 +1,47 @@
 .text-italic {
-    font-style: italic;
+    font-style: italic !important;
 }
 
 .text-semibold {
-    font-weight: 600;
+    font-weight: 600 !important;
 }
 
 .text-bold, strong {
-    font-weight: 700;
+    font-weight: 700 !important;
 }
 
 .text-strike {
-    text-decoration: line-through;
+    text-decoration: line-through !important;
 }
 
 .text-super {
-    vertical-align: super;
+    vertical-align: super !important;
 }
 
 .text-sub {
-    vertical-align: sub;
+    vertical-align: sub !important;
 }
 
 .text-capitalize {
-    text-transform: capitalize;
+    text-transform: capitalize !important;
 }
 
 .text-lowercase {
-    text-transform: lowercase;
+    text-transform: lowercase !important;
 }
 
 .text-uppercase {
-    text-transform: uppercase;
+    text-transform: uppercase !important;
 }
 
 .text-left {
-    text-align: left;
+    text-align: left !important;
 }
 
 .text-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .text-right {
-    text-align: right;
+    text-align: right !important;
 }
