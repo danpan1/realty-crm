@@ -15,11 +15,11 @@ class AddRealtyFull {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.realty = {contacts: [{phones: []}]};
-    this.activeTab = 2;
+    this.activeTab = 0;
     this.state = $state;
     this.fake = {
       arenda: true
-    }
+    };
   }
 
   //ng-disabled='firstForm.$invalid || secondForm.$invalid || false'
