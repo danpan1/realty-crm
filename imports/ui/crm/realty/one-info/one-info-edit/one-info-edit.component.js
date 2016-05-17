@@ -13,28 +13,27 @@ class OneInfoEdit {
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
+    this.conditionsSelected = [];
+    for(var i in this.dictionary.composition.length){
+        this.conditionsSelected.push(false);
+    }
+    for(var i in this.realty.details.composition){
+        this.conditionsSelected[this.realty.details.composition[i]] = true;
+    }
   }
   
   ngOnInit() {
       if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
   }
   
-  onChangeRealty (realtyId) { /*, conditions*/ /*, oneInfoEdit.realty.details.conditions*/
-      /*console.log(conditions)
-      this.currentconditions = [];
-      for(var i in dictionary.conditions){
-          this.currentconditions[i] = {name: dictionary.conditions[i].name, presence: false};
+  onChangeRealty (realtyId) {
+      this.realty.details.composition = [];
+      for(var i in this.conditionsSelected){
+          if(this.conditionsSelected[i] == true){
+              this.realty.details.composition.push(i);
+          }
       }
-      for(var i in conditions){
-        for(var n in dictionary.conditions){
-            if(conditions[i] == dictionary.conditions[n].id){
-                console.log(this.currentconditions[n])
-                this.currentconditions[n].presence = true;
-                break;
-            }
-        }
-      }
-      console.log(this.currentconditions)*/
+      
       
       
       Realty.update({_id: realtyId}, {
@@ -54,19 +53,7 @@ class OneInfoEdit {
     console.log(this.realty.details.roomsSquare.length)
     this.realty.details.roomsSquare.push(0);
   }
-  /*
-  updateRealty(realtyId) {
-      Realty.update({_id: realtyId}, {
-        $set: vm.realty
-      }, (error) => {
-        if(error) {
-          console.log(error)
-        } else {
-          if(callback && typeof callback == 'function')
-            callback();
-        }
-      });
-  }*/
+  
 }
 
 const moduleName = 'oneInfoEdit';

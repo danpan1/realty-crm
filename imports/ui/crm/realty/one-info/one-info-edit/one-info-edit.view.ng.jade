@@ -1,3 +1,4 @@
+p {{this.realty.details.composition}}
 div(ng-if="oneInfoEdit.show")
     div.one-info-edit__wrapper(ng-click="oneInfoEdit.show = false")
     div.one-info-edit__block.ph-16(layout="column" ng-init="oneInfoEdit.ngOnInit()")
@@ -88,8 +89,8 @@ div(ng-if="oneInfoEdit.show")
                         div(flex)
                             div
                                 label Состав съемщиков
-                                md-input-container
-                                    md-checkbox(ng-model="oneInfoEdit.realty.details.composition[$index]" ng-repeat="position in oneInfoEdit.dictionary.composition").md-primary {{position.name}}
+                                md-input-container(ng-repeat="position in oneInfoEdit.dictionary.composition")
+                                    md-checkbox(ng-model="oneInfoEdit.conditionsSelected[$index]").md-primary {{position.name}}
                             div
                                 md-input-container
                                     label Собственник
