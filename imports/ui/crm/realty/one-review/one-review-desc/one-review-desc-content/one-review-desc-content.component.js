@@ -36,9 +36,10 @@ class OneReviewDescContent {
     this.descTitleNumber = 0;
     this.benefitsList = saleDescription.map((item)=> {return item.name})
     this.textVariable = "";
-    this.setActiveBenefit();
-    
     vm.desc.details = vm.realty.details.descr;
+    vm.desc.nextdetails = vm.realty.details.descr;
+    this.setActiveBenefit();
+
   }
   
   /*
@@ -100,7 +101,7 @@ class OneReviewDescContent {
   
   /* Устанавливаем информацию о выбранном виде выгоды */
   setActiveBenefit () {
-      if(this.activeObject.index != undefined){
+    if(this.activeObject.index != undefined){
           this.activeBenefit.content = this.saleDescription[this.activeObject.index].value;
           this.activeBenefit.label = this.saleDescription[this.activeObject.index].name;
           this.textVariable = '';
