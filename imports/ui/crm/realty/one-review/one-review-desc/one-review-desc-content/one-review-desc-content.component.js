@@ -36,24 +36,11 @@ class OneReviewDescContent {
     this.descTitleNumber = 0;
     this.benefitsList = saleDescription.map((item)=> {return item.name})
     this.textVariable = "";
-    vm.desc.details = vm.realty.details.descr;
-    vm.desc.nextdetails = vm.realty.details.descr;
+    vm.desc.details = vm.realty.details.descr || '';
+    vm.desc.nextdetails = vm.realty.details.descr || '';
     this.setActiveBenefit();
 
   }
-  
-  /*
-  setSomeDesc () {
-      var vm = this;
-  }
-  
-  onInit () {
-      var vm = this;
-      setTimeout( () => {
-        vm.setSomeDesc();
-      },1500);
-  }*/
-  /* Сохранение описания и заголовка на сервер */
   
   /* Выбираем вид выгоды */
   setActiveBenefitObjectNumber(activeNumber){
