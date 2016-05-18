@@ -38,3 +38,10 @@ add-realty-full {
     content:'*';
   }
 }
+
+
+.hide-count{
+    & .md-char-counter{
+        display: none;
+    }
+}
