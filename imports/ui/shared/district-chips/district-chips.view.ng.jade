@@ -1,5 +1,5 @@
 div().district
-    label Район или округ
+    //label Район или округ
     md-chips(ng-model='districtChips.districtsAreaInForm',
     md-autocomplete-snap='',
     md-require-match='true',
@@ -9,7 +9,7 @@ div().district
         md-search-text='districtChips.searchText',
         md-search-text-change='districtChips.searchTextChange(districtChips.searchText)',
         md-items='item in districtChips.districtsAreaSuggestionList',
-        placeholder='',
+        placeholder='Район или округ',
         md-no-cache='true')
             span(md-highlight-text='districtChips.searchText') {{item.name}}
             md-not-found
