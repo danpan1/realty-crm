@@ -18,9 +18,24 @@ class AddClientFull {
     this.resetClient();
     this.activeTab = 0;
     this.state = $state;
+    this.fake = true;
   }
-
+  
+  filterPhone(){
+      if(this.client.phone.length >= 18) return false;
+      this.client.phone = ' ' + this.client.phone;
+  }
+  
   submit(valid) {
+    var value = this.client.phone.split('');
+    for(var i in [1,2,3]){
+        for(var i in value){
+            if(value[i].match(/\+|\(|\)|\-|\s|d/)){
+                value.splice(i,1);
+            }
+        }
+    }
+    this.client.phone = value.join('');
     console.log('submit');
     if (!valid) {
       alert('не все данные корректны');
@@ -44,6 +59,10 @@ class AddClientFull {
       }
     });
     this.resetClient();
+  }
+  
+  showThis(t){
+      console.log(t);
   }
 
   resetClient() {

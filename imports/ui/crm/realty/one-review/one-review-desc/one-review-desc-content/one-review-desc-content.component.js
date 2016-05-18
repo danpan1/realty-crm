@@ -36,8 +36,8 @@ class OneReviewDescContent {
     this.descTitleNumber = 0;
     this.benefitsList = saleDescription.map((item)=> {return item.name})
     this.textVariable = "";
-    vm.desc.details = vm.realty.details.descr;
-    vm.desc.nextdetails = vm.realty.details.descr;
+    vm.desc.details = vm.realty.details.descr || '';
+    vm.desc.nextdetails = vm.realty.details.descr || '';
     this.setActiveBenefit();
 
   }
@@ -80,6 +80,7 @@ class OneReviewDescContent {
       this.textVariable = this.activeBenefit.content[this.active.index] ? this.activeBenefit.content[this.active.index] : '';
       this.desc.details = this.desc.nextdetails + this.textVariable;
       this.compareLength = this.desc.details.length;
+      this.realty.details.descr = this.desc.details;
   }
   nextActiveBenefitNumber () {
       this.active.index++;
