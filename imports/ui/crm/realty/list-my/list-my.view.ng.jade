@@ -8,7 +8,7 @@
 
 .md-body-1(layout='column', layout-align='space-around stretch')
     .listMy(layout='row', md-whiteframe='2',ng-repeat='realty in listMy.realty').md-whiteframe-2dp.mv-8
-        div(layout='column' layout-align='center center' ui-sref="crm.realty.one.info({realtyId: '{{::realty._id}}'})").listMy_Photo
+        div(layout='column' layout-align='center center' ui-sref="crm.realty.one.review({realtyId: '{{::realty._id}}'})").listMy_Photo
             div(layout='column', layout-align='space-between')
                 div(layout='row' layout-align='center center').apartment-pic
                     img(ng-src='{{::realty.image || "realty_no_image.png"}}')
