@@ -101,6 +101,6 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
 
 div(layout='column' layout-align='center center')
     md-button(flex='30' ng-click='oneReview.sendToModerator()'
-    ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"').md-success.md-raised.md-title.mv-16 Отправить на проверку модератора
+    ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"').md-success.md-raised.md-title.mv-16 Отправить на проверку модератору
     md-button(flex='30' ng-click='oneReview.sendToModerator()'
     ng-if='oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"' ng-disabled = 'true').md-success.md-raised.md-title.mv-16 Объект находится на проверке
