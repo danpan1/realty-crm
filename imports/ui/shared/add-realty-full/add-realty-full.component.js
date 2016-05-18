@@ -21,10 +21,13 @@ class AddRealtyFull {
     //fake selects Аренда Москва Квартиры
     this.fake = true;
   }
-
-  filterPhone(){
-      if(this.realty.contacts[0].phones[0].phone.length >= 18) return false;
-      this.realty.contacts[0].phones[0].phone = ' ' + this.realty.contacts[0].phones[0].phone;
+       
+  filterPhoneKeyPress(){
+      if(this.realty.contacts[0].phones[0].phone.length >= 17) return false;
+      if(this.realty.contacts[0].phones[0].phone[0] != '7') this.realty.contacts[0].phones[0].phone = '7 ' + this.realty.contacts[0].phones[0].phone;
+  }
+  filterPhoneFocus () {
+      if(!this.realty.contacts[0].phones[0].phone || this.realty.contacts[0].phones[0].phone[0] != '7') this.realty.contacts[0].phones[0].phone = '7';
   }
   
   submit() {

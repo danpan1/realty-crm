@@ -14,9 +14,15 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
                         label Фамилия
                         input(type='text', aria-label='Фамилия', required='' ng-model='register.credentials.profile.surName')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='75')
+                    md-input-container(flex='75' ng-class="{ 'has-error' : register.credentials.profile.phone.length > 1 && register.credentials.profile.phone.length < 15}")
                         label Телефон
-                        input(type='tel', aria-label='Телефон', required='' ng-model='register.credentials.profile.phone')
+                        input(type='tel', 
+                        aria-label='Телефон', 
+                        ng-focus="register.filterPhoneFocus()"
+                        ng-keypress="register.filterPhoneKeyPress()",
+                        ng-phone-filter, 
+                        required='' 
+                        ng-model='register.credentials.profile.phone')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='75')
                         label Email

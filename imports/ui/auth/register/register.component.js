@@ -28,8 +28,27 @@ class Register {
 
     this.error = '';
   }
-
+     
+  filterPhoneKeyPress(){
+      if(this.credentials.profile.phone.length >= 17) return false;
+      if(this.credentials.profile.phone[0] != '7') this.credentials.profile.phone = '7 ' + this.credentials.profile.phone;
+  }
+  filterPhoneFocus () {
+      if(!this.credentials.profile.phone || this.credentials.profile.phone[0] != '7') this.credentials.profile.phone = '7';
+  }
+  
   register() {
+      
+    var value = this.client.credentials.profile.split('');
+    for(var i in [1,2,3]){
+        for(var i in value){
+            if(value[i].match(/\+|\(|\)|\-|\s|d/)){
+                value.splice(i,1);
+            }
+        }
+    }
+    this.credentials.profile.phone = value.join('');
+    
     console.log(this.credentials);
     Accounts.createUser(this.credentials,
       this.$bindToContext((err) => {

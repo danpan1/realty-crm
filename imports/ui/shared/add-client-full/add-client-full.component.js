@@ -23,11 +23,28 @@ class AddClientFull {
     this.client.need = {
         metroTransport: 0
     }
+    this.client.searchEndDate = this.client.searchStartDate;
+    
   }
   
-  filterPhone(){
-      if(this.client.phone.length >= 18) return false;
-      this.client.phone = ' ' + this.client.phone;
+  onInit () {
+     console.log('234234');
+     angular.element(".md-datepicker-button").each(function(){
+        console.log('234234');
+        var el = this;
+        var ip = angular.element(el).parent().find("input").bind('click', function(e){
+            angular.element(el).click();
+        });
+        angular.element(this).css('visibility', 'hidden');
+     });
+  }
+        
+  filterPhoneKeyPress(){
+      if(this.client.phone.length >= 17) return false;
+      if(this.client.phone[0] != '7') this.client.phone = '7 ' + this.client.phone;
+  }
+  filterPhoneFocus () {
+      if(!this.client.phone || this.client.phone[0] != '7') this.client.phone = '7';
   }
   
   submit(valid) {
