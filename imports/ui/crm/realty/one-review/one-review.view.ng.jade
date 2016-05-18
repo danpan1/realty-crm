@@ -11,8 +11,8 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
             ngf-accept="'image/*'"
             ngf-resize="{width: 248, height: 186, centerCrop: false}"
             ngf-before-model-change="oneReview.uploadNormalImages($files)"
-            ng-disabled='oneReview.uploadThumbsImagesLength !== 0').md-primary.md-raised Добавить фото
-            div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReview.uploadThumbsImagesLength !== 0')
+            ng-disabled='oneReview.uploadNormalLength !== 0').md-primary.md-raised Добавить фото
+            div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReview.uploadNormalLength !== 0')
                 div Загружается фото...
                 md-progress-circular(md-mode='indeterminate')
         div(flex='50')
@@ -22,7 +22,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
 
 div(md-whiteframe='2').mv-16
     div(layout='row' layout-wrap)
-        div(flex='33' ng-repeat='image in oneReview.realty.details.thumbnails')
+        div(flex='33' ng-repeat='image in oneReview.realty.details.images')
             md-card
                 md-button(ng-click='oneReview.setMainImage(image)').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
                 md-button(aria-label ng-click="oneReview.removeImage(image)").btn-remove-photo

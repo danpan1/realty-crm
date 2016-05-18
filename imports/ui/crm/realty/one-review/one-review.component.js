@@ -38,17 +38,22 @@ class OneReview {
   }
 
   removeImage(image) {
-    // this.realty.details.images = this.realty.details.images.filter((item) => {
-    //   return item.url != image.url;
-    // });
-    if (this.realty.image == image.url) {
+    let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+      return (item.originalName === image.originalName);
+    });
+    if (this.realty.image === this.realty.details.thumbnails[imageIndex].url) {
+      console.log('removeImage mainImage',this.realty.image);
       this.realty.image = '';
     }
     this.s3DeleteImage(image);
   }
 
   setMainImage(image) {
-    this.realty.image = image.url;
+    let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+      return (item.originalName === image.originalName);
+    });
+    this.realty.image = this.realty.details.thumbnails[imageIndex].url;
+    console.log('setMainImage',this.realty.image);
     this.saveNewDescription();
   }
 
@@ -65,17 +70,17 @@ class OneReview {
     // debugger
     // let a = [1,2,3]
     let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
-      return (item.url === image.url);
+      return (item.originalName === image.originalName);
     });
     let imageNormalIndex = this.realty.details.images.findIndex((item)=> {
       return (item.originalName === image.originalName);
     });
 
-    this.realty.details.thumbnails.splice(imageIndex, 1);
+    let smallImage = this.realty.details.thumbnails.splice(imageIndex, 1);
     // console.log(this.realty.details.images.length);
     let bigImage = this.realty.details.images.splice(imageNormalIndex, 1);
 
-    S3.delete(image.relative_url, (error)=> {
+    S3.delete(smallImage[0].relative_url, (error)=> {
         if (error) {
           console.log(error);
         }
