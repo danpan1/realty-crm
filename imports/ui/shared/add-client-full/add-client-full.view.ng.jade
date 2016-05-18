@@ -6,7 +6,10 @@ md-tabs(md-dynamic-height)
                     div(layout='row')
                         div(flex='80')
                             div(layout='row').mv-16
-                                md-input-container(ng-class="{ 'has-error' : addClientFull.client.phone.length > 1 && addClientFull.client.phone.length < 17}").mv-0.form-required.hide-count
+                                md-input-container().mv-0.form-required
+                                    label Имя клиента
+                                    input(ng-model='addClientFull.client.name', required='')
+                                md-input-container(flex-offset='5' ng-class="{ 'has-error' : addClientFull.client.phone.length > 1 && addClientFull.client.phone.length < 17}").mv-0.form-required.hide-count
                                     // ng-pattern='/^([0-9]|\(|\)|\s|\-){18}$/',
                                     label Телефон
                                     input(ng-model='addClientFull.client.phone',
@@ -16,9 +19,6 @@ md-tabs(md-dynamic-height)
                                     ng-keypress="addClientFull.filterPhone()",
                                     ng-phone-filter,
                                     md-maxlength='18')
-                                md-input-container(flex-offset='5').mv-0.form-required
-                                    label Имя клиента
-                                    input(ng-model='addClientFull.client.name', required='')
                                 md-input-container(flex-offset='5').mv-0.form-required
                                     label Email клиента
                                     input(type="email" ng-model='addClientFull.client.email', required='')
@@ -50,7 +50,7 @@ md-tabs(md-dynamic-height)
                             div(layout='row').mv-16
                                 md-input-container(flex).mv-0.form-required
                                     label Напшите, что важно клиенту (ваша заметка)
-                                    textarea(required ng-model='addClientFull.client.realtorNote', md-maxlength='150', rows='5', md-select-on-focus='' )
+                                    textarea(required ng-model='addClientFull.client.realtorNote', md-maxlength='300', rows='5', md-select-on-focus='' )
                     //        div().md-subhead Какой процент стоимости аренды вы хотите получить
                     //
                     //        div(layout='row' layout-align='start center').mv-16
@@ -151,7 +151,6 @@ md-tabs(md-dynamic-height)
                                         md-input-container(flex='30').mv-0.pv-0
                                             input(ng-model='addClientFull.client.need.metroTime', placeholder='минут')
                                         md-input-container(flex).mv-0.ml-32.pb-0
-                                            label пешком
                                             md-select(ng-model='addClientFull.client.need.metroTransport' )
                                                 md-option(ng-value='transport.id',
                                                 ng-repeat="transport in addClientFull.dictionary.transport") {{transport.name}}

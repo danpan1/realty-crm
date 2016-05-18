@@ -4,17 +4,17 @@ div(md-whiteframe='2').mv-16.client-card
     div(layout='column')
         div(layout='row')
             div(flex='25').ph-16.pv-8
-                h3(ng-click="clientCard.sendCurrentClient(clientCard.client)").md-title.text-bold.client-card__price {{clientCard.client.need.priceTo}}
+                h3(ng-click="clientCard.sendCurrentClient(clientCard.client)").md-title.text-bold.client-card__price {{clientCard.client.need.price | price}}
                 p().md-body-1.client-card__right-label {{clientCard.client.comissionLoyal == true ? 'Готов ' : 'Не готов ' }} платить комиссию
                 p().md-body-1.client-card__right-label на {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
-                p().md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
+                p(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8
-                p(ng-if="clientCard.client.status == 'realtor'").md-title.client-card__no-margin
+                p(ng-if="clientCard.client.status == 'realtor'" hide).md-title.client-card__no-margin
                     span().text-bold 1 мая 17:00 | 
                     span().text-bold через 3:00
                 p().md-body-1.client-card__note {{clientCard.client.realtorNote}}
-            div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.client.status") 
+            div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.client.status" hide)
                 p.client-card__link_p(ng-if="clientCard.client.status != 'archive'")
                     a.client-card__link(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})" href="") 15 связей
                 p.text-uppercase.client-card__btn_buy-client(ng-if="clientCard.client.status == 'hot'") Купить за 150 руб.
@@ -49,7 +49,7 @@ div(md-whiteframe='2').mv-16.client-card
                     p(ng-repeat="subway in clientCard.client.need.embedded.subways")
                         span().metro-color.metro-color-pink
                         span() {{subway.name}}, 
-                        span() 10 минут пешком
+                        span(ng-if="clientCard.client.need.metroTime != undefined && clientCard.client.need.metroTime > 0") {{clientCard.client.need.metroTime}} минут {{clientCard.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
                     p
                         span(ng-repeat="district in clientCard.client.need.embedded.districts") р-н {{district}}
                 div(flex='55').ph-16.pv-8

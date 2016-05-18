@@ -19,6 +19,10 @@ class AddClientFull {
     this.activeTab = 0;
     this.state = $state;
     this.fake = true;
+    this.client.comissionLoyal = true;
+    this.client.need = {
+        metroTransport: 0
+    }
   }
   
   filterPhone(){
@@ -69,7 +73,7 @@ class AddClientFull {
         console.log(error);
       } else {
         console.log(result);
-        this.state.go('crm.clients.details.connections', {client: result, assort: 'manual', activetab: 'connections'}) ;
+        this.state.go('crm.clients.list.my', {status: 'realtor'}) ;
       }
     });
     this.resetClient();
