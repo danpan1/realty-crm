@@ -13,12 +13,10 @@ export const AddressSchema = new SimpleSchema({
     optional: true
   },
   city: {
-    type: String,
-    optional: true
+    type: String
   },
   country: {
-    type: String,
-    optional: true
+    type: String
   },
   districtId: {
     type: String,
@@ -30,49 +28,37 @@ export const AddressSchema = new SimpleSchema({
   },
   flat: {
     type: String,
-    max: 20,
+    optional: true
+  },
+  loc: {
+    type: [Number],
     optional: true
   },
   house: {
-    type: String,
-    optional: true
+    type: String
   },
   meta: { // что не нужно в карточке и вообще возможно нен нужно
     type: Object,
     blackbox: true,
     optional: true
   },
-  //TODO хранить метро по id или так прямо. И с пешком тоже не понятно
-  metroId: {
-    type:String,
-    optional: true
-  },
-  metroName: {
-    type:String,
-    optional: true
-  },
   metroTransport: {
-    type: Number,
-    optional: true
+    type: Number
   },
-  metroPeshkom: {
-    type: String,
-    optional: true
+  metroTime: {
+    type: String
   },
   street: {
-    type: String,
-    optional: true
+    type: String
   },
-  subways: {
-    type:Array,
-    optional: true
+  streetFiasId: {
+    type: String
   },
-  'subways.$': {
-    type:'String',
-    optional: true
-  },
+  // subways: { // ID метро
+  //   optional: true,
+  //   blackbox: true
+  // },
   value: {
-    type: String,
-    optional: true
+    type: String
   }
 });
