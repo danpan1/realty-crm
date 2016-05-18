@@ -4,7 +4,7 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
         img(src='img/logos/brand-logo-large.png')
     md-whiteframe.md-whiteframe-z2(layout='column', flex='60').pv-16
         div(layout='column', layout-fill='', layout-margin='', layout-padding='')
-            form(name='loginForm')
+            form(name='loginForm' ng-submit='login.login()')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='75')
                         label Email
@@ -14,7 +14,7 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
                         label Пароль
                         input(type='password', ng-model='login.credentials.password', aria-label='Пароль', required='')
                 div(layout='row' layout-align='center center')
-                    md-button.md-raised.md-primary(flex='75' ng-click='login.login()', aria-label='login', ng-disabled='login.loginForm.$invalid()')
+                    md-button.md-raised.md-primary(flex='75' type='submit', aria-label='login', ng-disabled='login.loginForm.$invalid()')
                         | Войти
                 div(layout='row' layout-align='center center')
                     a.md-button.md-primary(flex='75' href='/resetpw') Забыли пароль?

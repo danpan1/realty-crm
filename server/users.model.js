@@ -37,15 +37,27 @@ Schema.Users = new SimpleSchema({
     type: Date,
     optional: true
   },
-  name: {
+  profile: {
+    type: Object,
+    optional: true
+  },
+  'profile.name': {
     type: String,
     optional: true
   },
-  phone: {
-    type: [String],
+  'profile.phone': {
+    type: String,
     optional: true
   },
-  realtorId: {
+  'profile.realtorId': {
+    type: String,
+    optional: true
+  },
+  'profile.surName': {
+    type: String,
+    optional: true
+  },
+  'profile.urlVk': {
     type: String,
     optional: true
   },
@@ -57,14 +69,6 @@ Schema.Users = new SimpleSchema({
     type: Object,
     optional: true,
     blackbox: true
-  },
-  surName: {
-    type: String,
-    optional: true
-  },
-  urlVk: {
-    type: String,
-    optional: true
   }
 });
 

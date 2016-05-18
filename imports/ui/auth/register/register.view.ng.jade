@@ -4,19 +4,19 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
         img(src='img/logos/brand-logo-large.png')
     md-whiteframe.md-whiteframe-z2(layout='column', flex='60').pv-16
         div(layout='column', layout-fill='', layout-margin='', layout-padding='')
-            form(name='registerForm')
+            form(name='registerForm' ng-submit='register.register()')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='75')
                         label Имя
-                        input(type='text', aria-label='Имя', required='')
+                        input(type='text', aria-label='Имя', required='' ng-model='register.credentials.profile.name')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='75')
                         label Фамилия
-                        input(type='text', aria-label='Фамилия', required='')
+                        input(type='text', aria-label='Фамилия', required='' ng-model='register.credentials.profile.surName')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='75')
                         label Телефон
-                        input(type='tel', aria-label='Телефон', required='')
+                        input(type='tel', aria-label='Телефон', required='' ng-model='register.credentials.profile.phone')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='75')
                         label Email
@@ -28,9 +28,9 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='75')
                         label Ссылка на &laquoВконтакте&raquo
-                        input(type='text', aria-label='Ссылка на Вконтакте', required='')
+                        input(type='text', aria-label='Ссылка на Вконтакте' ng-model='register.credentials.profile.urlVk')
                 div(layout='row' layout-align='center center')
-                    md-button.md-raised.md-primary(flex='75' ng-click='register.register()', aria-label='register', ng-disabled='register.registerForm.$invalid()')
+                    md-button.md-raised.md-primary(flex='75' type='submit', aria-label='register' ng-disabled='registerForm.$invalid')
                         | Зарегистрироваться
             md-toolbar.md-warn(ng-show='register.error', layout='row', layout-fill='', layout-padding='', layout-margin='')
-                p.md-body-1 {{ register.error }}
+                p.md-body-1 {{ register.error.reason }}
