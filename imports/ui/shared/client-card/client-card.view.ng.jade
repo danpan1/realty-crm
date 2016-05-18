@@ -47,7 +47,7 @@ div(md-whiteframe='2').mv-16.client-card
             div(flex='55' layout="row").one-demonstrations-center-cell.ph-16.pv-8
                 div(flex='45').ph-16.pv-8
                     p(ng-repeat="subway in clientCard.client.need.embedded.subways")
-                        span().metro-color.metro-color-pink
+                        span(class="metro-color-{{clientCard.client.need.embedded.subways[$index].line}}").metro-color
                         span() {{subway.name}}, 
                         span(ng-if="clientCard.client.need.metroTime != undefined && clientCard.client.need.metroTime > 0") {{clientCard.client.need.metroTime}} минут {{clientCard.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
                     p

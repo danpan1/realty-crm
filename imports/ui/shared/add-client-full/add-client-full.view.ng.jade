@@ -24,8 +24,8 @@ md-tabs(md-dynamic-height ng-init="addClientFull.onInit()")
                                     label Email клиента
                                     input(type="email" ng-model='addClientFull.client.email')
                             div(layout='row')
-                                md-checkbox(ng-model='addClientFull.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary
-                                label().md-subhead {{ addClientFull.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию.
+                                md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addClientFull.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ addClientFull.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию.
+                                // label(for="comissionloyal") 
                             //
                             //    div(layout='row').mv-16 
                             //        md-input-container(flex='60').mv-0
