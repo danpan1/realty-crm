@@ -14,7 +14,7 @@ class AddRealtyFull {
   constructor($state) {
     this.state = $state;
     this.dictionary = dictionary;
-    this.realty = {contacts: [{phones: []}], address :{
+    this.realty = {contacts: [{phones: [{phone:''}]}], address :{
       metroTransport : 0
     }};
     this.activeTab = 0;
@@ -22,7 +22,21 @@ class AddRealtyFull {
     this.fake = true;
   }
 
+  filterPhone(){
+      if(this.realty.contacts[0].phones[0].phone.length >= 18) return false;
+      this.realty.contacts[0].phones[0].phone = ' ' + this.realty.contacts[0].phones[0].phone;
+  }
+  
   submit() {
+    var value = this.realty.contacts[0].phones[0].phone.split('');
+    for(var i in [1,2,3]){
+        for(var i in value){
+            if(value[i].match(/\+|\(|\)|\-|\s|d/)){
+                value.splice(i,1);
+            }
+        }
+    }
+    this.realty.contacts[0].phones[0].phone = value.join('');
     //4 - Аренда - Квартиры
     const vm = this;
     this.realty.type = 4;
