@@ -51,6 +51,10 @@ export const AddressSchema = new SimpleSchema({
     type:String,
     optional: true
   },
+  metroTransport: {
+    type: Number,
+    optional: true
+  },
   metroPeshkom: {
     type: String,
     optional: true

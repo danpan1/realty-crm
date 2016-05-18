@@ -104,7 +104,7 @@ export const dictionary = {
   ],
   transport: [
     {id: 0, name: 'пешком'},
-    {id: 1, name: 'трансп.'}
+    {id: 1, name: 'транспортом'}
   ],
   type: [
     {id: 3, name: 'посуточно'},

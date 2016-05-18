@@ -30,18 +30,18 @@ md-tabs(md-dynamic-height md-border-bottom)
                     div(layout='row', layout-align="space-between center")
                         div(flex='45')
                             div(layout='row')
-                                div(flex='45')
+                                div(flex='45').form-required
                                     subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
 
                                 div(flex='55').ml-32
                                     div(layout='row' layout-align='start end').mt-32
-                                        md-input-container(flex='30').mv-0.pv-0
-                                            input(ng-model='addRealtyFull.realty.address.metroPeshkom', placeholder='минут')
-                                        md-input-container(flex).mv-0.ml-32.pb-0
-                                            label пешком
+                                        md-input-container(flex='30').mv-0.pv-0.form-required
+                                            input(ng-model='addRealtyFull.realty.address.metroPeshkom', placeholder='минут' ng-required='')
+                                        md-input-container(flex).mv-0.ml-32.pb-0.form-required
+                                            //label пешком
                                             md-select(ng-model='addRealtyFull.realty.address.metroTransport')
                                                 md-option(ng-value='transport.id',
-                                                ng-repeat="transport in addRealtyFull.dictionary.transport") {{transport.name}}
+                                                ng-repeat="transport in addRealtyFull.dictionary.transport" ng-required='') {{transport.name}}
                 div(layout='row').mv-32
                     md-button(ng-click='addRealtyFull.activeTab = 1'
                     ng-disabled="firstForm.$invalid").md-primary.md-raised.mh-0 Продолжить
@@ -75,10 +75,10 @@ md-tabs(md-dynamic-height md-border-bottom)
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required
                                     input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
-                                md-input-container(flex).mv-0.ml-32.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
-                                md-input-container(flex).mv-0.ml-32.form-required
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
+                                md-input-container(flex).mv-0.ml-32
+                                    input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
+                                md-input-container(flex).mv-0.ml-32
+                                    input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
 
                     div(layout='row').mv-16
                         div(flex='70')
@@ -107,9 +107,9 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     md-select(required ng-model='addRealtyFull.realty.details.renovation')
                                         md-option(ng-value='renovation.id',
                                         ng-repeat="renovation in addRealtyFull.dictionary.renovation ") {{renovation.name}}
-                                md-input-container(flex).mv-0.ml-32.form-required
+                                md-input-container(flex).mv-0.ml-32
                                     label Тип дома
-                                    md-select(required ng-model='addRealtyFull.realty.details.materials')
+                                    md-select( ng-model='addRealtyFull.realty.details.materials')
                                         md-option(ng-value='materials.id',
                                         ng-repeat="materials in addRealtyFull.dictionary.materials ") {{materials.name}}
 

@@ -14,7 +14,9 @@ class AddRealtyFull {
   constructor($state) {
     this.state = $state;
     this.dictionary = dictionary;
-    this.realty = {contacts: [{phones: []}]};
+    this.realty = {contacts: [{phones: []}], address :{
+      metroTransport : 0
+    }};
     this.activeTab = 0;
     //fake selects Аренда Москва Квартиры
     this.fake = true;
