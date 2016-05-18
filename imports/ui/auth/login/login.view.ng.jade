@@ -18,5 +18,5 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
                         | Войти
                 div(layout='row' layout-align='center center')
                     a.md-button.md-primary(flex='75' href='/resetpw') Забыли пароль?
-            md-toolbar.md-warn(ng-show='login.error', layout='row', layout-fill='', layout-padding='', layout-margin='')
-                p.md-body-1 {{ login.error }}
+            md-toolbar.md-warn(ng-show='login.error', layout='row', layout-fill='', layout-padding='', layout-margin='' layout-align='center center')
+                p().md-body-1 {{ login.error }}
