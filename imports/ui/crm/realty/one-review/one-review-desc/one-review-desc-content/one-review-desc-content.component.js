@@ -15,6 +15,7 @@ class OneReviewDescContent {
 
     $reactive(this).attach($scope);
     /* Устанавливаем дефолтные значения для всех используемых в компоненте переменных */
+    let vm = this;
     this.saleDescription = saleDescription;
     this.active = {
         index:-1,
@@ -35,22 +36,11 @@ class OneReviewDescContent {
     this.descTitleNumber = 0;
     this.benefitsList = saleDescription.map((item)=> {return item.name})
     this.textVariable = "";
+    vm.desc.details = vm.realty.details.descr || '';
+    vm.desc.nextdetails = vm.realty.details.descr || '';
     this.setActiveBenefit();
+
   }
-  
-  
-  setSomeDesc () {
-      var vm = this;
-      vm.desc.details = vm.realty.details.descr;
-  }
-  
-  onInit () {
-      var vm = this;
-      setTimeout( () => {
-        vm.setSomeDesc();
-      },1500);
-  }
-  /* Сохранение описания и заголовка на сервер */
   
   /* Выбираем вид выгоды */
   setActiveBenefitObjectNumber(activeNumber){
@@ -77,6 +67,7 @@ class OneReviewDescContent {
       this.textVariable = this.activeBenefit.content[this.active.index] ? this.activeBenefit.content[this.active.index] : '';
       this.desc.details = this.desc.nextdetails + this.textVariable;
       this.compareLength = this.desc.details.length;
+      this.realty.details.descr = this.desc.details;
   }
   nextActiveBenefitNumber () {
       this.active.index++;
@@ -98,7 +89,7 @@ class OneReviewDescContent {
   
   /* Устанавливаем информацию о выбранном виде выгоды */
   setActiveBenefit () {
-      if(this.activeObject.index != undefined){
+    if(this.activeObject.index != undefined){
           this.activeBenefit.content = this.saleDescription[this.activeObject.index].value;
           this.activeBenefit.label = this.saleDescription[this.activeObject.index].name;
           this.textVariable = '';

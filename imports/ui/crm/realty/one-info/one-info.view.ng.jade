@@ -1,12 +1,15 @@
-one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow")
+one-info-edit(ng-if="oneInfo.realty" realty="oneInfo.realty" show="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
     // IMAGES
-    div(layout="row" layout-align='center center')
-        div(flex).oneInfo-image-container.mv-16
+    div(layout="row" layout-align='start center')
+        div(hide) 
+            div(ng-repeat="image in oneInfo.realty.details.images")
+                img(src="{{image.url}}")
+        div(md-whiteframe='2').oneInfo-image-container.mv-16
+            button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)").md-raised
+            button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)").md-raised
             div.oneInfo-image-inner
-                button.slide__prev(ng-click="oneInfo.nextImage(false,oneInfo.realty.details.images.length)")
-                img(src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}", md-whiteframe="2")
-                button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)")
+                img(src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}")
     div(layout="row", layout-align="space-between")
         div(md-whiteframe='2' flex='80' layout-padding layout="row")
             div(flex="33")
@@ -17,8 +20,8 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Округ: #[strong {{oneInfo.realty.address.areaName}}]
                     div().md-subhead Район: #[strong {{oneInfo.realty.address.districtName}}]
                     div().md-subhead Улица: #[strong {{oneInfo.realty.address.street}}]
-                    div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.meta.house}}]
-                    div().md-subhead Квартира: #[strong {{oneInfo.realty.address.meta.flat}}]
+                    div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.house}}]
+                    div().md-subhead Квартира: #[strong {{oneInfo.realty.address.flat}}]
                     div().md-subhead Метро: #[strong {{oneInfo.realty.address.metroName}} {{oneInfo.realty.address.metroPeshkom}} мин. пешком]
                     div
                         md-button(ng-click="oneInfo.showEditDialog($event)").md-primary.md-raised.ml-0 Изменить
@@ -49,10 +52,10 @@ div(layout="column", layout-align="space-around stretch")
                     //p
                     div().md-subhead Собственник #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
                     div().md-subhead Срок: #[strong {{oneInfo.realty.type == 3 ? 'посуточно' : 'длительный срок'}}]
-                    div().md-subhead Цена: #[strong {{oneInfo.realty.price}}]
-                    div().md-subhead От клиента: #[strong {{oneInfo.realty.realtor.clientpercent}}]%
-                    div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.realtor.partnerpercent}}]%
-        div(md-whiteframe='2' flex='20').ml-16 {{oneInfo.currentConditions[$index].presence}}
+                    div().md-subhead Цена: #[strong {{oneInfo.realty.price | price}}]
+                    div().md-subhead От клиента: #[strong {{oneInfo.realty.clientpercent || 0}}]%
+                    div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.partnerpercent || 0}}]%
+        div(md-whiteframe='2' flex='20').mh-16 {{oneInfo.currentConditions[$index].presence}}
             md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
             aria-label='Switch 2'
             ng-repeat="condition in oneInfo.dictionary.conditions"

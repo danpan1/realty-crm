@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 
 import './login.view.html';
 
@@ -26,9 +26,20 @@ class Login {
     Meteor.loginWithPassword(this.credentials.email, this.credentials.password,
       this.$bindToContext((err) => {
         if (err) {
-          this.error = err;
+          console.log(err);
+          switch (err.reason) {
+            case 'User not found':
+              this.error = 'Неверно указан Email';
+              break;
+            case 'Incorrect password':
+              this.error = 'Неверно указан пароль';
+              break;
+            default:
+              this.error = err.reason;
+              break;
+          }
         } else {
-          this.$state.go('crm.realty.list.new');
+          this.$state.go('crm.realty.list.my');
         }
       })
     );
@@ -40,8 +51,8 @@ const moduleName = 'login';
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-    templateUrl: 'imports/ui/auth/login/login.view.html',
-    bindings: {},
-    controllerAs: moduleName,
-    controller: Login
-  })
+  templateUrl: 'imports/ui/auth/login/login.view.html',
+  bindings: {},
+  controllerAs: moduleName,
+  controller: Login
+})

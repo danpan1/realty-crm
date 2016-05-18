@@ -34,7 +34,7 @@ div(md-whiteframe='2').mv-16.client-card
         div(layout='row')
             div(flex='25').ph-16.pv-8
                 div(ng-if="clientCard.client.status != 'hot' && !clientCard.assort")
-                    p.md-body-1.client-card__right-label {{clientCard.client.phone}}
+                    p.md-body-1.client-card__right-label {{clientCard.client.phone | phone}}
                     p.md-body-1.client-card__right-label {{clientCard.client.name}}
 
 

@@ -30,24 +30,10 @@ class Layout {
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
       {name:'Модератор', uisref:'call-center.moderator'}
     ];
-    this.actions = [{
-      name: 'Добавить',
-      type: 'toggle',
-      pages: [{
-        name: 'Клиента',
-        type: 'link',
-        state: '',
-        icon: ''
-      },{
-        name: 'Объект',
-        type: 'link',
-        state: '',
-        icon: ''
-      }]
-    }];
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {
+        console.log(user, 'user');
         this.user = user;
       }
     });
@@ -81,6 +67,8 @@ function mdIconConfig($mdIconProvider) {
   'ngInject';
   $mdIconProvider
     .icon('menu', URL_ICON_MENU, 24)
+    .icon('skip_next', 'svg/skip_next.svg', 48)
+    .icon('skip_prev', 'svg/skip_previous.svg', 48)
     .icon('conditions_elevator', 'svg/elevator.svg', 28)
     .icon('conditions_children', 'svg/children.svg', 24)
     .icon('conditions_furniture', 'svg/furniture.svg', 24)

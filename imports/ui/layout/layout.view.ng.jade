@@ -3,7 +3,7 @@ md-toolbar(layout='row' layout-align='center center').ph-16
     div(layout='row' layout-align='center center' flex).toolbar-container
         span().brand-logo
         span(flex)
-        span().md-body-1 {{layout.user.emails[0].address}}.mr-0
+        span().md-body-1.mr-0 {{layout.user.profile.name}} {{layout.user.profile.surName}}
         md-button(hide-gt-md='', ng-click='layout.toggleList()').md-icon-button.menu
             md-icon(md-svg-icon='menu')
         md-button(show-gt-md='' ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.btn-logout

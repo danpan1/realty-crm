@@ -21,9 +21,14 @@ one-info {
 }
 
 .oneInfo-image-container {
+	position: relative;
+	background: white;
+	width: 664px;
+	height: 442px;
 	text-align: center;
 	img {
-		max-height: 442px !important;
+		max-height: 442px;
+		max-width: 664px;
 	}
 }
 
@@ -34,6 +39,8 @@ one-info {
 
 .slide__prev,
 .slide__next {
+	z-index: 100;
+
 	position: absolute;
   background: url('img/icons/icon-arrow-left.png') no-repeat;
   width: 42px;

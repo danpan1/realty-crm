@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import { Accounts } from 'meteor/accounts-base';
+import {Accounts} from 'meteor/accounts-base';
 
 import './register.view.html';
 
@@ -17,19 +17,26 @@ class Register {
 
     this.credentials = {
       email: '',
-      password: ''
+      password: '',
+      profile:{
+        name: '',
+        phone: '',
+        surName: '',
+        urlVk: ''
+      }
     };
 
     this.error = '';
   }
 
   register() {
+    console.log(this.credentials);
     Accounts.createUser(this.credentials,
       this.$bindToContext((err) => {
         if (err) {
           this.error = err;
         } else {
-          this.$state.go('crm.realty.list.new');
+          this.$state.go('crm.realty.list.my');
         }
       })
     );
@@ -42,8 +49,8 @@ const moduleName = 'register';
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-    templateUrl: 'imports/ui/auth/register/register.view.html',
-    bindings: {},
-    controllerAs: moduleName,
-    controller: Register
-  });
+  templateUrl: 'imports/ui/auth/register/register.view.html',
+  bindings: {},
+  controllerAs: moduleName,
+  controller: Register
+});
