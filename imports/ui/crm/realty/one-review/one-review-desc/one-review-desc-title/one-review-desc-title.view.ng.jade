@@ -1,11 +1,11 @@
 // p(ng-click="oneReviewDescTitle.setSomeTitle()") Set Title
 div(layout='row')
-    p(ng-init="oneReviewDescTitle.onInit()" flex='20' layout="row" layout-align="center start")
-        md-button(ng-click="oneReviewDescTitle.prevDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber == 0 || !oneReviewDescTitle.descTitleNumber").little-button.md-icon-button
+    div(ng-init="oneReviewDescTitle.onInit()" layout="row")
+        md-button(ng-click="oneReviewDescTitle.prevDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber == 0 || !oneReviewDescTitle.descTitleNumber").little-button.md-icon-button.mr-0
             md-icon(md-svg-icon='skip_prev')
-        md-button(ng-click="oneReviewDescTitle.nextDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber + 1 >= oneReviewDescTitle.descTitle.value.length").little-button.md-icon-button
+        md-button(ng-click="oneReviewDescTitle.nextDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber + 1 >= oneReviewDescTitle.descTitle.value.length").little-button.md-icon-button.ml-0
             md-icon(md-svg-icon='skip_next')
-    md-input-container(flex='80').md-block
+    md-input-container(flex='60').ml-16
         label Заголовок
         md-select(ng-model="oneReviewDescTitle.descTitle.value[oneReviewDescTitle.descTitleNumber]" placeholder='Выберите готовый заголовок, который цепляет')
             md-option(ng-value='title' ng-repeat="title in oneReviewDescTitle.descTitle.value" ng-click="oneReviewDescTitle.setDescTitle(title, $index)") {{title}}
