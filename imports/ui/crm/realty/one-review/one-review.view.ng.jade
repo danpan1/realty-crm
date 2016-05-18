@@ -40,7 +40,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
                 md-button(flex-offset='10'
                 ng-class='{"md-primary": oneReview.realty.realtor.isCheckout === false}'
                 ng-click = 'oneReview.isCheckout(false)').md-raised Не встречались
-        div(flex='50' )
+        div(flex='50')
             h3(ng-if='!oneReview.realty.realtor.isCheckout').md-headline Ответ от модератора:
             p(ng-if='!oneReview.realty.realtor.isCheckout').md-body-1 Без просмотра сложно совершать сделки.
             p(ng-if='!oneReview.realty.realtor.isCheckout').md-body-1 Посмотрите #[a(href='#') «Как делать эффективный просмотр»]

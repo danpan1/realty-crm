@@ -19,7 +19,6 @@ div(layout='row' ng-init="oneReviewDescContent.onInit()")
             md-input-container(flex='60').ml-16
                 md-select(ng-model="oneReviewDescContent.activeBenefit.content[oneReviewDescContent.active.index]" placeholder='Выберите описание')
                     md-option(ng-value='name' ng-repeat="name in oneReviewDescContent.activeBenefit.content" ng-click="oneReviewDescContent.setActiveBenefitNumber($index)") {{name}}
-    //- div(layout='column' flex='80')
 
 md-input-container().md-block
     textarea(ng-maxlength="2000" ng-keydown="oneReviewDescContent.controlKeyPress(oneReviewDescContent.desc.details)" ng-model="oneReviewDescContent.desc.details")
