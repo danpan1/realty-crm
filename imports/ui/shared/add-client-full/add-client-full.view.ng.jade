@@ -4,36 +4,42 @@ md-tabs(md-dynamic-height)
             form(name="firstForm")
                 div(layout='column')
                     div(layout='row')
-                        div(flex='50')
+                        div(flex='80')
                             div(layout='row').mv-16
-                                md-input-container().mv-0.form-required
+                                md-input-container().mv-0.form-required.hide-count
+                                    // ng-pattern='/^([0-9]|\(|\)|\s|\-){18}$/',
                                     label Телефон
                                     input(ng-model='addClientFull.client.phone',
                                     placeholder='7 (XXX) XXX XX XX',
-                                    ng-pattern='/^[0-9]{11}$/',
                                     required='',
-                                    ng-phone-filter
-                                    md-maxlength='11')
+                                    maxlength="18",
+                                    ng-keypress="addClientFull.filterPhone()",
+                                    ng-phone-filter,
+                                    md-maxlength='18')
                                 md-input-container(flex-offset='5').mv-0.form-required
                                     label Имя клиента
                                     input(ng-model='addClientFull.client.name', required='')
+                                md-input-container(flex-offset='5').mv-0.form-required
+                                    label Email клиента
+                                    input(type="email" ng-model='addClientFull.client.email', required='')
                             div(layout='row')
-                                md-checkbox(ng-model='addClientFull.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1")
+                                md-checkbox(ng-model='addClientFull.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary
                                 label().md-subhead {{ addClientFull.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию.
+                            //
+                            //    div(layout='row').mv-16 
+                            //        md-input-container(flex='60').mv-0
+                            //        input(ng-model='addClientFull.client.comission'
+                            //        placeholder='Сумма до которой он готов платить комиссию')
+                            div(layout="row")
+                                div(layout='row' layout-align='start center').mv-16
+                                    div()
+                                        span().md-subhead Актуально с 
+                                    md-datepicker(ng-model='addClientFull.client.searchEndDate', md-placeholder='Enter date')
 
-                            div(layout='row').mv-16
-                                md-input-container(flex='60').mv-0
-                                    input(ng-model='addClientFull.client.comission'
-                                    placeholder='Сумма до которой он готов платить комиссию')
-                            div(layout='row' layout-align='start end').mv-16
-                                div().dots
-                                    span().md-subhead На когда
-                                md-datepicker(ng-model='addClientFull.client.searchEndDate', md-placeholder='Enter date')
-
-                            div(layout='row' layout-align='start end').mv-16
-                                div().dots
-                                    span().md-subhead Когда начал поиск
-                                md-datepicker(ng-model='addClientFull.client.searchStartDate', md-placeholder='Enter date')
+                                div(layout='row' layout-align='start center').mv-16.ml-32
+                                    div()
+                                        span().md-subhead В поиске с 
+                                    md-datepicker(ng-model='addClientFull.client.searchStartDate', md-placeholder='Enter date')
                             //СОСТАВ СЪЁМЩИкОВ
                             div(layout='row').mv-16
                                 md-input-container().mv-0.form-required
@@ -43,7 +49,7 @@ md-tabs(md-dynamic-height)
                                         ng-repeat="composition in addClientFull.dictionary.composition ") {{composition.name}}
                             div(layout='row').mv-16
                                 md-input-container(flex).mv-0.form-required
-                                    label Клиеинту важно (текст длинный какой-то)
+                                    label Напшите, что важно клиенту (ваша заметка)
                                     textarea(required ng-model='addClientFull.client.realtorNote', md-maxlength='150', rows='5', md-select-on-focus='' )
                     //        div().md-subhead Какой процент стоимости аренды вы хотите получить
                     //
@@ -82,25 +88,46 @@ md-tabs(md-dynamic-height)
                     //                md-select(ng-model='addClientFull.client.conditions', multiple='true')
                     //                    md-option(ng-value='condition.id',
                     //                    ng-repeat="condition in addClientFull.dictionary.conditions ") {{condition.name}}
-
+                    div(layout='row')
+                        div(flex='70')
+                            div(layout='row' layout-align='space-between start')
+                                md-input-container(flex)
+                                    md-select(required ng-model='addClientFull.fake')
+                                        md-option(ng-value='true') Аренда
+                                md-input-container(flex).ml-32
+                                    md-select(required ng-model='addClientFull.fake')
+                                        md-option(ng-value='true') Квартиры
+                                md-input-container(flex).ml-32
+                                    md-select(required ng-model='addClientFull.fake')
+                                        md-option(ng-value='true') Москва
 
                     div(layout='row')
-                        div(flex='80')
-                            div(layout='column' ng-class="{ 'has-error' : addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo }").mv-16
-                                div(layout='row')
-                                    md-input-container(flex='25').md-block.form-required
-                                        label цена от
-                                        input(required ng-pattern='/^[0-9]{1,}$/' ng-model='addClientFull.client.need.priceFrom')
-                                    md-input-container(flex='25' flex-offset='10').md-block.form-required
-                                        label цена до
-                                        input(required ng-pattern='/^[0-9]{1,}$/' ng-model='addClientFull.client.need.priceTo')
-                                div()
-                                    span(ng-if="addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo") Правое число должно быть больше левого
+                        div(flex='70')
+                            div(layout='column').mv-16
+                                div(layout='row'  layout-align='space-between start')
+                                    md-input-container(flex='25').md-block.form-required.mv-0
+                                        input(placeholder="цена" required ng-pattern='/^[0-9]{1,}$/' ng-model='addClientFull.client.need.price')  
+                                    md-input-container(flex).mv-0.form-required.ml-32
+                                        label Количество комнат
+                                        md-select(required ng-model='addClientFull.client.need.roomcount', multiple='true')
+                                            md-option(ng-value='roomcount.id',
+                                            ng-repeat="roomcount in addClientFull.dictionary.roomcountBig") {{roomcount.name}}  
+                                    md-input-container(flex).mv-0.form-required.ml-32
+                                        label Ремонт
+                                        md-select(required ng-model='addClientFull.client.need.renovation', multiple='true')
+                                            md-option(ng-value='renovation.id',
+                                            ng-repeat="renovation in addClientFull.dictionary.renovation") {{renovation.name}}
+                                    // md-input-container(flex='25' flex-offset='10').md-block.form-required
+                                    //     label цена до
+                                    //     input(required ng-pattern='/^[0-9]{1,}$/' ng-model='addClientFull.client.need.priceTo')
+                                //div()
+                                //    span(ng-if="addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo") Правое число должно быть больше левого
                     div(layout='row')
-                        div(flex='80')
-                            div(layout='row').mv-16
-                                district-chips(ng-model='addClientFull.client.need.districts'
-                                districts-embeded = 'addClientFull.client.need.embedded.districts')
+                        div(flex='70')
+                            //div(layout='row').mv-16
+                            //    district-chips(ng-model='addClientFull.client.need.districts'
+                            //    districts-embeded = 'addClientFull.client.need.embedded.districts')
+                            
                             //    md-input-container(flex).mv-0
                             //        input(ng-model='addClientFull.client.need.floorFrom' placeholder='Улица')
                             //    md-input-container(flex flex-offset='5').mv-0
@@ -108,10 +135,21 @@ md-tabs(md-dynamic-height)
                             //    md-input-container(flex flex-offset='5').mv-0
                             //        input(ng-model='addClientFull.client.need.floorFrom' placeholder='Квартира (видите только вы)')
 
-                            div(layout='row' layout-align='start end').mv-16
-                                div(flex='30')
+                            div(layout='row' layout-align='start start').mv-16
+                                div(flex='40')
                                     subway-chips(ng-model='addClientFull.client.need.subways'
                                     subways-embeded = 'addClientFull.client.need.embedded.subways')
+                                div(flex='60').ml-32
+                                    div(layout='row' layout-align='space-between start').mt-32
+                                        md-input-container(flex='30').mv-0.pv-0
+                                            input(ng-model='addClientFull.client.need.metroTime', placeholder='минут')
+                                        md-input-container(flex).mv-0.ml-32.pb-0
+                                            label пешком
+                                            md-select(ng-model='addClientFull.client.need.metroTransport' )
+                                                md-option(ng-value='transport.id',
+                                                ng-repeat="transport in addClientFull.dictionary.transport") {{transport.name}}
+                                
+                                                
                                 //div(layout='row' layout-align='start end' flex-offset='5')
                                 //    label().md-subhead До метро
                                 //    md-input-container(flex='15' flex-offset='5').mv-0.pb-0
@@ -122,14 +160,9 @@ md-tabs(md-dynamic-height)
                                         //    md-option(ng-value='condition.id',
                                         //    ng-repeat="condition in addClientFull.dictionary.conditions ") {{condition.name}}
                     
-                    div(layout='row')
-                        div(flex='80')
-                            div(layout='row' layout-align='start end').mv-16
-                                md-input-container(flex).mv-0.form-required
-                                    label Количество комнат
-                                    md-select(required ng-model='addClientFull.client.need.roomcount', multiple='true')
-                                        md-option(ng-value='roomcount.id',
-                                        ng-repeat="roomcount in addClientFull.dictionary.roomcountBig") {{roomcount.name}}
+                    //div(layout='row')
+                    //    div(flex='80')
+                    //        div(layout='row' layout-align='start end').mv-16
                                 //div(flex='33' flex-offset='5')
                                 //    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead.mb-0 Апартаменты
                                 //div(flex='33')
@@ -200,7 +233,7 @@ md-tabs(md-dynamic-height)
                     div(layout='row').mv-16
                         div(flex='60')
                             div(layout='row' layout-wrap)
-                                realty-conditions(ng-model='addClientFull.client.need.conditions' )
+                                realty-conditions(ng-model='addClientFull.client.need.conditions' checkbox="true")
 
 div(layout='row').mv-16.mh-32
     md-button(ng-click="addClientFull.activeTab = 1" ng-disabled="firstForm.$invalid" ng-if="addClientFull.activeTab == 0").md-primary.md-raised Продолжить

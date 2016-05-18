@@ -12,16 +12,16 @@ export const clientNeedSchema = new SimpleSchema({
     type: [String],
     optional: true
   },
+  renovation: {// ремонт
+    type: [String],
+    optional: true
+  },
   embedded:{
     type: Object,
     blackbox: true,
     optional: true
   },
-  priceFrom: {  // Цена от
-    type: Number,
-    optional: true
-  },
-  priceTo: {  // Цена до
+  price: {  // Цена
     type: Number,
     optional: true
   },
@@ -32,5 +32,13 @@ export const clientNeedSchema = new SimpleSchema({
   subways: { // Метро
     type: [String],
     optional: true
-  }
+  },
+  metroTime: {
+    type: Number,
+    optional: true
+  },
+  metroTransport: {
+    type: String,
+    optional: true
+  },
 });
