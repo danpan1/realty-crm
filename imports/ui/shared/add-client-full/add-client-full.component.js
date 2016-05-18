@@ -36,6 +36,20 @@ class AddClientFull {
         }
     }
     this.client.phone = value.join('');
+    
+   
+    var price = this.client.need.price.split('');
+    for(var i in [1,2,3]){
+        for(var i in price){
+            if(price[i].match(/\s/)){
+                price.splice(i,1);
+            }
+        }
+    }
+    this.client.need.price = price.join('');
+    console.log(this.client.need.price);
+    console.log(this.client.phone);
+    
     console.log('submit');
     if (!valid) {
       alert('не все данные корректны');

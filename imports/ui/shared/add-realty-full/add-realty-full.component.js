@@ -28,15 +28,28 @@ class AddRealtyFull {
   }
   
   submit() {
-    var value = this.realty.contacts[0].phones[0].phone.split('');
+    var phone = this.realty.contacts[0].phones[0].phone.split('');
     for(var i in [1,2,3]){
-        for(var i in value){
-            if(value[i].match(/\+|\(|\)|\-|\s|d/)){
-                value.splice(i,1);
+        for(var i in phone){
+            if(phone[i].match(/\+|\(|\)|\-|\s|d/)){
+                phone.splice(i,1);
             }
         }
     }
-    this.realty.contacts[0].phones[0].phone = value.join('');
+    this.realty.contacts[0].phones[0].phone = phone.join('');
+    
+    var price = this.realty.price.split('');
+    for(var i in [1,2,3]){
+        for(var i in price){
+            if(price[i].match(/\s/)){
+                price.splice(i,1);
+            }
+        }
+    }
+    this.realty.price = price.join('');
+    console.log(this.realty.price);
+    console.log(this.realty.contacts[0].phones[0].phone );
+    
     //4 - Аренда - Квартиры
     const vm = this;
     this.realty.type = 4;
