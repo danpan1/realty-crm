@@ -1,4 +1,4 @@
-md-tabs(md-dynamic-height)
+md-tabs(md-dynamic-height ng-init="addClientFull.onInit()")
     md-tab(label='1) Особенности клиента' md-active='addClientFull.activeTab == 0' ng-click="addClientFull.activeTab = 0")
         md-content().ph-32.pv-16
             form(name="firstForm")
@@ -9,19 +9,20 @@ md-tabs(md-dynamic-height)
                                 md-input-container().mv-0.form-required
                                     label Имя клиента
                                     input(ng-model='addClientFull.client.name', required='')
-                                md-input-container(flex-offset='5' ng-class="{ 'has-error' : addClientFull.client.phone.length > 1 && addClientFull.client.phone.length < 17}").mv-0.form-required.hide-count
-                                    // ng-pattern='/^([0-9]|\(|\)|\s|\-){18}$/',
+                                md-input-container(flex-offset='5' ng-class="{ 'has-error' : addClientFull.client.phone.length > 1 && addClientFull.client.phone.length < 15}").mv-0.form-required.hide-count
+                                    // ng-pattern='/^([0-9]|\(|\)|\s|\-){17}$/',
                                     label Телефон
                                     input(ng-model='addClientFull.client.phone',
                                     placeholder='8 (XXX) XXX XX XX',
                                     required='',
-                                    maxlength="18",
-                                    ng-keypress="addClientFull.filterPhone()",
+                                    maxlength="17",
+                                    ng-focus="addClientFull.filterPhoneFocus()"
+                                    ng-keypress="addClientFull.filterPhoneKeyPress()",
                                     ng-phone-filter,
-                                    md-maxlength='18')
-                                md-input-container(flex-offset='5').mv-0.form-required
+                                    md-maxlength='17')
+                                md-input-container(flex-offset='5').mv-0
                                     label Email клиента
-                                    input(type="email" ng-model='addClientFull.client.email', required='')
+                                    input(type="email" ng-model='addClientFull.client.email')
                             div(layout='row')
                                 md-checkbox(ng-model='addClientFull.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary
                                 label().md-subhead {{ addClientFull.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию.
