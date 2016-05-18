@@ -38,7 +38,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
                 ng-class='{"md-primary": oneReview.realty.realtor.isCheckout}'
                 ng-click = 'oneReview.isCheckout(true)').md-raised Была встреча
                 md-button(flex-offset='10'
-                ng-class='{"md-primary": !oneReview.realty.realtor.isCheckout}'
+                ng-class='{"md-primary": oneReview.realty.realtor.isCheckout === false}'
                 ng-click = 'oneReview.isCheckout(false)').md-raised Не встречались
         div(flex='50' )
             h3(ng-if='!oneReview.realty.realtor.isCheckout').md-headline Ответ от модератора:
@@ -93,11 +93,14 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
                 ng-class='{"md-primary": oneReview.realty.realtor.isExclusive}').md-raised Эксклюзив
                 md-button(flex-offset='10'
                 ng-click = 'oneReview.isExclusive(false)'
-                ng-class='{"md-primary": !oneReview.realty.realtor.isExclusive}').md-raised Не эксклюзив
+                ng-class='{"md-primary": oneReview.realty.realtor.isExclusive  === false}').md-raised Не эксклюзив
         div(flex='50' )
             h3(ng-if='!oneReview.realty.realtor.isExclusive').md-headline Ответ от модератора:
             p(ng-if='!oneReview.realty.realtor.isExclusive').md-body-1 Пройдите интенсив
             p(ng-if='!oneReview.realty.realtor.isExclusive').md-body-1 Посмотрите #[a(href='#') «Как умело закрывать на эксклюзив за 10 минут»]
 
 div(layout='column' layout-align='center center')
-    md-button(flex='30' ng-click='oneReview.sendToModerator()').md-success.md-raised.md-title.mv-16 Отправить на проверку модератора
+    md-button(flex='30' ng-click='oneReview.sendToModerator()'
+    ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"').md-success.md-raised.md-title.mv-16 Отправить на проверку модератора
+    md-button(flex='30' ng-click='oneReview.sendToModerator()'
+    ng-if='oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"' ng-disabled = 'true').md-success.md-raised.md-title.mv-16 Объект находится на проверке

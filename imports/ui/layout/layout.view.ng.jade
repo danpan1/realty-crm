@@ -15,7 +15,6 @@ div(flex, layout='row' layout-align='center none')
     md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left").pv-16
         menu-toggle(section="layout.actions")
         md-select(ng-model='layout.select' md-selected-text = 'layout.selectText()')
-            md-option(ng-value='0') Добавить
             md-option( ng-value='1' ng-click='layout.redirect("crm.realty.add")') Объект
             md-option( ng-value='2' ng-click='layout.redirect("crm.clients.add")') Клиента
 

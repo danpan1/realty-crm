@@ -32,7 +32,7 @@ class Layout {
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
       {name: 'Модератор', uisref: 'call-center.moderator'}
     ];
-    this.select = 0;
+    this.select = 1;
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {
@@ -50,7 +50,7 @@ class Layout {
   }
 
   selectText() {
-    this.select = 0;
+    this.select = 1;
     return 'Добавить';
   }
 
