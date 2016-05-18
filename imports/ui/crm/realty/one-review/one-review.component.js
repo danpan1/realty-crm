@@ -38,13 +38,12 @@ class OneReview {
   }
 
   removeImage(image) {
-    this.realty.details.images = this.realty.details.images.filter((item) => {
-      return item.url != image.url;
-    });
+    // this.realty.details.images = this.realty.details.images.filter((item) => {
+    //   return item.url != image.url;
+    // });
     if (this.realty.image == image.url) {
       this.realty.image = '';
     }
-    this.saveNewDescription();
     this.s3DeleteImage(image);
   }
 
@@ -65,17 +64,16 @@ class OneReview {
   s3DeleteImage(image) {
     // debugger
     // let a = [1,2,3]
-    console.log(this.realty.details.thumbnails);
-    console.log(image);
     let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
       return (item.url === image.url);
     });
+    let imageNormalIndex = this.realty.details.images.findIndex((item)=> {
+      return (item.originalName === image.originalName);
+    });
 
     this.realty.details.thumbnails.splice(imageIndex, 1);
-    console.log(this.realty.details.images.length);
-    let bigImage = this.realty.details.images.splice(imageIndex, 1);
-    console.log(bigImage[0]);
-    console.log(this.realty.details.images.length);
+    // console.log(this.realty.details.images.length);
+    let bigImage = this.realty.details.images.splice(imageNormalIndex, 1);
 
     S3.delete(image.relative_url, (error)=> {
         if (error) {
@@ -101,6 +99,7 @@ class OneReview {
     if (files) {
       this.uploadThumbsImagesLength = files.length;
     }
+
     S3.upload({
       files: files,
       path: ''
@@ -114,7 +113,9 @@ class OneReview {
         }
 
         this.$timeout(()=> {
-          console.log(result.url, 'small uploaded');
+          console.log(result.file, 'small uploaded');
+          console.log(result);
+          result.originalName = result.file.original_name;
           this.realty.details.thumbnails.push(result);
           this.saveNewDescription();
         }, 0);
@@ -142,7 +143,9 @@ class OneReview {
         }
 
         this.$timeout(()=> {
-          console.log(result.url, 'big uploaded');
+          console.log(result.file, 'big uploaded');
+          console.log(result);
+          result.originalName = result.file.original_name;
           this.realty.details.images.push(result);
           this.saveNewDescription();
         }, 0);

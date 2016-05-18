@@ -81,6 +81,9 @@ export const RentDetailsSchema = new SimpleSchema({
   'images.$.relative_url': {
     type: String
   },
+  'images.$.originalName': {
+    type: String
+  },
   thumbnails: {
     type: [Object],
     label: 'images',
@@ -90,6 +93,9 @@ export const RentDetailsSchema = new SimpleSchema({
     type: String
   },
   'thumbnails.$.relative_url': {
+    type: String
+  },
+  'thumbnails.$.originalName': {
     type: String
   },
   //Тип жилья в фильтре

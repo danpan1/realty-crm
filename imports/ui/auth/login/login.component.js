@@ -28,7 +28,7 @@ class Login {
         if (err) {
           this.error = err;
         } else {
-          this.$state.go('crm.realty.list.new');
+          this.$state.go('crm.realty.list.my');
         }
       })
     );
