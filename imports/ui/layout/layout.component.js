@@ -10,10 +10,8 @@ import './layout.view.html';
 
 class Layout {
   /* @ngInject */
-  constructor($scope, $reactive, $mdSidenav, $state, $timeout) {
+  constructor($scope, $reactive, $mdSidenav) {
     $reactive(this).attach($scope);
-    this.$state = $state;
-    this.$timeout = $timeout;
     this.$mdSidenav = $mdSidenav;
     this.sideNavItems = [
       // {name: 'Добавить клиента', uisref: 'crm.clients.add'},
@@ -40,13 +38,6 @@ class Layout {
         this.user = user;
       }
     });
-  }
-
-  redirect(state) {
-    this.$state.go(state);
-    // this.$timeout(()=> {
-    // }, 100);
-
   }
 
   selectText() {
