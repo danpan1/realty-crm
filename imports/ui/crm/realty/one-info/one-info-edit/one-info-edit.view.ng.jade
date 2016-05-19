@@ -6,10 +6,16 @@ div(ng-if="oneInfoEdit.show")
                 div(flex='30')
                     h2 Месторасположение
                     div
-                        md-input-container
-                            label Собственник
-                            md-select(ng-model="oneInfoEdit.realty.operator.qualification")
-                                md-option(ng-value='quality.id' ng-repeat="quality in oneInfoEdit.dictionary.qualification") {{quality.name}}
+                        realty-street(ng-model='oneInfoEdit.realty.address.street' house='oneInfoEdit.realty.address.house'
+                        dadata='oneInfoEdit.realty.address.full' layout = 'column' flex='66')
+                    div
+                        md-input-container(flex='33').ml-32
+                            label Квартира
+                            input(ng-model='oneInfoEdit.realty.address.flat')
+                            span.bottom-label Видите только вы
+                    div
+                        subway-chips(ng-model='oneInfoEdit.realty.address.subways' subways-embeded = 'oneInfoEdit.realty.address.subwaysEmbedded' flex
+                        ng-if='oneInfoEdit.realty.address.subways')
                 div(flex='30')
                     h2 Объект
                     div(layout='row')
