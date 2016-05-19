@@ -61,6 +61,7 @@ export function addRealty(realty) {
   if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, ['business'])) {
 
     if (Roles.userIsInRole(this.userId, ['realtor'])) {
+      //Если риэлтор - то сразу присваиваем объекты в его Лист
       if (!realty.realtor) {
         realty.realtor = {};
       }
