@@ -6,7 +6,7 @@ div(layout='row')
         md-button(ng-click="oneReviewDescTitle.nextDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber + 1 >= oneReviewDescTitle.descTitle.value.length").little-button.md-icon-button.ml-0
             md-icon(md-svg-icon='skip_next')
     md-input-container(flex='60').ml-16
-        label Заголовок
+        label Продающий заголовок
         md-select(ng-model="oneReviewDescTitle.descTitle.value[oneReviewDescTitle.descTitleNumber]" placeholder='Выберите готовый заголовок, который цепляет')
             md-option(ng-value='title' ng-repeat="title in oneReviewDescTitle.descTitle.value" ng-click="oneReviewDescTitle.setDescTitle(title, $index)") {{title}}
 md-input-container().md-block
