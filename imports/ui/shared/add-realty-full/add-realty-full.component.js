@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '/imports/api/dictionary';
+import {dictionary} from '/imports/helpers/dictionary';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty/realty.model';
 import {name as PhoneMask} from '/imports/ui/shared/phone-mask/phone-mask.component';

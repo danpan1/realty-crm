@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '../../../api/dictionary';
+import {dictionary} from '../../../helpers/dictionary';
 import {Meteor} from 'meteor/meteor';
 
 import './realty-card.view.html';

@@ -1,6 +1,12 @@
 .realty-one-layout-btn-back {   
+    background-color: rgba(158, 158, 158, 0.2) !important;
+    border: 1px solid #d9d9d9 !important;
     md-icon {
         width: 14px;
         height: 14px;
     }
+}
+
+.realty-one-layout-whiteframe {
+    box-shadow: 0 0 4px rgba(106, 106, 106, 0.7) !important;
 }

@@ -8,9 +8,7 @@ if (Meteor.isServer) {
 
   Meteor.publish('oneInfo', function (id) {
 
-    if (Roles.userIsInRole(this.userId, ['business'])) {
-      // console.log(id);
-      // console.log(Realty.findOne({'_id': id}));
+    if (this.userId) {
       console.log(id);
       return Realty.find({'_id': id});
     }

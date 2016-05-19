@@ -4,17 +4,28 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {clientNeedSchema} from './client-need.schema';
+import {Roles} from 'meteor/alanning:roles';
+import {Meteor} from 'meteor/meteor';
+
 export const Clients = new Mongo.Collection('clients');
 
 Clients.allow({
   insert() {
-    return true;
+    let userId = Meteor.userId();
+    return userId || Roles.userIsInRole(userId, ['staff']);
   },
-  update(userId, party, fields, modifier) {
-    return userId && party.owner === userId;
+  update(clientId, client) {
+    let userId = Meteor.userId();
+    let isOwner;
+    if (client) {
+      isOwner = (client.realtorId === userId);
+    }
+    let permission = (userId && isOwner) || Roles.userIsInRole(userId, ['staff']);
+    console.log(`update permission = ${permission}`);
+    return permission;
   },
-  remove(userId, party) {
-    return userId && party.owner === userId;
+  remove() {
+    return false;
   }
 });
 

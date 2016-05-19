@@ -13,7 +13,7 @@ function moderatorGet() {
 
     realty = Realty.findOne({
       'moderator.status': 'inprogress'
-      // , 'moderator.id': this.userId
+      // , 'moderator.id': Meteor.userId()
     }, {
       sort: {$natural: -1}
     });
@@ -25,7 +25,7 @@ function moderatorGet() {
     console.log('realty',realty);
     if (realty && realty._id) {
       Realty.update({_id: realty._id}, {
-        $set: {'moderator.status': 'inprogress', 'moderator.id': this.userID}
+        $set: {'moderator.status': 'inprogress', 'moderator.id': Meteor.userId()}
       }, (error) => {
         if (error) {
           console.log(error);
@@ -45,7 +45,7 @@ function moderatorGet() {
 function moderatorSave(realty) {
 
   if (Meteor.isServer) {
-    realty.moderator.id = this.userId;
+    realty.moderator.id = Meteor.userId();
     realty.moderator.status = 'done';
     Realty.update({_id: realty._id}, {
       $set: realty

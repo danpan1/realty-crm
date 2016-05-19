@@ -4,7 +4,7 @@
 // { reports:{ create_date:new Date('2016-04-07 14:00'),
 // customer_name:'Иван', customer_phone:'89162234433' } } })
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {dictionary} from '../../dictionary';
+import {dictionary} from '../../../helpers/dictionary';
 export const ReportsSchema = new SimpleSchema({
   realtorId: {
     type: String,

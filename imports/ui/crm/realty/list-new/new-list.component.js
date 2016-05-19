@@ -8,7 +8,7 @@ import {name as realtyFilter} from '../realty-filter/realty-filter.component';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import {name as slideShow} from '/imports/ui/shared/slide-show/slide-show.component';
 
-import {dictionary} from '../../../../api/dictionary';
+import {dictionary} from '../../../../helpers/dictionary';
 import './new-list.view.html';
 
 class NewList {

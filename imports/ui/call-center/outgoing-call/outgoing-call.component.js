@@ -9,7 +9,7 @@ import {name as subwayChips} from '/imports/ui/shared/subway-chips/subway-chips.
 import {name as realtyStreet} from '/imports/ui/shared/realty-street/realty-street.component';
 import {name as districtSingle} from '/imports/ui/shared/district-single/district-single.component';
 import {name as dateTimepPicker} from '/imports/ui/shared/date-time-picker/date-time-picker.component';
-import {dictionary} from '/imports/api/dictionary';
+import {dictionary} from '/imports/helpers/dictionary';
 import {Realty} from '/imports/api/realty';
 import {Agents} from '/imports/api/agents';
 import './outgoing-call.view.html';

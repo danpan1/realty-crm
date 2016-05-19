@@ -3,12 +3,12 @@
  */
 'use strict';
 import {Meteor} from 'meteor/meteor';
-import {Realty} from './realty.model';
+import {Realty} from '../realty.model.js';
 import {Dadata} from '/imports/api/dadata';
 import {Locations} from '/imports/api/locations';
 import {_} from 'meteor/underscore';
 import {Roles} from 'meteor/alanning:roles';
-import nextAutoincrement from '../helpers/getUniqueId';
+import nextAutoincrement from '../../../helpers/getUniqueId';
 
 Meteor.methods({
   submitReviewDate,
@@ -18,7 +18,7 @@ Meteor.methods({
 
 export function submitReviewDate(date, id) {
 
-  if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, ['business'])) {
+  if (Meteor.isServer && Meteor.userId()) {
 
     Realty.update({_id: id}, {
       $set: {
@@ -39,11 +39,11 @@ export function submitReviewDate(date, id) {
 
 export function takeRealty(realtyId) {
 
-  if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, ['business'])) {
+  if (Meteor.isServer && Meteor.userId()) {
 
     Realty.update({_id: realtyId}, {
       $set: {
-        'realtor.id': this.userId,
+        'realtor.id': Meteor.userId(),
         'realtor.takeDate': new Date(),
         'status': 'taken'
       }
@@ -58,11 +58,11 @@ export function takeRealty(realtyId) {
   }
 }
 
-export function addRealty(realty) {
+export function addRealty(realty, notRealtor) {
 
-  if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, ['business'])) {
-
-    if (Roles.userIsInRole(this.userId, ['realtor'])) {
+  if (Meteor.isServer && Meteor.userId()) {
+    //TODO побыстрому исправил проблему Roles
+    if (!notRealtor) {
       //Генерим уникальный ID
       realty._id = nextAutoincrement(Realty) + '';
 
@@ -70,7 +70,7 @@ export function addRealty(realty) {
       if (!realty.realtor) {
         realty.realtor = {};
       }
-      realty.realtor.id = this.userId;
+      realty.realtor.id = Meteor.userId();
       realty.status = 'taken';
     }
 

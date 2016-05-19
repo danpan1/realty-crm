@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {AddressService} from '/imports/api/AddressService';
+import {AddressService} from '/imports/helpers/AddressService';
 import './realty-street.view.html';
 
 class RealtyStreet {
