@@ -4,6 +4,8 @@
 'use strict';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from './realty.model';
+import {Dadata} from '/imports/api/dadata';
+import {Locations} from '/imports/api/locations';
 import {_} from 'meteor/underscore';
 import {Roles} from 'meteor/alanning:roles';
 import nextAutoincrement from '../helpers/getUniqueId';
@@ -61,6 +63,10 @@ export function addRealty(realty) {
   if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, ['business'])) {
 
     if (Roles.userIsInRole(this.userId, ['realtor'])) {
+      //Генерим уникальный ID
+      realty._id = nextAutoincrement(Realty) + '';
+
+      //Если риэлтор - то сразу присваиваем объекты в его Лист
       if (!realty.realtor) {
         realty.realtor = {};
       }
@@ -68,8 +74,17 @@ export function addRealty(realty) {
       realty.status = 'taken';
     }
 
-    //Генерим уникальный ID
-    realty._id = nextAutoincrement(Realty) + '';
+    let district = Locations.findOne({type: 'district', name: realty.address.districtName.slice(0, -4)});
+    let area = Locations.findOne({type: 'area', _id: {$in: district.parents}});
+
+    let dadata = Dadata.insert(realty.address.meta);
+    realty.address.dadata = dadata;
+    realty.address.areaId = area._id;
+    realty.address.areaName = area.name;
+    realty.address.districtId = district._id;
+    realty.address.districtName = district.name || realty.address.districtName;
+    // console.log(realty.address);
+
 
     Realty.insert(realty, (error) => {
       if (error) {

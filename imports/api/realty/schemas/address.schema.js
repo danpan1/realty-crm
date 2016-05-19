@@ -32,32 +32,45 @@ export const AddressSchema = new SimpleSchema({
   },
   loc: {
     type: [Number],
-    optional: true
+    optional: true,
+    decimal : true
   },
   house: {
     type: String
   },
-  meta: { // что не нужно в карточке и вообще возможно нен нужно
-    type: Object,
-    blackbox: true,
+  dadata: { // Full data из дадаты . Id карточки. Будем хранить в отдельной коллекции
+    type: String,
     optional: true
   },
   metroTransport: {
-    type: Number
+    type: Number,
+    optional: true
   },
   metroTime: {
-    type: String
+    type: String,
+    optional: true
   },
   street: {
-    type: String
+    type: String,
+    optional: true
   },
-  streetFiasId: {
-    type: String
+  streetFiasId: { // Правильный поиск по комбинации streetFiasId + номер дома (улицы меняют названия, дома меняют Id)
+    type: String,
+    optional: true
   },
-  // subways: { // ID метро
-  //   optional: true,
-  //   blackbox: true
-  // },
+  subways: { // ID метро
+    type: [String],
+    optional: true
+  },
+  subwaysEmbedded: { // Линия и Название метро
+    type: Array,
+    optional: true
+  },
+  'subwaysEmbedded.$': { // ID метро
+    type: Object,
+    optional: true,
+    blackbox: true
+  },
   value: {
     type: String
   }

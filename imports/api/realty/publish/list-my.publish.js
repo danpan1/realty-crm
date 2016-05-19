@@ -11,7 +11,7 @@ if (Meteor.isServer) {
   Meteor.publish('listMy', function (options, details, id) {
 
       let selector;
-      console.log('listMy');
+      // console.log('listMy');
       if (Roles.userIsInRole(this.userId, ['realtor'])) {
 
         selector = {
@@ -43,7 +43,7 @@ if (Meteor.isServer) {
             title: 1
           };
         }
-        console.log(selector);
+        // console.log(selector);
         return Realty.find(selector, options);
       }
 
