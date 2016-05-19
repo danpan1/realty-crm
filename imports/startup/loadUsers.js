@@ -38,7 +38,7 @@ Meteor.startup(function () {
     for (let key in admins) {
       id = Accounts.createUser(admins[key]);
       Roles.addUsersToRoles(id, 'admin');
-      Roles.addUsersToRoles(id, 'business');
+      Roles.addUsersToRoles(id, 'realtor');
     }
 
     /*
@@ -52,7 +52,6 @@ Meteor.startup(function () {
         profile: {}
       });
     Roles.addUsersToRoles(id, 'realtor');
-    Roles.addUsersToRoles(id, 'business');
 
     /*
      Operators
@@ -84,8 +83,7 @@ Meteor.startup(function () {
 
     for (let key in operators) {
       id = Accounts.createUser(operators[key]);
-      Roles.addUsersToRoles(id, 'operator');
-      Roles.addUsersToRoles(id, 'business');
+      Roles.addUsersToRoles(id, 'staff');
     }
   }
 });

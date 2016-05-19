@@ -1,33 +1,39 @@
-import {Mongo} from 'meteor/mongo';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {dictionary} from '../../helpers/dictionary';
-export const Realty = new Mongo.Collection('realty');
-export const Parser = new Mongo.Collection('parser');
-import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
-import {Roles} from 'meteor/alanning:roles'
+
 import {AddressSchema} from './schemas/address.schema';
-import {ModeratorSchema} from './schemas/moderator.schema.js';
 import {ContactsSchema} from './schemas/contacts.schema';
+import {dictionary} from '../../helpers/dictionary';
+import {Meteor} from 'meteor/meteor';
+import {ModeratorSchema} from './schemas/moderator.schema.js';
+import {Mongo} from 'meteor/mongo';
 import {ParseDetailsSchema} from './schemas/parseDetails.schema';
+import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
 import {RealtyRealtorSchema} from './schemas/realty-realtor.schema';
-import {ReportsSchema} from './schemas/reports.schema';
 import {RentDetailsSchema} from './schemas/details.schema';
+import {Roles} from 'meteor/alanning:roles';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+
+export const Parser = new Mongo.Collection('parser');
+export const Realty = new Mongo.Collection('realty');
 // mongodump -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
 // mongorestore -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
-import {Meteor} from 'meteor/meteor';
 
-// mongorestore -h 127.0.0.1 --port 27017 -d getrent dump/meteor
-// mongodump -h 127.0.0.1 --port 27017 -d getrent dump2/meteor
-// db.realty.remove({status: {$ne:'new'}})
 Realty.allow({
-  update: function () {
-    return Roles.userIsInRole(Meteor.userId(), ['business']);
+  update: function (realtyId, realty) {
+    let userId = Meteor.userId();
+    let isOwner;
+    if (realty.realtor) {
+      isOwner = (realty.realtor.id === userId);
+    }
+    let permission = (userId && isOwner) || Roles.userIsInRole(userId, ['staff']);
+    console.log(`update permission = ${permission}`);
+    return permission;
   },
   insert: function () {
-    return Roles.userIsInRole(Meteor.userId(), ['business']);
+    let userId = Meteor.userId();
+    return userId || Roles.userIsInRole(userId, ['staff']);;
   },
   remove: function () {
-    return Roles.userIsInRole(Meteor.userId(), ['business']);
+    return false;
   }
 });
 Realty.Schema = new SimpleSchema({

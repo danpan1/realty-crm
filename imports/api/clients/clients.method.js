@@ -11,11 +11,11 @@ Meteor.methods({
   addClient
 });
 
-export function addClient(client) {
+export function addClient(client, notRealtor) {
   console.log('casdc');
-  if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, ['business'])) {
-    if (Roles.userIsInRole(this.userId, ['realtor'])) {
-      client.realtorId = this.userId;
+  if (Meteor.isServer && Meteor.userId()) {
+    if (!notRealtor) {
+      client.realtorId = Meteor.userId();
     }
     let nextValue = nextAutoincrement(Clients); // 1
     client._id = nextValue + '';
@@ -27,18 +27,6 @@ export function addClient(client) {
       }
     });
     return nextValue;
-    // Clients.insert.update({_id: id}, {
-    //   $set: {
-    //     'realtor.reviewDate': date,
-    //     status: 'review'
-    //   }
-    // }, (error) => {
-    //   if (error) {
-    //     console.log(error);
-    //   } else {
-    //     console.log('Submited  Review Date');
-    //   }
-    // });
 
   }
 

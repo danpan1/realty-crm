@@ -18,7 +18,7 @@ function operatorGet() {
       sort: {$natural: -1}
     });
     call = Realty.findOne({
-      status: 'call', 'operator.id': this.userID
+      status: 'call', 'operator.id': Meteor.userId()
     }, {
       sort: {$natural: -1}
     });
@@ -34,7 +34,7 @@ function operatorGet() {
     }
 
     Realty.update({_id: one._id}, {
-      $set: {status: 'call', 'operator.id': this.userID}
+      $set: {status: 'call', 'operator.id': Meteor.userId()}
     }, (error) => {
       if (error) {
         console.log(error);
@@ -49,7 +49,7 @@ function operatorGet() {
 function operatorSave(realty) {
 
   if (Meteor.isServer) {
-    realty.operator.id = this.userId;
+    realty.operator.id = Meteor.userId();
     realty.status = 'list';
     Realty.update({_id: realty._id}, {
       $set: realty
@@ -79,7 +79,7 @@ function operatorSet(data, notAvailable) {
     if (countLaterCalls == 2) data.status = 'analyze';
 
     let operatorData = {
-      id: this.userId,
+      id: Meteor.userId(),
       qualification: data.operator.qualification,
       comment: data.operator.comment,
       callDate: new Date(),

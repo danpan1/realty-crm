@@ -5,6 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Accounts} from 'meteor/accounts-base';
 import {name as PhoneMask} from '/imports/ui/shared/phone-mask/phone-mask.component';
+import {Meteor} from 'meteor/meteor';
 
 import './register.view.html';
 
@@ -40,7 +41,7 @@ class Register {
   
   register() {
       
-    var value = this.client.credentials.profile.split('');
+    var value = this.credentials.profile.phone.split('');
     for(var i in [1,2,3]){
         for(var i in value){
             if(value[i].match(/\+|\(|\)|\-|\s|d/)){

@@ -190,7 +190,7 @@ class OneReview {
     let percent = this.realty.moderator.percent;
     percent.isExclusive = (this.realty.realtor.isExclusive) ? 20 : 0;
     percent.isCheckout = (this.realty.realtor.isCheckout) ? 20 : 0;
-    this.realty.moderator.percent.total = percent.photo + percent.advertisement + percent.description + percent.isExclusive + percent.isCheckout;
+    this.realty.moderator.percent.total = ((percent.photo || 0) * 0.2) + ((percent.advertisement || 0) * 0.2) + ((percent.description || 0) * 0.2) + percent.isExclusive + percent.isCheckout;
     console.log(this.realty);
     Realty.update({_id: this.realty._id}, {
       $set: this.realty
