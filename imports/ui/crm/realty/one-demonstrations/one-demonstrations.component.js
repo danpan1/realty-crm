@@ -3,9 +3,8 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {ClientFilterQuery} from '/imports/api/client-filter-query';
 import {Realty} from '/imports/api/realty';
-import {dictionary} from '/imports/api/dictionary';
+import {dictionary} from '/imports/helpers/dictionary';
 import './one-demonstrations.view.html';
 
 class OneDemonstrations {
@@ -56,11 +55,6 @@ class OneDemonstrations {
     });
 
     vm.helpers({
-      // realty: () => {
-      // },
-      clientFilterQueries: () => {
-        return ClientFilterQuery.find();
-      }
     });
   }
 

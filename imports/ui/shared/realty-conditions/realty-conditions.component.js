@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '/imports/api/dictionary';
+import {dictionary} from '/imports/helpers/dictionary';
 import './realty-conditions.view.html';
 
 class RealtyConditions {

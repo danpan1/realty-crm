@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '../../../../../api/dictionary';
+import {dictionary} from '../../../../../helpers/dictionary';
 import {Realty} from '/imports/api/realty';
 
 import './one-info-edit.view.html';

@@ -2,7 +2,7 @@
  * Created by Danpan on 27.03.16.
  */
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {dictionary} from '../../dictionary';
+import {dictionary} from '../../../helpers/dictionary';
 export const RealtyOperatorSchema = new SimpleSchema({
   id: {
     type: String,

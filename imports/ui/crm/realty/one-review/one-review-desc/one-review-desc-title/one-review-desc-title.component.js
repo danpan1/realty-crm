@@ -5,7 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty';
-import {saleDescription, saleTitle} from '/imports/api/saleDescription';
+import {saleDescription, saleTitle} from '/imports/helpers/saleDescription';
 
 import './one-review-desc-title.view.html';
 

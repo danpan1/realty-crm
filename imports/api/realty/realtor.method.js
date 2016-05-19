@@ -8,7 +8,7 @@ import {Dadata} from '/imports/api/dadata';
 import {Locations} from '/imports/api/locations';
 import {_} from 'meteor/underscore';
 import {Roles} from 'meteor/alanning:roles';
-import nextAutoincrement from '../helpers/getUniqueId';
+import nextAutoincrement from '../../helpers/getUniqueId';
 
 Meteor.methods({
   submitReviewDate,

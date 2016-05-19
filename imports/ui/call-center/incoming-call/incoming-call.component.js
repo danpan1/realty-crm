@@ -8,7 +8,7 @@ import angularMeteor from 'angular-meteor';
 import {Realty} from '/imports/api/realty';
 // import {Counts} from 'meteor/tmeasday:publish-counts';
 import {name as addClientHot} from '../../shared/add-client-full/add-client-full.component';
-import {dictionary} from '../../../api/dictionary';
+import {dictionary} from '../../../helpers/dictionary';
 
 import './incoming-call.view.html';
 

@@ -1,6 +1,6 @@
 // детальная информация для объекта (аренда)
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {dictionary} from '../../dictionary';
+import {dictionary} from '../../../helpers/dictionary';
 export const RentDetailsSchema = new SimpleSchema({
   //Балкон
   balcony: {

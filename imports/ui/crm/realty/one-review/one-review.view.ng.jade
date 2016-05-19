@@ -57,7 +57,7 @@ div(md-whiteframe='2').mt-0.mb-16.ph-32.pv-16
 
     div(flex)
         one-review-desc(realty='oneReview.realty')
-        md-button(ng-disabled='!oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000' ng-click='oneReview.saveNewDescription(oneReview.realty._id)').md-primary.md-raised.ml-0 Сохранить только текст объявления
+        md-button( ng-click='oneReview.saveNewDescription(oneReview.realty._id)').md-primary.md-raised.ml-0 Сохранить только текст объявления
 
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
@@ -99,6 +99,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
 
 div(layout='column' layout-align='center center')
     md-button(flex='30' ng-click='oneReview.sendToModerator()'
-    ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"').md-success.md-raised.md-title.mv-16 Отправить на проверку модератору
+    ng-disabled='!oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000'
+    ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"' ).md-success.md-raised.md-title.mv-16 Отправить на проверку модератору
     md-button(flex='30' ng-click='oneReview.sendToModerator()'
     ng-if='oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"' ng-disabled = 'true').md-success.md-raised.md-title.mv-16 Объект находится на проверке

@@ -1,6 +1,6 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {dictionary} from '../dictionary';
+import {dictionary} from '../../helpers/dictionary';
 export const Realty = new Mongo.Collection('realty');
 export const Parser = new Mongo.Collection('parser');
 import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
