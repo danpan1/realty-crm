@@ -11,9 +11,8 @@ md-tabs(md-dynamic-height)
                                     input(ng-model='addClientFull.client.name', required='')
                                 md-input-container(flex-offset='5' ng-class="{ 'has-error' : addClientFull.client.phone.length > 1 && addClientFull.client.phone.length < 17}").mv-0.form-required.hide-count
                                     // ng-pattern='/^([0-9]|\(|\)|\s|\-){18}$/',
-                                    label Телефон
+                                    label Телефон клиента
                                     input(ng-model='addClientFull.client.phone',
-                                    placeholder='8 (XXX) XXX XX XX',
                                     required='',
                                     maxlength="18",
                                     ng-keypress="addClientFull.filterPhone()",
