@@ -18,6 +18,10 @@ export const AddressSchema = new SimpleSchema({
   country: {
     type: String
   },
+  dadata: { // Full data из дадаты . Id карточки. Будем хранить в отдельной коллекции
+    type: String,
+    optional: true
+  },
   districtId: {
     type: String,
     optional: true
@@ -30,17 +34,13 @@ export const AddressSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  loc: {
+  loc: { // Координаты
     type: [Number],
     optional: true,
     decimal : true
   },
   house: {
     type: String
-  },
-  dadata: { // Full data из дадаты . Id карточки. Будем хранить в отдельной коллекции
-    type: String,
-    optional: true
   },
   metroTransport: {
     type: Number,
