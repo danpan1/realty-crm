@@ -14,6 +14,15 @@ class Moderator {
     $reactive(this).attach($scope);
     // console.log('mode');
     this.getNew();
+    this.rating = {
+        photo:{
+            chosen: 60
+        },
+        advert:{
+            chosen: 60
+        },
+        variants: [10,20,30,40,50,60,70,80,90,100]
+    }
   }
 
   getNew() {

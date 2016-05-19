@@ -6,6 +6,7 @@ import angularMeteor from 'angular-meteor';
 import {dictionary} from '/imports/api/dictionary';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty/realty.model';
+import {name as PhoneMask} from '/imports/ui/shared/phone-mask/phone-mask.component';
 
 import './add-realty-full.view.html';
 
@@ -21,25 +22,8 @@ class AddRealtyFull {
     //fake selects Аренда Москва Квартиры
     this.fake = true;
   }
-       
-  filterPhoneKeyPress(){
-      if(this.realty.contacts[0].phones[0].phone.length >= 17) return false;
-      if(this.realty.contacts[0].phones[0].phone[0] != '7') this.realty.contacts[0].phones[0].phone = '7 ' + this.realty.contacts[0].phones[0].phone;
-  }
-  filterPhoneFocus () {
-      if(!this.realty.contacts[0].phones[0].phone || this.realty.contacts[0].phones[0].phone[0] != '7') this.realty.contacts[0].phones[0].phone = '7';
-  }
   
   submit() {
-    var phone = this.realty.contacts[0].phones[0].phone.split('');
-    for(var i in [1,2,3]){
-        for(var i in phone){
-            if(phone[i].match(/\+|\(|\)|\-|\s|d/)){
-                phone.splice(i,1);
-            }
-        }
-    }
-    this.realty.contacts[0].phones[0].phone = phone.join('');
     
     var price = this.realty.price.split('');
     for(var i in [1,2,3]){
@@ -89,7 +73,8 @@ const moduleName = 'addRealtyFull';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  PhoneMask
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/add-realty-full/add-realty-full.view.html',
   bindings: {},

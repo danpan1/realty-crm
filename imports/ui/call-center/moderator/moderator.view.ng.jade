@@ -5,14 +5,13 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
             div(layout='row')
                 h3.md-headline.text-uppercase Фото
                 md-input-container(flex-offset='5')
-                    label 60%
-                    md-select(ng-model='realtyFilter.filter.conditions').small-select
-                        md-option(ng-value='condition.id',
-                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                    md-select(ng-model='moderator.rating.photo.chosen').small-select
+                        md-option(ng-value='var',
+                        ng-repeat='var in moderator.rating.variants') {{var}}%
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Не качественные.
-            p().md-body-1 Закажите профессиональные #[a(href="#") в 2 клика]
+            p().md-body-1 Закажите профессиональные #[a(href="#").blue-link в 2 клика]
 
 
 div(md-whiteframe='2').mv-16
@@ -81,10 +80,9 @@ div(md-whiteframe='2').mt-16.ph-32.pv-16
             div(layout='row')
                 h3.md-headline.text-uppercase Качество рекламы
                 md-input-container(flex-offset='5')
-                    label 60%
-                    md-select(ng-model='realtyFilter.filter.conditions').small-select
-                        md-option(ng-value='condition.id',
-                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                    md-select(ng-model='moderator.rating.advert.chosen').small-select
+                        md-option(ng-value='var',
+                        ng-repeat='var in moderator.rating.variants') {{var}}%
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Текст 1

@@ -6,6 +6,7 @@ import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
 import {Clients} from '/imports/api/clients';
 import {ClientFilterQuery} from '/imports/api/client-filter-query';
+import {name as PhoneMask} from '/imports/ui/shared/phone-mask/phone-mask.component';
 import {dictionary} from '/imports/api/dictionary';
 
 import './add-client-full.view.html';
@@ -27,37 +28,7 @@ class AddClientFull {
     
   }
   
-  onInit () {
-     console.log('234234');
-     angular.element(".md-datepicker-button").each(function(){
-        console.log('234234');
-        var el = this;
-        var ip = angular.element(el).parent().find("input").bind('click', function(e){
-            angular.element(el).click();
-        });
-        angular.element(this).css('visibility', 'hidden');
-     });
-  }
-        
-  filterPhoneKeyPress(){
-      if(this.client.phone.length >= 17) return false;
-      if(this.client.phone[0] != '7') this.client.phone = '7 ' + this.client.phone;
-  }
-  filterPhoneFocus () {
-      if(!this.client.phone || this.client.phone[0] != '7') this.client.phone = '7';
-  }
-  
   submit(valid) {
-    var value = this.client.phone.split('');
-    for(var i in [1,2,3]){
-        for(var i in value){
-            if(value[i].match(/\+|\(|\)|\-|\s|d/)){
-                value.splice(i,1);
-            }
-        }
-    }
-    this.client.phone = value.join('');
-    
    
     var price = this.client.need.price.split('');
     for(var i in [1,2,3]){
@@ -125,7 +96,8 @@ const moduleName = 'addClientFull';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  PhoneMask
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/add-client-full/add-client-full.view.html',
   bindings: {pageStatus: '@'},

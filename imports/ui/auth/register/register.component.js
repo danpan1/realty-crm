@@ -4,6 +4,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Accounts} from 'meteor/accounts-base';
+import {name as PhoneMask} from '/imports/ui/shared/phone-mask/phone-mask.component';
 
 import './register.view.html';
 
@@ -31,10 +32,10 @@ class Register {
      
   filterPhoneKeyPress(){
       if(this.credentials.profile.phone.length >= 17) return false;
-      if(this.credentials.profile.phone[0] != '7') this.credentials.profile.phone = '7 ' + this.credentials.profile.phone;
+      if(this.credentials.profile.phone[0] != '8') this.credentials.profile.phone = '8 ' + this.credentials.profile.phone;
   }
   filterPhoneFocus () {
-      if(!this.credentials.profile.phone || this.credentials.profile.phone[0] != '7') this.credentials.profile.phone = '7';
+      if(!this.credentials.profile.phone || this.credentials.profile.phone[0] != '8') this.credentials.profile.phone = '8';
   }
   
   register() {
@@ -66,7 +67,8 @@ const moduleName = 'register';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  PhoneMask
 ]).component(moduleName, {
   templateUrl: 'imports/ui/auth/register/register.view.html',
   bindings: {},

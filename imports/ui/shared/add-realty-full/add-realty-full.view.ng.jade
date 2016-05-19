@@ -148,16 +148,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                                 md-input-container(flex).mv-0
                                     label Имя собственника
                                     input(ng-model='addRealtyFull.realty.contacts[0].name', required='')
-                                md-input-container(flex ng-class="{ 'has-error' : addRealtyFull.realty.contacts[0].phones[0].phone.length > 1 && addRealtyFull.realty.contacts[0].phones[0].phone.length < 15}").mv-0.ml-32.hide-count
-                                    label Телефон собственника
-                                    //ng-pattern='/^[0-9]{11}$/',
-                                    input(ng-model='addRealtyFull.realty.contacts[0].phones[0].phone',
-                                    required='',
-                                    maxlength="17",
-                                    ng-focus="addRealtyFull.filterPhoneFocus()"
-                                    ng-keypress="addRealtyFull.filterPhoneKeyPress()",
-                                    ng-phone-filter,
-                                    md-maxlength='17')
+                                phone-mask(ng-if='addRealtyFull.realty' label='"Телефон собственника"' phone='addRealtyFull.realty.contacts[0].phones[0].phone')
                     div(layout='row')
                         div(flex='45').mv-16
                             div(layout='row' layout-align='space-between start')
