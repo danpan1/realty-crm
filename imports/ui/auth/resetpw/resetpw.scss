@@ -1,0 +1,27 @@
+resetpw {
+  img {
+    max-width: 100%;
+  }
+  
+  md-content {
+    background-color: #f1f8fd;
+  }
+
+  header {
+    min-height: 60px;
+    background-color: rgb(33, 150, 243);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+    h2 {
+      color: $white;
+    }
+  }
+
+  md-whiteframe {
+    background-color: #fff;
+    width: 328px;
+  }
+
+  md-input-container {
+    margin: 0;
+  }
+}

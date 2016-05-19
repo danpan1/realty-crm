@@ -20,6 +20,10 @@ add-realty-full {
   .add-realty-price-text {
     margin: 4px 0;
   }
+
+  p {
+    margin: 2px 0;
+  }
 }
 
 .add-client-full-small-select {
@@ -39,9 +43,8 @@ add-realty-full {
   }
 }
 
-
 .hide-count{
-    & .md-char-counter{
-        display: none;
-    }
+  & .md-char-counter{
+    display: none;
+  }
 }

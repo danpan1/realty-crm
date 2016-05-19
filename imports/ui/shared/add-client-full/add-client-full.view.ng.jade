@@ -13,7 +13,7 @@ md-tabs(md-dynamic-height ng-init="addClientFull.onInit()")
                                     // ng-pattern='/^([0-9]|\(|\)|\s|\-){17}$/',
                                     label Телефон
                                     input(ng-model='addClientFull.client.phone',
-                                    placeholder='7 (XXX) XXX XX XX',
+                                    placeholder='8 (XXX) XXX XX XX',
                                     required='',
                                     maxlength="17",
                                     ng-focus="addClientFull.filterPhoneFocus()"
@@ -49,8 +49,8 @@ md-tabs(md-dynamic-height ng-init="addClientFull.onInit()")
                                         md-option(ng-value='composition.id',
                                         ng-repeat="composition in addClientFull.dictionary.composition ") {{composition.name}}
                             div(layout='row').mv-16
-                                md-input-container(flex).mv-0.form-required
-                                    label Напшите, что важно клиенту (ваша заметка)
+                                md-input-container(flex='50').mv-0.form-required
+                                    label Напишите, что важно клиенту (ваша заметка)
                                     textarea(required ng-model='addClientFull.client.realtorNote', md-maxlength='300', rows='5', md-select-on-focus='' )
                     //        div().md-subhead Какой процент стоимости аренды вы хотите получить
                     //
@@ -107,8 +107,8 @@ md-tabs(md-dynamic-height ng-init="addClientFull.onInit()")
                             div(layout='column').mv-16
                                 div(layout='row' layout-align='space-between start')
                                     md-input-container(flex='25').md-block.form-required.mv-0
+                                        label Цена
                                         input(
-                                            placeholder="цена",
                                             required,
                                             ng-model='addClientFull.client.need.price',
                                             ng-price-filter,

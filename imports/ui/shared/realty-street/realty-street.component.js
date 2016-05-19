@@ -7,65 +7,54 @@ import {AddressService} from '/imports/api/AddressService';
 import './realty-street.view.html';
 
 class RealtyStreet {
-  /* @ngInject */
   constructor() {
+    this.noCache = false;
+  }
+
+  clearHouse() {
+    this.searchTextHouse = '';
+    this.house = null;
+    this.dataFull = null;
   }
 
   querySearch(query) {
-    const vm = this;
-    //console.log('request', query);
+    if (!query) {
+      return;
+    }
     return AddressService.search({
       'from_bound': {'value': 'street'},
       'to_bound': {'value': 'street'},
       'locations': [{'region': 'москва'}],
       'restrict_value': true,
-      query: query, count: 5
+      'query': query, count: 10
     }).then((res)=> {
-      vm.suggestionsStreetList = res.suggestions;
-      // console.log(res.suggestions);
       return res.suggestions;
     });
-  }
-
-  clearHouse() {
-    // console.log('clearHouse');
-    // this.selectedHouse = {value: ' '};
   }
 
   querySearchHouse(query) {
-    const vm = this;
-    //console.log('request', query);
-    // console.log(vm.selectedStreet);
-    // query = vm.selectedStreet.value + ' ' + query;
-    return AddressService.search({
-      'from_bound': {'value': 'house'},
-      'to_bound': {'value': 'house'},
-      'locations': [{'region': 'москва', 'street': vm.selectedStreet.data.street}],
-      'restrict_value': true,
-      query: query, count: 20
-    }).then((res)=> {
-      vm.suggestionsStreetList = res.suggestions;
-      // console.log(res.suggestions);
-      return res.suggestions;
-    });
+    if (!query) {
+      return;
+    }
+    if (this.street && this.street.data) {
+      return AddressService.search({
+        'from_bound': {'value': 'house'},
+        'to_bound': {'value': 'house'},
+        'locations': [{'region': 'москва', 'street': this.street.data.street}],
+        'restrict_value': true,
+        'query': query, count: 10
+      }).then((res)=> {
+        return res.suggestions;
+      });
+    }
   }
-  querySearchHouseFinal(query) {
-    const vm = this;
-    //console.log('request', query.unrestricted_value);
-    // console.log(vm.selectedStreet);
-    // query = vm.selectedStreet.value + ' ' + query;
-    return AddressService.search({
-      // 'from_bound': {'value': 'house'},
-      // 'to_bound': {'value': 'house'},
-      'locations': [{'region': 'москва'}],
-      'restrict_value': true,
-      query: query.unrestricted_value, count: 20
-    }).then((res)=> {
-      vm.suggestionsStreetList = res.suggestions;
-      vm.selectedData = res.suggestions[0];
-      //console.log(res.suggestions);
-      return res.suggestions;
-    });
+  // в DADATA приходится запрашивать с параметром count : 1, чтобы получить Район и Координаты
+  requestFullData(query) {
+    if (query && query.unrestricted_value) {
+      return AddressService.search({'query': query.unrestricted_value, count: 1}).then((res)=> {
+        this.dataFull = res.suggestions[0];
+      });
+    }
   }
 
 }
@@ -78,9 +67,9 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/realty-street/realty-street.view.html',
   bindings: {
-    selectedStreet: '=ngModel',
-    selectedHouse:'=house',
-    selectedData: '=dadata'
+    street: '=ngModel',
+    house: '=house',
+    dataFull: '=dadata'
 
   },
   controllerAs: moduleName,

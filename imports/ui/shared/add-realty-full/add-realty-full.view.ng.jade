@@ -178,14 +178,14 @@ md-tabs(md-dynamic-height md-border-bottom)
                         p().md-subhead.add-realty-full-text (Будет показано только агентам)
 
                     div(layout='row')
-                        div(flex='45').mv-16
+                        div(flex='50').mv-16
                             div(layout='row' layout-align='space-between start')
-                                md-input-container(flex).mv-0
+                                md-input-container(flex='45').mv-0
                                     input(ng-model='addRealtyFull.realty.realtor.clientpercent' placeholder='От прямого клиента')
-                                md-input-container(flex).mv-0.ml-32
+                                md-input-container(flex='55').mv-0.ml-32
                                     input(ng-model='addRealtyFull.realty.realtor.partnerpercent' placeholder='От клиента другого агента')
 
                     div(layout='row').mv-32
-                        md-button(ng-click='addRealtyFull.submit()' ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-success.md-raised.md-title.mh-0 Добавить объект!
+                        md-button(ng-click='addRealtyFull.submit()' ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-primary.md-raised.md-title.mh-0 Добавить объект
                         md-button(md-no-ink ng-click='addRealtyFull.activeTab = 1').md-primary.md-body-1.ml-32 Вернуться на шаг назад
 

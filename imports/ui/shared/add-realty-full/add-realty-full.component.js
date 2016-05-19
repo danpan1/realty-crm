@@ -57,13 +57,18 @@ class AddRealtyFull {
     const vm = this;
     this.realty.type = 4;
     this.realty.address = {
+      areaId:'',
+      areaName: '',
       city: 'Москва',
       country: 'Россия',
-      flat: vm.locations.flat,
-      street: vm.locations.street.value,
-      house: vm.locations.house.value,
-      meta: vm.locations.full.data,
+      districtId : '',
       districtName: vm.locations.full.data.city_district,
+      flat: vm.locations.flat,
+      house: vm.locations.house.value,
+      loc: [+vm.locations.full.data.geo_lon, +vm.locations.full.data.geo_lat],
+      meta: vm.locations.full.data,
+      street: vm.locations.street.value,
+      streetFiasId: vm.locations.street.data.fias_id,
       value: vm.locations.full.unrestricted_value
     };
 
