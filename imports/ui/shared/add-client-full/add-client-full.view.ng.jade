@@ -9,17 +9,7 @@ md-tabs(md-dynamic-height ng-init="addClientFull.onInit()")
                                 md-input-container().mv-0.form-required
                                     label Имя клиента
                                     input(ng-model='addClientFull.client.name', required='')
-                                md-input-container(flex-offset='5' ng-class="{ 'has-error' : addClientFull.client.phone.length > 1 && addClientFull.client.phone.length < 15}").mv-0.form-required.hide-count
-                                    // ng-pattern='/^([0-9]|\(|\)|\s|\-){17}$/',
-                                    label Телефон
-                                    input(ng-model='addClientFull.client.phone',
-                                    placeholder='8 (XXX) XXX XX XX',
-                                    required='',
-                                    maxlength="17",
-                                    ng-focus="addClientFull.filterPhoneFocus()"
-                                    ng-keypress="addClientFull.filterPhoneKeyPress()",
-                                    ng-phone-filter,
-                                    md-maxlength='17')
+                                phone-mask(ng-if='addClientFull.client' label='"Телефон"' phone='addClientFull.client.phone')
                                 md-input-container(flex-offset='5').mv-0
                                     label Email клиента
                                     input(type="email" ng-model='addClientFull.client.email')
@@ -49,7 +39,7 @@ md-tabs(md-dynamic-height ng-init="addClientFull.onInit()")
                                         md-option(ng-value='composition.id',
                                         ng-repeat="composition in addClientFull.dictionary.composition ") {{composition.name}}
                             div(layout='row').mv-16
-                                md-input-container(flex='50').mv-0.form-required
+                                md-input-container(flex='90').mv-0.form-required
                                     label Напишите, что важно клиенту (ваша заметка)
                                     textarea(required ng-model='addClientFull.client.realtorNote', md-maxlength='300', rows='5', md-select-on-focus='' )
                     //        div().md-subhead Какой процент стоимости аренды вы хотите получить

@@ -19,3 +19,11 @@ moderator {
     min-height: 52px;
   }
 }
+
+.blue-link{
+    color: color($blue);
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+}

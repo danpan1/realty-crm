@@ -18,14 +18,13 @@ export default angular.module(moduleName, []).directive('ngPhoneFilter',function
                   }
               }
             }
-			if(value[0] == '7') value.splice(0,1);
+			if(value[0] == '8') value.splice(0,1);
             value = value.join('');
             var city, number, main;
             city = value.slice(0, 3);
             number = value.slice(3);
             city = city ? city.length >= 3 ? ' (' + city + ') ' : city : '';
             number = number ? number.length > 3 ? number.length > 5 ? number.slice(0, 3) + '-' + number.slice(3,5) + '-' + number.slice(5) :  number.slice(0, 3) + '-' + number.slice(3) : number : '';
-            console.log(city + number);
             return (' ' + city + number).trim();
         });
     
