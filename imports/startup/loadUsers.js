@@ -37,8 +37,7 @@ Meteor.startup(function () {
 
     for (let key in admins) {
       id = Accounts.createUser(admins[key]);
-      Roles.addUsersToRoles(id, 'admin');
-      Roles.addUsersToRoles(id, 'realtor');
+      Roles.addUsersToRoles(id, 'staff');
     }
 
     /*
@@ -51,7 +50,6 @@ Meteor.startup(function () {
         password: '77DX3G73M2SWaYG',
         profile: {}
       });
-    Roles.addUsersToRoles(id, 'realtor');
 
     /*
      Operators

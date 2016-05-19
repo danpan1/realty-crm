@@ -75,16 +75,18 @@ export function addRealty(realty, notRealtor) {
     }
 
     let district = Locations.findOne({type: 'district', name: realty.address.districtName.slice(0, -4)});
-    let area = Locations.findOne({type: 'area', _id: {$in: district.parents}});
 
-    let dadata = Dadata.insert(realty.address.meta);
-    realty.address.dadata = dadata;
-    realty.address.areaId = area._id;
-    realty.address.areaName = area.name;
-    realty.address.districtId = district._id;
-    realty.address.districtName = district.name || realty.address.districtName;
-    // console.log(realty.address);
+    if (district) {
+      realty.address.districtId = district._id;
+      realty.address.districtName = district.name;
+      let area = Locations.findOne({type: 'area', _id: {$in: district.parents}});
+      realty.address.areaId = area._id;
+      realty.address.areaName = area.name;
+    } else {
+      console.log('нет в базе такого района. надо добавить: ', realty.address.districtName);
+    }
 
+    realty.address.dadata = Dadata.insert(realty.address.meta);
 
     Realty.insert(realty, (error) => {
       if (error) {

@@ -12,17 +12,54 @@ md-toolbar {
 md-sidenav{
   max-width: 192px !important;
   font-size: 16px !important;;
-  background-color: #f1f8fd !important;
-  box-shadow: none !important;
+  background-color: #e3f2fd !important;
   md-list-item {
     color: #333 !important;
-    &.active{
-      color: #106cc8 !important;
-      background-color: #d3e9f4 !important;
+    &.active {
+      background-color: #bbdefb !important;
     }
+
     .md-no-style.md-button,
     .md-no-proxy.md-button {
       font-weight: 400 !important;
+    }
+
+    a.md-button:not([disabled]):hover {
+      background-color: #bbdefb;
+    }
+  }
+
+  // .md-select-menu-container.md-active md-select-menu {
+  //   md-option[selected] {
+  //     color: rgb(50, 50, 50);
+  //   }
+  // }
+  
+  md-select {
+    margin: 0 23px 8px 23px;
+    .md-select-value {
+      border-bottom: none;
+      .md-select-icon:after {
+        content: none;
+      }
+    }
+
+    &:not([disabled]):focus .md-select-value {
+      border-bottom: none;
+    }
+  }
+}
+
+#select_container_4 {
+  left: 0 !important;
+  min-width: 192px !important;
+  md-select-menu {
+    md-content {
+      padding-left: 10px;
+      background-color: #bbdefb !important;
+      md-option[selected] {
+        color: rgb(50, 50, 50);
+      }
     }
   }
 }

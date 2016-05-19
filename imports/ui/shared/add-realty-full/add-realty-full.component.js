@@ -55,9 +55,10 @@ class AddRealtyFull {
       metroTransport : vm.metroTransport,
       street: vm.locations.street.value,
       streetFiasId: vm.locations.street.data.fias_id,
+      subways : this.locations.subways,
+      subwaysEmbedded : this.locations.embedded.subways,
       value: vm.locations.full.unrestricted_value
     };
-    this.realty.address.subwaysEmbedded = this.locations.embedded.subways;
     console.log(this.realty.address.subwaysEmbedded);
     Meteor.call('addRealty', this.realty, (error, result) => {
       if (error) {
