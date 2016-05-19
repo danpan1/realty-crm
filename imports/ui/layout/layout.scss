@@ -28,12 +28,6 @@ md-sidenav{
       background-color: #bbdefb;
     }
   }
-
-  // .md-select-menu-container.md-active md-select-menu {
-  //   md-option[selected] {
-  //     color: rgb(50, 50, 50);
-  //   }
-  // }
   
   md-select {
     margin: 0 23px 8px 23px;
@@ -56,7 +50,6 @@ md-sidenav{
   md-select-menu {
     md-content {
       padding-left: 10px;
-      background-color: #bbdefb !important;
       md-option[selected] {
         color: rgb(50, 50, 50);
       }
