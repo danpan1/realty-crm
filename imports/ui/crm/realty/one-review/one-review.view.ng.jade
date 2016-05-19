@@ -17,8 +17,8 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
                 md-progress-circular(md-mode='indeterminate')
         div(flex='50')
             h3(ng-if='oneReview.realty.moderator.comment.photo').md-headline Ответ от модератора:
-            p(ng-if='oneReview.realty.moderator.comment.photo').md-body-1 Не качественные.
-            p(ng-if='oneReview.realty.moderator.comment.photo').md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
+            p(ng-if='oneReview.realty.moderator.comment.photo').md-body-1 {{oneReview.realty.moderator.comment.photo}}
+            p(ng-if='oneReview.realty.moderator.percent.photo < 60').md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
 
 div(md-whiteframe='2').mv-16
     div(layout='row' layout-wrap)
@@ -51,8 +51,7 @@ div(md-whiteframe='2').mt-16.ph-32.pv-16
             h3.md-headline.text-uppercase Качество рекламы {{(oneReview.realty.moderator.percent.description || 0)}}%
         div(flex='50')
             h3(ng-if='oneReview.realty.moderator.comment.description').md-headline Ответ от модератора:
-            p(ng-if='oneReview.realty.moderator.comment.description').md-body-1 Текст 1
-            p(ng-if='oneReview.realty.moderator.comment.description').md-body-1 Вторая строка
+            p(ng-if='oneReview.realty.moderator.comment.description').md-body-1 {{oneReview.realty.moderator.comment.description}}
 
 div(md-whiteframe='2').mt-0.mb-16.ph-32.pv-16
 
@@ -66,8 +65,7 @@ div(md-whiteframe='2').mt-16.ph-32.pv-16
             h3.md-headline.text-uppercase Объем рекламы {{(oneReview.realty.moderator.percent.advertisement || 0)}}%
         div(flex='50')
             h3(ng-if='oneReview.realty.moderator.comment.advertisement').md-headline Ответ от модератора:
-            p(ng-if='oneReview.realty.moderator.comment.advertisement').md-body-1 Первая строка
-            p(ng-if='oneReview.realty.moderator.comment.advertisement').md-body-1 Вторая строка
+            p(ng-if='oneReview.realty.moderator.comment.advertisement').md-body-1 {{oneReview.realty.moderator.comment.advertisement}}
 
 div(md-whiteframe='2').ph-16
     div(layout='column' layout-padding)
