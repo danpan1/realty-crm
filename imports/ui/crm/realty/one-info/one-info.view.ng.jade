@@ -22,7 +22,7 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Улица: #[strong {{oneInfo.realty.address.street}}]
                     div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.house}}]
                     div().md-subhead Квартира: #[strong {{oneInfo.realty.address.flat}}]
-                    div().md-subhead Метро: #[strong {{oneInfo.realty.address.metroName}} {{oneInfo.realty.address.metroPeshkom}} мин. пешком]
+                    div().md-subhead Метро: #[strong {{oneInfo.realty.address.subwaysEmbedded[0].name}} {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
                     div
                         md-button(ng-click="oneInfo.showEditDialog($event)").md-primary.md-raised.ml-0 Изменить
 

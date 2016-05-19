@@ -16,15 +16,15 @@ class AddRealtyFull {
     this.state = $state;
     this.dictionary = dictionary;
     this.realty = {contacts: [{phones: [{phone:''}]}], address :{
-      metroTransport : 0
     }};
+    this.metroTransport = 0;
     this.activeTab = 0;
     //fake selects Аренда Москва Квартиры
     this.fake = true;
   }
-  
+
   submit() {
-    
+
     var price = this.realty.price.split('');
     for(var i in [1,2,3]){
         for(var i in price){
@@ -35,8 +35,8 @@ class AddRealtyFull {
     }
     this.realty.price = price.join('');
     console.log(this.realty.price);
-    console.log(this.realty.contacts[0].phones[0].phone );
-    
+    console.log(this.realty.contacts[0].phones[0].phone);
+
     //4 - Аренда - Квартиры
     const vm = this;
     this.realty.type = 4;
@@ -51,11 +51,14 @@ class AddRealtyFull {
       house: vm.locations.house.value,
       loc: [+vm.locations.full.data.geo_lon, +vm.locations.full.data.geo_lat],
       meta: vm.locations.full.data,
+      metroTime : vm.locations.metroTime,
+      metroTransport : vm.metroTransport,
       street: vm.locations.street.value,
       streetFiasId: vm.locations.street.data.fias_id,
       value: vm.locations.full.unrestricted_value
     };
-
+    this.realty.address.subwaysEmbedded = this.locations.embedded.subways;
+    console.log(this.realty.address.subwaysEmbedded);
     Meteor.call('addRealty', this.realty, (error, result) => {
       if (error) {
         console.log(error);

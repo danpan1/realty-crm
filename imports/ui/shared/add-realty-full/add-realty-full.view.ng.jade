@@ -36,10 +36,10 @@ md-tabs(md-dynamic-height md-border-bottom)
                                 div(flex='55').ml-32
                                     div(layout='row' layout-align='start end').mt-32
                                         md-input-container(flex='30').mv-0.pv-0
-                                            input(ng-model='addRealtyFull.realty.address.metroTime', placeholder='минут')
+                                            input(ng-model='addRealtyFull.locations.metroTime', placeholder='минут')
                                         md-input-container(flex).mv-0.ml-32.pb-0
                                             //label пешком
-                                            md-select(ng-model='addRealtyFull.realty.address.metroTransport')
+                                            md-select(ng-model='addRealtyFull.metroTransport')
                                                 md-option(ng-value='transport.id',
                                                 ng-repeat="transport in addRealtyFull.dictionary.transport") {{transport.name}}
                 div(layout='row').mv-32
