@@ -41,7 +41,15 @@
             margin-top: 12px;
         }
     }
+
+    .clientCard-col-1 {
+        max-width: 25rem !important;
+    }
 }
 .icon-rotate-90{
     transform: rotate(90deg);
+}
+
+.clientCard-conditions {
+    text-align: center;
 }
