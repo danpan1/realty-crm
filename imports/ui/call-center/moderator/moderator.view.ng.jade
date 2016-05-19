@@ -23,7 +23,7 @@ div(md-whiteframe='2').mv-16
         div(flex="33" ng-repeat="photo in moderator.realty.details.thumbnails")
             md-card
                 md-button(ng-if='photo.url != moderator.realty.image' ng-click='moderator.setMainImage(photo)').md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(ng-if='photo.url == moderator.realty.image' ng-disabled='true').md-primary.md-raised.btn-set-photo.btn-set-photo-active Главное фото
+                md-button(ng-if='photo.url == moderator.realty.image').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
                 md-button(aria-label).btn-remove-photo
                     md-icon(md-svg-icon='svg/icon-close-white.svg')
                 img(src='{{photo.url}}')
@@ -55,4 +55,4 @@ div(layout='row').mt-32
     div(flex='30' flex-offset='5')
         md-button(ng-click='moderator.save(false)').md-primary.md-raised Отклонить
     div(flex='70')
-        md-button(ng-click='moderator.save(true)').md-success.md-raised.md-title Одобрить
+        md-button(ng-click='moderator.save(true)').md-success.md-raised.md-title.md-button-big Одобрить
