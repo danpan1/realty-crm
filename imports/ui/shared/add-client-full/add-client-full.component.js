@@ -24,7 +24,6 @@ class AddClientFull {
         metroTransport: 0
     }
     this.client.searchEndDate = this.client.searchStartDate;
-    
   }
   
   submit(valid) {

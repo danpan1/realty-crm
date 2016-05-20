@@ -40,8 +40,8 @@ md-tabs(md-dynamic-height ng-init="addClientFull.onInit()")
                                         ng-repeat="composition in addClientFull.dictionary.composition ") {{composition.name}}
                             div(layout='row').mv-16
                                 md-input-container(flex='90').mv-0.form-required
-                                    label Напишите, что важно клиенту (ваша заметка)
-                                    textarea(required ng-model='addClientFull.client.realtorNote', md-maxlength='300', rows='5', md-select-on-focus='' )
+                                    label Напишите, что важно клиенту (ваша заметка) 
+                                    textarea(required ng-model='addClientFull.client.realtorNote' maxlength='300' md-maxlength='300', rows='5', md-select-on-focus='' )
                     //        div().md-subhead Какой процент стоимости аренды вы хотите получить
                     //
                     //        div(layout='row' layout-align='start center').mv-16
