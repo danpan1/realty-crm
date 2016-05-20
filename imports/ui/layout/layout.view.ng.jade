@@ -14,7 +14,7 @@ div(flex, layout='row' layout-align='center none')
     // Container #3
     md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left").pv-16
         menu-toggle(section="layout.actions")
-        md-select(ng-model='layout.select' md-selected-text = 'layout.selectText()')
+        md-select(ng-model='layout.select' md-selected-text = 'layout.selectText()').sideNav-btn-add
             md-option( ng-value='1' ng-click='layout.toggleList()' ui-sref='crm.realty.add') Объект
             md-option( ng-value='2' ng-click='layout.toggleList()' ui-sref='crm.clients.add') Клиента
 
@@ -26,7 +26,8 @@ div(flex, layout='row' layout-align='center none')
             ui-sref-active="active",
             layout="row",
             layout-align='start'
-            ng-click='layout.toggleList()') {{item.name}}
+            ng-click='layout.toggleList()',
+            md-ink-ripple="#bbdefb") {{item.name}}
 
     // Container #4
     md-content#content(flex,md-whiteframe="4", layout="column", layout-align='space-between center')

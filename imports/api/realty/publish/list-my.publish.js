@@ -12,7 +12,7 @@ if (Meteor.isServer) {
 
       let selector;
       // console.log('listMy');
-      if (Roles.userIsInRole(this.userId, ['realtor'])) {
+      if (this.userId) {
 
         selector = {
           $and: [
@@ -27,7 +27,7 @@ if (Meteor.isServer) {
         Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
       }
       //Отдаем объекты недвижимости если у юзера есть роль бизнес
-      if (Roles.userIsInRole(this.userId, ['business'])) {
+      if (this.userId) {
         if (!details) {
           options.fields = {
             'address.house': 1,

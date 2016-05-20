@@ -10,9 +10,6 @@ const onCreateUser = function (options, user) {
   if (user.profile) {
     user.profile.realtorId = nextAutoincrement(Meteor.users);
   }
-  // console.log(user);
-  //user.roles = ['operator'];
-  //Roles.addUsersToRoles(user._id, ['operator'], Roles.GLOBAL_GROUP);
   return user;
 };
 

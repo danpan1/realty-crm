@@ -3,7 +3,6 @@
   > div {
     background-color: #fff;
   }
-  border: 1px solid #f3f3f3;
   &_Photo,
   &_Address,
   &_Progress,
@@ -31,10 +30,6 @@
   &_Actions {
     width: 38rem;
   }
-}
-
-.orange {
-  color: #ff5722;
 }
 
 .listMy_Address-item {

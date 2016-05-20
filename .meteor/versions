@@ -20,6 +20,10 @@ blaze@2.1.7
 blaze-html-templates@1.0.4
 blaze-tools@1.0.8
 boilerplate-generator@1.0.8
+browser-policy@1.0.9
+browser-policy-common@1.0.9
+browser-policy-content@1.0.10
+browser-policy-framing@1.0.10
 caching-compiler@1.0.4
 caching-html-compiler@1.0.6
 callback-hook@1.0.8
@@ -56,6 +60,7 @@ less@2.6.0
 livedata@1.0.18
 localstorage@1.0.9
 logging@1.0.12
+matb33:collection-hooks@0.8.1
 mdg:validation-error@0.2.0
 meteor@1.1.14
 meteor-base@1.0.4

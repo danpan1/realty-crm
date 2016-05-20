@@ -102,4 +102,4 @@ div(layout='column' layout-align='center center')
     ng-disabled='!oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000'
     ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"' ).md-success.md-raised.md-title.mv-16 Отправить на проверку модератору
     md-button(flex='30' ng-click='oneReview.sendToModerator()'
-    ng-if='oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"' ng-disabled = 'true').md-success.md-raised.md-title.mv-16 Объект находится на проверке
+    ng-if='oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"' ng-disabled = 'true').one-review-btn-in-progress.md-raised.md-title.mv-16 Объект находится на проверке

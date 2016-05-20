@@ -13,7 +13,6 @@ if (Meteor.isServer) {
     let selector = {};
     
     console.log(filter);
-    console.log(this.userId);
     
     if (filter) {
       if (filter.status) {
