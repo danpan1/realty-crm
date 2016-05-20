@@ -62,13 +62,13 @@ div(md-whiteframe='2').mv-16.client-card
             div(flex='20').ph-16.pv-8
                 div(layout='row', layout-wrap, layout-align='start start')
                     div(flex="25" ng-repeat="condition in clientCard.client.need.conditions").clientCard-conditions
-                        md-icon(ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture')
-                        md-icon(ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture')
-                        md-icon(ng-if="condition == 'tv'" md-svg-icon='conditions_tv')
-                        md-icon(ng-if="condition == 'refrigerator'" md-svg-icon='conditions_refrigerator')
-                        md-icon(ng-if="condition == 'washer'" md-svg-icon='conditions_washer')
-                        md-icon(ng-if="condition == 'phone'" md-svg-icon='conditions_phone')
-                        md-icon(ng-if="condition == 'animal'" md-svg-icon='conditions_animal')
-                        md-icon(ng-if="condition == 'elevator'" md-svg-icon='conditions_elevator').icon-rotate-90
-                        md-icon(ng-if="condition == 'children'" md-svg-icon='conditions_children')
-                        md-icon(ng-if="condition == 'wifi'" md-svg-icon='conditions_wifi')
+                        md-icon(ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').cliendCard-condition-icons
+                        md-icon(ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture').cliendCard-condition-icons
+                        md-icon(ng-if="condition == 'tv'" md-svg-icon='conditions_tv').cliendCard-condition-icons
+                        md-icon(ng-if="condition == 'refrigerator'" md-svg-icon='conditions_refrigerator').cliendCard-condition-icons
+                        md-icon(ng-if="condition == 'washer'" md-svg-icon='conditions_washer').cliendCard-condition-icons
+                        md-icon(ng-if="condition == 'phone'" md-svg-icon='conditions_phone').cliendCard-condition-icons
+                        md-icon(ng-if="condition == 'animal'" md-svg-icon='conditions_animal').cliendCard-condition-icons
+                        md-icon(ng-if="condition == 'elevator'" md-svg-icon='conditions_elevator').cliendCard-condition-icons.icon-rotate-90
+                        md-icon(ng-if="condition == 'children'" md-svg-icon='conditions_children').cliendCard-condition-icons
+                        md-icon(ng-if="condition == 'wifi'" md-svg-icon='conditions_wifi').cliendCard-condition-icons

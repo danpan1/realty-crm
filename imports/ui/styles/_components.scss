@@ -116,4 +116,7 @@
   color: #ff5722 !important;
   background: none !important;
   box-shadow: none !important;
+  &:hover {
+    text-decoration: underline !important;
+  }
 }
