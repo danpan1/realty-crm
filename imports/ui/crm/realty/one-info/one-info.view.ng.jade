@@ -36,8 +36,8 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Общая площадь: #[strong {{oneInfo.realty.square}}]
                     div().md-subhead Жилая площадь: #[strong {{oneInfo.realty.details.livingSquare}}]
                     div().md-subhead Площадь кухни: #[strong {{oneInfo.realty.details.kitchenSquare}}]
-                    div().md-subhead Площадь комнат:
-                        span(ng-repeat="i in [0,1,2,3]") #[strong {{oneInfo.realty.details.roomsSquare[i]}}, ]
+                    //div().md-subhead Площадь комнат:
+                    //    span(ng-repeat="i in [0,1,2,3]") #[strong {{oneInfo.realty.details.roomsSquare[i]}}, ]
                     div().md-subhead Лоджия: #[strong {{oneInfo.realty.details.loggia}}]
                     div().md-subhead Балкон: #[strong {{oneInfo.realty.details.balcony}}]
                     div().md-subhead Пассажирских лифтов: #[strong {{oneInfo.realty.details.elevator}} ]
