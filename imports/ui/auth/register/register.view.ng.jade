@@ -14,7 +14,7 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
                         label Фамилия
                         input(type='text', aria-label='Фамилия', required='' ng-model='register.credentials.profile.surName')
                 div(layout='row' layout-align='center center')
-                    phone-mask(ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone')
+                    phone-mask(layout='row' flex='75' ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='75')
                         label Email

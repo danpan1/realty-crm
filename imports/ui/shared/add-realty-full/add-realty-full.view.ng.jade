@@ -3,7 +3,6 @@ md-tabs(md-dynamic-height md-border-bottom)
         md-content().ph-32.pv-16
             form(novalidate name="firstForm")
                 div(layout='column')
-
                     div(layout='row')
                         div(flex='70')
                             div(layout='row' layout-align='space-between start')
@@ -27,21 +26,20 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     input(ng-model='addRealtyFull.locations.flat')
                                     span.bottom-label Видите только вы
 
-                    div(layout='row', layout-align="space-between center")
-                        div(flex='45')
-                            div(layout='row')
-                                div(flex='45')
-                                    subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
+                    div(layout='row')
+                        div(flex='70')
+                            subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
 
-                                div(flex='55').ml-32
-                                    div(layout='row' layout-align='start end').mt-32
-                                        md-input-container(flex='30').mv-0.pv-0
-                                            input(ng-model='addRealtyFull.locations.metroTime', placeholder='минут')
-                                        md-input-container(flex).mv-0.ml-32.pb-0
-                                            //label пешком
-                                            md-select(ng-model='addRealtyFull.metroTransport')
-                                                md-option(ng-value='transport.id',
-                                                ng-repeat="transport in addRealtyFull.dictionary.transport") {{transport.name}}
+                    div(layout='row').mv-16
+                        div(flex='45')
+                            div(layout='row' layout-align='start end')
+                                md-input-container(flex).mv-0.pv-0
+                                    input(ng-model='addRealtyFull.locations.metroTime', placeholder='минут')
+                                md-input-container(flex).mv-0.ml-32.pb-0
+                                    md-select(ng-model='addRealtyFull.metroTransport')
+                                        md-option(ng-value='transport.id',
+                                        ng-repeat="transport in addRealtyFull.dictionary.transport") {{transport.name}}
+                                        
                 div(layout='row').mv-32
                     md-button(ng-click='addRealtyFull.activeTab = 1'
                     ng-disabled="firstForm.$invalid").md-primary.md-raised.mh-0 Продолжить
@@ -148,7 +146,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                                 md-input-container(flex).mv-0
                                     label Имя собственника
                                     input(ng-model='addRealtyFull.realty.contacts[0].name', required='')
-                                phone-mask(ng-if='addRealtyFull.realty' label='"Телефон собственника"' phone='addRealtyFull.realty.contacts[0].phones[0].phone')
+                                phone-mask(layout='row' flex ng-if='addRealtyFull.realty' label='"Телефон собственника"' phone='addRealtyFull.realty.contacts[0].phones[0].phone').ml-32
                     div(layout='row')
                         div(flex='45').mv-16
                             div(layout='row' layout-align='space-between start')
