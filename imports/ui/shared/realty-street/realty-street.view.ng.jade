@@ -30,6 +30,6 @@ md-search-text='realtyStreet.searchTextHouse',
 md-selected-item-change='realtyStreet.requestFullData(realtyStreet.house)',
 md-items='item in realtyStreet.querySearchHouse(realtyStreet.searchTextHouse)',
 md-item-text='item.value',
-md-floating-label='Дом и корпус').form-required.ml-32
+md-floating-label='Дом и корпус').form-required
     md-item-template
         span(md-highlight-text='realtyStreet.searchTextHouse') {{item.value}}

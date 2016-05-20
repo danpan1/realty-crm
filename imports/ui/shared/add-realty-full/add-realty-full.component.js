@@ -55,8 +55,8 @@ class AddRealtyFull {
       metroTransport : vm.metroTransport,
       street: vm.locations.street.value,
       streetFiasId: vm.locations.street.data.fias_id,
-      subways : this.locations.subways,
-      subwaysEmbedded : this.locations.embedded.subways,
+      subways : vm.locations.subways,
+      subwaysEmbedded : vm.locations.embedded.subways,
       value: vm.locations.full.unrestricted_value
     };
     console.log(this.realty.address.subwaysEmbedded);

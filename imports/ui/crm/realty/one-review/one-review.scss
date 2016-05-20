@@ -48,9 +48,13 @@ one-review {
         background-color: #525252;
       }
     }
+    
+    & .btn-set-photo-active {
+      display: block !important;
+    }
   }
 
-  .md-success {
+  .md-success.big-button {
     min-width: 400px;
     min-height: 52px;
   }
@@ -75,12 +79,21 @@ one-review {
 }
 
 .little-button{
+  & md-icon{
+    fill: #2196f3;
+  }
+  &[disabled]{
     & md-icon{
-        fill: #2196f3;
+        fill: #BDBDBD;
     }
-    &[disabled]{
-        & md-icon{
-            fill: rgba(33, 150, 243, .4);
-        }
-    }
+  }
+}
+
+.one-review-btn-in-progress {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  color: #106cc8 !important;
+  background-color: none !important;
+  box-shadow: none !important;
 }

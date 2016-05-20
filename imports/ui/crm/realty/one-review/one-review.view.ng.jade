@@ -16,21 +16,22 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
                 div Загружается фото...
                 md-progress-circular(md-mode='indeterminate')
         div(flex='50')
-            h3(ng-if='oneReview.realty.moderator.comment.photo').md-headline Ответ от модератора:
+            h3(ng-if='oneReview.realty.moderator.comment.photo').md-headline Ответ от модератора: 
             p(ng-if='oneReview.realty.moderator.comment.photo').md-body-1 {{oneReview.realty.moderator.comment.photo}}
-            p(ng-if='oneReview.realty.moderator.percent.photo < 60').md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
+            p(ng-if='oneReview.realty.moderator.percent.photo && oneReview.realty.moderator.percent.photo < 60').md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
 
 div(md-whiteframe='2').mv-16
     div(layout='row' layout-wrap)
-        div(flex='33' ng-repeat='image in oneReview.realty.details.images')
+        div(flex='33' ng-repeat='image in oneReview.realty.details.thumbnails')
             md-card
-                md-button(ng-click='oneReview.setMainImage(image)').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
+                md-button(ng-if='image.url == oneReview.realty.image').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
+                md-button(ng-if='image.url != oneReview.realty.image' ng-click='oneReview.setMainImage(image)').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
                 md-button(aria-label ng-click="oneReview.removeImage(image)").btn-remove-photo
                     md-icon(md-svg-icon='svg/icon-close-white.svg')
                 div.one-review-photo(style='background-image:url({{image.url}});')
 
 div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-around start')
+    div(layout='row')
         div(flex='50')
             h3.md-headline.text-uppercase Просмотр {{(oneReview.realty.realtor.isCheckout === undefined || oneReview.realty.realtor.isCheckout === false) ? '0%' : '100%'}}
             div().one-review-btn-group
@@ -40,10 +41,10 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
                 md-button(flex-offset='10'
                 ng-class='{"md-primary": oneReview.realty.realtor.isCheckout === false}'
                 ng-click = 'oneReview.isCheckout(false)').md-raised Не встречались
-        div(flex='50')
-            h3(ng-if='!oneReview.realty.realtor.isCheckout').md-headline Ответ от модератора:
-            p(ng-if='!oneReview.realty.realtor.isCheckout').md-body-1 Без просмотра сложно совершать сделки.
-            p(ng-if='!oneReview.realty.realtor.isCheckout').md-body-1 Посмотрите #[a(href='#') «Как делать эффективный просмотр»]
+        div(flex='50' ng-if="oneReview.realty.realtor.isCheckout === false")
+            h3().md-headline Ответ от модератора:
+            p().md-body-1 Без просмотра сложно совершать сделки.
+            p().md-body-1 Посмотрите #[a(href='#') «Как делать эффективный просмотр»]
 
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
@@ -79,11 +80,11 @@ div(md-whiteframe='2').ph-16
         div(layout='row')
             div(flex='25').md-body-1 GetRent.pro
             div(flex='75' ng-if='oneReview.realty.status === "sale"').md-body-1.one-review-board-green Размещено!
-            div(flex='75' ng-if='oneReview.realty.status !== "sale"').md-body-1.one-review-board-red Подготовьте качественно объект!
-
+            div(flex='75' ng-if='oneReview.realty.status !== "sale" && oneReview.realty.moderator.status === "done"').md-body-1.one-review-board-red Подготовьте качественно объект!
+            div(flex='75' ng-if='oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"').md-body-1 Будет размещено после одобрения модератором
 
 div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-around start')
+    div(layout='row')
         div(flex='50')
             h3.md-headline.text-uppercase Эксклюзив {{(oneReview.realty.realtor.isExclusive === undefined || oneReview.realty.realtor.isExclusive === false) ? '0%' : '100%'}}
             div().one-review-btn-group
@@ -92,14 +93,14 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
                 md-button(flex-offset='10'
                 ng-click = 'oneReview.isExclusive(false)'
                 ng-class='{"md-primary": oneReview.realty.realtor.isExclusive  === false}').md-raised Не эксклюзив
-        div(flex='50' )
-            h3(ng-if='!oneReview.realty.realtor.isExclusive').md-headline Ответ от модератора:
-            p(ng-if='!oneReview.realty.realtor.isExclusive').md-body-1 Пройдите интенсив
-            p(ng-if='!oneReview.realty.realtor.isExclusive').md-body-1 Посмотрите #[a(href='#') «Как умело закрывать на эксклюзив за 10 минут»]
+        div(flex='50' ng-if='oneReview.realty.realtor.isExclusive === false')
+            h3().md-headline Ответ от модератора:
+            p().md-body-1 Пройдите интенсив
+            p().md-body-1 Посмотрите #[a(href='#') «Как умело закрывать на эксклюзив за 10 минут»]
 
 div(layout='column' layout-align='center center')
     md-button(flex='30' ng-click='oneReview.sendToModerator()'
     ng-disabled='!oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000'
-    ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"' ).md-success.md-raised.md-title.mv-16 Отправить на проверку модератору
+    ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"' ).md-success.md-raised.md-title.mv-16.big-button Отправить на проверку модератору
     md-button(flex='30' ng-click='oneReview.sendToModerator()'
-    ng-if='oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"' ng-disabled = 'true').md-success.md-raised.md-title.mv-16 Объект находится на проверке
+    ng-if='oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"' ng-disabled = 'true').one-review-btn-in-progress.md-raised.md-title.mv-16 Объект находится на проверке

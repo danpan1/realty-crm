@@ -1,25 +1,20 @@
+p {{}}
 div(md-whiteframe='2').mt-16.ph-32.pt-32.pb-8
     div(layout='row')
         div(flex)
             md-input-container().md-block
-                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Получатели: начните вводить имя клиента, агента или любой email')
+                input(ng-model='oneEmail.info.emails' placeholder='Получатели: начните вводить имя клиента, агента или любой email')
             md-input-container().md-block
-                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Тема письма')
-div(md-whiteframe='2').one-email-card.ph-32.pv-8
-    div(layout='row')
-        div(flex)
-            h3().md-title Объект №1
+                input(ng-model='oneEmail.info.topic' placeholder='Тема письма')
             md-input-container().md-block
-                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Адрес объекта')
+                input(ng-model='oneEmail.info.addedinfo' placeholder='Дополнительно написать к этому объекту')
             md-input-container().md-block
-                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Сообщение по этому объекту')
+                input(ng-model='oneEmail.info.dealcondition' placeholder='Условия сделки с собственником и клиентом')
             md-input-container().md-block
-                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Условия сделки с собственником и клиентом')
-            md-input-container().md-block
-                input(ng-model='realtyFilter.filter.floorFrom' placeholder='Процент или сумма вознаграждения партнера (не обязательно)')
+                input(ng-model='oneEmail.info.partnerpercent' placeholder='Процент или сумма вознаграждения партнера')
 div(md-whiteframe='2').one-email-card.ph-32.pv-8
     div(layout='column')
         div().mv-8
             md-button(md-no-ink).md-primary.md-body-1.ml-0 Добавить ещё объект
         div().mv-8
-            md-button().md-primary.md-raised.md-body-1.ml-0 Отправить письмо
+            md-button(ng-click="oneEmail.send()").md-primary.md-raised.md-body-1.ml-0 Отправить письмо

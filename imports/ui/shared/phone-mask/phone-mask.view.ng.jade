@@ -1,7 +1,6 @@
-md-input-container(flex ng-class="{ 'has-error' : phoneMask.visualPhone.length > 1 && phoneMask.visualPhone.length < 15}").mv-0.ml-32.hide-count
+md-input-container(flex ng-class="{ 'has-error' : phoneMask.visualPhone.length > 1 && phoneMask.visualPhone.length < 15}").mv-0.hide-count
     label {{phoneMask.label}}
     input(ng-model='phoneMask.visualPhone',
-    placeholder='8 (XXX) XXX XX XX',
     required='',
     maxlength="17",
     ng-focus="phoneMask.filterPhoneFocus()"

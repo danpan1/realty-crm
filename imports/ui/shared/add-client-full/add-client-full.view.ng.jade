@@ -9,12 +9,12 @@ md-tabs(md-dynamic-height)
                                 md-input-container().mv-0.form-required
                                     label Имя клиента
                                     input(ng-model='addClientFull.client.name', required='')
-                                phone-mask(ng-if='addClientFull.client' label='"Телефон"' phone='addClientFull.client.phone')
+                                phone-mask(ng-if='addClientFull.client' label='"Телефон клиента"' phone='addClientFull.client.phone').ml-32
                                 md-input-container(flex-offset='5').mv-0
                                     label Email клиента
                                     input(type="email" ng-model='addClientFull.client.email')
                             div(layout='row')
-                                md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addClientFull.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ addClientFull.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию.
+                                md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addClientFull.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ addClientFull.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
                                 // label(for="comissionloyal")
                             //
                             //    div(layout='row').mv-16 
@@ -51,7 +51,7 @@ md-tabs(md-dynamic-height)
                     //                input(ng-model='addClientFull.client.floorFrom' placeholder='От клиента другого агента')
                                 span(flex-offset='5').md-body-1 (Будет показано только агентам)
 
-    md-tab(label='2) Требования к объекту' md-active='addClientFull.activeTab == 1' ng-disabled="firstForm.$invalid" ng-click="addClientFull.activeTab = 1")
+    md-tab(label='2) Требования к объекту' md-active='addClientFull.activeTab == 1' ng-click="addClientFull.activeTab = 1" ng-disabled='firstForm.$invalid')
         md-content().ph-32.pv-16
             form(name="secondForm")
                 div(layout='column')
@@ -122,19 +122,8 @@ md-tabs(md-dynamic-height)
                                 //    span(ng-if="addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo") Правое число должно быть больше левого
                     div(layout='row')
                         div(flex='70')
-                            //div(layout='row').mv-16
-                            //    district-chips(ng-model='addClientFull.client.need.districts'
-                            //    districts-embeded = 'addClientFull.client.need.embedded.districts')
-                            
-                            //    md-input-container(flex).mv-0
-                            //        input(ng-model='addClientFull.client.need.floorFrom' placeholder='Улица')
-                            //    md-input-container(flex flex-offset='5').mv-0
-                            //        input(ng-model='addClientFull.client.need.floorFrom' placeholder='Дом и корпус')
-                            //    md-input-container(flex flex-offset='5').mv-0
-                            //        input(ng-model='addClientFull.client.need.floorFrom' placeholder='Квартира (видите только вы)')
-
                             subway-chips(ng-model='addClientFull.client.need.subways'
-                            subways-embeded = 'addClientFull.client.need.embedded.subways')
+                            subways-embeded = 'addClientFull.client.need.embedded.subways' flex)
                     div(layout='row').mv-16
                         div(flex='45')
                             div(layout='row' layout-align='space-between start')

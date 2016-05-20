@@ -11,6 +11,7 @@ div(layout='row')
             md-option(ng-value='title' ng-repeat="title in oneReviewDescTitle.descTitle.value" ng-click="oneReviewDescTitle.setDescTitle(title, $index)") {{title}}
 md-input-container(flex='60' flex-offset='10').md-block
     input(ng-maxlength="65"
+    maxlength="65"
     ng-keydown="oneReviewDescTitle.controlKeyPress(this.oneReviewDescTitle.inputTitleDesc)"
     ng-model="oneReviewDescTitle.inputTitleDesc"
     placeholder='или напишите сами продающий заголовок, который тебя цепляет')

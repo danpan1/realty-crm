@@ -48,3 +48,9 @@ add-realty-full {
     display: none;
   }
 }
+
+.addRealtyFull-street {
+  md-autocomplete:last-child {
+    margin-left: 32px;
+  }
+}
