@@ -45,12 +45,12 @@ div(ng-if="oneInfoEdit.show")
                             md-input-container().md-block.mv-32
                                 label Площадь кухни:
                                 input(ng-model="oneInfoEdit.realty.details.kitchenSquare")
-                            div(layout="column")
-                                div(flex)
-                                    label Площадь комнат:
-                                div(flex)
-                                    md-input-container(ng-repeat="i in [0,1,2,3]" flex="25")
-                                        input(ng-model="oneInfoEdit.realty.details.roomsSquare[i]")
+                            //div(layout="column")
+                            //    div(flex)
+                            //        label Площадь комнат:
+                            //    div(flex)
+                            //        md-input-container(ng-repeat="i in [0,1,2,3]" flex="25")
+                            //            input(ng-model="oneInfoEdit.realty.details.roomsSquare[i]")
                             div(layout='row')
                                 md-input-container(flex='50').md-block.mv-32
                                     label Лоджия:

@@ -23,8 +23,9 @@ function sendTest (info, realty) {
   let renovation = dictionary.renovation[realty.details.renovation].name;
   let windows = dictionary.windowView[realty.details.windowView].name;
   let subways = realty.address.subwaysEmbedded != undefined ? realty.address.subwaysEmbedded[0].name : false;
+  let subwayStation = subways ? `м.`+subways+realty.address.metroTime+` мин. `+transport +`, `: '';
   let email = realty.contacts[0].email ? `<a href="mailto:`+realty.contacts[0].email+`" target="_blank">`+realty.contacts[0].email+`</a>` : '';
-  let metro;
+  let metro = ``;
   if(subways && realty.address.metroTime && transport) metro = `Метро: ${subways} ${realty.address.metroTime} мин. ${transport}<br>`
   // Площадь комнат: 100, 20, 40, 50, 60, 22
   //Апартаменты, Пентхаус<br>
@@ -55,7 +56,7 @@ function sendTest (info, realty) {
                 <tbody>
                     <tr>
                         <td>
-                            <p style="font-size:20px;">${realty.title}</p>
+                            <p style="font-size:20px;">${realty.roomcount}-комнатная, ${subwayStation} ${price} руб.</p>
                             <p>${info.addedinfo}</p>
                             ${mainImage}
                             ${images}

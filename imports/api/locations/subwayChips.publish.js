@@ -6,6 +6,8 @@ import {Locations} from './locations.model';
 if (Meteor.isServer) {
 
   Meteor.publish('subwayChips', function (options, searchString, selectedItems) {
+      
+    console.log(selectedItems)
 
     let selector = {
       type: 'subway'

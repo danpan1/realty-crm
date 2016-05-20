@@ -44,6 +44,8 @@ class Moderator {
     this.setPercents();
     if (approved) {
       this.realty.status = 'sale';
+    }else{
+      this.realty.status = 'taken';
     }
     Meteor.call('moderatorSave', this.realty, (error)=> {
       if (error) {

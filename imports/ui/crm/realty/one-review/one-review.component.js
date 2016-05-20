@@ -122,6 +122,7 @@ class OneReview {
           console.log(result);
           result.originalName = result.file.original_name;
           this.realty.details.thumbnails.push(result);
+          if(!this.realty.image) this.realty.image = this.realty.details.thumbnails[0].url;
           this.saveNewDescription();
         }, 0);
         // console.log('uploaded images', this.realty.details.images);
