@@ -48,9 +48,13 @@ one-review {
         background-color: #525252;
       }
     }
+    
+    & .btn-set-photo-active {
+      display: block !important;
+    }
   }
 
-  .md-success {
+  .md-success.big-button {
     min-width: 400px;
     min-height: 52px;
   }

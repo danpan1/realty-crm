@@ -20,7 +20,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
 
 div(md-whiteframe='2').mv-16
     div(layout='row' layout-wrap layout-align='space-between')
-        div(flex="33" ng-repeat="photo in moderator.realty.details.thumbnails")
+        div(flex="33" ng-repeat="photo in moderator.realty.details.images")
             md-card
                 md-button(ng-if='photo.url != moderator.realty.image' ng-click='moderator.setMainImage(photo)').md-primary.md-raised.btn-set-photo Сделать главным фото
                 md-button(ng-if='photo.url == moderator.realty.image').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото

@@ -46,10 +46,11 @@ div(md-whiteframe='2').mv-16.client-card
             md-divider
             div(flex='55' layout="row").one-demonstrations-center-cell.ph-16
                 div(flex='45' layout-fill).ph-16
-                    p(ng-repeat="subway in clientCard.client.need.embedded.subways")
-                        span(class="metro-color-{{clientCard.client.need.embedded.subways[$index].line}}").metro-color
-                        span() {{subway.name}}, 
-                        span(ng-if="clientCard.client.need.metroTime != undefined && clientCard.client.need.metroTime > 0") {{clientCard.client.need.metroTime}} минут {{clientCard.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
+                    p
+                        p(ng-repeat="subway in clientCard.client.need.embedded.subways").mv-0
+                            span(class="metro-color-{{clientCard.client.need.embedded.subways[$index].line}}").metro-color
+                            span() {{subway.name}}, 
+                            span(ng-if="clientCard.client.need.metroTime != undefined && clientCard.client.need.metroTime > 0 && $index == clientCard.client.need.embedded.subways.length-1") {{clientCard.client.need.metroTime}} минут {{clientCard.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
                     p
                         span(ng-repeat="district in clientCard.client.need.embedded.districts") р-н {{district}}
                 md-divider
@@ -62,13 +63,23 @@ div(md-whiteframe='2').mv-16.client-card
             div(flex='20').ph-16.pv-8
                 div(layout='row', layout-wrap, layout-align='start start')
                     div(flex="25" ng-repeat="condition in clientCard.client.need.conditions").clientCard-conditions
-                        md-icon(ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').cliendCard-condition-icons
-                        md-icon(ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture').cliendCard-condition-icons
-                        md-icon(ng-if="condition == 'tv'" md-svg-icon='conditions_tv').cliendCard-condition-icons
-                        md-icon(ng-if="condition == 'refrigerator'" md-svg-icon='conditions_refrigerator').cliendCard-condition-icons
-                        md-icon(ng-if="condition == 'washer'" md-svg-icon='conditions_washer').cliendCard-condition-icons
-                        md-icon(ng-if="condition == 'phone'" md-svg-icon='conditions_phone').cliendCard-condition-icons
-                        md-icon(ng-if="condition == 'animal'" md-svg-icon='conditions_animal').cliendCard-condition-icons
-                        md-icon(ng-if="condition == 'elevator'" md-svg-icon='conditions_elevator').cliendCard-condition-icons.icon-rotate-90
-                        md-icon(ng-if="condition == 'children'" md-svg-icon='conditions_children').cliendCard-condition-icons
-                        md-icon(ng-if="condition == 'wifi'" md-svg-icon='conditions_wifi').cliendCard-condition-icons
+                        md-icon(alt='Мебель' ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').client-card__md-icon 
+                        span(ng-if="condition == 'furniture'") Мебель
+                        md-icon(alt='Кухонный гарнитур' ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture').client-card__md-icon 
+                        span(ng-if="condition == 'kitchen_furniture'") Кухонный гарнитур
+                        md-icon(alt='Телевизор' ng-if="condition == 'tv'" md-svg-icon='conditions_tv').client-card__md-icon 
+                        span(ng-if="condition == 'tv'") Телевизор
+                        md-icon(alt='Холодильник' ng-if="condition == 'refrigerator'" md-svg-icon='conditions_refrigerator').client-card__md-icon 
+                        span(ng-if="condition == 'refrigerator'") Холодильник
+                        md-icon(alt='Стиральная машина' ng-if="condition == 'washer'" md-svg-icon='conditions_washer').client-card__md-icon 
+                        span(ng-if="condition == 'washer'") Стиральная машина
+                        md-icon(alt='Стационарный телефон' ng-if="condition == 'phone'" md-svg-icon='conditions_phone').client-card__md-icon 
+                        span(ng-if="condition == 'phone'") Стационарный телефон
+                        md-icon(alt='С животными' ng-if="condition == 'animal'" md-svg-icon='conditions_animal').client-card__md-icon 
+                        span(ng-if="condition == 'animal'") С животными
+                        md-icon(alt='Лифт' ng-if="condition == 'elevator'" md-svg-icon='conditions_elevator').icon-rotate-90.client-card__md-icon 
+                        span(ng-if="condition == 'elevator'") Лифт
+                        md-icon(alt='С детьми' ng-if="condition == 'children'" md-svg-icon='conditions_children').client-card__md-icon 
+                        span(ng-if="condition == 'children'") С детьми
+                        md-icon(alt='Wi-Fi' ng-if="condition == 'wifi'" md-svg-icon='conditions_wifi').client-card__md-icon 
+                        span(ng-if="condition == 'wifi'") Wi-Fi

@@ -12,9 +12,9 @@ class SubwayChips {
     $reactive(this).attach($scope);
     const vm = this;
     vm.subwaysInForm = [];
-    vm.alreadyPicked = this.subwaysIdList || [];
+    this.alreadyPicked = this.subwaysIdList || [];
     vm.subscribe('subwayChips', ()=> {
-      return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), vm.alreadyPicked];
+      return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), this.alreadyPicked];
     }, {
       onReady: function () {
         if (!vm.loaded) {
@@ -51,6 +51,8 @@ class SubwayChips {
       // this.subwaysSuggestionList = [];
       this.query = criteria;
     }
+    this.alreadyPicked = this.subwaysIdList;
+    
   }
 
 }

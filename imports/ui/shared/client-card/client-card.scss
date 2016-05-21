@@ -45,6 +45,22 @@
     .clientCard-col-1 {
         max-width: 25rem !important;
     }
+    
+    &__md-icon{
+        & + span{
+            display:none;
+            position: absolute;
+            padding: 5px 10px;
+            border: 1px solid #898989;
+            z-index: 10;
+            background: #fff;
+        }
+        &:hover{
+            & + span{
+                display: block;
+            }
+        }
+    }
 }
 .icon-rotate-90{
     transform: rotate(90deg);
