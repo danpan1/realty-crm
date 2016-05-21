@@ -1,13 +1,13 @@
 // p(ng-click="oneReviewDescTitle.setSomeTitle()") Set Title
 div(layout='row')
     div(ng-init="oneReviewDescTitle.onInit()" layout="row" flex='10')
-        md-button(ng-click="oneReviewDescTitle.prevDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber == 0 || !oneReviewDescTitle.descTitleNumber" md-no-ink).little-button.md-icon-button.mr-0
+        md-button(ng-click="oneReviewDescTitle.prevDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber == 0 || !oneReviewDescTitle.descTitleNumber" aria-label='Выбрать предыдущий заголовок' md-no-ink).little-button.md-icon-button.mr-0
             md-icon(md-svg-icon='skip_prev')
-        md-button(ng-click="oneReviewDescTitle.nextDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber + 1 >= oneReviewDescTitle.descTitle.value.length" md-no-ink).little-button.md-icon-button.ml-0
+        md-button(ng-click="oneReviewDescTitle.nextDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber + 1 >= oneReviewDescTitle.descTitle.value.length" aria-label='Выбрать следующий заголовок' md-no-ink).little-button.md-icon-button.ml-0
             md-icon(md-svg-icon='skip_next')
     md-input-container(flex='60')
         label Продающий заголовок
-        md-select(ng-model="oneReviewDescTitle.descTitle.value[oneReviewDescTitle.descTitleNumber]" placeholder='Выберите готовый заголовок, который цепляет')
+        md-select(ng-model="oneReviewDescTitle.descTitle.value[oneReviewDescTitle.descTitleNumber]" placeholder='Выберите готовый заголовок, который цепляет' aria-label='Выберите готовый заголовок')
             md-option(ng-value='title' ng-repeat="title in oneReviewDescTitle.descTitle.value" ng-click="oneReviewDescTitle.setDescTitle(title, $index)") {{title}}
 md-input-container(flex='60' flex-offset='10').md-block
     input(ng-maxlength="65"
