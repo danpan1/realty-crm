@@ -101,6 +101,12 @@
   }
 }
 
+.md-select-multi-single {
+  .md-container {
+    display: none !important;
+  }
+}
+
 .bottom-label {
   margin-left: 7px;
   font-size: 11px;
