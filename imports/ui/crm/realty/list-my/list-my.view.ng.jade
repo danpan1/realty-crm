@@ -23,15 +23,15 @@
         md-divider
 
         div(layout='column' layout-align='center center' ui-sref="crm.realty.one.review({realtyId: '{{::realty._id}}'})").listMy_Progress.p-8
-            div().md-title.btn-orange.mv-8 {{::realty.moderator.percent.total || 0}}% / 100%
+            div().md-title.color-orange.mv-8 {{::realty.moderator.percent.total || 0}}% / 100%
             md-button().btn-orange.mv-8 {{(realty.moderator.percent.total !== 100) ? 'Срочно улучшить' : 'Максимально подготовлен'}}
         md-divider
 
         div(layout='column' layout-align='center center').listMy_Advertisement.p-8
-            div(ng-if='realty.status === "sale"').md-title.btn-orange.mv-8 100% / 100%
-            div(ng-if='realty.status !== "sale"').md-title.btn-orange.mv-8 0% / 100%
-            div(ng-if='realty.status === "sale"').btn-orange.mv-8 Размещено
-            div(ng-if='realty.status !== "sale"').btn-orange.mv-8 Не размещено
+            div(ng-if='realty.status === "sale"').md-title.color-orange.mv-8 100% / 100%
+            div(ng-if='realty.status !== "sale"').md-title.color-orange.mv-8 0% / 100%
+            div(ng-if='realty.status === "sale"').color-orange.mv-8 Размещено
+            div(ng-if='realty.status !== "sale"').color-orange.mv-8 Не размещено
         md-divider
 
         div(layout='column' layout-align='center center').listMy_Actions.pv-8.pl-16.pr-32
