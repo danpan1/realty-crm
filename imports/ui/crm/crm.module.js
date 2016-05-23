@@ -14,6 +14,7 @@ import {name as phoneFilter} from '../../filters/phone.filter.js';
 import {name as Realty}from './realty/realty.component';
 import {name as clients}from './clients/clients.component';
 import {name as layout} from '/imports/ui/layout/layout.component';
+import {name as documents} from '/imports/ui/crm/documents/documents.component';
 
 const moduleName = 'app.crm';
 // create a module
@@ -22,6 +23,7 @@ export default angular.module(moduleName, [
   layout,
   //ngMenuLink,
   //ngMenuToggle,
+  documents,
   ngPhoneFilter,
   ngPriceFilter,
   priceFilter,
