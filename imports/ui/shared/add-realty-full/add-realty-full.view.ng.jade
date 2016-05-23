@@ -105,9 +105,9 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     md-select(required ng-model='addRealtyFull.realty.details.renovation')
                                         md-option(ng-value='renovation.id',
                                         ng-repeat="renovation in addRealtyFull.dictionary.renovation ") {{renovation.name}}
-                                md-input-container(flex).mv-0.ml-32
+                                md-input-container(flex).mv-0.ml-32.form-required
                                     label Тип дома
-                                    md-select( ng-model='addRealtyFull.realty.details.materials')
+                                    md-select(required ng-model='addRealtyFull.realty.details.materials')
                                         md-option(ng-value='materials.id',
                                         ng-repeat="materials in addRealtyFull.dictionary.materials ") {{materials.name}}
 

@@ -23,10 +23,10 @@ function sendTest (info, realty) {
   let renovation = dictionary.renovation[realty.details.renovation].name;
   let windows = dictionary.windowView[realty.details.windowView].name;
   let subways = realty.address.subwaysEmbedded != undefined ? realty.address.subwaysEmbedded[0].name : false;
-  let subwayStation = subways ? `м.`+subways+realty.address.metroTime+` мин. `+transport +`, `: '';
+  let subwayStation = subways ? `м.`+subways+', '+realty.address.metroTime+` мин. `+transport +`, `: '';
   let email = realty.contacts[0].email ? `<a href="mailto:`+realty.contacts[0].email+`" target="_blank">`+realty.contacts[0].email+`</a>` : '';
   let metro = ``;
-  if(subways && realty.address.metroTime && transport) metro = `Метро: ${subways} ${realty.address.metroTime} мин. ${transport}<br>`
+  if(subways && realty.address.metroTime && transport) metro = `<b>Метро:</b> ${subways} ${realty.address.metroTime} мин. ${transport}<br>`
   // Площадь комнат: 100, 20, 40, 50, 60, 22
   //Апартаменты, Пентхаус<br>
   
@@ -72,24 +72,24 @@ function sendTest (info, realty) {
                     <tr>
                         <td valign="top" style="padding-right:15px;">
                             <b>Район:</b> ${realty.address.areaName}<br>
-                            Улица: ${realty.address.street} ${realty.address.house} к.${realty.address.flat}<br>
+                            <b>Улица:</b> ${realty.address.street} ${realty.address.house} к.${realty.address.flat}<br>
                             ${metro}
-                            Тип здания: ${materials}<br>
-                            Комнат: ${realty.roomcount}-комнатная<br>
-                            Ремонта: ${renovation}<br>
-                            Этаж: ${realty.details.livingSquare} из ${realty.details.livingSquare}<br>
-                            Окна: ${windows}<br>
-                            Цена: ${price}<br>
-                            Комиссия: ${realty.realtor.clientpercent}%
+                            <b>Тип здания:</b> ${materials}<br>
+                            <b>Комнат:</b> ${realty.roomcount}-комнатная<br>
+                            <b>Ремонта:</b> ${renovation}<br>
+                            <b>Этаж:</b> ${realty.details.livingSquare} из ${realty.details.livingSquare}<br>
+                            <b>Окна:</b> ${windows}<br>
+                            <b>Цена:</b> ${price}<br>
+                            <b>Комиссия:</b> ${realty.realtor.clientpercent}%
                         </td>
                         <td valign="top" style="padding-left:60px;">
-                            Общая площадь: ${realty.square} м²<br>
-                            Жилая площадь: ${realty.details.livingSquare} м²<br>
-                            Площадь кухни: ${realty.details.kitchenSquare} м²<br>
-                            Лоджия: ${realty.details.loggia}<br>
-                            Балкон: ${realty.details.balcony}<br>
-                            Пассажирских лифтов: ${realty.details.elevator}<br>
-                            Грузовых лифтов: ${realty.details.elevatorBig}
+                            <b>Общая площадь:</b> ${realty.square} м²<br>
+                            <b>Жилая площадь:</b> ${realty.details.livingSquare} м²<br>
+                            <b>Площадь кухни:</b> ${realty.details.kitchenSquare} м²<br>
+                            <b>Лоджия:</b> ${realty.details.loggia}<br>
+                            <b>Балкон:</b> ${realty.details.balcony}<br>
+                            <b>Пассажирских лифтов:</b> ${realty.details.elevator}<br>
+                            <b>Грузовых лифтов:</b> ${realty.details.elevatorBig}
                         </td>
                     </tr>
                 </tbody>
