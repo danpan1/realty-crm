@@ -11,7 +11,7 @@ if (Meteor.isServer) {
   Meteor.publish('listMy', function (options, details, id) {
 
       let selector;
-      // console.log('listMy');
+      
       if (this.userId) {
 
         selector = {

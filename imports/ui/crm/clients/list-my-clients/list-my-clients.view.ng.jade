@@ -6,4 +6,17 @@ md-tabs(md-dynamic-height md-selected="listMyClients.selectedTab")
     //md-tab(ui-sref="crm.clients.list.my({status: \'\'})") Скрыть фильтр
     
 div 
-    client-card(ng-repeat='client in listMyClients.clients' client='client')
+        //ng-repeat='client in listMyClients.clients' 
+    client-card(
+        dir-paginate="client in listMyClients.clients | itemsPerPage: listMyClients.perPage" 
+        total-items="listMyClients.clientsCount"
+        client='client')
+    
+div(layout="row" layout-align="center start")
+    md-button(ng-click="listMyClients.goToPage(1)" ng-if='listMyClients.page != 1').md-raised first            
+    md-button(ng-click="listMyClients.goToPage(listMyClients.page - 2)" ng-if='listMyClients.page - 2 >= 1').md-raised {{listMyClients.page - 2}}            
+    md-button(ng-click="listMyClients.goToPage(listMyClients.page - 1)" ng-if='listMyClients.page - 1 >= 1').md-raised {{listMyClients.page - 1}}            
+    md-button().md-raised.md-primary {{listMyClients.page}}            
+    md-button(ng-click="listMyClients.goToPage(listMyClients.page + 1)" ng-if='listMyClients.page + 1 <= listMyClients.pagesCount').md-raised {{listMyClients.page + 1}}           
+    md-button(ng-click="listMyClients.goToPage(listMyClients.page + 2)" ng-if='listMyClients.page + 2 <= listMyClients.pagesCount').md-raised {{listMyClients.page + 2}}            
+    md-button(ng-click="listMyClients.goToPage(listMyClients.pagesCount)" ng-if='listMyClients.page != listMyClients.pagesCount').md-raised last 

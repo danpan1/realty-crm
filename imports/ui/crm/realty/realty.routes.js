@@ -44,8 +44,9 @@ export default function routes($stateProvider) {
       template: '<new-list/>'
     })
     .state('crm.realty.list.my', {
-      url: '/my',
-      template: '<list-my/>'
+      url: '/my?:page',
+      template: '<list-my/>',
+      controller: function ($state, $stateParams) {}
     })
     .state('crm.realty.list.archive', {
       url: '/archive',

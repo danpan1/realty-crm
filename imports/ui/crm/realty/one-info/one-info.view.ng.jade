@@ -53,8 +53,8 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Собственник #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
                     div().md-subhead Срок: #[strong {{oneInfo.realty.type == 3 ? 'посуточно' : 'длительный срок'}}]
                     div().md-subhead Цена: #[strong {{oneInfo.realty.price | price}}]
-                    div().md-subhead От клиента: #[strong {{oneInfo.realty.clientpercent || 0}}]%
-                    div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.partnerpercent || 0}}]%
+                    div().md-subhead От клиента: #[strong {{oneInfo.realty.realtor.clientpercent || 0}}]%
+                    div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
         div(md-whiteframe='2' flex='20').mh-16 {{oneInfo.currentConditions[$index].presence}}
             md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
             aria-label='Switch 2'

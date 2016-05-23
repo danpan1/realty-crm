@@ -7,7 +7,11 @@
         div().listMy_col Подробнее
 
 .md-body-1(layout='column', layout-align='space-around stretch')
-    .listMy(layout='row', md-whiteframe='2',ng-repeat='realty in listMy.realty').md-whiteframe-2dp.mv-8
+            //ng-repeat='realty in listMy.realty',
+    .listMy(layout='row', 
+            md-whiteframe='2',
+            dir-paginate="realty in listMy.realty | itemsPerPage: listMy.perPage" 
+            total-items="listMy.realtyCount").md-whiteframe-2dp.mv-8
         div(layout='column' layout-align='center center' ui-sref="crm.realty.one.review({realtyId: '{{::realty._id}}'})").listMy_Photo
             div(layout='column', layout-align='space-between')
                 div(layout='row' layout-align='center center').apartment-pic
@@ -36,3 +40,14 @@
 
         div(layout='column' layout-align='center center').listMy_Actions.pv-8.pl-16.pr-32
             md-button(md-no-ink='' ui-sref="crm.realty.one.info({realtyId: '{{::realty._id}}'})").md-primary Инфо об объекте
+
+div(layout="row" layout-align="center start")
+    md-button(ng-click="listMy.goToPage(1)" ng-if='listMy.page != 1').md-raised first            
+    md-button(ng-click="listMy.goToPage(listMy.page - 2)" ng-if='listMy.page - 2 >= 1').md-raised {{listMy.page - 2}}            
+    md-button(ng-click="listMy.goToPage(listMy.page - 1)" ng-if='listMy.page - 1 >= 1').md-raised {{listMy.page - 1}}            
+    md-button().md-raised.md-primary {{listMy.page}}            
+    md-button(ng-click="listMy.goToPage(listMy.page + 1)" ng-if='listMy.page + 1 <= listMy.pagesCount').md-raised {{listMy.page + 1}}           
+    md-button(ng-click="listMy.goToPage(listMy.page + 2)" ng-if='listMy.page + 2 <= listMy.pagesCount').md-raised {{listMy.page + 2}}            
+    md-button(ng-click="listMy.goToPage(listMy.pagesCount)" ng-if='listMy.page != listMy.pagesCount').md-raised last      
+        //dir-pagination-controls(on-page-change="listMy.pageChanged(newPageNumber)")
+
