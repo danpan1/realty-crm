@@ -44,6 +44,10 @@ md-sidenav{
   }
 }
 
+div[md-whiteframe] {
+  background-color: $white;
+}
+
 #select_container_4 {
   left: 0 !important;
   min-width: 192px !important;
