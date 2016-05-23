@@ -15,12 +15,6 @@ md-tabs(md-dynamic-height)
                                     input(type="email" ng-model='addClientFull.client.email')
                             div(layout='row')
                                 md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addClientFull.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ addClientFull.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
-                                // label(for="comissionloyal")
-                            //
-                            //    div(layout='row').mv-16 
-                            //        md-input-container(flex='60').mv-0
-                            //        input(ng-model='addClientFull.client.comission'
-                            //        placeholder='Сумма до которой он готов платить комиссию')
                             div(layout="row")
                                 div(layout='row' layout-align='start center').mv-16
                                     div()
@@ -35,10 +29,10 @@ md-tabs(md-dynamic-height)
                             div(layout='row').mv-16
                                 md-input-container().mv-0.form-required
                                     label Состав съемщиков
-                                    md-select(required ng-model='addClientFull.client.composition')
+                                    md-select(required ng-model='addClientFull.client.composition' aria-label='Выбрать состав съемщиков')
                                         md-option(ng-value='composition.id',
                                         ng-repeat="composition in addClientFull.dictionary.composition ") {{composition.name}}
-                            div(layout='row').mv-16
+                            div(layout='row').mv-32
                                 md-input-container(flex='90').mv-0.form-required
                                     label Напишите, что важно клиенту (ваша заметка)
                                     textarea(required ng-model='addClientFull.client.realtorNote', md-maxlength='300', rows='5', md-select-on-focus='' )
@@ -51,7 +45,7 @@ md-tabs(md-dynamic-height)
                     //                input(ng-model='addClientFull.client.floorFrom' placeholder='От клиента другого агента')
                                 span(flex-offset='5').md-body-1 (Будет показано только агентам)
 
-    md-tab(label='2) Требования к объекту' md-active='addClientFull.activeTab == 1' ng-click="addClientFull.activeTab = 1" ng-disabled='firstForm.$invalid')
+    md-tab(label='2) Требования к объекту' md-active='addClientFull.activeTab == 1' ng-click="addClientFull.activeTab = 1")
         md-content().ph-32.pv-16
             form(name="secondForm")
                 div(layout='column')
@@ -83,43 +77,42 @@ md-tabs(md-dynamic-height)
                         div(flex='70')
                             div(layout='row' layout-align='space-between start')
                                 md-input-container(flex)
-                                    md-select(required ng-model='addClientFull.fake')
+                                    md-select(required ng-model='addClientFull.fake' aria-label='Выбрать тип сделки')
                                         md-option(ng-value='true') Аренда
                                 md-input-container(flex).ml-32
-                                    md-select(required ng-model='addClientFull.fake')
+                                    md-select(required ng-model='addClientFull.fake' aria-label='Выбрать вид жилья')
                                         md-option(ng-value='true') Квартиры
                                 md-input-container(flex).ml-32
-                                    md-select(required ng-model='addClientFull.fake')
+                                    md-select(required ng-model='addClientFull.fake' aria-label='Выбрать город')
                                         md-option(ng-value='true') Москва
 
-                    div(layout='row')
+                    div(layout='row').mv-16
                         div(flex='70')
-                            div(layout='column').mv-16
-                                div(layout='row' layout-align='space-between start')
-                                    md-input-container(flex='25').md-block.form-required.mv-0
-                                        label Цена
-                                        input(
-                                            required,
-                                            ng-model='addClientFull.client.need.price',
-                                            ng-price-filter,
-                                            ng-keypress="addClientFull.client.need.price = ' '+this.addClientFull.client.need.price"
-                                        )  
-                                    //ng-pattern='/^[0-9]{1,}$/'
-                                    md-input-container(flex).mv-0.form-required.ml-32
-                                        label Количество комнат
-                                        md-select(required ng-model='addClientFull.client.need.roomcount', multiple='true')
-                                            md-option(ng-value='roomcount.id',
-                                            ng-repeat="roomcount in addClientFull.dictionary.roomcountBig") {{roomcount.name}}  
-                                    md-input-container(flex).mv-0.form-required.ml-32
-                                        label Ремонт
-                                        md-select(required ng-model='addClientFull.client.need.renovation', multiple='true')
-                                            md-option(ng-value='renovation.id',
-                                            ng-repeat="renovation in addClientFull.dictionary.renovation") {{renovation.name}}
-                                    // md-input-container(flex='25' flex-offset='10').md-block.form-required
-                                    //     label цена до
-                                    //     input(required ng-pattern='/^[0-9]{1,}$/' ng-model='addClientFull.client.need.priceTo')
-                                //div()
-                                //    span(ng-if="addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo") Правое число должно быть больше левого
+                            div(layout='row' layout-align='space-between start')
+                                md-input-container(flex).form-required.mv-0
+                                    label Цена
+                                    input(
+                                        required,
+                                        ng-model='addClientFull.client.need.price',
+                                        ng-price-filter,
+                                        ng-keypress="addClientFull.client.need.price = ' '+this.addClientFull.client.need.price"
+                                    )  
+                                //ng-pattern='/^[0-9]{1,}$/'
+                                md-input-container(flex).mv-0.form-required.ml-32
+                                    label Количество комнат
+                                    md-select(required ng-model='addClientFull.client.need.roomcount', multiple='true' aria-label='Выбрать количество комнат').md-select-multi-single
+                                        md-option(ng-value='roomcount.id',
+                                        ng-repeat="roomcount in addClientFull.dictionary.roomcountBig") {{roomcount.name}}  
+                                md-input-container(flex).mv-0.form-required.ml-32
+                                    label Ремонт
+                                    md-select(required ng-model='addClientFull.client.need.renovation', multiple='true' aria-label='Выбрать тип ремонта')
+                                        md-option(ng-value='renovation.id',
+                                        ng-repeat="renovation in addClientFull.dictionary.renovation") {{renovation.name}}
+                                // md-input-container(flex='25' flex-offset='10').md-block.form-required
+                                //     label цена до
+                                //     input(required ng-pattern='/^[0-9]{1,}$/' ng-model='addClientFull.client.need.priceTo')
+                            //div()
+                            //    span(ng-if="addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo") Правое число должно быть больше левого
                     div(layout='row')
                         div(flex='70')
                             subway-chips(ng-model='addClientFull.client.need.subways'
@@ -130,7 +123,7 @@ md-tabs(md-dynamic-height)
                                 md-input-container(flex).mv-0.pv-0
                                     input(ng-model='addClientFull.client.need.metroTime', placeholder='минут')
                                 md-input-container(flex).mv-0.ml-32.pb-0
-                                    md-select(ng-model='addClientFull.client.need.metroTransport' )
+                                    md-select(ng-model='addClientFull.client.need.metroTransport' aria-label='До метро')
                                         md-option(ng-value='transport.id',
                                         ng-repeat="transport in addClientFull.dictionary.transport") {{transport.name}}
                                 
@@ -221,8 +214,8 @@ md-tabs(md-dynamic-height)
                                 realty-conditions(ng-model='addClientFull.client.need.conditions' checkbox="true")
 
 div(layout='row').mv-16.mh-32
-    md-button(ng-click="addClientFull.activeTab = 1" ng-disabled="firstForm.$invalid" ng-if="addClientFull.activeTab == 0").md-primary.md-raised Продолжить
-    md-button(ng-if="addClientFull.activeTab == 1" ng-disabled="secondForm.$invalid || addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo"  ng-click='addClientFull.submit(true)').md-success.md-raised Добавить клиента!
-    md-button(md-no-ink ng-if="addClientFull.activeTab == 1" ng-click="addClientFull.activeTab = 0" flex-offset='10').md-primary.md-body-1 Вернуться на шаг назад
+    md-button(ng-click="addClientFull.activeTab = 1" ng-disabled="firstForm.$invalid" ng-if="addClientFull.activeTab == 0" aria-label='Продолжить').md-primary.md-raised Продолжить
+    md-button(ng-if="addClientFull.activeTab == 1" ng-disabled="secondForm.$invalid || addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo"  ng-click='addClientFull.submit(true)' aria-label='Добавить клиента').md-success.md-raised Добавить клиента!
+    md-button(md-no-ink ng-if="addClientFull.activeTab == 1" ng-click="addClientFull.activeTab = 0" flex-offset='10' aria-label='Вернуться на шаг назад').md-primary.md-body-1 Вернуться на шаг назад
 
 

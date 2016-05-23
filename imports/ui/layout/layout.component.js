@@ -24,7 +24,7 @@ class Layout {
       // {name:'Дела', uisref:'realty'},
       // {name:'Отчет', uisref:'realty'},
       // {name:'Собщения', uisref:'realty'},
-      // {name:'Документы', uisref:'realty'},
+      {name:'Документы', uisref:'crm.documents'},
       // {name:'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},

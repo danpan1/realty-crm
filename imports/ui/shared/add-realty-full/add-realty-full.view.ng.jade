@@ -7,13 +7,13 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='70')
                             div(layout='row' layout-align='space-between start')
                                 md-input-container(flex)
-                                    md-select(ng-model='addRealtyFull.fake')
+                                    md-select(ng-model='addRealtyFull.fake' aria-label='Выбрать тип сделки')
                                         md-option(ng-value='true') Аренда
                                 md-input-container(flex).ml-32
-                                    md-select(ng-model='addRealtyFull.fake')
+                                    md-select(ng-model='addRealtyFull.fake' aria-label='Выбрать вид жилья')
                                         md-option(ng-value='true') Квартиры
                                 md-input-container(flex).ml-32
-                                    md-select(ng-model='addRealtyFull.fake')
+                                    md-select(ng-model='addRealtyFull.fake' aria-label='Выбрать город')
                                         md-option(ng-value='true') Москва
 
                     div(layout='row').mt-16
@@ -36,7 +36,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                                 md-input-container(flex).mv-0.pv-0
                                     input(ng-model='addRealtyFull.locations.metroTime', placeholder='минут')
                                 md-input-container(flex).mv-0.ml-32.pb-0
-                                    md-select(ng-model='addRealtyFull.metroTransport')
+                                    md-select(ng-model='addRealtyFull.metroTransport' aria-label='До метро')
                                         md-option(ng-value='transport.id',
                                         ng-repeat="transport in addRealtyFull.dictionary.transport") {{transport.name}}
                                         
