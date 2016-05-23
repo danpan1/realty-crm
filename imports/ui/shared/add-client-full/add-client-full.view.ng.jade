@@ -45,7 +45,7 @@ md-tabs(md-dynamic-height)
                     //                input(ng-model='addClientFull.client.floorFrom' placeholder='От клиента другого агента')
                                 span(flex-offset='5').md-body-1 (Будет показано только агентам)
 
-    md-tab(label='2) Требования к объекту' md-active='addClientFull.activeTab == 1' ng-click="addClientFull.activeTab = 1")
+    md-tab(label='2) Требования к объекту' md-active='addClientFull.activeTab == 1' ng-click="addClientFull.activeTab = 1" ng-disabled='firstForm.$invalid')
         md-content().ph-32.pv-16
             form(name="secondForm")
                 div(layout='column')
