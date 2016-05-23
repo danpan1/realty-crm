@@ -17,7 +17,7 @@ add-client-full {
 
 .add-client-full-small-select {
   .md-select-value {
-  min-width: 50px;
+    min-width: 50px;
   }
 }
 
@@ -26,21 +26,21 @@ md-input-container .md-errors-spacer {
 }
 
 .has-error{
-    & label{
-        color: red !important;
-    }
-    & input{
-        border-bottom: 1px solid red;
-    }
-    & span{
-        color: red !important;
-        margin-top: -40px;
-        position: absolute;
-    }
+  & label{
+    color: red !important;
+  }
+  & input{
+    border-bottom: 1px solid red;
+  }
+  & span{
+    color: red !important;
+    margin-top: -40px;
+    position: absolute;
+  }
 }
 
 .hide-count{
-    & .md-char-counter{
-        display: none;
-    }
+  & .md-char-counter{
+    display: none;
+  }
 }

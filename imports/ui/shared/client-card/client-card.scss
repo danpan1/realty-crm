@@ -47,6 +47,7 @@
     }
     
     &__md-icon{
+        color: #bdbdbd;
         & + span{
             display:none;
             position: absolute;
@@ -68,4 +69,8 @@
 
 .clientCard-conditions {
     text-align: center;
+}
+
+.cliendCard-condition-icons {
+    color: #bdbdbd;
 }

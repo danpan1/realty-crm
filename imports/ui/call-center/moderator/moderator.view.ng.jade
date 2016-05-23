@@ -19,7 +19,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
 
 
 div(md-whiteframe='2').mv-16
-    div(layout='row' layout-wrap layout-align='space-between')
+    div(layout='row' layout-wrap layout-align='center start')
         div(flex="33" ng-repeat="photo in moderator.realty.details.images")
             md-card
                 md-button(ng-if='photo.url != moderator.realty.image' ng-click='moderator.setMainImage(photo)').md-primary.md-raised.btn-set-photo Сделать главным фото
@@ -47,10 +47,13 @@ div(md-whiteframe='2').mt-16.ph-32.pv-16
                     textarea(ng-model='moderator.realty.moderator.comment.description', placeholder='Напишите комментарий')
                                         
 div(md-whiteframe='2').ph-32.pv-16
-    div(layout='row')
-        div(flex)
+    div(layout='column')
+        div()
             h3().md-subhead {{moderator.realty.title}}
             p().md-body-1 {{moderator.realty.details.descr}}
+        div().mt-16
+            span {{moderator.realty.contacts[0].phones[0].phone | phone}}
+            span.ml-16 {{moderator.realty.contacts[0].name}}
 div(layout='row').mt-32
     div(flex='30' flex-offset='5')
         md-button(ng-click='moderator.save(false)').md-primary.md-raised Отклонить

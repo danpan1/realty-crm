@@ -1,47 +1,46 @@
 one-info {
-	div[md-whiteframe] {
-		background-color: $white;
-	}
+  div[md-whiteframe] {
+    background-color: $white;
+  }
 }
 
 .one-info-contacts {
-	md-input-container {
-		.md-errors-spacer {
-			min-height: 0;
-		}
-	}
+  md-input-container {
+    .md-errors-spacer {
+      min-height: 0;
+    }
+  }
 
-	.md-title {
-		margin: 0;
-	}
+  .md-title {
+    margin: 0;
+  }
 }
 
 .one-info-closed .md-title {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .oneInfo-image-container {
-	position: relative;
-	background: white;
-	width: 664px;
-	height: 442px;
-	text-align: center;
-	img {
-		max-height: 442px;
-		max-width: 664px;
-	}
+  position: relative;
+  background: white;
+  width: 664px;
+  height: 442px;
+  text-align: center;
+  img {
+    max-height: 442px;
+    max-width: 664px;
+  }
 }
 
 .oneInfo-image-inner {
-	display: inline-block;
-	position: relative;
+  display: inline-block;
+  position: relative;
 }
 
 .slide__prev,
 .slide__next {
-	z-index: 10;
-
-	position: absolute;
+  z-index: 10;
+  position: absolute;
   background: url('img/icons/icon-arrow-left.png') no-repeat;
   width: 42px;
   height: 42px;
@@ -52,12 +51,12 @@ one-info {
 
 .slide__prev {
   top: 50%;
+  left: 0;
   transform: translate(0, -50%) scaleX(-1);
-	left: 0;
 }
 
 .slide__next {
   top: 50%;
+  right: 0;
   transform: translate(0, -50%);
-	right: 0;
 }
