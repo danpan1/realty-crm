@@ -5,8 +5,7 @@ md-tabs(md-dynamic-height md-selected="listMyClients.selectedTab")
     //md-tab(ui-sref="crm.clients.list.my({status: \'archive\'})") Архив
     //md-tab(ui-sref="crm.clients.list.my({status: \'\'})") Скрыть фильтр
     
-div 
-        //ng-repeat='client in listMyClients.clients' 
+div
     client-card(
         dir-paginate="client in listMyClients.clients | itemsPerPage: listMyClients.perPage" 
         total-items="listMyClients.clientsCount"

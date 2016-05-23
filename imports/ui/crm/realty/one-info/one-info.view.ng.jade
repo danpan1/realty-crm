@@ -17,12 +17,12 @@ div(layout="column", layout-align="space-around stretch")
                 div
                     //div().md-subhead Область: #[strong {{oneInfo.realty.address.meta.region}}]
                     div().md-subhead Город: #[strong Москва]
-                    div().md-subhead Округ: #[strong {{oneInfo.realty.address.areaName}}]
-                    div().md-subhead Район: #[strong {{oneInfo.realty.address.districtName}}]
-                    div().md-subhead Улица: #[strong {{oneInfo.realty.address.street}}]
-                    div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.house}}]
-                    div().md-subhead Квартира: #[strong {{oneInfo.realty.address.flat}}]
-                    div().md-subhead Метро: #[strong {{oneInfo.realty.address.subwaysEmbedded[0].name}} {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
+                    div().md-subhead Округ: #[strong {{oneInfo.realty.address.areaName || 'Не указано'}}]
+                    div().md-subhead Район: #[strong {{oneInfo.realty.address.districtName || 'Не указано'}}]
+                    div().md-subhead Улица: #[strong {{oneInfo.realty.address.street || 'Не указано'}}]
+                    div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.house || 'Не указано'}}]
+                    div().md-subhead Квартира: #[strong {{oneInfo.realty.address.flat || 'Не указано'}}]
+                    div(ng-if='oneInfo.realty.address.subwaysEmbedded[0].name').md-subhead Метро: #[strong {{oneInfo.realty.address.subwaysEmbedded[0].name}} {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
                     div
                         md-button(ng-click="oneInfo.showEditDialog($event)").md-primary.md-raised.ml-0 Изменить
 
