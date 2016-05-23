@@ -81,7 +81,7 @@ div(md-whiteframe='2').ph-16
             div(flex='25').md-body-1 GetRent.pro
             div(flex='75' ng-if='oneReview.realty.status === "sale"').md-body-1.one-review-board-green Размещено!
             div(flex='75' ng-if='oneReview.realty.status !== "sale" && oneReview.realty.moderator.status === "done"').md-body-1.one-review-board-red Подготовьте качественно объект!
-            div(flex='75' ng-if='oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"').md-body-1 Будет размещено после одобрения модератором
+            div(flex='75' ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"').md-body-1.one-review-board-red Будет размещено после одобрения модератором
 
 div(md-whiteframe='2').mv-16.ph-32.pv-16
     div(layout='row')

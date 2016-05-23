@@ -22,6 +22,7 @@ class Moderator {
   getNew() {
     this.isLoading = true;
     const vm = this;
+    if(this.realty) console.log(this.realty._id);
     Meteor.call('moderatorGet', (error, result)=> {
       if (error) {
         console.log('error', error);
@@ -31,8 +32,11 @@ class Moderator {
           vm.isLoading = false;
           console.log('новый объект', vm.realty);
           if (!result) {
+            console.log('Что-то пошло не так');
             vm.isLoading = true;
           }
+          console.log(this.realty._id);
+          window.scrollTo(0,0);
         });
       }
     });

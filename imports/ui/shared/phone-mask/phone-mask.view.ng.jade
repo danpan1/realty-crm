@@ -3,6 +3,7 @@ md-input-container(flex ng-class="{ 'has-error' : phoneMask.visualPhone.length >
     input(ng-model='phoneMask.visualPhone',
     required='',
     maxlength="17",
+    ng-keyup="phoneMask.filterPhoneKeyUp()"
     ng-focus="phoneMask.filterPhoneFocus()"
     ng-keypress="phoneMask.filterPhoneKeyPress()",
     ng-blur="phoneMask.filterPhoneBlur()",

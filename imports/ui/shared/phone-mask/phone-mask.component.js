@@ -11,12 +11,30 @@ class PhoneMask {
   constructor($scope, $reactive, $state) {
     $reactive(this).attach($scope);
     this.visualPhone = this.phone;
+    this.errorPhoneNum = /([^\-\s\(\)\+0-9]|\s{2,})/;
   }
         
   filterPhoneKeyPress(){
-      if(this.visualPhone.length >= 17) return false;
       if(this.visualPhone[0] != '8') this.visualPhone = '8 ' + this.visualPhone;
+      this.phone = this.visualPhone;
   }
+  
+  filterPhoneKeyUp () {
+      console.log(this.visualPhone);
+      if(this.errorPhoneNum.test(this.visualPhone)) {
+          let phone = this.visualPhone.split('');
+          for(var i in [1,2,3]){
+              for(var i in phone){
+                  if(!phone[i].match(/\+|\s|\(|\)|\-|[0-9]/)){
+                      phone.splice(i,1);
+                  }
+              }
+          }
+          if(phone[0] !== '8') this.visualPhone = '8 '+phone.join('');
+          return false;
+      }
+  }
+  
   filterPhoneFocus () {
       if(!this.visualPhone) this.visualPhone = '8';
   }
