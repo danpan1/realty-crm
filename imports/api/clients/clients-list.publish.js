@@ -2,17 +2,16 @@
  * Created by Danpan on 10.05.16.
  */
 import {Meteor} from 'meteor/meteor';
+import {Clients} from './clients.model';
+import {_} from 'meteor/underscore';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 
-import {Clients} from './clients.model';
 
 if (Meteor.isServer) {
 
   Meteor.publish('listClients', function (filter, options) {
 
     let selector = {};
-    
-    console.log(filter);
     
     if (filter) {
       if (filter.status) {
@@ -22,8 +21,10 @@ if (Meteor.isServer) {
         selector._id = filter._id;
       }
     }
+    
+    Counts.publish(this, 'clientsCount', Clients.find(selector), {noReady: true});
 
-    return Clients.find(selector,options);
+    return Clients.find(selector,filter);
   });
 
 }
