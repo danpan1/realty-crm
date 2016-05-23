@@ -26,16 +26,16 @@ export const dictionary = {
     {id: 6, name: 'Более двух человек'}
   ],
   conditions: [
-    {id: 'furniture', name: 'Мебель'},
-    {id: 'kitchen_furniture', name: 'Кух. мебель'},
-    {id: 'tv', name: 'Телевизор'},
-    {id: 'refrigerator', name: 'Холодильник'},
-    {id: 'washer', name: 'Стир. машина'},
-    {id: 'phone', name: 'Телефон'},
-    {id: 'animal', name: 'С животными'},
-    {id: 'elevator', name: 'Лифт'},
-    {id: 'children', name: 'С детьми'},
-    {id: 'wifi', name: 'Wi-Fi'}
+    {id: 'animal', name: 'С животными', cian : 'можно с животными'},
+    {id: 'children', name: 'С детьми', cian : 'можно с детьми'},
+    {id: 'elevator', name: 'Лифт', cian : ''},
+    {id: 'furniture', name: 'Мебель', cian : 'жилая мебель'},
+    {id: 'kitchen_furniture', name: 'Кух. мебель', cian : 'кухонная мебель'},
+    {id: 'phone', name: 'Телефон', cian : 'телефон'},
+    {id: 'refrigerator', name: 'Холодильник', cian : 'холодильник'},
+    {id: 'tv', name: 'Телевизор', cian : 'телевизор'},
+    {id: 'washer', name: 'Стир. машина', cian : 'стиральная машина'},
+    {id: 'wifi', name: 'Wi-Fi', cian : 'интернет'}
   ],
   customerQualification: [
     {id: 0, name: 'Турист'},
@@ -58,13 +58,13 @@ export const dictionary = {
     {id: 1, name: 'Новостройка'}
   ],
   materials: [
-    {id: 0, name: 'Панельный'},
-    {id: 1, name: 'Монолитно-кирпичный'},
-    {id: 2, name: 'Монолитный'},
-    {id: 3, name: 'Блочный'},
-    {id: 4, name: 'Кирпичный'},
-    {id: 5, name: 'Деревянный'},
-    {id: 6, name: 'Сталинский'}
+    {id: 0, name: 'Панельный', cian : 'панельный'},
+    {id: 1, name: 'Монолитно-кирпичный', cian : 'кирпично-монолитный'},
+    {id: 2, name: 'Монолитный', cian : 'монолитный'},
+    {id: 3, name: 'Блочный', cian : 'блочный'},
+    {id: 4, name: 'Кирпичный', cian : 'кирпичный'},
+    {id: 5, name: 'Деревянный', cian : ''},
+    {id: 6, name: 'Сталинский', cian : 'сталинский'}
   ],
   //квалификация собственника от колл-центра
   operation: [

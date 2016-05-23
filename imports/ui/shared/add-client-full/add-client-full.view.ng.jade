@@ -86,34 +86,33 @@ md-tabs(md-dynamic-height)
                                     md-select(required ng-model='addClientFull.fake' aria-label='Выбрать город')
                                         md-option(ng-value='true') Москва
 
-                    div(layout='row')
+                    div(layout='row').mv-16
                         div(flex='70')
-                            div(layout='column').mv-16
-                                div(layout='row' layout-align='space-between start')
-                                    md-input-container(flex='25').md-block.form-required.mv-0
-                                        label Цена
-                                        input(
-                                            required,
-                                            ng-model='addClientFull.client.need.price',
-                                            ng-price-filter,
-                                            ng-keypress="addClientFull.client.need.price = ' '+this.addClientFull.client.need.price"
-                                        )  
-                                    //ng-pattern='/^[0-9]{1,}$/'
-                                    md-input-container(flex).mv-0.form-required.ml-32
-                                        label Количество комнат
-                                        md-select(required ng-model='addClientFull.client.need.roomcount', multiple='true' aria-label='Выбрать количество комнат')
-                                            md-option(ng-value='roomcount.id',
-                                            ng-repeat="roomcount in addClientFull.dictionary.roomcountBig") {{roomcount.name}}  
-                                    md-input-container(flex).mv-0.form-required.ml-32
-                                        label Ремонт
-                                        md-select(required ng-model='addClientFull.client.need.renovation', multiple='true' aria-label='Выбрать тип ремонта')
-                                            md-option(ng-value='renovation.id',
-                                            ng-repeat="renovation in addClientFull.dictionary.renovation") {{renovation.name}}
-                                    // md-input-container(flex='25' flex-offset='10').md-block.form-required
-                                    //     label цена до
-                                    //     input(required ng-pattern='/^[0-9]{1,}$/' ng-model='addClientFull.client.need.priceTo')
-                                //div()
-                                //    span(ng-if="addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo") Правое число должно быть больше левого
+                            div(layout='row' layout-align='space-between start')
+                                md-input-container(flex).form-required.mv-0
+                                    label Цена
+                                    input(
+                                        required,
+                                        ng-model='addClientFull.client.need.price',
+                                        ng-price-filter,
+                                        ng-keypress="addClientFull.client.need.price = ' '+this.addClientFull.client.need.price"
+                                    )  
+                                //ng-pattern='/^[0-9]{1,}$/'
+                                md-input-container(flex).mv-0.form-required.ml-32
+                                    label Количество комнат
+                                    md-select(required ng-model='addClientFull.client.need.roomcount', multiple='true' aria-label='Выбрать количество комнат').md-select-multi-single
+                                        md-option(ng-value='roomcount.id',
+                                        ng-repeat="roomcount in addClientFull.dictionary.roomcountBig") {{roomcount.name}}  
+                                md-input-container(flex).mv-0.form-required.ml-32
+                                    label Ремонт
+                                    md-select(required ng-model='addClientFull.client.need.renovation', multiple='true' aria-label='Выбрать тип ремонта')
+                                        md-option(ng-value='renovation.id',
+                                        ng-repeat="renovation in addClientFull.dictionary.renovation") {{renovation.name}}
+                                // md-input-container(flex='25' flex-offset='10').md-block.form-required
+                                //     label цена до
+                                //     input(required ng-pattern='/^[0-9]{1,}$/' ng-model='addClientFull.client.need.priceTo')
+                            //div()
+                            //    span(ng-if="addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo") Правое число должно быть больше левого
                     div(layout='row')
                         div(flex='70')
                             subway-chips(ng-model='addClientFull.client.need.subways'
@@ -216,7 +215,7 @@ md-tabs(md-dynamic-height)
 
 div(layout='row').mv-16.mh-32
     md-button(ng-click="addClientFull.activeTab = 1" ng-disabled="firstForm.$invalid" ng-if="addClientFull.activeTab == 0" aria-label='Продолжить').md-primary.md-raised Продолжить
-    md-button(ng-if="addClientFull.activeTab == 1" ng-disabled="secondForm.$invalid || addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo"  ng-click='addClientFull.submit(true)' aria-label='Добавить клиента').md-success.md-raised Добавить клиента!
+    md-button(ng-if="addClientFull.activeTab == 1" ng-disabled="secondForm.$invalid || addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo"  ng-click='addClientFull.submit(true)' aria-label='Добавить клиента и найти связи между объектами').md-primary.md-raised Добавить клиента и найти связи между объектами
     md-button(md-no-ink ng-if="addClientFull.activeTab == 1" ng-click="addClientFull.activeTab = 0" flex-offset='10' aria-label='Вернуться на шаг назад').md-primary.md-body-1 Вернуться на шаг назад
 
 
