@@ -20,7 +20,7 @@ class ListMy {
     this.stateParams = $stateParams;
     
     vm.loaded = false;
-    vm.perPage = 2;
+    vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
       'price': -1
