@@ -8,12 +8,26 @@ import './phone-mask.view.html';
 
 class PhoneMask {
   /* @ngInject */
-  constructor($scope, $reactive, $state) {
+  constructor($scope, $reactive, $timeout) {
     $reactive(this).attach($scope);
+    this.$timeout = $timeout;
     this.visualPhone = this.phone;
     this.errorPhoneNum = /([^\-\s\(\)\+0-9]|\s{2,})/;
   }
         
+  ngOnInit () {
+      if(this.visualPhone.length > 5){
+        var value = this.visualPhone.toString().trim().replace(/^\+/, '');
+        var country, city, number, main;
+        country = value[0];
+        city = value.slice(1, 4);
+        number = value.slice(4);
+        main = city ? city.length >= 3 ? (country + ' (' + city + ') ') : (country + ' (' + city) : country;
+        number = number ? number.length > 3 ? number.length > 5 ? number.slice(0, 3) + '-' + number.slice(3,5) + '-' + number.slice(5) :  number.slice(0, 3) + '-' + number.slice(3) : number : '';
+        this.visualPhone = (main + number).trim();
+      }
+  }
+  
   filterPhoneKeyPress(){
       if(this.visualPhone[0] != '8') this.visualPhone = '8 ' + this.visualPhone;
       this.phone = this.visualPhone;

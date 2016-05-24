@@ -95,4 +95,4 @@ div(layout='column' layout-align='center center')
         md-button(ng-click='oneReview.sendToModerator()'
         ng-disabled='!oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000'
         ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"' aria-label='Отправить на проверку модератору').md-success.md-raised.md-title.mv-16.big-button Отправить на проверку модератору
-    div(flex='30').one-review-btn-in-progress.md-title.mv-16 Объект находится на проверке
+    div(flex='30' ng-if='oneReview.realty.moderator.status == "todo" || oneReview.realty.moderator.status === "inprogress"').one-review-btn-in-progress.md-title.mv-16 Объект находится на проверке

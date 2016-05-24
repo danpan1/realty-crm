@@ -22,8 +22,16 @@ class OneInfoEdit {
     }
   }
   
-  ngOnInit() {
-      if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
+  ngOnInit(price) {
+    if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
+      
+    if (price) {
+        var number = price.toString();
+        number = number.split('').reverse().join('');
+        number = number.length > 3 ? number.length > 6 ? number.length > 6 ? number.slice(0, 3) + ' ' + number.slice(3,6) +  ' ' + number.slice(6,9) + ' ' + number.slice(9) : number.slice(0, 3) + ' ' + number.slice(3,6) + ' ' + number.slice(6) :  number.slice(0, 3) + ' ' + number.slice(3) : number;
+        number = number.split('').reverse().join('');
+        this.realty.price = number;
+    }
   }
   
   onChangeRealty (realtyId) {

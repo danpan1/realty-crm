@@ -75,6 +75,22 @@ Clients.Schema = new SimpleSchema({
   realtorNote: { // Заметка от риэлтора по клиенту или от колл-центра
     type: String
   },
+  relations: {
+    type: [Object],
+    optional: true
+  },
+  'relations.$._id':{
+    type: String,
+    optional: true
+  },
+  'relations.$.read':{
+    type: Boolean,
+    optional: true
+  },
+  'relations.$.hide':{
+    type: Boolean,
+    optional: true
+  }, /// TODO сделать статусы ['offer', 'offered', inwork, reject, hide, read]??? пока хз
   searchEndDate: { // На когда ищет
     type: Date,
     optional: true

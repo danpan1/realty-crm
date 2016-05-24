@@ -25,13 +25,24 @@ class OneInfo {
     this.slideNum = 0;
     this.archiveConfirm = {
       show: false
-    }
+    };
     this.editDialogShow = false;
     this.currentConditions = [];
     for (var i in dictionary.conditions) {
       this.currentConditions[i] = {};
     }
     // console.log(this.currentConditions);
+
+    let isConditionsSetted = false;
+    this.autorun(() => {
+
+      let conditions = this.getReactively('realty.details.conditions');
+
+      if (conditions && !isConditionsSetted) {
+        isConditionsSetted = true;
+        this.setActiveConditions(conditions);
+      }
+    });
   }
 
   archive(realty) {

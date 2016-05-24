@@ -2,7 +2,7 @@
  * Created by Danpan on 23.03.16.
  */
 import {Meteor} from 'meteor/meteor';
-import {Clients} from './clients.model';
+import {Clients} from '../clients.model.js';
 import {Roles} from 'meteor/alanning:roles';
 
 if (Meteor.isServer) {

@@ -17,6 +17,8 @@ div(md-whiteframe='2').mv-16.client-card
             md-divider
             div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.client.status")
                 p.client-card__link_p(ng-if="clientCard.client.status != 'archive'")
+                    a.client-card__link(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' href="") Предложить объект
+                p.client-card__link_p(ng-if="clientCard.client.status != 'archive'")
                     a.client-card__link(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})" href="") 15 связей
                 p.text-uppercase.client-card__btn_buy-client(ng-if="clientCard.client.status == 'hot'") Купить за 150 руб.
                 p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
@@ -57,6 +59,7 @@ div(md-whiteframe='2').mv-16.client-card
                 div(flex='55').ph-16
                     p
                         span(ng-repeat="room in clientCard.client.need.roomcount").md-body-1 {{room}}
+                        
                             span(ng-if="$index < clientCard.client.need.roomcount.length - 1") ,
                         span() {{ }} комнат,  длительная
             md-divider
