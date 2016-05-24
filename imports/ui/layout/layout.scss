@@ -30,7 +30,8 @@ md-sidenav{
   }
   
   md-select {
-    margin: 0 23px 8px 23px;
+    margin: 0;
+    padding: 8px 23px;
     .md-select-value {
       border-bottom: none;
       .md-select-icon:after {
