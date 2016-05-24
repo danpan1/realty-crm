@@ -1,1 +1,91 @@
-div Hello Client Info
+div(layout='row' layout-align='space-between start').mt-16
+    div(md-whiteframe='2' flex='66').client-info-notes.mr-16.p-16
+        h3().md-title.mt-0.mb-32 Заметка по объекту
+        div(layout='column' layout-align='space-between none').client-info-notes-item
+            md-input-container().md-block.mt-0
+                label Заметка по объекту
+                textarea(maxlength="2000" ng-model="oneReviewDescContent.desc.details")
+            div
+                md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+    div(md-whiteframe='2' flex='33').client-info-contacts.p-16
+        h3().md-title.mt-0.mb-32 Контакты собственника
+        md-input-container().md-block.mt-16.mb-0
+            label Имя
+            input(type='text').md-title
+        md-input-container().md-block.mt-16.mb-0
+            label Телефон
+            input(type='tel').md-title
+        md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+div(layout='row').mt-16
+    div(md-whiteframe='2' flex)
+        div(layout='row')
+            div(flex='33').ph-32.pv-16
+                h3().md-subhead.text-bold.text-uppercase.mt-0 Особенности клиента
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') Цена: 
+                    div(flex='40') #[strong 30000]
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') Платить комиссию:
+                    div(flex='40') #[strong Да]
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') Сколько: 
+                    div(flex='40') #[strong 15000]
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') Актуально с: 
+                    div(flex='40') #[strong 01.05]
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') В поиске с: 
+                    div(flex='40') #[strong 20.04]
+                div().md-subhead.mv-8 Состав съемщиков: 
+                div().md-subhead.mv-8 #[strong Семейная пара]
+                md-button(aria-label='Изменить').md-primary.md-raised.mt-32.mh-0 Изменить
+            md-divider
+            div(flex='33').ph-32.pv-16
+                h3().md-subhead.text-bold.text-uppercase.mt-0 Объект
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') Аренда: 
+                    div(flex='40') #[strong длительная]
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') Тип объекта: 
+                    div(flex='40') #[strong Квартира]
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') Город: 
+                    div(flex='40') #[strong Москва]
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') Тип ремонта:
+                    div(flex='40') #[strong Евроремонт]
+                div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                    div(flex='60') Комнат: 
+                    div(flex='40') #[strong 1, 2]
+            md-divider
+            div(flex='33').ph-32.pv-16
+                h3().md-subhead.text-bold.text-uppercase.mt-0 Метро
+                subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
+                div(layout='row' layout-align='start center').mt-32
+                    md-input-container(flex).mv-0.pv-0
+                        input(ng-model='addRealtyFull.locations.metroTime', placeholder='минут').client-info-minutes
+                    md-input-container(flex).mv-0.ml-32.pb-0
+                        md-select(ng-model='addRealtyFull.metroTransport' aria-label='До метро')
+                            md-option(ng-value='transport.id',
+                            ng-repeat="transport in addRealtyFull.dictionary.transport") {{transport.name}}
+
+div(layout='row' layout-align='start start').mt-16
+    div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
+        div(layout='row' layout-align='space-between start' layout-wrap)
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+            md-switch(aria-label='Switch 2').md-warn.mv-8 Холодильник
+    div(md-whiteframe='2' flex='50').p-16
+        h3().md-title.mt-0 Закрытие сделки
+        md-button(aria-label='Закрыть сделку и переместить объект в архив').md-primary.md-raised.mt-32.mh-0 Закрыть сделку и переместить объект в архив
