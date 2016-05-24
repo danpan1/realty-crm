@@ -1,6 +1,5 @@
 one-info-edit(ng-if="oneInfo.details.composition" realty="oneInfo.realty" show="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
-    // IMAGES
     div(layout="row" layout-align='start center')
         div(hide) 
             div(ng-repeat="image in oneInfo.realty.details.images")
@@ -10,71 +9,125 @@ div(layout="column", layout-align="space-around stretch")
             button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)").md-raised
             div.oneInfo-image-inner
                 img(src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}")
-    div(layout="row", layout-align="space-between")
-        div(md-whiteframe='2' flex='80' layout-padding layout="row")
-            div(flex="33")
-                h2 Месторасположение
-                div
-                    //div().md-subhead Область: #[strong {{oneInfo.realty.address.meta.region}}]
-                    div().md-subhead Город: #[strong Москва]
-                    div().md-subhead Округ: #[strong {{oneInfo.realty.address.areaName || 'Не указано'}}]
-                    div().md-subhead Район: #[strong {{oneInfo.realty.address.districtName || 'Не указано'}}]
-                    div().md-subhead Улица: #[strong {{oneInfo.realty.address.street || 'Не указано'}}]
-                    div().md-subhead Дом и корп: #[strong {{oneInfo.realty.address.house || 'Не указано'}}]
-                    div().md-subhead Квартира: #[strong {{oneInfo.realty.address.flat || 'Не указано'}}]
-                    div(ng-if='oneInfo.realty.address.subwaysEmbedded[0].name').md-subhead Метро: #[strong {{oneInfo.realty.address.subwaysEmbedded[0].name}} {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
-                    div
-                        md-button(ng-click="oneInfo.showEditDialog()").md-primary.md-raised.ml-0 Изменить
 
-            div(flex="33")
-                h2 Объект
+    div(layout='row' layout-align='space-between start').mt-16
+        div(md-whiteframe='2' flex='66').client-info-notes.mr-16.p-16
+            h3().md-title.mt-0.mb-32 Заметка по объекту
+            div(layout='column' layout-align='space-between none').client-info-notes-item
+                md-input-container().md-block.mt-0
+                    label Заметка по объекту
+                    textarea(maxlength="2000" ng-model="oneReviewDescContent.desc.details")
                 div
-                    div().md-subhead Тип здания: #[strong {{oneInfo.dictionary.materials[oneInfo.realty.details.materials].name}}]
-                    div().md-subhead Комнат: #[strong {{ oneInfo.realty.roomcount}} комнат]
-                    div().md-subhead Ремонт:#[strong {{oneInfo.dictionary.renovation[oneInfo.realty.details.renovation].name}}]
-                    div().md-subhead Этаж: #[strong {{oneInfo.realty.floor}} из {{oneInfo.realty.floormax}}]
-                    div().md-subhead Общая площадь: #[strong {{oneInfo.realty.square}}]
-                    div().md-subhead Жилая площадь: #[strong {{oneInfo.realty.details.livingSquare}}]
-                    div().md-subhead Площадь кухни: #[strong {{oneInfo.realty.details.kitchenSquare}}]
-                    div().md-subhead Площадь комнат:
-                        span(ng-repeat="room in oneInfo.realty.details.roomsSquare") #[strong {{room.square}}]
-                        span(ng-if='$index != oneInfo.realty.details.roomsSquare.length - 1') ,
-                    div().md-subhead Лоджия: #[strong {{oneInfo.realty.details.loggia}}]
-                    div().md-subhead Балкон: #[strong {{oneInfo.realty.details.balcony}}]
-                    div().md-subhead Пассажирских лифтов: #[strong {{oneInfo.realty.details.elevator}} ]
-                    div().md-subhead Грузовых лифтов: #[strong {{oneInfo.realty.details.elevatorBig}}]
-                    div().md-subhead Окна выходят #[strong {{oneInfo.realty.details.windowView == 1 ? ' во двор' : 'на улицу'}}]
-            div(flex="33")
-                h2 Условия
-                div
+                    md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+        div(md-whiteframe='2' flex='33').client-info-contacts.p-16
+            h3().md-title.mt-0.mb-32 Контакты собственника
+            md-input-container().md-block.mt-16.mb-0
+                label Имя
+                input(type='text').md-title
+            md-input-container().md-block.mt-16.mb-0
+                label Телефон
+                input(type='tel').md-title
+            md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+
+    div(layout='row').mt-16
+        div(md-whiteframe='2' flex)
+            div(layout='row')
+                div(flex='33').ph-32.pv-16
+                    h3().md-subhead.text-bold.text-uppercase.mt-0 Месторасположение
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Город:
+                        div(flex='40') #[strong Москва]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Округ:
+                        div(flex='40') #[strong {{oneInfo.realty.address.areaName || 'Не указано'}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Улица:
+                        div(flex='40') #[strong {{oneInfo.realty.address.street || 'Не указано'}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Дом и корпус:
+                        div(flex='40') #[strong {{oneInfo.realty.address.house || 'Не указано'}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Квартира:
+                        div(flex='40') #[strong {{oneInfo.realty.address.flat || 'Не указано'}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Район:
+                        div(flex='40') #[strong {{oneInfo.realty.address.districtName || 'Не указано'}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Метро:
+                        div(flex='40') #[strong {{oneInfo.realty.address.subwaysEmbedded[0].name}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') До метро:
+                        div(flex='40') #[strong {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
+                    md-button(ng-click="oneInfo.showEditDialog($event)" aria-label='Изменить').md-primary.md-raised.mt-32.mh-0 Изменить
+                md-divider
+                div(flex='33').ph-32.pv-16
+                    h3().md-subhead.text-bold.text-uppercase.mt-0 Объект
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Тип здания:
+                        div(flex='40') #[strong {{oneInfo.dictionary.materials[oneInfo.realty.details.materials].name}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Комнат:
+                        div(flex='40') #[strong {{oneInfo.realty.roomcount}} комнат]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Ремонт:
+                        div(flex='40') #[strong {{oneInfo.dictionary.renovation[oneInfo.realty.details.renovation].name}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Этаж:
+                        div(flex='40') #[strong {{oneInfo.realty.floor}} из {{oneInfo.realty.floormax}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Общая:
+                        div(flex='40') #[strong {{oneInfo.realty.square}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Жилая:
+                        div(flex='40') #[strong {{oneInfo.realty.details.livingSquare}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Кухни:
+                        div(flex='40') #[strong {{oneInfo.realty.details.kitchenSquare}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Лоджия:
+                        div(flex='40') #[strong {{oneInfo.realty.details.loggia}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Балкон:
+                        div(flex='40') #[strong {{oneInfo.realty.details.balcony}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Пасс. лифтов:
+                        div(flex='40') #[strong {{oneInfo.realty.details.elevator}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Груз. лифтов:
+                        div(flex='40') #[strong {{oneInfo.realty.details.elevatorBig}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Окна выходят
+                        div(flex='40') #[strong {{oneInfo.realty.details.windowView == 1 ? ' во двор' : 'на улицу'}}]
+                md-divider
+                div(flex='33').ph-32.pv-16
+                    h3().md-subhead.text-bold.text-uppercase.mt-0 Условия
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Цена:
+                        div(flex='40') #[strong {{oneInfo.realty.price | price}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Собственник:
+                        div(flex='40') #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') От клиента:
+                        div(flex='40') #[strong {{oneInfo.realty.realtor.clientpercent || 0}}]%
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') От партнера:
+                        div(flex='40') #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
                     div().md-subhead Состав съемщиков
                     div(ng-repeat="position in oneInfo.realty.details.composition")
                         div().md-subhead #[strong {{oneInfo.dictionary.composition[position].name}} ]
-                    //p
-                    div().md-subhead Собственник #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
-                    div().md-subhead Срок: #[strong {{oneInfo.realty.type == 3 ? 'посуточно' : 'длительный срок'}}]
-                    div().md-subhead Цена: #[strong {{oneInfo.realty.price | price}}]
-                    div().md-subhead От клиента: #[strong {{oneInfo.realty.realtor.clientpercent || 0}}]%
-                    div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
-        div(md-whiteframe='2' flex='20').mh-16 {{oneInfo.currentConditions[$index].presence}}
-            md-switch.md-warn(
-            ng-model='oneInfo.currentConditions[$index].presence',
-            aria-label='Switch 2',
-            ng-repeat="condition in oneInfo.dictionary.conditions",
-            ng-click="oneInfo.onConditionsChange(condition.id)") {{condition.name}}
 
-    div(layout="row", layout-align="space-between")
-        div(layout="column" flex='50')
-            div(md-whiteframe='2').one-info-contacts.p-16.mv-16
-                h3().md-title Контакты
-                div(layout='row' layout-align='space-between' ng-repeat='contact in oneInfo.realty.contacts')
-                    p(flex="70").md-subhead {{contact.name}}
-                    p(flex="30").md-subhead {{contact.phones[0].phone}}
-        div(layout="column" flex='50' ng-if='oneInfo.realty.status != "archive"')
-            div(md-whiteframe='2').one-info-contacts.p-16.mv-16
-                h3().md-title Закрытие сделки  
-                div
-                    md-button(ng-click='oneInfo.archiveConfirm.show = true').md-primary.md-raised.ml-0 Закрыть сделку и перенести объект в архив
+    div(layout='row' layout-align='start start').mt-16
+        div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
+            div(layout='row' layout-align='space-around start' layout-wrap){{oneInfo.currentConditions[$index].presence}}
+                md-switch.md-warn(flex='50' ng-model='oneInfo.currentConditions[$index].presence',
+                aria-label='Switch 2'
+                ng-repeat="condition in oneInfo.dictionary.conditions"
+                ng-click="oneInfo.onConditionsChange(condition.id)") {{condition.name}}
+
+        div(md-whiteframe='2' flex='50' ng-if='oneInfo.realty.status != "archive"').p-16
+            h3().md-title.mt-0 Закрытие сделки
+            md-button(ng-click='oneInfo.archiveConfirm.show = true' aria-label='Закрыть сделку и переместить объект в архив').md-primary.md-raised.mt-32.mh-0  Закрыть сделку и перенести объект в архив
 
 div(ng-if='oneInfo.archiveConfirm.show == true')
     div(ng-click='oneInfo.archiveConfirm.show = false').one-info-edit__wrapper

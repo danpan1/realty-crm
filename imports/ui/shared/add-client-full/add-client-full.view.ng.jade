@@ -37,16 +37,16 @@ md-tabs(md-dynamic-height)
                                 md-input-container(flex='90').mv-0.form-required
                                     label Напишите, что важно клиенту (ваша заметка)
                                     textarea(required ng-model='addClientFull.client.realtorNote', md-maxlength='300', rows='5', md-select-on-focus='' )
-                            
+
                             div(layout="row")
                                 div(layout='row' layout-align='start center').mv-16
                                     div()
-                                        span().md-subhead Актуально с 
+                                        span().md-subhead Актуально с
                                     md-datepicker(ng-model='addClientFull.client.searchEndDate', md-placeholder='')
 
                                 div(layout='row' layout-align='start center').mv-16.ml-32
                                     div()
-                                        span().md-subhead В поиске с 
+                                        span().md-subhead В поиске с
                                     md-datepicker(ng-model='addClientFull.client.searchStartDate', md-placeholder='Enter date')
     md-tab(label='2) Требования к объекту' md-active='addClientFull.activeTab == 1' ng-click="addClientFull.activeTab = 1" ng-disabled='firstForm.$invalid')
         md-content().ph-32.pv-16
@@ -68,7 +68,7 @@ md-tabs(md-dynamic-height)
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row' layout-align='space-between start')
-                                md-input-container(flex).form-required.mv-0
+                                md-input-container(flex).form-required.mv-0.zh
                                     label Цена
                                     input(
                                         required,
@@ -76,7 +76,7 @@ md-tabs(md-dynamic-height)
                                         ng-price-filter,
                                         ng-keypress="addClientFull.client.need.price = ' '+this.addClientFull.client.need.price"
                                     )  
-                                
+
                                 md-input-container(flex).mv-0.form-required.ml-32
                                     label Количество комнат
                                     md-select(required ng-model='addClientFull.client.need.roomcount', multiple='true' aria-label='Выбрать количество комнат').md-select-multi-single
@@ -87,21 +87,20 @@ md-tabs(md-dynamic-height)
                                     md-select(required ng-model='addClientFull.client.need.renovation', multiple='true' aria-label='Выбрать тип ремонта')
                                         md-option(ng-value='renovation.id',
                                         ng-repeat="renovation in addClientFull.dictionary.renovation") {{renovation.name}}
-                               
                     div(layout='row')
                         div(flex='70')
                             subway-chips(ng-model='addClientFull.client.need.subways'
-                            subways-embeded = 'addClientFull.client.need.embedded.subways' flex)
+                            subways-embeded = 'addClientFull.client.need.embedded.subways' flex).zh
                     div(layout='row').mv-16
                         div(flex='45')
                             div(layout='row' layout-align='space-between start')
-                                md-input-container(flex).mv-0.pv-0
+                                md-input-container(flex).mv-0.pv-0.zh
                                     input(ng-model='addClientFull.client.need.metroTime', placeholder='минут')
                                 md-input-container(flex).mv-0.ml-32.pb-0
                                     md-select(ng-model='addClientFull.client.need.metroTransport' aria-label='До метро')
                                         md-option(ng-value='transport.id',
                                         ng-repeat="transport in addClientFull.dictionary.transport") {{transport.name}}
-                                
+
                     div(layout='row').mv-16
                         div(flex='60')
                             div(layout='row' layout-wrap)

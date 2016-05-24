@@ -6,8 +6,8 @@ div(ng-if="oneInfoEdit.show")
                 div(flex='30')
                     h2 Месторасположение
                     realty-street(ng-model='oneInfoEdit.realty.address.street' house='oneInfoEdit.realty.address.house'
-                    dadata='oneInfoEdit.realty.address.full' layout='column' flex='66')
-                    md-input-container(flex='33').md-block
+                    dadata='oneInfoEdit.realty.address.full' layout='column' flex='66').zh
+                    md-input-container(flex='33').md-block.zh
                         label Квартира
                         input(ng-model='oneInfoEdit.realty.address.flat')
                         span.bottom-label Видите только вы
@@ -22,7 +22,7 @@ div(ng-if="oneInfoEdit.show")
                                 label Тип здания:
                                 md-select(ng-model="oneInfoEdit.realty.details.materials")
                                     md-option(ng-value='material.id' ng-repeat="material in oneInfoEdit.dictionary.materials") {{material.name}}
-                            md-input-container().md-block.mv-32
+                            md-input-container().md-block.mv-32.zh
                                 label Комнат:
                                 input(ng-model="oneInfoEdit.realty.roomcount")
                             md-input-container().md-block.mv-32
@@ -30,27 +30,21 @@ div(ng-if="oneInfoEdit.show")
                                 md-select(ng-model="oneInfoEdit.realty.details.renovation")
                                     md-option(ng-value='renovation.id' ng-repeat="renovation in oneInfoEdit.dictionary.renovation") {{renovation.name}}
                             div(layout="row" layout-align='start center')
-                                md-input-container(flex='45')
+                                md-input-container(flex='45').zh
                                     label Этаж:
                                     input(ng-model="oneInfoEdit.realty.floor")
                                 label().md-block.mh-16 из
-                                md-input-container(flex='45')
+                                md-input-container(flex='45').zh
                                     input(ng-model="oneInfoEdit.realty.floormax" aria-label='Общее число этажей')
-                            md-input-container().md-block.mv-32
+                            md-input-container().md-block.mv-32.zh
                                 label Общая площадь
                                 input(ng-model="oneInfoEdit.realty.square")
-                            md-input-container().md-block.mv-32
+                            md-input-container().md-block.mv-32.zh
                                 label Жилая площадь:
                                 input(ng-model="oneInfoEdit.realty.details.livingSquare")
-                            md-input-container().md-block.mv-32
+                            md-input-container().md-block.mv-32.zh
                                 label Площадь кухни:
                                 input(ng-model="oneInfoEdit.realty.details.kitchenSquare")
-                            //div(layout="column")
-                            //    div(flex)
-                            //        label Площадь комнат:
-                            //    div(flex)
-                            //        md-input-container(ng-repeat="i in [0,1,2,3]" flex="25")
-                            //            input(ng-model="oneInfoEdit.realty.details.roomsSquare[i]")
                             div(layout='row')
                                 md-input-container(flex='50').md-block.mv-32
                                     label Лоджия:
@@ -87,13 +81,13 @@ div(ng-if="oneInfoEdit.show")
                                 label Срок
                                 md-select(ng-model="oneInfoEdit.realty.type")
                                     md-option(ng-value='type.id' ng-repeat="type in oneInfoEdit.dictionary.type") {{type.name}}
-                            md-input-container(flex).md-block.mv-32
+                            md-input-container(flex).md-block.mv-32.zh
                                 label Цена
                                 input(ng-model="oneInfoEdit.realty.price")
-                            md-input-container(flex).md-block.mv-32
+                            md-input-container(flex).md-block.mv-32.zh
                                 label Процент от клиента
                                 input(ng-model="oneInfoEdit.realty.realtor.clientpercent")
-                            md-input-container(flex).md-block.mv-32
+                            md-input-container(flex).md-block.mv-32.zh
                                 label Процент от клиента партнера
                                 input(ng-model="oneInfoEdit.realty.realtor.partnerpercent")            
                               
