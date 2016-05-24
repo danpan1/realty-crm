@@ -11,23 +11,31 @@ if (Meteor.isServer) {
   Meteor.publish('listMy', function (options, details, id) {
 
       let selector;
-      
+
+      console.log(options);
+
       if (this.userId) {
+
+        console.log(options.status);
 
         selector = {
           $and: [
             {'realtor.id': this.userId},
-            {status: {$in: ['sale', 'taken', 'review', 'reviewed']}}
+            {status: options.status ? options.status : {$in: ['sale', 'taken', 'archive', 'review', 'reviewed']}}
           ]
         };
+        /*
+         if (options) {
+         if (options.status) {
+         selector.status = options.status;
+         }
+         }*/
 
         if (id) {
           selector.$and.push({_id: id});
         }
         Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
-      }
-      //Отдаем объекты недвижимости если у юзера есть роль бизнес
-      if (this.userId) {
+        //Отдаем объекты недвижимости если у юзера есть роль бизнес
         if (!details) {
           options.fields = {
             'address.house': 1,
@@ -43,7 +51,7 @@ if (Meteor.isServer) {
             title: 1
           };
         }
-        // console.log(selector);
+        console.log(options);
         return Realty.find(selector, options);
       }
 

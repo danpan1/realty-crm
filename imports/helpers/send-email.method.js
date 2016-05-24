@@ -95,28 +95,6 @@ function sendTest (info, realty) {
                 </tbody>
             </table>
             <br><br>
-            <table style="width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px; text-align:justify;">
-                <tbody>
-                    <tr>
-                        <td>
-                            <p style="font-size:20px;">Условия сделки с собственником и клиентом</p>
-                            <p>${info.dealcondition}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <br><br>
-            <table style="width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px; text-align:justify;">
-                <tbody>
-                    <tr>
-                        <td>
-                            <p style="font-size:20px;">Вознаграждение партнера</p>
-                            <p>${info.partnerpercent}</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <br><br><br>
             <center>
                 <img src="http://world-invest.pro/img/shadow_2.jpg">
             </center>
@@ -147,7 +125,7 @@ function sendTest (info, realty) {
     console.log('server email');
     Email.send({
       to: info.emails,
-      from: 'postmaster@e.getrent.pro',
+      from: info.useremail ? info.username+' <'+ info.useremail+'>' : 'postmaster@e.getrent.pro',
       subject: info.topic,
       html: list
     });

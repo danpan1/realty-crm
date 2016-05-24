@@ -1,4 +1,4 @@
-one-info-edit(ng-if="oneInfo.realty" realty="oneInfo.realty" show="oneInfo.editDialogShow")
+one-info-edit(ng-if="oneInfo.details.composition" realty="oneInfo.realty" show="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
     // IMAGES
     div(layout="row" layout-align='start center')
@@ -68,6 +68,19 @@ div(layout="column", layout-align="space-around stretch")
                 div(layout='row' layout-align='space-between' ng-repeat='contact in oneInfo.realty.contacts')
                     p(flex="70").md-subhead {{contact.name}}
                     p(flex="30").md-subhead {{contact.phones[0].phone}}
+        div(layout="column" flex='50' ng-if='oneInfo.realty.status != "archive"')
+            div(md-whiteframe='2').one-info-contacts.p-16.mv-16
+                h3().md-title Закрытие сделки  
+                div
+                    md-button(ng-click='oneInfo.archiveConfirm.show = true').md-primary.md-raised.ml-0 Закрыть сделку и перенести объект в архив
 
-
-
+div(ng-if='oneInfo.archiveConfirm.show == true')
+    div(ng-click='oneInfo.archiveConfirm.show = false').one-info-edit__wrapper
+    div(layout='column' ng-init='oneInfoEdit.ngOnInit()').one-info-archive__block.ph-16
+        div(layout='row' layout-align='space-between center').dialog-header
+            div(flex='90')
+                h2 В архив
+            div(flex='10' ng-click='oneInfo.archiveConfirm.show = false') X
+        p Закрыть сделку и перенести объект в архив?
+        md-button(ng-click='oneInfo.archive(oneInfo.realty)').md-primary.md-raised.ml-0.mb-16 Переместить
+    

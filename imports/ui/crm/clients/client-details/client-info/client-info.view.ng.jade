@@ -1,1 +1,88 @@
-div Hello Client Info
+div {{clientInfo.client}}
+div
+    div(layout='row' layout-align='space-between start' ng-init='clientInfo.ngOnInit()').mt-16
+        div(md-whiteframe='2' flex='66').client-info-notes.mr-16.p-16
+            h3().md-title.mt-0.mb-32 Заметка по объекту
+            div(layout='column' layout-align='space-between none').client-info-notes-item
+                md-input-container().md-block.mt-0
+                    label Заметка по объекту
+                    textarea(maxlength="2000")
+                div
+                    md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+        div(md-whiteframe='2' flex='33').client-info-contacts.p-16
+            h3().md-title.mt-0.mb-32 Контакты собственника
+            md-input-container().md-block.mt-16.mb-0
+                label Имя
+                input(type='text').md-title
+            md-input-container().md-block.mt-16.mb-0
+                label Телефон
+                input(type='tel').md-title
+            md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+    div(layout='row').mt-16
+        div(md-whiteframe='2' flex)
+            div(layout='row')
+                div(flex='33').ph-32.pv-16
+                    h3().md-subhead.text-bold.text-uppercase.mt-0 Особенности клиента
+                    div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') Цена: 
+                        div(flex='40') #[strong {{clientInfo.client.need.price}}]
+                    div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') Платить комиссию:
+                        div(flex='40') #[strong {{clientInfo.client.comissionLoyal ? 'Да' : 'Нет'}}]
+                    div(layout='row' ng-if='clientInfo.client.comission' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') Сколько: 
+                        div(flex='40') #[strong {{clientInfo.client.comission}}]
+                    div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') Актуально с: 
+                        div(flex='40') #[strong {{clientInfo.client.searchStartDate | date:'dd.mm'}}]
+                    div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') В поиске с: 
+                        div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.mm'}}]
+                    div().md-subhead.mv-8 Состав съемщиков: 
+                    div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
+                    md-button(aria-label='Изменить').md-primary.md-raised.mt-32.mh-0 Изменить
+                md-divider
+                div(flex='33').ph-32.pv-16
+                    h3().md-subhead.text-bold.text-uppercase.mt-0 Объект
+                    div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') Аренда: 
+                        div(flex='40') #[strong длительная]
+                    div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') Тип объекта: 
+                        div(flex='40') #[strong Квартира]
+                    div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') Город: 
+                        div(flex='40') #[strong Москва]
+                    div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') Тип ремонта:
+                        div(flex='40') 
+                            span(ng-repeat='renovation in clientInfo.client.need.renovation') #[strong {{clientInfo.dictionary.renovation[renovation].name}}]
+                                span(ng-if='$index != clientInfo.client.need.renovation.length - 1') , 
+                    div(layout='row' layout-align='space-around center').md-subhead.mv-8 
+                        div(flex='60') Комнат: 
+                        div(flex='40') 
+                            span(ng-repeat='room in clientInfo.client.need.roomcount') #[strong {{room}}]
+                                span(ng-if='$index != clientInfo.client.need.renovation.length - 1') , 
+                md-divider
+                div(flex='33').ph-32.pv-16
+                    h3().md-subhead.text-bold.text-uppercase.mt-0 Метро
+                    subway-chips(ng-model='clientInfo.client.need.subways' subways-embeded='clientInfo.client.need.embedded.subways' flex)
+                    div(layout='row' layout-align='start center').mt-32
+                        md-input-container(flex).mv-0.pv-0
+                            input(ng-model='clientInfo.client.need.metroTime', placeholder='минут').client-info-minutes
+                        md-input-container(flex).mv-0.ml-32.pb-0
+                            md-select(ng-model='clientInfo.client.need.metroTransport' aria-label='До метро')
+                                md-option(ng-value='transport.id',
+                                ng-repeat="transport in clientInfo.dictionary.transport") {{transport.name}}
+
+    div(layout='row' layout-align='start start')#openArchiveDialog.md-padding.mt-16
+        div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between start' layout-wrap)
+                md-switch(flex='50',
+                ng-model='clientInfo.currentConditions[$index].presence',
+                aria-label='Switch 2'
+                ng-repeat="condition in clientInfo.dictionary.conditions"
+                ng-click="clientInfo.onConditionsChange(condition.id)").md-warn.mv-8.mh-0 {{condition.name}}
+        div(md-whiteframe='2' flex='50').p-16
+            h3().md-title.mt-0 Закрытие сделки
+            md-button(ng-click='clientInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить объект в архив').md-primary.md-raised.mt-32.mh-0 Закрыть сделку и переместить объект в архив

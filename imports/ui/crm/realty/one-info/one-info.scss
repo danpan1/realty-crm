@@ -54,3 +54,18 @@
   right: 0;
   transform: translate(0, -50%);
 }
+
+.one-info{
+    &-archive{
+        &__block{
+            z-index: 71;
+            position: fixed;
+            top: 50px;
+            width: 300px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            background: #fff;
+        }
+    }
+}

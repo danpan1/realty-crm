@@ -30,16 +30,32 @@ Clients.allow({
 });
 
 Clients.Schema = new SimpleSchema({
+  business: { // чем занимается
+    type: String,
+    optional: true
+  },
   comission: { // размер комиссии
-    type: Number,
+    type: String,
+    optional: true
+  },
+  comissionLoyal: { // платит или нет комиссию
+    type: Boolean,
     optional: true
   },
   composition: { // состав ищущих жильё
     type: String,
     optional: true
   },
-  comissionLoyal: { // платит или нет комиссию
-    type: Boolean,
+  createdAt: { // дата созданий
+    type: Date,
+    optional: true
+  },
+  modifiedAt: { // дата обновления
+    type: Date,
+    optional: true
+  },
+  email:{
+    type: String,
     optional: true
   },
   name: {
@@ -52,17 +68,11 @@ Clients.Schema = new SimpleSchema({
   phone: {
     type: String
   },
-  email:{
-    type: String
-  },
   realtorId: { // Какой риэлтор курирует клиента
     type: String,
     optional: true
   },
   realtorNote: { // Заметка от риэлтора по клиенту или от колл-центра
-    type: String
-  },
-  status: {//'realtor' - находится у риэлтора в работе (мои клиенты)
     type: String
   },
   searchEndDate: { // На когда ищет
@@ -73,10 +83,22 @@ Clients.Schema = new SimpleSchema({
     type: Date,
     optional: true
   },
+  status: {//'realtor' - находится у риэлтора в работе (мои клиенты)
+    type: String
+  },
   value:{
     type: Number,
     optional: true
   }
+});
+
+Clients.before.insert(function (userId, doc) {
+  doc.createdAt = Date.now();
+});
+
+Clients.before.update(function (userId, doc, fieldNames, modifier, options) {
+  modifier.$set = modifier.$set || {};
+  modifier.$set.modifiedAt = Date.now();
 });
 /**
  * filterQuery

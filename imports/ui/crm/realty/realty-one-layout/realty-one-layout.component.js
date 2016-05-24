@@ -9,9 +9,23 @@ import './realty-one-layout.view.html';
 
 class RealtyOneLayout {
   /* @ngInject */
-  constructor($scope, $reactive, $state) {
+  constructor($scope, $reactive, $state, $stateParams) {
 
     $reactive(this).attach($scope);
+
+    this.subscribe('oneInfo', () => {
+      return [
+        $stateParams.realtyId
+      ];
+    }, {
+      onReady(){
+        // let realty = Realty.findOne({});
+        // if (realty && realty.details && realty.details.conditions) {
+        //   this.setActiveConditions(realty.details.conditions);
+        // }
+      }
+    });
+
     this.helpers({
       infoRealty: () => {
         return Realty.findOne({});
@@ -22,14 +36,20 @@ class RealtyOneLayout {
       // case '/demonstrations':
       //   this.selectedTab = 0;
       //   break;
-      case '/review':
+      case '/find':
         this.selectedTab = 0;
         break;
-      // case '/email':
-      //   this.selectedTab = 2;
-      //   break;
-      case '/info':
+      case '/connections':
         this.selectedTab = 1;
+        break;
+      case '/review':
+        this.selectedTab = 2;
+        break;
+      case '/email':
+        this.selectedTab = 3;
+        break;
+      case '/info':
+        this.selectedTab = 4;
         break;
       default:
         this.selectedTab = 0;

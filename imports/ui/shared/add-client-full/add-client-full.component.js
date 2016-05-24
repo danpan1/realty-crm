@@ -15,6 +15,7 @@ class AddClientFull {
   constructor($scope, $reactive, $state) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
+    this.dictionary.composition = dictionary.composition.slice(1);
     this.resetClient();
     this.activeTab = 0;
     this.state = $state;

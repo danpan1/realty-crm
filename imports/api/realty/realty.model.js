@@ -1,4 +1,3 @@
-
 import {AddressSchema} from './schemas/address.schema';
 import {ContactsSchema} from './schemas/contacts.schema';
 import {dictionary} from '../../helpers/dictionary';
@@ -30,7 +29,8 @@ Realty.allow({
   },
   insert: function () {
     let userId = Meteor.userId();
-    return userId || Roles.userIsInRole(userId, ['staff']);;
+    return userId || Roles.userIsInRole(userId, ['staff']);
+    ;
   },
   remove: function () {
     return false;
@@ -41,8 +41,20 @@ Realty.Schema = new SimpleSchema({
   address: {
     type: AddressSchema
   },
+  comission: { // размер комиссии
+    type: String,
+    optional: true
+  },
+  comissionLoyal: { // платит или нет комиссию
+    type: Boolean,
+    optional: true
+  },
   contacts: {
     type: [ContactsSchema],
+    optional: true
+  },
+  createdAt: {
+    type: Date,
     optional: true
   },
   deposit: {  // Залог
@@ -71,6 +83,10 @@ Realty.Schema = new SimpleSchema({
   },
   moderator: { //отчет рекламщика
     type: ModeratorSchema,
+    optional: true
+  },
+  modifiedAt: {
+    type: Date,
     optional: true
   },
   operator: {
@@ -124,13 +140,17 @@ Realty.Schema = new SimpleSchema({
     type: Number,
     max: 5,
     optional: true
-  },
-  updatedAt: {
-    type: Date,
-    optional: true
   }
 });
 
+Realty.before.insert(function (userId, doc) {
+  doc.createdAt = Date.now();
+});
+
+Realty.before.update(function (userId, doc, fieldNames, modifier, options) {
+  modifier.$set = modifier.$set || {};
+  modifier.$set.modifiedAt = Date.now();
+});
 //Каждый update  проставляет время udate now
 // Realty.before.update(function (userId, doc, fieldNames, modifier) {
 //   modifier.$set = modifier.$set || {};
