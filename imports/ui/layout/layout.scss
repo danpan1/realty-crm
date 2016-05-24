@@ -114,10 +114,6 @@ md-switch {
   }
 }
 
-md-input-container .md-errors-spacer {
-  min-height: 0;
-}
-
 .topbar {
   position: relative;
   z-index: 2;
@@ -144,7 +140,7 @@ md-input-container .md-errors-spacer {
   min-width: 50px;
 }
 
-.zero-height {
+.zh {
   .md-errors-spacer {
     min-height: 0 !important;
   }
