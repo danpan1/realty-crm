@@ -46,6 +46,14 @@ Clients.Schema = new SimpleSchema({
     type: String,
     optional: true
   },
+  createdAt: { // дата созданий
+    type: Date,
+    optional: true
+  },
+  modifiedAt: { // дата обновления
+    type: Date,
+    optional: true
+  },
   email:{
     type: String,
     optional: true
@@ -82,6 +90,15 @@ Clients.Schema = new SimpleSchema({
     type: Number,
     optional: true
   }
+});
+
+Clients.before.insert(function (userId, doc) {
+  doc.createdAt = Date.now();
+});
+
+Clients.before.update(function (userId, doc, fieldNames, modifier, options) {
+  modifier.$set = modifier.$set || {};
+  modifier.$set.modifiedAt = Date.now();
 });
 /**
  * filterQuery

@@ -15,5 +15,6 @@ Meteor.startup(function () {
   // } catch (err) {
   //   // Will always get here once the doc's in place, so just ignore
   // }
+  // db.realty.insert({_id: 'autoincrement', value: 0});
 
 });

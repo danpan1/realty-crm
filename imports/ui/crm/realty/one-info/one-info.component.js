@@ -15,16 +15,6 @@ class OneInfo {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.state = $state;
-    this.subscribe('oneInfo', () => {
-      return [
-        $stateParams.realtyId
-      ];
-    }, {
-      onReady(){
-        let realty = Realty.findOne({});
-        this.setActiveConditions(realty.details.conditions)
-      }
-    });
 
     this.helpers({
       realty: () => {
@@ -34,65 +24,65 @@ class OneInfo {
     // oneInfo
     this.slideNum = 0;
     this.archiveConfirm = {
-        show: false
+      show: false
     }
     this.editDialogShow = false;
     this.currentConditions = [];
-    for(var i in dictionary.conditions){
-        this.currentConditions[i] = {};
+    for (var i in dictionary.conditions) {
+      this.currentConditions[i] = {};
     }
     // console.log(this.currentConditions);
   }
-  
-  archive (realty) {
-      if(realty == this.realty){
-          this.realty.status = 'archive';
-          Realty.update({_id: this.realty._id}, {
-              $set: this.realty
-          }, (error) => {
-              if(error) {
-              console.log(error);
-              } else {
-                  console.log('call recieved newObj');
-              }
-          });
-          console.log(this.realty.status);
-          this.state.go('crm.realty.list.my');
-      }
+
+  archive(realty) {
+    if (realty == this.realty) {
+      this.realty.status = 'archive';
+      Realty.update({_id: this.realty._id}, {
+        $set: this.realty
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('call recieved newObj');
+        }
+      });
+      console.log(this.realty.status);
+      this.state.go('crm.realty.list.my');
+    }
   }
-  
-  onConditionsChange (condition) {
+
+  onConditionsChange(condition) {
     let index = this.realty.details.conditions.indexOf(condition);
     if (index === -1) {
       this.realty.details.conditions.push(condition);
-    }  else {
+    } else {
       this.realty.details.conditions.splice(index, 1);
     }
     console.log(this.realty.details.conditions);
     Realty.update({_id: this.realty._id}, {
-        $set: this.realty
+      $set: this.realty
     }, (error) => {
-        if(error) {
+      if (error) {
         console.log(error);
-        } else {
-            console.log('call recieved newObj');
-        }
+      } else {
+        console.log('call recieved newObj');
+      }
     });
   }
-  
-  setActiveConditions (conditions) {
-      console.log(conditions)
-      for(var i in conditions){
-        for(var n in dictionary.conditions){
-            this.currentConditions[n].name = dictionary.conditions[n].id;
-            if(conditions[i] == dictionary.conditions[n].id){
-                this.currentConditions[n].presence = true;
-                console.log(this.currentConditions[n]);
-            }
+
+  setActiveConditions(conditions) {
+    console.log(conditions)
+    for (var i in conditions) {
+      for (var n in dictionary.conditions) {
+        this.currentConditions[n].name = dictionary.conditions[n].id;
+        if (conditions[i] == dictionary.conditions[n].id) {
+          this.currentConditions[n].presence = true;
+          console.log(this.currentConditions[n]);
         }
+      }
     }
-  }  
-  
+  }
+
   nextImage(boo, max) {
     if (boo) {
       if (this.slideNum + 1 >= max) {
@@ -110,11 +100,11 @@ class OneInfo {
       }
     }
   }
-  
-  showEditDialog () {
-      this.editDialogShow = true;
+
+  showEditDialog() {
+    this.editDialogShow = true;
   }
-  
+
 }
 
 const moduleName = 'oneInfo';

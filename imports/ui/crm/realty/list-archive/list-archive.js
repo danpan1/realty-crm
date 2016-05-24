@@ -47,8 +47,7 @@ class ListArchive {
     vm.helpers({
       realty: () => {
         return Realty.find(
-          // {status: {$in: ['sale']}},
-          {status: {$in: ['sale', 'taken', 'archive', 'review', 'reviewed']}},
+          {status: 'archive'},
           {sort: vm.sort});
       },
       realtyCount: () => {
@@ -85,14 +84,5 @@ export default angular.module(moduleName, [
     bindings: {},
     controllerAs: moduleName,
     controller: ListArchive
-  })
-  .config(config);
+  });
 
-function config($stateProvider) {
-  'ngInject';
-  $stateProvider
-    .state('realty.list', {
-      url: '/archive',
-      template: '<list-archive/>'
-    });
-}

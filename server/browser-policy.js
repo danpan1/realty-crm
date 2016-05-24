@@ -10,6 +10,7 @@ const allowFrameOrigin = function () {
 
   BrowserPolicy.content.allowImageOrigin("*.img.avito.st");
   BrowserPolicy.content.allowImageOrigin('s3.amazonaws.com');
+  BrowserPolicy.content.allowImageOrigin('world-invest.pro');
 
   BrowserPolicy.content.allowStyleOrigin('cdnjs.cloudflare.com');
 

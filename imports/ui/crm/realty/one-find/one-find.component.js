@@ -1,16 +1,17 @@
 /**
- * Created by Danpan on 06.05.16.
+ * Created by Danpan on 24.05.16.
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
-import {name as ClientCard} from '/imports/ui/shared/client-card/client-card.component';
 import {Counts} from 'meteor/tmeasday:publish-counts';
-import './list-my-clients.view.html';
 import {Clients} from '/imports/api/clients';
+import {Realty} from '/imports/api/realty';
 
-class ListMyClients {
+import './one-find.view.html';
+
+class OneFind {
   /* @ngInject */
   constructor($scope, $reactive, $state, $stateParams) {
     $reactive(this).attach($scope);
@@ -18,7 +19,7 @@ class ListMyClients {
     this.stateParams = $stateParams;
 
     let vm = this;
-    vm.status = this.stateParams.status ? this.stateParams.status : 'hot';
+    vm.searchType = this.stateParams.searchType || 'my';
     vm.loaded = false;
     vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
@@ -26,24 +27,30 @@ class ListMyClients {
       'createdAt': -1
     };
 
-    vm.selectedTab = '';
-    switch ($stateParams.status) {
-      case 'hot':
+    switch ($stateParams.searchType) {
+      case 'my':
         vm.selectedTab = 0;
         break;
-      case 'realtor':
+      case 'manual':
         vm.selectedTab = 1;
         break;
-      case 'archive':
+      case 'algorithm':
         vm.selectedTab = 2;
         break;
       default:
         vm.selectedTab = 0;
         break;
     }
-    vm.subscribe('listClients', () => {
+    vm.subscribe('findClients', () => {
       return [{
-        status: vm.getReactively('status')
+        conditions : vm.getReactively('realty.details.conditions'),
+        metroTime : vm.getReactively('realty.address.metroTime'),
+        metroTransport : vm.getReactively('realty.address.metroTransport'),
+        price : vm.getReactively('realty.price'),
+        roomcount: vm.getReactively('realty.roomcount'),
+        searchType : vm.getReactively('stateParams.searchType'),
+        status: vm.getReactively('status'),
+        subways : vm.getReactively('realty.address.subways')
       },
         {
           limit: parseInt(vm.perPage),
@@ -55,7 +62,7 @@ class ListMyClients {
     }, {
       onReady: function () {
         vm.loaded = true;
-        console.log('onReady And the Items actually Arrive', arguments);
+        // console.log('onReady And the Items actually Arrive', arguments);
         // subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
       }
     });
@@ -66,6 +73,9 @@ class ListMyClients {
       clientsCount: () => {
         return Counts.get('clientsCount');
       },
+      realty: () => {
+        return Realty.findOne({});
+      },
       pagesCount: () => {
         return Math.ceil(Counts.get('clientsCount') / this.perPage);
       }
@@ -73,24 +83,17 @@ class ListMyClients {
 
   }
 
-  goToPage(newPageNumber) {
-    this.state.go('crm.clients.list.my', {status: this.status, page: newPageNumber});
-  }
-
 }
 
-const moduleName = 'listMyClients';
+const moduleName = 'oneFind';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor,
-  ClientCard,
-  uiRouter,
-  utilsPagination
+  angularMeteor
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/crm/clients/list-my-clients/list-my-clients.view.html',
+  templateUrl: 'imports/ui/crm/realty/one-find/one-find.view.html',
   bindings: {},
   controllerAs: moduleName,
-  controller: ListMyClients
+  controller: OneFind
 });
 

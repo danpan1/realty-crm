@@ -119,8 +119,21 @@ md-input-container .md-errors-spacer {
 }
 
 .topbar {
-    height: 70px;
-    background: #fff;
+  position: relative;
+  z-index: 2;
+  height: 70px;
+  .btn-back {
+    background-color: #f5f5f5;
+    border: none;
+    md-icon {
+        width: 14px;
+        height: 14px;
+    }
+  }
+}
+
+.tabbar {
+  box-shadow: 0 0 4px rgba(106, 106, 106, 0.7) !important;
 }
 
 .whiteBg {
