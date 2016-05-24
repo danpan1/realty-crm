@@ -14,7 +14,7 @@ div
             md-input-container().md-block.mt-16.mb-0
                 label Имя
                 input(type='text' ng-model='clientInfo.client.name').md-title
-            phone-mask(label='"Телефон клиента"' phone='clientInfo.client.phone')
+            phone-mask(label='"Телефон клиента"' phone='clientInfo.client.phone').mt-16
             md-button(aria-label='Сохранить' ng-click='clientInfo.updateClientInfo()').md-primary.md-raised.m-0 Сохранить
     div(layout='row').mt-16
         div(md-whiteframe='2' flex)

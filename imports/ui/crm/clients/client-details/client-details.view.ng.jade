@@ -10,4 +10,4 @@ section(ng-repeat="client in clientDetails.clients")
             md-tab(ui-sref="crm.clients.details.demonstration({client:client._id, activetab: 'demonstration'})") Показы
             md-tab(ui-sref="crm.clients.details.email({client:client._id, activetab: 'email'})") Отправить предложение
             md-tab(ui-sref="crm.clients.details.info({client:client._id, activetab: 'info'})") Инфо о клиенте
-        ui-view
+ui-view
