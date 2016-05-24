@@ -15,18 +15,6 @@ class OneInfo {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.state = $state;
-    this.subscribe('oneInfo', () => {
-      return [
-        $stateParams.realtyId
-      ];
-    }, {
-      onReady(){
-        let realty = Realty.findOne({});
-        if (realty && realty.details && realty.details.conditions) {
-          this.setActiveConditions(realty.details.conditions);
-        }
-      }
-    });
 
     this.helpers({
       realty: () => {

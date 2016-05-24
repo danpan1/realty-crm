@@ -51,5 +51,9 @@ export default function routes($stateProvider) {
     .state('crm.realty.list.archive', {
       url: '/archive?:page',
       template: '<list-archive/>'
+    })
+    .state('crm.realty.one.find', {
+      url: '/find?:searchType',
+      template: '<one-find/>'
     });
 }

@@ -12,6 +12,7 @@ import {name as oneReview} from './one-review/one-review.component';
 import {name as oneInfo} from './one-info/one-info.component';
 import {name as realtyCard} from '/imports/ui/shared/realty-card/realty-card.component';
 import {name as addRealtyFull} from '/imports/ui/shared/add-realty-full/add-realty-full.component';
+import {name as oneFind} from '/imports/ui/crm/realty/one-find/one-find.component';
 import routes from './realty.routes.js';
 const moduleName = 'realty';
 
@@ -33,6 +34,7 @@ export default angular.module(moduleName, [
   oneConnections,
   oneReview,
   realtyListLayout,
+  oneFind,
   realtyCard,
   ArchiveList,
   listMy,
