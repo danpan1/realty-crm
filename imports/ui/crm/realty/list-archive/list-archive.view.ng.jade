@@ -1,1 +1,52 @@
-div Archive
+.md-body-1(layout='column', layout-align='space-around stretch')
+    .listMy(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
+        div().listMy_col Фото
+        div().listMy_col Комнат/Цена/Адрес
+        div().listMy_col Подготовлен
+        div().listMy_col Реклама на GetRent
+        div().listMy_col Подробнее
+
+.md-body-1(layout='column', layout-align='space-around stretch')
+    .listMy(layout='row', 
+            md-whiteframe='2',
+            dir-paginate="realty in listArchive.realty | itemsPerPage: listArchive.perPage" 
+            total-items="listArchive.realtyCount").md-whiteframe-2dp.mv-8
+        div(layout='column' layout-align='center center').listMy_Photo
+            div(layout='column', layout-align='space-between')
+                div(layout='row' layout-align='center center').apartment-pic
+                    img(ng-src='{{::realty.image || "realty_no_image.png"}}')
+                    //div().icon-zoom
+
+        div().listMy_Address.pv-8.ph-16
+            div(layout='column', layout-align='space-between')
+                div
+                    div().price.listMy_Address-item {{::realty.roomcount}} комн. {{::realty.price | price}}
+                    div().listMy_Address-item {{::realty.address.street}}
+                    div().listMy_Address-item {{::realty.address.house}} кв. {{::realty.address.flat}}
+        md-divider
+
+        div(layout='column' layout-align='center center').listMy_Progress.p-8
+            div().md-title.color-orange.mv-8 {{::realty.moderator.percent.total || 0}}% / 100%
+            md-button().btn-orange.mv-8 {{(realty.moderator.percent.total !== 100) ? 'Срочно улучшить' : 'Максимально подготовлен'}}
+        md-divider
+
+        div(layout='column' layout-align='center center').listMy_Advertisement.p-8
+            div(ng-if='realty.status === "sale"').md-title.color-orange.mv-8 100% / 100%
+            div(ng-if='realty.status !== "sale"').md-title.color-orange.mv-8 0% / 100%
+            div(ng-if='realty.status === "sale"').color-orange.mv-8 Размещено
+            div(ng-if='realty.status !== "sale"').color-orange.mv-8 Не размещено
+        md-divider
+
+        div(layout='column' layout-align='center center').listMy_Actions.pv-8.pl-16.pr-32
+            md-button(md-no-ink='').md-primary Инфо об объекте
+
+div(layout="row" ng-if="listArchive.pagesCount > 1" layout-align="center start")
+    md-button(ng-click="listArchive.goToPage(1)" ng-if='listArchive.page != 1').md-raised first            
+    md-button(ng-click="listArchive.goToPage(listArchive.page - 2)" ng-if='listArchive.page - 2 >= 1').md-raised {{listArchive.page - 2}}            
+    md-button(ng-click="listArchive.goToPage(listArchive.page - 1)" ng-if='listArchive.page - 1 >= 1').md-raised {{listArchive.page - 1}}            
+    md-button().md-raised.md-primary {{listArchive.page}}            
+    md-button(ng-click="listArchive.goToPage(listArchive.page + 1)" ng-if='listArchive.page + 1 <= listArchive.pagesCount').md-raised {{listArchive.page + 1}}           
+    md-button(ng-click="listArchive.goToPage(listArchive.page + 2)" ng-if='listArchive.page + 2 <= listArchive.pagesCount').md-raised {{listArchive.page + 2}}            
+    md-button(ng-click="listArchive.goToPage(listArchive.pagesCount)" ng-if='listArchive.page != listArchive.pagesCount').md-raised last      
+        //dir-pagination-controls(on-page-change="listArchive.pageChanged(newPageNumber)")
+

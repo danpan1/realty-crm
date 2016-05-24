@@ -49,7 +49,7 @@ export default function routes($stateProvider) {
       controller: function ($state, $stateParams) {}
     })
     .state('crm.realty.list.archive', {
-      url: '/archive',
+      url: '/archive?:page',
       template: '<list-archive/>'
     });
 }

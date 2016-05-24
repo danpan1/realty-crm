@@ -11,9 +11,10 @@ import './one-info.view.html';
 
 class OneInfo {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams, $mdDialog, $mdMedia) {
+  constructor($scope, $reactive, $state, $stateParams, $mdDialog, $mdMedia) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
+    this.state = $state;
     this.subscribe('oneInfo', () => {
       return [
         $stateParams.realtyId
@@ -38,6 +39,23 @@ class OneInfo {
         this.currentConditions[i] = {};
     }
     // console.log(this.currentConditions);
+  }
+  
+  archive (realty) {
+      if(realty == this.realty){
+          this.realty.status = 'archive';
+          Realty.update({_id: this.realty._id}, {
+              $set: this.realty
+          }, (error) => {
+              if(error) {
+              console.log(error);
+              } else {
+                  console.log('call recieved newObj');
+              }
+          });
+          console.log(this.realty.status);
+          this.state.go('crm.realty.list.my');
+      }
   }
   
   onConditionsChange (condition) {

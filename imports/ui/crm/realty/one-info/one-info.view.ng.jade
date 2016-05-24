@@ -68,6 +68,11 @@ div(layout="column", layout-align="space-around stretch")
                 div(layout='row' layout-align='space-between' ng-repeat='contact in oneInfo.realty.contacts')
                     p(flex="70").md-subhead {{contact.name}}
                     p(flex="30").md-subhead {{contact.phones[0].phone}}
+        div(layout="column" flex='50')
+            div(md-whiteframe='2').one-info-contacts.p-16.mv-16
+                h3().md-title Закрытие сделки  
+                div
+                    md-button(ng-click="oneInfo.archive(oneInfo.realty)").md-primary.md-raised.ml-0 Закрыть сделку и перенести объект в архив
 
 
 

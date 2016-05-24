@@ -12,14 +12,24 @@ if (Meteor.isServer) {
 
       let selector;
       
+      console.log(options)
+      
       if (this.userId) {
+          
+        console.log(options.status)
 
         selector = {
           $and: [
             {'realtor.id': this.userId},
-            {status: {$in: ['sale', 'taken', 'review', 'reviewed']}}
+            {status: options.status ? options.status : {$in: ['sale', 'taken', 'archive', 'review', 'reviewed']}}
           ]
         };
+        /*
+        if (options) {
+            if (options.status) {
+                selector.status = options.status;
+            }
+        }*/
 
         if (id) {
           selector.$and.push({_id: id});

@@ -53,7 +53,8 @@ Clients.Schema = new SimpleSchema({
     type: String
   },
   email:{
-    type: String
+    type: String,
+    optional: true
   },
   realtorId: { // Какой риэлтор курирует клиента
     type: String,
