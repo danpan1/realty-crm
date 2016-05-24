@@ -2,7 +2,7 @@
  * Created by Danpan on 10.05.16.
  */
 import {Meteor} from 'meteor/meteor';
-import {Clients} from './clients.model';
+import {Clients} from '../clients.model.js';
 import {_} from 'meteor/underscore';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import {Roles} from 'meteor/alanning:roles';

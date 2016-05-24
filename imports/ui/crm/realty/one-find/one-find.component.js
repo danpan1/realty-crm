@@ -7,6 +7,7 @@ import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import {Clients} from '/imports/api/clients';
+import {Realty} from '/imports/api/realty';
 
 import './one-find.view.html';
 
@@ -40,9 +41,16 @@ class OneFind {
         vm.selectedTab = 0;
         break;
     }
-    vm.subscribe('listClients', () => {
+    vm.subscribe('findClients', () => {
       return [{
-        status: vm.getReactively('status')
+        conditions : vm.getReactively('realty.details.conditions'),
+        metroTime : vm.getReactively('realty.address.metroTime'),
+        metroTransport : vm.getReactively('realty.address.metroTransport'),
+        price : vm.getReactively('realty.price'),
+        roomcount: vm.getReactively('realty.roomcount'),
+        searchType : vm.getReactively('stateParams.searchType'),
+        status: vm.getReactively('status'),
+        subways : vm.getReactively('realty.address.subways')
       },
         {
           limit: parseInt(vm.perPage),
@@ -64,6 +72,9 @@ class OneFind {
       },
       clientsCount: () => {
         return Counts.get('clientsCount');
+      },
+      realty: () => {
+        return Realty.findOne({});
       },
       pagesCount: () => {
         return Math.ceil(Counts.get('clientsCount') / this.perPage);

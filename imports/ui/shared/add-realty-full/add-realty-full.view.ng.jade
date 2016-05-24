@@ -77,12 +77,12 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
                                 md-input-container(flex).mv-0.ml-32
                                     input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
-                            div().mt-16
-                                p().md-subhead.add-realty-full-text Площадь комнат м²
-                            div(layout='row' layout-align='start center' flex).md-input-container.mt-16
-                                md-input-container(flex ng-repeat='room in addRealtyFull.realty.details.roomsSquare').mv-0
-                                    label {{$index + 1}}-я комната
-                                    input(ng-pattern="/^[0-9]{1,}$/" ng-model='room.square')
+                            //div().mt-16
+                            //    p().md-subhead.add-realty-full-text Площадь комнат м²
+                            //div(layout='row' layout-align='start center' flex).md-input-container.mt-16
+                            //    md-input-container(flex ng-repeat='room in addRealtyFull.realty.details.roomsSquare').mv-0
+                            //        label {{$index + 1}}-я комната
+                            //        input(ng-pattern="/^[0-9]{1,}$/" ng-model='room.square')
                                 
                     div(layout='row').mv-16
                         div(flex='70')

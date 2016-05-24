@@ -1,6 +1,6 @@
 div.md-whiteframe-2dp(md-whiteframe="2")
     div(layout="row")
-        md-tabs(md-dynamic-height md-border-bottom md-selected="oneConnections.selectedTab" flex="80")
+        md-tabs(md-dynamic-height md-border-bottom md-selected="oneFind.selectedTab" flex="80")
             md-tab(ui-sref="crm.realty.one.find({searchType:'my'})") Мои
             md-tab(ui-sref="crm.realty.one.find({searchType:'manual'})") Точное сопадение
             md-tab(ui-sref="crm.realty.one.find({searchType:'algorithm'})") Авто-подборка
@@ -9,4 +9,4 @@ div.md-whiteframe-2dp(md-whiteframe="2")
         div.ph-8(flex="85") Действия по клиенту на всем вашем аккаунте
 
 div.md-whiteframe-2dp(md-whiteframe="2")
-    client-card(ng-repeat='client in oneConnections.clients' client='client' assort="oneConnections.assort")
+    client-card(ng-repeat='client in oneFind.clients' client='client' assort="oneFind.assort")
