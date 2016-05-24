@@ -13,7 +13,7 @@ export const clientNeedSchema = new SimpleSchema({
     optional: true
   },
   renovation: {// ремонт
-    type: [String],
+    type: [Number],
     optional: true
   },
   embedded:{

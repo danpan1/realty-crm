@@ -12,12 +12,20 @@ class ClientInfo {
   /* @ngInject */
   
   /* @ngInject */
-  constructor($scope, $reactive, $state, $stateParams) {
+  constructor($scope, $reactive, $state, $stateParams, $mdDialog) {
     $reactive(this).attach($scope);
+    this.state = $state;
+    let vm = this;
+    this.mdDialog = $mdDialog;
+    
     this.dictionary = dictionary;
     this.compositionSelected = [];
     for(var i in this.dictionary.composition.length){
         this.compositionSelected.push(false);
+    }
+    this.currentConditions = [];
+    for(var i in dictionary.conditions){
+        this.currentConditions[i] = {};
     }
     
     this.subscribe('clientInfo', () => {
@@ -27,7 +35,6 @@ class ClientInfo {
     }, {
       onReady(){
         let client = Clients.findOne({});
-        //this.setActiveConditions(realty.details.conditions)
       }
     });
     this.helpers({
@@ -39,7 +46,27 @@ class ClientInfo {
   }
   
   ngOnInit() {
-      if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
+      for(var i in this.client.need.renovation){
+          this.client.need.renovation[i] = parseInt(this.client.need.renovation[i]);
+      }
+      this.setActiveConditions(this.client.need.conditions);
+  }
+  
+  archive (client) {
+      if(client == this.client){
+          this.client.status = 'archive';
+          Clients.update({_id: this.client._id}, {
+              $set: this.client
+          }, (error) => {
+              if(error) {
+              console.log(error);
+              } else {
+                  console.log('call recieved newClient');
+              }
+          });
+          console.log(this.client.status);
+          this.state.go('crm.clients.list.my');
+      }
   }
   
   onChangeClient (clientId) {
@@ -61,12 +88,46 @@ class ClientInfo {
       });
       
       this.show = false;
-  }  
-  
-  addRoomSquare () {
-    console.log(this.realty.details.roomsSquare.length)
-    this.realty.details.roomsSquare.push({square:0});
   }
+   
+  openArchiveDialog (ev) {
+      let vm = this;
+      console.log(angular.element(document.querySelector('#openArchiveDialog')));
+      var confirm = this.mdDialog.confirm()
+            .parent(angular.element(document.body))
+            .clickOutsideToClose(true)
+            .title('В архив')
+            .textContent('Перенести клиента в архив?')
+            .ariaLabel('Client archivation confirmation')
+            .ok('Переместить')
+            .cancel('Нет')
+            .targetEvent(ev);
+        this.mdDialog.show(confirm).then(function() {
+            vm.client.status = 'archive';
+            Clients.update({_id: vm.client._id}, {
+                $set: vm.client
+            }, (error) => {
+                if(error) {
+                console.log(error);
+                } else {
+                    console.log('call recieved newClient');
+                }
+            });
+            console.log(vm.client.status);
+            vm.state.go('crm.clients.list.my');
+        })
+  }
+  
+  setActiveConditions (conditions) {
+      for(var i in conditions){
+        for(var n in dictionary.conditions){
+            this.currentConditions[n].name = dictionary.conditions[n].id;
+            if(conditions[i] == dictionary.conditions[n].id){
+                this.currentConditions[n].presence = true;
+            }
+        }
+    }
+  }  
   
 }
 

@@ -1,0 +1,24 @@
+client-info {
+  .md-button {
+    min-width: 110px;
+  }
+
+  md-switch:last-of-type {
+    margin-right: 16px;
+  }
+  
+  .client-info-minutes .md-errors-spacer {
+    min-height: 0;
+  }
+}
+
+.client-info-notes,
+.client-info-contacts {
+  min-height: 268px;
+}
+
+.client-info{
+    &-notes-item {
+        min-height: 168px;
+    }
+}

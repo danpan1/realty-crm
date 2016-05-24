@@ -1,11 +1,13 @@
-div {{clientInfo.clients}}
 section(ng-repeat="client in clientDetails.clients")
-    div(layout="row")
-        md-button.md-raised.md-default(ui-sref="crm.clients.list.my({status: \'realtor\'})") Back
-        h1 {{client._id}} {{client.name}} {{client.phone}}
-    md-tabs(md-dynamic-height md-selected="clientDetails.selectedTab")
-        md-tab(ui-sref="crm.clients.details.connections({client:client._id, assort: 'manual', activetab: 'connections'})") Связи
-        md-tab(ui-sref="crm.clients.details.demonstration({client:client._id, activetab: 'demonstration'})") Показы
-        md-tab(ui-sref="crm.clients.details.email({client:client._id, activetab: 'email'})") Отправить предложение
-        md-tab(ui-sref="crm.clients.details.info({client:client._id, activetab: 'info'})") Инфо о клиенте
-    ui-view
+    div(md-whiteframe='1')
+        div(layout='row' layout-align='start center').topbar
+            md-button(aria-label='Вернуться назад' ui-sref="crm.clients.list.my({status: \'realtor\'})").realty-one-layout-btn-back.mh-16
+                md-icon(md-svg-src='svg/icon-arrow-left.svg')
+            h3.md-headline {{client._id}} {{client.name}} {{client.phone}}
+    div(md-whiteframe='1').realty-one-layout-whiteframe
+        md-tabs(md-dynamic-height md-selected="clientDetails.selectedTab")
+            md-tab(ui-sref="crm.clients.details.connections({client:client._id, assort: 'manual', activetab: 'connections'})") Связи
+            md-tab(ui-sref="crm.clients.details.demonstration({client:client._id, activetab: 'demonstration'})") Показы
+            md-tab(ui-sref="crm.clients.details.email({client:client._id, activetab: 'email'})") Отправить предложение
+            md-tab(ui-sref="crm.clients.details.info({client:client._id, activetab: 'info'})") Инфо о клиенте
+        ui-view

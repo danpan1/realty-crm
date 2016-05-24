@@ -29,14 +29,14 @@ class ListMyClients {
     
     vm.selectedTab = '';
     switch($stateParams.status){
-        case 'hot':
+        /*case 'hot':
+            vm.selectedTab = 0;
+            break;*/
+        case 'realtor':
             vm.selectedTab = 0;
             break;
-        case 'realtor':
-            vm.selectedTab = 1;
-            break;
         case 'archive':
-            vm.selectedTab = 2;
+            vm.selectedTab = 1;
             break;
         default:
             vm.selectedTab = 0;

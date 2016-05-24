@@ -1,4 +1,3 @@
-p {{oneEmail.user}}
 div(md-whiteframe='2').mt-16.ph-32.pt-32.pb-8
     div(layout='row')
         div(flex)
@@ -26,11 +25,11 @@ div()
                             img(src='http://world-invest.pro/img/logo.jpg')
                         td(style='width:25%; line-height: 18px;')
                             span
-                            | Дмитрий Антонов
+                            | {{oneEmail.realty.contacts[0].name}}
                             br
-                            | 8 (925) 111-22-33
+                            | {{oneEmail.realty.contacts[0].phones[0].phone | phone}}
                             br
-                            a(href='mailto:antonov@mail.ru', target='_blank') antonov@mail.ru
+                            a(ng-if='oneEmail.realty.contacts[0].email' href='mailto:{{oneEmail.realty.contacts[0].email}}', target='_blank') {{oneEmail.realty.contacts[0].email}}
                     center
                     img(src='http://world-invest.pro/img/shadow_1.jpg')
                     table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px; text-align:justify;')
@@ -38,79 +37,83 @@ div()
                         tr
                         td
                             p(style='font-size:20px;')
-                            | 1-комнатная, м.Таганская 5 мин. пешком, 16 000 руб.
+                                span {{oneEmail.realty.roomcount}}-комнатная, 
+                                span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') м.{{oneEmail.realty.address.subwaysEmbedded[0].name}} 
+                                span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTime}} мин. 
+                                span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTransport == 0 ? 'пешком' : 'транспортом'}}, 
+                                span {{oneEmail.realty.price | price}} руб.
                             p
-                            | Текст от риелтора текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                            img(src='http://world-invest.pro/img/foto.jpg', style='margin: 5px 0;')
-                            img(src='http://world-invest.pro/img/foto.jpg', style='margin: 5px 0;')
+                            | {{oneEmail.info.addedinfo}}
+                            p(ng-repeat='img in oneEmail.realty.details.images' layout='column' layout-align='center center')
+                                img(src='{{img.url}}', style='margin: 5px 0;')
                             br
                             br
                             p
-                            | Сдается квартира на сутки / посуточно, на часы. Квартира сдается для празднования Нового Года. Двухкомнатная квартира студия, чистая и уютная, оборудованная всем необходимым для комфортного проживания. Евроремонт, камин, джакузи, без лимитный Wi-Fi интернет. В квартире производится регулярная уборка. Рядом с домом остановка общественного транспорта «Улица Подвойского». Шаговая доступность до станций метро: Выставочная и Международная. В округе множество мест проведения досуга, кафе бары, рестораны, торгово-развлекательные комплексы. Также расположены: «Центр международной торговли», парк «Красная Пресня», выставочный комплекс «Москва Сити» и «Экспоцентр на Красной Пресне». Заселение производится круглосуточно. Возможна встреча на вокзале или в аэропорту. Предоставляем отчетные документы.
+                            | {{oneEmail.realty.details.descr}}
                     br
                     table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px;')
                     tbody
                         tr
                         td(valign='top', style='padding-right:15px;')
                             b Район:
-                            |  ЦАО
+                            |  {{oneEmail.realty.address.areaName}}
+                            br			
+                            b Улица: 
+                            | {{oneEmail.realty.address.street}} {{oneEmail.realty.address.house}} к.{{oneEmail.realty.address.flat}}
                             br
-                            | 				Улица: Таганская 15 к.1
+                            b(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') Метро: 
+                            span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') м.{{oneEmail.realty.address.subwaysEmbedded[0].name}} 
+                            span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTime}} мин. 
+                            span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTransport == 0 ? 'пешком' : 'транспортом'}},
                             br
-                            | 				Метро: Лубянка 5 мин. пешом
+                            b Тип здания: 
+                            | {{oneEmail.dictionary.materials[oneEmail.realty.details.materials].name}}
                             br
-                            | 				Тип здания: Кирпичный
+                            b Комнат: 
+                            | {{oneEmail.realty.roomcount}}-комнатная
                             br
-                            | 				Комнат: 3 комнатная
+                            b Ремонт: 
+                            | {{oneEmail.dictionary.renovation[oneEmail.realty.details.renovation].name}}
                             br
-                            | 				Ремонта: Евроремонт
+                            //span() Апартаменты
+                            //span() , 
+                            //span() Пентхаус
+                            //br
+                            b Этаж: 
+                            | 10 из 55
                             br
-                            | 				Апартаменты, Пентхаус
+                            b Окна: 
+                            | {{oneEmail.dictionary.windowView[oneEmail.realty.details.windowView].name}}
                             br
-                            | 				Этаж: 10 из 55
+                            b Цена: 
+                            | {{oneEmail.realty.price | price}}
                             br
-                            | 				Окна выходят на: двор
-                            br
-                            | 				Цена: 30 000
-                            br
-                            | 				Комиссия: 50%
+                            b Комиссия: 
+                            | {{oneEmail.realty.realtor.clientpercent}}
                         td(valign='top', style='padding-left:60px;')
-                            | Общая площадь.: 55 м²
+                            b Общая площадь: 
+                            | {{oneEmail.realty.square}} м²
                             br
-                            | 				Жилая площадь: 55 м²
+                            b Жилая площадь: 
+                            | {{oneEmail.realty.details.livingSquare}} м²
                             br
-                            | 				Площадь кухни: 55 м²
+                            b Площадь кухни: 
+                            | {{oneEmail.realty.details.kitchenSquare}} м²
                             br
-                            | 				Площадь комнат: 100, 20, 40,
-                            | 				50, 60, 22
-                            | 				Лоджия: 1
+                            b Площадь комнат: 
+                            span(ng-repeat='room in oneEmail.realty.details.roomsSquare') {{room.square}}
+                            br 
+                            b Лоджия: 
+                            | {{oneEmail.realty.details.loggia}}
                             br
-                            | 				Балкон: 2
+                            b Балкон: 
+                            | {{oneEmail.realty.details.balcony}}
                             br
-                            | 				Пассажирских лифтов: 1
+                            b Пассажирских лифтов: 
+                            | {{oneEmail.realty.details.elevator}}
                             br
-                            | 				Грузовых лифтов: 1
-                    br
-                    br
-                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px; text-align:justify;')
-                    tbody
-                        tr
-                        td
-                            p(style='font-size:20px;')
-                            | Условия сделки с собственником и клиентом
-                            p
-                            | Текст текст Текст текст Текст текст Текст текст Текст текст
-                    br
-                    br
-                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px; text-align:justify;')
-                    tbody
-                        tr
-                        td
-                            p(style='font-size:20px;')
-                            | Вознаграждение партнера
-                            p
-                            | 50% или 15 000 рублей
-                    br
+                            b Грузовых лифтов:
+                            | {{oneEmail.realty.details.elevatorBig}}
                     br
                     br
                     center
@@ -121,12 +124,12 @@ div()
                         tr
                         td(style='width:55%')
                             img(src='http://world-invest.pro/img/logo.jpg')
-                        td(style='width:25%; line-height: 18px;')
+                       td(style='width:25%; line-height: 18px;')
                             span
-                            | Дмитрий Антонов
+                            | {{oneEmail.realty.contacts[0].name}}
                             br
-                            | 				8 (925) 111-22-33
+                            | {{oneEmail.realty.contacts[0].phones[0].phone | phone}}
                             br
-                            a(href='mailto:antonov@mail.ru', target='_blank') antonov@mail.ru
+                            a(ng-if='oneEmail.realty.contacts[0].email' href='mailto:{{oneEmail.realty.contacts[0].email}}', target='_blank') {{oneEmail.realty.contacts[0].email}}
         div(md-whiteframe='2' flex-offset='5' flex='40')
-            p Иуиуиу
+            p 
