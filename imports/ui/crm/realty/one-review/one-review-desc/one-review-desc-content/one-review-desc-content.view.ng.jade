@@ -22,6 +22,6 @@ div(layout='row' ng-init="oneReviewDescContent.onInit()")
                 md-select(ng-model="oneReviewDescContent.activeBenefit.content[oneReviewDescContent.active.index]" placeholder='Выберите описание')
                     md-option(ng-value='name' ng-repeat="name in oneReviewDescContent.activeBenefit.content" ng-click="oneReviewDescContent.setActiveBenefitNumber($index)") {{name}}
 
-md-input-container().md-block
+md-input-container().md-block.zh
     label Продающее объявление
     textarea(md-maxlength="2000" maxlength="2000" ng-keydown="oneReviewDescContent.controlKeyPress(oneReviewDescContent.desc.details)" ng-model="oneReviewDescContent.desc.details")
