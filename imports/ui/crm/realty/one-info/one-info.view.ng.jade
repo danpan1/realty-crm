@@ -119,7 +119,7 @@ div(layout="column", layout-align="space-around stretch")
 
     div(layout='row' layout-align='start start').mt-16
         div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
-            div(layout='row' layout-align='space-around start' layout-wrap){{oneInfo.currentConditions[$index].presence}}
+            div(layout='row' layout-align='space-around start' layout-wrap) {{oneInfo.currentConditions[$index].presence}}
                 md-switch.md-warn(flex='50' ng-model='oneInfo.currentConditions[$index].presence',
                 aria-label='Switch 2'
                 ng-repeat="condition in oneInfo.dictionary.conditions"

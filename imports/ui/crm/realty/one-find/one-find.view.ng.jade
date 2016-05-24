@@ -4,9 +4,9 @@ div.md-whiteframe-2dp(md-whiteframe="2")
             md-tab(ui-sref="crm.realty.one.find({searchType:'my'})") Мои
             md-tab(ui-sref="crm.realty.one.find({searchType:'manual'})") Точное сопадение
             md-tab(ui-sref="crm.realty.one.find({searchType:'algorithm'})") Авто-подборка
-    div.ph-16.pv-16(layout="row")
-        div.ph-8(flex="15") Цена
-        div.ph-8(flex="85") Действия по клиенту на всем вашем аккаунте
+    //div.ph-16.pv-16(layout="row")
+    //    div.ph-8(flex="15") Цена
+    //    div.ph-8(flex="85") Действия по клиенту на всем вашем аккаунте
 
 div.md-whiteframe-2dp(md-whiteframe="2")
-    client-card(ng-repeat='client in oneFind.clients' client='client' assort="oneFind.assort")
+    client-card(ng-repeat='client in oneFind.clients' client='client' assort="oneFind.assort" realty-id='{{oneFind.realty._id}}')

@@ -107,6 +107,22 @@ Realty.Schema = new SimpleSchema({
     type: RealtyRealtorSchema,
     optional: true
   },
+  relations: {
+    type: [Object],
+    optional: true
+  },
+  'relations.$._id':{
+    type: String,
+    optional: true
+  },
+  'relations.$.read':{
+    type: Boolean,
+    optional: true
+  },
+  'relations.$.hide':{
+    type: Boolean,
+    optional: true
+  }, /// TODO сделать статусы ['offer', 'offered', inwork, reject, hide, read]??? пока хз
   // reports: { // TODO Отчеты о показах. И сами показы. Возможно это надо в отдельную коллекцию. но пока пусть так
   //   type: [ReportsSchema],
   //   // minCount : 1,
