@@ -89,7 +89,10 @@ div(ng-if="oneInfoEdit.show")
                                     md-option(ng-value='type.id' ng-repeat="type in oneInfoEdit.dictionary.type") {{type.name}}
                             md-input-container(flex).md-block.mv-32
                                 label Цена
-                                input(ng-model="oneInfoEdit.realty.price")
+                                input(ng-model="oneInfoEdit.realty.price"
+                                      ng-price-filter
+                                      ng-keypress="oneInfoEdit.realty.price = ' '+this.oneInfoEdit.realty.price"
+                                      ng-init="clientInfoEdit.ngOnInit(oneInfoEdit.realty.price)")
                             md-input-container(flex).md-block.mv-32
                                 label Процент от клиента
                                 input(ng-model="oneInfoEdit.realty.realtor.clientpercent")

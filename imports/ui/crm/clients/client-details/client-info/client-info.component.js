@@ -83,8 +83,8 @@ class ClientInfo {
           }
       }
       
-      Realty.update({_id: realtyId}, {
-        $set: this.realty
+      Clients.update({_id: clientId}, {
+        $set: this.client
       }, (error) => {
         if(error) {
           console.log(error)

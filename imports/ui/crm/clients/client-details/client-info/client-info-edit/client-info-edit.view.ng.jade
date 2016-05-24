@@ -7,7 +7,10 @@ div(ng-if="clientInfoEdit.show")
                     h2 Особенности клиента
                     md-input-container().md-block.mv-32
                         label Цена:
-                        input(ng-model='clientInfoEdit.client.need.price')
+                        input(ng-model='clientInfoEdit.client.need.price'
+                              ng-price-filter,
+                              ng-keypress="clientInfoEdit.client.need.price = ' '+this.clientInfoEdit.client.need.price"
+                              ng-init="clientInfoEdit.ngOnInit(clientInfoEdit.client.need.price)")
                      div(layout='row')
                         md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='clientInfoEdit.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ clientInfoEdit.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
                      div(layout='row' layout-align='start center').mv-16
