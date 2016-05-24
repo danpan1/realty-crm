@@ -33,6 +33,9 @@ class OneInfo {
     });
     // oneInfo
     this.slideNum = 0;
+    this.archiveConfirm = {
+        show: false
+    }
     this.editDialogShow = false;
     this.currentConditions = [];
     for(var i in dictionary.conditions){
