@@ -1,4 +1,4 @@
-p {{}}
+p {{oneEmail.user}}
 div(md-whiteframe='2').mt-16.ph-32.pt-32.pb-8
     div(layout='row')
         div(flex)
@@ -7,12 +7,126 @@ div(md-whiteframe='2').mt-16.ph-32.pt-32.pb-8
             md-input-container().md-block
                 input(ng-model='oneEmail.info.topic' placeholder='Тема письма')
             md-input-container().md-block
-                input(ng-model='oneEmail.info.addedinfo' placeholder='Дополнительно написать к этому объекту')
-            md-input-container().md-block
-                input(ng-model='oneEmail.info.dealcondition' placeholder='Условия сделки с собственником и клиентом')
-            md-input-container().md-block
-                input(ng-model='oneEmail.info.partnerpercent' placeholder='Процент или сумма вознаграждения партнера')
+                textarea(ng-model='oneEmail.info.addedinfo' placeholder='Дополнительно написать к этому объекту')
 div(md-whiteframe='2').one-email-card.ph-32.pv-8
     div(layout='column')
         div().mv-8
             md-button(ng-click="oneEmail.send()").md-primary.md-raised.md-body-1.ml-0 Отправить письмо
+
+div()
+    h2 Предварительный просмотр
+    div(layout="row")
+        div(md-whiteframe='2' flex-offset='5' flex='50')
+            table(style='width:550px; margin:0 auto; padding: 0 15px;')
+                tbody
+                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px;')
+                    tbody
+                        tr
+                        td(style='width:55%')
+                            img(src='http://world-invest.pro/img/logo.jpg')
+                        td(style='width:25%; line-height: 18px;')
+                            span
+                            | Дмитрий Антонов
+                            br
+                            | 8 (925) 111-22-33
+                            br
+                            a(href='mailto:antonov@mail.ru', target='_blank') antonov@mail.ru
+                    center
+                    img(src='http://world-invest.pro/img/shadow_1.jpg')
+                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px; text-align:justify;')
+                    tbody
+                        tr
+                        td
+                            p(style='font-size:20px;')
+                            | 1-комнатная, м.Таганская 5 мин. пешком, 16 000 руб.
+                            p
+                            | Текст от риелтора текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                            img(src='http://world-invest.pro/img/foto.jpg', style='margin: 5px 0;')
+                            img(src='http://world-invest.pro/img/foto.jpg', style='margin: 5px 0;')
+                            br
+                            br
+                            p
+                            | Сдается квартира на сутки / посуточно, на часы. Квартира сдается для празднования Нового Года. Двухкомнатная квартира студия, чистая и уютная, оборудованная всем необходимым для комфортного проживания. Евроремонт, камин, джакузи, без лимитный Wi-Fi интернет. В квартире производится регулярная уборка. Рядом с домом остановка общественного транспорта «Улица Подвойского». Шаговая доступность до станций метро: Выставочная и Международная. В округе множество мест проведения досуга, кафе бары, рестораны, торгово-развлекательные комплексы. Также расположены: «Центр международной торговли», парк «Красная Пресня», выставочный комплекс «Москва Сити» и «Экспоцентр на Красной Пресне». Заселение производится круглосуточно. Возможна встреча на вокзале или в аэропорту. Предоставляем отчетные документы.
+                    br
+                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px;')
+                    tbody
+                        tr
+                        td(valign='top', style='padding-right:15px;')
+                            b Район:
+                            |  ЦАО
+                            br
+                            | 				Улица: Таганская 15 к.1
+                            br
+                            | 				Метро: Лубянка 5 мин. пешом
+                            br
+                            | 				Тип здания: Кирпичный
+                            br
+                            | 				Комнат: 3 комнатная
+                            br
+                            | 				Ремонта: Евроремонт
+                            br
+                            | 				Апартаменты, Пентхаус
+                            br
+                            | 				Этаж: 10 из 55
+                            br
+                            | 				Окна выходят на: двор
+                            br
+                            | 				Цена: 30 000
+                            br
+                            | 				Комиссия: 50%
+                        td(valign='top', style='padding-left:60px;')
+                            | Общая площадь.: 55 м²
+                            br
+                            | 				Жилая площадь: 55 м²
+                            br
+                            | 				Площадь кухни: 55 м²
+                            br
+                            | 				Площадь комнат: 100, 20, 40,
+                            | 				50, 60, 22
+                            | 				Лоджия: 1
+                            br
+                            | 				Балкон: 2
+                            br
+                            | 				Пассажирских лифтов: 1
+                            br
+                            | 				Грузовых лифтов: 1
+                    br
+                    br
+                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px; text-align:justify;')
+                    tbody
+                        tr
+                        td
+                            p(style='font-size:20px;')
+                            | Условия сделки с собственником и клиентом
+                            p
+                            | Текст текст Текст текст Текст текст Текст текст Текст текст
+                    br
+                    br
+                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px; text-align:justify;')
+                    tbody
+                        tr
+                        td
+                            p(style='font-size:20px;')
+                            | Вознаграждение партнера
+                            p
+                            | 50% или 15 000 рублей
+                    br
+                    br
+                    br
+                    center
+                    img(src='http://world-invest.pro/img/shadow_2.jpg')
+                    br
+                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px;')
+                    tbody
+                        tr
+                        td(style='width:55%')
+                            img(src='http://world-invest.pro/img/logo.jpg')
+                        td(style='width:25%; line-height: 18px;')
+                            span
+                            | Дмитрий Антонов
+                            br
+                            | 				8 (925) 111-22-33
+                            br
+                            a(href='mailto:antonov@mail.ru', target='_blank') antonov@mail.ru
+        div(md-whiteframe='2' flex-offset='5' flex='40')
+            p Иуиуиу

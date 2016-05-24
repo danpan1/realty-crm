@@ -39,7 +39,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     md-select(ng-model='addRealtyFull.metroTransport' aria-label='До метро')
                                         md-option(ng-value='transport.id',
                                         ng-repeat="transport in addRealtyFull.dictionary.transport") {{transport.name}}
-                                        
+                                           
                 div(layout='row').mv-32
                     md-button(ng-click='addRealtyFull.activeTab = 1'
                     ng-disabled="firstForm.$invalid").md-primary.md-raised.mh-0 Продолжить
@@ -53,7 +53,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                             div(layout='row' layout-align='start end')
                                 md-input-container(flex='33').mv-0.form-required
                                     label Количество комнат
-                                    md-select(required ng-model='addRealtyFull.realty.roomcount')
+                                    md-select(required ng-model='addRealtyFull.realty.roomcount', ng-change="addRealtyFull.changeRoomCount()")
                                         md-option(ng-value='roomcount.id',
                                         ng-repeat="roomcount in addRealtyFull.dictionary.roomcountBig") {{roomcount.name}}
                                 div(flex='33').ml-32
@@ -77,7 +77,13 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
                                 md-input-container(flex).mv-0.ml-32
                                     input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
-
+                            div().mt-16
+                                p().md-subhead.add-realty-full-text Площадь комнат м²
+                            div(layout='row' layout-align='start center' flex).md-input-container.mt-16
+                                md-input-container(flex ng-repeat='room in addRealtyFull.realty.details.roomsSquare').mv-0
+                                    label {{$index + 1}}-я комната
+                                    input(ng-pattern="/^[0-9]{1,}$/" ng-model='room.square')
+                                
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row')
@@ -161,7 +167,14 @@ md-tabs(md-dynamic-height md-border-bottom)
                                 md-input-container(flex).mv-0.ml-32.form-required
                                     md-select(required ng-model='addRealtyFull.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
                                         md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
-
+                   
+                   div().mt-32 
+                            div(layout='row')
+                                md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addRealtyFull.realty.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ addRealtyFull.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
+                            div(layout='row').mv-16
+                                md-input-container(flex-offset='5').mv-0
+                                    input(type="text" ng-model='addRealtyFull.realty.comission' placeholder='Сколько готов платить комиссии (% или рублей)')
+                    
                     div().mt-32
                         p().md-subhead.add-realty-full-text Какой процент стоимости аренды вы хотите получить?
                         p().md-subhead.add-realty-full-text (Будет показано только агентам)

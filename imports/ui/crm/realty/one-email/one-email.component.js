@@ -6,6 +6,7 @@ import angularMeteor from 'angular-meteor';
 import {Email} from 'meteor/email';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty';
+import {Accounts} from 'meteor/accounts-base';
 
 import './one-email.view.html';
 
@@ -14,7 +15,23 @@ class OneEmail {
   constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
     let vm = this;
-    
+    this.autorun(function () {
+      let user = Meteor.user();
+      if (user) {
+        console.log(user, 'user');
+        this.user = user;
+        this.info = {
+            emails:'',
+            topic: '',
+            addedinfo: '',
+            dealcondition: '',
+            partnerpercent: '',
+            username: user.profile.name + ' ' + user.profile.surName,
+            useremail: user.emails[0].verified ? user.emails[0].address : false
+        }
+      }
+    });
+    console.log(this.user);
     this.subscribe('oneInfo', () => {
       return [
         $stateParams.realtyId
@@ -25,13 +42,6 @@ class OneEmail {
       }
     });
     
-    this.info = {
-        emails:'',
-        topic: '',
-        addedinfo: '',
-        dealcondition: '',
-        partnerpercent: ''
-    }
   }
   
   send () {
