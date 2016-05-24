@@ -114,6 +114,10 @@ md-switch {
   }
 }
 
+md-input-container .md-errors-spacer {
+  min-height: 0;
+}
+
 .topbar {
     height: 70px;
     background: #fff;

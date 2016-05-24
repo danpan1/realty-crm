@@ -21,10 +21,6 @@ add-client-full {
   }
 }
 
-md-input-container .md-errors-spacer {
-  min-height: 0;
-}
-
 .has-error{
   & label{
     color: red !important;
