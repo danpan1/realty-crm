@@ -15,12 +15,32 @@ class AddRealtyFull {
   constructor($state) {
     this.state = $state;
     this.dictionary = dictionary;
-    this.realty = {contacts: [{phones: [{phone:''}]}], address :{
-    }};
+    this.realty = {
+        contacts: [
+            {phones: [{phone:''}]}
+        ], 
+        address: {
+        },
+        details: {
+            roomsSquare: []
+        }
+    };
     this.metroTransport = 0;
     this.activeTab = 0;
     //fake selects Аренда Москва Квартиры
     this.fake = true;
+  }
+  
+  changeRoomCount () {
+    if (this.realty.details.roomsSquare.length < this.realty.roomcount) {
+      while (this.realty.details.roomsSquare.length < this.realty.roomcount) {
+          this.realty.details.roomsSquare.push({square:0});
+      }
+    } else {
+      while (this.realty.details.roomsSquare.length > this.realty.roomcount) {
+        this.realty.details.roomsSquare.splice(this.realty.details.roomsSquare.length - 1,1);
+      }
+    }
   }
 
   submit() {

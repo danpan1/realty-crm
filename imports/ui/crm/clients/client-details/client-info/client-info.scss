@@ -17,6 +17,8 @@ client-info {
   min-height: 268px;
 }
 
-.client-info-notes-item {
-  min-height: 168px;
+.client-info{
+    &-notes-item {
+        min-height: 168px;
+    }
 }

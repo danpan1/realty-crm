@@ -13,12 +13,12 @@ class OneInfoEdit {
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
-    this.conditionsSelected = [];
+    this.compositionSelected = [];
     for(var i in this.dictionary.composition.length){
-        this.conditionsSelected.push(false);
+        this.compositionSelected.push(false);
     }
     for(var i in this.realty.details.composition){
-        this.conditionsSelected[this.realty.details.composition[i]] = true;
+        this.compositionSelected[this.realty.details.composition[i]] = true;
     }
   }
   
@@ -28,8 +28,8 @@ class OneInfoEdit {
   
   onChangeRealty (realtyId) {
       this.realty.details.composition = [];
-      for(var i in this.conditionsSelected){
-          if(this.conditionsSelected[i] == true){
+      for(var i in this.compositionSelected){
+          if(this.compositionSelected[i] == true){
               this.realty.details.composition.push(i);
           }
       }

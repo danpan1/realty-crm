@@ -1,6 +1,9 @@
 // детальная информация для объекта (аренда)
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {dictionary} from '../../../helpers/dictionary';
+const roomSquareSchema = {
+    square: Number
+} 
 export const RentDetailsSchema = new SimpleSchema({
   //Балкон
   balcony: {
@@ -145,7 +148,7 @@ export const RentDetailsSchema = new SimpleSchema({
   },
   // площадь комнат
   roomsSquare: {
-    type: [Number],
+    type: [roomSquareSchema],
     label: 'roomsSquare',
     optional: true
   },

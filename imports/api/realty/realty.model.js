@@ -41,6 +41,14 @@ Realty.Schema = new SimpleSchema({
   address: {
     type: AddressSchema
   },
+  comission: { // размер комиссии
+    type: String,
+    optional: true
+  },
+  comissionLoyal: { // платит или нет комиссию
+    type: Boolean,
+    optional: true
+  },
   contacts: {
     type: [ContactsSchema],
     optional: true
