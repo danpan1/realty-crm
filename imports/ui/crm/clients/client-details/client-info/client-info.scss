@@ -3,12 +3,11 @@ client-info {
     min-width: 110px;
   }
 
-  md-switch:last-of-type {
-    margin-right: 16px;
-  }
-  
-  .client-info-minutes .md-errors-spacer {
-    min-height: 0;
+  md-switch {
+    margin-right: 0;
+    &:last-of-type {
+      margin-right: 0;
+    }
   }
 }
 
