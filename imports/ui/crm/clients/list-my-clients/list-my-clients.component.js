@@ -16,42 +16,43 @@ class ListMyClients {
     $reactive(this).attach($scope);
     this.state = $state;
     this.stateParams = $stateParams;
-    
+
     let vm = this;
     vm.status = this.stateParams.status ? this.stateParams.status : 'hot';
     vm.loaded = false;
     vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
-      //'price': -1
-      'name': 1
+      'createdAt': -1
     };
-    
+
     vm.selectedTab = '';
-    switch($stateParams.status){
-        case 'hot':
-            vm.selectedTab = 0;
-            break;
-        case 'realtor':
-            vm.selectedTab = 1;
-            break;
-        case 'archive':
-            vm.selectedTab = 2;
-            break;
-        default:
-            vm.selectedTab = 0;
-            break;
+    switch ($stateParams.status) {
+      case 'hot':
+        vm.selectedTab = 0;
+        break;
+      case 'realtor':
+        vm.selectedTab = 1;
+        break;
+      case 'archive':
+        vm.selectedTab = 2;
+        break;
+      default:
+        vm.selectedTab = 0;
+        break;
     }
     vm.subscribe('listClients', () => {
-        return [
-            {
-            status:vm.getReactively('status'),
-            limit: parseInt(vm.perPage),
-            skip: parseInt((vm.getReactively('page') - 1) * vm.perPage),
-            sort: vm.getReactively('sort')
-            }
-        ];
-      }, {
+      return [{
+        status: vm.getReactively('status')
+      },
+        {
+          limit: parseInt(vm.perPage),
+          skip: parseInt((vm.getReactively('page') - 1) * vm.perPage),
+          sort: vm.getReactively('sort')
+        }
+
+      ];
+    }, {
       onReady: function () {
         vm.loaded = true;
         console.log('onReady And the Items actually Arrive', arguments);
@@ -60,7 +61,7 @@ class ListMyClients {
     });
     vm.helpers({
       clients() {
-        return Clients.find();
+        return Clients.find({}, {sort: vm.getReactively('sort')});
       },
       clientsCount: () => {
         return Counts.get('clientsCount');
@@ -69,11 +70,11 @@ class ListMyClients {
         return Math.ceil(Counts.get('clientsCount') / this.perPage);
       }
     });
-    
+
   }
-  
-  goToPage (newPageNumber) {
-      this.state.go('crm.clients.list.my', {status: this.status, page: newPageNumber}) ;
+
+  goToPage(newPageNumber) {
+    this.state.go('crm.clients.list.my', {status: this.status, page: newPageNumber});
   }
 
 }
