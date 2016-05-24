@@ -11,7 +11,7 @@ div
         total-items="listMyClients.clientsCount"
         client='client')
     
-div(layout="row" layout-align="center start")
+div(layout="row" ng-if="listMyClients.pagesCount > 1" layout-align="center start")
     md-button(ng-click="listMyClients.goToPage(1)" ng-if='listMyClients.page != 1').md-raised first            
     md-button(ng-click="listMyClients.goToPage(listMyClients.page - 2)" ng-if='listMyClients.page - 2 >= 1').md-raised {{listMyClients.page - 2}}            
     md-button(ng-click="listMyClients.goToPage(listMyClients.page - 1)" ng-if='listMyClients.page - 1 >= 1').md-raised {{listMyClients.page - 1}}            
