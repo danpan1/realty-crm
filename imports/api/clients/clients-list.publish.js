@@ -10,8 +10,6 @@ import {Roles} from 'meteor/alanning:roles';
 if (Meteor.isServer) {
   
   Meteor.publish('listClients', function (filter, options) {
-
-    console.log(this.userId);
   
     if(this.userId){
         

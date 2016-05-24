@@ -24,7 +24,7 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Квартира: #[strong {{oneInfo.realty.address.flat || 'Не указано'}}]
                     div(ng-if='oneInfo.realty.address.subwaysEmbedded[0].name').md-subhead Метро: #[strong {{oneInfo.realty.address.subwaysEmbedded[0].name}} {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
                     div
-                        md-button(ng-click="oneInfo.showEditDialog($event)").md-primary.md-raised.ml-0 Изменить
+                        md-button(ng-click="oneInfo.showEditDialog()").md-primary.md-raised.ml-0 Изменить
 
             div(flex="33")
                 h2 Объект
@@ -36,8 +36,9 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Общая площадь: #[strong {{oneInfo.realty.square}}]
                     div().md-subhead Жилая площадь: #[strong {{oneInfo.realty.details.livingSquare}}]
                     div().md-subhead Площадь кухни: #[strong {{oneInfo.realty.details.kitchenSquare}}]
-                    //div().md-subhead Площадь комнат:
-                    //    span(ng-repeat="i in [0,1,2,3]") #[strong {{oneInfo.realty.details.roomsSquare[i]}}, ]
+                    div().md-subhead Площадь комнат:
+                        span(ng-repeat="room in oneInfo.realty.details.roomsSquare") #[strong {{room.square}}]
+                        span(ng-if='$index != oneInfo.realty.details.roomsSquare.length - 1') ,
                     div().md-subhead Лоджия: #[strong {{oneInfo.realty.details.loggia}}]
                     div().md-subhead Балкон: #[strong {{oneInfo.realty.details.balcony}}]
                     div().md-subhead Пассажирских лифтов: #[strong {{oneInfo.realty.details.elevator}} ]
@@ -56,9 +57,10 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead От клиента: #[strong {{oneInfo.realty.realtor.clientpercent || 0}}]%
                     div().md-subhead От клиента партнера: #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
         div(md-whiteframe='2' flex='20').mh-16 {{oneInfo.currentConditions[$index].presence}}
-            md-switch.md-warn(ng-model='oneInfo.currentConditions[$index].presence',
-            aria-label='Switch 2'
-            ng-repeat="condition in oneInfo.dictionary.conditions"
+            md-switch.md-warn(
+            ng-model='oneInfo.currentConditions[$index].presence',
+            aria-label='Switch 2',
+            ng-repeat="condition in oneInfo.dictionary.conditions",
             ng-click="oneInfo.onConditionsChange(condition.id)") {{condition.name}}
 
     div(layout="row", layout-align="space-between")

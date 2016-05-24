@@ -1,4 +1,4 @@
-div {{clientInfo.client}}
+client-info-edit(ng-if="clientInfo.client" client="clientInfo.client" show="clientInfo.editDialogShow") 
 div
     div(layout='row' layout-align='space-between start' ng-init='clientInfo.ngOnInit()').mt-16
         div(md-whiteframe='2' flex='66').client-info-notes.mr-16.p-16
@@ -6,18 +6,16 @@ div
             div(layout='column' layout-align='space-between none').client-info-notes-item
                 md-input-container().md-block.mt-0
                     label Заметка по объекту
-                    textarea(maxlength="2000")
+                    textarea(maxlength="2000" ng-model='clientInfo.client.realtorNote')
                 div
-                    md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+                    md-button(aria-label='Сохранить' ng-click='clientInfo.updateClientInfo()').md-primary.md-raised.m-0 Сохранить
         div(md-whiteframe='2' flex='33').client-info-contacts.p-16
             h3().md-title.mt-0.mb-32 Контакты собственника
             md-input-container().md-block.mt-16.mb-0
                 label Имя
-                input(type='text').md-title
-            md-input-container().md-block.mt-16.mb-0
-                label Телефон
-                input(type='tel').md-title
-            md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+                input(type='text' ng-model='clientInfo.client.name').md-title
+            phone-mask(label='"Телефон клиента"' phone='clientInfo.client.phone')
+            md-button(aria-label='Сохранить' ng-click='clientInfo.updateClientInfo()').md-primary.md-raised.m-0 Сохранить
     div(layout='row').mt-16
         div(md-whiteframe='2' flex)
             div(layout='row')
@@ -40,7 +38,7 @@ div
                         div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.mm'}}]
                     div().md-subhead.mv-8 Состав съемщиков: 
                     div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
-                    md-button(aria-label='Изменить').md-primary.md-raised.mt-32.mh-0 Изменить
+                    md-button(aria-label='Изменить' ng-click="clientInfo.showEditDialog($event)").md-primary.md-raised.mt-32.mh-0 Изменить
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Объект
@@ -57,6 +55,7 @@ div
                         div(flex='60') Тип ремонта:
                         div(flex='40') 
                             span(ng-repeat='renovation in clientInfo.client.need.renovation') #[strong {{clientInfo.dictionary.renovation[renovation].name}}]
+                                
                                 span(ng-if='$index != clientInfo.client.need.renovation.length - 1') , 
                     div(layout='row' layout-align='space-around center').md-subhead.mv-8 
                         div(flex='60') Комнат: 
