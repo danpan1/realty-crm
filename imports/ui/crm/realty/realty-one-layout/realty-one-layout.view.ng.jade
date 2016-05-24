@@ -1,9 +1,9 @@
-div(md-whiteframe='1')
-    div(layout='row' layout-align='start center').topbar
-        md-button(aria-label='Вернуться назад' ui-sref="crm.realty.list.my").realty-one-layout-btn-back.mh-16
+div(md-whiteframe='1').topbar
+    div(layout='row' layout-align='start center')
+        md-button(aria-label='Вернуться назад' ui-sref="crm.realty.list.my").btn-back.mh-16
             md-icon(md-svg-src='svg/icon-arrow-left.svg')
         h3.md-headline г Москва, {{::realtyOneLayout.infoRealty.address.street}}, {{::realtyOneLayout.infoRealty.address.house}}, кв {{::realtyOneLayout.infoRealty.address.flat}}
-div(md-whiteframe='1').realty-one-layout-whiteframe
+div(md-whiteframe='1').tabbar
     md-tabs(md-selected="realtyOneLayout.selectedTab")
         //md-tab(label='Связи' ui-sref='crm.realty.one.connections({assort:\'manual\'})')
         //md-tab(label='Показы' ui-sref='crm.realty.one.demonstrations')
