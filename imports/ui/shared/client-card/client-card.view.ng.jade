@@ -57,6 +57,7 @@ div(md-whiteframe='2').mv-16.client-card
                 div(flex='55').ph-16
                     p
                         span(ng-repeat="room in clientCard.client.need.roomcount").md-body-1 {{room}}
+                        
                             span(ng-if="$index < clientCard.client.need.roomcount.length - 1") ,
                         span() {{ }} комнат,  длительная
             md-divider

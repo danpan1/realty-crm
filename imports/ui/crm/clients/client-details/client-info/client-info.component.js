@@ -5,6 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Clients} from '/imports/api/clients/clients.model';
 import {dictionary} from '/imports/helpers/dictionary';
+import {name as ClientInfoEdit} from './client-info-edit/client-info-edit.component';
 
 import './client-info.view.html';
 
@@ -17,6 +18,7 @@ class ClientInfo {
     this.state = $state;
     let vm = this;
     this.mdDialog = $mdDialog;
+    this.editDialogShow = false;
     
     this.dictionary = dictionary;
     this.compositionSelected = [];
@@ -55,7 +57,10 @@ class ClientInfo {
   archive (client) {
       if(client == this.client){
           this.client.status = 'archive';
-          Clients.update({_id: this.client._id}, {
+          
+          this.updateClientInfo();
+          
+          /*Clients.update({_id: this.client._id}, {
               $set: this.client
           }, (error) => {
               if(error) {
@@ -63,7 +68,8 @@ class ClientInfo {
               } else {
                   console.log('call recieved newClient');
               }
-          });
+          });*/
+          
           console.log(this.client.status);
           this.state.go('crm.clients.list.my');
       }
@@ -104,7 +110,10 @@ class ClientInfo {
             .targetEvent(ev);
         this.mdDialog.show(confirm).then(function() {
             vm.client.status = 'archive';
-            Clients.update({_id: vm.client._id}, {
+            
+            vm.updateClientInfo();
+            
+            /*Clients.update({_id: vm.client._id}, {
                 $set: vm.client
             }, (error) => {
                 if(error) {
@@ -112,10 +121,35 @@ class ClientInfo {
                 } else {
                     console.log('call recieved newClient');
                 }
-            });
+            });*/
+            
             console.log(vm.client.status);
             vm.state.go('crm.clients.list.my');
         })
+  }
+  
+  updateClientInfo () {
+    Clients.update({_id: this.client._id}, {
+        $set: this.client
+    }, (error) => {
+        if(error) {
+        console.log(error);
+        } else {
+            console.log('call recieved newObj');
+        }
+    });
+  }
+  
+  onConditionsChange (condition) {
+    let index = this.client.need.conditions.indexOf(condition);
+    if (index === -1) {
+      this.client.need.conditions.push(condition);
+    }  else {
+      this.client.need.conditions.splice(index, 1);
+    }
+    console.log(this.client.need.conditions);
+    
+    this.updateClientInfo();
   }
   
   setActiveConditions (conditions) {
@@ -129,13 +163,18 @@ class ClientInfo {
     }
   }  
   
+  showEditDialog () {
+      this.editDialogShow = true;
+  }
+  
 }
 
 const moduleName = 'clientInfo';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  ClientInfoEdit
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/clients/client-details/client-info/client-info.view.html',
   bindings: {},
