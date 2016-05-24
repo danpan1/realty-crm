@@ -18,9 +18,11 @@ md-tabs(md-dynamic-height)
                             div(layout='row').mv-16
                                 md-input-container(flex='90').mv-0.form-required
                                     input(type="text" ng-model='addClientFull.client.comission' placeholder='Сколько готов платить комиссии (% или рублей)')
-                            //СОСТАВ СЪЁМЩИкОВ
+                    
+                    div(layout='row')        
+                        div(flex='45')
                             div(layout='row').mv-16
-                                md-input-container().mv-0.form-required
+                                md-input-container(flex='40').mv-0.form-required
                                     label Состав съемщиков
                                     md-select(required ng-model='addClientFull.client.composition' aria-label='Выбрать состав съемщиков')
                                         md-option(ng-value='composition.id',
@@ -28,6 +30,9 @@ md-tabs(md-dynamic-height)
                                 md-input-container(flex-offset='5').mv-0
                                     label Чем занимается
                                     input(type="text" ng-model='addClientFull.client.business')
+
+                    div(layout='row')
+                        div(flex='80')
                             div(layout='row').mv-32
                                 md-input-container(flex='90').mv-0.form-required
                                     label Напишите, что важно клиенту (ваша заметка)
