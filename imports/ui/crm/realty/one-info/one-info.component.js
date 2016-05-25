@@ -76,6 +76,19 @@ class OneInfo {
   }
   
   realtyUpdate () {
+      
+      
+    let value = this.realty.contacts[0].phones[0].phone.split('');
+    for(var i in [1,2,3]){
+      for(var i in value){
+          if(value[i].match(/\+|\(|\)|\-|\s|d/)){
+              value.splice(i,1);
+          }
+      }
+    }
+    value = value.join('');
+    this.realty.contacts[0].phones[0].phone = parseInt(value);
+    
     Realty.update({_id: this.realty._id}, {
       $set: this.realty
     }, (error) => {
