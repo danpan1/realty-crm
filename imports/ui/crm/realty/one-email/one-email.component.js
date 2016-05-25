@@ -17,6 +17,7 @@ class OneEmail {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     let vm = this;
+    this.proposalSent = 0;
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {
@@ -24,7 +25,7 @@ class OneEmail {
         this.user = user;
         this.info = {
             emails:'',
-            topic: '',
+            //topic: '',
             addedinfo: '',
             dealcondition: '',
             partnerpercent: '',
@@ -41,17 +42,28 @@ class OneEmail {
     }, {
       onReady() {
         vm.realty = Realty.findOne({});
+        let number = vm.realty.price.toString();
+        number = number.split('').reverse().join('');
+        number = number.length > 3 ? number.length > 6 ? number.length > 6 ? number.slice(0, 3) + ' ' + number.slice(3,6) +  ' ' + number.slice(6,9) + ' ' + number.slice(9) : number.slice(0, 3) + ' ' + number.slice(3,6) + ' ' + number.slice(6) :  number.slice(0, 3) + ' ' + number.slice(3) : number;
+        vm.price = number.split('').reverse().join('');
+        vm.info.topic = 'Преложение для [[Имя]]: ' + vm.realty.roomcount + '-комнатная, м.' + vm.realty.address.subwaysEmbedded[0].name + ' ' + vm.realty.address.metroTime + ' мин. ' + vm.dictionary.transport[vm.realty.address.metroTransport].name + ', ' + vm.price + ' руб.';
+        let realtyConditions = vm.price + ' рублей в месяц, депозит ' + vm.price + ' рублей';
+        let comission = vm.realty.comission ? ', комиссия ' + vm.realty.comission : '';
+        vm.info.realtyConditions = realtyConditions + comission;
       }
     });
     
   }
   
   send () {
+      let vm = this;
+      vm.proposalSent = 1;
       Meteor.call('sendTest', this.info, this.realty, (error, result) => {
           if (error) {
               console.log(error);
           } else {
               console.log(`Cool!`);
+              vm.proposalSent = 2;
           }
       });
   }

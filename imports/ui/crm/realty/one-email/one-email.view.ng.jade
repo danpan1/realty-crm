@@ -7,10 +7,13 @@ div(md-whiteframe='2').mt-16.ph-32.pt-32.pb-8
                 input(ng-model='oneEmail.info.topic' placeholder='Тема письма')
             md-input-container().md-block
                 textarea(ng-model='oneEmail.info.addedinfo' placeholder='Дополнительно написать к этому объекту')
+            md-input-container().md-block
+                p {{oneEmail.info.realtyConditions}}
 div(md-whiteframe='2').one-email-card.ph-32.pv-8
     div(layout='column')
         div().mv-8
-            md-button(ng-click="oneEmail.send()").md-primary.md-raised.md-body-1.ml-0 Отправить письмо
+            md-button(ng-click="oneEmail.send()" ng-if='oneEmail.proposalSent != 2' ng-disabled='oneEmail.proposalSent == 1').md-primary.md-raised.md-body-1.ml-0 Отправить письмо
+            md-button(ng-if='oneEmail.proposalSent == 2').md-success.md-raised.md-body-1.ml-0 Успешно отправлено
 
 div()
     h2 Предварительный просмотр
@@ -132,4 +135,6 @@ div()
                             br
                             a(ng-if='oneEmail.realty.contacts[0].email' href='mailto:{{oneEmail.realty.contacts[0].email}}', target='_blank') {{oneEmail.realty.contacts[0].email}}
         div(md-whiteframe='2' flex-offset='5' flex='40')
-            p 
+            p #[b Имя отправителя:] {{oneEmail.info.username}}
+            p #[b Email отправителя:] {{oneEmail.user.emails[0].address}}
+            p #[b Email для ответа:] {{oneEmail.user.emails[0].address}}
