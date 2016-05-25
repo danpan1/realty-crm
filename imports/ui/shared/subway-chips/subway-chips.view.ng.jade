@@ -7,7 +7,7 @@ div().metro.mt-16
         md-autocomplete(md-selected-item='subwayChips.selectedItem',
         md-search-text='subwayChips.searchText',
         md-search-text-change='subwayChips.searchTextChange(subwayChips.searchText)',
-        md-items='item in subwayChips.subwaysSuggestionList | selectedSubway:subwayChips.alreadyPicked',
+        md-items='item in subwayChips.subwaysSuggestionList | selectedSubway:subwayChips.subwaysInForm',
         placeholder='Метро',
         md-no-cache='true')
             span(class="metro-color-{{item.meta.lineId}}").metro-color
