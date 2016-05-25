@@ -119,6 +119,17 @@ class ClientInfo {
   }
   
   updateClientInfo () {
+    let value = this.client.phone.split('');
+    for(var i in [1,2,3]){
+      for(var i in value){
+          if(value[i].match(/\+|\(|\)|\-|\s|d/)){
+              value.splice(i,1);
+          }
+      }
+    }
+    value = value.join('');
+    this.client.phone = parseInt(value);
+            
     Clients.update({_id: this.client._id}, {
         $set: this.client
     }, (error) => {

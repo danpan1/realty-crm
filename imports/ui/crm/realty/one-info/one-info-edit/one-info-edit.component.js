@@ -42,7 +42,17 @@ class OneInfoEdit {
           }
       }
       
-      
+      var price = this.realty.price.split('');
+      for(var i in [1,2,3]){
+          for(var i in price){
+              if(price[i].match(/\s/)){
+                  price.splice(i,1);
+              }
+          }
+      }
+      price = price.join('');
+      this.realty.price = parseInt(price);
+      console.log(this.realty.price);
       
       Realty.update({_id: realtyId}, {
         $set: this.realty
