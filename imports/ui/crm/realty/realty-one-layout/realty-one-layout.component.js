@@ -31,7 +31,6 @@ class RealtyOneLayout {
         return Realty.findOne({});
       }
     });
-    console.log($state);
     switch ($state.current.url) {
       // case '/demonstrations':
       //   this.selectedTab = 0;
