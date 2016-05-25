@@ -40,13 +40,5 @@
         div(layout='column' layout-align='center center').listMy_Actions.pv-8.pl-16.pr-32
             //md-button(md-no-ink='').md-primary Инфо об объекте
 
-div(layout="row" ng-if="listArchive.pagesCount > 1" layout-align="center start")
-    //md-button(ng-click="listArchive.goToPage(1)" ng-if='listArchive.page != 1').md-raised first
-    //md-button(ng-click="listArchive.goToPage(listArchive.page - 2)" ng-if='listArchive.page - 2 >= 1').md-raised {{listArchive.page - 2}}
-    //md-button(ng-click="listArchive.goToPage(listArchive.page - 1)" ng-if='listArchive.page - 1 >= 1').md-raised {{listArchive.page - 1}}
-    //md-button().md-raised.md-primary {{listArchive.page}}
-    //md-button(ng-click="listArchive.goToPage(listArchive.page + 1)" ng-if='listArchive.page + 1 <= listArchive.pagesCount').md-raised {{listArchive.page + 1}}
-    //md-button(ng-click="listArchive.goToPage(listArchive.page + 2)" ng-if='listArchive.page + 2 <= listArchive.pagesCount').md-raised {{listArchive.page + 2}}
-    //md-button(ng-click="listArchive.goToPage(listArchive.pagesCount)" ng-if='listArchive.page != listArchive.pagesCount').md-raised last
-        //dir-pagination-controls(on-page-change="listArchive.pageChanged(newPageNumber)")
 
+pagination-buttons(ng-if='listArchive.pagesCount' uisref='\'crm.realty.list.archive\'' page='listArchive.page' pagescount='listArchive.pagesCount')
