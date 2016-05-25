@@ -57,9 +57,9 @@ md-tabs(md-dynamic-height md-border-bottom)
                                         md-option(ng-value='roomcount.id',
                                         ng-repeat="roomcount in addRealtyFull.dictionary.roomcountBig") {{roomcount.name}}
                                 div(flex='33').ml-32
-                                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead.mb-0 Апартаменты
+                                    md-checkbox(aria-label='Checkbox 1' md-no-ink ng-model='addRealtyFull.realty.details.apartaments').md-primary.md-subhead.mb-0 Апартаменты
                                 div(flex='33').ml-32
-                                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead.mb-0 Пентхаус
+                                    md-checkbox(aria-label='Checkbox 1' md-no-ink ng-model='addRealtyFull.realty.details.penthouse').md-primary.md-subhead.mb-0 Пентхаус
 
                     div(layout='row').mv-16
                         div(flex='45')
