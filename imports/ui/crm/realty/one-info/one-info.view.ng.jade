@@ -122,8 +122,8 @@ div(layout="column", layout-align="space-around stretch")
                 aria-label='Switch 2'
                 ng-repeat="condition in oneInfo.dictionary.conditions"
                 ng-click="oneInfo.onConditionsChange(condition.id)") {{condition.name}}
-
-        div(md-whiteframe='2' flex='50' ng-if='oneInfo.realty.status != "archive"').p-16
+                    //ng-if='oneInfo.realty.status != "archive"
+        div(md-whiteframe='2' flex='50').p-16
             h3().md-title.mt-0 Закрытие сделки
             md-button(ng-click='oneInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить объект в архив').md-primary.md-raised.mt-32.mh-0  Закрыть сделку и перенести объект в архив
             //md-button(ng-click='oneInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить клиента в архив').md-primary.md-raised.mt-32.mh-0 Закрыть сделку и переместить клиента в архив
