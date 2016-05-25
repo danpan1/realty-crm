@@ -57,6 +57,8 @@ class AddRealtyFull {
     console.log(this.realty.price);
     console.log(this.realty.contacts[0].phones[0].phone);
 
+    if(!this.realty.comissionLoyal) this.realty.comission = '';
+    
     //4 - Аренда - Квартиры
     const vm = this;
     this.realty.type = 4;

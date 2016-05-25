@@ -60,11 +60,19 @@ Clients.Schema = new SimpleSchema({
     type: String,
     optional: true
   },
+  important: {
+    type: String,
+    optional: true
+  },
   name: {
     type: String
   },
   need: { // Сама потребность по объекту
     type: clientNeedSchema,
+    optional: true
+  },
+  note: {
+    type: String,
     optional: true
   },
   phone: {

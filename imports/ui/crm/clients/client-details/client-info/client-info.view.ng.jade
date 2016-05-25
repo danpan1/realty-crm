@@ -5,8 +5,7 @@ div(ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
             h3().md-title.mt-0.mb-32 Заметка по клиенту
             div(layout='column' layout-align='space-between none').client-info-notes-item
                 md-input-container().md-block.mt-0
-                    label Заметка по клиенту
-                    textarea(maxlength="2000" ng-model='clientInfo.client.realtorNote')
+                    textarea(maxlength="2000" ng-model='clientInfo.client.important')
                 div
                     md-button(aria-label='Сохранить' ng-click='clientInfo.updateClientInfo()').md-primary.md-raised.m-0 Сохранить
         div(md-whiteframe='2' flex='33').client-info-contacts.p-16
@@ -23,7 +22,7 @@ div(ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Особенности клиента
                     div(layout='row' layout-align='space-around center').md-subhead.mv-8
                         div(flex='60') Цена:
-                        div(flex='40') #[strong {{clientInfo.client.need.price}}]
+                        div(flex='40') #[strong {{clientInfo.client.need.price | price}}]
                     div(layout='row' layout-align='space-around center').md-subhead.mv-8
                         div(flex='60') Платить комиссию:
                         div(flex='40') #[strong {{clientInfo.client.comissionLoyal ? 'Да' : 'Нет'}}]
@@ -65,7 +64,7 @@ div(ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Метро
                     p
-                        p(ng-repeat="subway in clientInfo.client.need.embedded.subways").mv-0
+                        p(ng-repeat="subway in clientInfo.client.need.embedded.subways track by $index").mv-0
                             span(class="metro-color-{{clientInfo.client.need.embedded.subways[$index].line}}").metro-color
                             span() {{subway.name}}
                             span(ng-if='$index != clientInfo.client.need.embedded.subways.length - 1') , 

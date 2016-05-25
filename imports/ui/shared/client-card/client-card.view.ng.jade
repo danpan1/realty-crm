@@ -14,7 +14,7 @@ div(md-whiteframe='2').mv-16.client-card
                 p(ng-if="clientCard.client.status == 'realtor'" hide).md-title.m-0
                     span().text-bold 1 мая 17:00 | 
                     span().text-bold через 3:00
-                p().md-body-1.client-card__note {{clientCard.client.realtorNote}}
+                p().md-body-1.client-card__note {{clientCard.client.note}}
             md-divider
             div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.client.status")
                 p.client-card__link_p(ng-if="clientCard.client.status != 'archive'")

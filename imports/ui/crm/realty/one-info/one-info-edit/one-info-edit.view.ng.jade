@@ -86,7 +86,7 @@ div(ng-if="oneInfoEdit.show")
                                 input(ng-model="oneInfoEdit.realty.price"
                                       ng-price-filter
                                       ng-keypress="oneInfoEdit.realty.price = ' '+this.oneInfoEdit.realty.price"
-                                      ng-init="clientInfoEdit.ngOnInit(oneInfoEdit.realty.price)")
+                                      ng-init="oneInfoEdit.ngOnInit(oneInfoEdit.realty.price)")
                             md-input-container(flex).md-block.mv-32.zh
                                 label Процент от клиента
                                 input(ng-model="oneInfoEdit.realty.realtor.clientpercent")

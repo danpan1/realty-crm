@@ -15,7 +15,6 @@ div(layout="column", layout-align="space-around stretch")
             h3().md-title.mt-0.mb-32 Заметка по объекту
             div(layout='column' layout-align='space-between none').client-info-notes-item
                 md-input-container().md-block.mt-0
-                    label Заметка по объекту
                     textarea(maxlength="2000" ng-model="oneInfo.realty.realtor.comment")
                 div
                     md-button(aria-label='Сохранить' ng-click='oneInfo.realtyUpdate()').md-primary.md-raised.m-0 Сохранить
