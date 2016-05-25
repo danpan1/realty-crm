@@ -5,6 +5,7 @@ import {Meteor} from 'meteor/meteor';
 import {Clients} from '../clients.model';
 import {_} from 'meteor/underscore';
 import {Counts} from 'meteor/tmeasday:publish-counts';
+import {dictionary} from '../../../helpers/dictionary';
 
 if (Meteor.isServer) {
 
@@ -14,6 +15,7 @@ if (Meteor.isServer) {
 
     if (this.userId) {
       console.log(filter.searchType);
+
       let selector = {
         status: 'realtor'
       };
@@ -35,14 +37,33 @@ if (Meteor.isServer) {
         // if (filter.metroTransport || filter.metroTransport === 0) {
         //   selector['need.metroTransport'] = filter.metroTransport;
         // }
-        //
-        // if (filter.subways) {
-        //   selector['need.subways'] = filter.subways;
-        // }
-        //
-        // if (filter.conditions) {
-        //   selector['need.conditions'] = filter.conditions;
-        // }
+
+        if (filter.subways) {
+          if (filter.searchType === 'manual') {
+            selector['need.subways'] = filter.subways;
+          } else {
+            selector['need.subwaysInDistance'] = {$in: filter.subways};
+          }
+        }
+
+        if (filter.conditions && filter.conditions.length) {
+
+          let mappedDictionary = dictionary.conditions.map((item)=> {
+            return item.id;
+          });
+          //Приходится искать от обратного. Ищем по объекту в запросе.
+          let ninConditions = mappedDictionary.filter((item)=> {
+            if (filter.conditions.indexOf(item) === -1) {
+              return true;
+            }
+            return false;
+          });
+          if (filter.searchType === 'manual') {
+            selector['need.conditions'] = {$nin: ninConditions};
+          } else {
+            // Тут надо алгоритм такой, что если мебель указана в conditions тогда ищем мебель
+          }
+        }
 
         if (filter.searchType === 'my') {
           selector.realtorId = this.userId;
@@ -55,7 +76,5 @@ if (Meteor.isServer) {
       }
 
     }
-
   });
-
 }
