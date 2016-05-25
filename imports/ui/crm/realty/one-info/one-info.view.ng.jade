@@ -102,13 +102,13 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Цена:
                         div(flex='40') #[strong {{oneInfo.realty.price | price}}]
-                    div(layout='row' ng-if='oneInfo.realty.operator.qualification' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' ng-if='oneInfo.realty.comission' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Собственник:
-                        div(flex='40') #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
-                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='40') #[strong {{oneInfo.realty.comission}}]
+                    div(layout='row' ng-if='oneInfo.realty.realtor.clientpercent' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') От клиента:
                         div(flex='40') #[strong {{oneInfo.realty.realtor.clientpercent || 0}}]%
-                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' ng-if='oneInfo.realty.realtor.partnerpercent' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') От партнера:
                         div(flex='40') #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
                     div().md-subhead Состав съемщиков

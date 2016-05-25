@@ -78,9 +78,12 @@ class AddRealtyFull {
       street: vm.locations.street.value,
       streetFiasId: vm.locations.street.data.fias_id,
       subways : vm.locations.subways,
-      subwaysEmbedded : vm.locations.embedded.subways,
+      //subwaysEmbedded : vm.locations.embedded.subways,
       value: vm.locations.full.unrestricted_value
     };
+    if(vm.locations.embedded){
+        this.realty.address.subwaysEmbedded = vm.locations.embedded.subways;
+    }
     console.log(this.realty.address.subwaysEmbedded);
     Meteor.call('addRealty', this.realty, (error, result) => {
       if (error) {
