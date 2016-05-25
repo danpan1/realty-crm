@@ -31,10 +31,10 @@ div(ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
                         div(flex='40') #[strong {{clientInfo.client.comission}}]
                     div(layout='row' layout-align='space-around center').md-subhead.mv-8
                         div(flex='60') Актуально с:
-                        div(flex='40') #[strong {{clientInfo.client.searchStartDate | date:'dd.mm'}}]
+                        div(flex='40') #[strong {{clientInfo.client.searchStartDate | date:'dd.MM'}}]
                     div(layout='row' layout-align='space-around center').md-subhead.mv-8
                         div(flex='60') В поиске с:
-                        div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.mm'}}]
+                        div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.MM'}}]
                     div().md-subhead.mv-8 Состав съемщиков:
                     div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
                     md-button(aria-label='Изменить' ng-click="clientInfo.showEditDialog($event)").md-primary.md-raised.mt-32.mh-0 Изменить
