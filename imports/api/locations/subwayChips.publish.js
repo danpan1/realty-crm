@@ -16,7 +16,8 @@ if (Meteor.isServer) {
         $regex: `.*${searchString}.*`,
         $options: 'i'
       };
-
+      let find = Locations.find(selector, options).fetch().map((item) => {return item.name;});
+      console.log(find);
       return Locations.find(selector, options);
 
     } else if (selectedItems && selectedItems.length) {

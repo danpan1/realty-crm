@@ -5,8 +5,9 @@ import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {clientNeedSchema} from './client-need.schema';
 import {Roles} from 'meteor/alanning:roles';
+import {_} from 'meteor/underscore';
 import {Meteor} from 'meteor/meteor';
-
+import {Locations} from '../locations';
 export const Clients = new Mongo.Collection('clients');
 
 Clients.allow({
@@ -54,7 +55,7 @@ Clients.Schema = new SimpleSchema({
     type: Date,
     optional: true
   },
-  email:{
+  email: {
     type: String,
     optional: true
   },
@@ -79,15 +80,15 @@ Clients.Schema = new SimpleSchema({
     type: [Object],
     optional: true
   },
-  'relations.$._id':{
+  'relations.$._id': {
     type: String,
     optional: true
   },
-  'relations.$.read':{
+  'relations.$.read': {
     type: Boolean,
     optional: true
   },
-  'relations.$.hide':{
+  'relations.$.hide': {
     type: Boolean,
     optional: true
   }, /// TODO сделать статусы ['offer', 'offered', inwork, reject, hide, read]??? пока хз
@@ -102,7 +103,7 @@ Clients.Schema = new SimpleSchema({
   status: {//'realtor' - находится у риэлтора в работе (мои клиенты)
     type: String
   },
-  value:{
+  value: {
     type: Number,
     optional: true
   }
@@ -110,6 +111,33 @@ Clients.Schema = new SimpleSchema({
 
 Clients.before.insert(function (userId, doc) {
   doc.createdAt = Date.now();
+  console.log(doc.need.subways, 'doc.need.subways');
+  let subways = Locations.find({'_id': {$in: doc.need.subways}}).fetch();
+  if (subways) {
+    let subwaysInDistance = [];
+    subways.forEach((metro) => {
+      let foundCloseMetro = Locations.find({
+        coordinates: {
+          $near: {
+            $geometry: {type: 'Point', coordinates: metro.coordinates},
+            $maxDistance: 3000
+          }
+        }
+      }).fetch();
+      subwaysInDistance = subwaysInDistance.concat(foundCloseMetro);
+    });
+
+    console.log('subwaysInDistance', subwaysInDistance);
+    let step1 = subwaysInDistance.map((item)=> {
+      return item._id;
+    });
+    console.log('step1', step1.length);
+    let step2 = _.uniq(step1, function (item) {
+      return item;
+    });
+    console.log('step2', step2.length);
+    doc.need.subwaysInDistance = step2;
+  }
 });
 
 Clients.before.update(function (userId, doc, fieldNames, modifier, options) {

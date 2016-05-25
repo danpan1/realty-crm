@@ -33,6 +33,10 @@ export const clientNeedSchema = new SimpleSchema({
     type: [String],
     optional: true
   },
+  subwaysInDistance: { // Метро ближайшие
+    type: [String],
+    optional: true
+  },
   metroTime: {
     type: Number,
     optional: true
