@@ -1,0 +1,12 @@
+p paginationButtons {{paginationButtons.pagescount}}
+p paginationButtons {{paginationButtons.page}}
+p paginationButtons {{paginationButtons.uisref}}
+
+div(layout="row" ng-if="paginationButtons.pagescount > 1" layout-align="center start")
+    md-button(ng-click="paginationButtons.goToPage(1)" ng-if='paginationButtons.page != 1').md-raised first            
+    md-button(ng-click="paginationButtons.goToPage(paginationButtons.page - 2)" ng-if='paginationButtons.page - 2 >= 1').md-raised {{paginationButtons.page - 2}}            
+    md-button(ng-click="paginationButtons.goToPage(paginationButtons.page - 1)" ng-if='paginationButtons.page - 1 >= 1').md-raised {{paginationButtons.page - 1}}            
+    md-button().md-raised.md-primary {{paginationButtons.page}}            
+    md-button(ng-click="paginationButtons.goToPage(paginationButtons.page + 1)" ng-if='paginationButtons.page + 1 <= paginationButtons.pagescount').md-raised {{paginationButtons.page + 1}}           
+    md-button(ng-click="paginationButtons.goToPage(paginationButtons.page + 2)" ng-if='paginationButtons.page + 2 <= paginationButtons.pagescount').md-raised {{paginationButtons.page + 2}}            
+    md-button(ng-click="paginationButtons.goToPage(paginationButtons.pagescount)" ng-if='paginationButtons.page != paginationButtons.pagescount').md-raised last  

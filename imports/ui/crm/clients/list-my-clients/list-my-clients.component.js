@@ -6,6 +6,7 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
 import {name as ClientCard} from '/imports/ui/shared/client-card/client-card.component';
+import {name as PaginationButtons} from '/imports/ui/shared/pagination-buttons/pagination-buttons.component';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import './list-my-clients.view.html';
 import {Clients} from '/imports/api/clients';
@@ -20,7 +21,7 @@ class ListMyClients {
     let vm = this;
     vm.status = this.stateParams.status ? this.stateParams.status : 'hot';
     vm.loaded = false;
-    vm.perPage = 20;
+    vm.perPage = 1;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
       'createdAt': -1
@@ -28,14 +29,14 @@ class ListMyClients {
 
     vm.selectedTab = '';
     switch ($stateParams.status) {
-      case 'hot':
+      /*case 'hot':
+        vm.selectedTab = 0;
+        break;*/
+      case 'realtor':
         vm.selectedTab = 0;
         break;
-      case 'realtor':
-        vm.selectedTab = 1;
-        break;
       case 'archive':
-        vm.selectedTab = 2;
+        vm.selectedTab = 1;
         break;
       default:
         vm.selectedTab = 0;
@@ -86,7 +87,8 @@ export default angular.module(moduleName, [
   angularMeteor,
   ClientCard,
   uiRouter,
-  utilsPagination
+  utilsPagination,
+  PaginationButtons
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/clients/list-my-clients/list-my-clients.view.html',
   bindings: {},

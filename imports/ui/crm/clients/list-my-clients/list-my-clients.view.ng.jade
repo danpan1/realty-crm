@@ -1,8 +1,8 @@
 md-tabs(md-dynamic-height md-selected="listMyClients.selectedTab")
     //md-tab(ui-sref="crm.clients.list.my({status: \'hot\'})") Горячие клиенты
-    md-tab(ui-sref="crm.clients.list.my({status: \'realtor\'})") Мои клиенты
+    md-tab(ui-sref="crm.clients.list.my({status: \'realtor\', page: 1})") Мои клиенты
     //md-tab(ui-sref="crm.clients.list.my({status: \'all\'})") Все
-    md-tab(ui-sref="crm.clients.list.my({status: \'archive\'})") Архив
+    md-tab(ui-sref="crm.clients.list.my({status: \'archive\', page: 1})") Архив
     //md-tab(ui-sref="crm.clients.list.my({status: \'\'})") Скрыть фильтр
     
 div
@@ -11,11 +11,4 @@ div
         total-items="listMyClients.clientsCount"
         client='client')
     
-div(layout="row" ng-if="listMyClients.pagesCount > 1" layout-align="center start")
-    md-button(ng-click="listMyClients.goToPage(1)" ng-if='listMyClients.page != 1').md-raised first            
-    md-button(ng-click="listMyClients.goToPage(listMyClients.page - 2)" ng-if='listMyClients.page - 2 >= 1').md-raised {{listMyClients.page - 2}}            
-    md-button(ng-click="listMyClients.goToPage(listMyClients.page - 1)" ng-if='listMyClients.page - 1 >= 1').md-raised {{listMyClients.page - 1}}            
-    md-button().md-raised.md-primary {{listMyClients.page}}            
-    md-button(ng-click="listMyClients.goToPage(listMyClients.page + 1)" ng-if='listMyClients.page + 1 <= listMyClients.pagesCount').md-raised {{listMyClients.page + 1}}           
-    md-button(ng-click="listMyClients.goToPage(listMyClients.page + 2)" ng-if='listMyClients.page + 2 <= listMyClients.pagesCount').md-raised {{listMyClients.page + 2}}            
-    md-button(ng-click="listMyClients.goToPage(listMyClients.pagesCount)" ng-if='listMyClients.page != listMyClients.pagesCount').md-raised last 
+pagination-buttons(ng-if='listMyClients.pagesCount' uisref='\'crm.clients.list.my\'' page='listMyClients.page' pagescount='listMyClients.pagesCount')

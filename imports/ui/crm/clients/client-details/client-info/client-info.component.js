@@ -124,7 +124,7 @@ class ClientInfo {
             });*/
             
             console.log(vm.client.status);
-            vm.state.go('crm.clients.list.my');
+            vm.state.go('crm.clients.list.my', {status: 'realtor'});
         })
   }
   

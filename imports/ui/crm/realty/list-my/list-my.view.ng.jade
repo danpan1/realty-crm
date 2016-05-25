@@ -41,13 +41,4 @@
         div(layout='column' layout-align='center center').listMy_Actions.pv-8.pl-16.pr-32
             md-button(md-no-ink='' ui-sref="crm.realty.one.info({realtyId: '{{::realty._id}}'})").md-primary Инфо об объекте
 
-div(layout="row" ng-if="listMy.pagesCount > 1" layout-align="center start")
-    md-button(ng-click="listMy.goToPage(1)" ng-if='listMy.page != 1').md-raised first            
-    md-button(ng-click="listMy.goToPage(listMy.page - 2)" ng-if='listMy.page - 2 >= 1').md-raised {{listMy.page - 2}}            
-    md-button(ng-click="listMy.goToPage(listMy.page - 1)" ng-if='listMy.page - 1 >= 1').md-raised {{listMy.page - 1}}            
-    md-button().md-raised.md-primary {{listMy.page}}            
-    md-button(ng-click="listMy.goToPage(listMy.page + 1)" ng-if='listMy.page + 1 <= listMy.pagesCount').md-raised {{listMy.page + 1}}           
-    md-button(ng-click="listMy.goToPage(listMy.page + 2)" ng-if='listMy.page + 2 <= listMy.pagesCount').md-raised {{listMy.page + 2}}            
-    md-button(ng-click="listMy.goToPage(listMy.pagesCount)" ng-if='listMy.page != listMy.pagesCount').md-raised last      
-        //dir-pagination-controls(on-page-change="listMy.pageChanged(newPageNumber)")
-
+pagination-buttons(ng-if='listMy.pagesCount' uisref='\'crm.realty.list.my\'' page='listMy.page' pagescount='listMy.pagesCount')
