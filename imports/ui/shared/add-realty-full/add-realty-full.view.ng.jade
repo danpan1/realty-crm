@@ -44,7 +44,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                     md-button(ng-click='addRealtyFull.activeTab = 1'
                     ng-disabled="firstForm.$invalid").md-primary.md-raised.mh-0 Продолжить
 
-    md-tab(label='2) Параметры' md-active='addRealtyFull.activeTab == 1' ng-click='addRealtyFull.activeTab = 1' ng-disabled='firstForm.$invalid')
+    md-tab(label='2) Параметры' md-active='addRealtyFull.activeTab == 1' ng-click='addRealtyFull.activeTab = 1')
         md-content().ph-32.pv-16
             form(novalidate name="secondForm")
                 div(layout='column')
@@ -141,7 +141,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                         ng-disabled="firstForm.$invalid || secondForm.$invalid").md-primary.md-raised.mh-0 Продолжить
                         md-button(md-no-ink ng-click='addRealtyFull.activeTab = 0').md-primary.md-body-1.ml-32 Вернуться на шаг назад
 
-    md-tab(label='3) Стоимость' md-active='addRealtyFull.activeTab == 2' ng-click='addRealtyFull.activeTab = 2' ng-disabled='firstForm.$invalid || secondForm.$invalid') 
+    md-tab(label='3) Стоимость' md-active='addRealtyFull.activeTab == 2' ng-click='addRealtyFull.activeTab = 2') 
         md-content().ph-32.pv-16
             form(novalidate name="thirdForm")
 
@@ -169,11 +169,11 @@ md-tabs(md-dynamic-height md-border-bottom)
                                         md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
                    
                    div().mt-32 
-                            div(layout='row')
-                                md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addRealtyFull.realty.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ addRealtyFull.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
-                            div(layout='row').mv-16
-                                md-input-container(flex-offset='5').mv-0
-                                    input(type="text" ng-model='addRealtyFull.realty.comission' placeholder='Сколько готов платить комиссии (% или рублей)')
+                        div(layout='row')
+                            md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addRealtyFull.realty.comissionLoyal' flex flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ addRealtyFull.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
+                        div(layout='row').mv-16
+                            md-input-container(flex='45').md-block.mv-0
+                                input(type="text" ng-model='addRealtyFull.realty.comission' placeholder='Сколько готов платить комиссии (% или рублей)')
                     
                     div().mt-32
                         p().md-subhead.add-realty-full-text Какой процент стоимости аренды вы хотите получить?
