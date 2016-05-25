@@ -59,7 +59,7 @@ div(layout="column", layout-align="space-around stretch")
                         div(flex='60') До метро:
                         div(flex='40') #[strong {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
                     md-button(ng-click="oneInfo.editDialogShow = true" aria-label='Изменить').md-primary.md-raised.mt-32.mh-0 Изменить
-                    md-button.md-raised.md-default() {{oneInfo.editDialogShow}} + {{oneInfo.realty.details.composition}}
+                    
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Объект
@@ -105,7 +105,7 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Цена:
                         div(flex='40') #[strong {{oneInfo.realty.price | price}}]
-                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' ng-if='oneInfo.realty.operator.qualification' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Собственник:
                         div(flex='40') #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8

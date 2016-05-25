@@ -74,8 +74,8 @@ div(ng-if="oneInfoEdit.show")
                         div().vertical-divider-2
                         div(flex)
                             md-input-container(flex).md-block.mv-16.form-required
-                                md-select(required ng-model='addRealtyFull.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
-                                    md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
+                                md-select(required ng-model='oneInfoEdit.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
+                                    md-option(ng-value="position.id" ng-repeat='position in oneInfoEdit.dictionary.composition') {{position.name}}
 
                             md-input-container(flex).md-block.mv-32
                                 label Срок

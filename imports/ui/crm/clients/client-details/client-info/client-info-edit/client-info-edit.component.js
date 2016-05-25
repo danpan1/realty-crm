@@ -26,6 +26,18 @@ class ClientInfoEdit {
   
   onChangeRealty (clientId) {     
 
+      var price = this.client.need.price.split('');
+      for(var i in [1,2,3]){
+          for(var i in price){
+              if(price[i].match(/\s/)){
+                  price.splice(i,1);
+              }
+          }
+      }
+      price = price.join('');
+      this.client.need.price = parseInt(price);
+      console.log(this.client.need.price);
+    
       Clients.update({_id: clientId}, {
         $set: this.client
       }, (error) => {

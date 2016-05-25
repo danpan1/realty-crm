@@ -1,6 +1,6 @@
 client-info-edit(ng-if="clientInfo.client" client="clientInfo.client" show="clientInfo.editDialogShow")
-div
-    div(layout='row' layout-align='space-between start' ng-init='clientInfo.ngOnInit()').mt-16
+div(ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
+    div(layout='row' layout-align='space-between start' ).mt-16
         div(md-whiteframe='2' flex='66').client-info-notes.mr-16.p-16
             h3().md-title.mt-0.mb-32 Заметка по клиенту
             div(layout='column' layout-align='space-between none').client-info-notes-item
@@ -64,14 +64,14 @@ div
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Метро
-                    subway-chips(ng-model='clientInfo.client.need.subways' subways-embeded='clientInfo.client.need.embedded.subways' flex)
-                    div(layout='row' layout-align='start center').mt-32
-                        md-input-container(flex).mv-0.pv-0
-                            input(ng-model='clientInfo.client.need.metroTime', placeholder='минут').client-info-minutes
-                        md-input-container(flex).mv-0.ml-32.pb-0
-                            md-select(ng-model='clientInfo.client.need.metroTransport' aria-label='До метро')
-                                md-option(ng-value='transport.id',
-                                ng-repeat="transport in clientInfo.dictionary.transport") {{transport.name}}
+                    p
+                        p(ng-repeat="subway in clientInfo.client.need.embedded.subways").mv-0
+                            span(class="metro-color-{{clientInfo.client.need.embedded.subways[$index].line}}").metro-color
+                            span() {{subway.name}}
+                            span(ng-if='$index != clientInfo.client.need.embedded.subways.length - 1') , 
+                    p(ng-if='clientInfo.client.need.metroTime != undefined && clientInfo.client.need.metroTime > 0') {{clientInfo.client.need.metroTime}} минут {{clientInfo.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
+                    
+                     
 
     div(layout='row' layout-align='start start')#openArchiveDialog.md-padding.mt-16
         div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
