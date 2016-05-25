@@ -52,7 +52,6 @@ class OneInfoEdit {
       }
       price = price.join('');
       this.realty.price = parseInt(price);
-      console.log(this.realty.price);
       
       Realty.update({_id: realtyId}, {
         $set: this.realty
