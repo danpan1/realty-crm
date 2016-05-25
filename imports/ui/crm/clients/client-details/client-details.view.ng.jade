@@ -7,7 +7,7 @@ section(ng-repeat="client in clientDetails.clients")
     div(md-whiteframe='1').realty-one-layout-whiteframe
         md-tabs(md-dynamic-height md-selected="clientDetails.selectedTab")
             md-tab(ui-sref="crm.clients.details.connections({client:client._id, assort: 'manual', activetab: 'connections'})") Связи
-            md-tab(ui-sref="crm.clients.details.demonstration({client:client._id, activetab: 'demonstration'})") Показы
-            md-tab(ui-sref="crm.clients.details.email({client:client._id, activetab: 'email'})") Отправить предложение
+            //md-tab(ui-sref="crm.clients.details.demonstration({client:client._id, activetab: 'demonstration'})") Показы
+            //md-tab(ui-sref="crm.clients.details.email({client:client._id, activetab: 'email'})") Отправить предложение
             md-tab(ui-sref="crm.clients.details.info({client:client._id, activetab: 'info'})") Инфо о клиенте
 ui-view

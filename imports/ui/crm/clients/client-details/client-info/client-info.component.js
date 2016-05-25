@@ -129,6 +129,19 @@ class ClientInfo {
     }
     value = value.join('');
     this.client.phone = parseInt(value);
+    
+    if(typeof this.client.need.price != 'number'){
+        var price = this.client.need.price.split('');
+        for(var i in [1,2,3]){
+            for(var i in price){
+                if(price[i].match(/\s/)){
+                    price.splice(i,1);
+                }
+            }
+        }
+        price = price.join('');
+        this.client.need.price = parseInt(price);
+    }
             
     Clients.update({_id: this.client._id}, {
         $set: this.client

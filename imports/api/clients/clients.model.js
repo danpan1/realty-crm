@@ -60,11 +60,19 @@ Clients.Schema = new SimpleSchema({
     type: String,
     optional: true
   },
+  important: {
+    type: String,
+    optional: true
+  },
   name: {
     type: String
   },
   need: { // Сама потребность по объекту
     type: clientNeedSchema,
+    optional: true
+  },
+  note: {
+    type: String,
     optional: true
   },
   phone: {
@@ -74,8 +82,17 @@ Clients.Schema = new SimpleSchema({
     type: String,
     optional: true
   },
-  realtorNote: { // Заметка от риэлтора по клиенту или от колл-центра
-    type: String
+  realtorPhone: {
+    type: String,
+    optional: true
+  },
+  realtorName: {
+    type: String,
+    optional: true
+  },
+  realtorIdShort: {
+    type: String,
+    optional: true
   },
   relations: { // Связи
     type: [RelationsSchema],
@@ -102,13 +119,13 @@ Clients.before.insert(function (userId, doc) {
   doc.createdAt = Date.now();
   console.log(doc.need.subways, 'doc.need.subways');
   let subways = Locations.find({'_id': {$in: doc.need.subways}}).fetch();
-  if (subways) {
+  if (subways && subways.length && subways[0].loc.llg) {
     let subwaysInDistance = [];
     subways.forEach((metro) => {
       let foundCloseMetro = Locations.find({
-        coordinates: {
+        'loc.llg': {
           $near: {
-            $geometry: {type: 'Point', coordinates: metro.coordinates},
+            $geometry: {type: 'Point', coordinates: metro.loc.llg},
             $maxDistance: 3000
           }
         }

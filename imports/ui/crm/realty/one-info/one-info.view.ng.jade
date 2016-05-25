@@ -15,7 +15,6 @@ div(layout="column", layout-align="space-around stretch")
             h3().md-title.mt-0.mb-32 Заметка по объекту
             div(layout='column' layout-align='space-between none').client-info-notes-item
                 md-input-container().md-block.mt-0
-                    label Заметка по объекту
                     textarea(maxlength="2000" ng-model="oneInfo.realty.realtor.comment")
                 div
                     md-button(aria-label='Сохранить' ng-click='oneInfo.realtyUpdate()').md-primary.md-raised.m-0 Сохранить
@@ -67,9 +66,11 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Комнат:
                         div(flex='40') #[strong {{oneInfo.realty.roomcount}} комнат]
-                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' layout-wrap layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Ремонт:
                         div(flex='40') #[strong {{oneInfo.dictionary.renovation[oneInfo.realty.details.renovation].name}}]
+                        div(flex='40' flex-offset='60' ng-if='oneInfo.realty.details.apartaments') #[strong Апартаменты]
+                        div(flex='40' flex-offset='60' ng-if='oneInfo.realty.details.penthouse') #[strong Пентхаус]
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Этаж:
                         div(flex='40') #[strong {{oneInfo.realty.floor}} из {{oneInfo.realty.floormax}}]
@@ -103,13 +104,13 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Цена:
                         div(flex='40') #[strong {{oneInfo.realty.price | price}}]
-                    div(layout='row' ng-if='oneInfo.realty.operator.qualification' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' ng-if='oneInfo.realty.comission' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Собственник:
-                        div(flex='40') #[strong {{oneInfo.dictionary.qualification[oneInfo.realty.operator.qualification].name}}]
-                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='40') #[strong {{oneInfo.realty.comission}}]
+                    div(layout='row' ng-if='oneInfo.realty.realtor.clientpercent' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') От клиента:
                         div(flex='40') #[strong {{oneInfo.realty.realtor.clientpercent || 0}}]%
-                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' ng-if='oneInfo.realty.realtor.partnerpercent' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') От партнера:
                         div(flex='40') #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
                     div().md-subhead Состав съемщиков
@@ -123,8 +124,8 @@ div(layout="column", layout-align="space-around stretch")
                 aria-label='Switch 2'
                 ng-repeat="condition in oneInfo.dictionary.conditions"
                 ng-click="oneInfo.onConditionsChange(condition.id)") {{condition.name}}
-
-        div(md-whiteframe='2' flex='50' ng-if='oneInfo.realty.status != "archive"').p-16
+                    //ng-if='oneInfo.realty.status != "archive"
+        div(md-whiteframe='2' flex='50').p-16
             h3().md-title.mt-0 Закрытие сделки
             md-button(ng-click='oneInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить объект в архив').md-primary.md-raised.mt-32.mh-0  Закрыть сделку и перенести объект в архив
             //md-button(ng-click='oneInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить клиента в архив').md-primary.md-raised.mt-32.mh-0 Закрыть сделку и переместить клиента в архив

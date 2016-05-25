@@ -57,8 +57,17 @@ class AddRealtyFull {
     console.log(this.realty.price);
     console.log(this.realty.contacts[0].phones[0].phone);
 
+    if(!this.realty.comissionLoyal) this.realty.comission = '';
+    
     //4 - Аренда - Квартиры
     const vm = this;
+
+    if (!this.realty.realtor) {
+      this.realty.realtor = {};
+    }
+    this.realty.realtor.phone = Meteor.user().profile.phone;
+    this.realty.realtor.name = Meteor.user().profile.name;
+    this.realty.realtor.realtorIdShort = Meteor.user().profile.realtorId;
     this.realty.type = 4;
     this.realty.address = {
       areaId:'',
@@ -76,9 +85,12 @@ class AddRealtyFull {
       street: vm.locations.street.value,
       streetFiasId: vm.locations.street.data.fias_id,
       subways : vm.locations.subways,
-      subwaysEmbedded : vm.locations.embedded.subways,
+      //subwaysEmbedded : vm.locations.embedded.subways,
       value: vm.locations.full.unrestricted_value
     };
+    if(vm.locations.embedded){
+        this.realty.address.subwaysEmbedded = vm.locations.embedded.subways;
+    }
     console.log(this.realty.address.subwaysEmbedded);
     Meteor.call('addRealty', this.realty, (error, result) => {
       if (error) {

@@ -11,7 +11,7 @@ if (Meteor.isServer) {
 
   Meteor.publish('findClients', function (filter, options) {
 
-    // console.log(this.userId);
+    console.log('findClients');
 
     if (this.userId) {
       console.log(filter.searchType);
@@ -21,7 +21,7 @@ if (Meteor.isServer) {
       };
       //TODO filter.price  костыль. надо переделать. моргают клиенты лишние при переключнии табов
       if (filter && filter.price) {
-        console.log(filter);
+        // console.log(filter);
         if (filter.price) {
           selector['need.price'] = {$gte: filter.price / 1.25, $lte: filter.price * 4 / 3};
         }
@@ -71,7 +71,7 @@ if (Meteor.isServer) {
 
         Counts.publish(this, 'clientsCount', Clients.find(selector), {noReady: true});
 
-        console.log(selector);
+        // console.log(selector);
         return Clients.find(selector, options);
       }
 

@@ -68,21 +68,22 @@ class OneFind {
     });
     vm.helpers({
       clients() {
+        let clientIds = [];
         let realty = Realty.findOne({});
         if (realty && realty.relations) {
-          let clientIds = realty.relations.map((item)=> {
+          clientIds = realty.relations.map((item)=> {
             return item.clientId;
           });
-          return Clients.find(
-            {
-              '_id': {
-                $nin: clientIds
-              }
-            }, {
-              sort: vm.getReactively('sort')
-            }
-          );
         }
+        return Clients.find(
+          {
+            '_id': {
+              $nin: clientIds
+            }
+          }, {
+            sort: vm.getReactively('sort')
+          }
+        );
 
       },
       clientsCount: () => {

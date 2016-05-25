@@ -29,6 +29,10 @@ div(ng-if="oneInfoEdit.show")
                                 label Ремонт:
                                 md-select(ng-model="oneInfoEdit.realty.details.renovation")
                                     md-option(ng-value='renovation.id' ng-repeat="renovation in oneInfoEdit.dictionary.renovation") {{renovation.name}}
+                            md-input-container().md-block.mv-32
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink ng-model='oneInfoEdit.realty.details.apartaments').md-primary.md-subhead.mb-0 Апартаменты
+                            md-input-container().md-block.mv-32
+                                md-checkbox(aria-label='Checkbox 1' md-no-ink ng-model='oneInfoEdit.realty.details.penthouse').md-primary.md-subhead.mb-0 Пентхаус
                             div(layout="row" layout-align='start center')
                                 md-input-container(flex='45').zh
                                     label Этаж:
@@ -86,7 +90,7 @@ div(ng-if="oneInfoEdit.show")
                                 input(ng-model="oneInfoEdit.realty.price"
                                       ng-price-filter
                                       ng-keypress="oneInfoEdit.realty.price = ' '+this.oneInfoEdit.realty.price"
-                                      ng-init="clientInfoEdit.ngOnInit(oneInfoEdit.realty.price)")
+                                      ng-init="oneInfoEdit.ngOnInit(oneInfoEdit.realty.price)")
                             md-input-container(flex).md-block.mv-32.zh
                                 label Процент от клиента
                                 input(ng-model="oneInfoEdit.realty.realtor.clientpercent")

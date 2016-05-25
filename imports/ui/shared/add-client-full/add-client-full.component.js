@@ -22,25 +22,30 @@ class AddClientFull {
     this.fake = true;
     this.client.comissionLoyal = true;
     this.client.need = {
-        metroTransport: 0
+      metroTransport: 0
     }
     this.client.searchEndDate = this.client.searchStartDate;
   }
-  
+
   submit(valid) {
-   
+
     var price = this.client.need.price.split('');
-    for(var i in [1,2,3]){
-        for(var i in price){
-            if(price[i].match(/\s/)){
-                price.splice(i,1);
-            }
+    for (var i in [1, 2, 3]) {
+      for (var i in price) {
+        if (price[i].match(/\s/)) {
+          price.splice(i, 1);
         }
+      }
     }
     this.client.need.price = price.join('');
-    console.log(this.client.need.price);
-    console.log(this.client.phone);
-    
+    this.client.realtorPhone = Meteor.user().profile.phone;
+    this.client.realtorName = Meteor.user().profile.name;
+    this.client.realtorIdShort = Meteor.user().profile.realtorId;
+
+    if (!this.client.comissionLoyal) {
+      this.client.comission = '';
+    }
+
     console.log('submit');
     if (!valid) {
       alert('не все данные корректны');
@@ -60,14 +65,14 @@ class AddClientFull {
         console.log(error);
       } else {
         console.log(result);
-        this.state.go('crm.clients.list.my', {status: 'realtor'}) ;
+        this.state.go('crm.clients.list.my', {status: 'realtor'});
       }
     });
     this.resetClient();
   }
-  
-  showThis(t){
-      console.log(t);
+
+  showThis(t) {
+    console.log(t);
   }
 
   resetClient() {
@@ -78,7 +83,7 @@ class AddClientFull {
       status: vm.pageStatus,
       comissionLoyal: false,
       searchStartDate: new Date(),
-      realtorNote: '',
+      note: '',
       subways: [],
       districts: [],
       embedded: {

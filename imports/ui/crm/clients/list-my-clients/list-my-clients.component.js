@@ -21,10 +21,10 @@ class ListMyClients {
     let vm = this;
     vm.status = this.stateParams.status ? this.stateParams.status : 'hot';
     vm.loaded = false;
-    vm.perPage = 1;
+    vm.perPage = 3;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
-      'createdAt': -1
+      '_id': -1
     };
 
     vm.selectedTab = '';
@@ -56,7 +56,7 @@ class ListMyClients {
     }, {
       onReady: function () {
         vm.loaded = true;
-        console.log('onReady And the Items actually Arrive', arguments);
+        // console.log('onReady And the Items actually Arrive', arguments);
         // subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
       }
     });

@@ -25,7 +25,7 @@ if (Meteor.isServer) {
 
 
       let selector, criterions = [];
-      // console.log('listMy');
+      console.log('find-realty-by-needs');
       if (this.userId && !!client) {
         console.log('options ', options);
         console.log('client ', client);

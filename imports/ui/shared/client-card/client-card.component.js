@@ -43,6 +43,7 @@ export default angular.module(moduleName, [
   bindings: {
       client: '<',
       assort:'<' ,
+    pageFrom:'@' ,
       realtyId: '@'
   },
   controllerAs: moduleName,

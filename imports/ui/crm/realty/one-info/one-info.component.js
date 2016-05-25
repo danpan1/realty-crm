@@ -108,14 +108,14 @@ class OneInfo {
             .clickOutsideToClose(true)
             .title('В архив')
             .textContent('Закрыть сделку и перенести объект в архив?')
-            .ariaLabel('Client archivation confirmation')
+            .ariaLabel('Object archivation confirmation')
             .ok('Переместить')
             .cancel('Нет')
             .targetEvent(ev);
         this.mdDialog.show(confirm).then(function() {
             vm.realty.status = 'archive';
             
-            this.realtyUpdate();
+            vm.realtyUpdate();
             
             console.log(vm.realty.status);
             vm.state.go('crm.realty.list.my');

@@ -9,7 +9,18 @@ export const RealtyRealtorSchema = new SimpleSchema({
     max: 20,
     optional: true
   },
-
+  phone: {
+    type: String,
+    optional: true
+  },
+  name: {
+    type: String,
+    optional: true
+  },
+  realtorIdShort: {
+    type: String,
+    optional: true
+  },
   takeDate: {
     type: Date,
     optional: true
@@ -58,11 +69,11 @@ export const RealtyRealtorSchema = new SimpleSchema({
     type: Number,
     optional: true
   },
-  clientpercent:{
+  clientpercent: {
     type: Number,
     optional: true
   },
-  partnerpercent:{
+  partnerpercent: {
     type: Number,
     optional: true
   }

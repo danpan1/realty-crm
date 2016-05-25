@@ -4,6 +4,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Realty} from '/imports/api/realty';
+import {Clients} from '/imports/api/clients';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 
 import './client-connections.view.html';
@@ -31,29 +32,17 @@ class ClientConnections {
     this.showSlider = false;
     this.slideShowImages = [];
     vm.sort = {
-      // 'updated_at': -1
-      'parseDetails.UID': -1
+      'updatedAt': -1
     };
 
-    vm.subscribe('newList', () => {
+    vm.subscribe('relationsListInClient', () => {
       return [
         //фильтр для pagination
         {
           limit: parseInt(vm.perPage),
           skip: parseInt((vm.getReactively('page') - 1) * vm.perPage),
           sort: vm.getReactively('sort')
-        },
-        //фильтр клиента
-        {
-          floorFrom: vm.getReactively('filter.floorFrom'),
-          floorTo: vm.getReactively('filter.floorTo'),
-          priceTo: vm.getReactively('filter.priceTo'),
-          priceFrom: vm.getReactively('filter.priceFrom'),
-          roomcount: vm.getReactively('roomcount'),
-          type: vm.getReactively('filter.type'),
-          subways: vm.getReactively('filter.subways'),
-          districts: vm.getReactively('filter.districts')
-        }
+        },vm.getReactively('client.relations')
       ];
     }, {
       onReady: function () {
@@ -62,8 +51,11 @@ class ClientConnections {
     });
 
     vm.helpers({
+      client: () => {
+        return Clients.findOne({});
+      },
       realty: () => {
-        return Realty.find({status: 'list'}, {sort: vm.getReactively('sort')});
+        return Realty.find({}, {sort: vm.getReactively('sort')});
       },
       realtyCount: () => {
         return Counts.get('realtyCount');

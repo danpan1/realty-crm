@@ -5,6 +5,11 @@ const roomSquareSchema = {
     square: Number
 } 
 export const RentDetailsSchema = new SimpleSchema({
+  // Апартаменты
+  apartaments: {
+    type: Boolean,
+    optional: true
+  },
   //Балкон
   balcony: {
     type: Number,
@@ -86,6 +91,10 @@ export const RentDetailsSchema = new SimpleSchema({
   },
   'images.$.originalName': {
     type: String
+  },
+  penthouse: {
+    type: Boolean,
+    optional: true
   },
   thumbnails: {
     type: [Object],

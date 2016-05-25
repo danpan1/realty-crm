@@ -71,6 +71,7 @@ export function addRealty(realty, notRealtor) {
         realty.realtor = {};
       }
       realty.realtor.id = Meteor.userId();
+      
       realty.status = 'taken';
     }
 
