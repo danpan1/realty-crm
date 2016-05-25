@@ -28,7 +28,7 @@ class Layout {
       // {name:'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
-      {name: 'Модератор', uisref: 'call-center.moderator'}
+      // {name: 'Модератор', uisref: 'call-center.moderator'}
     ];
     this.select = 1;
     this.autorun(function () {

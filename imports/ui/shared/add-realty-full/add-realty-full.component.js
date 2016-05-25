@@ -61,6 +61,13 @@ class AddRealtyFull {
     
     //4 - Аренда - Квартиры
     const vm = this;
+
+    if (!this.realty.realtor) {
+      this.realty.realtor = {};
+    }
+    this.realty.realtor.phone = Meteor.user().profile.phone;
+    this.realty.realtor.name = Meteor.user().profile.name;
+    this.realty.realtor.realtorIdShort = Meteor.user().profile.realtorId;
     this.realty.type = 4;
     this.realty.address = {
       areaId:'',

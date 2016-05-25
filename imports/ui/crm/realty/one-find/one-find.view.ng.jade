@@ -6,4 +6,8 @@ div.md-whiteframe-2dp(md-whiteframe="2")
             md-tab(ui-sref="crm.realty.one.find({searchType:'algorithm'})") Авто-подборка
 
 div.md-whiteframe-2dp(md-whiteframe="2")
-    client-card(ng-repeat='client in oneFind.clients' client='client' assort="oneFind.assort" realty-id='{{oneFind.realty._id}}')
+    client-card(ng-repeat='client in oneFind.clients'
+    client='client'
+    assort="oneFind.assort"
+    realty-id='{{oneFind.realty._id}}'
+    page-from='{{oneFind.searchType}}')

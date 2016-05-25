@@ -1,4 +1,5 @@
 // import './subwayChips.publish';
+import './publish/relations-list-in-client.publish';
 import './publish/new-list.publish';
 import './publish/incoming-call.publish';
 import './publish/list-my.publish.js';

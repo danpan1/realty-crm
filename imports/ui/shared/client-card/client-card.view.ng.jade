@@ -17,24 +17,26 @@ div(md-whiteframe='2').mv-16.client-card
                 p().md-body-1.client-card__note {{clientCard.client.note}}
             md-divider
             div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.client.status")
-                p.client-card__link_p(ng-if="clientCard.client.status != 'archive'")
-                    a.client-card__link(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' href="") Предложить объект
-                p.client-card__link_p(ng-if="clientCard.client.status != 'archive'")
-                    a.client-card__link(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})" href="") {{clientCard.client.relations.length}} связей
-                p.text-uppercase.client-card__btn_buy-client(ng-if="clientCard.client.status == 'hot'") Купить за 150 руб.
-                p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
+
+                p.client-card__link_p(ng-if="clientCard.pageFrom == 'manual' || clientCard.pageFrom == 'algorithm'")
+                    a.client-card__link(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' ) Предложить объект
+
+                p.client-card__link_p(ng-if="clientCard.pageFrom == 'my'")
+                    a.client-card__link(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' ) Выбрать клиента
+
+                p.client-card__link_p(ng-if="!clientCard.pageFrom")
+                    a.client-card__link(
+                    ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})"
+                    ) {{clientCard.client.relations.length || 0}} связей
+
+                //p.text-uppercase.client-card__btn_buy-client(ng-if="clientCard.client.status == 'hot'") Купить за 150 руб.
+                //p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
                     a.client-card__link(ui-sref="crm.clients.details.email({client:clientCard.client._id, activetab: 'offers'})" href="") 11 предложений
                 //p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
                 //    a.client-card__link(ui-sref="crm.clients.details.demonstration({client:clientCard.client._id, activetab: 'shows'})" href="") 2 показа
-                p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
+                //p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
                     a.client-card__link(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})" href="") Добавить объекты
-            div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.assort == 'manual'")
-                p.text-uppercase.client-card__btn_blue-view Назначить показ
-                p.text-uppercase.client-card__btn_buy-client Купить за 150 руб.
-                p.client-card__btn_hide скрыть
-            div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.assort == 'auto'")
-                p.text-uppercase.client-card__btn_blue-view Предложить объект
-                p.text-uppercase.client-card__btn_buy-client Купить за 150 руб.
+
         md-divider
         
         div(layout='row')
@@ -67,23 +69,23 @@ div(md-whiteframe='2').mv-16.client-card
             div(flex='20').ph-16.pv-8
                 div(layout='row', layout-wrap, layout-align='start start')
                     div(flex="25" ng-repeat="condition in clientCard.client.need.conditions").clientCard-conditions
-                        md-icon(alt='Мебель' ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').client-card__md-icon 
+                        md-icon(alt='Мебель' ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').client-card__md-icon
                         span(ng-if="condition == 'furniture'") Мебель
-                        md-icon(alt='Кухонный гарнитур' ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture').client-card__md-icon 
+                        md-icon(alt='Кухонный гарнитур' ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture').client-card__md-icon
                         span(ng-if="condition == 'kitchen_furniture'") Кухонный гарнитур
-                        md-icon(alt='Телевизор' ng-if="condition == 'tv'" md-svg-icon='conditions_tv').client-card__md-icon 
+                        md-icon(alt='Телевизор' ng-if="condition == 'tv'" md-svg-icon='conditions_tv').client-card__md-icon
                         span(ng-if="condition == 'tv'") Телевизор
-                        md-icon(alt='Холодильник' ng-if="condition == 'refrigerator'" md-svg-icon='conditions_refrigerator').client-card__md-icon 
+                        md-icon(alt='Холодильник' ng-if="condition == 'refrigerator'" md-svg-icon='conditions_refrigerator').client-card__md-icon
                         span(ng-if="condition == 'refrigerator'") Холодильник
-                        md-icon(alt='Стиральная машина' ng-if="condition == 'washer'" md-svg-icon='conditions_washer').client-card__md-icon 
+                        md-icon(alt='Стиральная машина' ng-if="condition == 'washer'" md-svg-icon='conditions_washer').client-card__md-icon
                         span(ng-if="condition == 'washer'") Стиральная машина
-                        md-icon(alt='Стационарный телефон' ng-if="condition == 'phone'" md-svg-icon='conditions_phone').client-card__md-icon 
+                        md-icon(alt='Стационарный телефон' ng-if="condition == 'phone'" md-svg-icon='conditions_phone').client-card__md-icon
                         span(ng-if="condition == 'phone'") Стационарный телефон
-                        md-icon(alt='С животными' ng-if="condition == 'animal'" md-svg-icon='conditions_animal').client-card__md-icon 
+                        md-icon(alt='С животными' ng-if="condition == 'animal'" md-svg-icon='conditions_animal').client-card__md-icon
                         span(ng-if="condition == 'animal'") С животными
-                        md-icon(alt='Лифт' ng-if="condition == 'elevator'" md-svg-icon='conditions_elevator').icon-rotate-90.client-card__md-icon 
+                        md-icon(alt='Лифт' ng-if="condition == 'elevator'" md-svg-icon='conditions_elevator').icon-rotate-90.client-card__md-icon
                         span(ng-if="condition == 'elevator'") Лифт
-                        md-icon(alt='С детьми' ng-if="condition == 'children'" md-svg-icon='conditions_children').client-card__md-icon 
+                        md-icon(alt='С детьми' ng-if="condition == 'children'" md-svg-icon='conditions_children').client-card__md-icon
                         span(ng-if="condition == 'children'") С детьми
-                        md-icon(alt='Wi-Fi' ng-if="condition == 'wifi'" md-svg-icon='conditions_wifi').client-card__md-icon 
+                        md-icon(alt='Wi-Fi' ng-if="condition == 'wifi'" md-svg-icon='conditions_wifi').client-card__md-icon
                         span(ng-if="condition == 'wifi'") Wi-Fi
