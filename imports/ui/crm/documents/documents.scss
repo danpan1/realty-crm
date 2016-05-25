@@ -14,3 +14,10 @@ documents {
     vertical-align: middle;
     color: #106cc8;
 }
+
+.documents__btn-download {
+    min-width: 50px !important;
+    &:hover {
+        background-color: transparent !important;
+    }
+}
