@@ -41,6 +41,10 @@ class AddClientFull {
     console.log(this.client.need.price);
     console.log(this.client.phone);
     
+    if(!this.client.comissionLoyal){
+        this.client.comission = '';
+    }
+    
     console.log('submit');
     if (!valid) {
       alert('не все данные корректны');
@@ -78,7 +82,7 @@ class AddClientFull {
       status: vm.pageStatus,
       comissionLoyal: false,
       searchStartDate: new Date(),
-      realtorNote: '',
+      note: '',
       subways: [],
       districts: [],
       embedded: {

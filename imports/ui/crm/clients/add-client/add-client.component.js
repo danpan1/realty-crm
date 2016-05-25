@@ -40,7 +40,7 @@ class AddClient {
       status: 'realtor',
       comissionLoyal: false,
       searchStartDate: new Date(),
-      realtorNote: '',
+      note: '',
       subways: [],
       districts : [],
       subwaysEmbeded :[],
