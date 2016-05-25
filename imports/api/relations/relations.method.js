@@ -11,25 +11,37 @@ Meteor.methods({
   setRelation
 });
 
-export function setRelation(clientId, realtyId, client) {
-
+export function setRelation(clientId, realtyId) {
+  //Это происходит на странице Объекты - Подобрать объект
+  // Значит это предложение для владельцев клиентов
   if (Meteor.isServer && Meteor.userId()) {
     console.log('clientId = ', clientId);
     console.log('realtyId = ', realtyId);
-    console.log('client = ', client);
     const id = Relations.insert({});
     console.log('Relations = ', id);
+
     let realtyRelation = {
-      _id : id,
-      read : !!client,
-      hide : false
+      _id: id,
+      answer: null,
+      clientId: clientId,
+      createdAt : new Date(),
+      hide: false,
+      isOffer: false,
+      read: true,
+      realtyId: realtyId
     };
+
     let clientRelation = {
-      _id : id,
-      read : !client,
-      hide : false
+      _id: id,
+      answer: null,
+      clientId: clientId,
+      createdAt : new Date(),
+      hide: false,
+      isOffer: true,
+      read: false,
+      realtyId: realtyId
     };
-    
+
     Realty.update({_id: realtyId},
       {
         $addToSet: {relations: realtyRelation}

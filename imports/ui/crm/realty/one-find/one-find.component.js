@@ -43,14 +43,14 @@ class OneFind {
     }
     vm.subscribe('findClients', () => {
       return [{
-        conditions : vm.getReactively('realty.details.conditions'),
-        metroTime : vm.getReactively('realty.address.metroTime'),
-        metroTransport : vm.getReactively('realty.address.metroTransport'),
-        price : vm.getReactively('realty.price'),
+        conditions: vm.getReactively('realty.details.conditions'),
+        metroTime: vm.getReactively('realty.address.metroTime'),
+        metroTransport: vm.getReactively('realty.address.metroTransport'),
+        price: vm.getReactively('realty.price'),
         roomcount: vm.getReactively('realty.roomcount'),
-        searchType : vm.getReactively('stateParams.searchType'),
+        searchType: vm.getReactively('stateParams.searchType'),
         status: vm.getReactively('status'),
-        subways : vm.getReactively('realty.address.subways')
+        subways: vm.getReactively('realty.address.subways')
       },
         {
           limit: parseInt(vm.perPage),
@@ -68,7 +68,22 @@ class OneFind {
     });
     vm.helpers({
       clients() {
-        return Clients.find({}, {sort: vm.getReactively('sort')});
+        let realty = Realty.findOne({});
+        if (realty && realty.relations) {
+          let clientIds = realty.relations.map((item)=> {
+            return item.clientId;
+          });
+          return Clients.find(
+            {
+              '_id': {
+                $nin: clientIds
+              }
+            }, {
+              sort: vm.getReactively('sort')
+            }
+          );
+        }
+
       },
       clientsCount: () => {
         return Counts.get('clientsCount');

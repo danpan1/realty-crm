@@ -31,23 +31,24 @@ class RealtyOneLayout {
         return Realty.findOne({});
       }
     });
-    switch ($state.current.url) {
+    console.log($state);
+    switch ($state.current.name) {
       // case '/demonstrations':
       //   this.selectedTab = 0;
       //   break;
-      case '/find':
+      case 'crm.realty.one.find':
         this.selectedTab = 0;
         break;
-      case '/connections':
+      case 'crm.realty.one.connections':
         this.selectedTab = 1;
         break;
-      case '/review':
+      case 'crm.realty.one.review':
         this.selectedTab = 2;
         break;
-      case '/email':
+      case 'crm.realty.one.email':
         this.selectedTab = 3;
         break;
-      case '/info':
+      case 'crm.realty.one.info':
         this.selectedTab = 4;
         break;
       default:
