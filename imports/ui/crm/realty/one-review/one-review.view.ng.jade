@@ -20,12 +20,12 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
             p(ng-if='oneReview.realty.moderator.comment.photo').md-body-1 {{oneReview.realty.moderator.comment.photo}}
             p(ng-if='oneReview.realty.moderator.percent.photo && oneReview.realty.moderator.percent.photo < 60').md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
 
-div(md-whiteframe='2').mv-16
-    div(layout='row' layout-wrap)
+div(md-whiteframe='2' ng-if='oneReview.realty.details.images && oneReview.realty.details.thumbnails').mv-16
+    div(layout='row' layout-wrap ng-init='oneReview.findMainImage(oneReview.realty.image)')
         div(flex='33' ng-repeat='image in oneReview.realty.details.images')
             md-card
-                md-button(ng-if='image.url == oneReview.realty.image' aria-label='Выбрать в качестве главного фото').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
-                md-button(ng-if='image.url != oneReview.realty.image' ng-click='oneReview.setMainImage(image)' aria-label='Сделать главным фото').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
+                md-button(ng-if='image.url == oneReview.mainImage' aria-label='Выбрать в качестве главного фото').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
+                md-button(ng-if='image.url != oneReview.mainImage' ng-click='oneReview.setMainImage(image)' aria-label='Сделать главным фото').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
                 md-button(ng-click="oneReview.removeImage(image)" aria-label='Удалить фото').btn-remove-photo
                     md-icon(md-svg-icon='svg/icon-close-white.svg')
                 div.one-review-photo(style='background-image:url({{image.url}});')

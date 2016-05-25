@@ -5,33 +5,26 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {name as ClientCard} from '/imports/ui/shared/client-card/client-card.component';
 import {Clients} from '/imports/api/clients';
+import {Realty} from '/imports/api/realty';
 
 import './one-connections.view.html';
 
 class OneConnections {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams) {
+  constructor($scope, $reactive) {
     $reactive(this).attach($scope);
-    
-    let vm = this;
-    vm.assort = $stateParams.assort;
-    vm.selectedTab = '';
-    switch($stateParams.assort){
-        case 'manual':
-            vm.selectedTab = 0;
-            break;
-        case 'auto':
-            vm.selectedTab = 1;
-            break;
-        default:
-            vm.selectedTab = 0;
-    }
-    
-    this.subscribe('listClients');
+  const vm = this;
+
+    this.subscribe('relationClients', ()=> {
+      return [vm.getReactively('realty.relations')];
+    });
 
     this.helpers({
       clients() {
-        return Clients.find();
+        return Clients.find({});
+      },
+      realty() {
+        return Realty.findOne({});
       }
     });
   }
@@ -45,8 +38,8 @@ export default angular.module(moduleName, [
   angularMeteor,
   ClientCard
 ]).component(moduleName, {
-    templateUrl: 'imports/ui/crm/realty/one-connections/one-connections.view.html',
-    bindings: {},
-    controllerAs: moduleName,
-    controller: OneConnections
-  });
+  templateUrl: 'imports/ui/crm/realty/one-connections/one-connections.view.html',
+  bindings: {},
+  controllerAs: moduleName,
+  controller: OneConnections
+});

@@ -4,6 +4,7 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {clientNeedSchema} from './client-need.schema';
+import {RelationsSchema} from '../relations/relations.schema';
 import {Roles} from 'meteor/alanning:roles';
 import {_} from 'meteor/underscore';
 import {Meteor} from 'meteor/meteor';
@@ -76,22 +77,10 @@ Clients.Schema = new SimpleSchema({
   realtorNote: { // Заметка от риэлтора по клиенту или от колл-центра
     type: String
   },
-  relations: {
-    type: [Object],
+  relations: { // Связи
+    type: [RelationsSchema],
     optional: true
   },
-  'relations.$._id': {
-    type: String,
-    optional: true
-  },
-  'relations.$.read': {
-    type: Boolean,
-    optional: true
-  },
-  'relations.$.hide': {
-    type: Boolean,
-    optional: true
-  }, /// TODO сделать статусы ['offer', 'offered', inwork, reject, hide, read]??? пока хз
   searchEndDate: { // На когда ищет
     type: Date,
     optional: true

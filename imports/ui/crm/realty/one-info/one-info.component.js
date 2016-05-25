@@ -11,10 +11,11 @@ import './one-info.view.html';
 
 class OneInfo {
   /* @ngInject */
-  constructor($scope, $reactive, $state, $stateParams, $mdDialog, $mdMedia) {
+  constructor($scope, $reactive, $state, $stateParams, $mdDialog) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.state = $state;
+    this.mdDialog = $mdDialog;
 
     this.helpers({
       realty: () => {
@@ -70,6 +71,11 @@ class OneInfo {
       this.realty.details.conditions.splice(index, 1);
     }
     console.log(this.realty.details.conditions);
+    
+    this.realtyUpdate();
+  }
+  
+  realtyUpdate () {
     Realty.update({_id: this.realty._id}, {
       $set: this.realty
     }, (error) => {
@@ -79,6 +85,28 @@ class OneInfo {
         console.log('call recieved newObj');
       }
     });
+  }
+   
+  openArchiveDialog (ev) {
+      let vm = this;
+      console.log(angular.element(document.querySelector('#openArchiveDialog')));
+      var confirm = this.mdDialog.confirm()
+            .parent(angular.element(document.body))
+            .clickOutsideToClose(true)
+            .title('В архив')
+            .textContent('Закрыть сделку и перенести объект в архив?')
+            .ariaLabel('Client archivation confirmation')
+            .ok('Переместить')
+            .cancel('Нет')
+            .targetEvent(ev);
+        this.mdDialog.show(confirm).then(function() {
+            vm.realty.status = 'archive';
+            
+            this.realtyUpdate();
+            
+            console.log(vm.realty.status);
+            vm.state.go('crm.realty.list.my');
+        })
   }
 
   setActiveConditions(conditions) {

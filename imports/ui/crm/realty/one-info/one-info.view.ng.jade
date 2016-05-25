@@ -1,4 +1,4 @@
-one-info-edit(ng-if="oneInfo.details.composition" realty="oneInfo.realty" show="oneInfo.editDialogShow")
+one-info-edit(ng-if="oneInfo.realty.details.composition" realty="oneInfo.realty" show="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
     div(layout="row" layout-align='start center')
         div(hide) 
@@ -16,18 +16,18 @@ div(layout="column", layout-align="space-around stretch")
             div(layout='column' layout-align='space-between none').client-info-notes-item
                 md-input-container().md-block.mt-0
                     label Заметка по объекту
-                    textarea(maxlength="2000" ng-model="oneReviewDescContent.desc.details")
+                    textarea(maxlength="2000" ng-model="oneInfo.realty.realtor.comment")
                 div
-                    md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+                    md-button(aria-label='Сохранить' ng-click='oneInfo.realtyUpdate()').md-primary.md-raised.m-0 Сохранить
         div(md-whiteframe='2' flex='33').client-info-contacts.p-16
             h3().md-title.mt-0.mb-32 Контакты собственника
             md-input-container().md-block.mt-16.mb-0
                 label Имя
-                input(type='text').md-title
+                input(type='text' ng-model='oneInfo.realty.contacts[0].name').md-title
             md-input-container().md-block.mt-16.mb-0
                 label Телефон
-                input(type='tel').md-title
-            md-button(aria-label='Сохранить').md-primary.md-raised.m-0 Сохранить
+                input(type='tel' ng-model='oneInfo.realty.contacts[0].phones[0].phone').md-title
+            md-button(aria-label='Сохранить' ng-click='oneInfo.realtyUpdate()').md-primary.md-raised.m-0 Сохранить
 
     div(layout='row').mt-16
         div(md-whiteframe='2' flex)
@@ -58,7 +58,8 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') До метро:
                         div(flex='40') #[strong {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
-                    md-button(ng-click="oneInfo.showEditDialog($event)" aria-label='Изменить').md-primary.md-raised.mt-32.mh-0 Изменить
+                    md-button(ng-click="oneInfo.editDialogShow = true" aria-label='Изменить').md-primary.md-raised.mt-32.mh-0 Изменить
+                    md-button.md-raised.md-default() {{oneInfo.editDialogShow}} + {{oneInfo.realty.details.composition}}
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Объект
@@ -127,15 +128,17 @@ div(layout="column", layout-align="space-around stretch")
 
         div(md-whiteframe='2' flex='50' ng-if='oneInfo.realty.status != "archive"').p-16
             h3().md-title.mt-0 Закрытие сделки
-            md-button(ng-click='oneInfo.archiveConfirm.show = true' aria-label='Закрыть сделку и переместить объект в архив').md-primary.md-raised.mt-32.mh-0  Закрыть сделку и перенести объект в архив
-
-div(ng-if='oneInfo.archiveConfirm.show == true')
-    div(ng-click='oneInfo.archiveConfirm.show = false').one-info-edit__wrapper
-    div(layout='column' ng-init='oneInfoEdit.ngOnInit()').one-info-archive__block.ph-16
-        div(layout='row' layout-align='space-between center').dialog-header
-            div(flex='90')
-                h2 В архив
-            div(flex='10' ng-click='oneInfo.archiveConfirm.show = false') X
-        p Закрыть сделку и перенести объект в архив?
-        md-button(ng-click='oneInfo.archive(oneInfo.realty)').md-primary.md-raised.ml-0.mb-16 Переместить
+            md-button(ng-click='oneInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить объект в архив').md-primary.md-raised.mt-32.mh-0  Закрыть сделку и перенести объект в архив
+            //md-button(ng-click='oneInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить клиента в архив').md-primary.md-raised.mt-32.mh-0 Закрыть сделку и переместить клиента в архив
+        // div(ng-if='oneInfo.archiveConfirm.show == true')
+             div(ng-click='oneInfo.archiveConfirm.show = false').one-info-edit__wrapper
+             div(layout='column' ng-init='oneInfoEdit.ngOnInit()').one-info-archive__block.ph-16
+                 div(layout='row' layout-align='space-between center').dialog-header
+                     div(flex='90')
+                         h2 В архив
+                     div(flex='10' ng-click='oneInfo.archiveConfirm.show = false') X
+                 p Закрыть сделку и перенести объект в архив?
+                 md-button(ng-click='oneInfo.archive(oneInfo.realty)').md-primary.md-raised.ml-0.mb-16 Переместить
+        
+        
     

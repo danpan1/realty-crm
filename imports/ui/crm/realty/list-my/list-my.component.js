@@ -28,7 +28,6 @@ class ListMy {
     };
 
     vm.subscribe('listMy', () => {
-      console.log(vm.getReactively('page'));
       return [
         {
           limit: parseInt(vm.perPage),
@@ -39,7 +38,6 @@ class ListMy {
     }, {
       onReady: function () {
         vm.loaded = true;
-        console.log('onReady And the Items actually Arrive', arguments);
         // subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
       }
     });
