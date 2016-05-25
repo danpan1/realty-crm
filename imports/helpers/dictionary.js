@@ -31,7 +31,7 @@ export const dictionary = {
     {id: 'elevator', name: 'Лифт', cian: ''},
     {id: 'furniture', name: 'Мебель', cian: 'жилая мебель'},
     {id: 'kitchen_furniture', name: 'Кух. мебель', cian: 'кухонная мебель'},
-    {id: 'phone', name: 'Телефон', cian : 'телефон'},
+    // {id: 'phone', name: 'Телефон', cian : 'телефон'},
     {id: 'refrigerator', name: 'Холодильник', cian: 'холодильник'},
     {id: 'tv', name: 'Телевизор', cian: 'телевизор'},
     {id: 'washer', name: 'Стир. машина', cian: 'стиральная машина'},
