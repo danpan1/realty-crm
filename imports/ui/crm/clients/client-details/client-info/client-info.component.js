@@ -113,16 +113,6 @@ class ClientInfo {
             
             vm.updateClientInfo();
             
-            /*Clients.update({_id: vm.client._id}, {
-                $set: vm.client
-            }, (error) => {
-                if(error) {
-                console.log(error);
-                } else {
-                    console.log('call recieved newClient');
-                }
-            });*/
-            
             console.log(vm.client.status);
             vm.state.go('crm.clients.list.my', {status: 'realtor'});
         })
