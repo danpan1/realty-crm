@@ -7,6 +7,7 @@ div(md-whiteframe='2').mv-16.client-card
                 h3(ng-click="clientCard.sendCurrentClient(clientCard.client)").md-title.text-bold.m-0 {{clientCard.client.need.price | price}}
                 p().md-body-1.client-card__right-label {{clientCard.client.comissionLoyal == true ? 'Готов ' : 'Не готов ' }} платить комиссию
                 p().md-body-1.client-card__right-label на {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
+                p().md-body-1.client-card__right-label id{{clientCard.client._id}}
                 p(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8

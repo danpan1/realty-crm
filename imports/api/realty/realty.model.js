@@ -10,7 +10,7 @@ import {RealtyRealtorSchema} from './schemas/realty-realtor.schema';
 import {RentDetailsSchema} from './schemas/details.schema';
 import {Roles} from 'meteor/alanning:roles';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-
+import {RelationsSchema} from '../relations/relations.schema';
 export const Parser = new Mongo.Collection('parser');
 export const Realty = new Mongo.Collection('realty');
 // mongodump -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
@@ -107,28 +107,10 @@ Realty.Schema = new SimpleSchema({
     type: RealtyRealtorSchema,
     optional: true
   },
-  relations: {
-    type: [Object],
+  relations: { // Связи
+    type: [RelationsSchema],
     optional: true
   },
-  'relations.$._id':{
-    type: String,
-    optional: true
-  },
-  'relations.$.read':{
-    type: Boolean,
-    optional: true
-  },
-  'relations.$.hide':{
-    type: Boolean,
-    optional: true
-  }, /// TODO сделать статусы ['offer', 'offered', inwork, reject, hide, read]??? пока хз
-  // reports: { // TODO Отчеты о показах. И сами показы. Возможно это надо в отдельную коллекцию. но пока пусть так
-  //   type: [ReportsSchema],
-  //   // minCount : 1,
-  //   maxCount: 100,
-  //   optional: true
-  // },
   roomcount: {//Количество комнат ['1', '2', '3', '4+']
     type: Number,
     label: 'roomcount',
