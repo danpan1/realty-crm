@@ -20,12 +20,12 @@ div(md-whiteframe='2').mv-16.client-card
                 p.client-card__link_p(ng-if="clientCard.client.status != 'archive'")
                     a.client-card__link(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' href="") Предложить объект
                 p.client-card__link_p(ng-if="clientCard.client.status != 'archive'")
-                    a.client-card__link(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})" href="") 15 связей
+                    a.client-card__link(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})" href="") {{clientCard.client.relations.length}} связей
                 p.text-uppercase.client-card__btn_buy-client(ng-if="clientCard.client.status == 'hot'") Купить за 150 руб.
                 p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
-                    a.client-card__link(ui-sref="crm.clients.details.email({client:clientCard.client._id, activetab: 'offers'})" href="") 10 предложений
-                p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
-                    a.client-card__link(ui-sref="crm.clients.details.demonstration({client:clientCard.client._id, activetab: 'shows'})" href="") 2 показа
+                    a.client-card__link(ui-sref="crm.clients.details.email({client:clientCard.client._id, activetab: 'offers'})" href="") 11 предложений
+                //p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
+                //    a.client-card__link(ui-sref="crm.clients.details.demonstration({client:clientCard.client._id, activetab: 'shows'})" href="") 2 показа
                 p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
                     a.client-card__link(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})" href="") Добавить объекты
             div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.assort == 'manual'")
