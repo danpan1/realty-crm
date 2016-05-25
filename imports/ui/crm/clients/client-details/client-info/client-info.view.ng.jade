@@ -64,7 +64,7 @@ div(ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Метро
                     p
-                        p(ng-repeat="subway in clientInfo.client.need.embedded.subways").mv-0
+                        p(ng-repeat="subway in clientInfo.client.need.embedded.subways track by $index").mv-0
                             span(class="metro-color-{{clientInfo.client.need.embedded.subways[$index].line}}").metro-color
                             span() {{subway.name}}
                             span(ng-if='$index != clientInfo.client.need.embedded.subways.length - 1') , 
