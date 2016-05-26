@@ -1,3 +1,15 @@
+.color{
+    &-success{
+        color: springgreen
+    }
+}
+
+.lh{
+    &-1{
+        line-height: 1em;
+    }
+}
+
 ui-view {
   background-color: #f1f8fd;
 }
@@ -386,6 +398,24 @@ md-switch {
 
 .pr-32 {
   padding-right: 32px !important;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.ta-c{
+    text-align: center;
+}
+.ta-r{
+    text-align: right;
+}
+.ta-l{
+    text-align: left;
+}
+
+.uppercase{
+    text-transform: uppercase
 }
 
 @media screen and (max-width: 1279px) {

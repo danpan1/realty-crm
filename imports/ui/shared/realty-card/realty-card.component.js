@@ -18,6 +18,18 @@ class RealtyCard {
   takeRealty(id) {
     Meteor.call('takeRealty', id);
   }
+  
+  updateRealty (id) {
+    Realty.update({_id: id}, {
+      $set: this.realty
+    }, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('call recieved newObj');
+      }
+    });
+  }
 
   showSlider() {
     this.slider({'images': this.realty.parseDetails.images});
