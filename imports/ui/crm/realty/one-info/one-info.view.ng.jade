@@ -124,7 +124,7 @@ div(layout="column", layout-align="space-around stretch")
                         div(flex='40') #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
 
     div(layout='row' layout-align='start start').mt-16
-        div(md-whiteframe='2' flex='50').mr-16.ph-32
+        div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
             div(layout='row' layout-align='space-around start' layout-wrap) {{oneInfo.currentConditions[$index].presence}}
                 md-switch(flex='50' ng-model='oneInfo.currentConditions[$index].presence',
                 aria-label='Switch 2'

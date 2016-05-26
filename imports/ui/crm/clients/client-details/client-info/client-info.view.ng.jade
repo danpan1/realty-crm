@@ -73,11 +73,9 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                             span() {{subway.name}}
                             span(ng-if='$index != clientInfo.client.need.embedded.subways.length - 1') , 
                     p(ng-if='clientInfo.client.need.metroTime != undefined && clientInfo.client.need.metroTime > 0') {{clientInfo.client.need.metroTime}} минут {{clientInfo.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
-                    
-                     
 
     div(layout='row' layout-align='start start')#openArchiveDialog.mt-16
-        div(md-whiteframe='2' flex='50').mr-16.ph-32
+        div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
             div(layout='row' layout-align='space-between start' layout-wrap)
                 md-switch(flex='50',
                 ng-model='clientInfo.currentConditions[$index].presence',
