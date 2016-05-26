@@ -18,26 +18,29 @@ div(ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
     div(layout='row').mt-16
         div(md-whiteframe='2' flex)
             div(layout='row')
-                div(flex='33').ph-32.pv-16
-                    h3().md-subhead.text-bold.text-uppercase.mt-0 Особенности клиента
-                    div(layout='row' layout-align='space-around center').md-subhead.mv-8
-                        div(flex='60') Цена:
-                        div(flex='40') #[strong {{clientInfo.client.need.price | price}}]
-                    div(layout='row' layout-align='space-around center').md-subhead.mv-8
-                        div(flex='60') Платить комиссию:
-                        div(flex='40') #[strong {{clientInfo.client.comissionLoyal ? 'Да' : 'Нет'}}]
-                    div(layout='row' ng-if='clientInfo.client.comission' layout-align='space-around center').md-subhead.mv-8
-                        div(flex='60') Сколько:
-                        div(flex='40') #[strong {{clientInfo.client.comission}}]
-                    div(layout='row' layout-align='space-around center').md-subhead.mv-8
-                        div(flex='60') Актуально с:
-                        div(flex='40') #[strong {{clientInfo.client.searchStartDate | date:'dd.MM'}}]
-                    div(layout='row' layout-align='space-around center').md-subhead.mv-8
-                        div(flex='60') В поиске с:
-                        div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.MM'}}]
-                    div().md-subhead.mv-8 Состав съемщиков:
-                    div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
-                    md-button(aria-label='Изменить' ng-click="clientInfo.showEditDialog($event)").md-primary.md-raised.mt-32.mh-0 Изменить
+                div(flex='33' layout='row').ph-32.pv-16
+                    div(layout='column' layout-align='space-between start')
+                        div(flex)
+                            h3().md-subhead.text-bold.text-uppercase.mt-0 Особенности клиента
+                            div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                                div(flex='60') Цена:
+                                div(flex='40') #[strong {{clientInfo.client.need.price | price}}]
+                            div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                                div(flex='60') Платить комиссию:
+                                div(flex='40') #[strong {{clientInfo.client.comissionLoyal ? 'Да' : 'Нет'}}]
+                            div(layout='row' ng-if='clientInfo.client.comission' layout-align='space-around center').md-subhead.mv-8
+                                div(flex='60') Сколько:
+                                div(flex='40') #[strong {{clientInfo.client.comission}}]
+                            div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                                div(flex='60') Актуально с:
+                                div(flex='40') #[strong {{clientInfo.client.searchStartDate | date:'dd.MM'}}]
+                            div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                                div(flex='60') В поиске с:
+                                div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.MM'}}]
+                            div().md-subhead.mv-8 Состав съемщиков:
+                            div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
+                        div(flex layout='column' layout-align='end start')
+                            md-button(aria-label='Изменить' ng-click="clientInfo.showEditDialog($event)").md-primary.md-raised.mt-32.mh-0 Изменить
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Требования к объекту
@@ -72,14 +75,14 @@ div(ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
                     
                      
 
-    div(layout='row' layout-align='start start')#openArchiveDialog.md-padding.mt-16
-        div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
+    div(layout='row' layout-align='start start')#openArchiveDialog.mt-16
+        div(md-whiteframe='2' flex='50').mr-16.ph-32
             div(layout='row' layout-align='space-between start' layout-wrap)
                 md-switch(flex='50',
                 ng-model='clientInfo.currentConditions[$index].presence',
                 aria-label='Switch 2'
                 ng-repeat="condition in clientInfo.dictionary.conditions"
-                ng-click="clientInfo.onConditionsChange(condition.id)").md-warn.mv-8.mh-0 {{condition.name}}
+                ng-click="clientInfo.onConditionsChange(condition.id)").md-warn {{condition.name}}
         div(md-whiteframe='2' flex='50').p-16
             h3().md-title.mt-0 Закрытие сделки
-            md-button(ng-click='clientInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить клиента в архив').md-primary.md-raised.mt-32.mh-0 Закрыть сделку и переместить клиента в архив
+            md-button(ng-click='clientInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить клиента в архив').md-primary.md-raised.mt-0.mb-16.mh-0 Закрыть сделку и переместить клиента в архив
