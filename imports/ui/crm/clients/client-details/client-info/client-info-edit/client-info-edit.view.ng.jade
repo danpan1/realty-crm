@@ -1,7 +1,14 @@
 div(ng-if="clientInfoEdit.show")
     div.one-info-edit__wrapper(ng-click="clientInfoEdit.show = false")
-    div.one-info-edit__block.ph-16(layout="column" ng-init="clientInfoEdit.ngOnInit()")
-        div.ph-16.one-info-edit__changes(layout="row" flex="90")
+    div.one-info-edit__block(layout="column" ng-init="clientInfoEdit.ngOnInit()")
+        md-toolbar
+            div().md-toolbar-tools 
+                h3().md-title.mv-0 Изменение параметров клиента
+                span(flex)
+                md-button(ng-click="clientInfoEdit.show = false" aria-label='Закрыть').md-icon-button
+                    md-icon(md-svg-icon='svg/icon-close.svg')
+
+        div.ph-32.one-info-edit__changes(layout="row" flex="90")
             div(layout='row' layout-align='space-between start')
                 div(flex='30')
                     h2 Особенности клиента
@@ -51,9 +58,8 @@ div(ng-if="clientInfoEdit.show")
                                     md-select(ng-model='clientInfoEdit.client.need.metroTransport' aria-label='До метро')
                                         md-option(ng-value='transport.id',
                                         ng-repeat="transport in clientInfoEdit.dictionary.transport") {{transport.name}}
-                     
                         
-        div(flex='10').mt-16.ph-16.one-info-edit__buttons
+        div(flex='10').mt-16.ph-32.one-info-edit__buttons
             div(layout='row' layout-align='center center')
                 md-button.md-raised.md-primary(ng-click="clientInfoEdit.onChangeRealty(clientInfoEdit.client._id)") Сохранить
                 md-button.md-raised.md-danger(ng-click="clientInfoEdit.show = false") Закрыть
