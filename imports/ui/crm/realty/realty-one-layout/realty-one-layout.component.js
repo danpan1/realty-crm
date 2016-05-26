@@ -12,17 +12,15 @@ class RealtyOneLayout {
   constructor($scope, $reactive, $state, $stateParams) {
 
     $reactive(this).attach($scope);
-
+    const vm = this;
+    vm.loadedData = false;
     this.subscribe('oneInfo', () => {
       return [
         $stateParams.realtyId
       ];
     }, {
       onReady(){
-        // let realty = Realty.findOne({});
-        // if (realty && realty.details && realty.details.conditions) {
-        //   this.setActiveConditions(realty.details.conditions);
-        // }
+        vm.loadedData = true;
       }
     });
 

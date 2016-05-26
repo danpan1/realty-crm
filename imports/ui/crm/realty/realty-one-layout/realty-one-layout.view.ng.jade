@@ -11,4 +11,4 @@ div(md-whiteframe='1').tabbar
         md-tab(label='Подготовка {{realtyOneLayout.infoRealty.moderator.percent.total || 0}}%' ui-sref='crm.realty.one.review')
         //md-tab(label='Отправить предложение' ui-sref='crm.realty.one.email')
         md-tab(label='Инфо об объекте' ui-sref='crm.realty.one.info')
-ui-view
+ui-view(ng-if='realtyOneLayout.loadedData')

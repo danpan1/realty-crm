@@ -32,18 +32,11 @@ class OneInfo {
     for (var i in dictionary.conditions) {
       this.currentConditions[i] = {};
     }
-    // console.log(this.currentConditions);
 
-    let isConditionsSetted = false;
-    this.autorun(() => {
-
-      let conditions = this.getReactively('realty.details.conditions');
-
-      if (conditions && !isConditionsSetted) {
+    if (this.realty.details.conditions ) {
         isConditionsSetted = true;
-        this.setActiveConditions(conditions);
+        this.setActiveConditions(this.realty.details.conditions);
       }
-    });
   }
 
   archive(realty) {

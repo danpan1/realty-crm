@@ -62,7 +62,7 @@ div(ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
                         div(flex='60') Комнат:
                         div(flex='40')
                             span(ng-repeat='room in clientInfo.client.need.roomcount') #[strong {{room}}]
-                                span(ng-if='$index != clientInfo.client.need.renovation.length - 1') ,
+                                span(ng-if='$index != clientInfo.client.need.roomcount.length - 1') , 
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Метро
