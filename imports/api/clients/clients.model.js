@@ -78,6 +78,11 @@ Clients.Schema = new SimpleSchema({
   phone: {
     type: String
   },
+  realtor: {
+    type:     DBRef.Schema,
+    optional: true
+  },
+  /*
   realtorId: { // Какой риэлтор курирует клиента
     type: String,
     optional: true
@@ -94,8 +99,9 @@ Clients.Schema = new SimpleSchema({
     type: String,
     optional: true
   },
+  */
   relations: { // Связи
-    type: RelationsSchema,
+    type: [RelationsSchema],
     optional: true
   },
   searchEndDate: { // На когда ищет
