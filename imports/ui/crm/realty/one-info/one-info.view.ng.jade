@@ -101,10 +101,16 @@ div(layout="column", layout-align="space-around stretch")
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Условия
+                    div().md-subhead Состав съемщиков
+                        div(ng-repeat="position in oneInfo.realty.details.composition")
+                            div().md-subhead #[strong {{oneInfo.dictionary.composition[position].name}} ]
+                    div(layout='row' ng-if='oneInfo.realty.type !== undefined' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Срок:
+                        div(flex='40') #[strong {{oneInfo.dictionary.type[oneInfo.realty.type].name}}]
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Цена:
                         div(flex='40') #[strong {{oneInfo.realty.price | price}}]
-                    div(layout='row' ng-if='oneInfo.realty.comission' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' ng-if='oneInfo.realty.comission && oneInfo.realty.comissionLoyal' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Собственник:
                         div(flex='40') #[strong {{oneInfo.realty.comission}}]
                     div(layout='row' ng-if='oneInfo.realty.realtor.clientpercent' layout-align='space-around start').md-subhead.mv-8
@@ -113,9 +119,6 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' ng-if='oneInfo.realty.realtor.partnerpercent' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') От партнера:
                         div(flex='40') #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
-                    div().md-subhead Состав съемщиков
-                    div(ng-repeat="position in oneInfo.realty.details.composition")
-                        div().md-subhead #[strong {{oneInfo.dictionary.composition[position].name}} ]
 
     div(layout='row' layout-align='start start').mt-16
         div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
