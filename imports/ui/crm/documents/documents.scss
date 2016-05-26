@@ -1,23 +1,29 @@
 documents {
-    md-icon {
-        width: 50px;
-        height: 50px;
-        color: #2196f3;
-    }
+  md-icon {
+    width: 50px;
+    height: 50px;
+    color: #2196f3;
+  }
 
-    div[md-whiteframe] {
-        min-height: 60px;
-    }
+  div[md-whiteframe] {
+    min-height: 60px;
+  }
 }
 
-.documents-name {
-    vertical-align: middle;
-    color: #106cc8;
+.documents__name {
+  vertical-align: middle;
+  color: #106cc8;
+}
+
+.documents__title-download {
+  vertical-align: middle;
+  text-decoration: none;
+  color: #106cc8;
 }
 
 .documents__btn-download {
-    min-width: 50px !important;
-    &:hover {
-        background-color: transparent !important;
-    }
+  min-width: 50px !important;
+  &:hover {
+    background-color: transparent !important;
+  }
 }
