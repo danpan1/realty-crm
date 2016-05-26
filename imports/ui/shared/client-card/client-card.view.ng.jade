@@ -5,16 +5,15 @@ div(md-whiteframe='2').mv-16.client-card
         div(layout='row')
             div(flex='25').clientCard-col-1.ph-16.pv-8
                 h3(ng-click="clientCard.sendCurrentClient(clientCard.client)").md-title.text-bold.m-0 {{clientCard.client.need.price | price}}
-                p().md-body-1.client-card__right-label {{clientCard.client.comissionLoyal == true ? 'Готов ' : 'Не готов ' }} платить комиссию
-                p().md-body-1.client-card__right-label на {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
+                p().md-body-1.client-card__right-label {{(clientCard.client.comission | price) || 'Готов платить комиссию'}}
                 p().md-body-1.client-card__right-label id{{clientCard.client._id}}
-                p(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8
                 p(ng-if="clientCard.client.status == 'realtor'" hide).md-title.m-0
                     span().text-bold 1 мая 17:00 | 
                     span().text-bold через 3:00
                 p().md-body-1.client-card__note {{clientCard.client.note}}
+
             md-divider
             div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.client.status")
 
@@ -34,21 +33,16 @@ div(md-whiteframe='2').mv-16.client-card
                     ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})"
                     ) {{(clientCard.client.relations.offers.length || 0) + (clientCard.client.relations.new.length || 0)}} предложений
 
-                //p.text-uppercase.client-card__btn_buy-client(ng-if="clientCard.client.status == 'hot'") Купить за 150 руб.
-                //p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
-                    a.client-card__link(ui-sref="crm.clients.details.email({client:clientCard.client._id, activetab: 'offers'})" href="") 11 предложений
-                //p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
-                //    a.client-card__link(ui-sref="crm.clients.details.demonstration({client:clientCard.client._id, activetab: 'shows'})" href="") 2 показа
-                //p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")
-                    a.client-card__link(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})" href="") Добавить объекты
-
         md-divider
         
         div(layout='row')
             div(flex='25').clientCard-col-1.ph-16.pv-8
-                div(ng-if="clientCard.client.status != 'hot' && !clientCard.assort")
-                    p.md-body-1.client-card__right-label {{clientCard.client.phone | phone}}
-                    p.md-body-1.client-card__right-label {{clientCard.client.name}}
+                p().md-body-1.client-card__right-label на {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
+                p(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
+
+                //div(ng-if="clientCard.client.status != 'hot' && !clientCard.assort")
+                //    p.md-body-1.client-card__right-label {{clientCard.client.phone | phone}}
+                //    p.md-body-1.client-card__right-label {{clientCard.client.name}}
 
                 h3(ng-if="clientCard.client.status == 'hot' && !clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новый
                 h3(ng-if="clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новая связь
