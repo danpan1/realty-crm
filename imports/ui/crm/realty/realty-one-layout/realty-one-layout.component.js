@@ -12,6 +12,7 @@ class RealtyOneLayout {
   constructor($scope, $reactive, $state, $stateParams) {
 
     $reactive(this).attach($scope);
+    this.infoRealty = false;
     const vm = this;
     vm.loadedData = false;
     this.subscribe('oneInfo', () => {
@@ -21,12 +22,13 @@ class RealtyOneLayout {
     }, {
       onReady(){
         vm.loadedData = true;
+        console.log(vm);
       }
     });
 
     this.helpers({
       infoRealty: () => {
-        return Realty.findOne({});
+        return Realty.findOne({_id: $stateParams.realtyId});
       }
     });
     console.log($state);
