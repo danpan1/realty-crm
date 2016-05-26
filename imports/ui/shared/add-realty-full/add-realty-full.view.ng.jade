@@ -168,8 +168,8 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     md-select(required ng-model='addRealtyFull.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
                                         md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
                    
-                    div().mt-32 
-                        div(layout='row')
+                    div(ng-if='addRealtyFull.realty').mt-32 
+                        div(layout='row' ng-init='addRealtyFull.realty.comissionLoyal = true')
                             md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addRealtyFull.realty.comissionLoyal' flex flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ addRealtyFull.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
                         div(layout='row' ng-if='addRealtyFull.realty.comissionLoyal').mv-16
                             md-input-container(flex='45').md-block.mv-0
