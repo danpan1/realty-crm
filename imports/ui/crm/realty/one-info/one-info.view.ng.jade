@@ -115,7 +115,7 @@ div(layout="column", layout-align="space-around stretch")
                         div(flex='40') #[strong {{oneInfo.realty.price | price}}]
                     div(layout='row' ng-if='oneInfo.realty.comission && oneInfo.realty.comissionLoyal' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Собственник:
-                        div(flex='40') #[strong {{oneInfo.realty.comission}}]
+                        div(flex='40') #[strong {{oneInfo.realty.comission}}]%
                     div(layout='row' ng-if='oneInfo.realty.realtor.clientpercent' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') От клиента:
                         div(flex='40') #[strong {{oneInfo.realty.realtor.clientpercent || 0}}]%
