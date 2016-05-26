@@ -35,8 +35,8 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
                     md-button.md-raised.md-primary(flex='75' type='submit', aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password)')
                         | Зарегистрироваться
                 div(layout='column' layout-align='start center')
-                    div.mb-16.mt-8 или
+                    div().md-body-1 или
                     div
-                        a(href='/login').client-card__link Войти
+                        a(href='/login').md-button.md-primary Войти
             md-toolbar.md-warn(ng-show='register.error', layout='row', layout-fill='', layout-padding='', layout-margin='' layout-align='center center')
                 p.md-body-1 Этот Email уже зарегистрирован
