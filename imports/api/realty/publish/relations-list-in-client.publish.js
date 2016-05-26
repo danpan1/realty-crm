@@ -14,9 +14,21 @@ if (Meteor.isServer) {
     // console.log('realtyRelated',relations);
 
     if (this.userId && relations) {
-      let realtyRelated = relations.map((item)=> {
-        return item.realtyId;
-      });
+      let realtyRelated = [];
+      
+      if (relations.my) {
+        realtyRelated = realtyRelated.concat(relations.my);
+      }
+      if (relations.saved) {
+        realtyRelated = realtyRelated.concat(relations.saved);
+      }
+      if (relations.new) {
+        realtyRelated = realtyRelated.concat(relations.new);
+      }
+      if (relations.offers) {
+        realtyRelated = realtyRelated.concat(relations.offers);
+      }
+      
       // console.log(realtyRelated, 'realtyRelated');
       let selector = {
         _id: {$in: realtyRelated},

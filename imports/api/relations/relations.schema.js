@@ -4,36 +4,28 @@
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 export const RelationsSchema = new SimpleSchema({
-  _id: { // Уникальный ID связи
-    type: String,
+  new: {
+    type: [String],
     optional: true
   },
-  clientId: { // Какой объект привязан
-    type: String,
+  offers: {
+    type: [String],
     optional: true
   },
-  createdAt:{
-    type: Date,
+  paid:{
+    type: [String],
     optional: true
   },
-  answer: { // Ответ , если предложение
-    type: Boolean,
+  my: {
+    type: [String],
     optional: true
   },
-  hide: { // Спрятать
-    type: Boolean,
+  saved: { // Спрятать
+    type: [String],
     optional: true
   },
-  isOffer: { // Предложение или выбрал сам
-    type: Boolean,
-    optional: true
-  },
-  read: { // Прочитано или не прочитано
-    type: Boolean,
-    optional: true
-  },
-  realtyId: { // Какой объект привязан
-    type: String,
+  hide: { // Предложение или выбрал сам
+    type: [String],
     optional: true
   }
 });

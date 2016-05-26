@@ -25,9 +25,9 @@ class ClientCard {
       /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
   }
   sendRealtyRelation (clientId) {
-      console.log(clientId,'clientId' );
+      console.log(clientId,'clientId');
       console.log(this.realtyId, 'realtyId');
-      Meteor.call('setRelation', clientId, this.realtyId, true);
+      Meteor.call('setRelationFindClient', clientId, this.realtyId, 'my');
       /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
   }
 

@@ -27,7 +27,12 @@ div(md-whiteframe='2').mv-16.client-card
                 p.client-card__link_p(ng-if="!clientCard.pageFrom")
                     a.client-card__link(
                     ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})"
-                    ) {{clientCard.client.relations.length || 0}} связей
+                    ) {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
+
+                p.client-card__link_p(ng-if="!clientCard.pageFrom")
+                    a.client-card__link(
+                    ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})"
+                    ) {{(clientCard.client.relations.offers.length || 0) + (clientCard.client.relations.new.length || 0)}} предложений
 
                 //p.text-uppercase.client-card__btn_buy-client(ng-if="clientCard.client.status == 'hot'") Купить за 150 руб.
                 //p.client-card__link_p(ng-if="clientCard.client.status == 'realtor'")

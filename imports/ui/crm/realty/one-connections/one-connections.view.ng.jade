@@ -4,6 +4,13 @@
         //div.ph-8(flex="85") Действия по клиенту на всем вашем аккаунте
 
 div.md-whiteframe-2dp(md-whiteframe="2")
-    client-card(ng-repeat='client in oneConnections.clients' client='client' assort="oneConnections.assort")
+    div Новые
+    client-card(ng-repeat='client in oneConnections.clientsNew' client='client' assort="oneConnections.assort")
+    div Предложения
+    client-card(ng-repeat='client in oneConnections.clientsOffers' client='client' assort="oneConnections.assort")
+    div Сохраненные
+    client-card(ng-repeat='client in oneConnections.clientsSaved' client='client' assort="oneConnections.assort")
+    div Мои
+    client-card(ng-repeat='client in oneConnections.clientsMy' client='client' assort="oneConnections.assort")
     
     

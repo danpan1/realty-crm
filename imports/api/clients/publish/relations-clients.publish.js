@@ -13,10 +13,22 @@ if (Meteor.isServer) {
     // console.log(this.userId);
 
     if (this.userId && relations) {
-      let clientsRelated = relations.map((item)=> {
-        return item.clientId;
-      });
-      console.log(clientsRelated, 'clientsRelated');
+      let clientsRelated = [];
+
+      if (relations.my) {
+        clientsRelated = clientsRelated.concat(relations.my);
+      }
+      if (relations.saved) {
+        clientsRelated = clientsRelated.concat(relations.saved);
+      }
+      if (relations.new) {
+        clientsRelated = clientsRelated.concat(relations.new);
+      }
+      if (relations.offers) {
+        clientsRelated = clientsRelated.concat(relations.offers);
+      }
+
+      // console.log(clientsRelated, 'clientsRelated');
       let selector = {
         _id: {$in: clientsRelated},
         status: 'realtor'

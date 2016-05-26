@@ -8,43 +8,50 @@ import {Clients} from '../clients';
 import {Relations} from '../relations';
 
 Meteor.methods({
-  setRelation
+  setRelationFindClient
 });
-
-export function setRelation(clientId, realtyId) {
+/**
+ * setRelation - установка связей
+ * @param {string} clientId  -
+ * @param {string} realtyId  -
+ * @param {string} type -
+ *          my - из моих клиентов или объектов,
+ *          new(новые партнерские) ,
+ *          offers - партнерские,
+ *          paid - платные от нашего сервиса,
+ *          saved - сохраненные,
+ *          hide - спрятанные
+ */
+export function setRelationFindClient(clientId, realtyId, type) {
   //Это происходит на странице Объекты - Подобрать объект
   // Значит это предложение для владельцев клиентов
   if (Meteor.isServer && Meteor.userId()) {
-    console.log('clientId = ', clientId);
-    console.log('realtyId = ', realtyId);
-    const id = Relations.insert({});
-    console.log('Relations = ', id);
+    console.log('setRelationFindClient');
+    let fieldInRealty,fieldInClient;
 
-    let realtyRelation = {
-      _id: id,
-      answer: null,
-      clientId: clientId,
-      createdAt : new Date(),
-      hide: false,
-      isOffer: false,
-      read: true,
-      realtyId: realtyId
-    };
+    switch (type) {
+      case 'my' :
+        fieldInRealty = 'relations.my';
+        fieldInClient = 'relations.my';
+        break;
+      case 'saved' :
+        fieldInClient = 'relations.new';
+        fieldInRealty = 'relations.saved';
+        break;
+      default :
+        fieldInClient = 'relations.new';
+        fieldInRealty = 'relations.saved';
+        break;
+    }
+    let modificatorRealty = {};
+    let modificatorClient = {};
 
-    let clientRelation = {
-      _id: id,
-      answer: null,
-      clientId: clientId,
-      createdAt : new Date(),
-      hide: false,
-      isOffer: true,
-      read: false,
-      realtyId: realtyId
-    };
+    modificatorRealty[fieldInRealty] = clientId;
+    modificatorClient[fieldInClient] = realtyId;
 
     Realty.update({_id: realtyId},
       {
-        $addToSet: {relations: realtyRelation}
+        $addToSet: modificatorRealty
       }, (error) => {
         if (error) {
           console.log(error);
@@ -55,7 +62,7 @@ export function setRelation(clientId, realtyId) {
 
     Clients.update({_id: clientId},
       {
-        $addToSet: {relations: clientRelation}
+        $addToSet: modificatorClient
       }, (error) => {
         if (error) {
           console.log(error);

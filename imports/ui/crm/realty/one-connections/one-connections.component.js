@@ -13,20 +13,49 @@ class OneConnections {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
-  const vm = this;
+    const vm = this;
+
+    this.realty = Realty.findOne({});
 
     this.subscribe('relationClients', ()=> {
       return [vm.getReactively('realty.relations')];
     });
+    console.log(this.realty.relations);
 
     this.helpers({
-      clients() {
-        return Clients.find({});
+      clientsNew() {
+        if (vm.realty.relations) {
+          return Clients.find({_id: {$in: vm.realty.relations.new || []}});
+        } else {
+          return [];
+        }
+      },
+      clientsOffers() {
+        if (vm.realty.relations) {
+          return Clients.find({_id: {$in: vm.realty.relations.offers || []}});
+        } else {
+          return [];
+        }
+      },
+      clientsSaved() {
+        if (vm.realty.relations) {
+          return Clients.find({_id: {$in: vm.realty.relations.saved || []}});
+        } else {
+          return [];
+        }
+      },
+      clientsMy() {
+        if (vm.realty.relations) {
+          return Clients.find({_id: {$in: vm.realty.relations.my || []}});
+        } else {
+          return [];
+        }
       },
       realty() {
         return Realty.findOne({});
       }
     });
+
   }
 
 }
