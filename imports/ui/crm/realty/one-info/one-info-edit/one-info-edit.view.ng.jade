@@ -11,21 +11,23 @@ div(ng-if="oneInfoEdit.show")
             div(layout='row' layout-align='space-between start')
                 div(flex='30')
                     h2 Месторасположение
-                    realty-street(ng-model='oneInfoEdit.realty.address.street' house='oneInfoEdit.realty.address.house'
-                    dadata='oneInfoEdit.realty.address.full' layout='column' flex='66').zh
-                    md-input-container(flex='33').md-block.zh
-                        label Квартира
-                        input(ng-model='oneInfoEdit.realty.address.flat')
-                        span.bottom-label Видите только вы
-                    subway-chips(ng-model='oneInfoEdit.realty.address.subways' subways-embeded='oneInfoEdit.realty.address.subwaysEmbedded' flex
-                    ng-if='oneInfoEdit.realty.address.subways')
-                    div(layout='row' layout-align='start end').mv-16
-                        md-input-container(flex).mv-0.pv-0.zh
-                            input(ng-model='oneInfoEdit.realty.address.metroTime', placeholder='минут')
-                        md-input-container(flex).mv-0.ml-32.pb-0
-                            md-select(ng-model='oneInfoEdit.realty.address.metroTransport' aria-label='До метро')
-                                md-option(ng-value='transport.id',
-                                ng-repeat="transport in oneInfoEdit.dictionary.transport") {{transport.name}}
+                    div(layout='row')
+                        div(flex)
+                            realty-street(ng-model='oneInfoEdit.realty.address.street' house='oneInfoEdit.realty.address.house'
+                            dadata='oneInfoEdit.realty.address.full' layout='column' flex='66').zh
+                            md-input-container().md-block.zh
+                                label Квартира
+                                input(ng-model='oneInfoEdit.realty.address.flat')
+                                span.bottom-label Видите только вы
+                            subway-chips(ng-model='oneInfoEdit.realty.address.subways' subways-embeded='oneInfoEdit.realty.address.subwaysEmbedded' flex
+                            ng-if='oneInfoEdit.realty.address.subways')
+                            div(layout='row' layout-align='start end').mv-16
+                                md-input-container(flex).mv-0.pv-0.zh
+                                    input(ng-model='oneInfoEdit.realty.address.metroTime', placeholder='минут')
+                                md-input-container(flex).mv-0.ml-32.pb-0
+                                    md-select(ng-model='oneInfoEdit.realty.address.metroTransport' aria-label='До метро')
+                                        md-option(ng-value='transport.id',
+                                        ng-repeat="transport in oneInfoEdit.dictionary.transport") {{transport.name}}
                    
                 div(flex='30')
                     h2 Объект
@@ -91,6 +93,9 @@ div(ng-if="oneInfoEdit.show")
                     div(layout='row')
                         div().vertical-divider-2
                         div(flex)
+                            subway-chips(ng-model='oneInfoEdit.realty.address.subways' subways-embeded='oneInfoEdit.realty.address.subwaysEmbedded' flex
+                            ng-if='oneInfoEdit.realty.address.subways')
+
                             md-input-container(flex).md-block.mv-16.form-required
                                 md-select(required ng-model='oneInfoEdit.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
                                     md-option(ng-value="position.id" ng-repeat='position in oneInfoEdit.dictionary.composition') {{position.name}}
