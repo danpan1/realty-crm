@@ -5,11 +5,11 @@ div(layout='row')
             md-icon(md-svg-icon='skip_prev')
         md-button(ng-click="oneReviewDescTitle.nextDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber + 1 >= oneReviewDescTitle.descTitle.value.length" aria-label='Выбрать следующий заголовок' md-no-ink).little-button.md-icon-button.ml-0
             md-icon(md-svg-icon='skip_next')
-    md-input-container(flex='60')
+    md-input-container(flex='65')
         label Продающий заголовок
         md-select(ng-model="oneReviewDescTitle.descTitle.value[oneReviewDescTitle.descTitleNumber]" placeholder='Выберите готовый заголовок, который цепляет' aria-label='Выберите готовый заголовок')
             md-option(ng-value='title' ng-repeat="title in oneReviewDescTitle.descTitle.value" ng-click="oneReviewDescTitle.setDescTitle(title, $index)") {{title}}
-md-input-container(flex='60' flex-offset='10').md-block.zh
+md-input-container(flex='65' flex-offset='10').md-block.zh
     input(ng-maxlength="65"
     maxlength="65"
     ng-keydown="oneReviewDescTitle.controlKeyPress(this.oneReviewDescTitle.inputTitleDesc)"

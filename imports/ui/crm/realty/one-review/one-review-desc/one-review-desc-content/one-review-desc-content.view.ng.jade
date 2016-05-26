@@ -6,7 +6,7 @@ div(layout='row' ng-init="oneReviewDescContent.onInit()")
                     md-icon(md-svg-icon='skip_prev')
                 md-button(ng-click="oneReviewDescContent.nextActiveBenefitObjectNumber(true)" ng-disabled='oneReviewDescContent.activeObject.index + 1 >= oneReviewDescContent.benefitsList.length' aria-label='Выбрать следующую выгоду' md-no-ink).little-button.md-icon-button.ml-0
                     md-icon(md-svg-icon='skip_next')
-            md-input-container(flex='60')
+            md-input-container(flex='65')
                 md-select(ng-model="oneReviewDescContent.activeObject.name" placeholder='Выберите выгоду')
                     md-option(ng-value='label' ng-repeat="label in oneReviewDescContent.benefitsList" ng-click="oneReviewDescContent.setActiveBenefitObjectNumber($index)") {{label}}
 
@@ -18,7 +18,7 @@ div(layout='row' ng-init="oneReviewDescContent.onInit()")
                 md-button(ng-click="oneReviewDescContent.nextActiveBenefitNumber(true)" ng-disabled='oneReviewDescContent.active.index + 1 >= oneReviewDescContent.activeBenefit.content.length' aria-label='Выберите следующее описание' md-no-ink).little-button.md-icon-button.ml-0
                     md-icon(md-svg-icon='skip_next')
           
-            md-input-container(flex='60')
+            md-input-container(flex='65')
                 md-select(ng-model="oneReviewDescContent.activeBenefit.content[oneReviewDescContent.active.index]" placeholder='Выберите описание')
                     md-option(ng-value='name' ng-repeat="name in oneReviewDescContent.activeBenefit.content" ng-click="oneReviewDescContent.setActiveBenefitNumber($index)") {{name}}
 
