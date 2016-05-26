@@ -109,7 +109,7 @@ Realty.Schema = new SimpleSchema({
     optional: true
   },
   relations: { // Связи
-    type: [RelationsSchema],
+    type: RelationsSchema,
     optional: true
   },
   roomcount: {//Количество комнат ['1', '2', '3', '4+']

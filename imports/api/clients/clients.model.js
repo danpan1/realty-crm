@@ -101,7 +101,7 @@ Clients.Schema = new SimpleSchema({
   },
   */
   relations: { // Связи
-    type: [RelationsSchema],
+    type: RelationsSchema,
     optional: true
   },
   searchEndDate: { // На когда ищет
