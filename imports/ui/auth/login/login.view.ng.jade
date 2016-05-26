@@ -17,10 +17,10 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
                     md-button.md-raised.md-primary(flex='75' type='submit', aria-label='login', ng-disabled='login.loginForm.$invalid()')
                         | Войти
                 div(layout='row' layout-align='center center')
-                    a.md-button.md-primary(flex='75' href='/resetpw') Забыли пароль?
+                    a(flex='75' href='/resetpw').md-button.md-primary Забыли пароль?
                 div(layout='column' layout-align='start center')
-                    div.mb-16 или
+                    div().md-body-1 или
                     div
-                        a(href='/register').client-card__link Зарегистрироваться
+                        a(href='/register').md-button.md-primary Зарегистрироваться
             md-toolbar.md-warn(ng-show='login.error', layout='row', layout-fill='', layout-padding='', layout-margin='' layout-align='center center')
                 p().md-body-1 {{ login.error }}

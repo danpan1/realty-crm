@@ -34,8 +34,8 @@
         div(layout='column' layout-align='center center').listMy_Advertisement.p-8
             div(ng-if='realty.status === "sale"').md-title.color-orange.mv-8 100% / 100%
             div(ng-if='realty.status !== "sale"').md-title.color-orange.mv-8 0% / 100%
-            div(ng-if='realty.status === "sale"').color-orange.mv-8 Размещено
-            div(ng-if='realty.status !== "sale"').color-orange.mv-8 Не размещено
+            div(ng-if='realty.status === "sale"').color-orange.md-body-1.mv-8 Размещено
+            div(ng-if='realty.status !== "sale"').color-orange.md-body-1.mv-8 Не размещено
         md-divider
 
         div(layout='column' layout-align='center center').listMy_Actions.pv-8.pl-16.pr-32

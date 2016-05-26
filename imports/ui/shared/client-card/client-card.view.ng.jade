@@ -10,25 +10,25 @@ div(md-whiteframe='2').mv-16.client-card
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8
                 p(ng-if="clientCard.client.status == 'realtor'" hide).md-title.m-0
-                    span().text-bold 1 мая 17:00 | 
-                    span().text-bold через 3:00
+                    span().text-bold.md-body-1 1 мая 17:00 | 
+                    span().text-bold.md-body-1 через 3:00
                 p().md-body-1.client-card__note {{clientCard.client.note}}
 
             md-divider
             div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.client.status")
 
-                p.client-card__link_p(ng-if="clientCard.pageFrom == 'manual' || clientCard.pageFrom == 'algorithm'")
+                p.client-card__link_p.md-body-1(ng-if="clientCard.pageFrom == 'manual' || clientCard.pageFrom == 'algorithm'")
                     a.client-card__link(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' ) Предложить объект
 
-                p.client-card__link_p(ng-if="clientCard.pageFrom == 'my'")
+                p.client-card__link_p.md-body-1(ng-if="clientCard.pageFrom == 'my'")
                     a.client-card__link(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' ) Выбрать клиента
 
-                p.client-card__link_p(ng-if="!clientCard.pageFrom")
+                p.client-card__link_p.md-body-1(ng-if="!clientCard.pageFrom")
                     a.client-card__link(
                     ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})"
                     ) {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
 
-                p.client-card__link_p(ng-if="!clientCard.pageFrom")
+                p.client-card__link_p.md-body-1(ng-if="!clientCard.pageFrom")
                     a.client-card__link(
                     ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})"
                     ) {{(clientCard.client.relations.offers.length || 0) + (clientCard.client.relations.new.length || 0)}} предложений
@@ -51,15 +51,15 @@ div(md-whiteframe='2').mv-16.client-card
             div(flex='55' layout="row").one-demonstrations-center-cell.ph-16
                 div(flex='45' layout-fill).ph-16
                     p
-                        p(ng-repeat="subway in clientCard.client.need.embedded.subways").mv-0
+                        p(ng-repeat="subway in clientCard.client.need.embedded.subways").md-body-1.mv-0
                             span(class="metro-color-{{clientCard.client.need.embedded.subways[$index].line}}").metro-color
                             span() {{subway.name}}, 
                             span(ng-if="clientCard.client.need.metroTime != undefined && clientCard.client.need.metroTime > 0 && $index == clientCard.client.need.embedded.subways.length-1") {{clientCard.client.need.metroTime}} минут {{clientCard.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
-                    p
+                    p().md-body-1
                         span(ng-repeat="district in clientCard.client.need.embedded.districts") р-н {{district}}
                 md-divider
                 div(flex='55').ph-16
-                    p
+                    p().md-body-1
                         span(ng-repeat="room in clientCard.client.need.roomcount").md-body-1 {{room}}
                         
                             span(ng-if="$index < clientCard.client.need.roomcount.length - 1") , 
