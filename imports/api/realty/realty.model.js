@@ -104,8 +104,7 @@ Realty.Schema = new SimpleSchema({
     max: 9999999999
   },
   realtor: {
-    //type: RealtyRealtorSchema,
-    type:     DBRef.Schema,
+    type: RealtyRealtorSchema,
     optional: true
   },
   relations: { // Связи

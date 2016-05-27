@@ -70,8 +70,8 @@ export function addRealty(realty, notRealtor) {
       if (!realty.realtor) {
         realty.realtor = {};
       }
-      // realty.realtor.id = Meteor.userId();
-      realty.realtor = {$ref: 'users', $id: Meteor.userId()};
+      realty.realtor.id = Meteor.userId();
+      
       realty.status = 'taken';
     }
 

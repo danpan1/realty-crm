@@ -15,8 +15,7 @@ export function addClient(client, notRealtor) {
   console.log('casdc');
   if (Meteor.isServer && Meteor.userId()) {
     if (!notRealtor) {
-      // client.realtorId = Meteor.userId();
-      client.realtor = {$ref: 'users', $id: Meteor.userId()};
+      client.realtorId = Meteor.userId();
     }
     let nextValue = nextAutoincrement(Clients); // 1
     client._id = nextValue + '';
