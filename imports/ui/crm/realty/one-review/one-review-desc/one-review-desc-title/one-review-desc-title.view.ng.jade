@@ -1,4 +1,3 @@
-// p(ng-click="oneReviewDescTitle.setSomeTitle()") Set Title
 div(layout='row')
     div(ng-init="oneReviewDescTitle.onInit()" layout="row" flex='10')
         md-button(ng-click="oneReviewDescTitle.prevDescTitleNumber()" ng-disabled="oneReviewDescTitle.descTitleNumber == 0 || !oneReviewDescTitle.descTitleNumber" aria-label='Выбрать предыдущий заголовок' md-no-ink).little-button.md-icon-button.mr-0
@@ -14,4 +13,4 @@ md-input-container(flex='65' flex-offset='10').md-block.zh
     maxlength="65"
     ng-keydown="oneReviewDescTitle.controlKeyPress(this.oneReviewDescTitle.inputTitleDesc)"
     ng-model="oneReviewDescTitle.inputTitleDesc"
-    placeholder='или напишите сами продающий заголовок, который тебя цепляет')
+    placeholder='Здесь вы можете редактировать заголовок или написать свой')
