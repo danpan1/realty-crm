@@ -108,9 +108,12 @@ div(ng-if="oneInfoEdit.show")
                                       ng-keypress="oneInfoEdit.realty.price = ' '+this.oneInfoEdit.realty.price"
                                       ng-init="oneInfoEdit.ngOnInit(oneInfoEdit.realty.price)")
                             md-input-container(flex).md-block.mv-32.zh
-                                md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='oneInfoEdit.realty.comissionLoyal' flex flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ addRealtyFull.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
+                                md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='oneInfoEdit.realty.comissionLoyal' flex flex-offset='5'
+                                aria-label="Checkbox 1"
+                                ).md-primary.md-subhead {{oneInfoEdit.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
                             md-input-container(flex ng-if='oneInfoEdit.realty.comissionLoyal').md-block.mv-32.zh
-                                input(type="text" ng-model='oneInfoEdit.realty.comission' placeholder='Сколько готов платить комиссии (% или рублей)')
+                                input(type="text"
+                                ng-model='oneInfoEdit.realty.comission' placeholder='Сколько готов платить комиссии (% или рублей)')
                             md-input-container(flex).md-block.mv-32.zh
                                 label Процент от клиента
                                 input(ng-model="oneInfoEdit.realty.realtor.clientpercent")

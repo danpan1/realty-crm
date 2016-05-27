@@ -107,9 +107,9 @@ div(layout="column", layout-align="space-around stretch")
                     div().md-subhead Состав съемщиков
                         div(ng-repeat="position in oneInfo.realty.details.composition")
                             div().md-subhead #[strong {{oneInfo.dictionary.composition[position].name}} ]
-                    div(layout='row' ng-if='oneInfo.realty.type !== undefined' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Срок:
-                        div(flex='40') #[strong {{oneInfo.dictionary.type[oneInfo.realty.type].name}}]
+                        div(flex='40') #[strong длительный]
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Цена:
                         div(flex='40') #[strong {{oneInfo.realty.price | price}}]

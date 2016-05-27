@@ -11,7 +11,7 @@ import './client-info.view.html';
 
 class ClientInfo {
   /* @ngInject */
-  
+
   /* @ngInject */
   constructor($scope, $reactive, $state, $stateParams, $mdDialog) {
     $reactive(this).attach($scope);
@@ -19,168 +19,171 @@ class ClientInfo {
     let vm = this;
     this.mdDialog = $mdDialog;
     this.editDialogShow = false;
-    
+
     this.dictionary = dictionary;
     this.compositionSelected = [];
-    for(var i in this.dictionary.composition.length){
-        this.compositionSelected.push(false);
+    for (var i in this.dictionary.composition.length) {
+      this.compositionSelected.push(false);
     }
     this.currentConditions = [];
-    for(var i in dictionary.conditions){
-        this.currentConditions[i] = {};
+    for (var i in dictionary.conditions) {
+      this.currentConditions[i] = {};
     }
-    
+
     this.subscribe('clientInfo', () => {
       return [
         $stateParams.client
       ];
     }, {
       onReady(){
-        let client = Clients.findOne({});
+        let client = Clients.findOne({_id : $stateParams.client});
       }
     });
     this.helpers({
       client: () => {
-        return Clients.findOne({});
+        return Clients.findOne({_id : $stateParams.client});
       }
     });
-    
+
   }
-  
+
   ngOnInit() {
-      for(var i in this.client.need.renovation){
-          this.client.need.renovation[i] = parseInt(this.client.need.renovation[i]);
+    for (var i in this.client.need.renovation) {
+      this.client.need.renovation[i] = parseInt(this.client.need.renovation[i]);
+    }
+    this.setActiveConditions(this.client.need.conditions);
+  }
+
+  archive(client) {
+    if (client == this.client) {
+      this.client.status = 'archive';
+
+      this.updateClientInfo();
+
+      /*Clients.update({_id: this.client._id}, {
+       $set: this.client
+       }, (error) => {
+       if(error) {
+       console.log(error);
+       } else {
+       console.log('call recieved newClient');
+       }
+       });*/
+
+      console.log(this.client.status);
+      this.state.go('crm.clients.list.my');
+    }
+  }
+
+  onChangeClient(clientId) {
+    this.client.composition = [];
+    for (var i in this.compositionSelected) {
+      if (this.compositionSelected[i] == true) {
+        this.realty.details.composition.push(i);
       }
-      this.setActiveConditions(this.client.need.conditions);
-  }
-  
-  archive (client) {
-      if(client == this.client){
-          this.client.status = 'archive';
-          
-          this.updateClientInfo();
-          
-          /*Clients.update({_id: this.client._id}, {
-              $set: this.client
-          }, (error) => {
-              if(error) {
-              console.log(error);
-              } else {
-                  console.log('call recieved newClient');
-              }
-          });*/
-          
-          console.log(this.client.status);
-          this.state.go('crm.clients.list.my');
+    }
+
+    Clients.update({_id: clientId}, {
+      $set: this.client
+    }, (error) => {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log('call recieved newObj');
       }
+    });
+
+    this.show = false;
   }
-  
-  onChangeClient (clientId) {
-      this.client.composition = [];
-      for(var i in this.compositionSelected){
-          if(this.compositionSelected[i] == true){
-              this.realty.details.composition.push(i);
-          }
-      }
-      
-      Clients.update({_id: clientId}, {
-        $set: this.client
-      }, (error) => {
-        if(error) {
-          console.log(error)
-        } else {
-            console.log('call recieved newObj');
-        }
-      });
-      
-      this.show = false;
+
+  openArchiveDialog(ev) {
+    let vm = this;
+    console.log(angular.element(document.querySelector('#openArchiveDialog')));
+    var confirm = this.mdDialog.confirm()
+      .parent(angular.element(document.body))
+      .clickOutsideToClose(true)
+      .title('В архив')
+      .textContent('Перенести клиента в архив?')
+      .ariaLabel('Client archivation confirmation')
+      .ok('Переместить')
+      .cancel('Нет')
+      .targetEvent(ev);
+    this.mdDialog.show(confirm).then(function () {
+      vm.client.status = 'archive';
+
+      vm.updateClientInfo();
+
+      console.log(vm.client.status);
+      vm.state.go('crm.clients.list.my', {status: 'realtor'});
+    })
   }
-   
-  openArchiveDialog (ev) {
-      let vm = this;
-      console.log(angular.element(document.querySelector('#openArchiveDialog')));
-      var confirm = this.mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .clickOutsideToClose(true)
-            .title('В архив')
-            .textContent('Перенести клиента в архив?')
-            .ariaLabel('Client archivation confirmation')
-            .ok('Переместить')
-            .cancel('Нет')
-            .targetEvent(ev);
-        this.mdDialog.show(confirm).then(function() {
-            vm.client.status = 'archive';
-            
-            vm.updateClientInfo();
-            
-            console.log(vm.client.status);
-            vm.state.go('crm.clients.list.my', {status: 'realtor'});
-        })
-  }
-  
-  updateClientInfo () {
+
+  updateClientInfo() {
     let value = this.client.phone.split('');
-    for(var i in [1,2,3]){
-      for(var i in value){
-          if(value[i].match(/\+|\(|\)|\-|\s|d/)){
-              value.splice(i,1);
-          }
+    for (var i in [1, 2, 3]) {
+      for (var i in value) {
+        if (value[i].match(/\+|\(|\)|\-|\s|d/)) {
+          value.splice(i, 1);
+        }
       }
     }
     value = value.join('');
     this.client.phone = parseInt(value);
-    
-    if(typeof this.client.need.price != 'number'){
-        var price = this.client.need.price.split('');
-        for(var i in [1,2,3]){
-            for(var i in price){
-                if(price[i].match(/\s/)){
-                    price.splice(i,1);
-                }
-            }
+
+    if (typeof this.client.need.price != 'number') {
+      var price = this.client.need.price.split('');
+      for (var i in [1, 2, 3]) {
+        for (var i in price) {
+          if (price[i].match(/\s/)) {
+            price.splice(i, 1);
+          }
         }
-        price = price.join('');
-        this.client.need.price = parseInt(price);
+      }
+      price = price.join('');
+      this.client.need.price = parseInt(price);
     }
-            
+
     Clients.update({_id: this.client._id}, {
-        $set: this.client
+      $set: this.client
     }, (error) => {
-        if(error) {
+      if (error) {
         console.log(error);
-        } else {
-            console.log('call recieved newObj');
-        }
+      } else {
+        console.log('call recieved newObj');
+      }
     });
   }
-  
-  onConditionsChange (condition) {
+
+  onConditionsChange(condition) {
+    if(!this.client.need.conditions){
+      this.client.need.conditions = [];
+    }
     let index = this.client.need.conditions.indexOf(condition);
     if (index === -1) {
       this.client.need.conditions.push(condition);
-    }  else {
+    } else {
       this.client.need.conditions.splice(index, 1);
     }
     console.log(this.client.need.conditions);
-    
+
     this.updateClientInfo();
   }
-  
-  setActiveConditions (conditions) {
-      for(var i in conditions){
-        for(var n in dictionary.conditions){
-            this.currentConditions[n].name = dictionary.conditions[n].id;
-            if(conditions[i] == dictionary.conditions[n].id){
-                this.currentConditions[n].presence = true;
-            }
+
+  setActiveConditions(conditions) {
+    for (var i in conditions) {
+      for (var n in dictionary.conditions) {
+        this.currentConditions[n].name = dictionary.conditions[n].id;
+        if (conditions[i] == dictionary.conditions[n].id) {
+          this.currentConditions[n].presence = true;
         }
+      }
     }
-  }  
-  
-  showEditDialog () {
-      this.editDialogShow = true;
   }
-  
+
+  showEditDialog() {
+    this.editDialogShow = true;
+  }
+
 }
 
 const moduleName = 'clientInfo';
