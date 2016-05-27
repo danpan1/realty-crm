@@ -9,61 +9,62 @@ div(ng-if="clientInfoEdit.show")
                     md-icon(md-svg-icon='svg/icon-close.svg')
 
         div.ph-32.one-info-edit__changes(layout="row" flex="90")
-            div(layout='row' layout-align='space-between start')
+            div(layout='row' layout-align='space-between start' layout-fill)
                 div(flex='30')
                     h2 Особенности клиента
-                    div(layout='row')
-                        div(flex)
-                            md-input-container(flex).client-info-edit__price.md-block.mt-16
-                                label Цена:
-                                input(ng-model='clientInfoEdit.client.need.price'
-                                      ng-price-filter,
-                                      ng-keypress="clientInfoEdit.client.need.price = ' '+this.clientInfoEdit.client.need.price"
-                                      ng-init="clientInfoEdit.ngOnInit(clientInfoEdit.client.need.price)")
-                            div(layout='row')
-                                md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='clientInfoEdit.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ clientInfoEdit.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
-                            div().mv-16
-                                div().md-subhead Актуально с 
-                                md-datepicker(ng-model='clientInfoEdit.client.searchEndDate', md-placeholder='' flex)
-                            div().mv-16
-                                div().md-subhead В поиске с 
-                                md-datepicker(ng-model='clientInfoEdit.client.searchStartDate', md-placeholder='Enter date' flex)
-                            md-input-container().mv-0.form-required
-                                label Состав съемщиков
-                                md-select(required ng-model='clientInfoEdit.client.composition' aria-label='Выбрать состав съемщиков')
-                                    md-option(ng-value='composition.id',
-                                    ng-repeat="composition in clientInfoEdit.dictionary.composition ") {{composition.name}}
+                    div(layout='column')
+                        md-input-container(flex).client-info-edit__price.md-block.mt-16
+                            label Цена:
+                            input(ng-model='clientInfoEdit.client.need.price'
+                                  ng-price-filter,
+                                  ng-keypress="clientInfoEdit.client.need.price = ' '+this.clientInfoEdit.client.need.price"
+                                  ng-init="clientInfoEdit.ngOnInit(clientInfoEdit.client.need.price)")
+                        div(layout='row')
+                            md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='clientInfoEdit.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ clientInfoEdit.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
+                        div().mv-16
+                            div().md-subhead Актуально с 
+                            md-datepicker(ng-model='clientInfoEdit.client.searchEndDate', md-placeholder='' flex)
+                        div().mv-16
+                            div().md-subhead В поиске с 
+                            md-datepicker(ng-model='clientInfoEdit.client.searchStartDate', md-placeholder='Enter date' flex)
+                        md-input-container().mv-16.form-required
+                            label Состав съемщиков
+                            md-select(required ng-model='clientInfoEdit.client.composition' aria-label='Выбрать состав съемщиков')
+                                md-option(ng-value='composition.id',
+                                ng-repeat="composition in clientInfoEdit.dictionary.composition ") {{composition.name}}
 
                 div(flex='30')
                     h2 Объект
                     div(layout='row')
                         div().vertical-divider-1
-                        div(flex)
-                            md-input-container().md-block.form-required
-                                label Количество комнат
-                                md-select(required ng-model='clientInfoEdit.client.need.roomcount', multiple='true' aria-label='Выбрать количество комнат').md-select-multi-single
-                                    md-option(ng-value='roomcount.id',
-                                    ng-repeat="roomcount in clientInfoEdit.dictionary.roomcountBig") {{roomcount.name}}  
-                            md-input-container(flex).md-block.form-required
-                                label Ремонт
-                                md-select(required ng-model='clientInfoEdit.client.need.renovation', multiple='true' aria-label='Выбрать тип ремонта')
-                                    md-option(ng-value='renovation.id',
-                                    ng-repeat="renovation in clientInfoEdit.dictionary.renovation") {{renovation.name}}
+                        div(layout='row' layout-fill)
+                            div(flex)
+                                md-input-container(flex).md-block.form-required
+                                    label Количество комнат
+                                    md-select(required ng-model='clientInfoEdit.client.need.roomcount', multiple='true' aria-label='Выбрать количество комнат').md-select-multi-single
+                                        md-option(ng-value='roomcount.id',
+                                        ng-repeat="roomcount in clientInfoEdit.dictionary.roomcountBig") {{roomcount.name}}  
+                                md-input-container(flex).md-block.form-required.mv-32
+                                    label Ремонт
+                                    md-select(required ng-model='clientInfoEdit.client.need.renovation', multiple='true' aria-label='Выбрать тип ремонта')
+                                        md-option(ng-value='renovation.id',
+                                        ng-repeat="renovation in clientInfoEdit.dictionary.renovation") {{renovation.name}}
                                     
                 div(flex='30')
                     h2 Метро
                     div(layout='row')
                         div().vertical-divider-2
-                        div(flex)
-                            subway-chips(ng-model='clientInfoEdit.client.need.subways' subways-embeded='clientInfoEdit.client.need.subwaysEmbedded' flex
-                            ng-if='clientInfoEdit.client.need.subways').mv-16
-                            div(layout='row' layout-align='start end').mv-16
-                                md-input-container(flex).mv-0.pv-0.zh
-                                    input(ng-model='clientInfoEdit.client.need.metroTime', placeholder='минут')
-                                md-input-container(flex).mv-0.ml-32.pb-0
-                                    md-select(ng-model='clientInfoEdit.client.need.metroTransport' aria-label='До метро')
-                                        md-option(ng-value='transport.id',
-                                        ng-repeat="transport in clientInfoEdit.dictionary.transport") {{transport.name}}
+                        div(layout='row' layout-fill)
+                            div(flex)
+                                subway-chips(ng-model='clientInfoEdit.client.need.subways' subways-embeded='clientInfoEdit.client.need.subwaysEmbedded' flex
+                                ng-if='clientInfoEdit.client.need.subways')
+                                div(layout='row' layout-align='start end').mv-32
+                                    md-input-container(flex).mv-0.pv-0.zh
+                                        input(ng-model='clientInfoEdit.client.need.metroTime', placeholder='минут')
+                                    md-input-container(flex).mv-0.ml-32.pb-0
+                                        md-select(ng-model='clientInfoEdit.client.need.metroTransport' aria-label='До метро')
+                                            md-option(ng-value='transport.id',
+                                            ng-repeat="transport in clientInfoEdit.dictionary.transport") {{transport.name}}
                         
         div(flex='10').mt-16.ph-32.one-info-edit__buttons
             div(layout='row' layout-align='center center')

@@ -93,9 +93,6 @@ div(ng-if="oneInfoEdit.show")
                     div(layout='row')
                         div().vertical-divider-2
                         div(flex)
-                            subway-chips(ng-model='oneInfoEdit.realty.address.subways' subways-embeded='oneInfoEdit.realty.address.subwaysEmbedded' flex
-                            ng-if='oneInfoEdit.realty.address.subways')
-
                             md-input-container(flex).md-block.mv-16.form-required
                                 md-select(required ng-model='oneInfoEdit.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
                                     md-option(ng-value="position.id" ng-repeat='position in oneInfoEdit.dictionary.composition') {{position.name}}
