@@ -10,20 +10,23 @@ documents {
   }
 }
 
-.documents__name {
-  vertical-align: middle;
-  color: #106cc8;
-}
-
-.documents__title-download {
-  vertical-align: middle;
-  text-decoration: none;
-  color: #106cc8;
-}
-
-.documents__btn-download {
-  min-width: 50px !important;
-  &:hover {
-    background-color: transparent !important;
+.documents {
+  &__topbar {
+    min-height: auto !important;
+  }
+  &__name {
+    vertical-align: middle;
+    color: #106cc8;
+  }
+  &__title-download {
+    vertical-align: middle;
+    text-decoration: none;
+    color: #106cc8;
+  }
+  &__btn-download {
+    min-width: 50px !important;
+    &:hover {
+      background-color: transparent !important;
+    }
   }
 }

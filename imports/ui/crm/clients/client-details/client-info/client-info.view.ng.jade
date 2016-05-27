@@ -23,19 +23,19 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                     div(layout='column' layout-align='space-between start')
                         div(flex)
                             h3().md-subhead.text-bold.text-uppercase.mt-0 Особенности клиента
-                            div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Цена:
                                 div(flex='40') #[strong {{clientInfo.client.need.price | price}}]
-                            div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Платить комиссию:
                                 div(flex='40') #[strong {{clientInfo.client.comissionLoyal ? 'Да' : 'Нет'}}]
-                            div(layout='row' ng-if='clientInfo.client.comission' layout-align='space-around center').md-subhead.mv-8
+                            div(layout='row' ng-if='clientInfo.client.comission' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Сколько:
                                 div(flex='40') #[strong {{clientInfo.client.comission}}]
-                            div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Актуально с:
                                 div(flex='40') #[strong {{clientInfo.client.searchStartDate | date:'dd.MM'}}]
-                            div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') В поиске с:
                                 div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.MM'}}]
                         div(flex layout='column' layout-align='end start')
@@ -43,24 +43,24 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Требования к объекту
-                    div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Аренда:
                         div(flex='40') #[strong длительная]
-                    div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Тип объекта:
                         div(flex='40') #[strong Квартира]
-                    div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Город:
                         div(flex='40') #[strong Москва]
                     div().md-subhead.mv-8 Тип ремонта:
                     div(ng-repeat='renovation in clientInfo.client.need.renovation').md-subhead #[strong {{clientInfo.dictionary.renovation[renovation].name}}]
-                    div().md-subhead.mv-8 Состав съемщиков:
-                    div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
-                    div(layout='row' layout-align='space-around center').md-subhead.mv-8
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Комнат:
                         div(flex='40')
                             span(ng-repeat='room in clientInfo.client.need.roomcount') #[strong {{room}}]
                                 span(ng-if='$index != clientInfo.client.need.roomcount.length - 1') , 
+                    div().md-subhead.mv-8 Состав съемщиков:
+                    div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Метро
