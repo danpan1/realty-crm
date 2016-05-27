@@ -5,7 +5,7 @@
     background: #e3f2fd;
   }
   &_ID {
-    width: 13rem;
+    width: 9rem;
   }
   &_Address {
     width: 15.5rem;
@@ -19,7 +19,6 @@
       max-width: 14rem;
       max-height: 10.5rem;
     }
-
   }
   &_Info {
     width: 15rem;
@@ -33,6 +32,12 @@
   }
   &_Actions {
     width: 14rem;
+  }
+  &__new-connections {
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #4caf50;
   }
 }
 

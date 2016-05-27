@@ -1,17 +1,16 @@
 div(layout='column' md-whiteframe='2').mv-8.whiteBg
     div.newList(layout='row')
-
         div(layout='column' ng-if='::realtyCard.realtylisttype != "connections"').newList_ID.p-8
             div(layout='row')
                 div Сегодня
             div(layout='row')
                 div {{::realtyCard.realty.parseDetails.UID}}
-        div(layout='column' ng-if='::realtyCard.realtylisttype == "connections"').newList_ID.p-8
+        div(layout='column' ng-if='::realtyCard.realtylisttype == "connections"').newList_ID.md-body-1.p-16
             div(layout='row')
                 div id {{::realtyCard.realty.realtor.realtorIdShort | price}}
-            div(layout='column' layout-align='start center' ng-if = 'realtyCard.isNew')
-                h2(ng-if='!realtyCard.realty.relations.read').lh-1.md-uppercase.color-success.ta-c.mv-0 Новая связь
-                p(ng-if='realtyCard.realty.relations.read').mv-8 Прочитано
+            div(layout='column' layout-align='center center' ng-if = 'realtyCard.isNew')
+                span(ng-if='!realtyCard.realty.relations.read').newList__new-connections.mv-0 Новая связь
+                span(ng-if='realtyCard.realty.relations.read').mv-8 Прочитано
                 div(layout='row' layout-align='center center')
                     md-checkbox(ng-click="realtyCard.updateRealty(realtyCard.realty._id)" id="connectionRead" name="connectionRead" ng-model='realtyCard.realty.relations.read' flex flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead
                 
