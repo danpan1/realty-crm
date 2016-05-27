@@ -14,25 +14,26 @@ class ClientConnections {
   constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
     var vm = this;
-    vm.assort = $stateParams.assort ? $stateParams.assort : 'manual' ;
+    vm.assort = $stateParams.assort ? $stateParams.assort : 'manual';
+    this.client = Clients.findOne({_id: $stateParams.client});
     vm.selectedTab = '';
-    switch($stateParams.assort){
-        case 'manual':
-            vm.selectedTab = 0;
-            break;
-        case 'auto':
-            vm.selectedTab = 1;
-            break;
-        default:
-            vm.selectedTab = 0;
+    switch ($stateParams.assort) {
+      case 'manual':
+        vm.selectedTab = 0;
+        break;
+      case 'auto':
+        vm.selectedTab = 1;
+        break;
+      default:
+        vm.selectedTab = 0;
     }
-    
+
     vm.perPage = 5;
     vm.page = 1;
     this.showSlider = false;
     this.slideShowImages = [];
     vm.sort = {
-      'updatedAt': -1
+      '_id': -1
     };
 
     vm.subscribe('relationsListInClient', () => {
@@ -42,7 +43,7 @@ class ClientConnections {
           limit: parseInt(vm.perPage),
           skip: parseInt((vm.getReactively('page') - 1) * vm.perPage),
           sort: vm.getReactively('sort')
-        },vm.getReactively('client.relations')
+        }, vm.getReactively('client.relations')
       ];
     }, {
       onReady: function () {
@@ -50,26 +51,54 @@ class ClientConnections {
       }
     });
 
+
     vm.helpers({
       client: () => {
-        return Clients.findOne({});
+        return Clients.findOne({_id: $stateParams.client});
       },
-      realty: () => {
-        return Realty.find({}, {sort: vm.getReactively('sort')});
+      realtyNew() {
+        if (vm.client && vm.client.relations) {
+          return Realty.find({_id: {$in: vm.getReactively('client.relations.new') || []}}, {sort: vm.getReactively('sort')});
+        } else {
+          return [];
+        }
+      },
+      realtyOffers() {
+        if (vm.client && vm.client.relations) {
+          return Realty.find({_id: {$in: vm.client.relations.offers || []}}, {sort: vm.getReactively('sort')});
+        } else {
+          return [];
+        }
+      },
+      realtySaved() {
+        if (vm.client && vm.client.relations) {
+          return Realty.find({_id: {$in: vm.client.relations.saved || []}}, {sort: vm.getReactively('sort')});
+        } else {
+          return [];
+        }
+      },
+      realtyMy() {
+        console.log('realty.my');
+        if (vm.client && vm.client.relations) {
+          console.log('realty.m222y');
+          return Realty.find({_id: {$in: vm.client.relations.my || []}}, {sort: vm.getReactively('sort')});
+        } else {
+          return [];
+        }
       },
       realtyCount: () => {
         return Counts.get('realtyCount');
       }
     });
-    
+
   }
-  
+
   setSliderImages(images) {
-      console.log(images);
-      this.showSlider = true;
-      this.slideShowImages = images;
+    console.log(images);
+    this.showSlider = true;
+    this.slideShowImages = images;
   }
-  
+
 }
 
 const moduleName = 'clientConnections';

@@ -46,6 +46,7 @@ export default angular.module(moduleName, [
   bindings: {
     realty: '<',
     slider: '&',
+    isNew: '<',
     realtylisttype: '<'
   },
   controllerAs: moduleName,

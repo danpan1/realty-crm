@@ -34,7 +34,8 @@ export function setRelationFindClient(clientId, realtyId, type) {
         fieldInRealty = 'relations.my';
         fieldInClient = 'relations.my';
         break;
-      case 'saved' :
+      case 'algorithm' :
+      case 'manual' :
         fieldInClient = 'relations.new';
         fieldInRealty = 'relations.saved';
         break;

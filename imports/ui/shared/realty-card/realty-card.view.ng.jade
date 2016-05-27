@@ -9,7 +9,7 @@ div(layout='column' md-whiteframe='2').mv-8.whiteBg
         div(layout='column' ng-if='::realtyCard.realtylisttype == "connections"').newList_ID.p-8
             div(layout='row')
                 div id {{::realtyCard.realty.realtor.realtorIdShort | price}}
-            div(layout='column' layout-align='start center')
+            div(layout='column' layout-align='start center' ng-if = 'realtyCard.isNew')
                 h2(ng-if='!realtyCard.realty.relations.read').lh-1.md-uppercase.color-success.ta-c.mv-0 Новая связь
                 p(ng-if='realtyCard.realty.relations.read').mv-8 Прочитано
                 div(layout='row' layout-align='center center')
