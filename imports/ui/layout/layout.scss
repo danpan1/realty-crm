@@ -1,18 +1,23 @@
+layout > md-toolbar {
+  background-color: #1e88e5 !important;
+}
+
 .color{
-    &-success{
-        color: springgreen
-    }
+  &-success{
+    color: springgreen
+  }
 }
 
 .lh{
-    &-1{
-        line-height: 1em;
-    }
+  &-1{
+    line-height: 1em;
+  }
 }
 
 ui-view {
   background-color: #f1f8fd;
 }
+
 .toolbar-container {
     max-width: 1248px !important;
 }
@@ -82,7 +87,7 @@ div[md-whiteframe] {
 #content{
   //width: 1040px;
   margin-left: 16px;
-  background-color: #f1f8fd;
+  background-color: #c9e6f2;
   box-shadow: none;
 }
 
