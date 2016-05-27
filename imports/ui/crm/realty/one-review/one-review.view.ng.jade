@@ -27,7 +27,7 @@ div(md-whiteframe='2' ng-if='oneReview.realty.details.images && oneReview.realty
                 md-button(ng-if='image.url == oneReview.mainImage' aria-label='Выбрать в качестве главного фото').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
                 md-button(ng-if='image.url != oneReview.mainImage' ng-click='oneReview.setMainImage(image)' aria-label='Сделать главным фото').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
                 md-button(ng-click="oneReview.removeImage(image)" aria-label='Удалить фото').btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close-white.svg')
+                    md-icon(md-svg-icon='svg/icon-close.svg')
                 div.one-review-photo(style='background-image:url({{image.url}});')
 
 div(md-whiteframe='2').mv-16.ph-32.pv-16

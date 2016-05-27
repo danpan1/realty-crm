@@ -68,6 +68,9 @@ md-card {
     &:hover {
       background-color: #525252;
     }
+    md-icon {
+      color: $white;
+    }
   }
 }
 
