@@ -41,7 +41,7 @@ export default function routes($stateProvider) {
     
     
     .state('crm.clients.list.my', {
-      url: '/my?:status',
+      url: '/my?:status&:page',
       template: '<list-my-clients/>',
       controller: function ($state, $stateParams) {}
     })

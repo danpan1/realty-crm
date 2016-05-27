@@ -1,33 +1,38 @@
-import {Mongo} from 'meteor/mongo';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {dictionary} from '../dictionary';
-export const Realty = new Mongo.Collection('realty');
-export const Parser = new Mongo.Collection('parser');
-import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
-import {Roles} from 'meteor/alanning:roles'
 import {AddressSchema} from './schemas/address.schema';
-import {ModeratorSchema} from './schemas/moderator.schema.js';
 import {ContactsSchema} from './schemas/contacts.schema';
-import {ParseDetailsSchema} from './schemas/parseDetails.schema';
-import {RealtyRealtorSchema} from './schemas/realty-realtor.schema';
-import {ReportsSchema} from './schemas/reports.schema';
-import {RentDetailsSchema} from './schemas/details.schema';
-// mongodump -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
-// mongorestore -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
+import {dictionary} from '../../helpers/dictionary';
 import {Meteor} from 'meteor/meteor';
+import {ModeratorSchema} from './schemas/moderator.schema.js';
+import {Mongo} from 'meteor/mongo';
+import {ParseDetailsSchema} from './schemas/parseDetails.schema';
+import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
+import {RealtyRealtorSchema} from './schemas/realty-realtor.schema';
+import {RentDetailsSchema} from './schemas/details.schema';
+import {Roles} from 'meteor/alanning:roles';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {RelationsSchema} from '../relations/relations.schema';
+export const Parser = new Mongo.Collection('parser');
+export const Realty = new Mongo.Collection('realty');
+// mongodump -h 127.0.0.1 --port 3001 -d meteor
+// mongorestore -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
 
-// mongorestore -h 127.0.0.1 --port 27017 -d getrent dump/meteor
-// mongodump -h 127.0.0.1 --port 27017 -d getrent dump2/meteor
-// db.realty.remove({status: {$ne:'new'}})
 Realty.allow({
-  update: function () {
-    return Roles.userIsInRole(Meteor.userId(), ['business']);
+  update: function (realtyId, realty) {
+    let userId = Meteor.userId();
+    let isOwner;
+    if (realty.realtor) {
+      isOwner = (realty.realtor.id === userId);
+    }
+    let permission = (userId && isOwner) || Roles.userIsInRole(userId, ['staff']);
+    console.log(`update permission = ${permission}`);
+    return permission;
   },
   insert: function () {
-    return Roles.userIsInRole(Meteor.userId(), ['business']);
+    let userId = Meteor.userId();
+    return userId || Roles.userIsInRole(userId, ['staff']);
   },
   remove: function () {
-    return Roles.userIsInRole(Meteor.userId(), ['business']);
+    return false;
   }
 });
 Realty.Schema = new SimpleSchema({
@@ -35,8 +40,20 @@ Realty.Schema = new SimpleSchema({
   address: {
     type: AddressSchema
   },
+  comission: { // размер комиссии
+    type: String,
+    optional: true
+  },
+  comissionLoyal: { // платит или нет комиссию
+    type: Boolean,
+    optional: true
+  },
   contacts: {
     type: [ContactsSchema],
+    optional: true
+  },
+  createdAt: {
+    type: Date,
     optional: true
   },
   deposit: {  // Залог
@@ -67,6 +84,10 @@ Realty.Schema = new SimpleSchema({
     type: ModeratorSchema,
     optional: true
   },
+  modifiedAt: {
+    type: Date,
+    optional: true
+  },
   operator: {
     type: RealtyOperatorSchema,
     optional: true
@@ -85,12 +106,10 @@ Realty.Schema = new SimpleSchema({
     type: RealtyRealtorSchema,
     optional: true
   },
-  // reports: { // TODO Отчеты о показах. И сами показы. Возможно это надо в отдельную коллекцию. но пока пусть так
-  //   type: [ReportsSchema],
-  //   // minCount : 1,
-  //   maxCount: 100,
-  //   optional: true
-  // },
+  relations: { // Связи
+    type: RelationsSchema,
+    optional: true
+  },
   roomcount: {//Количество комнат ['1', '2', '3', '4+']
     type: Number,
     label: 'roomcount',
@@ -118,13 +137,17 @@ Realty.Schema = new SimpleSchema({
     type: Number,
     max: 5,
     optional: true
-  },
-  updatedAt: {
-    type: Date,
-    optional: true
   }
 });
 
+Realty.before.insert(function (userId, doc) {
+  doc.createdAt = Date.now();
+});
+
+Realty.before.update(function (userId, doc, fieldNames, modifier, options) {
+  modifier.$set = modifier.$set || {};
+  modifier.$set.modifiedAt = Date.now();
+});
 //Каждый update  проставляет время udate now
 // Realty.before.update(function (userId, doc, fieldNames, modifier) {
 //   modifier.$set = modifier.$set || {};

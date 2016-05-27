@@ -1,5 +1,5 @@
-.layout-fill {
-  height: auto !important;
+*:focus {
+  outline: none;
 }
 
 .brand-logo {
@@ -68,17 +68,40 @@ md-card {
     &:hover {
       background-color: #525252;
     }
+    md-icon {
+      color: $white;
+    }
   }
 }
 
 .color{
-    &-danger{
-        color:rgb(255,82,82);
-    }
-    &-primary{
-        color:rgb(33,150,243);
-    }
-    &-hide{
-        color:#898989;
-    }
+  &-danger{
+    color:rgb(255,82,82);
+  }
+  &-primary{
+    color:rgb(33,150,243);
+  }
+  &-hide{
+    color: #898989;
+  }
+  &-orange {
+    color: #ff5722;
+  }
+}
+
+.vertical-divider-1,
+.vertical-divider-2 {
+  position: absolute;
+  top: 9%;
+  width: 1px;
+  height: 77%;
+  border-left: 1px solid #f3f3f3;
+}
+
+.vertical-divider-1 {
+  left: 33%;
+}
+
+.vertical-divider-2 {
+  left: 66%;
 }

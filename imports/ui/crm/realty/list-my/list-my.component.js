@@ -3,6 +3,9 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import uiRouter from 'angular-ui-router';
+import utilsPagination from 'angular-utils-pagination';
+import {name as PaginationButtons} from '/imports/ui/shared/pagination-buttons/pagination-buttons.component';
 
 import {Realty} from '/imports/api/realty';
 import {Counts} from 'meteor/tmeasday:publish-counts';
@@ -10,16 +13,16 @@ import './list-my.view.html';
 
 class ListMy {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $state, $stateParams) {
     $reactive(this).attach($scope);
-
     const vm = this;
-
-    $reactive(this).attach($scope);
-
+    
+    this.state = $state;
+    this.stateParams = $stateParams;
+    
     vm.loaded = false;
     vm.perPage = 20;
-    vm.page = 1;
+    vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
       'price': -1
     };
@@ -35,7 +38,6 @@ class ListMy {
     }, {
       onReady: function () {
         vm.loaded = true;
-        console.log('onReady And the Items actually Arrive', arguments);
         // subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
       }
     });
@@ -49,11 +51,15 @@ class ListMy {
       },
       realtyCount: () => {
         return Counts.get('realtyCount');
+      },
+      pagesCount: () => {
+        return Math.ceil(Counts.get('realtyCount') / this.perPage);
       }
     });
-
+    
     vm.pageChanged = (newPageNumber) => {
-      vm.page = newPageNumber;
+      //vm.page = newPageNumber;
+      this.state.go('crm.realty.list.my', {page: newPageNumber}) ;
     };
 
   }
@@ -64,7 +70,10 @@ const moduleName = 'listMy';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  uiRouter,
+  utilsPagination,
+  PaginationButtons
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/list-my/list-my.view.html',
   bindings: {},

@@ -4,31 +4,64 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {clientNeedSchema} from './client-need.schema';
+import {RelationsSchema} from '../relations/relations.schema';
+import {Roles} from 'meteor/alanning:roles';
+import {_} from 'meteor/underscore';
+import {Meteor} from 'meteor/meteor';
+import {Locations} from '../locations';
 export const Clients = new Mongo.Collection('clients');
 
 Clients.allow({
   insert() {
-    return true;
+    let userId = Meteor.userId();
+    return userId || Roles.userIsInRole(userId, ['staff']);
   },
-  update(userId, party, fields, modifier) {
-    return userId && party.owner === userId;
+  update(clientId, client) {
+    let userId = Meteor.userId();
+    let isOwner;
+    if (client) {
+      isOwner = (client.realtorId === userId);
+    }
+    let permission = (userId && isOwner) || Roles.userIsInRole(userId, ['staff']);
+    console.log(`update permission = ${permission}`);
+    return permission;
   },
-  remove(userId, party) {
-    return userId && party.owner === userId;
+  remove() {
+    return false;
   }
 });
 
 Clients.Schema = new SimpleSchema({
+  business: { // чем занимается
+    type: String,
+    optional: true
+  },
   comission: { // размер комиссии
-    type: Number,
+    type: String,
+    optional: true
+  },
+  comissionLoyal: { // платит или нет комиссию
+    type: Boolean,
     optional: true
   },
   composition: { // состав ищущих жильё
     type: String,
     optional: true
   },
-  comissionLoyal: { // платит или нет комиссию
-    type: Boolean,
+  createdAt: { // дата созданий
+    type: Date,
+    optional: true
+  },
+  modifiedAt: { // дата обновления
+    type: Date,
+    optional: true
+  },
+  email: {
+    type: String,
+    optional: true
+  },
+  important: {
+    type: String,
     optional: true
   },
   name: {
@@ -38,21 +71,32 @@ Clients.Schema = new SimpleSchema({
     type: clientNeedSchema,
     optional: true
   },
-  phone: {
-    type: String
+  note: {
+    type: String,
+    optional: true
   },
-  email:{
+  phone: {
     type: String
   },
   realtorId: { // Какой риэлтор курирует клиента
     type: String,
     optional: true
   },
-  realtorNote: { // Заметка от риэлтора по клиенту или от колл-центра
-    type: String
+  realtorPhone: {
+    type: String,
+    optional: true
   },
-  status: {//'realtor' - находится у риэлтора в работе (мои клиенты)
-    type: String
+  realtorName: {
+    type: String,
+    optional: true
+  },
+  realtorIdShort: {
+    type: String,
+    optional: true
+  },
+  relations: { // Связи
+    type: RelationsSchema,
+    optional: true
   },
   searchEndDate: { // На когда ищет
     type: Date,
@@ -62,10 +106,49 @@ Clients.Schema = new SimpleSchema({
     type: Date,
     optional: true
   },
-  value:{
+  status: {//'realtor' - находится у риэлтора в работе (мои клиенты)
+    type: String
+  },
+  value: {
     type: Number,
     optional: true
   }
+});
+
+Clients.before.insert(function (userId, doc) {
+  doc.createdAt = Date.now();
+  console.log(doc.need.subways, 'doc.need.subways');
+  let subways = Locations.find({'_id': {$in: doc.need.subways}}).fetch();
+  if (subways && subways.length && subways[0].loc.llg) {
+    let subwaysInDistance = [];
+    subways.forEach((metro) => {
+      let foundCloseMetro = Locations.find({
+        'loc.llg': {
+          $near: {
+            $geometry: {type: 'Point', coordinates: metro.loc.llg},
+            $maxDistance: 3000
+          }
+        }
+      }).fetch();
+      subwaysInDistance = subwaysInDistance.concat(foundCloseMetro);
+    });
+
+    console.log('subwaysInDistance', subwaysInDistance);
+    let step1 = subwaysInDistance.map((item)=> {
+      return item._id;
+    });
+    console.log('step1', step1.length);
+    let step2 = _.uniq(step1, function (item) {
+      return item;
+    });
+    console.log('step2', step2.length);
+    doc.need.subwaysInDistance = step2;
+  }
+});
+
+Clients.before.update(function (userId, doc, fieldNames, modifier, options) {
+  modifier.$set = modifier.$set || {};
+  modifier.$set.modifiedAt = Date.now();
 });
 /**
  * filterQuery

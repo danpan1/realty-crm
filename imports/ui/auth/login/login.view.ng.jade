@@ -6,17 +6,21 @@ md-content(layout='column', layout-align='center center', layout-fill='', layout
         div(layout='column', layout-fill='', layout-margin='', layout-padding='')
             form(name='loginForm' ng-submit='login.login()')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='75')
+                    md-input-container(flex='75').form-required
                         label Email
                         input(type='email', ng-model='login.credentials.email', aria-label='Email', required='')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='75')
+                    md-input-container(flex='75').form-required
                         label Пароль
                         input(type='password', ng-model='login.credentials.password', aria-label='Пароль', required='')
                 div(layout='row' layout-align='center center')
                     md-button.md-raised.md-primary(flex='75' type='submit', aria-label='login', ng-disabled='login.loginForm.$invalid()')
                         | Войти
                 div(layout='row' layout-align='center center')
-                    a.md-button.md-primary(flex='75' href='/resetpw') Забыли пароль?
-            md-toolbar.md-warn(ng-show='login.error', layout='row', layout-fill='', layout-padding='', layout-margin='')
-                p.md-body-1 {{ login.error }}
+                    a(flex='75' href='/resetpw').md-button.md-primary Забыли пароль?
+                div(layout='column' layout-align='start center')
+                    div().md-body-1 или
+                    div
+                        a(href='/register').md-button.md-primary Зарегистрироваться
+            md-toolbar.md-warn(ng-show='login.error', layout='row', layout-fill='', layout-padding='', layout-margin='' layout-align='center center')
+                p().md-body-1 {{ login.error }}

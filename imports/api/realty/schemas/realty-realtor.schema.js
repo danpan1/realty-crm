@@ -2,14 +2,25 @@
  * Created by Danpan on 27.03.16.
  */
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {dictionary} from '../../dictionary';
+import {dictionary} from '../../../helpers/dictionary';
 export const RealtyRealtorSchema = new SimpleSchema({
   id: {
     type: String,
     max: 20,
     optional: true
   },
-
+  phone: {
+    type: String,
+    optional: true
+  },
+  name: {
+    type: String,
+    optional: true
+  },
+  realtorIdShort: {
+    type: String,
+    optional: true
+  },
   takeDate: {
     type: Date,
     optional: true
@@ -58,11 +69,11 @@ export const RealtyRealtorSchema = new SimpleSchema({
     type: Number,
     optional: true
   },
-  clientpercent:{
+  clientpercent: {
     type: Number,
     optional: true
   },
-  partnerpercent:{
+  partnerpercent: {
     type: Number,
     optional: true
   }

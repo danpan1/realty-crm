@@ -1,109 +1,61 @@
-div {{moderator.realty}}
 div(md-whiteframe='2').mv-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
-            div(layout='row')
+            div(layout='row' flex='100')
                 h3.md-headline.text-uppercase Фото
                 md-input-container(flex-offset='5')
-                    label 60%
-                    md-select(ng-model='realtyFilter.filter.conditions').small-select
-                        md-option(ng-value='condition.id',
-                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                    md-select(ng-model='moderator.realty.moderator.percent.photo' placeholder="Укажите").small-select
+                        md-option(ng-value='var',
+                        ng-repeat='var in moderator.rating.variants') {{var}}%
+            div
+                //md-button(ng-class="{ 'md-danger' : moderator.realty.moderator.percent.photo && moderator.realty.moderator.percent.photo < 60, 'md-primary' : moderator.realty.moderator.percent.photo && moderator.realty.moderator.percent.photo >= 60 }").md-raised 
+                    | {{ (moderator.realty.moderator.percent.photo < 60) ? 'Некачественные' : 'Качественные' }}
         div(flex='50')
-            h3().md-headline Ответ от модератора:
-            p().md-body-1 Не качественные.
-            p().md-body-1 Закажите профессиональные #[a(href="#") в 2 клика]
+            div(layout='column' flex='100')
+                h3().md-headline Ответ от модератора:
+                md-input-container().mv-0.pv-0
+                    textarea(ng-model='moderator.realty.moderator.comment.photo', placeholder='Напишите комментарий') 
+                p().md-body-1 Закажите профессиональные #[a(href="#").blue-link в 2 клика]
 
 
 div(md-whiteframe='2').mv-16
-    div(layout='row' layout-wrap layout-align='space-around')
-        div(flex)
+    div(layout='row' layout-wrap layout-align='center start')
+        div(flex="33" ng-repeat="photo in moderator.realty.details.images")
             md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
+                md-button(ng-if='photo.url != moderator.realty.image' ng-click='moderator.setMainImage(photo)').md-primary.md-raised.btn-set-photo Сделать главным фото
+                md-button(ng-if='photo.url == moderator.realty.image').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
                 md-button(aria-label).btn-remove-photo
                     md-icon(md-svg-icon='svg/icon-close-white.svg')
-                img(src='img/common/photo-2.jpg')
-        div(flex)
-            md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(aria-label).btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close-white.svg')
-                img(src='img/common/photo-2.jpg')
-        div(flex)
-            md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(aria-label).btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close-white.svg')
-                img(src='img/common/photo-2.jpg')
-    div(layout='row' layout-align='space-between')
-        div(flex)
-            md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(aria-label).btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close-white.svg')
-                img(src='img/common/photo-2.jpg')
-        div(flex)
-            md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(aria-label).btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close-white.svg')
-                img(src='img/common/photo-2.jpg')
-        div(flex)
-            md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(aria-label).btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close-white.svg')
-                img(src='img/common/photo-2.jpg')
-    div(layout='row' layout-align='space-between')
-        div(flex)
-            md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(aria-label).btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close-white.svg')
-                img(src='img/common/photo-2.jpg')
-        div(flex)
-            md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(aria-label).btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close-white.svg')
-                img(src='img/common/photo-2.jpg')
-        div(flex)
-            md-card
-                md-button().md-primary.md-raised.btn-set-photo Сделать главным фото
-                md-button(aria-label).btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close-white.svg')
-                img(src='img/common/photo-2.jpg')
-
+                img(src='{{photo.url}}')
 
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')
         div(flex='50')
             div(layout='row')
-                h3.md-headline.text-uppercase Качество рекламы
+                h3.md-headline.text-uppercase Качество рекламы 
                 md-input-container(flex-offset='5')
-                    label 60%
-                    md-select(ng-model='realtyFilter.filter.conditions').small-select
-                        md-option(ng-value='condition.id',
-                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                    md-select(ng-model='moderator.realty.moderator.percent.description' placeholder="Укажите").small-select
+                        md-option(ng-value='var',
+                        ng-repeat='var in moderator.rating.variants') {{var}}%
+            div
+                //md-button(ng-class="{ 'md-danger' : moderator.realty.moderator.percent.description && moderator.realty.moderator.percent.description < 60, 'md-primary' : moderator.realty.moderator.percent.description && moderator.realty.moderator.percent.description >= 60 }").md-raised 
+                    | {{ (moderator.realty.moderator.percent.description < 60) ? 'Качественное' : 'Некачественное' }}
         div(flex='50')
-            h3().md-headline Ответ от модератора:
-            p().md-body-1 Текст 1
-            p().md-body-1 Вторая строка
-
+            div(layout='column' flex='100')
+                h3().md-headline Ответ от модератора:
+                md-input-container(flex='100').mv-0.pv-0
+                    textarea(ng-model='moderator.realty.moderator.comment.description', placeholder='Напишите комментарий')
+                                        
 div(md-whiteframe='2').ph-32.pv-16
-    div(layout='row')
-        div(flex)
-            h3().md-subhead Уникальный продающий заголовок 65 символов, который тебя цепляет
-            p().md-body-1 Сдаем второй этаж-студию новой, полностью отделанной деревянной постройки. Очень теплое и уютное пространство. Собственник. 
-            p().md-body-1 Отличная экология, граница с лесом, возможность прогулок. И всего 10км от МКАД.
-            p().md-body-1 На одного-двух человек. Прихожая с вешалкой и подставкой для обуви, зеркало. Комната-студия с полностью оборудованной кухней - газовая варочная панель, холодильник с морозильной камерой, капсульная кофемашина Nespresso, многофункциональный чайник Bork. Телевизор LED с функцией Smart TV с доступом в интернет(подключен). Защищенный высокоскоростной Wi-Fi. Гардеробная зона. Ванная комната с душевой кабиной с тропическим душем, умывальник, унитаз. Стиральная машина. Регулируемые теплые полы, полотенцесушитель. 
-            p().md-body-1 Водоснабжение из собственного колодца - замечательная чистая и вкусная вода. (Имеется сертификат СЭС). На всех окнах римские шторы.
-            p().md-body-1 Отдельный вход. Парковочное место.
-            p().md-body-1 Всю коммуналку оплачивают доброжелательные хозяева-супруги.
-            p().md-body-1 Если есть потребность в живых цветах, предоставим с просьбой ухаживать за ними.
-
+    div(layout='column')
+        div()
+            h3().md-subhead {{moderator.realty.title}}
+            p().md-body-1 {{moderator.realty.details.descr}}
+        div().mt-16
+            span {{moderator.realty.contacts[0].phones[0].phone | phone}}
+            span.ml-16 {{moderator.realty.contacts[0].name}}
 div(layout='row').mt-32
     div(flex='30' flex-offset='5')
         md-button(ng-click='moderator.save(false)').md-primary.md-raised Отклонить
     div(flex='70')
-        md-button(ng-click='moderator.save(true)').md-success.md-raised.md-title Одобрить
+        md-button(ng-click='moderator.save(true)').md-success.md-raised.md-title.md-button-big Одобрить

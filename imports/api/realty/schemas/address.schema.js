@@ -13,10 +13,12 @@ export const AddressSchema = new SimpleSchema({
     optional: true
   },
   city: {
-    type: String,
-    optional: true
+    type: String
   },
   country: {
+    type: String
+  },
+  dadata: { // Full data из дадаты . Id карточки. Будем хранить в отдельной коллекции
     type: String,
     optional: true
   },
@@ -30,32 +32,21 @@ export const AddressSchema = new SimpleSchema({
   },
   flat: {
     type: String,
-    max: 20,
     optional: true
+  },
+  loc: { // Координаты
+    type: [Number],
+    optional: true,
+    decimal : true
   },
   house: {
-    type: String,
-    optional: true
-  },
-  meta: { // что не нужно в карточке и вообще возможно нен нужно
-    type: Object,
-    blackbox: true,
-    optional: true
-  },
-  //TODO хранить метро по id или так прямо. И с пешком тоже не понятно
-  metroId: {
-    type:String,
-    optional: true
-  },
-  metroName: {
-    type:String,
-    optional: true
+    type: String
   },
   metroTransport: {
     type: Number,
     optional: true
   },
-  metroPeshkom: {
+  metroTime: {
     type: String,
     optional: true
   },
@@ -63,16 +54,24 @@ export const AddressSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  subways: {
-    type:Array,
-    optional: true
-  },
-  'subways.$': {
-    type:'String',
-    optional: true
-  },
-  value: {
+  streetFiasId: { // Правильный поиск по комбинации streetFiasId + номер дома (улицы меняют названия, дома меняют Id)
     type: String,
     optional: true
+  },
+  subways: { // ID метро
+    type: [String],
+    optional: true
+  },
+  subwaysEmbedded: { // Линия и Название метро
+    type: Array,
+    optional: true
+  },
+  'subwaysEmbedded.$': { // ID метро
+    type: Object,
+    optional: true,
+    blackbox: true
+  },
+  value: {
+    type: String
   }
 });

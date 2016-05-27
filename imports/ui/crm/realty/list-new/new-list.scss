@@ -8,7 +8,7 @@
     width: 9rem;
   }
   &_Address {
-    width: 22.5rem;
+    width: 15.5rem;
   }
   &_Price {
     width: 13.5rem;
@@ -19,10 +19,9 @@
       max-width: 14rem;
       max-height: 10.5rem;
     }
-
   }
   &_Info {
-    width: 11rem;
+    width: 15rem;
   }
   &_Conditions {
     width: 19rem;
@@ -33,6 +32,12 @@
   }
   &_Actions {
     width: 14rem;
+  }
+  &__new-connections {
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #4caf50;
   }
 }
 

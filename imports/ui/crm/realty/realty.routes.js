@@ -44,11 +44,16 @@ export default function routes($stateProvider) {
       template: '<new-list/>'
     })
     .state('crm.realty.list.my', {
-      url: '/my',
-      template: '<list-my/>'
+      url: '/my?:page',
+      template: '<list-my/>',
+      controller: function ($state, $stateParams) {}
     })
     .state('crm.realty.list.archive', {
-      url: '/archive',
+      url: '/archive?:page',
       template: '<list-archive/>'
+    })
+    .state('crm.realty.one.find', {
+      url: '/find?:searchType',
+      template: '<one-find/>'
     });
 }

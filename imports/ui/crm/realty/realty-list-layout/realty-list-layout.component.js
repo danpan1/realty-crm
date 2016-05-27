@@ -8,9 +8,16 @@ import './realty-list-layout.view.html';
 
 class RealtyListLayout {
   /* @ngInject */
-  // constructor($scope, $reactive) {
-  //   $reactive(this).attach($scope);
-  // }
+  constructor($scope, $reactive, $state) {
+    $reactive(this).attach($scope);
+    
+    console.log($state.current.url);
+    console.log($state);
+    
+    this.selectedTab = 0;
+    if(/archive/.test($state.current.url)) this.selectedTab = 1;
+    
+  }
 
 }
 

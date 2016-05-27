@@ -5,8 +5,8 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
 import {Clients} from '/imports/api/clients';
-import {ClientFilterQuery} from '/imports/api/client-filter-query';
-import {dictionary} from '/imports/api/dictionary';
+import {name as PhoneMask} from '/imports/ui/shared/phone-mask/phone-mask.component';
+import {dictionary} from '/imports/helpers/dictionary';
 
 import './add-client-full.view.html';
 
@@ -15,27 +15,38 @@ class AddClientFull {
   constructor($scope, $reactive, $state) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
+    this.dictionary.composition = dictionary.composition.slice(1);
     this.resetClient();
     this.activeTab = 0;
     this.state = $state;
     this.fake = true;
-  }
-  
-  filterPhone(){
-      if(this.client.phone.length >= 18) return false;
-      this.client.phone = ' ' + this.client.phone;
-  }
-  
-  submit(valid) {
-    var value = this.client.phone.split('');
-    for(var i in [1,2,3]){
-        for(var i in value){
-            if(value[i].match(/\+|\(|\)|\-|\s|d/)){
-                value.splice(i,1);
-            }
-        }
+    this.client.comissionLoyal = true;
+    this.client.comission = 100;
+    this.client.need = {
+      metroTransport: 0
     }
-    this.client.phone = value.join('');
+    this.client.searchEndDate = this.client.searchStartDate;
+  }
+
+  submit(valid) {
+
+    var price = this.client.need.price.split('');
+    for (var i in [1, 2, 3]) {
+      for (var i in price) {
+        if (price[i].match(/\s/)) {
+          price.splice(i, 1);
+        }
+      }
+    }
+    this.client.need.price = price.join('');
+    this.client.realtorPhone = Meteor.user().profile.phone;
+    this.client.realtorName = Meteor.user().profile.name;
+    this.client.realtorIdShort = Meteor.user().profile.realtorId;
+
+    if (!this.client.comissionLoyal) {
+      this.client.comission = '';
+    }
+
     console.log('submit');
     if (!valid) {
       alert('не все данные корректны');
@@ -55,14 +66,14 @@ class AddClientFull {
         console.log(error);
       } else {
         console.log(result);
-        this.state.go('crm.clients.details.connections', {client: result, assort: 'manual', activetab: 'connections'}) ;
+        this.state.go('crm.clients.list.my', {status: 'realtor'});
       }
     });
     this.resetClient();
   }
-  
-  showThis(t){
-      console.log(t);
+
+  showThis(t) {
+    console.log(t);
   }
 
   resetClient() {
@@ -73,7 +84,7 @@ class AddClientFull {
       status: vm.pageStatus,
       comissionLoyal: false,
       searchStartDate: new Date(),
-      realtorNote: '',
+      note: '',
       subways: [],
       districts: [],
       embedded: {
@@ -90,7 +101,8 @@ const moduleName = 'addClientFull';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  PhoneMask
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/add-client-full/add-client-full.view.html',
   bindings: {pageStatus: '@'},

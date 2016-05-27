@@ -18,6 +18,7 @@ class OneReview {
     let vm = this;
     this.uploadThumbsImagesLength = 0;
     this.uploadNormalLength = 0;
+    this.mainImage = '';
     this.subscribe('oneInfo', () => {
       return [
         $stateParams.realtyId
@@ -25,7 +26,7 @@ class OneReview {
     }, {
       onReady() {
         vm.realty = Realty.findOne({});
-        // vm.prepareRealty();
+        if (vm.realty.details && vm.realty.details.thumbnails && vm.realty.details.images) vm.findMainImage(vm.realty.image);
       }
     });
 
@@ -42,19 +43,35 @@ class OneReview {
       return (item.originalName === image.originalName);
     });
     if (this.realty.image === this.realty.details.thumbnails[imageIndex].url) {
-      console.log('removeImage mainImage',this.realty.image);
+      console.log('removeImage mainImage', this.realty.image);
       this.realty.image = '';
     }
     this.s3DeleteImage(image);
   }
 
   setMainImage(image) {
-    let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
-      return (item.originalName === image.originalName);
-    });
-    this.realty.image = this.realty.details.thumbnails[imageIndex].url;
-    console.log('setMainImage',this.realty.image);
-    this.saveNewDescription();
+    if (image) {
+      let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+        return (item.originalName === image.originalName);
+      });
+      this.realty.image = this.realty.details.thumbnails[imageIndex].url;
+      console.log('setMainImage', this.realty.image);
+      this.findMainImage(this.realty.image);
+      this.saveNewDescription();
+    }
+  }
+
+  findMainImage(imageUrl) {
+    let vm = this;
+    if (imageUrl) {
+      let imageIndexThumbs = this.realty.details.thumbnails.findIndex((item)=> {
+        return (item.url === imageUrl);
+      });
+      let imageIndex = this.realty.details.images.findIndex((item)=> {
+        return (item.originalName === this.realty.details.thumbnails[imageIndexThumbs].originalName);
+      });
+      vm.mainImage = vm.realty.details.images[imageIndex].url;
+    }
   }
 
   sendToModerator() {
@@ -80,6 +97,9 @@ class OneReview {
     // console.log(this.realty.details.images.length);
     let bigImage = this.realty.details.images.splice(imageNormalIndex, 1);
 
+    if (this.realty.details.images[imageNormalIndex]) this.setMainImage(this.realty.details.images[imageNormalIndex]);
+    else this.setMainImage(this.realty.details.images[imageNormalIndex - 1]);
+
     S3.delete(smallImage[0].relative_url, (error)=> {
         if (error) {
           console.log(error);
@@ -100,7 +120,7 @@ class OneReview {
   // удаление фото из View
 
   uploadThumbImages(files) {
-    console.log(files);
+    let vm = this;
     if (files) {
       this.uploadThumbsImagesLength = files.length;
     }
@@ -118,10 +138,10 @@ class OneReview {
         }
 
         this.$timeout(()=> {
-          console.log(result.file, 'small uploaded');
-          console.log(result);
           result.originalName = result.file.original_name;
           this.realty.details.thumbnails.push(result);
+          /*if(!this.realty.image) this.realty.image = this.realty.details.thumbnails[0].url;
+           vm.setMainImage();*/
           this.saveNewDescription();
         }, 0);
         // console.log('uploaded images', this.realty.details.images);
@@ -131,7 +151,7 @@ class OneReview {
 
 
   uploadNormalImages(files) {
-    console.log(files);
+    var vm = this;
     if (files) {
       this.uploadNormalLength = files.length;
     }
@@ -148,10 +168,9 @@ class OneReview {
         }
 
         this.$timeout(()=> {
-          console.log(result.file, 'big uploaded');
-          console.log(result);
           result.originalName = result.file.original_name;
           this.realty.details.images.push(result);
+          if (!this.realty.image) vm.setMainImage(result);
           this.saveNewDescription();
         }, 0);
         // console.log('uploaded images', this.realty.details.images);
@@ -190,8 +209,7 @@ class OneReview {
     let percent = this.realty.moderator.percent;
     percent.isExclusive = (this.realty.realtor.isExclusive) ? 20 : 0;
     percent.isCheckout = (this.realty.realtor.isCheckout) ? 20 : 0;
-    this.realty.moderator.percent.total = percent.photo + percent.advertisement + percent.description + percent.isExclusive + percent.isCheckout;
-    console.log(this.realty);
+    this.realty.moderator.percent.total = ((percent.photo || 0) * 0.2) + ((percent.advertisement || 0) * 0.2) + ((percent.description || 0) * 0.2) + percent.isExclusive + percent.isCheckout;
     Realty.update({_id: this.realty._id}, {
       $set: this.realty
     }, (error) => {

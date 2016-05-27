@@ -12,13 +12,13 @@ add-realty-full {
   .md-button {
     min-width: 194px !important;
   }
-
-  md-input-container .md-errors-spacer {
-    min-height: 0;
-  }
   
   .add-realty-price-text {
     margin: 4px 0;
+  }
+
+  p {
+    margin: 2px 0;
   }
 }
 
@@ -37,4 +37,20 @@ add-realty-full {
     color: red;
     content:'*';
   }
+}
+
+.hide-count{
+  & .md-char-counter{
+    display: none;
+  }
+}
+
+.addRealtyFull-street {
+  md-autocomplete:last-child {
+    margin-left: 32px;
+  }
+}
+
+.add-realty-full__comission-percent {
+  width: 36px !important;
 }

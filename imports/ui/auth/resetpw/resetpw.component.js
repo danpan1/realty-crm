@@ -21,14 +21,17 @@ class Resetpw {
   }
 
   reset() {
-    Accounts.forgotPassword(this.credentials, this.$bindToContext((err) => {
+    Accounts.forgotPassword(this.credentials, this.$bindToContext((err, result) => {
       if (err) {
         this.error = err;
+        console.log(this.error);
       } else {
+        console.log(result);
         this.$state.go('crm.realty.list.new');
       }
     }));
   }
+  
 }
 
 const moduleName = 'resetpw';

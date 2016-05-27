@@ -20,6 +20,10 @@ blaze@2.1.7
 blaze-html-templates@1.0.4
 blaze-tools@1.0.8
 boilerplate-generator@1.0.8
+browser-policy@1.0.9
+browser-policy-common@1.0.9
+browser-policy-content@1.0.10
+browser-policy-framing@1.0.10
 caching-compiler@1.0.4
 caching-html-compiler@1.0.6
 callback-hook@1.0.8
@@ -56,9 +60,16 @@ less@2.6.0
 livedata@1.0.18
 localstorage@1.0.9
 logging@1.0.12
+matb33:collection-hooks@0.8.1
 mdg:validation-error@0.2.0
 meteor@1.1.14
 meteor-base@1.0.4
+meteorhacks:inject-initial@1.0.4
+meteorhacks:kadira@2.28.7
+meteorhacks:kadira-binary-deps@1.4.0
+meteorhacks:kadira-profiler@1.2.1
+meteorhacks:meteorx@1.4.1
+meteorhacks:zones@1.6.0
 meteortoys:toykit@2.2.1
 minifier-css@1.1.11
 minifier-js@1.1.11
@@ -69,6 +80,7 @@ modules@0.6.1
 modules-runtime@0.6.3
 mongo@1.1.7
 mongo-id@1.0.4
+mongo-livedata@1.0.12
 msavin:mongol@1.6.2
 npm-bcrypt@0.8.5
 npm-mongo@1.4.43

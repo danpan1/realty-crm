@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '../../../api/dictionary';
+import {dictionary} from '../../../helpers/dictionary';
 import {Meteor} from 'meteor/meteor';
 
 import './realty-card.view.html';
@@ -17,6 +17,18 @@ class RealtyCard {
 
   takeRealty(id) {
     Meteor.call('takeRealty', id);
+  }
+  
+  updateRealty (id) {
+    Realty.update({_id: id}, {
+      $set: this.realty
+    }, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('call recieved newObj');
+      }
+    });
   }
 
   showSlider() {
@@ -34,6 +46,7 @@ export default angular.module(moduleName, [
   bindings: {
     realty: '<',
     slider: '&',
+    isNew: '<',
     realtylisttype: '<'
   },
   controllerAs: moduleName,

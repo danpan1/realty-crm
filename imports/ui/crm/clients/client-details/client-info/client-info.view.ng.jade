@@ -1,1 +1,84 @@
-div Hello Client Info
+client-info-edit(ng-if="clientInfo.client" client="clientInfo.client" show="clientInfo.editDialogShow")
+div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
+    div(layout='row' layout-align='space-between start' ).mt-16
+        div(md-whiteframe='2' flex='66').client-info-notes.mr-16.p-16
+            h3().md-title.mt-0.mb-32 Заметка по клиенту
+            div(layout='column' layout-align='space-between none').client-info-notes-item
+                md-input-container().md-block.mt-0
+                    textarea(maxlength="2000" ng-model='clientInfo.client.important')
+                div
+                    md-button(aria-label='Сохранить' ng-click='clientInfo.updateClientInfo()').md-primary.md-raised.m-0 Сохранить
+        div(md-whiteframe='2' flex='33').client-info-contacts.p-16
+            h3().md-title.mt-0.mb-32 Контакты клиента
+            md-input-container().md-block.mt-16.mb-0
+                label Имя
+                input(type='text' ng-model='clientInfo.client.name').md-title
+            phone-mask(ng-if='clientInfo.client.phone' label='"Телефон клиента"' phone='clientInfo.client.phone').mt-16
+            md-button(aria-label='Сохранить' ng-click='clientInfo.updateClientInfo()').md-primary.md-raised.m-0 Сохранить
+
+    div(layout='row').mt-16
+        div(md-whiteframe='2' flex)
+            div(layout='row')
+                div(flex='33' layout='row').ph-32.pv-16
+                    div(layout='column' layout-align='space-between start')
+                        div(flex)
+                            h3().md-subhead.text-bold.text-uppercase.mt-0 Особенности клиента
+                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                                div(flex='60') Цена:
+                                div(flex='40') #[strong {{clientInfo.client.need.price | price}}]
+                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                                div(flex='60') Платить комиссию:
+                                div(flex='40') #[strong {{clientInfo.client.comissionLoyal ? 'Да' : 'Нет'}}]
+                            div(layout='row' ng-if='clientInfo.client.comission' layout-align='space-around start').md-subhead.mv-8
+                                div(flex='60') Сколько:
+                                div(flex='40') #[strong {{clientInfo.client.comission}}]
+                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                                div(flex='60') Актуально с:
+                                div(flex='40') #[strong {{clientInfo.client.searchStartDate | date:'dd.MM'}}]
+                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                                div(flex='60') В поиске с:
+                                div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.MM'}}]
+                        div(flex layout='column' layout-align='end start')
+                            md-button(aria-label='Изменить' ng-click="clientInfo.showEditDialog($event)").md-primary.md-raised.mt-32.mh-0 Изменить
+                md-divider
+                div(flex='33').ph-32.pv-16
+                    h3().md-subhead.text-bold.text-uppercase.mt-0 Требования к объекту
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Аренда:
+                        div(flex='40') #[strong длительная]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Тип объекта:
+                        div(flex='40') #[strong Квартира]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Город:
+                        div(flex='40') #[strong Москва]
+                    div().md-subhead.mv-8 Тип ремонта:
+                    div(ng-repeat='renovation in clientInfo.client.need.renovation').md-subhead #[strong {{clientInfo.dictionary.renovation[renovation].name}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Комнат:
+                        div(flex='40')
+                            span(ng-repeat='room in clientInfo.client.need.roomcount') #[strong {{room}}]
+                                span(ng-if='$index != clientInfo.client.need.roomcount.length - 1') , 
+                    div().md-subhead.mv-8 Состав съемщиков:
+                    div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
+                md-divider
+                div(flex='33').ph-32.pv-16
+                    h3().md-subhead.text-bold.text-uppercase.mt-0 Метро
+                    p
+                        p(ng-repeat="subway in clientInfo.client.need.embedded.subways track by $index").mv-0
+                            span(class="metro-color-{{clientInfo.client.need.embedded.subways[$index].line}}").metro-color
+                            span() {{subway.name}}
+                            span(ng-if='$index != clientInfo.client.need.embedded.subways.length - 1') , 
+                    p(ng-if='clientInfo.client.need.metroTime != undefined && clientInfo.client.need.metroTime > 0') {{clientInfo.client.need.metroTime}} минут {{clientInfo.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
+
+    div(layout='row' layout-align='start start')#openArchiveDialog.mt-16
+        div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between start' layout-wrap)
+                md-switch(flex='50',
+                ng-model='clientInfo.currentConditions[$index].presence',
+                aria-label='Switch 2'
+                ng-repeat="condition in clientInfo.dictionary.conditions"
+                ng-click="clientInfo.onConditionsChange(condition.id)").md-warn {{condition.name}}
+        div(md-whiteframe='2' flex='50').p-16
+            h3().md-title.mt-0 Закрытие сделки
+            md-button(ng-click='clientInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить клиента в архив').md-primary.md-raised.mt-0.mb-16.mh-0 Закрыть сделку и переместить клиента в архив

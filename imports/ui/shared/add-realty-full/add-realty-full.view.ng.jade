@@ -3,50 +3,48 @@ md-tabs(md-dynamic-height md-border-bottom)
         md-content().ph-32.pv-16
             form(novalidate name="firstForm")
                 div(layout='column')
-
                     div(layout='row')
                         div(flex='70')
                             div(layout='row' layout-align='space-between start')
                                 md-input-container(flex)
-                                    md-select(ng-model='addRealtyFull.fake')
+                                    md-select(ng-model='addRealtyFull.fake' aria-label='Выбрать тип сделки')
                                         md-option(ng-value='true') Аренда
                                 md-input-container(flex).ml-32
-                                    md-select(ng-model='addRealtyFull.fake')
+                                    md-select(ng-model='addRealtyFull.fake' aria-label='Выбрать вид жилья')
                                         md-option(ng-value='true') Квартиры
                                 md-input-container(flex).ml-32
-                                    md-select(ng-model='addRealtyFull.fake')
+                                    md-select(ng-model='addRealtyFull.fake' aria-label='Выбрать город')
                                         md-option(ng-value='true') Москва
 
                     div(layout='row').mt-16
                         div(flex='70')
                             div(layout='row')
                                 realty-street(ng-model='addRealtyFull.locations.street' house='addRealtyFull.locations.house'
-                                dadata='addRealtyFull.locations.full' layout = 'row' flex='66')
-                                md-input-container(flex='33').ml-32
+                                dadata='addRealtyFull.locations.full' layout = 'row' flex='66').addRealtyFull-street.zh
+                                md-input-container(flex='33').ml-32.zh
                                     label Квартира
                                     input(ng-model='addRealtyFull.locations.flat')
                                     span.bottom-label Видите только вы
 
-                    div(layout='row', layout-align="space-between center")
-                        div(flex='45')
-                            div(layout='row')
-                                div(flex='45').form-required
-                                    subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
+                    div(layout='row')
+                        div(flex='70')
+                            subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
 
-                                div(flex='55').ml-32
-                                    div(layout='row' layout-align='start end').mt-32
-                                        md-input-container(flex='30').mv-0.pv-0.form-required
-                                            input(ng-model='addRealtyFull.realty.address.metroPeshkom', placeholder='минут' ng-required='')
-                                        md-input-container(flex).mv-0.ml-32.pb-0.form-required
-                                            //label пешком
-                                            md-select(ng-model='addRealtyFull.realty.address.metroTransport')
-                                                md-option(ng-value='transport.id',
-                                                ng-repeat="transport in addRealtyFull.dictionary.transport" ng-required='') {{transport.name}}
+                    div(layout='row').mv-16
+                        div(flex='45')
+                            div(layout='row' layout-align='start end')
+                                md-input-container(flex).mv-0.pv-0.zh
+                                    input(ng-model='addRealtyFull.locations.metroTime', placeholder='минут')
+                                md-input-container(flex).mv-0.ml-32.pb-0
+                                    md-select(ng-model='addRealtyFull.metroTransport' aria-label='До метро')
+                                        md-option(ng-value='transport.id',
+                                        ng-repeat="transport in addRealtyFull.dictionary.transport") {{transport.name}}
+                                           
                 div(layout='row').mv-32
                     md-button(ng-click='addRealtyFull.activeTab = 1'
                     ng-disabled="firstForm.$invalid").md-primary.md-raised.mh-0 Продолжить
 
-    md-tab(label='2) Параметры' md-active='addRealtyFull.activeTab == 1' ng-click='addRealtyFull.activeTab = 1' ng-disabled='firstForm.$invalid')
+    md-tab(label='2) Параметры' md-active='addRealtyFull.activeTab == 1' ng-click='addRealtyFull.activeTab = 1'   ng-disabled="firstForm.$invalid")
         md-content().ph-32.pv-16
             form(novalidate name="secondForm")
                 div(layout='column')
@@ -55,31 +53,37 @@ md-tabs(md-dynamic-height md-border-bottom)
                             div(layout='row' layout-align='start end')
                                 md-input-container(flex='33').mv-0.form-required
                                     label Количество комнат
-                                    md-select(required ng-model='addRealtyFull.realty.roomcount')
+                                    md-select(required ng-model='addRealtyFull.realty.roomcount', ng-change="addRealtyFull.changeRoomCount()")
                                         md-option(ng-value='roomcount.id',
                                         ng-repeat="roomcount in addRealtyFull.dictionary.roomcountBig") {{roomcount.name}}
                                 div(flex='33').ml-32
-                                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead.mb-0 Апартаменты
+                                    md-checkbox(aria-label='Checkbox 1' md-no-ink ng-model='addRealtyFull.realty.details.apartaments').md-primary.md-subhead.mb-0 Апартаменты
                                 div(flex='33').ml-32
-                                    md-checkbox(aria-label='Checkbox 1' md-no-ink).md-primary.md-subhead.mb-0 Пентхаус
+                                    md-checkbox(aria-label='Checkbox 1' md-no-ink ng-model='addRealtyFull.realty.details.penthouse').md-primary.md-subhead.mb-0 Пентхаус
 
                     div(layout='row').mv-16
                         div(flex='45')
                             div(layout='row' layout-align='start center')
-                                md-input-container(flex).mv-0.form-required
+                                md-input-container(flex).mv-0.form-required.zh
                                     input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
-                                md-input-container(flex).mv-0.ml-32.form-required
+                                md-input-container(flex).mv-0.ml-32.form-required.zh
                                     input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row' layout-align='start center')
-                                md-input-container(flex).mv-0.form-required
+                                md-input-container(flex).mv-0.form-required.zh
                                     input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
-                                md-input-container(flex).mv-0.ml-32
+                                md-input-container(flex).mv-0.ml-32.zh
                                     input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
-                                md-input-container(flex).mv-0.ml-32
+                                md-input-container(flex).mv-0.ml-32.zh
                                     input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
-
+                            //div().mt-16
+                            //    p().md-subhead.add-realty-full-text Площадь комнат м²
+                            //div(layout='row' layout-align='start center' flex).md-input-container.mt-16
+                            //    md-input-container(flex ng-repeat='room in addRealtyFull.realty.details.roomsSquare').mv-0
+                            //        label {{$index + 1}}-я комната
+                            //        input(ng-pattern="/^[0-9]{1,}$/" ng-model='room.square')
+                                
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row')
@@ -107,9 +111,9 @@ md-tabs(md-dynamic-height md-border-bottom)
                                     md-select(required ng-model='addRealtyFull.realty.details.renovation')
                                         md-option(ng-value='renovation.id',
                                         ng-repeat="renovation in addRealtyFull.dictionary.renovation ") {{renovation.name}}
-                                md-input-container(flex).mv-0.ml-32
+                                md-input-container(flex).mv-0.ml-32.form-required
                                     label Тип дома
-                                    md-select( ng-model='addRealtyFull.realty.details.materials')
+                                    md-select(required ng-model='addRealtyFull.realty.details.materials')
                                         md-option(ng-value='materials.id',
                                         ng-repeat="materials in addRealtyFull.dictionary.materials ") {{materials.name}}
 
@@ -137,7 +141,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                         ng-disabled="firstForm.$invalid || secondForm.$invalid").md-primary.md-raised.mh-0 Продолжить
                         md-button(md-no-ink ng-click='addRealtyFull.activeTab = 0').md-primary.md-body-1.ml-32 Вернуться на шаг назад
 
-    md-tab(label='3) Стоимость' md-active='addRealtyFull.activeTab == 2' ng-click='addRealtyFull.activeTab = 2' ng-disabled='firstForm.$invalid || secondForm.$invalid || false')
+    md-tab(label='3) Стоимость' md-active='addRealtyFull.activeTab == 2' ng-click='addRealtyFull.activeTab = 2' ng-disabled="firstForm.$invalid || secondForm.$invalid") 
         md-content().ph-32.pv-16
             form(novalidate name="thirdForm")
 
@@ -145,38 +149,45 @@ md-tabs(md-dynamic-height md-border-bottom)
                     div(layout='row').mv-16
                         div(flex='45')
                             div(layout='row' layout-align='space-between start')
-                                md-input-container(flex).mv-0
-                                    label Телефон собственника
-                                    input(ng-model='addRealtyFull.realty.contacts[0].phones[0].phone',
-                                    ng-pattern='/^[0-9]{11}$/',
-                                    required='',
-                                    md-maxlength='11')
-                                md-input-container(flex).mv-0.ml-32
+                                md-input-container(flex).mv-0.zh.form-required
                                     label Имя собственника
                                     input(ng-model='addRealtyFull.realty.contacts[0].name', required='')
+                                phone-mask(layout='row' flex ng-if='addRealtyFull.realty' label='"Телефон собственника"' phone='addRealtyFull.realty.contacts[0].phones[0].phone').ml-32.zh
                     div(layout='row')
                         div(flex='45').mv-16
                             div(layout='row' layout-align='space-between start')
-                                md-input-container(flex).mv-0.form-required
+                                md-input-container(flex).mv-0.form-required.zh
                                     label Цена
-                                    input(required ng-model='addRealtyFull.realty.price')
+                                    input(
+                                        required 
+                                        ng-model='addRealtyFull.realty.price'
+                                        ng-price-filter
+                                        ng-keypress="addRealtyFull.realty.price = ' '+this.addRealtyFull.realty.price"
+                                    )
                                 md-input-container(flex).mv-0.ml-32.form-required
                                     md-select(required ng-model='addRealtyFull.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
                                         md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
-
+                   
+                    div(ng-if='addRealtyFull.realty').mt-16
+                        div(layout='row' layout-align='start center' ng-init='addRealtyFull.realty.comissionLoyal = true')
+                            md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addRealtyFull.realty.comissionLoyal' aria-label="Checkbox 1").m-0.md-primary.md-subhead {{ addRealtyFull.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
+                            md-input-container(md-no-float layout='row' ng-if ='addRealtyFull.realty.comissionLoyal').add-realty-full__comission-percent.ml-8
+                                input(type="text" ng-model='addRealtyFull.realty.comission')
+                            span(ng-if ='addRealtyFull.realty.comissionLoyal').md-subhead %
+                    
                     div().mt-32
                         p().md-subhead.add-realty-full-text Какой процент стоимости аренды вы хотите получить?
                         p().md-subhead.add-realty-full-text (Будет показано только агентам)
 
                     div(layout='row')
-                        div(flex='45').mv-16
+                        div(flex='50').mv-16
                             div(layout='row' layout-align='space-between start')
-                                md-input-container(flex).mv-0
+                                md-input-container(flex='45').mv-0.zh
                                     input(ng-model='addRealtyFull.realty.realtor.clientpercent' placeholder='От прямого клиента')
-                                md-input-container(flex).mv-0.ml-32
+                                md-input-container(flex='55').mv-0.ml-32.zh
                                     input(ng-model='addRealtyFull.realty.realtor.partnerpercent' placeholder='От клиента другого агента')
 
                     div(layout='row').mv-32
-                        md-button(ng-click='addRealtyFull.submit()' ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-success.md-raised.md-title.mh-0 Добавить объект!
+                        md-button(ng-click='addRealtyFull.submit()' ng-disabled="firstForm.$invalid || secondForm.$invalid || thirdForm.$invalid").md-primary.md-raised.md-title.mh-0 Добавить объект
                         md-button(md-no-ink ng-click='addRealtyFull.activeTab = 1').md-primary.md-body-1.ml-32 Вернуться на шаг назад
 

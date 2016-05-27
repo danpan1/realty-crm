@@ -1,0 +1,12 @@
+md-input-container(flex ng-class="{ 'has-error' : phoneMask.visualPhone.length > 1 && phoneMask.visualPhone.length < 15}").md-block.mv-0.form-required.hide-count
+    label {{phoneMask.label}}
+    input(ng-model='phoneMask.visualPhone',
+    required='',
+    maxlength="17",
+    ng-keyup="phoneMask.filterPhoneKeyUp()"
+    ng-focus="phoneMask.filterPhoneFocus()"
+    ng-init="phoneMask.ngOnInit()",
+    ng-keypress="phoneMask.filterPhoneKeyPress()",
+    ng-blur="phoneMask.filterPhoneBlur()",
+    ng-phone-filter,
+    md-maxlength='17')

@@ -1,6 +1,17 @@
-ui-view {
-  background-color: #f1f8fd;
+layout > md-toolbar {
+  background-color: #1e88e5 !important;
 }
+
+.lh{
+  &-1{
+    line-height: 1em;
+  }
+}
+
+ui-view {
+  background-color: #c9e6f2;
+}
+
 .toolbar-container {
     max-width: 1248px !important;
 }
@@ -12,36 +23,72 @@ md-toolbar {
 md-sidenav{
   max-width: 192px !important;
   font-size: 16px !important;;
-  background-color: #f1f8fd !important;
-  box-shadow: none !important;
+  background-color: #e3f2fd !important;
   md-list-item {
     color: #333 !important;
-    &.active{
-      color: #106cc8 !important;
-      background-color: #d3e9f4 !important;
+    &.active {
+      background-color: #bbdefb !important;
     }
+
     .md-no-style.md-button,
     .md-no-proxy.md-button {
       font-weight: 400 !important;
+    }
+
+    a.md-button:not([disabled]):hover {
+      background-color: #bbdefb;
+    }
+  }
+  
+  md-select {
+    margin: 0;
+    padding: 8px 23px;
+    .md-select-value {
+      border-bottom: none;
+      .md-select-icon:after {
+        content: none;
+      }
+    }
+
+    &:not([disabled]):focus .md-select-value {
+      border-bottom: none;
+    }
+  }
+}
+
+div[md-whiteframe] {
+  background-color: $white;
+}
+
+#select_container_4 {
+  left: 0 !important;
+  min-width: 192px !important;
+  md-select-menu {
+    md-content {
+      padding-left: 10px;
+      md-option[selected] {
+        color: rgb(50, 50, 50);
+      }
     }
   }
 }
 
 #mainContainer{
-  margin: 0 auto;
+  //margin: 0 auto;
   width: 1024px; //97.6rem 1024px - 24px -24px
 }
 
 #content{
-  width: 1040px;
+  //width: 1040px;
   margin-left: 16px;
-  background-color: #f1f8fd;
+  background-color: #c9e6f2;
   box-shadow: none;
 }
 
 md-tabs{
   background-color: $white;
   md-ink-bar {
+    color: color($blue, 400);
     background-color: color($blue, 400);
   }
 }
@@ -81,8 +128,21 @@ md-switch {
 }
 
 .topbar {
-    height: 70px;
-    background: #fff;
+  position: relative;
+  z-index: 2;
+  height: 70px;
+  .btn-back {
+    background-color: #f5f5f5;
+    border: none;
+    md-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+.tabbar {
+  box-shadow: 0 0 4px rgba(106, 106, 106, 0.7) !important;
 }
 
 .whiteBg {
@@ -91,6 +151,12 @@ md-switch {
 
 .small-select .md-select-value {
   min-width: 50px;
+}
+
+.zh {
+  .md-errors-spacer {
+    min-height: 0 !important;
+  }
 }
 
 .m-0 {
@@ -331,6 +397,24 @@ md-switch {
 
 .pr-32 {
   padding-right: 32px !important;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.ta-c{
+    text-align: center;
+}
+.ta-r{
+    text-align: right;
+}
+.ta-l{
+    text-align: left;
+}
+
+.uppercase{
+    text-transform: uppercase
 }
 
 @media screen and (max-width: 1279px) {

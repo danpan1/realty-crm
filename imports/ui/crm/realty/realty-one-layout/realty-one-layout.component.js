@@ -9,27 +9,47 @@ import './realty-one-layout.view.html';
 
 class RealtyOneLayout {
   /* @ngInject */
-  constructor($scope, $reactive, $state) {
+  constructor($scope, $reactive, $state, $stateParams) {
 
     $reactive(this).attach($scope);
+    this.infoRealty = false;
+    const vm = this;
+    vm.loadedData = false;
+    this.subscribe('oneInfo', () => {
+      return [
+        $stateParams.realtyId
+      ];
+    }, {
+      onReady(){
+        vm.loadedData = true;
+        console.log('loadedData');
+      }
+    });
+
     this.helpers({
       infoRealty: () => {
-        return Realty.findOne({});
+        return Realty.findOne({_id: $stateParams.realtyId});
       }
     });
     console.log($state);
-    switch ($state.current.url) {
+    switch ($state.current.name) {
       // case '/demonstrations':
       //   this.selectedTab = 0;
       //   break;
-      case '/review':
+      case 'crm.realty.one.find':
         this.selectedTab = 0;
         break;
-      // case '/email':
-      //   this.selectedTab = 2;
-      //   break;
-      case '/info':
+      case 'crm.realty.one.connections':
         this.selectedTab = 1;
+        break;
+      case 'crm.realty.one.review':
+        this.selectedTab = 2;
+        break;
+      case 'crm.realty.one.email':
+        this.selectedTab = 3;
+        break;
+      case 'crm.realty.one.info':
+        this.selectedTab = 4;
         break;
       default:
         this.selectedTab = 0;

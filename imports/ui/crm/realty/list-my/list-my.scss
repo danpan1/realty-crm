@@ -1,9 +1,4 @@
-
 .listMy {
-  > div {
-    background-color: #fff;
-  }
-  border: 1px solid #f3f3f3;
   &_Photo,
   &_Address,
   &_Progress,
@@ -21,6 +16,7 @@
   }
   &_Address {
     width: 15.8rem;
+    font-size: 14px;
   }
   &_Progress {
     width: 15.5rem;
@@ -31,10 +27,6 @@
   &_Actions {
     width: 38rem;
   }
-}
-
-.orange {
-  color: #ff5722;
 }
 
 .listMy_Address-item {
@@ -56,6 +48,7 @@
     width: 16rem;
   }
   &:nth-child(5) {
-    width: 38rem;
+    width: 39rem;
+    text-align: center;
   }
 }

@@ -13,7 +13,7 @@ export const clientNeedSchema = new SimpleSchema({
     optional: true
   },
   renovation: {// ремонт
-    type: [String],
+    type: [Number],
     optional: true
   },
   embedded:{
@@ -30,6 +30,10 @@ export const clientNeedSchema = new SimpleSchema({
     optional: true
   },
   subways: { // Метро
+    type: [String],
+    optional: true
+  },
+  subwaysInDistance: { // Метро ближайшие
     type: [String],
     optional: true
   },

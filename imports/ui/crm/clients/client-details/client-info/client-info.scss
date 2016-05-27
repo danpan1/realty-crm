@@ -1,0 +1,25 @@
+client-info {
+  display: block;
+  margin-bottom: 130px;
+  .md-button {
+    min-width: 110px;
+  }
+
+  md-switch {
+    margin: 2px 0;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+.client-info-notes,
+.client-info-contacts {
+  min-height: 268px;
+}
+
+.client-info{
+    &-notes-item {
+        min-height: 168px;
+    }
+}

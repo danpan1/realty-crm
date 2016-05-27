@@ -4,10 +4,6 @@ one-review {
     margin: 0;
   }
 
-  div[md-whiteframe] {
-    background-color: $white;
-  }
-
   md-card {
     position: relative;
     box-shadow: none;
@@ -24,33 +20,13 @@ one-review {
       background-position: center center;
       background-repeat: no-repeat;
     }
-
-    .one-review-btn-set-photo {
-      display: none;
-      @include centerer(true, false);
-      bottom: 16px;
-    }
-
-    .one-review-btn-remove-photo {
-      position: absolute;
-      top: 3px;
-      right: 3px;
-      width: 24px;
-      height: 24px;
-      margin: 0;
-      padding: 0;
-      min-width: 24px;
-      min-height: 24px;
-      line-height: 24px;
-      border-radius: 0;
-      background-color: #525252;
-      &:hover {
-        background-color: #525252;
-      }
+    
+    & .btn-set-photo-active {
+      display: block !important;
     }
   }
 
-  .md-success {
+  .md-success.big-button {
     min-width: 400px;
     min-height: 52px;
   }
@@ -72,4 +48,24 @@ one-review {
 
 .one-review-board-green {
   color: #8dbc00;
+}
+
+.little-button{
+  & md-icon{
+    fill: #2196f3;
+  }
+  &[disabled]{
+    & md-icon{
+        fill: #BDBDBD;
+    }
+  }
+}
+
+.one-review-btn-in-progress {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  color: #106cc8 !important;
+  background-color: none !important;
+  box-shadow: none !important;
 }

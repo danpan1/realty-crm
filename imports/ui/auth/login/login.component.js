@@ -26,18 +26,19 @@ class Login {
     Meteor.loginWithPassword(this.credentials.email, this.credentials.password,
       this.$bindToContext((err) => {
         if (err) {
-          console.log(err);
-          switch (err.reason) {
-            case 'User not found':
-              this.error = 'Неверно указан Email';
-              break;
-            case 'Incorrect password':
-              this.error = 'Неверно указан пароль';
-              break;
-            default:
-              this.error = err.reason;
-              break;
-          }
+          this.error = 'Неверно указан Email или пароль';
+          // console.log(err);
+          // switch (err.reason) {
+          //   case 'User not found':
+          //     this.error = 'Неверно указан Email';
+          //     break;
+          //   case 'Incorrect password':
+          //     this.error = 'Неверно указан пароль';
+          //     break;
+          //   default:
+          //     this.error = err.reason;
+          //     break;
+          // }
         } else {
           this.$state.go('crm.realty.list.my');
         }

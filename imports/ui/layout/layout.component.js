@@ -10,10 +10,8 @@ import './layout.view.html';
 
 class Layout {
   /* @ngInject */
-  constructor($scope, $reactive, $mdSidenav, $state, $timeout) {
+  constructor($scope, $reactive, $mdSidenav) {
     $reactive(this).attach($scope);
-    this.$state = $state;
-    this.$timeout = $timeout;
     this.$mdSidenav = $mdSidenav;
     this.sideNavItems = [
       // {name: 'Добавить клиента', uisref: 'crm.clients.add'},
@@ -26,13 +24,13 @@ class Layout {
       // {name:'Дела', uisref:'realty'},
       // {name:'Отчет', uisref:'realty'},
       // {name:'Собщения', uisref:'realty'},
-      // {name:'Документы', uisref:'realty'},
+      {name:'Документы', uisref:'crm.documents'},
       // {name:'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
-      {name: 'Модератор', uisref: 'call-center.moderator'}
+      // {name: 'Модератор', uisref: 'call-center.moderator'}
     ];
-    this.select = 0;
+    this.select = 1;
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {
@@ -42,15 +40,8 @@ class Layout {
     });
   }
 
-  redirect(state) {
-    this.$state.go(state);
-    // this.$timeout(()=> {
-    // }, 100);
-
-  }
-
   selectText() {
-    this.select = 0;
+    this.select = 1;
     return 'Добавить';
   }
 
@@ -84,15 +75,20 @@ function mdIconConfig($mdIconProvider) {
     .icon('menu', URL_ICON_MENU, 24)
     .icon('skip_next', 'svg/skip_next.svg', 48)
     .icon('skip_prev', 'svg/skip_previous.svg', 48)
-    .icon('conditions_elevator', 'svg/elevator.svg', 28)
+    .icon('conditions_animal', 'svg/animal.svg', 24)
+    .icon('conditions_balcony', 'svg/balcony.svg', 24)
+    .icon('conditions_bathroom', 'svg/bathroom.svg', 24)
     .icon('conditions_children', 'svg/children.svg', 24)
+    .icon('conditions_conditioner', 'svg/conditioner.svg', 24)
+    .icon('conditions_dishWasher', 'svg/dishWasher.svg', 24)
+    .icon('conditions_elevator', 'svg/elevator.svg', 28)
     .icon('conditions_furniture', 'svg/furniture.svg', 24)
     .icon('conditions_kitchen_furniture', 'svg/kitchen_furniture.svg', 24)
-    .icon('conditions_tv', 'svg/tv.svg', 24)
-    .icon('conditions_refrigerator', 'svg/refrigerator.svg', 24)
-    .icon('conditions_washer', 'svg/washer.svg', 24)
     .icon('conditions_phone', 'svg/phone.svg', 24)
-    .icon('conditions_animal', 'svg/animal.svg', 24)
+    .icon('conditions_refrigerator', 'svg/refrigerator.svg', 24)
+    .icon('conditions_shower', 'svg/shower.svg', 24)
+    .icon('conditions_tv', 'svg/tv.svg', 24)
+    .icon('conditions_washer', 'svg/washer.svg', 24)
     .icon('conditions_wifi', 'svg/wifi.svg', 24);
 
   /*  

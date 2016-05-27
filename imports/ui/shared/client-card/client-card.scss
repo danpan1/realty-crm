@@ -1,47 +1,70 @@
-.client-card{
-    background-color: white;
-    &__btn{
-        &_blue-view{
-            color:rgb(33,150,243);
-        }
-        &_buy-client{
-            color:rgb(255,82,82);
-        }
-        &_hide{
-            color:#898989;
-        }
-        &_buy-client,&_blue-view,&_hide{
-            cursor: pointer;
-            margin: 3px 0;
-            &:hover{
-                text-decoration: underline;
-            }
-        }
+.client-card {
+  &__btn{
+    &_blue-view {
+      color: rgb(33, 150, 243);
     }
-    &__no-margin{
-        margin: 0;
+    &_buy-client {
+      color: rgb(255, 82, 82);
     }
-    &__note{
-        margin-top: 2px;
+    &_hide{
+      color: #898989;
     }
-    &__link{
-        color:rgb(33,150,243);
-        text-decoration: none;
-        &_p{
-            margin: 2px 0;
-        }
+    &_buy-client, &_blue-view, &_hide {
+      cursor: pointer;
+      margin: 3px 0;
+      &:hover {
+        text-decoration: underline;
+      }
     }
-    &__price{
-        margin: 0;
-        font-weight: 700 !important;
+  }
+  &__note {
+    margin-top: 2px;
+  }
+  &__link {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    color: rgb(33, 150, 243) !important;
+    text-transform: none !important;
+    &:hover {
+      background-color: transparent !important;
     }
-    &__right-label{
-        margin: 3px 0;
-        &:first-child{
-            margin-top: 12px;
-        }
+  }
+  &__right-label {
+    margin: 3px 0;
+    &:first-child {
+      margin-top: 12px;
     }
+  }
+
+  .clientCard-col-1 {
+    max-width: 25rem !important;
+  }
+  
+  &__md-icon {
+    color: #bdbdbd;
+    & + span {
+      display:none;
+      position: absolute;
+      padding: 5px 10px;
+      border: 1px solid #898989;
+      z-index: 10;
+      background: #fff;
+    }
+    &:hover {
+      & + span {
+        display: block;
+      }
+    }
+  }
 }
-.icon-rotate-90{
-    transform: rotate(90deg);
+.icon-rotate-90 {
+  transform: rotate(90deg);
+}
+
+.clientCard-conditions {
+  text-align: center;
+}
+
+.cliendCard-condition-icons {
+  color: #bdbdbd;
 }

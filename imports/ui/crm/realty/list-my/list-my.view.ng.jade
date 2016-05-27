@@ -7,13 +7,16 @@
         div().listMy_col Подробнее
 
 .md-body-1(layout='column', layout-align='space-around stretch')
-    .listMy(layout='row', md-whiteframe='2',ng-repeat='realty in listMy.realty').md-whiteframe-2dp.mv-8
+            //ng-repeat='realty in listMy.realty',
+    .listMy(layout='row', 
+            md-whiteframe='2',
+            dir-paginate="realty in listMy.realty | itemsPerPage: listMy.perPage" 
+            total-items="listMy.realtyCount").md-whiteframe-2dp.mv-8
         div(layout='column' layout-align='center center' ui-sref="crm.realty.one.review({realtyId: '{{::realty._id}}'})").listMy_Photo
             div(layout='column', layout-align='space-between')
                 div(layout='row' layout-align='center center').apartment-pic
                     img(ng-src='{{::realty.image || "realty_no_image.png"}}')
                     //div().icon-zoom
-        md-divider
 
         div().listMy_Address.pv-8.ph-16
             div(layout='column', layout-align='space-between')
@@ -24,16 +27,18 @@
         md-divider
 
         div(layout='column' layout-align='center center' ui-sref="crm.realty.one.review({realtyId: '{{::realty._id}}'})").listMy_Progress.p-8
-            div.md-title.orange.mv-8 {{::realty.moderator.percent.total || 0}}% / 100%
-            div.orange.mv-8 {{(realty.moderator.percent.total !== 100) ? 'Срочно улучшить' : 'Максимально подготовлен'}}
+            div().md-title.color-orange.mv-8 {{::realty.moderator.percent.total || 0}}% / 100%
+            md-button().btn-orange.mv-8 {{(realty.moderator.percent.total !== 100) ? 'Срочно улучшить' : 'Максимально подготовлен'}}
         md-divider
 
         div(layout='column' layout-align='center center').listMy_Advertisement.p-8
-            div(ng-if='realty.status === "sale"').md-title.orange.mv-8 100% / 100%
-            div(ng-if='realty.status !== "sale"').md-title.orange.mv-8 0% / 100%
-            div(ng-if='realty.status === "sale"').orange.mv-8 Размещено
-            div(ng-if='realty.status !== "sale"').orange.mv-8 Не размещено
+            div(ng-if='realty.status === "sale"').md-title.color-orange.mv-8 100% / 100%
+            div(ng-if='realty.status !== "sale"').md-title.color-orange.mv-8 0% / 100%
+            div(ng-if='realty.status === "sale"').color-orange.md-body-1.mv-8 Размещено
+            div(ng-if='realty.status !== "sale"').color-orange.md-body-1.mv-8 Не размещено
         md-divider
 
         div(layout='column' layout-align='center center').listMy_Actions.pv-8.pl-16.pr-32
             md-button(md-no-ink='' ui-sref="crm.realty.one.info({realtyId: '{{::realty._id}}'})").md-primary Инфо об объекте
+
+pagination-buttons(ng-if='listMy.pagesCount' uisref='\'crm.realty.list.my\'' page='listMy.page' pagescount='listMy.pagesCount')

@@ -5,8 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
 import {Clients} from '/imports/api/clients';
-import {ClientFilterQuery} from '/imports/api/client-filter-query';
-import {dictionary} from '/imports/api/dictionary';
+import {dictionary} from '/imports/helpers/dictionary';
 import './add-client.view.html';
 
 class AddClient {
@@ -41,7 +40,7 @@ class AddClient {
       status: 'realtor',
       comissionLoyal: false,
       searchStartDate: new Date(),
-      realtorNote: '',
+      note: '',
       subways: [],
       districts : [],
       subwaysEmbeded :[],

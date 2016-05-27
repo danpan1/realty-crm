@@ -3,7 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {dictionary} from '../../../../../api/dictionary';
+import {dictionary} from '../../../../../helpers/dictionary';
 import {Realty} from '/imports/api/realty';
 
 import './one-info-edit.view.html';
@@ -13,28 +13,46 @@ class OneInfoEdit {
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
-    this.conditionsSelected = [];
+    this.compositionSelected = [];
     for(var i in this.dictionary.composition.length){
-        this.conditionsSelected.push(false);
+        this.compositionSelected.push(false);
     }
     for(var i in this.realty.details.composition){
-        this.conditionsSelected[this.realty.details.composition[i]] = true;
+        this.compositionSelected[this.realty.details.composition[i]] = true;
     }
   }
   
-  ngOnInit() {
-      if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
+  ngOnInit(price) {
+    if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
+      
+    if (price) {
+        var number = price.toString();
+        number = number.split('').reverse().join('');
+        number = number.length > 3 ? number.length > 6 ? number.length > 6 ? number.slice(0, 3) + ' ' + number.slice(3,6) +  ' ' + number.slice(6,9) + ' ' + number.slice(9) : number.slice(0, 3) + ' ' + number.slice(3,6) + ' ' + number.slice(6) :  number.slice(0, 3) + ' ' + number.slice(3) : number;
+        number = number.split('').reverse().join('');
+        this.realty.price = number;
+    }
   }
   
   onChangeRealty (realtyId) {
       this.realty.details.composition = [];
-      for(var i in this.conditionsSelected){
-          if(this.conditionsSelected[i] == true){
+      for(var i in this.compositionSelected){
+          if(this.compositionSelected[i] == true){
               this.realty.details.composition.push(i);
           }
       }
-      
-      
+      if(typeof this.realty.price != 'number'){
+        var price = this.realty.price.split('');
+        for(var i in [1,2,3]){
+            for(var i in price){
+                if(price[i].match(/\s/)){
+                    price.splice(i,1);
+                }
+            }
+        }
+        price = price.join('');
+        this.realty.price = parseInt(price);
+      }
       
       Realty.update({_id: realtyId}, {
         $set: this.realty

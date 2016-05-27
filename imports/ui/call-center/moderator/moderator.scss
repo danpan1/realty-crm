@@ -12,10 +12,21 @@ moderator {
         display: block;
       }
     }
+    & .btn-set-photo-active {
+      display: block;
+    }
   }
 
-  .md-success {
+  .md-success.md-button-big {
     min-width: 400px;
     min-height: 52px;
   }
+}
+
+.blue-link{
+    color: color($blue);
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
 }

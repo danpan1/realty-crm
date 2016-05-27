@@ -1,7 +1,15 @@
 // детальная информация для объекта (аренда)
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {dictionary} from '../../dictionary';
+import {dictionary} from '../../../helpers/dictionary';
+const roomSquareSchema = {
+    square: Number
+} 
 export const RentDetailsSchema = new SimpleSchema({
+  // Апартаменты
+  apartaments: {
+    type: Boolean,
+    optional: true
+  },
   //Балкон
   balcony: {
     type: Number,
@@ -84,6 +92,10 @@ export const RentDetailsSchema = new SimpleSchema({
   'images.$.originalName': {
     type: String
   },
+  penthouse: {
+    type: Boolean,
+    optional: true
+  },
   thumbnails: {
     type: [Object],
     label: 'images',
@@ -145,7 +157,7 @@ export const RentDetailsSchema = new SimpleSchema({
   },
   // площадь комнат
   roomsSquare: {
-    type: [Number],
+    type: [roomSquareSchema],
     label: 'roomsSquare',
     optional: true
   },
