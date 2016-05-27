@@ -21,7 +21,7 @@ class ListMyClients {
     let vm = this;
     vm.status = this.stateParams.status ? this.stateParams.status : 'hot';
     vm.loaded = false;
-    vm.perPage = 3;
+    vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
       '_id': -1

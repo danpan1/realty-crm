@@ -9,16 +9,36 @@ import {dictionary} from '../../../helpers/dictionary';
 
 if (Meteor.isServer) {
 
-  Meteor.publish('findClients', function (filter, options) {
+  Meteor.publish('findClients', function (filter, options, relations) {
 
     console.log('findClients');
 
     if (this.userId) {
+
+      let clientsRelated = [];
+      if (relations && relations.my) {
+        clientsRelated = clientsRelated.concat(relations.my);
+      }
+      if (relations && relations.saved) {
+        clientsRelated = clientsRelated.concat(relations.saved);
+      }
+      if (relations && relations.new) {
+        clientsRelated = clientsRelated.concat(relations.new);
+      }
+      if (relations && relations.offers) {
+        clientsRelated = clientsRelated.concat(relations.offers);
+      }
+
       console.log(filter.searchType);
 
       let selector = {
         status: 'realtor'
       };
+      if (clientsRelated && clientsRelated.length) {
+        selector._id = {
+          $nin: clientsRelated
+        };
+      }
       //TODO filter.price  костыль. надо переделать. моргают клиенты лишние при переключнии табов
       if (filter && filter.price) {
         // console.log(filter);
@@ -67,6 +87,8 @@ if (Meteor.isServer) {
 
         if (filter.searchType === 'my') {
           selector.realtorId = this.userId;
+        } else {
+          selector.realtorId = {$ne: this.userId};
         }
 
         Counts.publish(this, 'clientsCount', Clients.find(selector), {noReady: true});

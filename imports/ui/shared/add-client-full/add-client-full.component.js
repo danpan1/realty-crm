@@ -21,6 +21,7 @@ class AddClientFull {
     this.state = $state;
     this.fake = true;
     this.client.comissionLoyal = true;
+    this.client.comission = 100;
     this.client.need = {
       metroTransport: 0
     }

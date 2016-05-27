@@ -16,12 +16,7 @@ class OneInfo {
     this.dictionary = dictionary;
     this.state = $state;
     this.mdDialog = $mdDialog;
-
-    this.helpers({
-      realty: () => {
-        return Realty.findOne({});
-      }
-    });
+    this.realty = Realty.findOne({_id: $stateParams.realtyId});
     // oneInfo
     this.slideNum = 0;
     this.archiveConfirm = {
@@ -33,10 +28,15 @@ class OneInfo {
       this.currentConditions[i] = {};
     }
 
-    if (this.realty.details.conditions ) {
-        isConditionsSetted = true;
-        this.setActiveConditions(this.realty.details.conditions);
+    if (this.realty.details.conditions) {
+      this.setActiveConditions(this.realty.details.conditions);
+    }
+
+    this.helpers({
+      realty: () => {
+        return Realty.findOne({_id: $stateParams.realtyId});
       }
+    });
   }
 
   archive(realty) {
@@ -64,24 +64,24 @@ class OneInfo {
       this.realty.details.conditions.splice(index, 1);
     }
     console.log(this.realty.details.conditions);
-    
+
     this.realtyUpdate();
   }
-  
-  realtyUpdate () {
-      
-      
+
+  realtyUpdate() {
+
+
     let value = this.realty.contacts[0].phones[0].phone.split('');
-    for(var i in [1,2,3]){
-      for(var i in value){
-          if(value[i].match(/\+|\(|\)|\-|\s|d/)){
-              value.splice(i,1);
-          }
+    for (var i in [1, 2, 3]) {
+      for (var i in value) {
+        if (value[i].match(/\+|\(|\)|\-|\s|d/)) {
+          value.splice(i, 1);
+        }
       }
     }
     value = value.join('');
     this.realty.contacts[0].phones[0].phone = parseInt(value);
-    
+
     Realty.update({_id: this.realty._id}, {
       $set: this.realty
     }, (error) => {
@@ -92,27 +92,27 @@ class OneInfo {
       }
     });
   }
-   
-  openArchiveDialog (ev) {
-      let vm = this;
-      console.log(angular.element(document.querySelector('#openArchiveDialog')));
-      var confirm = this.mdDialog.confirm()
-            .parent(angular.element(document.body))
-            .clickOutsideToClose(true)
-            .title('В архив')
-            .textContent('Закрыть сделку и перенести объект в архив?')
-            .ariaLabel('Object archivation confirmation')
-            .ok('Переместить')
-            .cancel('Нет')
-            .targetEvent(ev);
-        this.mdDialog.show(confirm).then(function() {
-            vm.realty.status = 'archive';
-            
-            vm.realtyUpdate();
-            
-            console.log(vm.realty.status);
-            vm.state.go('crm.realty.list.my');
-        })
+
+  openArchiveDialog(ev) {
+    let vm = this;
+    console.log(angular.element(document.querySelector('#openArchiveDialog')));
+    var confirm = this.mdDialog.confirm()
+      .parent(angular.element(document.body))
+      .clickOutsideToClose(true)
+      .title('В архив')
+      .textContent('Закрыть сделку и перенести объект в архив?')
+      .ariaLabel('Object archivation confirmation')
+      .ok('Переместить')
+      .cancel('Нет')
+      .targetEvent(ev);
+    this.mdDialog.show(confirm).then(function () {
+      vm.realty.status = 'archive';
+
+      vm.realtyUpdate();
+
+      console.log(vm.realty.status);
+      vm.state.go('crm.realty.list.my');
+    })
   }
 
   setActiveConditions(conditions) {

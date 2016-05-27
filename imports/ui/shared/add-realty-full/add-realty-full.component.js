@@ -25,6 +25,8 @@ class AddRealtyFull {
             roomsSquare: []
         }
     };
+    this.realty.comission = 100;
+    this.realty.comissionLoyal = true;
     this.metroTransport = 0;
     this.activeTab = 0;
     //fake selects Аренда Москва Квартиры

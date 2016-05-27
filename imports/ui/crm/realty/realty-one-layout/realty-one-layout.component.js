@@ -22,7 +22,7 @@ class RealtyOneLayout {
     }, {
       onReady(){
         vm.loadedData = true;
-        console.log(vm);
+        console.log('loadedData');
       }
     });
 
