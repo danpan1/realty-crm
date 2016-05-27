@@ -9,9 +9,13 @@ div(md-whiteframe='2').mv-16.client-card
                 p().md-body-1.client-card__right-label id{{clientCard.client._id}}
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8
-                p(ng-if="clientCard.client.status == 'realtor'" hide).md-title.m-0
-                    span().text-bold.md-body-1 1 мая 17:00 | 
-                    span().text-bold.md-body-1 через 3:00
+                p(ng-if='clientCard.client.realtorId === clientCard.user._id').md-title.m-0
+                    span().text-bold.md-body-1 {{clientCard.client.phone | phone}} |
+                    span().text-bold.md-body-1  клиент {{clientCard.client.name}}
+                p(ng-if='clientCard.client.realtorId !== clientCard.user._id').md-title.m-0
+                    span().text-bold.md-body-1 {{clientCard.client.realtorPhone | phone}} |
+                    span().text-bold.md-body-1  риэлтор {{clientCard.client.realtorName}} |
+                    span().text-bold.md-body-1  id {{clientCard.client.realtorIdShort}}
                 p().md-body-1.client-card__note {{clientCard.client.note}}
 
             md-divider
@@ -23,7 +27,7 @@ div(md-whiteframe='2').mv-16.client-card
                 div(ng-if="clientCard.pageFrom == 'listMyClients'" ui-sref="crm.clients.details.info({client:clientCard.client._id, activetab: 'info'})")
                     md-button().client-card__link.m-0.p-0 Инфо о клиенте
                 div(ng-if="clientCard.pageFrom == 'listMyClients'")
-                    md-button(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})").client-card__link.m-0.p-0 
+                    md-button(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})").client-card__link.m-0.p-0
                     {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
         md-divider
         

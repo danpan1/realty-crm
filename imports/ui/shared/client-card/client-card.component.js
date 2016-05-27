@@ -10,6 +10,7 @@ class ClientCard {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
+    this.user = Meteor.user();
     /*this.isCommonClient = this.client.status == 'active' ? true : true;
      this.isHotClient = this.client.status == 'hot' ? true : false;
      this.isArchiveClient = this.client.status == 'archive' ? true : false;*/
