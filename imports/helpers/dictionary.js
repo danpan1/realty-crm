@@ -26,20 +26,20 @@ export const dictionary = {
     {id: 6, name: 'Более двух человек'}
   ],
   conditions: [
+    // {id: 'phone', name: 'Телефон', cian : 'телефон'},
     {id: 'animal', name: 'С животными', cian: 'можно с животными'},
+    {id: 'balcony', name: 'Балкон', cian: 'балкон'},
+    {id: 'bathroom', name: 'Ванна', cian: ''},
     {id: 'children', name: 'С детьми', cian: 'можно с детьми'},
+    {id: 'conditioner', name: 'Кондиционер', cian: 'кондиционер'},
+    {id: 'dishWasher', name: 'Посудомойка', cian: 'посудомоечная машина'},
     {id: 'elevator', name: 'Лифт', cian: ''},
     {id: 'furniture', name: 'Мебель', cian: 'жилая мебель'},
     {id: 'kitchen_furniture', name: 'Кух. мебель', cian: 'кухонная мебель'},
-    // {id: 'phone', name: 'Телефон', cian : 'телефон'},
     {id: 'refrigerator', name: 'Холодильник', cian: 'холодильник'},
+    {id: 'shower', name: 'Душевая кабина', cian: ''},
     {id: 'tv', name: 'Телевизор', cian: 'телевизор'},
     {id: 'washer', name: 'Стир. машина', cian: 'стиральная машина'},
-    {id: 'dishWasher', name: 'Посудомойка', cian: 'посудомоечная машина'},
-    {id: 'conditioner', name: 'Кондиционер', cian: 'кондиционер'},
-    {id: 'bathroom', name: 'Ванна', cian: ''},
-    {id: 'balcony', name: 'Балкон', cian: 'балкон'},
-    {id: 'shower', name: 'Душевая кабина', cian: ''},
     {id: 'wifi', name: 'Интернет', cian: 'интернет'}
   ],
   customerQualification: [
