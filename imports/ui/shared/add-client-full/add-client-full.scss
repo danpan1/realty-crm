@@ -21,7 +21,6 @@ add-client-full {
   }
 }
 
-
 .has-error{
   & label{
     color: red !important;
@@ -40,4 +39,8 @@ add-client-full {
   & .md-char-counter{
     display: none;
   }
+}
+
+.add-client-full__comission-percent {
+  width: 36px !important;
 }
