@@ -5,8 +5,8 @@ div(md-whiteframe='2').mv-16.client-card
         div(layout='row')
             div(flex='25').clientCard-col-1.ph-16.pv-8
                 h3(ng-click="clientCard.sendCurrentClient(clientCard.client)").md-title.text-bold.m-0 {{clientCard.client.need.price | price}}
-                p().md-body-1.client-card__right-label {{(clientCard.client.comission | price) || 'Готов платить комиссию'}}
-                p().md-body-1.client-card__right-label id{{clientCard.client._id}}
+                p().md-body-1.text-bold.client-card__right-label {{(clientCard.client.comission | price) || 'Готов платить комиссию'}}
+                p().md-body-1.text-bold.client-card__right-label id{{clientCard.client._id}}
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8
                 p(ng-if='clientCard.client.realtorId === clientCard.user._id').md-title.m-0
@@ -27,8 +27,8 @@ div(md-whiteframe='2').mv-16.client-card
                 div(ng-if="clientCard.pageFrom == 'listMyClients'" ui-sref="crm.clients.details.info({client:clientCard.client._id, activetab: 'info'})")
                     md-button().client-card__link.m-0.p-0 Инфо о клиенте
                 div(ng-if="clientCard.pageFrom == 'listMyClients'")
-                    md-button(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})").client-card__link.m-0.p-0
-                    {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
+                    md-button(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})"
+                    ).client-card__link.m-0.p-0 {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
         md-divider
         
         div(layout='row')

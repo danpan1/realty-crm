@@ -2,12 +2,6 @@ layout > md-toolbar {
   background-color: #1e88e5 !important;
 }
 
-.color{
-  &-success{
-    color: springgreen
-  }
-}
-
 .lh{
   &-1{
     line-height: 1em;
@@ -15,7 +9,7 @@ layout > md-toolbar {
 }
 
 ui-view {
-  background-color: #f1f8fd;
+  background-color: #c9e6f2;
 }
 
 .toolbar-container {
