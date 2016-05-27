@@ -1,6 +1,10 @@
 one-find {
-    md-tabs-canvas {
-        height: 47px;
-        overflow: visible;
-    }
+  md-tabs-canvas {
+    height: 47px;
+    overflow: visible;
+  }
+  div[md-whiteframe]:not(:first-child) {
+    background-color: transparent;
+    box-shadow: none;
+  }
 }

@@ -15,38 +15,22 @@ div(md-whiteframe='2').mv-16.client-card
                 p().md-body-1.client-card__note {{clientCard.client.note}}
 
             md-divider
-            div.pv-8.ph-8(flex='20' layout="column" ng-if="clientCard.client.status")
-
-                p.client-card__link_p.md-body-1(ng-if="clientCard.pageFrom == 'manual' || clientCard.pageFrom == 'algorithm'")
-                    a.client-card__link(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' ) Предложить объект
-
-                p.client-card__link_p.md-body-1(ng-if="clientCard.pageFrom == 'my'")
-                    a.client-card__link(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' ) Выбрать клиента
-
-                p.client-card__link_p.md-body-1(ng-if="clientCard.pageFrom == 'listMyClients'"
-                ui-sref="crm.clients.details.info({client:clientCard.client._id, activetab: 'info'})")
-                    a.client-card__link() Инфо о клиенте
-
-                p.client-card__link_p.md-body-1(ng-if="clientCard.pageFrom == 'listMyClients'")
-                    a.client-card__link(
-                    ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})"
-                    ) {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
-                //email предложения
-                //p.client-card__link_p.md-body-1(ng-if="clientCard.pageFrom == 'listMyClients'")
-                //    a.client-card__link(
-                //    ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})"
-                //    ) {{(clientCard.client.relations.offers.length || 0) + (clientCard.client.relations.new.length || 0)}} предложений
-
+            div.pv-8.ph-8(layout="column" ng-if="clientCard.client.status")
+                div(ng-if="clientCard.pageFrom == 'manual' || clientCard.pageFrom == 'algorithm'")
+                    md-button(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)').client-card__link.m-0.p-0 Предложить объект
+                div(ng-if="clientCard.pageFrom == 'my'")
+                    md-button(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' md-no-ink).client-card__link.m-0.p-0 Выбрать клиента
+                div(ng-if="clientCard.pageFrom == 'listMyClients'" ui-sref="crm.clients.details.info({client:clientCard.client._id, activetab: 'info'})")
+                    md-button().client-card__link.m-0.p-0 Инфо о клиенте
+                div(ng-if="clientCard.pageFrom == 'listMyClients'")
+                    md-button(ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})").client-card__link.m-0.p-0 
+                    {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
         md-divider
         
         div(layout='row')
             div(flex='25').clientCard-col-1.ph-16.pv-8
                 p().md-body-1.client-card__right-label на {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
                 p(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
-
-                //div(ng-if="clientCard.client.status != 'hot' && !clientCard.assort")
-                //    p.md-body-1.client-card__right-label {{clientCard.client.phone | phone}}
-                //    p.md-body-1.client-card__right-label {{clientCard.client.name}}
 
                 h3(ng-if="clientCard.client.status == 'hot' && !clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новый
                 h3(ng-if="clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новая связь
