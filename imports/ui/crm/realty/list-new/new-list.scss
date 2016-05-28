@@ -1,6 +1,4 @@
 .newList {
-  background: white;
-  border: 1px solid #f3f3f3;
   &:hover {
     background: #e3f2fd;
   }
@@ -14,7 +12,7 @@
     width: 13.5rem;
   }
   &_Photo {
-    width: 14rem;
+    width: 15.5rem;
     img {
       max-width: 14rem;
       max-height: 10.5rem;

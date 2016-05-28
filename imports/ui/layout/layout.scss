@@ -402,17 +402,17 @@ md-switch {
 }
 
 .ta-c{
-    text-align: center;
+  text-align: center !important;
 }
 .ta-r{
-    text-align: right;
+  text-align: right !important;
 }
 .ta-l{
-    text-align: left;
+  text-align: left !important;
 }
 
 .uppercase{
-    text-transform: uppercase
+  text-transform: uppercase !important;
 }
 
 @media screen and (max-width: 1279px) {
