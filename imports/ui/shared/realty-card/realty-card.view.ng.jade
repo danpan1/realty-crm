@@ -29,7 +29,7 @@ div(layout='column' md-whiteframe='2').mv-8
                         span(class='metro-color-{{subway.line}}').metro-color
                         span {{subway.name}}
                     //Пешком до метро
-                    div.md-body-1.mb-8 {{::realtyCard.realty.address.metroTime}} мин. {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
+                    div.md-body-1.ml-8.mb-8 {{::realtyCard.realty.address.metroTime}} мин. {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
         md-divider
 
         //3-ая колонка Цена и ремонт
@@ -55,10 +55,12 @@ div(layout='column' md-whiteframe='2').mv-8
         md-divider
 
         //6-ая Телефонн Риэлтора и Объявление
-        div(layout='column' layout-align='start start').newList_contacts.ph-16.pv-8
-            div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
-            div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
-            md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mt-16.mh-0.p-0.newList__color-blue.uppercase Объявление
+        div(layout='column' layout-align='space-between start').newList_contacts.ph-16.pv-8
+            div
+                div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
+                div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
+            div
+                md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.uppercase Объявление
         md-divider
 
         //7-ая Скрыть Сохранить
