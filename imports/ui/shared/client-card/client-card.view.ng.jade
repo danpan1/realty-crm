@@ -10,13 +10,13 @@ div(md-whiteframe='2').mv-16.client-card
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8
                 p(ng-if='clientCard.client.realtorId === clientCard.user._id').md-title.m-0
-                    span().text-bold.md-body-1 {{clientCard.client.phone | phone}} |
-                    span().text-bold.md-body-1  клиент {{clientCard.client.name}}
+                    div().text-bold.md-body-1 {{clientCard.client.phone | phone}}
+                    div().text-bold.md-body-1  клиент {{clientCard.client.name}}
                 p(ng-if='clientCard.client.realtorId !== clientCard.user._id').md-title.m-0
                     span().text-bold.md-body-1 {{clientCard.client.realtorPhone | phone}} |
                     span().text-bold.md-body-1  риэлтор {{clientCard.client.realtorName}} |
                     span().text-bold.md-body-1  id {{clientCard.client.realtorIdShort}}
-                p().md-body-1.client-card__note {{clientCard.client.note}}
+                p().md-body-1.client-card__note.m-0 {{clientCard.client.note}}
 
             md-divider
             div.pv-8.ph-16(layout="column" ng-if="clientCard.client.status")
@@ -32,14 +32,14 @@ div(md-whiteframe='2').mv-16.client-card
         
         div(layout='row')
             div(flex='25').clientCard-col-1.ph-16.pv-8
-                p().md-body-1.client-card__right-label на {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
-                p(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
+                div().md-body-1.client-card__right-label на {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
+                div(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
 
                 h3(ng-if="clientCard.client.status == 'hot' && !clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новый
                 h3(ng-if="clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новая связь
         
             md-divider
-            div(flex='55' layout="row").one-demonstrations-center-cell.ph-16
+            div(flex='55' layout="row").one-demonstrations-center-cell
                 div(flex='45' layout-fill).ph-16
                     p
                         p(ng-repeat="subway in clientCard.client.need.embedded.subways").md-body-1.mv-0
