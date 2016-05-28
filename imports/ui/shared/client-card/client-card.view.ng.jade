@@ -35,8 +35,8 @@ div(md-whiteframe='2').mv-16.client-card
         
         div(layout='row')
             div(flex='25').clientCard-col-1.ph-16.pv-8
-                div().md-body-1.client-card__right-label на {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
-                div(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label ищет {{clientCard.searchDuration}} дней
+                div().md-body-1.client-card__right-label На {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
+                div(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label Ищет {{clientCard.searchDuration}} дней
 
                 h3(ng-if="clientCard.client.status == 'hot' && !clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новый
                 h3(ng-if="clientCard.assort").md-title.text-bold.text-uppercase.one-demonstrations-new-label Новая связь
