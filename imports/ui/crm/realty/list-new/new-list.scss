@@ -21,7 +21,11 @@
     }
   }
   &_Info {
-    width: 15rem;
+    width: 11rem;
+  }
+  &_contacts {
+    width: 23.5rem;
+    background-color: #fffde7;
   }
   &_Conditions {
     width: 19rem;
@@ -38,6 +42,13 @@
     font-size: 14px;
     text-transform: uppercase;
     color: #4caf50;
+  }
+
+  &__color-blue {
+    color: #106cc8 !important;
+    &:hover, &:focus {
+      background-color: transparent !important;
+    }
   }
 }
 

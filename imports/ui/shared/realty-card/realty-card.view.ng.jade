@@ -12,77 +12,74 @@ div(layout='column' md-whiteframe='2').mv-8
 
 
         //2-ая колонка Метро и Метро пешком
-        div().newList_Address.p-8
+        div().newList_Address.ph-16.pv-8
             div(layout='column', layout-align='space-between')
                 p.mv-0
                     //Метро
-                    div.mb-8(ng-repeat='subway in ::realtyCard.realty.address.subwaysEmbedded').metro-name
+                    div(ng-repeat='subway in ::realtyCard.realty.address.subwaysEmbedded').metro-name.md-body-1.mb-8
                         span(class='metro-color-{{subway.line}}').metro-color
                         span {{subway.name}}
                     //Пешком до метро
-                    div.mb-8 {{::realtyCard.realty.address.metroTime}} мин. {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
+                    div.md-body-1.mb-8 {{::realtyCard.realty.address.metroTime}} мин. {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
         md-divider
 
         //3-ая колонка Цена и ремонт
-        div(layout='column').newList_Price.p-8
-            div.mb-8.price #[b {{::realtyCard.realty.price | price}}]
-            div.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
+        div(layout='column').newList_Price.ph-16.pv-8
+            div.md-body-1.mb-8.price #[b {{::realtyCard.realty.price | price}}]
+            div.md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
         md-divider
 
         //4-ая колонка Фото
-        div().newList_Photo
-            div(layout='column', layout-align='space-between')
-                div.apartment-pic(ng-click="realtyCard.showSlider( )")
-                    img(ng-src='{{::realtyCard.realty.image || "realty_no_image.png"}}')
-                    div().icon-zoom
+        div(layout='column' layout-align='center center').newList_Photo
+            div(ng-click="realtyCard.showSlider( )").apartment-pic
+                img(ng-src='{{::realtyCard.realty.image || "realty_no_image.png"}}')
+                div().icon-zoom
         md-divider
 
         //5-ая Инфо об объекте
-        div().newList_Info.p-8
+        div().newList_Info.ph-16.pv-8
             div(layout='column' layout-align='space-between')
-                div.mb-8 {{::realtyCard.realty.roomcount}}-к квартира
-                div.mb-8 Длительный
-                div.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
-                div.mb-8 {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} {{::realtyCard.realty.square}}м2
+                div().md-body-1.mb-8 {{::realtyCard.realty.roomcount}}-к квартира
+                div().md-body-1.mb-8 Длительный
+                div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
+                div().md-body-1.mb-8 {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} {{::realtyCard.realty.square}}м2
         md-divider
 
         //6-ая Телефонн Риэлтора и Объявление
-        div(layout='column' layout-align='start start').newList_Info.p-8
-            div.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
-            div.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
-            div(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr").mt-16.color-primary.uppercase #[b Объявление]
+        div(layout='column' layout-align='start start').newList_contacts.ph-16.pv-8
+            div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
+            div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
+            md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mt-16.mh-0.p-0.newList__color-blue.uppercase Объявление
         md-divider
 
         //7-ая Скрыть Сохранить
-        div(layout='column' layout-align="space-between left").newList_Actions.p-8
+        div(layout='column' layout-align="space-between left").newList_Actions.ph-16.pv-8
             div(layout="column" layout-align="space-between start")
-
                 div(ng-click = 'realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
-                ng-if='realtyCard.relationType === "new" || realtyCard.relationType ==="offers"').mv-8.md-uppercase.color-primary Сохранить
-
+                ng-if='realtyCard.relationType === "new" || realtyCard.relationType ==="offers"').md-body-1.mv-8.newList__color-blue Сохранить
                 div(ng-click = 'realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)').mb-8.color-hide скрыть
 
     // Подоробное объявление
     div.ph-32(ng-show="realtyCard.ngShowDescr")
         div(ng-if="!realtyCard.realtylisttype")
-            p {{::realtyCard.realty.details.descr}}
+            p().md-body-1 {{::realtyCard.realty.details.descr}}
             div(layout='row')
                 md-button(ng-click='realtyCard.takeRealty(realtyCard.realty._id)').md-raised.md-warn.btn-get-object Взять объект
             span(flex)
             md-button(ng-click="realtyCard.ngShowDescr =! realtyCard.ngShowDescr") Закрыть
         div(ng-if="realtyCard.realtylisttype == 'connections'")
             div(layout="row")
-                p(flex="35") {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
-                p(flex="65") Удобства
+                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
+                p(flex="65").md-body-1 Удобства
             div {{::realtyCard.realty.details.descr}}
             div(layout="row")
                 div(flex="90")
                 div(flex="10") 
-                    md-button.md-default.md-raised(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr") Закрыть
+                    md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr") Закрыть
         div(ng-if="realtyCard.realtylisttype == 'demonstration'")
             div(layout="row")
-                p(flex="35") {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
-                p(flex="65") Удобства
+                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
+                p(flex="65").md-body-1 Удобства
             div  {{::realtyCard.realty.details.descr}}
             div(layout="row")
                 div(flex="90") Риелтор {{::realtyCard.realty.contacts[0].name}} {{::realtyCard.realty.contacts[0].phones[0].phone}}
