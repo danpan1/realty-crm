@@ -8,12 +8,8 @@ login {
     background-color: #bbdefb;
   }
 
-  md-whiteframe {
-    background-color: #fff;
+  .login-form {
     width: 328px;
-  }
-
-  md-input-container {
-    margin: 0;
+    max-width: 328px;
   }
 }

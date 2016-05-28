@@ -1,18 +1,18 @@
 md-toolbar.md-primary(layout='column')
-md-content(layout='column', layout-align='center center', layout-fill='', layout-margin='')
-    div().mv-32
+md-content()
+    div().mv-32.ta-c
         img(src='img/logos/brand-logo-large.png')
-    md-whiteframe.md-whiteframe-z2(layout='column', flex='60')
+    div(layout='column', layout-align='center center').p-32
         header(layout='row' layout-align='center center')
             h2().md-subhead Восстановление пароля
-        div(layout='column', layout-fill='', layout-margin='', layout-padding='')
+        div(md-whiteframe='2').resetpw-form.p-32
             form(name='resetForm' ng-submit='login.login()')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='75')
+                    md-input-container(flex='80').md-block.m-0
                         label Email
-                        input(type='email', ng-model='resetpw.credentials.email', aria-label='Email', required='')
+                        input(type='email', ng-model='resetpw.credentials.email', required='')
                 div(layout='row' layout-align='center center').mt-16.mb-8
-                    md-button.md-raised.md-primary(flex='75' type='submit', ng-click="resetpw.reset()" aria-label='Восстановить пароль', ng-disabled='resetpw.resetForm.$invalid()')
+                    md-button.md-raised.md-primary(flex='80' type='submit', ng-click="resetpw.reset()" aria-label='Восстановить пароль', ng-disabled='resetpw.resetForm.$invalid()')
                         | Восстановить пароль
-            md-toolbar.md-warn(ng-show='resetpw.error', layout='row', layout-fill='', layout-padding='', layout-margin='' layout-align='center center')
+            md-toolbar.md-warn(ng-show='resetpw.error', layout='row', layout-align='center center')
                 p().md-body-1 {{ resetpw.error }}

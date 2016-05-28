@@ -1,42 +1,43 @@
 md-toolbar.md-primary(layout='column')
-md-content(layout='column', layout-align='center center', layout-fill='', layout-margin='')
-    div().mv-32
+md-content
+    div().mv-32.ta-c
         img(src='img/logos/brand-logo-large.png')
-    md-whiteframe.md-whiteframe-z2(layout='column', flex='60').pv-16
-        div(layout='column', layout-fill='', layout-margin='', layout-padding='')
+
+    div(layout='column', layout-align='center center').p-32
+        div(md-whiteframe='2').register-form.p-32
             form(name='registerForm' ng-submit='register.register()')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='75').form-required
+                    md-input-container(flex='80').md-block.form-required.m-0
                         label Имя
-                        input(type='text', aria-label='Имя', required='' ng-model='register.credentials.profile.name')
+                        input(type='text', required='' ng-model='register.credentials.profile.name')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='75').form-required
+                    md-input-container(flex='80').md-block.form-required.m-0
                         label Фамилия
-                        input(type='text', aria-label='Фамилия', required='' ng-model='register.credentials.profile.surName')
+                        input(type='text', required='' ng-model='register.credentials.profile.surName')
                 div(layout='row' layout-align='center center')
-                    phone-mask(layout='row' flex='75' ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone')
+                    phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='75').form-required
+                    md-input-container(flex='80').md-block.form-required.m-0
                         label Email
-                        input(type='email', ng-model='register.credentials.email', aria-label='Email', required='')
+                        input(type='email', ng-model='register.credentials.email', required='')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='75').form-required
+                    md-input-container(flex='80').md-block.form-required.m-0
                         label Пароль
-                        input(type='password', ng-model='register.credentials.password', aria-label='Пароль', required='')
+                        input(type='password', ng-model='register.credentials.password', required='')
                 div(layout='row' layout-align='center center' ng-class='{"has-error":registerForm.passwordRepeat.$touched && register.passwordrepeat != register.credentials.password}')
-                    md-input-container(flex='75').form-required
+                    md-input-container(flex='80').md-block.form-required.m-0
                         label {{ registerForm.passwordRepeat.$touched ? register.passwordrepeat == register.credentials.password ? 'Пароли совпадают' : 'Пароли не совпадают' : 'Повторите пароль'}}
-                        input(name='passwordRepeat' type='password', ng-model='register.passwordrepeat', aria-label='Пароль Повтор', required='')
+                        input(name='passwordRepeat' type='password', ng-model='register.passwordrepeat', required='')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='75')
+                    md-input-container(flex='80').md-block.m-0
                         label Ссылка на &laquoВконтакте&raquo
                         input(type='text', aria-label='Ссылка на Вконтакте' ng-model='register.credentials.profile.urlVk')
                 div(layout='row' layout-align='center center')
-                    md-button.md-raised.md-primary(flex='75' type='submit', aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password)')
+                    md-button(flex='80' type='submit', aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password)').md-raised.md-primary
                         | Зарегистрироваться
                 div(layout='column' layout-align='start center')
                     div().md-body-1 или
                     div
                         a(href='/login').md-button.md-primary Войти
-            md-toolbar.md-warn(ng-show='register.error', layout='row', layout-fill='', layout-padding='', layout-margin='' layout-align='center center')
+            md-toolbar.md-warn(ng-show='register.error', layout='row', layout-align='center center')
                 p.md-body-1 Этот Email уже зарегистрирован

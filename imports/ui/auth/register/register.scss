@@ -4,16 +4,11 @@ register {
   }
   
   md-content {
-    min-height: 800px !important;
     background-color: #bbdefb;
   }
 
-  md-whiteframe {
-    background-color: #fff;
+  .register-form {
     width: 328px;
-  }
-
-  md-input-container {
-    margin: 0;
+    max-width: 328px;
   }
 }
