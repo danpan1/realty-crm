@@ -44,7 +44,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                     md-button(ng-click='addRealtyFull.activeTab = 1'
                     ng-disabled="firstForm.$invalid").md-primary.md-raised.mh-0 Продолжить
 
-    md-tab(label='2) Параметры' md-active='addRealtyFull.activeTab == 1' ng-click='addRealtyFull.activeTab = 1'   ng-disabled="firstForm.$invalid")
+    md-tab(label='2) Параметры' md-active='addRealtyFull.activeTab == 1' ng-click='addRealtyFull.activeTab = 1' ng-disabled="firstForm.$invalid")
         md-content().ph-32.pv-16
             form(novalidate name="secondForm")
                 div(layout='column')
