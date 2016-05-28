@@ -31,7 +31,7 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                                 div(flex='40') #[strong {{clientInfo.client.comissionLoyal ? 'Да' : 'Нет'}}]
                             div(layout='row' ng-if='clientInfo.client.comission' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Сколько:
-                                div(flex='40') #[strong {{clientInfo.client.comission}}]
+                                div(flex='40') #[strong {{clientInfo.client.comission}}%]
                             div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Актуально с:
                                 div(flex='40') #[strong {{clientInfo.client.searchStartDate | date:'dd.MM'}}]
@@ -52,13 +52,13 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Город:
                         div(flex='40') #[strong Москва]
-                    div().md-subhead.mv-8 Тип ремонта:
-                    div(ng-repeat='renovation in clientInfo.client.need.renovation').md-subhead #[strong {{clientInfo.dictionary.renovation[renovation].name}}]
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Комнат:
                         div(flex='40')
                             span(ng-repeat='room in clientInfo.client.need.roomcount') #[strong {{room}}]
                                 span(ng-if='$index != clientInfo.client.need.roomcount.length - 1') , 
+                    div().md-subhead.mv-8 Тип ремонта:
+                    div(ng-repeat='renovation in clientInfo.client.need.renovation').md-subhead #[strong {{clientInfo.dictionary.renovation[renovation].name}}]
                     div().md-subhead.mv-8 Состав съемщиков:
                     div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
                 md-divider
