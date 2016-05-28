@@ -21,17 +21,16 @@ div(ng-if="clientInfoEdit.show")
                                   ng-init="clientInfoEdit.ngOnInit(clientInfoEdit.client.need.price)")
                         div(layout='row')
                             md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='clientInfoEdit.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ clientInfoEdit.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
+                        div(layout='row')
+                            md-input-container(md-no-float layout='row' ng-if='clientInfoEdit.client.comissionLoyal').add-client-full__comission-percent.ml-8.mv-0
+                                input(type="text" ng-model='clientInfoEdit.client.comission')
+                            span(ng-if='clientInfoEdit.client.comissionLoyal').md-subhead %
                         div().mv-16
                             div().md-subhead Актуально с 
                             md-datepicker(ng-model='clientInfoEdit.client.searchEndDate', md-placeholder='' flex)
                         div().mv-16
                             div().md-subhead В поиске с 
                             md-datepicker(ng-model='clientInfoEdit.client.searchStartDate', md-placeholder='Enter date' flex)
-                        md-input-container().mv-16.form-required
-                            label Состав съемщиков
-                            md-select(required ng-model='clientInfoEdit.client.composition' aria-label='Выбрать состав съемщиков')
-                                md-option(ng-value='composition.id',
-                                ng-repeat="composition in clientInfoEdit.dictionary.composition ") {{composition.name}}
 
                 div(flex='30')
                     h2 Объект
@@ -49,6 +48,11 @@ div(ng-if="clientInfoEdit.show")
                                     md-select(required ng-model='clientInfoEdit.client.need.renovation', multiple='true' aria-label='Выбрать тип ремонта')
                                         md-option(ng-value='renovation.id',
                                         ng-repeat="renovation in clientInfoEdit.dictionary.renovation") {{renovation.name}}
+                                md-input-container().mv-16.form-required
+                                    label Состав съемщиков
+                                    md-select(required ng-model='clientInfoEdit.client.composition' aria-label='Выбрать состав съемщиков')
+                                        md-option(ng-value='composition.id',
+                                        ng-repeat="composition in clientInfoEdit.dictionary.composition ") {{composition.name}}
                                     
                 div(flex='30')
                     h2 Метро

@@ -43,7 +43,13 @@ class ClientConnections {
           limit: parseInt(vm.perPage),
           skip: parseInt((vm.getReactively('page') - 1) * vm.perPage),
           sort: vm.getReactively('sort')
-        }, vm.getReactively('client.relations')
+        }, {
+          my : vm.getReactively('client.relations.my'),
+          saved : vm.getReactively('client.relations.saved'),
+          offers : vm.getReactively('client.relations.offers'),
+          new : vm.getReactively('client.relations.new'),
+          hide : vm.getReactively('client.relations.hide')
+        }
       ];
     }, {
       onReady: function () {
@@ -65,14 +71,14 @@ class ClientConnections {
       },
       realtyOffers() {
         if (vm.client && vm.client.relations) {
-          return Realty.find({_id: {$in: vm.client.relations.offers || []}}, {sort: vm.getReactively('sort')});
+          return Realty.find({_id: {$in: vm.getReactively('client.relations.offers') || []}}, {sort: vm.getReactively('sort')});
         } else {
           return [];
         }
       },
       realtySaved() {
         if (vm.client && vm.client.relations) {
-          return Realty.find({_id: {$in: vm.client.relations.saved || []}}, {sort: vm.getReactively('sort')});
+          return Realty.find({_id: {$in: vm.getReactively('client.relations.saved') || []}}, {sort: vm.getReactively('sort')});
         } else {
           return [];
         }
@@ -81,7 +87,7 @@ class ClientConnections {
         console.log('realty.my');
         if (vm.client && vm.client.relations) {
           console.log('realty.m222y');
-          return Realty.find({_id: {$in: vm.client.relations.my || []}}, {sort: vm.getReactively('sort')});
+          return Realty.find({_id: {$in: vm.getReactively('client.relations.my') || []}}, {sort: vm.getReactively('sort')});
         } else {
           return [];
         }

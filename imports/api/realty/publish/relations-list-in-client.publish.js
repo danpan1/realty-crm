@@ -29,7 +29,7 @@ if (Meteor.isServer) {
         realtyRelated = realtyRelated.concat(relations.offers);
       }
       
-      // console.log(realtyRelated, 'realtyRelated');
+      console.log(realtyRelated, 'realtyRelated');
       let selector = {
         _id: {$in: realtyRelated},
         // status: 'realtor'
