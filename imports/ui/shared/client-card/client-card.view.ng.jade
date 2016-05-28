@@ -10,12 +10,12 @@ div(md-whiteframe='2').mv-16.client-card
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8
                 div(ng-if='clientCard.client.realtorId === clientCard.user._id').md-title.m-0
-                    span().text-bold.md-body-1 {{clientCard.client.phone | phone}} |
-                    span().text-bold.md-body-1  клиент {{clientCard.client.name}}
+                    span().md-title.text-bold {{clientCard.client.phone | phone}} |
+                    span().md-title.text-bold  клиент {{clientCard.client.name}}
                 div(ng-if='clientCard.client.realtorId !== clientCard.user._id').md-title.m-0
-                    span().text-bold.md-body-1 {{clientCard.client.realtorPhone | phone}} |
-                    span().text-bold.md-body-1  риэлтор {{clientCard.client.realtorName}} |
-                    span().text-bold.md-body-1  id {{clientCard.client.realtorIdShort}}
+                    span().md-title.text-bold {{clientCard.client.realtorPhone | phone}} |
+                    span().md-title.text-bold  риэлтор {{clientCard.client.realtorName}} |
+                    span().md-title.text-bold  id {{clientCard.client.realtorIdShort}}
                 p().md-body-1.client-card__note.m-0 {{clientCard.client.note}}
 
             md-divider
