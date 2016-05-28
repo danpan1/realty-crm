@@ -84,8 +84,9 @@ div(layout='column' md-whiteframe='2').mv-8.whiteBg
                 div.md-uppercase.color-danger Купить за 150 руб.
                 div.color-hide(ng-click="console.log('sdfsdf')") скрыть
             div(ng-if="realtyCard.realtylisttype == 'connections'" layout="column" layout-align="space-between start")
-                div(ng-click = 'realtyCard.changeRelationType("save", realtyCard.realty._id, realtyCard.clientId,realtyCard.isNew)').mv-8.md-uppercase.color-primary Сохранить
-                div(ng-click = 'realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId,realtyCard.isNew)').mb-8.color-hide скрыть
+                div(ng-click = 'realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
+                ng-if='realtyCard.relationType === "new" || realtyCard.relationType ==="offers"').mv-8.md-uppercase.color-primary Сохранить
+                div(ng-click = 'realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)').mb-8.color-hide скрыть
             div(flex layout='row', ng-if="realtyCard.realtylisttype != 'connections'" layout-align='center center')
                 md-button(md-no-ink='' ng-click="realty.ngShowDescr =!realty.ngShowDescr").md-primary Подробнее
                 

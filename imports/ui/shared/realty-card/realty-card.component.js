@@ -50,7 +50,7 @@ export default angular.module(moduleName, [
   bindings: {
     realty: '<',
     slider: '&',
-    isNew: '<',
+    relationType: '@',
     clientId: '<',
     realtylisttype: '<'
   },
