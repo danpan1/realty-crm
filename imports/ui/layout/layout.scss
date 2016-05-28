@@ -9,7 +9,7 @@ layout > md-toolbar {
 }
 
 ui-view {
-  background-color: #c9e6f2;
+  background-color: #bbdefb;
 }
 
 .toolbar-container {
@@ -74,14 +74,12 @@ div[md-whiteframe] {
 }
 
 #mainContainer{
-  //margin: 0 auto;
   width: 1024px; //97.6rem 1024px - 24px -24px
 }
 
 #content{
-  //width: 1040px;
   margin-left: 16px;
-  background-color: #c9e6f2;
+  background-color: #bbdefb;
   box-shadow: none;
 }
 
