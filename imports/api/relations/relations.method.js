@@ -86,7 +86,7 @@ export function changeRelationTypeInClient(type, realtyId, clientId, relationTyp
     console.log(relationTypeCurrent, 'relationTypeCurrent');
     console.log(clientId, 'clientId');
     let modificator = {};
-    
+
     if (relationTypeCurrent) {
       modificator.$pull = {};
       modificator.$pull['relations.' + relationTypeCurrent] = realtyId;
@@ -107,5 +107,12 @@ export function changeRelationTypeInClient(type, realtyId, clientId, relationTyp
       });
 
   }
-
+  // db.clients.update({_id: '14'}, {
+  //   $set: {
+  //     'relations.offers': ['8', '9', '14'],
+  //     'relations.new': ['8', '9', '14'],
+  //     'relations.my': ['8', '9', '14'],
+  //     'relations.saved': ['8', '9', '14']
+  //   }
+  // })
 }
