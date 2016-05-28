@@ -44,11 +44,11 @@ class ClientConnections {
           skip: parseInt((vm.getReactively('page') - 1) * vm.perPage),
           sort: vm.getReactively('sort')
         }, {
-          my : vm.getReactively('client.relations.my'),
-          saved : vm.getReactively('client.relations.saved'),
-          offers : vm.getReactively('client.relations.offers'),
-          new : vm.getReactively('client.relations.new'),
-          hide : vm.getReactively('client.relations.hide')
+          my: vm.getReactively('client.relations.my'),
+          saved: vm.getReactively('client.relations.saved'),
+          offers: vm.getReactively('client.relations.offers'),
+          new: vm.getReactively('client.relations.new'),
+          hide: vm.getReactively('client.relations.hide')
         }
       ];
     }, {
@@ -100,9 +100,11 @@ class ClientConnections {
   }
 
   setSliderImages(images) {
-    console.log(images);
-    this.showSlider = true;
-    this.slideShowImages = images;
+    // console.log(images);
+    if (images && images.length) {
+      this.showSlider = true;
+      this.slideShowImages = images;
+    }
   }
 
 }

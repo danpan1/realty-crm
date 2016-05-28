@@ -11,12 +11,15 @@ class SlideShow {
     this.sliderMaxWidth = 0;
     this.slideCount = 0;
     this.slideInnerStyle = {};
+    this.marginConst = 1028;
   }
 
   showSlides() {
     // init and count slider width
-    this.sliderMaxWidth = this.slidesList.length * 1030 ;
-    this.slideInnerStyle = {'margin-left': this.slideMargin + 'px', 'width': this.sliderMaxWidth + 'px'};
+    if (this.slidesList && this.slidesList.length) {
+      this.sliderMaxWidth = this.slidesList.length * (this.marginConst);
+      this.slideInnerStyle = {'margin-left': this.slideMargin + 'px', 'width': this.sliderMaxWidth + 'px'};
+    }
   }
 
   hideSlides() {
@@ -32,17 +35,17 @@ class SlideShow {
       }
       else {
         this.slideCount++;
-        this.slideMargin = -this.slideCount * 1030;
+        this.slideMargin = -this.slideCount * this.marginConst;
       }
       ;
     } else { // if previous
       if (this.slideCount - 1 < 0) {
         this.slideCount = max - 1;
-        this.slideMargin = -(max - 1) * 1030;
+        this.slideMargin = -(max - 1) * this.marginConst;
       }
       else {
         this.slideCount--;
-        this.slideMargin = -this.slideCount * 1030;
+        this.slideMargin = -this.slideCount * this.marginConst;
       }
       ;
     }
