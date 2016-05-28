@@ -1,11 +1,8 @@
 div(layout='column' md-whiteframe='2').mv-8
     div.newList(layout='row')
-        div(layout='column' ng-if='::realtyCard.realtylisttype != "connections"').newList_ID.p-8
-            div(layout='row')
-                div Сегодня
-            div(layout='row')
-                div {{::realtyCard.realty.parseDetails.UID}}
-        div(layout='column' ng-if='::realtyCard.realtylisttype == "connections"').newList_ID.md-body-1.ph-16.pv-8
+
+        // 1-ая колонка - ID и Новая
+        div(layout='column').newList_ID.md-body-1.ph-16.pv-8
             div id {{::realtyCard.realty.realtor.realtorIdShort | price}}
             div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.isNew')
                 span(ng-if='!realtyCard.realty.relations.read').newList__new-connections.mv-0 Новая связь
@@ -13,28 +10,26 @@ div(layout='column' md-whiteframe='2').mv-8
                 md-checkbox(ng-click="realtyCard.updateRealty(realtyCard.realty._id)" id="connectionRead" name="connectionRead" ng-model='realtyCard.realty.relations.read' flex flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead.mb-0
         md-divider
 
+
+        //2-ая колонка Метро и Метро пешком
         div().newList_Address.p-8
             div(layout='column', layout-align='space-between')
                 p.mv-0
+                    //Метро
                     div.mb-8(ng-repeat='subway in ::realtyCard.realty.address.subwaysEmbedded').metro-name
                         span(class='metro-color-{{subway.line}}').metro-color
                         span {{subway.name}}
+                    //Пешком до метро
                     div.mb-8 {{::realtyCard.realty.address.metroTime}} мин. {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
-                div(ng-if='realtyCard.realtylisttype != "connections"')
-                    p(layout='column').address-info.mv-0
-                        div.mb-8 {{::realtyCard.realty.address.street}}
-                        div.mb-8 {{::realtyCard.realty.address.districtName}}
-                        div {{::realtyCard.realty.address.areaName}}
         md-divider
 
+        //3-ая колонка Цена и ремонт
         div(layout='column').newList_Price.p-8
             div.mb-8.price #[b {{::realtyCard.realty.price | price}}]
             div.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
-            div(ng-if="realtyCard.realtylisttype == 'connections'" ng-class=' {"color-success" : realtyCard.realty.operator.qualification == 2, "color-danger" : realtyCard.realty.operator.qualification == 0} ').type-owner {{::realtyCard.dictionary.qualification[realtyCard.realty.operator.qualification].name}}
-            div.color-primary(ng-if="realtyCard.realtylisttype == 'demonstration'") #[b Объявление]
-            //div.favorites В избранное
         md-divider
 
+        //4-ая колонка Фото
         div().newList_Photo
             div(layout='column', layout-align='space-between')
                 div.apartment-pic(ng-click="realtyCard.showSlider( )")
@@ -42,52 +37,32 @@ div(layout='column' md-whiteframe='2').mv-8
                     div().icon-zoom
         md-divider
 
+        //5-ая Инфо об объекте
         div().newList_Info.p-8
-            div(layout='column' layout-align='space-between' ng-if="!realtyCard.realtylisttype || realtyCard.realtylisttype == 'connections'")
+            div(layout='column' layout-align='space-between')
                 div.mb-8 {{::realtyCard.realty.roomcount}}-к квартира
                 div.mb-8 Длительный
                 div.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
                 div.mb-8 {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} {{::realtyCard.realty.square}}м2
-            div(ng-if="realtyCard.realtylisttype == 'demonstration'")
-                div.md-uppercase.md-bold 1 мая 17:00 | через 3:00
-                div.md-uppercase.md-bold {{::realtyCard.realty.address.street}}, д.{{::realtyCard.realty.address.meta.house}}, кв.208
-            div(ng-if="realtyCard.realtylisttype != 'connections'" layout="column" layout-align="space-between start")
-                div.md-bold {{::realtyCard.realty.contacts[0].name}} | {{::realtyCard.realty.contacts[0].phones[0].phone}}
-                div.uppercase.color-primary Объявление
         md-divider
-        
-        div(ng-if="realtyCard.realtylisttype == 'connections'" layout='column' layout-align='start start').newList_Info.p-8
+
+        //6-ая Телефонн Риэлтора и Объявление
+        div(layout='column' layout-align='start start').newList_Info.p-8
             div.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
             div.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
             div(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr").mt-16.color-primary.uppercase #[b Объявление]
-        div(ng-if="realtyCard.realtylisttype != 'connections'").newList_Conditions.p-8
-            div(layout='row', layout-wrap, layout-align='space-around')
-                - for (var i = 0; i < 12; i++)
-                    img(src='img/icons/icon-tv.png')
         md-divider
 
+        //7-ая Скрыть Сохранить
         div(layout='column' layout-align="space-between left").newList_Actions.p-8
-            div(ng-if="realtyCard.realtylisttype == 'demonstration'")
-                div(ng-if="true")
-                    div.color-primary Отправить отчет
-                    div.color-hide Перенести показ
-                div(ng-if="false")
-                    div Риелтор
-                    div {{::realtyCard.realty.contacts[0].name}} 
-                    div {{::realtyCard.realty.contacts[0].phones[0].phone}}
-                    div.color-hide скрыть
-            div(ng-if="realtyCard.realtylisttype == ''" layout="column" layout-align="space-between start")
-                div.md-uppercase.color-primary Назначить показ
-                div.md-uppercase.color-danger Купить за 150 руб.
-                div.color-hide(ng-click="console.log('sdfsdf')") скрыть
-            div(ng-if="realtyCard.realtylisttype == 'connections'" layout="column" layout-align="space-between start")
+            div(layout="column" layout-align="space-between start")
+
                 div(ng-click = 'realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
                 ng-if='realtyCard.relationType === "new" || realtyCard.relationType ==="offers"').mv-8.md-uppercase.color-primary Сохранить
-                div(ng-click = 'realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)').mb-8.color-hide скрыть
-            div(flex layout='row', ng-if="realtyCard.realtylisttype != 'connections'" layout-align='center center')
-                md-button(md-no-ink='' ng-click="realty.ngShowDescr =!realty.ngShowDescr").md-primary Подробнее
-                
 
+                div(ng-click = 'realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)').mb-8.color-hide скрыть
+
+    // Подоробное объявление
     div.ph-32(ng-show="realtyCard.ngShowDescr")
         div(ng-if="!realtyCard.realtylisttype")
             p {{::realtyCard.realty.details.descr}}
@@ -113,18 +88,3 @@ div(layout='column' md-whiteframe='2').mv-8
                 div(flex="90") Риелтор {{::realtyCard.realty.contacts[0].name}} {{::realtyCard.realty.contacts[0].phones[0].phone}}
                 div(flex="10") 
                     md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr") Закрыть
-        //div(flex='55')
-        //    h3.md-title Номер собственника +7 925 111 22 33  Александр
-        //    p Объект успешно сохранен в разделе «Мои объекты»!
-        //    p Прямо сейчас позвоните и договоритесь о просмотре и создайте ниже время просмотра этого объекта
-        //
-        //    div(layout='row' layout-align='start center')
-        //        md-datepicker(flex='45' ng-model='myDate' md-placeholder='Enter date')
-        //        md-input-container(flex='15').md-block
-        //            md-select
-        //                md-option(value='часов') часов
-        //        div(flex='5' hide-xs hide-sm)
-        //        md-input-container(flex='15').md-block
-        //            md-select
-        //                md-option(value='минут') минут
-        //    md-button.md-raised.md-primary.btn-plan-object Запланировать просмотр объекта
