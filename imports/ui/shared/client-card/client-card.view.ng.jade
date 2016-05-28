@@ -9,10 +9,10 @@ div(md-whiteframe='2').mv-16.client-card
                 p().md-body-1.text-bold.client-card__right-label id{{clientCard.client._id}}
             md-divider
             div(flex='55' layout="column").one-demonstrations-center-cell.ph-16.pv-8
-                p(ng-if='clientCard.client.realtorId === clientCard.user._id').md-title.m-0
-                    div().text-bold.md-body-1 {{clientCard.client.phone | phone}}
-                    div().text-bold.md-body-1  клиент {{clientCard.client.name}}
-                p(ng-if='clientCard.client.realtorId !== clientCard.user._id').md-title.m-0
+                div(ng-if='clientCard.client.realtorId === clientCard.user._id').md-title.m-0
+                    span().text-bold.md-body-1 {{clientCard.client.phone | phone}} |
+                    span().text-bold.md-body-1  клиент {{clientCard.client.name}}
+                div(ng-if='clientCard.client.realtorId !== clientCard.user._id').md-title.m-0
                     span().text-bold.md-body-1 {{clientCard.client.realtorPhone | phone}} |
                     span().text-bold.md-body-1  риэлтор {{clientCard.client.realtorName}} |
                     span().text-bold.md-body-1  id {{clientCard.client.realtorIdShort}}
