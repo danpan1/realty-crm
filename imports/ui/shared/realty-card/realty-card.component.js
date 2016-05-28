@@ -36,7 +36,7 @@ class RealtyCard {
   }
 
   showSlider() {
-    this.slider({'images': this.realty.parseDetails.images});
+    this.slider({'images': this.realty.details.images});
   }
 }
 

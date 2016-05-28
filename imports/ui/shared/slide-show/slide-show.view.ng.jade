@@ -1,7 +1,7 @@
 div.slide__bg(ng-style="slideShow.sliderStyles" ng-if="slideShow.isshown" ng-click="slideShow.hideSlides()")
 div.slide__wrapper(ng-style="slideShow.sliderStyles" ng-if="slideShow.isshown")
-    figure.slide__arrow.prev(ng-click="slideShow.nextSlide(false,slideShow.slidesList.length)") prev
+    figure.slide__prev(ng-click="slideShow.nextSlide(false,slideShow.slidesList.length)")
     div.slide__inner(ng-style="slideShow.slideInnerStyle" ng-init="slideShow.showSlides()")
         div.slide__block(ng-repeat="slide in slideShow.slidesList")
-            img.slide__img(ng-src="{{slide}}")
-    figure.slide__arrow.next(ng-click="slideShow.nextSlide(true,slideShow.slidesList.length)") next
+            img.slide__img(ng-src="{{slide.url}}")
+    figure.slide__next(ng-click="slideShow.nextSlide(true,slideShow.slidesList.length)")
