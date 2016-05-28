@@ -67,9 +67,9 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                     p
                         p(ng-repeat="subway in clientInfo.client.need.embedded.subways track by $index").mv-0
                             span(class="metro-color-{{clientInfo.client.need.embedded.subways[$index].line}}").metro-color
-                            span() {{subway.name}}
+                            span().md-body-1 {{subway.name}}
                             span(ng-if='$index != clientInfo.client.need.embedded.subways.length - 1') , 
-                    p(ng-if='clientInfo.client.need.metroTime != undefined && clientInfo.client.need.metroTime > 0') {{clientInfo.client.need.metroTime}} минут {{clientInfo.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
+                    p(ng-if='clientInfo.client.need.metroTime != undefined && clientInfo.client.need.metroTime > 0').md-body-1 {{clientInfo.client.need.metroTime}} минут {{clientInfo.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
 
     div(layout='row' layout-align='start start')#openArchiveDialog.mt-16
         div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
