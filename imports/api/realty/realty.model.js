@@ -30,7 +30,6 @@ Realty.allow({
   insert: function () {
     let userId = Meteor.userId();
     return userId || Roles.userIsInRole(userId, ['staff']);
-    ;
   },
   remove: function () {
     return false;

@@ -76,6 +76,7 @@ function mdIconConfig($mdIconProvider) {
     .icon('skip_next', 'svg/skip_next.svg', 48)
     .icon('skip_prev', 'svg/skip_previous.svg', 48)
     .icon('conditions_animal', 'svg/animal.svg', 24)
+    .icon('conditions_balcony', 'svg/balcony.svg', 24)
     .icon('conditions_bathroom', 'svg/bathroom.svg', 24)
     .icon('conditions_children', 'svg/children.svg', 24)
     .icon('conditions_conditioner', 'svg/conditioner.svg', 24)

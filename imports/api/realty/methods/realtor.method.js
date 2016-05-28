@@ -71,11 +71,13 @@ export function addRealty(realty, notRealtor) {
         realty.realtor = {};
       }
       realty.realtor.id = Meteor.userId();
-      
+
       realty.status = 'taken';
     }
-
-    let district = Locations.findOne({type: 'district', name: realty.address.districtName.slice(0, -4)});
+    let district;
+    if (realty.address.districtName) {
+      district = Locations.findOne({type: 'district', name: realty.address.districtName.slice(0, -4)});
+    }
 
     if (district) {
       realty.address.districtId = district._id;
