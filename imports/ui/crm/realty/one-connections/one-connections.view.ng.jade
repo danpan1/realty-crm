@@ -10,7 +10,7 @@ div.md-whiteframe-2dp(md-whiteframe="2")
     //client-card(ng-repeat='client in oneConnections.clientsNew' client='client' assort="oneConnections.assort")
     //div Предложения
     client-card(ng-repeat='client in oneConnections.clientsOffers' client='client' assort="oneConnections.assort")
-    div(md-whiteframe="1")
+    div(md-whiteframe="1" hide)
         md-tabs(md-border-bottom md-selected='0').realty-list-layout__topbar
             md-tab(label='Выбранные клиенты')
     client-card(ng-repeat='client in oneConnections.clientsSaved' client='client' assort="oneConnections.assort")
