@@ -7,12 +7,14 @@ div(md-whiteframe="1").mt-8
         realty-card(ng-repeat='realty in clientConnections.realtyNew'
         realty='realty'
         realtylisttype="'connections'"
-        slider='clientConnections.setSliderImages(images)' is-new= 'true')
+        slider='clientConnections.setSliderImages(images)' is-new= 'true'
+        client-id='clientConnections.client._id')
     div
         realty-card(ng-repeat='realty in clientConnections.realtyOffers'
         realty='realty'
         realtylisttype="'connections'"
-        slider='clientConnections.setSliderImages(images)')
+        slider='clientConnections.setSliderImages(images)'
+        client-id='clientConnections.client._id')
 
 div(md-whiteframe="1")
     md-tabs(md-border-bottom md-selected='0').realty-list-layout__topbar
@@ -22,11 +24,13 @@ div(md-whiteframe="1")
         realty-card(ng-repeat='realty in clientConnections.realtySaved'
                     realty='realty'
                     realtylisttype="'connections'"
-                    slider='clientConnections.setSliderImages(images)')
+                    slider='clientConnections.setSliderImages(images)'
+                    client='clientConnections.client._id')
     div
         realty-card(ng-repeat='realty in clientConnections.realtyMy'
                     realty='realty'
                     realtylisttype="'connections'"
-                    slider='clientConnections.setSliderImages(images)')
+                    slider='clientConnections.setSliderImages(images)'
+                    client-id='clientConnections.client._id')
     
     

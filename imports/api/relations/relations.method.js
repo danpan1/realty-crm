@@ -8,7 +8,8 @@ import {Clients} from '../clients';
 import {Relations} from '../relations';
 
 Meteor.methods({
-  setRelationFindClient
+  setRelationFindClient,
+  changeRelationTypeInClient
 });
 /**
  * setRelation - установка связей
@@ -27,7 +28,7 @@ export function setRelationFindClient(clientId, realtyId, type) {
   // Значит это предложение для владельцев клиентов
   if (Meteor.isServer && Meteor.userId()) {
     console.log('setRelationFindClient');
-    let fieldInRealty,fieldInClient;
+    let fieldInRealty, fieldInClient;
 
     switch (type) {
       case 'my' :
@@ -65,6 +66,41 @@ export function setRelationFindClient(clientId, realtyId, type) {
       {
         $addToSet: modificatorClient
       }, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('clientRelation  ok');
+        }
+      });
+
+  }
+
+}
+export function changeRelationTypeInClient(type, realtyId, clientId, isNew) {
+  //Это происходит на странице Объекты - Подобрать объект
+  // Значит это предложение для владельцев клиентов
+  if (Meteor.isServer && Meteor.userId()) {
+    console.log('changeRelationTypeInClient');
+    console.log(type, 'type');
+    console.log(realtyId, 'realtyId');
+    console.log(isNew, 'isNew');
+    console.log(clientId, 'clientId');
+    let modificator = {};
+    if (isNew) {
+      modificator.$pull = {'relations.new': realtyId};
+    } else {
+      modificator.$pull = {'relations.offers': realtyId};
+    }
+
+    if (type === 'save') {
+      modificator.$addToSet = {'relations.saved': realtyId};
+    } else if (type === 'hide') {
+      modificator.$pull = {'relations.saved': realtyId};
+      modificator.$addToSet = {'relations.hide': realtyId};
+    }
+
+    Clients.update({_id: clientId},
+      modificator, (error) => {
         if (error) {
           console.log(error);
         } else {

@@ -18,7 +18,11 @@ class RealtyCard {
   takeRealty(id) {
     Meteor.call('takeRealty', id);
   }
-  
+
+  changeRelationType(type,realtyId, clientId, isNew) {
+    Meteor.call('changeRelationTypeInClient', type,realtyId,clientId,isNew);
+  }
+
   updateRealty (id) {
     Realty.update({_id: id}, {
       $set: this.realty
@@ -47,6 +51,7 @@ export default angular.module(moduleName, [
     realty: '<',
     slider: '&',
     isNew: '<',
+    clientId: '<',
     realtylisttype: '<'
   },
   controllerAs: moduleName,
