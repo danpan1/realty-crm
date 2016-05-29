@@ -1,5 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty';
+import {Roles} from 'meteor/alanning:roles';
 Meteor.methods({
   moderatorGet,
   moderatorSave
@@ -7,7 +8,7 @@ Meteor.methods({
 function moderatorGet() {
 
   //TODO findAnModify
-  if (Meteor.isServer) {
+  if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, 'staff') ) {
 
     let realty, call;
 
@@ -44,7 +45,7 @@ function moderatorGet() {
 
 function moderatorSave(realty) {
 
-  if (Meteor.isServer) {
+  if (Meteor.isServer && this.userId && Roles.userIsInRole(this.userId, 'staff')) {
     realty.moderator.id = Meteor.userId();
     realty.moderator.status = 'done';
     Realty.update({_id: realty._id}, {

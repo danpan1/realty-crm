@@ -5,27 +5,8 @@ import {Roles} from 'meteor/alanning:roles';
 Meteor.startup(function () {
   let id = '';
   //TODO какие есть роли и как их применять
-  if (Meteor.users.find().count() === 0) {
+  if (Meteor.users.find({roles : 'staff'}).count() === 0) {
     let admins = [
-      {
-        email: 'danpan@yandex.ru',
-        password: "A8PP9m7TaFM494CU",
-        profile: {
-          name: 'Данил',
-          phone: '79165315252',
-          surName: 'Панкрашин'
-        }
-      },
-
-      {
-        email: 'superdenceo@gmail.com',
-        password: '123456',
-        profile: {
-          name: 'Денис',
-          phone: '79250759587',
-          surName: 'Новаковский'
-        }
-      },
       {
         email: 'admin@rieltor.guru',
         password: '669htB7NLDR3TTJ9',
