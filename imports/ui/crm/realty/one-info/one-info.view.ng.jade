@@ -69,6 +69,9 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Комнат:
                         div(flex='40') #[strong {{oneInfo.realty.roomcount}} комнат]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Окна выходят
+                        div(flex='40') #[strong {{oneInfo.realty.details.windowView == 1 ? ' во двор' : 'на улицу'}}]
                     div(layout='row' layout-wrap layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Ремонт:
                         div(flex='40') #[strong {{oneInfo.dictionary.renovation[oneInfo.realty.details.renovation].name}}]
@@ -98,9 +101,6 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Груз. лифтов:
                         div(flex='40') #[strong {{oneInfo.realty.details.elevatorBig}}]
-                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
-                        div(flex='60') Окна выходят
-                        div(flex='40') #[strong {{oneInfo.realty.details.windowView == 1 ? ' во двор' : 'на улицу'}}]
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Условия

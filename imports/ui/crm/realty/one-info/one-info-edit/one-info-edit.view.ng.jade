@@ -42,6 +42,10 @@ div(ng-if="oneInfoEdit.show")
                                 label Комнат:
                                 input(ng-model="oneInfoEdit.realty.roomcount")
                             md-input-container().md-block.mv-32
+                                label Окна выходят
+                                md-select(ng-model="oneInfoEdit.realty.details.windowView")
+                                    md-option(ng-value='window.id' ng-repeat="window in oneInfoEdit.dictionary.windowView") {{window.name}}
+                            md-input-container().md-block.mv-32
                                 label Ремонт:
                                 md-select(ng-model="oneInfoEdit.realty.details.renovation")
                                     md-option(ng-value='renovation.id' ng-repeat="renovation in oneInfoEdit.dictionary.renovation") {{renovation.name}}
@@ -83,10 +87,6 @@ div(ng-if="oneInfoEdit.show")
                                     label Грузовых лифтов:
                                     md-select(ng-model="oneInfoEdit.realty.details.elevatorBig")
                                         md-option(ng-value='i' ng-repeat="i in [0,1,2,3,4]") {{i}}
-                            md-input-container().md-block.mv-32
-                                label Окна выходят
-                                md-select(ng-model="oneInfoEdit.realty.details.windowView")
-                                    md-option(ng-value='window.id' ng-repeat="window in oneInfoEdit.dictionary.windowView") {{window.name}}
                 
                 div(flex='30')
                     h2 Условия
