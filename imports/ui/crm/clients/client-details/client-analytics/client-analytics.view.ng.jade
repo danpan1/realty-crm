@@ -1,73 +1,73 @@
 div(layout="row" layout-wrap)
-    div(md-whiteframe='2').mr-16.p-16.flex-33 {{clientAnalytics.client.name}} ищет до {{clientAnalytics.client.need.price | price}}
-    div(md-whiteframe='2').client-info-notes.mr-16.p-16.md-whiteframe-2dp.flex-100
-        p Рыночные цены объектов по параметрам клиента
-        div(layout="row")
-            div(flex="25")
-                h3 Минимальная
-                h2 {{clientAnalytics.client.need.price - 5000 | price}}
-            div(flex="25")
-                h3 Средняя
-                h2 {{clientAnalytics.client.need.price - 2000 | price}}
-                h2 - {{2000 | price}}
-            div(flex="25")
-                h3 Максимальная
-                h2 {{clientAnalytics.client.need.price + 5000 | price}}
-            div(flex="25")
-                h3 Предложения
-                h2 15 объектов
-        hr
-        div
-            p Параметры объектов
+    div(md-whiteframe='2' flex='33').md-title.text-normal.mt-16.mb-8.ph-32.pv-16 {{clientAnalytics.client.name}} ищет до #[span().text-semibold {{clientAnalytics.client.need.price | price}}]
+    div(md-whiteframe='2' flex='100').mv-8
+        div().border.p-32
+            div().md-title.mb-32 Рыночные цены объектов по параметрам клиента
+            div(layout="row")
+                div(flex="25")
+                    h3().md-title.text-normal.text-uppercase.color-grey-500.mv-0 Минимальная
+                    h2().md-display-1.mv-8 {{clientAnalytics.client.need.price - 5000 | price}}
+                div(flex="25")
+                    h3().md-title.text-normal.text-uppercase.color-grey-500.mv-0 Средняя
+                    h2().md-display-1.mv-8.text-bold {{clientAnalytics.client.need.price - 2000 | price}}
+                    h2().md-display-1.mv-8.text-bold.color-green-600  - {{2000 | price}}
+                div(flex="25")
+                    h3().md-title.text-normal.text-uppercase.color-grey-500.mv-0 Максимальная
+                    h2().md-display-1.mv-8 {{clientAnalytics.client.need.price + 5000 | price}}
+                div(flex="25")
+                    h3().md-title.text-normal.text-uppercase.color-grey-500.mv-0 Предложения
+                    h2().md-display-1.color-blue.mv-8 15 объектов
+        div().p-32
+            div().md-title.text-normal.color-grey-500.mb-8 Параметры объектов
             span(ng-repeat="subway in clientAnalytics.client.need.embedded.subways track by $index").mv-0
                 span(class="metro-color-{{clientAnalytics.client.need.embedded.subways[$index].line}}").metro-color
-                span().md-body-1 {{subway.name}} 
-                span(ng-if="$index == clientAnalytics.client.need.embedded.subways.length - 1") / 
-            span(ng-repeat='room in clientAnalytics.client.need.roomcount') #[strong {{room}}]
-                span {{$index != clientAnalytics.client.need.roomcount.length - 1 ? ', ' : ' комнатная / ' }}
+                span().md-title.text-normal {{subway.name}} 
+                span(ng-if="$index == clientAnalytics.client.need.embedded.subways.length - 1").md-title.text-normal / 
+            span(ng-repeat='room in clientAnalytics.client.need.roomcount').md-title.text-normal {{room}}
+                span().md-title.text-normal {{$index != clientAnalytics.client.need.roomcount.length - 1 ? ', ' : ' комнатная / ' }}
             span(ng-if="clientAnalytics.client.need.materials")
                 span(ng-repeat="material in clientAnalytics.client.need.materials track by $index") 
-                    span {{clientAnalytics.dictionary.materials[material].name}}
-                    span {{$index != clientAnalytics.client.need.materials.length - 1 ? ', ' : '/ ' }}
-            span(ng-if="!clientAnalytics.client.need.materials") Тип дома не важен /
+                    span().md-title.text-normal {{clientAnalytics.dictionary.materials[material].name}}
+                    span().md-title.text-normal {{$index != clientAnalytics.client.need.materials.length - 1 ? ', ' : '/ ' }}
+            span(ng-if="!clientAnalytics.client.need.materials").md-title.text-normal Тип дома не важен /
             span(ng-if="clientAnalytics.client.need.renovation !== undefined")
                 span(ng-repeat="renovation in clientAnalytics.client.need.renovation track by $index") 
-                    span {{clientAnalytics.dictionary.renovation[renovation].name}}
-                    span(ng-if='$index != clientAnalytics.client.need.renovation.length - 1') , 
-            span(ng-if="clientAnalytics.client.need.renovation === undefined") Ремонт не важен
+                    span().md-title.text-normal {{clientAnalytics.dictionary.renovation[renovation].name}}
+                    span(ng-if='$index != clientAnalytics.client.need.renovation.length - 1').md-title.text-normal , 
+            span(ng-if="clientAnalytics.client.need.renovation === undefined").md-title.text-normal Ремонт не важен
 
-div(md-whiteframe='2').client-info-notes.mr-16.p-16.md-whiteframe-2dp.flex-100
-        p Рыночные цены объектов по параметрам клиента
-        div(layout="row")
-            div(flex="25")
-                h3 Минимальная
-                h2 {{clientAnalytics.client.need.price - 5000 | price}}
-            div(flex="25")
-                h3 Средняя
-                h2 {{clientAnalytics.client.need.price + 7500 | price}}
-                h2 + {{7500 | price}}
-            div(flex="25")
-                h3 Максимальная
-                h2 {{clientAnalytics.client.need.price + 15000 | price}}
-            div(flex="25")
-                h3 Предложения
-                h2 10 объектов
-        hr
-        div
-            p Параметры объектов
+    div(md-whiteframe='2' flex='100').mv-8
+        div().border.p-32
+            div().md-title.mb-32 Рыночные цены объектов по параметрам клиента
+            div(layout="row")
+                div(flex="25")
+                    h3().md-title.text-normal.text-uppercase.color-grey-500.mv-0 Минимальная
+                    h2().md-display-1.mv-8 {{clientAnalytics.client.need.price - 5000 | price}}
+                div(flex="25")
+                    h3().md-title.text-normal.text-uppercase.color-grey-500.mv-0 Средняя
+                    h2().md-display-1.mv-8.text-bold {{clientAnalytics.client.need.price - 2000 | price}}
+                    h2().md-display-1.mv-8.text-bold.color-deep-orange-500  + {{5000 | price}}
+                div(flex="25")
+                    h3().md-title.text-normal.text-uppercase.color-grey-500.mv-0 Максимальная
+                    h2().md-display-1.mv-8 {{clientAnalytics.client.need.price + 5000 | price}}
+                div(flex="25")
+                    h3().md-title.text-normal.text-uppercase.color-grey-500.mv-0 Предложения
+                    h2().md-display-1.color-blue.mv-8 15 объектов
+        div().p-32
+            div().md-title.text-normal.color-grey-500.mb-8 Параметры объектов
             span(ng-repeat="subway in clientAnalytics.client.need.embedded.subways track by $index").mv-0
                 span(class="metro-color-{{clientAnalytics.client.need.embedded.subways[$index].line}}").metro-color
-                span().md-body-1 {{subway.name}} 
-                span(ng-if="$index == clientAnalytics.client.need.embedded.subways.length - 1") / 
-            span(ng-repeat='room in clientAnalytics.client.need.roomcount') #[strong {{room}}]
-                span {{$index != clientAnalytics.client.need.roomcount.length - 1 ? ', ' : ' комнатная / ' }}
+                span().md-title.text-normal {{subway.name}} 
+                span(ng-if="$index == clientAnalytics.client.need.embedded.subways.length - 1").md-title.text-normal / 
+            span(ng-repeat='room in clientAnalytics.client.need.roomcount').md-title.text-normal {{room}}
+                span().md-title.text-normal {{$index != clientAnalytics.client.need.roomcount.length - 1 ? ', ' : ' комнатная / ' }}
             span(ng-if="clientAnalytics.client.need.materials")
                 span(ng-repeat="material in clientAnalytics.client.need.materials track by $index") 
-                    span {{clientAnalytics.dictionary.materials[material].name}}
-                    span {{$index != clientAnalytics.client.need.materials.length - 1 ? ', ' : '/ ' }}
-            span(ng-if="!clientAnalytics.client.need.materials") Тип дома не важен /
+                    span().md-title.text-normal {{clientAnalytics.dictionary.materials[material].name}}
+                    span().md-title.text-normal {{$index != clientAnalytics.client.need.materials.length - 1 ? ', ' : '/ ' }}
+            span(ng-if="!clientAnalytics.client.need.materials").md-title.text-normal Тип дома не важен /
             span(ng-if="clientAnalytics.client.need.renovation !== undefined")
                 span(ng-repeat="renovation in clientAnalytics.client.need.renovation track by $index") 
-                    span {{clientAnalytics.dictionary.renovation[renovation].name}}
-                    span(ng-if='$index != clientAnalytics.client.need.renovation.length - 1') , 
-            span(ng-if="clientAnalytics.client.need.renovation === undefined") Ремонт не важен
+                    span().md-title.text-normal {{clientAnalytics.dictionary.renovation[renovation].name}}
+                    span(ng-if='$index != clientAnalytics.client.need.renovation.length - 1').md-title.text-normal , 
+            span(ng-if="clientAnalytics.client.need.renovation === undefined").md-title.text-normal Ремонт не важен
