@@ -21,16 +21,13 @@ div(md-whiteframe='2').mv-16.client-card
             md-divider
             div.pv-8.ph-16(layout="column" ng-if="clientCard.client.status")
                 div(ng-if="clientCard.pageFrom == 'manual' || clientCard.pageFrom == 'algorithm'")
-                    md-button(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)').client-card__link.ta-l.m-0.p-0 Предложить объект
+                    md-button(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)').client-card__link.text-left.m-0.p-0 Предложить объект
                 div(ng-if="clientCard.pageFrom == 'my'")
-                    md-button(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' md-no-ink).client-card__link.ta-l.m-0.p-0 Выбрать клиента
+                    md-button(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' md-no-ink).client-card__link.text-left.m-0.p-0 Выбрать клиента
                 div(ng-if="clientCard.pageFrom == 'listMyClients'" ui-sref="crm.clients.details.info({client:clientCard.client._id, activetab: 'info'})")
-                    md-button().client-card__link.m-0.ta-l.p-0 Инфо о клиенте
+                    md-button().client-card__link.m-0.text-left.p-0 Инфо о клиенте
                 div(ng-if="clientCard.pageFrom == 'listMyClients'" ui-sref="crm.clients.details.connections({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})")
-                    md-button().client-card__link.ta-l.m-0.p-0 {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
-                //div(ng-if="clientCard.assort")
-                //    md-button().client-card__link.ta-l.m-0.p-0 Сохранить
-                //    p.ta-l.m-0.p-0.client-card__btn_hide Скрыть
+                    md-button().client-card__link.text-left.m-0.p-0 {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
         md-divider
         
         div(layout='row')

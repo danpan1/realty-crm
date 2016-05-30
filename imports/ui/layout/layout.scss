@@ -2,12 +2,6 @@ layout > md-toolbar {
   background-color: #1e88e5 !important;
 }
 
-.lh{
-  &-1{
-    line-height: 1em;
-  }
-}
-
 ui-view {
   background-color: #bbdefb;
 }
@@ -401,24 +395,8 @@ md-switch {
   white-space: nowrap;
 }
 
-.ta-c{
-  text-align: center !important;
-}
-
-.ta-r{
-  text-align: right !important;
-}
-
-.ta-l{
-  text-align: left !important;
-}
-
 .border {
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.12);
-}
-
-.uppercase{
-  text-transform: uppercase !important;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2),0 2px 2px 0 rgba(0, 0, 0, 0.14),0 3px 1px -2px rgba(0, 0, 0, 0.12);
 }
 
 @media screen and (max-width: 1279px) {
