@@ -33,14 +33,17 @@ class ClientDetails {
       case 'connections':
         vm.selectedTab = 0;
         break;
-      case 'demonstration':
+      case 'analytics':
+        vm.selectedTab = 1;
+        break;
+      /*case 'demonstration':
         vm.selectedTab = 1;
         break;
       case 'email':
         vm.selectedTab = 2;
-        break;
+        break;*/
       case 'info':
-        vm.selectedTab = 3;
+        vm.selectedTab = 2;
         break;
       default:
         vm.selectedTab = 0;

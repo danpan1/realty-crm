@@ -26,6 +26,11 @@ export default function routes($stateProvider) {
           template: '<client-connections/>',
           controller: function ($state, $stateParams) {}
         })
+        .state('crm.clients.details.analytics', {
+          url: '/analytics?:client&:activetab',
+          template: '<client-analytics/>',
+          controller: function ($state, $stateParams) {}
+        })
         .state('crm.clients.details.demonstration', {
           url: '/demonstration?:client&:activetab',
           template: '<client-demonstration/>'
