@@ -9,6 +9,7 @@ import {Clients} from '/imports/api/clients';
 import {name as listMyClients} from './list-my-clients/list-my-clients.component';
 import {name as clientDetails} from './client-details/client-details.component';
 import {name as clientConnections} from './client-details/client-connections/client-connections.component';
+import {name as clientAnalytics} from './client-details/client-analytics/client-analytics.component';
 import {name as clientDemonstration} from './client-details/client-demonstration/client-demonstration.component';
 import {name as clientEmail} from './client-details/client-email/client-email.component';
 import {name as clientInfo} from './client-details/client-info/client-info.component';
@@ -36,6 +37,7 @@ export default angular.module(moduleName, [
   clientConnections,
   clientDemonstration,
   clientEmail,
+  clientAnalytics,
   clientInfo
   //currentClient
 ]).component(moduleName, {

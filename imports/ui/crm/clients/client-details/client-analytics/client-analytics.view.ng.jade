@@ -1,0 +1,73 @@
+div(layout="row" layout-wrap)
+    div(md-whiteframe='2').mr-16.p-16.flex-33 {{clientAnalytics.client.name}} ищет до {{clientAnalytics.client.need.price | price}}
+    div(md-whiteframe='2').client-info-notes.mr-16.p-16.md-whiteframe-2dp.flex-100
+        p Рыночные цены объектов по параметрам клиента
+        div(layout="row")
+            div(flex="25")
+                h3 Минимальная
+                h2 {{clientAnalytics.client.need.price - 5000 | price}}
+            div(flex="25")
+                h3 Средняя
+                h2 {{clientAnalytics.client.need.price - 2000 | price}}
+                h2 - {{2000 | price}}
+            div(flex="25")
+                h3 Максимальная
+                h2 {{clientAnalytics.client.need.price + 5000 | price}}
+            div(flex="25")
+                h3 Предложения
+                h2 15 объектов
+        hr
+        div
+            p Параметры объектов
+            span(ng-repeat="subway in clientAnalytics.client.need.embedded.subways track by $index").mv-0
+                span(class="metro-color-{{clientAnalytics.client.need.embedded.subways[$index].line}}").metro-color
+                span().md-body-1 {{subway.name}} 
+                span(ng-if="$index == clientAnalytics.client.need.embedded.subways.length - 1") / 
+            span(ng-repeat='room in clientAnalytics.client.need.roomcount') #[strong {{room}}]
+                span {{$index != clientAnalytics.client.need.roomcount.length - 1 ? ', ' : ' комнатная / ' }}
+            span(ng-if="clientAnalytics.client.need.materials")
+                span(ng-repeat="material in clientAnalytics.client.need.materials track by $index") 
+                    span {{clientAnalytics.dictionary.materials[material].name}}
+                    span {{$index != clientAnalytics.client.need.materials.length - 1 ? ', ' : '/ ' }}
+            span(ng-if="!clientAnalytics.client.need.materials") Тип дома не важен /
+            span(ng-if="clientAnalytics.client.need.renovation !== undefined")
+                span(ng-repeat="renovation in clientAnalytics.client.need.renovation track by $index") 
+                    span {{clientAnalytics.dictionary.renovation[renovation].name}}
+                    span(ng-if='$index != clientAnalytics.client.need.renovation.length - 1') , 
+            span(ng-if="clientAnalytics.client.need.renovation === undefined") Ремонт не важен
+
+div(md-whiteframe='2').client-info-notes.mr-16.p-16.md-whiteframe-2dp.flex-100
+        p Рыночные цены объектов по параметрам клиента
+        div(layout="row")
+            div(flex="25")
+                h3 Минимальная
+                h2 {{clientAnalytics.client.need.price - 5000 | price}}
+            div(flex="25")
+                h3 Средняя
+                h2 {{clientAnalytics.client.need.price + 7500 | price}}
+                h2 + {{7500 | price}}
+            div(flex="25")
+                h3 Максимальная
+                h2 {{clientAnalytics.client.need.price + 15000 | price}}
+            div(flex="25")
+                h3 Предложения
+                h2 10 объектов
+        hr
+        div
+            p Параметры объектов
+            span(ng-repeat="subway in clientAnalytics.client.need.embedded.subways track by $index").mv-0
+                span(class="metro-color-{{clientAnalytics.client.need.embedded.subways[$index].line}}").metro-color
+                span().md-body-1 {{subway.name}} 
+                span(ng-if="$index == clientAnalytics.client.need.embedded.subways.length - 1") / 
+            span(ng-repeat='room in clientAnalytics.client.need.roomcount') #[strong {{room}}]
+                span {{$index != clientAnalytics.client.need.roomcount.length - 1 ? ', ' : ' комнатная / ' }}
+            span(ng-if="clientAnalytics.client.need.materials")
+                span(ng-repeat="material in clientAnalytics.client.need.materials track by $index") 
+                    span {{clientAnalytics.dictionary.materials[material].name}}
+                    span {{$index != clientAnalytics.client.need.materials.length - 1 ? ', ' : '/ ' }}
+            span(ng-if="!clientAnalytics.client.need.materials") Тип дома не важен /
+            span(ng-if="clientAnalytics.client.need.renovation !== undefined")
+                span(ng-repeat="renovation in clientAnalytics.client.need.renovation track by $index") 
+                    span {{clientAnalytics.dictionary.renovation[renovation].name}}
+                    span(ng-if='$index != clientAnalytics.client.need.renovation.length - 1') , 
+            span(ng-if="clientAnalytics.client.need.renovation === undefined") Ремонт не важен

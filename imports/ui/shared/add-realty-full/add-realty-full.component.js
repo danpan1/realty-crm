@@ -12,7 +12,7 @@ import './add-realty-full.view.html';
 
 class AddRealtyFull {
   /* @ngInject */
-  constructor($state) {
+  constructor ($state) {
     this.state = $state;
     this.dictionary = dictionary;
     this.realty = {
@@ -45,7 +45,7 @@ class AddRealtyFull {
     }
   }
 
-  submit() {
+  submit () {
 
     var price = this.realty.price.split('');
     for(var i in [1,2,3]){
