@@ -13,6 +13,7 @@ import {name as priceFilter} from '../../filters/price.filter.js';
 import {name as phoneFilter} from '../../filters/phone.filter.js';
 import {name as selectedSubway} from '../../filters/selected-subway.filter.js';
 import {name as Realty}from './realty/realty.component';
+import {name as Feedback}from './feedback/feedback.component';
 import {name as clients}from './clients/clients.component';
 import {name as layout} from '/imports/ui/layout/layout.component';
 import {name as documents} from '/imports/ui/crm/documents/documents.component';
@@ -31,5 +32,6 @@ export default angular.module(moduleName, [
   phoneFilter,
   selectedSubway,
   clients,
-  Realty
+  Realty,
+  Feedback
 ]).config(routes);

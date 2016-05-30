@@ -1,0 +1,6 @@
+div.md-whiteframe-2dp(md-whiteframe="2")
+    div(layout="row")
+        md-tabs(md-dynamic-height md-border-bottom md-selected="clientSuit.selectedTab" flex="80")
+            md-tab(ui-sref="crm.clients.details.suit({assort:'my'})") Мои
+            md-tab(ui-sref="crm.clients.details.suit({assort:'exact'})") Точное совпадение
+            md-tab(ui-sref="crm.clients.details.suit({assort:'auto'})") Авто-Подброка

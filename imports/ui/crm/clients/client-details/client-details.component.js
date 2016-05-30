@@ -30,11 +30,14 @@ class ClientDetails {
     });
 
     switch ($stateParams.activetab) {
-      case 'connections':
+      case 'suit':
         vm.selectedTab = 0;
         break;
-      case 'analytics':
+      case 'connections':
         vm.selectedTab = 1;
+        break;
+      case 'analytics':
+        vm.selectedTab = 2;
         break;
       /*case 'demonstration':
         vm.selectedTab = 1;
@@ -43,10 +46,10 @@ class ClientDetails {
         vm.selectedTab = 2;
         break;*/
       case 'info':
-        vm.selectedTab = 2;
+        vm.selectedTab = 3;
         break;
       default:
-        vm.selectedTab = 0;
+        vm.selectedTab = 3;
     }
 
   }

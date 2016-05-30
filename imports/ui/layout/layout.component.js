@@ -23,12 +23,13 @@ class Layout {
       // {name: 'Горячие Клиенты', uisref: 'crm.clients.list.my'+'({status: \'hot\'})'},
       // {name:'Дела', uisref:'realty'},
       // {name:'Отчет', uisref:'realty'},
-      // {name:'Собщения', uisref:'realty'},
+      // {name:'Сообщения', uisref:'realty'},
       {name:'Документы', uisref:'crm.documents'},
       // {name:'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
       // {name: 'Модератор', uisref: 'call-center.moderator'}
+      {name:'Задать вопрос', uisref:'crm.feedback'},
     ];
     this.select = 1;
     this.autorun(function () {
