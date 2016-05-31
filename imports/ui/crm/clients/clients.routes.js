@@ -26,6 +26,25 @@ export default function routes($stateProvider) {
           template: '<client-connections/>',
           controller: function ($state, $stateParams) {}
         })
+        .state('crm.clients.details.suit', {
+          url: `/suit?:client
+                     &:suitby
+                     &:activetab
+                     &:floorFrom
+                     &:floorTo
+                     &:priceFrom
+                     &:priceTo
+                     &:conditions
+                     &:subways
+                     &:roomcount
+                     &:districts
+                     &:composition
+                     &:renovation
+                     &:metroTime
+                     &:metroTransport`,
+          template: '<client-suit/>',
+          controller: function ($state, $stateParams) {}
+        })
         .state('crm.clients.details.analytics', {
           url: '/analytics?:client&:activetab',
           template: '<client-analytics/>',

@@ -19,13 +19,16 @@ div(flex, layout='row' layout-align='center none')
             md-option( ng-value='2' ng-click='layout.toggleList()' ui-sref='crm.clients.add') Клиента
 
         md-list
-            md-list-item(ng-repeat="item in layout.sideNavItems",
-            ui-sref='{{item.uisref}}',
-            ui-sref-active="active",
-            layout="row",
-            layout-align='start'
-            ng-click='layout.toggleList()',
-            md-ink-ripple="#bbdefb") {{item.name}}
+            div(ng-repeat="item in layout.sideNavItems")
+                md-list-item(ui-sref='{{item.uisref}}',
+                             ui-sref-active="active",
+                             layout="row",
+                             layout-align='start',
+                             ng-click='layout.toggleList()',
+                             md-ink-ripple="#bbdefb") {{item.name}}
+            div
+                md-list-item(layout="row" layout-align='start' md-ink-ripple="#bbdefb").ph-0
+                    a(href='https://vk.com/write19844032' target='blank').md-list-item-inner.md-no-style.md-button.md-ink-ripple Задать вопрос 
 
     // Container #4
     md-content#content(flex,md-whiteframe="4", layout="column", layout-align='space-between center')

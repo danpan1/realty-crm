@@ -171,7 +171,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                     div(ng-if='addRealtyFull.realty').mt-16
                         div(layout='row' layout-align='start center' ng-init='addRealtyFull.realty.comissionLoyal = true')
                             md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addRealtyFull.realty.comissionLoyal' aria-label="Checkbox 1").m-0.md-primary.md-subhead {{ addRealtyFull.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
-                            md-input-container(md-no-float layout='row' ng-if ='addRealtyFull.realty.comissionLoyal').add-realty-full__comission-percent.ml-8
+                            md-input-container(md-no-float layout='row' ng-class='{ "vHidden" : !addRealtyFull.realty.comissionLoyal }').add-realty-full__comission-percent.ml-8
                                 input(type="text" ng-model='addRealtyFull.realty.comission')
                             span(ng-if ='addRealtyFull.realty.comissionLoyal').md-subhead %
                     

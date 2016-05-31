@@ -15,7 +15,7 @@ md-tabs(md-dynamic-height)
                                     input(type="email" ng-model='addClientFull.client.email')
                             div(layout='row' layout-align='start center')
                                 md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addClientFull.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead.mb-0 {{ addClientFull.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
-                                md-input-container(md-no-float ng-if='addClientFull.client.comissionLoyal').add-client-full__comission-percent.ml-8.mv-0.zh
+                                md-input-container(md-no-float ng-class='{"vHidden": !addClientFull.client.comissionLoyal}').add-client-full__comission-percent.ml-8.mv-0.zh
                                     input(type="text" ng-model='addClientFull.client.comission')
                                 span(ng-if='addClientFull.client.comissionLoyal').md-subhead %
                     

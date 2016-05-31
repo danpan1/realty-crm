@@ -12,8 +12,8 @@ class RealtyFilter {
   constructor($scope, $reactive, $timeout) {
     this.$timeout = $timeout;
     $reactive(this).attach($scope);
-    this.filter = {};
-    this.filter.roomcount = [];
+    //this.filter = {};
+    //this.filter.roomcount = [];
     this.dictionary = dictionary;
     // this.conditions = dictionary.conditions;
   }
@@ -35,7 +35,7 @@ class RealtyFilter {
 
   existsRoomcount(item) {
     // console.log(this.filter.roomcount);
-    return this.filter.roomcount.indexOf(item) > -1;
+    if(this.filter.roomcount) return this.filter.roomcount.indexOf(item) > -1;
   }
 
 }

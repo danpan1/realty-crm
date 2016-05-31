@@ -3,9 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {Realty} from '/imports/api/realty';
 import {Clients} from '/imports/api/clients';
-import {Counts} from 'meteor/tmeasday:publish-counts';
 import {dictionary} from '/imports/helpers/dictionary';
 
 import './client-analytics.view.html';

@@ -2,6 +2,12 @@ layout > md-toolbar {
   background-color: #1e88e5 !important;
 }
 
+.lh{
+  &-1{
+    line-height: 1em;
+  }
+}
+
 ui-view {
   background-color: #bbdefb;
 }
@@ -393,6 +399,26 @@ md-switch {
 
 .nowrap {
   white-space: nowrap;
+}
+
+.ta-c{
+  text-align: center !important;
+}
+
+.ta-r{
+  text-align: right !important;
+}
+
+.ta-l{
+  text-align: left !important;
+}
+
+.vHidden{
+  visibility: hidden;
+}
+
+.uppercase{
+  text-transform: uppercase !important;
 }
 
 .border {

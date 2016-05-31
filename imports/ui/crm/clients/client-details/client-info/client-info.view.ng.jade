@@ -61,16 +61,20 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                     div(ng-repeat='renovation in clientInfo.client.need.renovation').md-subhead #[strong {{clientInfo.dictionary.renovation[renovation].name}}]
                     div().md-subhead.mv-8 Состав съемщиков:
                     div().md-subhead.mv-8 #[strong {{clientInfo.dictionary.composition[clientInfo.client.composition].name}}]
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8 
+                        div(flex="60") Метро:
+                        div(flex='40' layout='column')
+                            div(ng-repeat="subway in clientInfo.client.need.embedded.subways track by $index").mv-0
+                                span(class="metro-color-{{clientInfo.client.need.embedded.subways[$index].line}}").metro-color
+                                span().md-body-1 {{subway.name}}
+                            div(ng-if='clientInfo.client.need.metroTime != undefined && clientInfo.client.need.metroTime > 0').md-body-1 {{clientInfo.client.need.metroTime}} минут {{clientInfo.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
+
                 md-divider
                 div(flex='33').ph-32.pv-16
-                    h3().md-subhead.text-bold.text-uppercase.mt-0 Метро
-                    p
-                        p(ng-repeat="subway in clientInfo.client.need.embedded.subways track by $index").mv-0
-                            span(class="metro-color-{{clientInfo.client.need.embedded.subways[$index].line}}").metro-color
-                            span().md-body-1 {{subway.name}}
-                            span(ng-if='$index != clientInfo.client.need.embedded.subways.length - 1') , 
-                    p(ng-if='clientInfo.client.need.metroTime != undefined && clientInfo.client.need.metroTime > 0').md-body-1 {{clientInfo.client.need.metroTime}} минут {{clientInfo.client.need.metroTransport == 1 ? 'транспортом' : 'пешком' }}
-
+                    h3().md-subhead.text-bold.text-uppercase.mt-0 Что важно клиенту
+                    p().md-body-1 {{clientInfo.client.note}}
+                    
+                    
     div(layout='row' layout-align='start start')#openArchiveDialog.mt-16
         div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
             div(layout='row' layout-align='space-between start' layout-wrap)
