@@ -5,6 +5,7 @@ Meteor.methods({
 });
 
 function sendQuestion (info) {
+  email = info.useremail ? info.useremail : '';
   let phone = info.phone.toString();
   phone = phone.slice(0,1) + ' (' + phone.slice(1,4) + ') ' + phone.slice(4,7) + '-' + phone.slice(7,9) + '-' + phone.slice(9,11);
   
@@ -19,9 +20,9 @@ function sendQuestion (info) {
                         </td>
                         <td style="width:25%; line-height: 18px;">
                             <span>
-                            ${info.username}<br>
+                            ${info.username} (id ${info.id})<br>
                             ${phone}<br>
-                            ${info.useremail}
+                            ${email}
                             </span>
                         </td>
                     </tr>

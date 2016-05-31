@@ -21,15 +21,15 @@ class Layout {
       // {name: 'Архив объекты', uisref: 'crm.realty.list.my'+'({status: \'archive\'})'},
       {name: 'Клиенты', uisref: 'crm.clients.list.my' + '({status: \'realtor\'})'},
       // {name: 'Горячие Клиенты', uisref: 'crm.clients.list.my'+'({status: \'hot\'})'},
-      // {name:'Дела', uisref:'realty'},
-      // {name:'Отчет', uisref:'realty'},
-      // {name:'Сообщения', uisref:'realty'},
+      // {name: 'Дела', uisref:'realty'},
+      // {name: 'Отчет', uisref:'realty'},
+      // {name: 'Сообщения', uisref:'realty'},
       {name:'Документы', uisref:'crm.documents'},
-      // {name:'Настройки', uisref:'realty'},
+      // {name: 'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
       // {name: 'Модератор', uisref: 'call-center.moderator'}
-      {name:'Задать вопрос', uisref:'crm.feedback'},
+      // {name: 'Задать вопрос', uisref:'crm.feedback'},
     ];
     this.select = 1;
     this.autorun(function () {

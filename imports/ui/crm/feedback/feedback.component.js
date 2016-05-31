@@ -22,6 +22,7 @@ class Feedback {
         console.log(user);
         this.user = user;
         this.info = {
+            id: user.profile._id,
             topic: '',
             addedinfo: '',
             phone: user.profile.phone,

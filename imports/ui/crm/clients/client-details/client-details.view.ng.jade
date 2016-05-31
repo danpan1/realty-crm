@@ -6,7 +6,7 @@ section(ng-repeat="client in clientDetails.clients")
             h3.md-headline {{client.name}} / {{client.phone | phone}} / {{client.need.price | price}} / id{{client._id}}
     div(md-whiteframe='1').tabbar
         md-tabs(md-dynamic-height md-selected="clientDetails.selectedTab")
-            md-tab(ui-sref="crm.clients.details.suit({client:client._id, assort: 'exact', activetab: 'suit'})") Подобрать объект
+            md-tab(ui-sref="crm.clients.details.suit({client:client._id, suitby: 'exact', activetab: 'suit'})") Подобрать объект
             md-tab(ui-sref="crm.clients.details.connections({client:client._id, assort: 'manual', activetab: 'connections'})") Связи
             md-tab(ui-sref="crm.clients.details.analytics({client:client._id, activetab: 'analytics'})") Аналитика
             md-tab(ui-sref="crm.clients.details.info({client:client._id, activetab: 'info'})") Инфо о клиенте
