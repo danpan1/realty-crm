@@ -30,12 +30,12 @@ div(md-whiteframe='2').realty-list-filter.ph-32.pv-16
                     div(layout='row' layout-align='space-between end').mt-32
                         label(flex='30') До метро
                         md-input-container(flex='20').mv-0.pv-0
-                            input(ng-model='realtyFilter.filter.metroPeshkom', placeholder='минут')
+                            input(ng-model='realtyFilter.filter.metroTime', placeholder='минут')
                         md-input-container().mv-0.pb-0
                             label пешком
-                            md-select(ng-model='outgoingCall.realty.address.metroTransport' required='')
+                            md-select(ng-model='realtyFilter.filter.metroTransport' required='')
                                 md-option(ng-value='transport.id',
-                                ng-repeat="transport in outgoingCall.dictionary.transport") {{transport.name}}
+                                ng-repeat="transport in realtyFilter.dictionary.transport") {{transport.name}}
 
                     div(layout='row' layout-align='space-between end').mt-32
                         label(flex='30') Этаж
@@ -68,7 +68,7 @@ div(md-whiteframe='2').realty-list-filter.ph-32.pv-16
             div(layout='row')
                 md-input-container(flex).mv-32
                     label Кто будет проживать
-                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true')
+                    md-select(ng-model='realtyFilter.filter.composition', multiple='true')
                         //md-optgroup(label='Выбрать удобства')
-                        md-option(ng-value='condition.id',
-                        ng-repeat="condition in realtyFilter.dictionary.conditions ") {{condition.name}}
+                        md-option(ng-value='composition.id',
+                        ng-repeat="composition in realtyFilter.dictionary.composition ") {{composition.name}}

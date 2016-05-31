@@ -3,10 +3,8 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {Realty} from '/imports/api/realty';
 import {Clients} from '/imports/api/clients';
-import {Counts} from 'meteor/tmeasday:publish-counts';
-import {dictionary} from '/imports/helpers/dictionary';
+import {name as clientSuitExact} from './client-suit-exact/client-suit-exact.component'
 
 import './client-suit.view.html';
 
@@ -15,9 +13,9 @@ class ClientSuit {
   constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
     var vm = this;
-    vm.assort = $stateParams.assort ? $stateParams.assort : 'exact' ;
+    vm.suitby = $stateParams.suitby ? $stateParams.suitby : 'exact' ;
     vm.selectedTab = '';
-    switch($stateParams.assort){
+    switch($stateParams.suitby){
         case 'my':
             vm.selectedTab = 0;
             break;
@@ -37,7 +35,8 @@ const moduleName = 'clientSuit';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  clientSuitExact
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/clients/client-details/client-suit/client-suit.view.html',
   bindings: {},
