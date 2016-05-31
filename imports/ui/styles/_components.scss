@@ -133,3 +133,35 @@
     text-decoration: underline !important;
   }
 }
+
+.modal {
+  &__wrapper{
+    z-index: 70;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  &__block{
+    z-index: 71;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    width: 80%;
+    height: 80%;
+    max-width: 940px;
+    margin: 0 auto;
+    background: #fff;
+    label {
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+
+  &__changes{
+    overflow: auto;
+  }
+}
