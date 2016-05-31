@@ -25,11 +25,11 @@ class ClientSuitExact {
       if(vm.stateParams.priceFrom) vm.filter.priceFrom = vm.stateParams.priceFrom;
       if(vm.stateParams.priceTo) vm.filter.priceTo = vm.stateParams.priceTo;
       if(vm.stateParams.conditions) vm.filter.conditions = vm.stateParams.conditions;
-      if(vm.stateParams.subways) vm.filter.subways = vm.stateParams.subways;
+      if(vm.stateParams.subways) vm.filter.subways = typeof vm.stateParams.subways == 'object' ? vm.stateParams.subways : [vm.stateParams.subways];
+      if(vm.stateParams.districts) vm.filter.districts = typeof vm.stateParams.districts == 'object' ? vm.stateParams.districts : [vm.stateParams.districts];
       if(vm.stateParams.roomcount) {
         for(var i in vm.stateParams.roomcount){
           for(var d in vm.dictionary.roomcount){
-            console.log(vm.stateParams.roomcount[i]+'+'+vm.dictionary.roomcount[d].id);
             if(vm.stateParams.roomcount[i] == vm.dictionary.roomcount[d].id) {
               vm.filter.roomcount.push(vm.dictionary.roomcount[d]);
               break;
@@ -37,7 +37,6 @@ class ClientSuitExact {
           }
         }
       }
-      if(vm.stateParams.districts) vm.filter.districts = vm.stateParams.districts;
       if(vm.stateParams.composition) vm.filter.composition = vm.stateParams.composition;
       if(vm.stateParams.renovation) vm.filter.renovation = vm.stateParams.renovation;
       if(vm.stateParams.metroTime) vm.filter.metroTime = vm.stateParams.metroTime;
