@@ -60,15 +60,15 @@ div(layout='column' md-whiteframe='2').mv-8
                 div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
                 div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
             div
-                md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.uppercase Объявление
+                md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.text-uppercase Объявление
         md-divider
 
         //7-ая Скрыть Сохранить
         div(layout='column' layout-align="space-between left").newList_Actions.ph-16.pv-8
             div(layout="column" layout-align="space-between start")
                 md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
-                ng-if='realtyCard.relationType === "new" || realtyCard.relationType ==="offers"' md-no-ink).md-simple-button.realty-card__btn-save.mv-8.mh-0.p-0.ta-l Сохранить
-                md-button(ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)').md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.ta-l скрыть
+                ng-if='realtyCard.relationType === "new" || realtyCard.relationType ==="offers"' md-no-ink).md-simple-button.realty-card__btn-save.mv-8.mh-0.p-0.text-left Сохранить
+                md-button(ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)').md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
 
     // Подоробное объявление
     div.ph-32(ng-show="realtyCard.ngShowDescr")
