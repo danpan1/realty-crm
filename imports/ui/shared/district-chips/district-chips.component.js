@@ -26,17 +26,19 @@ class DistrictChips {
           vm.districtsAreaInForm = Locations.find({
             type: {$in: ['district', 'area']}
           }).fetch();
-          let newList = [];
-          let testList = typeof vm.stateParams.districts == 'object' ? vm.stateParams.districts : [vm.stateParams.districts];
-          for(var f in vm.districtsAreaInForm){
-            for(var s in testList){
-              if(vm.districtsAreaInForm[f]._id == testList[s]){
-                newList.push(vm.districtsAreaInForm[f]);
-                break;
+          if(vm.stateParams.districts){
+            let newList = [];
+            let testList = typeof vm.stateParams.districts == 'object' ? vm.stateParams.districts : [vm.stateParams.districts];
+            for(var f in vm.districtsAreaInForm){
+              for(var s in testList){
+                if(vm.districtsAreaInForm[f]._id == testList[s]){
+                  newList.push(vm.districtsAreaInForm[f]);
+                  break;
+                }
               }
             }
+            vm.districtsAreaInForm = newList;
           }
-          vm.districtsAreaInForm = newList;
         }
         vm.loaded = true;
       }

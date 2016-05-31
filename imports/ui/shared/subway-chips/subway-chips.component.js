@@ -23,17 +23,19 @@ class SubwayChips {
           vm.subwaysInForm = Locations.find({
             type: 'subway'
           }).fetch();
-          let newList = [];
-          let testList = typeof vm.stateParams.subways == 'object' ? vm.stateParams.subways : [vm.stateParams.subways];
-          for(var f in vm.subwaysInForm){
-            for(var s in testList){
-              if(vm.subwaysInForm[f]._id == testList[s]){
-                newList.push(vm.subwaysInForm[f]);
-                break;
+          if(vm.stateParams.subways){
+            let newList = [];
+            let testList = typeof vm.stateParams.subways == 'object' ? vm.stateParams.subways : [vm.stateParams.subways];
+            for(var f in vm.subwaysInForm){
+              for(var s in testList){
+                if(vm.subwaysInForm[f]._id == testList[s]){
+                  newList.push(vm.subwaysInForm[f]);
+                  break;
+                }
               }
             }
+            vm.subwaysInForm = newList;
           }
-          vm.subwaysInForm = newList;
         }
         vm.loaded = true;
       }
