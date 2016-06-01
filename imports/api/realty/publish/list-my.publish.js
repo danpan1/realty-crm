@@ -2,6 +2,7 @@
  * Created by Danpan on 08.04.16.
  */
 import {Meteor} from 'meteor/meteor';
+import {Accounts} from 'meteor/accounts-base';
 import {Realty} from '../realty.model';
 import {_} from 'meteor/underscore';
 import {Counts} from 'meteor/tmeasday:publish-counts';
