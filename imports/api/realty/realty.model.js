@@ -124,16 +124,26 @@ Realty.Schema = new SimpleSchema({
     optional: true,
     max: 9999999999
   },//TODO забить на decimal парсить до целых чисел
+  source: { //источник реалти Авито или Циан
+    type: String,
+    optional: true,
+    allowedValues: ['cian', 'avito']
+  },
   status: {
     type: String,
-    allowedValues: ['new', 'call', 'later', 'agency', 'analyze', 'list', 'taken', 'sale', 'sold', 'archive', 'trash']
+    allowedValues: ['new', 'agency', 'taken', 'realtor', 'sale', 'sold', 'archive', 'trash']
   },
   title: { // Title на авито. Загловок основной.
     type: String,
     optional: true,
     max: 200
   },
-  type: {   // Тип продажа вторичка(1) или продажа новостройки(2)  (3)аренда суточно (4) аренда долгосрочно (-1) не удалось определить.
+  type: {   // Тип продажа
+    // продажа вторичка       (1)
+    // продажа новостройки    (2)
+    // аренда суточно         (3)
+    // аренда долгосрочно     (4)
+    // не удалось определить  (-1)
     type: Number,
     max: 5,
     optional: true

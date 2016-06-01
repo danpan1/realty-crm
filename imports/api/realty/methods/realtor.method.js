@@ -72,7 +72,7 @@ export function addRealty(realty, notRealtor) {
       }
       realty.realtor.id = Meteor.userId();
 
-      realty.status = 'taken';
+      realty.status = 'realtor';
     }
     let district;
     if (realty.address.districtName) {
