@@ -11,10 +11,11 @@ import './client-suit-exact.view.html';
 
 class ClientSuitExact {
   /* @ngInject */
-  constructor($scope, $reactive, $state, $stateParams) {
+  constructor($scope, $reactive, $location, $state, $stateParams) {
     $reactive(this).attach($scope);
     let vm = this;
     this.dictionary = dictionary;
+    this.location = $location;
     this.stateParams = $stateParams;
     this.state = $state;
     this.filter = {};
@@ -85,7 +86,7 @@ class ClientSuitExact {
   }
   
   suitRealty () {
-    if(this.filter.floorFrom) this.stateParams.floorFrom = this.filter.floorFrom;
+    /*if(this.filter.floorFrom) this.stateParams.floorFrom = this.filter.floorFrom;
     if(this.filter.floorTo) this.stateParams.floorTo = this.filter.floorTo;
     if(this.filter.priceFrom) this.stateParams.priceFrom = this.filter.priceFrom;
     if(this.filter.priceTo) this.stateParams.priceTo = this.filter.priceTo;
@@ -101,8 +102,49 @@ class ClientSuitExact {
     if(this.filter.composition) this.stateParams.composition = this.filter.composition;
     if(this.filter.renovation) this.stateParams.renovation = this.filter.renovation;
     if(this.filter.metroTime) this.stateParams.metroTime = this.filter.metroTime;
-    if(this.filter.metroTransport) this.stateParams.metroTransport = this.filter.metroTransport;
-    this.state.go('crm.clients.details.suit', this.stateParams);
+    if(this.filter.metroTransport) this.stateParams.metroTransport = this.filter.metroTransport;*/
+    
+    var newPath = this.location.path()+'?client='+this.location.url().match(/client=\d+/)[0].slice(7)+'&suitby=exact&activetab=suit';
+    console.log(newPath);
+    console.log(this.location.url());
+    if(this.filter.floorFrom) newPath += '&floorFrom=' + this.filter.floorFrom;
+    if(this.filter.floorTo) newPath+='&floorTo='+this.filter.floorTo;
+    if(this.filter.priceFrom) newPath+='&priceFrom='+this.filter.priceFrom;
+    if(this.filter.priceTo) newPath+='&priceTo='+this.filter.priceTo;
+    if(this.filter.metroTime) newPath+='&metroTime='+this.filter.metroTime;
+    if(this.filter.metroTransport) newPath+='&metroTransport='+this.filter.metroTransport;
+    if(this.filter.districts) {
+      for(var i in this.filter.districts){
+        newPath += '&districts='+this.filter.districts[i];
+      }
+    }
+    if(this.filter.roomcount) {
+      for(var i in this.filter.roomcount){
+        newPath += '&roomcount='+this.filter.roomcount[i].id;
+      }
+    }
+    if(this.filter.subways) {
+      for(var i in this.filter.subways){
+        newPath += '&subways='+this.filter.subways[i];
+      }
+    }
+    if(this.filter.composition) {
+      for(var i in this.filter.composition){
+        newPath += '&composition='+this.filter.composition[i];
+      }
+    }
+    if(this.filter.renovation) {
+      for(var i in this.filter.renovation){
+        newPath += '&renovation='+this.filter.renovation[i];
+      }
+    }
+    if(this.filter.conditions) {
+      for(var i in this.filter.conditions){
+        newPath += '&conditions='+this.filter.conditions[i];
+      }
+    }
+    history.pushState(null, null, newPath);
+    //this.state.go('crm.clients.details.suit', this.stateParams);
   }
   
 }

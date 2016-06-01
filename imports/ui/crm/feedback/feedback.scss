@@ -1,5 +1,8 @@
 .feedback{
-  &_{
-    
+  &__nostyles{
+    background: transparent;
+    color: #fff;
+    border: 0;
+    text-transform: uppercase;
   }
 }
