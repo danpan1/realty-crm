@@ -1,17 +1,21 @@
+/**
+ * Created by Danpan on 01.06.16.
+ */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {Meteor} from 'meteor/meteor';
+// import {Meteor} from 'meteor/meteor';
 
 import {Locations} from '/imports/api/locations';
 import {Realty} from '/imports/api/realty';
-import {name as realtyFilter} from '../realty-filter/realty-filter.component';
+// import {name as realtyFilter} from '../realty/realty-filter/realty-filter.component';
 import {Counts} from 'meteor/tmeasday:publish-counts';
-import {name as slideShow} from '/imports/ui/shared/slide-show/slide-show.component';
+// import {name as slideShow} from '/imports/ui/shared/slide-show/slide-show.component';
 
-import {dictionary} from '../../../../helpers/dictionary';
-import './new-list.view.html';
+import {dictionary} from '../../../helpers/dictionary';
 
-class NewList {
+import './realty-new-list.view.html';
+
+class RealtyNewList {
   /* @ngInject */
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
@@ -19,12 +23,11 @@ class NewList {
     this.dictionary = dictionary;
     vm.perPage = 20;
     vm.page = 1;
-    // this.roomcount = [];
     this.showSlider = false;
     this.slideShowImages = [];
     vm.sort = {
       // 'updated_at': -1
-      'parseDetails.UID': -1
+      'createdAt': -1
     };
 
     vm.subscribe('newList', () => {
@@ -55,7 +58,7 @@ class NewList {
 
     vm.helpers({
       realty: () => {
-        return Realty.find({status: 'list'}, {sort: vm.getReactively('sort')});
+        return Realty.find({}, {sort: vm.getReactively('sort')});
       },
       realtyCount: () => {
         return Counts.get('realtyCount');
@@ -71,16 +74,14 @@ class NewList {
 
 }
 
-const moduleName = 'newList';
+const moduleName = 'realtyNewList';
 
 // create a module
 export default angular.module(moduleName, [
-  realtyFilter,
-  angularMeteor,
-  slideShow
+  angularMeteor
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/crm/realty/list-new/new-list.view.html',
+  templateUrl: 'imports/ui/crm/realty-new-list/realty-new-list.view.html',
   bindings: {},
   controllerAs: moduleName,
-  controller: NewList
+  controller: RealtyNewList
 });

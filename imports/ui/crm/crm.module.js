@@ -17,6 +17,7 @@ import {name as Feedback}from './feedback/feedback.component';
 import {name as clients}from './clients/clients.component';
 import {name as layout} from '/imports/ui/layout/layout.component';
 import {name as documents} from '/imports/ui/crm/documents/documents.component';
+import {name as newRealtyList} from '/imports/ui/crm/realty-new-list/realty-new-list.component';
 
 const moduleName = 'app.crm';
 // create a module
@@ -29,6 +30,7 @@ export default angular.module(moduleName, [
   ngPhoneFilter,
   ngPriceFilter,
   priceFilter,
+  newRealtyList,
   phoneFilter,
   selectedSubway,
   clients,
