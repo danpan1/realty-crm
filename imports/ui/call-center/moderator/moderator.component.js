@@ -49,7 +49,7 @@ class Moderator {
     if (approved) {
       this.realty.status = 'sale';
     }else{
-      this.realty.status = 'taken';
+      this.realty.status = 'realtor';
     }
     Meteor.call('moderatorSave', this.realty, (error)=> {
       if (error) {

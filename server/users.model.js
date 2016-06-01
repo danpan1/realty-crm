@@ -61,6 +61,10 @@ Schema.Users = new SimpleSchema({
     type: String,
     optional: true
   },
+  takenRealty: {
+    type: Number,
+    optional: true
+  },
   roles: {
     type: [String],
     optional: true
