@@ -5,6 +5,7 @@ import {Clients} from '/imports/api/clients';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import {dictionary} from '/imports/helpers/dictionary';
 import {Locations} from '/imports/api/locations';
+import {name as PaginationButtons} from '/imports/ui/shared/pagination-buttons/pagination-buttons.component';
 import {name as realtyFilter} from '/imports/ui/crm/realty/realty-filter/realty-filter.component';
 
 import './client-suit-exact.view.html';
@@ -15,40 +16,13 @@ class ClientSuitExact {
     $reactive(this).attach($scope);
     let vm = this;
     this.dictionary = dictionary;
-    this.location = $location;
     this.stateParams = $stateParams;
-    this.state = $state;
-    this.filter = {};
-    this.filter.roomcount = [];
-    if(vm.stateParams){
-      if(vm.stateParams.floorFrom) vm.filter.floorFrom = vm.stateParams.floorFrom;
-      if(vm.stateParams.floorTo) vm.filter.floorTo = vm.stateParams.floorTo;
-      if(vm.stateParams.priceFrom) vm.filter.priceFrom = vm.stateParams.priceFrom;
-      if(vm.stateParams.priceTo) vm.filter.priceTo = vm.stateParams.priceTo;
-      if(vm.stateParams.conditions) vm.filter.conditions = vm.stateParams.conditions;
-      if(vm.stateParams.subways) vm.filter.subways = typeof vm.stateParams.subways == 'object' ? vm.stateParams.subways : [vm.stateParams.subways];
-      if(vm.stateParams.districts) vm.filter.districts = typeof vm.stateParams.districts == 'object' ? vm.stateParams.districts : [vm.stateParams.districts];
-      if(vm.stateParams.roomcount) {
-        for(var i in vm.stateParams.roomcount){
-          for(var d in vm.dictionary.roomcount){
-            if(vm.stateParams.roomcount[i] == vm.dictionary.roomcount[d].id) {
-              vm.filter.roomcount.push(vm.dictionary.roomcount[d]);
-              break;
-            }
-          }
-        }
-      }
-      if(vm.stateParams.composition) vm.filter.composition = vm.stateParams.composition;
-      if(vm.stateParams.renovation) vm.filter.renovation = vm.stateParams.renovation;
-      if(vm.stateParams.metroTime) vm.filter.metroTime = vm.stateParams.metroTime;
-      if(vm.stateParams.metroTransport) vm.filter.metroTransport = vm.stateParams.metroTransport;
-    }
     vm.perPage = 20;
-    vm.page = 1;
+    vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     this.showSlider = false;
     this.slideShowImages = [];
     vm.sort = {
-      'parseDetails.UID': -1
+      'createdAt': -1
     };
     
     vm.subscribe('newList', () => {
@@ -77,74 +51,21 @@ class ClientSuitExact {
 
     vm.helpers({
       realty: () => {
-        return Realty.find({status: 'list'}, {sort: vm.getReactively('sort')});
+        return Realty.find({}, {sort: vm.getReactively('sort')});
       },
       realtyCount: () => {
         return Counts.get('realtyCount');
+      },
+      pagesCount: () => {
+        return Math.ceil(Counts.get('realtyCount') / this.perPage);
       }
-    });  
+    });
   }
   
-  suitRealty () {
-    /*if(this.filter.floorFrom) this.stateParams.floorFrom = this.filter.floorFrom;
-    if(this.filter.floorTo) this.stateParams.floorTo = this.filter.floorTo;
-    if(this.filter.priceFrom) this.stateParams.priceFrom = this.filter.priceFrom;
-    if(this.filter.priceTo) this.stateParams.priceTo = this.filter.priceTo;
-    if(this.filter.conditions) this.stateParams.conditions = this.filter.conditions;
-    if(this.filter.subways) this.stateParams.subways = this.filter.subways;
-    if(this.filter.roomcount) {
-      this.stateParams.roomcount = [];
-      for(var i in this.filter.roomcount){
-        this.stateParams.roomcount.push(this.filter.roomcount[i].id);
-      }
-    }
-    if(this.filter.districts) this.stateParams.districts = this.filter.districts;
-    if(this.filter.composition) this.stateParams.composition = this.filter.composition;
-    if(this.filter.renovation) this.stateParams.renovation = this.filter.renovation;
-    if(this.filter.metroTime) this.stateParams.metroTime = this.filter.metroTime;
-    if(this.filter.metroTransport) this.stateParams.metroTransport = this.filter.metroTransport;*/
-    
-    var newPath = this.location.path()+'?client='+this.location.url().match(/client=\d+/)[0].slice(7)+'&suitby=exact&activetab=suit';
-    console.log(newPath);
-    console.log(this.location.url());
-    if(this.filter.floorFrom) newPath += '&floorFrom=' + this.filter.floorFrom;
-    if(this.filter.floorTo) newPath+='&floorTo='+this.filter.floorTo;
-    if(this.filter.priceFrom) newPath+='&priceFrom='+this.filter.priceFrom;
-    if(this.filter.priceTo) newPath+='&priceTo='+this.filter.priceTo;
-    if(this.filter.metroTime) newPath+='&metroTime='+this.filter.metroTime;
-    if(this.filter.metroTransport) newPath+='&metroTransport='+this.filter.metroTransport;
-    if(this.filter.districts) {
-      for(var i in this.filter.districts){
-        newPath += '&districts='+this.filter.districts[i];
-      }
-    }
-    if(this.filter.roomcount) {
-      for(var i in this.filter.roomcount){
-        newPath += '&roomcount='+this.filter.roomcount[i].id;
-      }
-    }
-    if(this.filter.subways) {
-      for(var i in this.filter.subways){
-        newPath += '&subways='+this.filter.subways[i];
-      }
-    }
-    if(this.filter.composition) {
-      for(var i in this.filter.composition){
-        newPath += '&composition='+this.filter.composition[i];
-      }
-    }
-    if(this.filter.renovation) {
-      for(var i in this.filter.renovation){
-        newPath += '&renovation='+this.filter.renovation[i];
-      }
-    }
-    if(this.filter.conditions) {
-      for(var i in this.filter.conditions){
-        newPath += '&conditions='+this.filter.conditions[i];
-      }
-    }
-    history.pushState(null, null, newPath);
-    //this.state.go('crm.clients.details.suit', this.stateParams);
+  setSliderImages(images) {
+    console.log(images);
+    this.showSlider = true;
+    this.slideShowImages = images;
   }
   
 }
@@ -154,7 +75,8 @@ const moduleName = 'clientSuitExact';
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
-  realtyFilter
+  realtyFilter,
+  PaginationButtons
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/clients/client-details/client-suit/client-suit-exact/client-suit-exact.view.html',
   bindings: {},

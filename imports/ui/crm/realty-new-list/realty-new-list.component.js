@@ -3,26 +3,30 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import {Realty} from '/imports/api/realty';
+import {Clients} from '/imports/api/clients';
+import {Counts} from 'meteor/tmeasday:publish-counts';
+import {dictionary} from '../../../helpers/dictionary';
+import {Locations} from '/imports/api/locations';
+import {name as PaginationButtons} from '/imports/ui/shared/pagination-buttons/pagination-buttons.component';
+import {name as realtyFilter} from '/imports/ui/crm/realty/realty-filter/realty-filter.component';
 // import {Meteor} from 'meteor/meteor';
 
-import {Locations} from '/imports/api/locations';
-import {Realty} from '/imports/api/realty';
 // import {name as realtyFilter} from '../realty/realty-filter/realty-filter.component';
-import {Counts} from 'meteor/tmeasday:publish-counts';
 // import {name as slideShow} from '/imports/ui/shared/slide-show/slide-show.component';
 
-import {dictionary} from '../../../helpers/dictionary';
 
 import './realty-new-list.view.html';
 
 class RealtyNewList {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $location, $state, $stateParams) {
     $reactive(this).attach($scope);
     const vm = this;
     this.dictionary = dictionary;
+    this.stateParams = $stateParams;
     vm.perPage = 20;
-    vm.page = 1;
+    vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     this.showSlider = false;
     this.slideShowImages = [];
     vm.sort = {
@@ -62,6 +66,9 @@ class RealtyNewList {
       },
       realtyCount: () => {
         return Counts.get('realtyCount');
+      },
+      pagesCount: () => {
+        return Math.ceil(Counts.get('realtyCount') / this.perPage);
       }
     });
   }
@@ -78,7 +85,9 @@ const moduleName = 'realtyNewList';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  realtyFilter,
+  PaginationButtons
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty-new-list/realty-new-list.view.html',
   bindings: {},

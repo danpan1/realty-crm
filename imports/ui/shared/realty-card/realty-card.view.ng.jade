@@ -1,4 +1,4 @@
-div(layout='column' md-whiteframe='2').mv-8
+div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
     div.newList(layout='row')
 
         // 1-ая колонка - ID и Новая
@@ -56,28 +56,70 @@ div(layout='column' md-whiteframe='2').mv-8
 
         //6-ая Телефонн Риэлтора и Объявление
         div(layout='column' layout-align='space-between start').newList_contacts.ph-16.pv-8
-            div
-                div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
-                div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
-            div
-                md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.text-uppercase Объявление
+            div(ng-if="realtyCard.realtylisttype")
+                div
+                    div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
+                    div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
+                div
+                    md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.text-uppercase Объявление
+            div(layout='row', layout-wrap, layout-align='start start' ng-if="!realtyCard.realtylisttype")
+                div(flex="25" ng-repeat="condition in realtyCard.realty.details.conditions").clientCard-conditions
+                    md-icon(alt='Мебель' ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').client-card__md-icon
+                    span(ng-if="condition == 'furniture'") Мебель
+                    md-icon(alt='Кухонный гарнитур' ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture').client-card__md-icon
+                    span(ng-if="condition == 'kitchen_furniture'") Кухонный гарнитур
+                    md-icon(alt='Телевизор' ng-if="condition == 'tv'" md-svg-icon='conditions_tv').client-card__md-icon
+                    span(ng-if="condition == 'tv'") Телевизор
+                    md-icon(alt='Холодильник' ng-if="condition == 'refrigerator'" md-svg-icon='conditions_refrigerator').client-card__md-icon
+                    span(ng-if="condition == 'refrigerator'") Холодильник
+                    md-icon(alt='Стиральная машина' ng-if="condition == 'washer'" md-svg-icon='conditions_washer').client-card__md-icon
+                    span(ng-if="condition == 'washer'") Стиральная машина
+                    md-icon(alt='Стационарный телефон' ng-if="condition == 'phone'" md-svg-icon='conditions_phone').client-card__md-icon
+                    span(ng-if="condition == 'phone'") Стационарный телефон
+                    md-icon(alt='С животными' ng-if="condition == 'animal'" md-svg-icon='conditions_animal').client-card__md-icon
+                    span(ng-if="condition == 'animal'") С животными
+                    md-icon(alt='Лифт' ng-if="condition == 'elevator'" md-svg-icon='conditions_elevator').icon-rotate-90.client-card__md-icon
+                    span(ng-if="condition == 'elevator'") Лифт
+                    md-icon(alt='С детьми' ng-if="condition == 'children'" md-svg-icon='conditions_children').client-card__md-icon
+                    span(ng-if="condition == 'children'") С детьми
+                    md-icon(alt='Wi-Fi' ng-if="condition == 'wifi'" md-svg-icon='conditions_wifi').client-card__md-icon
+                    span(ng-if="condition == 'wifi'") Wi-Fi
+                    md-icon(alt='Ванна' ng-if="condition == 'bathroom'" md-svg-icon='conditions_bathroom').client-card__md-icon
+                    span(ng-if="condition == 'bathroom'") Ванна
+                    md-icon(alt='Кондиционер' ng-if="condition == 'conditioner'" md-svg-icon='conditions_conditioner').client-card__md-icon
+                    span(ng-if="condition == 'conditioner'") Кондиционер
+                    md-icon(alt='Посудомойка' ng-if="condition == 'dishWasher'" md-svg-icon='conditions_dishWasher').client-card__md-icon
+                    span(ng-if="condition == 'dishWasher'") Посудомойка
+                    md-icon(alt='Душевая кабина' ng-if="condition == 'shower'" md-svg-icon='conditions_shower').client-card__md-icon
+                    span(ng-if="condition == 'shower'") Душевая кабина
+                    md-icon(alt='Балкон' ng-if="condition == 'balcony'" md-svg-icon='conditions_balcony').client-card__md-icon
+                    span(ng-if="condition == 'balcony'") Балкон
         md-divider
 
         //7-ая Скрыть Сохранить
         div(layout='column' layout-align="space-between left").newList_Actions.ph-16.pv-8
             div(layout="column" layout-align="space-between start")
-                md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
-                ng-if='realtyCard.relationType === "new" || realtyCard.relationType ==="offers"' md-no-ink).md-simple-button.realty-card__btn-save.mv-8.mh-0.p-0.text-left Сохранить
-                md-button(ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)').md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
+                md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)' ng-if='realtyCard.relationType === "new" || realtyCard.relationType === "offers"' md-no-ink).md-simple-button.realty-card__btn-save.mv-8.mh-0.p-0.text-left Сохранить
+                md-button(ng-if="realtyCard.realtylisttype" ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)').md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
+                md-button(ng-if="!realtyCard.realtylisttype" ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.text-uppercase Подробнее
 
     // Подоробное объявление
-    div.ph-32(ng-show="realtyCard.ngShowDescr")
+    div(ng-show="realtyCard.ngShowDescr").ph-32.pb-16
         div(ng-if="!realtyCard.realtylisttype")
             p().md-body-1 {{::realtyCard.realty.details.descr}}
             div(layout='row')
                 md-button(ng-click='realtyCard.takeRealty(realtyCard.realty._id)').md-raised.md-warn.btn-get-object Взять объект
-            span(flex)
-            md-button(ng-click="realtyCard.ngShowDescr =! realtyCard.ngShowDescr") Закрыть
+            h3(flex).md-title {{::realtyCard.realty.contacts[0].phones[0].phone}} {{::realtyCard.realty.contacts[0].name}}
+            div(layout="row" ng-if='!realtyCard.objectAdded')
+                md-button(ng-click="realtyCard.takeObject(realtyCard.realty._id)").md-raised.md-primary Собственник
+                md-button(ng-click="realtyCard.isAgent = true").md-raised.md-warn Агент
+            div(ng-if='realtyCard.isAgent == true')
+                h3(flex).md-title Хотите продолжить с ним работать?
+                div(layout="row")
+                    md-button(ng-click='realtyCard.agentContinue(realtyCard.realty._id)').md-raised.md-deafult Да 
+                    md-button(ng-click='realtyCard.agentContinue()').md-raised.md-deafult Нет
+            h3(flex ng-if='realtyCard.objectAdded == true').md-title Объект сохранен в раздел #[a «Мои объекты»]
+            //md-button(ng-click="realtyCard.ngShowDescr =! realtyCard.ngShowDescr") Закрыть
         div(ng-if="realtyCard.realtylisttype == 'connections'")
             div(layout="row")
                 p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]

@@ -13,16 +13,27 @@ class RealtyCard {
   constructor($scope, $reactive) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
+    this.show = true;
   }
 
-  takeRealty(id) {
-    Meteor.call('takeRealty', id);
+  agentContinue (id) {
+    if(id) this.objectAdded = true;
+    else this.show = false;
   }
 
   changeRelationType(type,realtyId, clientId, isNew) {
     Meteor.call('changeRelationTypeInClient', type,realtyId,clientId,isNew);
   }
+  
+  takeObject(id){
+    console.log(id);
+    this.objectAdded = true;
+  }
 
+  takeRealty(id) {
+    Meteor.call('takeRealty', id);
+  }
+  
   updateRealty (id) {
     Realty.update({_id: id}, {
       $set: this.realty

@@ -2,14 +2,27 @@ div(md-whiteframe="1")
     md-tabs(md-border-bottom md-selected='realtyNewList.selectedTab').realty-list-layout__topbar
         md-tab(label='Аренда' ui-sref="crm.realty-new-list({operation: \'rent\', page: 1})")
         md-tab(label='Продажа' ui-sref="crm.realty-new-list({operation: \'sale\', page: 1})")
-
-realty-filter(filter = 'realtyNewList.filter' roomcount = 'realtyNewList.roomcount')
+realty-filter(filter='realtyNewList.filter' roomcount='realtyNewList.roomcount')
 slide-show(slides-list='realtyNewList.slideShowImages' isshown='realtyNewList.showSlider')
 div {{realtyNewList.filter}} фильтр
 div {{realtyNewList.realtyCount}} объектов найдено
-.md-body-1(layout='column', layout-align='space-around stretch' )
-    realty-card(ng-repeat='realty in realtyNewList.realty'
-    realty='realty'
-    slider='realtyNewList.setSliderImages(images)')
 
-pagination-buttons(ng-if='realtyNewList.pagesCount' uisref='\'crm.clients.list.my\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
+pagination-buttons(ng-if='realtyNewList.pagesCount' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
+
+.md-body-1(layout='column', layout-align='space-around stretch')
+    .listMy(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
+        div().listMy_col Подано
+        div().listMy_col Местоположение
+        div().listMy_col Собственник
+        div().listMy_col Фото
+        div().listMy_col Объект
+        div().listMy_col Удобства
+        div().listMy_col Действия
+        
+.md-body-1(layout='column', layout-align='space-around stretch' )
+    realty-card(dir-paginate="realty in realtyNewList.realty | itemsPerPage: realtyNewList.perPage" 
+                total-items="realtyNewList.realtyCount"
+                page-from='realtyNewList'
+                realty='realty'
+                slider='realtyNewList.setSliderImages(images)')
+pagination-buttons(ng-if='realtyNewList.pagesCount' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
