@@ -16,7 +16,7 @@ class PaginationButtons {
   }
       
   goToPage (newPageNumber) {
-      console.log(this.uisref);
+      console.log(this.uisref + ' + ' + newPageNumber);
       this.state.go(this.uisref, {page: newPageNumber}) ;
   }
   

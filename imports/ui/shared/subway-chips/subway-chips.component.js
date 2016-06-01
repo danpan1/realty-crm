@@ -6,12 +6,14 @@ import {Meteor} from 'meteor/meteor';
 import './subway-chips.view.html';
 
 class SubwayChips {
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $stateParams) {
     'ngInject';
 
     $reactive(this).attach($scope);
     const vm = this;
+    this.stateParams = $stateParams;
     vm.subwaysInForm = [];
+    vm.subwaysSuggestionList = [];
     this.alreadyPicked = this.subwaysIdList || [];
     vm.subscribe('subwayChips', ()=> {
       return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), this.alreadyPicked];
@@ -21,6 +23,19 @@ class SubwayChips {
           vm.subwaysInForm = Locations.find({
             type: 'subway'
           }).fetch();
+          if(vm.stateParams.subways){
+            let newList = [];
+            let testList = typeof vm.stateParams.subways == 'object' ? vm.stateParams.subways : [vm.stateParams.subways];
+            for(var f in vm.subwaysInForm){
+              for(var s in testList){
+                if(vm.subwaysInForm[f]._id == testList[s]){
+                  newList.push(vm.subwaysInForm[f]);
+                  break;
+                }
+              }
+            }
+            vm.subwaysInForm = newList;
+          }
         }
         vm.loaded = true;
       }
@@ -44,11 +59,11 @@ class SubwayChips {
       return {name: item.name, line: item.meta.lineId};
     });
   }
-
+  
   searchTextChange(criteria) {
     this.loaded = true;
     if (typeof criteria === 'string' && criteria.length) {
-      // this.subwaysSuggestionList = [];
+      // 
       this.query = criteria;
     }
     this.alreadyPicked = this.subwaysIdList;

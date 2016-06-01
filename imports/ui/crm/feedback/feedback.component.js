@@ -11,17 +11,18 @@ import './feedback.view.html';
 
 class Feedback {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $http) {
     $reactive(this).attach($scope);
     let vm = this;
     this.proposalSent = 0;
+    this.http = $http;
     
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {
         console.log(user);
-        this.user = user;
-        this.info = {
+        vm.user = user;
+        vm.info = {
             id: user.profile._id,
             topic: '',
             addedinfo: '',
@@ -29,6 +30,14 @@ class Feedback {
             username: user.profile.name + ' ' + user.profile.surName,
             useremail: /*user.emails[0].verified ?*/ user.emails[0].address /*: false*/
         }
+        vm.data = {
+            good_name: "ocaen_object_6mes",
+            bill_first_name: user.profile.name,
+            bill_email: user.emails[0].address,
+            bill_phone: user.profile.phone,
+            file_profile: "default",
+            offerta_accept: "true"
+        };
       }
     });
     

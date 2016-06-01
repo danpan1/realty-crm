@@ -46,7 +46,7 @@ class ListMy {
       realty: () => {
         return Realty.find(
           // {status: {$in: ['sale']}},
-          {status: {$in: ['sale', 'taken', 'review', 'reviewed']}},
+          {status: {$in: ['sale', 'taken', 'realtor']}},
           {sort: vm.sort});
       },
       realtyCount: () => {

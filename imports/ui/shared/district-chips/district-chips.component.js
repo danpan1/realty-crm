@@ -10,14 +10,14 @@ import {Meteor} from 'meteor/meteor';
 import './district-chips.view.html';
 
 class DistrictChips {
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $stateParams) {
     'ngInject';
 
     $reactive(this).attach($scope);
     const vm = this;
+    this.stateParams = $stateParams;
     vm.districtsAreaInForm = [];
     vm.alreadyPicked = this.districtsAreaIdList || [];
-    console.log(vm.alreadyPicked);
     vm.subscribe('districtsAreaChips', ()=> {
       return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), vm.alreadyPicked];
     }, {
@@ -25,7 +25,20 @@ class DistrictChips {
         if (!vm.loaded) {
           vm.districtsAreaInForm = Locations.find({
             type: {$in: ['district', 'area']}
-          }).fetch();;
+          }).fetch();
+          if(vm.stateParams.districts){
+            let newList = [];
+            let testList = typeof vm.stateParams.districts == 'object' ? vm.stateParams.districts : [vm.stateParams.districts];
+            for(var f in vm.districtsAreaInForm){
+              for(var s in testList){
+                if(vm.districtsAreaInForm[f]._id == testList[s]){
+                  newList.push(vm.districtsAreaInForm[f]);
+                  break;
+                }
+              }
+            }
+            vm.districtsAreaInForm = newList;
+          }
         }
         vm.loaded = true;
       }

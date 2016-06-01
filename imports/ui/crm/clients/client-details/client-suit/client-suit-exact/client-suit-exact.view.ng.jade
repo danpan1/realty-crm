@@ -1,2 +1,15 @@
 realty-filter(filter='clientSuitExact.filter' roomcount='clientSuitExact.roomcount')
-md-button(ng-click='clientSuitExact.suitRealty()').md-raised.md-primary Найти
+slide-show(slides-list='clientSuitExact.slideShowImages' isshown='clientSuitExact.showSlider')
+div {{clientSuitExact.filter}} фильтр
+div {{clientSuitExact.realtyCount}} объектов найдено
+
+pagination-buttons(ng-if='clientSuitExact.pagesCount' uisref='\'crm.clients.details.suit\'' page='clientSuitExact.page' pagescount='clientSuitExact.pagesCount')
+
+.md-body-1(layout='column', layout-align='space-around stretch' )
+    realty-card(dir-paginate="realty in clientSuitExact.realty | itemsPerPage: clientSuitExact.perPage" 
+                total-items="clientSuitExact.realtyCount"
+                page-from='clientSuitExact'
+                realty='realty'
+                slider='clientSuitExact.setSliderImages(images)')
+
+pagination-buttons(ng-if='clientSuitExact.pagesCount' uisref='\'crm.clients.details.suit\'' page='clientSuitExact.page' pagescount='clientSuitExact.pagesCount')

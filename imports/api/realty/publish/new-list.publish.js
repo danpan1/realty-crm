@@ -8,17 +8,18 @@ if (Meteor.isServer) {
   Meteor.publish('newList', function (options, search) {
       let selector;
       if (this.userId) {
+        // TODO статус добавить !!! тут нужен статус new
         selector = {
-          status: 'list'
+          // status: 'list'
 
         };
 
         if (search) {
           console.log(search);
-          if (search.UID) {
-            selector.UID = +search.UID;
-          }
+
           let price = {};
+
+          /* ЦЕНА ОТ И ДО*/
           if (search.priceFrom) {
             price.$gte = parseInt(search.priceFrom);
           }
@@ -28,7 +29,9 @@ if (Meteor.isServer) {
           if (!_.isEmpty(price)) {
             selector.price = price;
           }
+          /* END ЦЕНА */
 
+          /* ЭТАЖИ ОТ И ДО*/
           let floor = {};
           if (search.floorFrom) {
             floor.$gte = parseInt(search.floorFrom);
@@ -39,59 +42,75 @@ if (Meteor.isServer) {
           if (!_.isEmpty(floor)) {
             selector.floor = floor;
           }
+          /* END ЭТАЖИ ОТ И ДО */
 
-          //values в виде строки
+          /* КОЛИЧЕСТВО КОМНАТ */
           if (search.roomcount && !_.isEmpty(search.roomcount)) {
             selector.roomcount = {$in: search.roomcount};
           }
+          /* END КОЛИЧЕСТВО КОМНАТ */
 
+          /* ТИП ОПЕРАЦИИ 1-продажа квартир вторичных 2-долгосрочная аренда квартир */
           if (search.type) {
             selector.type = search.type;
           }
+          /* END ТИП ОПЕРАЦИИ */
 
+          /* УДОБСТВА */
+          if (search.conditions && !_.isEmpty(search.conditions)) {
+            selector.conditions = {$all: search.conditions};
+          }
+          /* END УДОБСТВА */
+
+          /* ВРЕМЯ ДО МЕТРО и Транспорт до метро */
+          if (search.metroTime) {
+            selector.metroTime = {$lte: search.metroTime};
+            selector.metroTransport = search.metroTransport;
+          }
+          /* END ВРЕМЯ ДО МЕТРО */
+
+          /* РАЙОНЫ МЕТРО */
           let query = [];
-          let locations = false;
           if (search.districts && !_.isEmpty(search.districts)) {
-            locations = true;
             query.push({'address.districtId': {$in: search.districts}});
             query.push({'address.areaId': {$in: search.districts}});
           }
 
           if (search.subways && !_.isEmpty(search.subways)) {
-            locations = true;
             query.push({'address.subways': {$in: search.subways}});
           }
 
-          if (locations) {
+          if (query && !_.isEmpty(query)) {
             selector.$or = query;
           }
+          /* END РАЙОНЫ МЕТРО */
 
         }
         Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
 
-        //Отдаем объекты недвижимости если у юзера есть роль бизнес
+        //TODO раскомментить только то что надо на клиенте
         options.fields = {
-          image: 1,
-          price: 1,
-          title: 1,
-          'parseDetails.UID': 1,
-          'parseDetails.images': 1,
-          'address.metroName': 1,
-          'address.street': 1,
-          'address.meta.house': 1,
-          'address.areaName': 1,
-          'address.districtName': 1,
-          'operator.qualification': 1,
-          'details.renovation': 1,
-          'details.descr': 1,
-          contacts: 1,
-          'realtor.id': 1,
-          roomcount: 1,
-          square: 1,
-          floor: 1,
-          floormax: 1,
-          status: 1
+          // image: 1,
+          // price: 1,
+          // title: 1,
+          // 'parseDetails.images': 1,
+          // 'address.metroName': 1,
+          // 'address.street': 1,
+          // 'address.meta.house': 1,
+          // 'address.areaName': 1,
+          // 'address.districtName': 1,
+          // 'operator.qualification': 1,
+          // 'details.renovation': 1,
+          // 'details.descr': 1,
+          // contacts: 1,
+          // 'realtor.id': 1,
+          // roomcount: 1,
+          // square: 1,
+          // floor: 1,
+          // floormax: 1,
+          // status: 1
         };
+
         console.log(selector);
         return Realty.find(selector, options);
       }
