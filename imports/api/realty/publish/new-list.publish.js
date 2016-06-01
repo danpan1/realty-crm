@@ -9,7 +9,7 @@ if (Meteor.isServer) {
       let selector;
       if (this.userId) {
         selector = {
-          status: 'list'
+          // status: 'list'
 
         };
 

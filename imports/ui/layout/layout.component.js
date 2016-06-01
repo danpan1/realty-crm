@@ -16,7 +16,7 @@ class Layout {
     this.sideNavItems = [
       // {name: 'Добавить клиента', uisref: 'crm.clients.add'},
       // {name: 'Объекты', uisref: 'crm.realty.list.new'},
-      {name: 'Океан объектов', uisref: ''},
+      {name: 'Океан объектов', uisref: 'crm.realty-new-list({operation: \'rent\', page: 1})'},
       {name: 'Мои объекты', uisref: 'crm.realty.list.my'},
       // {name: 'Новые объекты', uisref: 'crm.realty.list.new'},
       // {name: 'Архив объекты', uisref: 'crm.realty.list.my'+'({status: \'archive\'})'},
