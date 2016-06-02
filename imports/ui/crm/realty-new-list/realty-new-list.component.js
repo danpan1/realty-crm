@@ -37,7 +37,10 @@ class RealtyNewList {
       'createdAt': -1
     };
     let timeTestLoadData = new Date();
+    let timeTestRender = new Date();
     vm.subscribe('newList', () => {
+      vm.loaded = false;
+      timeTestLoadData  = new Date();
       return [
         //фильтр для pagination
         {
@@ -62,7 +65,9 @@ class RealtyNewList {
       onReady: function () {
         vm.loaded = true;
         let timeLoaded = new Date();
+        let timeRender = new Date();
         console.log('время на закгрузку = ', ((timeLoaded - timeTestLoadData) / 1000));
+        console.log('время на рендер = ', ((timeRender - timeTestRender) / 1000));
 
       }
     });
