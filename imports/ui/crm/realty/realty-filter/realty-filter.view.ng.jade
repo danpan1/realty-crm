@@ -4,10 +4,12 @@ div(md-whiteframe='2').realty-list-filter.ph-32.pv-16
             div(layout='column' layout-align='center none')
                 div(flex)
                     subway-chips(ng-model="realtyFilter.filter.subways"
-                    subways-embeded='realtyFilter.subwaysEmbeded' flex)
+                    subways-embeded='realtyFilter.subwaysEmbeded' flex
+                    subways-changed='realtyFilter.suitRealty()')
                 div(flex)
                     district-chips(ng-model="realtyFilter.filter.districts"
-                    districts-embeded='realtyFilter.districtsEmbeded' flex)
+                    districts-embeded='realtyFilter.districtsEmbeded' flex
+                    districts-changed='realtyFilter.suitRealty()')
 
         div(flex='30' flex-offset='10')
             div(layout='column')
@@ -73,5 +75,3 @@ div(md-whiteframe='2').realty-list-filter.ph-32.pv-16
                         //md-optgroup(label='Выбрать удобства')
                         md-option(ng-value='composition.id',
                         ng-repeat="composition in realtyFilter.dictionary.composition ") {{composition.name}}
-
-md-button(ng-click='realtyFilter.suitRealty()').md-raised.md-primary Найти

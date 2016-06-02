@@ -20,7 +20,6 @@ class RealtyCard {
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {
-        console.log(user);
         vm.user = user;
         vm.data = {
             good_name: "ocaen_object_6mes",

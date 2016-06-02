@@ -10,11 +10,12 @@ import {Meteor} from 'meteor/meteor';
 import './district-chips.view.html';
 
 class DistrictChips {
-  constructor($scope, $reactive, $stateParams) {
+  constructor($scope, $reactive, $stateParams, $timeout) {
     'ngInject';
 
     $reactive(this).attach($scope);
     const vm = this;
+    this.$timeout = $timeout;
     this.stateParams = $stateParams;
     vm.districtsAreaInForm = [];
     vm.alreadyPicked = this.districtsAreaIdList || [];
@@ -62,6 +63,9 @@ class DistrictChips {
     this.districtsEmbeded = this.districtsAreaInForm.map((item)=> {
       return item.name;
     });
+    this.$timeout(() => {
+      this.districtsChanged();
+    },100)
   }
 
   searchTextChange(criteria) {
@@ -83,7 +87,8 @@ export default angular.module(moduleName, [
     templateUrl: 'imports/ui/shared/district-chips/district-chips.view.html',
     bindings: {
       districtsAreaIdList: '=ngModel',
-      districtsEmbeded: '='
+      districtsEmbeded: '=',
+      districtsChanged: '&'
     },
     controllerAs: moduleName,
     controller: DistrictChips

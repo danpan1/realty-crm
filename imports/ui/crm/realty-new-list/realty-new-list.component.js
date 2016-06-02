@@ -77,7 +77,6 @@ class RealtyNewList {
   
   openPurchaseSuccess (ev) {
     // Если совершена покупка, открываем окно с сообщением
-    console.log('Hello purchase');
     if(this.stateParams.purchase){
       let vm = this;
       this.mdDialog.show(
