@@ -106,13 +106,13 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
     // Подоробное объявление
     div(ng-show="realtyCard.ngShowDescr").ph-32.pb-16
         div(ng-if="!realtyCard.realtylisttype")
-            p().md-body-1 {{::realtyCard.realty.details.descr}}
+            p().md-body-1.realty-card__details-text {{::realtyCard.realty.details.descr}}
             div(layout='row')
-                md-button(ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.btn-get-object Взять объект
+                md-button(ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16 Взять объект
             h3(flex).md-title {{::realtyCard.realty.contacts[0].phones[0].phone}} {{::realtyCard.realty.contacts[0].name}}
             div(layout="row" ng-if='!realtyCard.objectAdded')
-                md-button(ng-click="realtyCard.takeObject(realtyCard.realty._id)").md-raised.md-primary Собственник
-                md-button(ng-click="realtyCard.isAgent = true").md-raised.md-warn Агент
+                md-button(ng-click="realtyCard.takeObject(realtyCard.realty._id)").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
+                md-button(ng-click="realtyCard.isAgent = true").md-raised.realty-card__agent.ml-16.ph-16 Агент
             div(ng-if='realtyCard.isAgent == true && realtyCard.objectAdded != true')
                 h3(flex).md-title Хотите продолжить с ним работать?
                 div(layout="row")

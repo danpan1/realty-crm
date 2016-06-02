@@ -1,10 +1,20 @@
+realty-card {
+  .realty-card__details-text {
+    line-height: 24px;
+  }
+}
+
 .realty-card {
   &__btn-save {
-    color: #106cc8 !important;
+  color: #106cc8 !important;
   }
   &__btn-hide {
-    font-size: 12px !important;
-    text-transform: none !important;
-    color: #898989 !important;
+  font-size: 12px !important;
+  text-transform: none !important;
+  color: #898989 !important;
   }
+}
+
+.subscription-dialog {
+  max-width: 424px !important;
 }
