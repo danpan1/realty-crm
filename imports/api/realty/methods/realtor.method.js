@@ -11,50 +11,102 @@ import {Roles} from 'meteor/alanning:roles';
 import nextAutoincrement from '../../../helpers/getUniqueId';
 
 Meteor.methods({
-  submitReviewDate,
   addRealty,
+  addRealtyToMyList,
   takeRealty
 });
 
-export function submitReviewDate(date, id) {
+/**
+ * takeRealty - взять объект недвижимости. Кнопка взять на странице Новые объекты.
+ * @param realtyId
+ */
+export function addRealtyToMyList(realtyId) {
 
   if (Meteor.isServer && Meteor.userId()) {
 
-    Realty.update({_id: id}, {
-      $set: {
-        'realtor.reviewDate': date,
-        status: 'review'
-      }
-    }, (error) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Submited  Review Date');
-      }
-    });
+    let realty = Realty.findOne({_id: realtyId});
+    if (!realty) {
+      //Не даём взять объект
+      return 'нет такого объекта';
+    }
 
-  }
+    if (realty.status !== 'taken') {
+      //Не даём взять объект
+      return 'метод вызывается в неправильном месте. попытка взлома';
+    }
 
-}
-
-export function takeRealty(realtyId) {
-
-  if (Meteor.isServer && Meteor.userId()) {
+    if (realty.realtor && realty.realtor.id !== this.userId) {
+      //Не даём взять объект
+      return 'не владелец объекта';
+    }
 
     Realty.update({_id: realtyId}, {
       $set: {
-        'realtor.id': Meteor.userId(),
-        'realtor.takeDate': new Date(),
-        'status': 'taken'
+        'status': 'realtor'
       }
     }, (error) => {
       if (error) {
         console.log(error);
       } else {
-        console.log('Take Date set');
+        console.log('status realtor set');
       }
     });
+    //TODO переставить внутри Realty update
+    return 'по идее ок';
 
+  }
+}
+
+export function takeRealty(realtyId) {
+  if (Meteor.isServer && Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'paid')) {
+
+    console.log('takeRealty')
+    let realty = Realty.findOne({_id: realtyId});
+    if (!realty) {
+      //Не даём взять объект
+      return 'нет такого объекта';
+    }
+
+    if (realty.status !== 'new') {
+      //Не даём взять объект
+      return 'метод вызывается в неправильном месте. попытка взлома';
+    }
+
+    if (realty.realtor && realty.realtor.id) {
+      //Не даём взять объект
+      return 'у объекта уже есть владелец. попытка взлома';
+    }
+
+    let user = Meteor.users.findOne({_id: this.userId});
+    Meteor.users.update({_id: this.userId},
+      {$inc: {takenRealty: 1}}
+    );
+    console.log(user.takenRealty, ` = takenRealty user ${user.profile.name}`);
+
+    //Если меньше 100 объектов уже взято, тогда даём взять объект
+    if (user.takenRealty <= 100) {
+
+      Realty.update({_id: realtyId}, {
+        $set: {
+          'realtor.id': Meteor.userId(),
+          'status': 'taken'
+        }
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Take Date set');
+        }
+      });
+      return realty.contacts.phones[0].phone;
+    } else {
+      //Не даём взять объект
+      return 'больше 100 объектов взято в этом месяце';
+    }
+
+  } else {
+    console.log('NOt paid');
+    return 'NOt paid';
   }
 }
 

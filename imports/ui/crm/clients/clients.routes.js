@@ -28,6 +28,7 @@ export default function routes($stateProvider) {
         })
         .state('crm.clients.details.suit', {
           url: `/suit?:client
+                     &:page
                      &:suitby
                      &:activetab
                      &:floorFrom

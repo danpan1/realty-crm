@@ -57,14 +57,26 @@ class OneInfo {
   }
 
   onConditionsChange(condition) {
-    let index = this.realty.details.conditions.indexOf(condition);
-    if (index === -1) {
-      this.realty.details.conditions.push(condition);
-    } else {
-      this.realty.details.conditions.splice(index, 1);
+    let index;
+    if (this.realty.details.conditions) {
+      index = this.realty.details.conditions.indexOf(condition);
+      /*if (index === -1) this.realty.details.conditions.push(condition);
+      else this.realty.details.conditions.splice(index, 1);
+      console.log(this.realty.details.conditions);
+      this.realtyUpdate();*/
     }
+    else {
+      this.realty.details.conditions = [];
+      index = -1;
+      /*if (index === -1) this.realty.details.conditions.push(condition);
+      else this.realty.details.conditions.splice(index, 1);
+      console.log(this.realty.details.conditions);
+      this.realtyUpdate();*/
+    }
+    
+    if (index === -1) this.realty.details.conditions.push(condition);
+    else this.realty.details.conditions.splice(index, 1);
     console.log(this.realty.details.conditions);
-
     this.realtyUpdate();
   }
 

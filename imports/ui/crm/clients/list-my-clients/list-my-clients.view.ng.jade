@@ -7,7 +7,7 @@ div
     client-card(
         dir-paginate="client in listMyClients.clients | itemsPerPage: listMyClients.perPage" 
         total-items="listMyClients.clientsCount"
-    page-from = 'listMyClients'
+        page-from='listMyClients'
         client='client')
     
 pagination-buttons(ng-if='listMyClients.pagesCount' uisref='\'crm.clients.list.my\'' page='listMyClients.page' pagescount='listMyClients.pagesCount')

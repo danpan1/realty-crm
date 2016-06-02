@@ -1,0 +1,11 @@
+form(md-whiteframe='1'
+ng-submit='addRole.submit(addRoleForm.$valid)'
+name='addRoleForm'
+layout-align='center start'
+layout='column')
+    md-input-container
+        label Email
+        input(ng-model="addRole.email" type="email" required='')
+    md-button(type='submit').md-raised.md-primary Добавить роль
+
+div(md-whiteframe='2') {{addRole.result || 'Введите email'}}
