@@ -9,12 +9,25 @@ import './add-role.view.html';
 
 class AddRole {
   /* @ngInject */
-  constructor($scope, $reactive) {
-    $reactive(this).attach($scope);
+  constructor($timeout) {
+    this.timeout = $timeout;
   }
 
-  submit() {
-    Meteor.call('addRolePaid', Meteor.userId());
+  submit(valid) {
+    console.log(valid);
+    if (valid) {
+      Meteor.call('addUsersToRolePaid', this.email, (err, result)=> {
+        if (err) {
+          this.timeout(()=> {
+            this.result = err;
+          }, 0);
+        } else {
+          this.timeout(()=> {
+            this.result = result;
+          }, 0);
+        }
+      });
+    }
   }
 
 }

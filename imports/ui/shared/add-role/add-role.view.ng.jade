@@ -5,5 +5,7 @@ layout-align='center start'
 layout='column')
     md-input-container
         label Email
-        input(ng-model="addRole.user.email" type="email" ng-required='')
+        input(ng-model="addRole.email" type="email" required='')
     md-button(type='submit').md-raised.md-primary Добавить роль
+
+div(md-whiteframe='2') {{addRole.result || 'Введите email'}}
