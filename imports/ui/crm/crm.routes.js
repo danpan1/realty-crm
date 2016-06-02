@@ -6,7 +6,7 @@ export default function routes($stateProvider) {
       template: '<layout layout="column" flex tabIndex="-1" role="main"/>'
     })
     .state('crm.realty-new-list', {
-      url: `/new-realty?:search&:page&:floorFrom&:floorTo&:priceFrom&:priceTo&:conditions&:subways&:roomcount&:districts&:composition&:renovation&:metroTime&:metroTransport`,
+      url: `/new-realty?:search&:purchase&:page&:floorFrom&:floorTo&:priceFrom&:priceTo&:conditions&:subways&:roomcount&:districts&:composition&:renovation&:metroTime&:metroTransport`,
       template: '<realty-new-list/>',
       controller: function ($state, $stateParams) {}
     })

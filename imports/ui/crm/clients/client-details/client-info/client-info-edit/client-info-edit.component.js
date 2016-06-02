@@ -67,10 +67,3 @@ export default angular.module(moduleName, [
   controllerAs: moduleName,
   controller: ClientInfoEdit
 });
-
-/*
-                div(layout="row")
-                    p Удобства:
-                    p
-                        realty-conditions(ng-model='oneInfoEdit.realty.details.conditions' required='') */
-

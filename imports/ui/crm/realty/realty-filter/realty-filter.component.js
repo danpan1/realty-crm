@@ -45,6 +45,7 @@ class RealtyFilter {
     }
   }
   
+  
   suitRealty () {
     /*if(this.filter.floorFrom) this.stateParams.floorFrom = this.filter.floorFrom;
     if(this.filter.floorTo) this.stateParams.floorTo = this.filter.floorTo;

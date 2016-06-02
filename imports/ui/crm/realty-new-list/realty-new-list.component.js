@@ -20,9 +20,10 @@ import './realty-new-list.view.html';
 
 class RealtyNewList {
   /* @ngInject */
-  constructor($scope, $reactive, $location, $state, $stateParams) {
+  constructor($scope, $reactive, $location, $state, $stateParams, $mdDialog) {
     $reactive(this).attach($scope);
     const vm = this;
+    this.mdDialog = $mdDialog;
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
     vm.perPage = 20;
@@ -71,6 +72,25 @@ class RealtyNewList {
         return Math.ceil(Counts.get('realtyCount') / this.perPage);
       }
     });
+    
+  }
+  
+  openPurchaseSuccess (ev) {
+    // Если совершена покупка, открываем окно с сообщением
+    console.log('Hello purchase');
+    if(this.stateParams.purchase){
+      let vm = this;
+      this.mdDialog.show(
+        this.mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('Успешно оплачено')
+          .textContent('Вы успешно оплатили ' + vm.stateParams.purchase + ' объектов')
+          .ariaLabel('Alert Purchase Success')
+          .ok('Продолжить брать объекты')
+          .targetEvent(ev)
+      );
+    }
   }
 
   setSliderImages(images) {
