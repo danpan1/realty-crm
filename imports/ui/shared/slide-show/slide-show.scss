@@ -1,56 +1,81 @@
-
-.slide{
-    &__arrow{
-        border: 6px solid #fff;
+.slide {
+  &__bg {
+    z-index: 70;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  &__wrapper {
+    z-index: 71;
+    position: fixed;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 0;
+    right: 0;
+    width: 664px;
+    height: 442px;
+    margin: 0px auto;
+    padding: 0;
+    background: $black;
+    box-shadow: 0 0 4px rgba(106, 106, 106, 0.7);
+    .slide__close {
+      position: absolute !important;
+      top: 0 !important;
+      right: -58px !important;
+      width: 45px !important;
+      height: 45px !important;
+      border-radius: 0 !important;
+      background: rgba(51, 51, 51, 0.5) !important;
+      md-icon {
         position: absolute;
-        width: 40px;
-        height: 40px;
-        background: #2489cf;
-        border-radius: 50%;
-        font: 600 20px/36px Calibri;
-        text-align: center;
-        &.prev{
-            margin-top: 280px;
-        }
-        &.next{
-            margin: -324px 0 0 941px;
-        }
+        top: -9px;
+        left: -7px;
+        width: 60px;
+        height: 60px;
+        color: $white;
+      }
     }
-    &__bg{
-        position:fixed;
-        width:100%;
-        height:100%;
-        background: rgba(0,0,0,.7);
-        top: 0;
-        left: 0;
-        z-index: 70;
-    }
-    &__block{
-        width:1004px;
-        margin: 0 11.7px;
-        padding: 0;
-        display: inline-block;
-        text-align: center;
-    }
-    &__img{
-        max-width:100%;
-        max-height: 600px;
-    }
-    &__inner{
-        transition:.5s;
-    }
-    &__wrapper{
-        position:fixed;
-        width: 1024px;
-        height:600px;
-        padding: 15px 10px 15px 2px;
-        background: #fff;
-        border-radius: 4px;
-        overflow: hidden;
-        margin: 0px auto;
-        left:0;
-        right:0;
-        top: 10px;
-        z-index: 71;
-    }
+  }
+  &__content {
+    overflow: hidden;
+  }
+  &__inner {
+    transition: 0.5s;
+  }
+  &__block {
+    display: inline-block;
+    width: 644px;
+    margin: 0 10px;
+    padding: 0;
+    text-align: center;
+  }
+  &__img {
+    max-width: 100%;
+    max-height: 442px;
+  }
+  &__prev,
+  &__next {
+    z-index: 10;
+    position: absolute;
+    background: url('img/icons/icon-arrow-left.png') no-repeat;
+    width: 42px;
+    height: 42px;
+    appearance: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  &__prev {
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%) scaleX(-1);
+  }
+  &__next {
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+  }
 }
