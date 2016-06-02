@@ -84,6 +84,7 @@ div[md-whiteframe] {
 }
 
 md-tabs{
+  border-radius: 0;
   background-color: $white;
   md-ink-bar {
     color: color($blue, 400);
@@ -395,6 +396,11 @@ md-switch {
 
 .pr-32 {
   padding-right: 32px !important;
+}
+
+.mv-18 {
+  margin-top: 18px !important;
+  margin-bottom: 18px !important;
 }
 
 .nowrap {

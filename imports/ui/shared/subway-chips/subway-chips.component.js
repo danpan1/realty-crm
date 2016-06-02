@@ -6,11 +6,12 @@ import {Meteor} from 'meteor/meteor';
 import './subway-chips.view.html';
 
 class SubwayChips {
-  constructor($scope, $reactive, $stateParams) {
+  constructor($scope, $reactive, $stateParams, $timeout) {
     'ngInject';
 
     $reactive(this).attach($scope);
     const vm = this;
+    this.$timeout = $timeout;
     this.stateParams = $stateParams;
     vm.subwaysInForm = [];
     vm.subwaysSuggestionList = [];
@@ -58,6 +59,9 @@ class SubwayChips {
     this.subwaysEmbeded = this.subwaysInForm.map((item)=> {
       return {name: item.name, line: item.meta.lineId};
     });
+    this.$timeout(() => {
+      this.subwaysChanged();
+    },100)
   }
   
   searchTextChange(criteria) {
@@ -82,7 +86,8 @@ export default angular.module(moduleName, [
   controllerAs: moduleName,
   bindings: {
     subwaysIdList: '=ngModel',
-    subwaysEmbeded: '='
+    subwaysEmbeded: '=',
+    subwaysChanged: '&'
   },
   controller: SubwayChips
 });

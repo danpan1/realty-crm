@@ -4,6 +4,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Realty} from '/imports/api/realty';
+import {CountsDan} from '/imports/api/counts';
 import {Clients} from '/imports/api/clients';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import {dictionary} from '../../../helpers/dictionary';
@@ -20,9 +21,10 @@ import './realty-new-list.view.html';
 
 class RealtyNewList {
   /* @ngInject */
-  constructor($scope, $reactive, $location, $state, $stateParams) {
+  constructor($scope, $reactive, $location, $state, $stateParams, $mdDialog) {
     $reactive(this).attach($scope);
     const vm = this;
+    this.mdDialog = $mdDialog;
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
     vm.perPage = 20;
@@ -33,7 +35,7 @@ class RealtyNewList {
       // 'updated_at': -1
       'createdAt': -1
     };
-
+    let timeTestLoadData = new Date();
     vm.subscribe('newList', () => {
       return [
         //фильтр для pagination
@@ -47,8 +49,9 @@ class RealtyNewList {
           floorFrom: vm.getReactively('filter.floorFrom'),
           floorTo: vm.getReactively('filter.floorTo'),
           priceTo: vm.getReactively('filter.priceTo'),
+          conditions: vm.getReactively('filter.conditions'),
           priceFrom: vm.getReactively('filter.priceFrom'),
-          roomcount: vm.getReactively('roomcount'),
+          roomcount: vm.getReactively('filter.roomcount'),
           type: vm.getReactively('filter.type'),
           subways: vm.getReactively('filter.subways'),
           districts: vm.getReactively('filter.districts')
@@ -57,20 +60,53 @@ class RealtyNewList {
     }, {
       onReady: function () {
         vm.loaded = true;
+        let timeLoaded = new Date();
+        console.log('время на закгрузку = ', ((timeLoaded - timeTestLoadData) / 1000));
+
       }
     });
 
     vm.helpers({
       realty: () => {
-        return Realty.find({}, {sort: vm.getReactively('sort')});
+        return Realty.find({}, {
+          sort: vm.getReactively('sort')
+        });
       },
       realtyCount: () => {
-        return Counts.get('realtyCount');
+        let с = CountsDan.findOne({});
+        if (с) {
+          return с.count;
+        } else {
+          return '';
+        }
       },
       pagesCount: () => {
-        return Math.ceil(Counts.get('realtyCount') / this.perPage);
+        let с = CountsDan.findOne({});
+        if (с) {
+          return Math.ceil(с.count / this.perPage);
+        } else {
+          return '';
+        }
       }
     });
+
+  }
+
+  openPurchaseSuccess(ev) {
+    // Если совершена покупка, открываем окно с сообщением
+    if(this.stateParams.purchase){
+      let vm = this;
+      this.mdDialog.show(
+        this.mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('Успешно оплачено')
+          .textContent('Вы успешно оплатили ' + vm.stateParams.purchase + ' объектов')
+          .ariaLabel('Alert Purchase Success')
+          .ok('Продолжить брать объекты')
+          .targetEvent(ev)
+      );
+    }
   }
 
   setSliderImages(images) {

@@ -6,21 +6,56 @@ import angularMeteor from 'angular-meteor';
 import {dictionary} from '../../../../helpers/dictionary';
 import {name as districtsAreaIdList} from '/imports/ui/shared/district-chips/district-chips.component.js';
 import './realty-filter.view.html';
+import {CountsDan} from '/imports/api/counts';
 
 class RealtyFilter {
   /* @ngInject */
   constructor($scope, $reactive, $timeout, $location, $state, $stateParams) {
     this.$timeout = $timeout;
     $reactive(this).attach($scope);
+
+    this.helpers({
+      realtyCount: () => {
+        let с = CountsDan.findOne({});
+        if (с) {
+          return с.count;
+        } else {
+          return '';
+        }
+      }
+    });
     let vm = this;
     this.dictionary = dictionary;
     this.location = $location;
     this.stateParams = $stateParams;
     this.state = $state;
     this.filter = {};
-    this.filter.roomcount = [];
     console.log(vm.stateParams);
-    if(vm.stateParams){
+    
+    if (window.localStorage["filter"] != undefined && window.localStorage["filter"]) {
+      console.log(JSON.parse(window.localStorage["filter"]));
+      this.filter = JSON.parse(window.localStorage["filter"]);
+      var roomList = this.filter.roomcount;
+      this.filter.roomcount = [];
+      for(var i in roomList) {
+        switch (roomList[i].id) {
+          case 1:
+            this.toggleRoomcount(this.dictionary.roomcount[0]);
+            break;
+          case 2:
+            this.toggleRoomcount(this.dictionary.roomcount[1]);
+            break;
+          case 3:
+            this.toggleRoomcount(this.dictionary.roomcount[2]);
+            break;
+          case 99:
+            this.toggleRoomcount(this.dictionary.roomcount[3]);
+            break;
+        }
+      }
+    }
+    //this.filter.roomcount = [];
+    /*if(vm.stateParams){
       if(vm.stateParams.floorFrom) vm.filter.floorFrom = vm.stateParams.floorFrom;
       if(vm.stateParams.floorTo) vm.filter.floorTo = vm.stateParams.floorTo;
       if(vm.stateParams.priceFrom) vm.filter.priceFrom = vm.stateParams.priceFrom;
@@ -42,10 +77,20 @@ class RealtyFilter {
       if(vm.stateParams.renovation) vm.filter.renovation = vm.stateParams.renovation;
       if(vm.stateParams.metroTime) vm.filter.metroTime = vm.stateParams.metroTime;
       if(vm.stateParams.metroTransport) vm.filter.metroTransport = vm.stateParams.metroTransport;
-    }
+    }*/
   }
   
+  
   suitRealty () {
+    
+    window.localStorage["filter"] = JSON.stringify(this.filter, function (key, val) {
+      if (key == '$$hashKey') {
+        return undefined;
+      }
+      return val;
+    });
+    console.log(window.localStorage["filter"]);
+        
     /*if(this.filter.floorFrom) this.stateParams.floorFrom = this.filter.floorFrom;
     if(this.filter.floorTo) this.stateParams.floorTo = this.filter.floorTo;
     if(this.filter.priceFrom) this.stateParams.priceFrom = this.filter.priceFrom;
@@ -63,13 +108,11 @@ class RealtyFilter {
     if(this.filter.renovation) this.stateParams.renovation = this.filter.renovation;
     if(this.filter.metroTime) this.stateParams.metroTime = this.filter.metroTime;
     if(this.filter.metroTransport) this.stateParams.metroTransport = this.filter.metroTransport;*/
-    if(this.location.url().match(/client=\d+/)){
+    /*if(this.location.url().match(/client=\d+/)){
       var newPath = this.location.path()+'?client='+this.location.url().match(/client=\d+/)[0].slice(7)+'&page='+this.stateParams.page+'&suitby=exact&activetab=suit';  
     }else{
       var newPath = this.location.path()+'?search=true&page='+this.stateParams.page;  
     }    
-    console.log(newPath);
-    console.log(this.location.url());
     if(this.filter.floorFrom) newPath += '&floorFrom=' + this.filter.floorFrom;
     if(this.filter.floorTo) newPath+='&floorTo='+this.filter.floorTo;
     if(this.filter.priceFrom) newPath+='&priceFrom='+this.filter.priceFrom;
@@ -106,7 +149,9 @@ class RealtyFilter {
         newPath += '&conditions='+this.filter.conditions[i];
       }
     }
-    history.pushState(null, null, newPath);
+    console.log(newPath);
+    this.filter.request = newPath;*/
+    //window.history.replaceState(null, null, newPath);
     //if(this.stateParams.page) this.state.go('crm.clients.details.suit', {page:1});
   }
 
@@ -119,6 +164,9 @@ class RealtyFilter {
         this.filter.roomcount.push(item);
       }
       this.roomcount = this.filter.roomcount.slice();
+    this.$timeout(()=>{
+      this.suitRealty();
+    },100)
     //this.$timeout(()=> {
     //  this.suitRealty();
     //}, 10);
