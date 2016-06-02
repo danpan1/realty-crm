@@ -27,6 +27,7 @@ class RealtyNewList {
     this.mdDialog = $mdDialog;
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
+    this.realtyCount = 0;
     vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     this.showSlider = false;

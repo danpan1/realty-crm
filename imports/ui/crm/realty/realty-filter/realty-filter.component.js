@@ -54,6 +54,67 @@ class RealtyFilter {
         }
       }
     }
+  }
+  
+  
+  suitRealty () {
+    window.localStorage["filter"] = JSON.stringify(this.filter, function (key, val) {
+      if (key == '$$hashKey') {
+        return undefined;
+      }
+      return val;
+    });
+    console.log(window.localStorage["filter"]);
+  }
+
+  toggleRoomcount(item) {
+      var idx = this.filter.roomcount.indexOf(item);
+      if (idx > -1) {
+        this.filter.roomcount.splice(idx, 1);
+      }
+      else {
+        this.filter.roomcount.push(item);
+      }
+      this.roomcount = this.filter.roomcount.slice();
+    this.$timeout(()=>{
+      this.suitRealty();
+    },100)    
+  }
+
+  existsRoomcount(item) {
+    // console.log(this.filter.roomcount);
+    if(this.filter.roomcount) return this.filter.roomcount.indexOf(item) > -1;
+  }
+
+}
+
+const moduleName = 'realtyFilter';
+
+// create a module
+export default angular.module(moduleName, [
+  angularMeteor,
+  districtsAreaIdList
+]).component(moduleName, {
+  templateUrl: 'imports/ui/crm/realty/realty-filter/realty-filter.view.html',
+  bindings: {
+    filter: '=',
+    roomcount: '=',
+    realtyCount: '='
+  },
+  controllerAs: moduleName,
+  controller: RealtyFilter
+});
+
+
+
+
+
+
+
+
+
+// From constructor
+
     //this.filter.roomcount = [];
     /*if(vm.stateParams){
       if(vm.stateParams.floorFrom) vm.filter.floorFrom = vm.stateParams.floorFrom;
@@ -78,19 +139,9 @@ class RealtyFilter {
       if(vm.stateParams.metroTime) vm.filter.metroTime = vm.stateParams.metroTime;
       if(vm.stateParams.metroTransport) vm.filter.metroTransport = vm.stateParams.metroTransport;
     }*/
-  }
-  
-  
-  suitRealty () {
     
-    window.localStorage["filter"] = JSON.stringify(this.filter, function (key, val) {
-      if (key == '$$hashKey') {
-        return undefined;
-      }
-      return val;
-    });
-    console.log(window.localStorage["filter"]);
-        
+// From suitRealty
+
     /*if(this.filter.floorFrom) this.stateParams.floorFrom = this.filter.floorFrom;
     if(this.filter.floorTo) this.stateParams.floorTo = this.filter.floorTo;
     if(this.filter.priceFrom) this.stateParams.priceFrom = this.filter.priceFrom;
@@ -153,48 +204,3 @@ class RealtyFilter {
     this.filter.request = newPath;*/
     //window.history.replaceState(null, null, newPath);
     //if(this.stateParams.page) this.state.go('crm.clients.details.suit', {page:1});
-  }
-
-  toggleRoomcount(item) {
-      var idx = this.filter.roomcount.indexOf(item);
-      if (idx > -1) {
-        this.filter.roomcount.splice(idx, 1);
-      }
-      else {
-        this.filter.roomcount.push(item);
-      }
-      this.roomcount = this.filter.roomcount.slice();
-    this.$timeout(()=>{
-      this.suitRealty();
-    },100)
-    //this.$timeout(()=> {
-    //  this.suitRealty();
-    //}, 10);
-    // console.log(this.roomcount);
-    // console.log(this.filter);
-    
-  }
-
-  existsRoomcount(item) {
-    // console.log(this.filter.roomcount);
-    if(this.filter.roomcount) return this.filter.roomcount.indexOf(item) > -1;
-  }
-
-}
-
-const moduleName = 'realtyFilter';
-
-// create a module
-export default angular.module(moduleName, [
-  angularMeteor,
-  districtsAreaIdList
-]).component(moduleName, {
-  templateUrl: 'imports/ui/crm/realty/realty-filter/realty-filter.view.html',
-  bindings: {
-    filter: '=',
-    roomcount: '='
-  },
-  controllerAs: moduleName,
-  controller: RealtyFilter
-});
-
