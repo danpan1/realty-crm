@@ -51,40 +51,47 @@ class RealtyCard {
     var vm = this;
     this.mdDialog.show({
       //controller: DialogController,
-      template: `<md-dialog aria-label="Purchasing subscribtion" ng-cloak>
+      template: `<md-dialog class="subscription-dialog" aria-label="Оплата подписки" ng-cloak>
                     <md-toolbar>
                       <div class="md-toolbar-tools">
                         <h2>Оплата подписки</h2>
                         <span flex></span>
                         <md-button class="md-icon-button" ng-click="this.close()">
-                          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                          <md-icon md-svg-src="svg/icon-close.svg" aria-label="Закрыть окно оплаты подписки"></md-icon>
                         </md-button>
                       </div>
                     </md-toolbar>
                     <md-dialog-content>
-                      <div class="md-dialog-content">
-                        <h2>Безлимитное количество объектов за 990 рублей в месяц</h2>
-                        <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocaen_object_period/?t=20985#form" target='blank' onsubmit="return __cmsformcheck_order()">
-                          <input type="hidden" name="good_name" value="ocaen_object_period" />
-                          <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
-                          <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
-                          <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
-                          <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
-                          <md-button class="md-primary md-raised">
-                              <input type="submit" value="Оплатить картой подписку на 1 месяц" name="doorder" class="feedback__nostyles p-0 m-0" />
-                          </md-button>
-                        </form>
-                        <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocaen_object_6mes/?t=20986#form" target='blank' onsubmit="return __cmsformcheck_order()">
-                          <input type="hidden" class="good-name" name="good_name" value="ocaen_object_6mes" />
-                          <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
-                          <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
-                          <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
-                          <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
-                          <md-button class="md-default md-raised">
-                              <input type="submit" value="Оплатить другой системой за 6 месяцев" name="doorder" style='color:black;' class="feedback__nostyles p-0 m-0" />
-                          </md-button>
-                        </form>
-                        <!--<md-button class="md-danger md-raised" ng-click='close()'>Закрыть!</md-button>-->
+                      <div class="md-dialog-content pv-16">
+                        <div layout="column">
+                          <div layout="row" flex="80">
+                            <h3 class="md-subhead text-center">Безлимитное количество объектов за 990 рублей в месяц</h3>
+                          </div>
+                          <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocaen_object_period/?t=20985#form" target='blank' onsubmit="return __cmsformcheck_order()">
+                            <input type="hidden" name="good_name" value="ocaen_object_period" />
+                            <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
+                            <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
+                            <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
+                            <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
+                            <div layout="row">
+                              <md-button flex class="md-primary md-raised mv-16 ph-16">
+                                <input type="submit" value="Оплатить картой подписку на 1 месяц" name="doorder" class="feedback__nostyles" />
+                              </md-button>
+                          </form>
+                        </div>
+                          <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocaen_object_6mes/?t=20986#form" target='blank' onsubmit="return __cmsformcheck_order()">
+                            <input type="hidden" class="good-name" name="good_name" value="ocaen_object_6mes" />
+                            <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
+                            <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
+                            <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
+                            <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
+                            <div layout="row">
+                              <md-button flex class="md-default md-raised mv-16 ph-16 flex">
+                                <input type="submit" value="Оплатить другой системой за 6 месяцев" name="doorder" style='color:black;' class="feedback__nostyles" />
+                              </md-button>
+                          </form>
+                          <!--<md-button class="md-danger md-raised" ng-click='close()'>Закрыть!</md-button>-->
+                        
                       </div>
                     </md-dialog-content>
                 </md-dialog>`,
