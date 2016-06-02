@@ -89,7 +89,7 @@ if (Meteor.isServer) {
           /* END РАЙОНЫ МЕТРО */
 
         }
-        Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
+        // Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
 
         //TODO раскомментить только то что надо на клиенте
         options.fields = {

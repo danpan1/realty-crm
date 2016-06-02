@@ -33,6 +33,8 @@ class RealtyStreet {
   }
 
   querySearchHouse(query) {
+    console.log('dadata');
+    this.dataFull = null;
     if (!query) {
       return;
     }
