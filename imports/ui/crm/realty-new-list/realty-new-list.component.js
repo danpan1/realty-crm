@@ -4,6 +4,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Realty} from '/imports/api/realty';
+import {CountsDan} from '/imports/api/counts';
 import {Clients} from '/imports/api/clients';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import {dictionary} from '../../../helpers/dictionary';
@@ -72,11 +73,20 @@ class RealtyNewList {
         });
       },
       realtyCount: () => {
-        console.log('count =', Realty.find({}).count());
-        return Realty.find({}).count();
+        let с = CountsDan.findOne({});
+        if (с) {
+          return с.count;
+        } else {
+          return '';
+        }
       },
       pagesCount: () => {
-        return Math.ceil(Realty.find({}).count() / this.perPage);
+        let с = CountsDan.findOne({});
+        if (с) {
+          return Math.ceil(с.count / this.perPage);
+        } else {
+          return '';
+        }
       }
     });
 

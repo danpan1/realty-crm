@@ -1,8 +1,9 @@
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '../realty.model';
+import {CountsDan} from '../../counts/counts.model';
 import {Roles} from 'meteor/alanning:roles';
 import {_} from 'meteor/underscore';
-import {Counts} from 'meteor/tmeasday:publish-counts';
+// import {Counts} from 'meteor/tmeasday:publish-counts';
 
 if (Meteor.isServer) {
   Meteor.publish('newList', function (options, search) {
@@ -94,6 +95,8 @@ if (Meteor.isServer) {
         //TODO раскомментить только то что надо на клиенте
         options.fields = {
           'address.subwaysEmbedded': 1,
+          'address.metroTime': 1,
+          'details.descr': 1,
           'details.renovation': 1,
           'details.images': 1,
           'details.conditions': 1,
@@ -109,7 +112,11 @@ if (Meteor.isServer) {
         //         { limit: 20,   skip: 40, sort: { createdAt: -1 }},
         console.log(selector);
         // console.log(options);
-        return Realty.find(selector, options);
+        let realty = Realty.find(selector, options);
+        let count = realty.count();
+        let countId = CountsDan.upsert({_id: this.userId}, {count: count});
+        CountsDan.find({_id: countId});
+        return [realty, CountsDan.find({_id: this.userId})];
       }
 
     }
