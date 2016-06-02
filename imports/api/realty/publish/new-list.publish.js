@@ -15,7 +15,7 @@ if (Meteor.isServer) {
         };
 
         if (search) {
-          console.log(search);
+          console.log('search', search);
 
           let price = {};
 
@@ -46,7 +46,10 @@ if (Meteor.isServer) {
 
           /* КОЛИЧЕСТВО КОМНАТ */
           if (search.roomcount && !_.isEmpty(search.roomcount)) {
-            selector.roomcount = {$in: search.roomcount};
+            let rooms = search.roomcount.map((item)=> {
+              return item.id;
+            });
+            selector.roomcount = {$in: rooms};
           }
           /* END КОЛИЧЕСТВО КОМНАТ */
 
@@ -90,28 +93,22 @@ if (Meteor.isServer) {
 
         //TODO раскомментить только то что надо на клиенте
         options.fields = {
-          // image: 1,
-          // price: 1,
-          // title: 1,
-          // 'parseDetails.images': 1,
-          // 'address.metroName': 1,
-          // 'address.street': 1,
-          // 'address.meta.house': 1,
-          // 'address.areaName': 1,
-          // 'address.districtName': 1,
-          // 'operator.qualification': 1,
-          // 'details.renovation': 1,
-          // 'details.descr': 1,
-          // contacts: 1,
-          // 'realtor.id': 1,
-          // roomcount: 1,
-          // square: 1,
-          // floor: 1,
-          // floormax: 1,
-          // status: 1
+          'address.subwaysEmbedded': 1,
+          'details.renovation': 1,
+          'details.images': 1,
+          'details.conditions': 1,
+          floor: 1,
+          floormax: 1,
+          image: 1,
+          price: 1,
+          roomcount: 1,
+          square: 1,
+          status: 1
         };
-
+        //db.realty.ensureIndex({roomcount : 1})
+        //         { limit: 20,   skip: 40, sort: { createdAt: -1 }},
         console.log(selector);
+        // console.log(options);
         return Realty.find(selector, options);
       }
 
