@@ -19,6 +19,7 @@ class RealtyStreet {
 
   querySearch(query) {
     if (!query) {
+      console.log('!query')
       return;
     }
     return AddressService.search({
@@ -28,14 +29,15 @@ class RealtyStreet {
       'restrict_value': true,
       'query': query, count: 10
     }).then((res)=> {
+      console.log('street then')
       return res.suggestions;
     });
   }
 
   querySearchHouse(query) {
-    console.log('dadata');
     this.dataFull = null;
     if (!query) {
+      console.log('house !query')
       return;
     }
     if (this.street && this.street.data) {
@@ -46,6 +48,7 @@ class RealtyStreet {
         'restrict_value': true,
         'query': query, count: 10
       }).then((res)=> {
+      console.log('house then')
         return res.suggestions;
       });
     }
