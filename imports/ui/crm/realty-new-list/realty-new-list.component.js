@@ -85,7 +85,7 @@ class RealtyNewList {
           .parent(angular.element(document.querySelector('body')))
           .clickOutsideToClose(true)
           .title('Успешно оплачено')
-          .textContent('<h2>Вы успешно оплатили ' + vm.stateParams.purchase + ' объектов</h2>')
+          .textContent('Вы успешно оплатили ' + vm.stateParams.purchase + ' объектов')
           .ariaLabel('Alert Purchase Success')
           .ok('Продолжить брать объекты')
           .targetEvent(ev)

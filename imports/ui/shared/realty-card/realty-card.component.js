@@ -51,8 +51,8 @@ class RealtyCard {
   openPurchaseStart (ev) {
     var vm = this;
     this.mdDialog.show({
-      controller: DialogController,
-      template: `<md-dialog aria-label="Mango (Fruit)" ng-cloak>
+      //controller: DialogController,
+      template: `<md-dialog aria-label="Purchasing subscribtion" ng-cloak>
                     <md-toolbar>
                       <div class="md-toolbar-tools">
                         <h2>Оплата подписки</h2>
@@ -85,7 +85,7 @@ class RealtyCard {
                               <input type="submit" value="Оплатить другой системой за 6 месяцев" name="doorder" style='color:black;' class="feedback__nostyles p-0 m-0" />
                           </md-button>
                         </form>
-                        <md-button class="md-danger md-raised" ng-click='close()'>Закрыть на хуй!</md-button>
+                        <!--<md-button class="md-danger md-raised" ng-click='close()'>Закрыть!</md-button>-->
                       </div>
                     </md-dialog-content>
                 </md-dialog>`,
