@@ -9,7 +9,7 @@ div {{realtyNewList.realtyCount}} объектов найдено
 
 pagination-buttons(ng-if='realtyNewList.pagesCount' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
 
-.md-body-1(layout='column', layout-align='space-around stretch')
+.md-body-1(layout='column', layout-align='space-around stretch' ng-init='realtyNewList.openPurchaseSuccess()')
     .listMy(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
         div().listMy_col Подано
         div().listMy_col Местоположение

@@ -7,7 +7,7 @@ export default function routes($stateProvider) {
     })
     .state('crm.realty-new-list', {
       template: '<realty-new-list/>',
-      url: `/new-realty?:search&:page&:floorFrom&:floorTo&:priceFrom&:priceTo&:conditions&:subways&:roomcount&:districts&:composition&:renovation&:metroTime&:metroTransport`,
+      url: `/new-realty?:search&:purchase&:page&:floorFrom&:floorTo&:priceFrom&:priceTo&:conditions&:subways&:roomcount&:districts&:composition&:renovation&:metroTime&:metroTransport`,
       controller: function ($state, $stateParams) {}
     });
   // Пока тут пусто. Может здесь будет layout индивидуальны. Danpan
