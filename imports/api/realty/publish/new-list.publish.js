@@ -94,6 +94,8 @@ if (Meteor.isServer) {
         //TODO раскомментить только то что надо на клиенте
         options.fields = {
           'address.subwaysEmbedded': 1,
+          'address.metroTime': 1,
+          'details.descr': 1,
           'details.renovation': 1,
           'details.images': 1,
           'details.conditions': 1,
