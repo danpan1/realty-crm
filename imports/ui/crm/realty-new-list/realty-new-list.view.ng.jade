@@ -23,5 +23,4 @@ div(ng-if='realtyNewList.realty.length == realtyNewList.realtyCount || (realtyNe
                     page-from='realtyNewList'
                     realty='realty'
                     slider='realtyNewList.setSliderImages(images)')
-//pagination-buttons(ng-if='realtyNewList.pagesCount' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
-//db.realty.ensureIndex({"roomcount": 1})
+pagination-buttons(ng-if='realtyNewList.pagesCount && (realtyNewList.realty.length == realtyNewList.realtyCount) || (realtyNewList.realty.length == 20 && realtyNewList.realtyCount >=20)' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
