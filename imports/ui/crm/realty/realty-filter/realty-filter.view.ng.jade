@@ -9,15 +9,17 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                         ng-repeat="composition in realtyFilter.dictionary.composition ") {{composition.name}}
                 div(flex)
                     district-chips(ng-model="realtyFilter.filter.districts"
-                    districts-embeded='realtyFilter.districtsEmbeded' flex)
+                    districts-embeded='realtyFilter.districtsEmbeded' flex
+                    districts-changed='realtyFilter.suitRealty()')
                 div(flex)
                     subway-chips(ng-model="realtyFilter.filter.subways"
-                    subways-embeded='realtyFilter.subwaysEmbeded' flex)
+                    subways-embeded='realtyFilter.subwaysEmbeded' flex
+                    subways-changed='realtyFilter.suitRealty()')
 
         div(flex='30' flex-offset='10')
             div(layout='column' layout-align='space-between none').realty-filter__block
                 div(layout='row' layout-align='space-between end').realty-filter__rooms
-                    label().mr-8 Комнат 
+                    label().mr-8 Комнат
                     md-checkbox(
                     ng-checked='realtyFilter.existsRoomcount(item)',
                     ng-repeat='item in realtyFilter.dictionary.roomcount',
@@ -63,5 +65,3 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                     md-button(aria-label='Очистить число показов').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
                         md-icon(md-svg-icon='svg/icon-delete-forever.svg')
 
-
-md-button(ng-click='realtyFilter.suitRealty()').md-raised.md-primary Найти

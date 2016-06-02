@@ -19,7 +19,7 @@ md-floating-label='Улица').form-required
             |  have a favorite state.
         div(ng-message='minlength') Your entry is not long enough.
         div(ng-message='maxlength') Your entry is too long.
-
+//div {{realtyStreet.dataFull}}
 md-autocomplete(flex='',
 required='',
 md-input-name='autocompleteFieldHouse',
@@ -33,3 +33,6 @@ md-item-text='item.value',
 md-floating-label='Дом и корпус').form-required
     md-item-template
         span(md-highlight-text='realtyStreet.searchTextHouse') {{item.value}}
+    div(ng-messages='searchForm.autocompleteField.$error',
+    ng-if='!realtyStreet.dataFull && realtyStreet.searchTextHouse')
+        div(ng-message='required') Выбор номер дома возможен только из предложенных вариантов!

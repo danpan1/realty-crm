@@ -34,7 +34,7 @@ class RealtyNewList {
       // 'updated_at': -1
       'createdAt': -1
     };
-
+    let timeTestLoadData = new Date();
     vm.subscribe('newList', () => {
       return [
         //фильтр для pagination
@@ -48,8 +48,9 @@ class RealtyNewList {
           floorFrom: vm.getReactively('filter.floorFrom'),
           floorTo: vm.getReactively('filter.floorTo'),
           priceTo: vm.getReactively('filter.priceTo'),
+          conditions: vm.getReactively('filter.conditions'),
           priceFrom: vm.getReactively('filter.priceFrom'),
-          roomcount: vm.getReactively('roomcount'),
+          roomcount: vm.getReactively('filter.roomcount'),
           type: vm.getReactively('filter.type'),
           subways: vm.getReactively('filter.subways'),
           districts: vm.getReactively('filter.districts')
@@ -58,26 +59,31 @@ class RealtyNewList {
     }, {
       onReady: function () {
         vm.loaded = true;
+        let timeLoaded = new Date();
+        console.log('время на закгрузку = ', ((timeLoaded - timeTestLoadData) / 1000));
+
       }
     });
 
     vm.helpers({
       realty: () => {
-        return Realty.find({}, {sort: vm.getReactively('sort')});
+        return Realty.find({}, {
+          sort: vm.getReactively('sort')
+        });
       },
       realtyCount: () => {
-        return Counts.get('realtyCount');
+        console.log('count =', Realty.find({}).count());
+        return Realty.find({}).count();
       },
       pagesCount: () => {
-        return Math.ceil(Counts.get('realtyCount') / this.perPage);
+        return Math.ceil(Realty.find({}).count() / this.perPage);
       }
     });
-    
+
   }
-  
-  openPurchaseSuccess (ev) {
+
+  openPurchaseSuccess(ev) {
     // Если совершена покупка, открываем окно с сообщением
-    console.log('Hello purchase');
     if(this.stateParams.purchase){
       let vm = this;
       this.mdDialog.show(
