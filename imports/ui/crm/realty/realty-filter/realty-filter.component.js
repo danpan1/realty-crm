@@ -6,12 +6,24 @@ import angularMeteor from 'angular-meteor';
 import {dictionary} from '../../../../helpers/dictionary';
 import {name as districtsAreaIdList} from '/imports/ui/shared/district-chips/district-chips.component.js';
 import './realty-filter.view.html';
+import {CountsDan} from '/imports/api/counts';
 
 class RealtyFilter {
   /* @ngInject */
   constructor($scope, $reactive, $timeout, $location, $state, $stateParams) {
     this.$timeout = $timeout;
     $reactive(this).attach($scope);
+
+    this.helpers({
+      realtyCount: () => {
+        let с = CountsDan.findOne({});
+        if (с) {
+          return с.count;
+        } else {
+          return '';
+        }
+      }
+    });
     let vm = this;
     this.dictionary = dictionary;
     this.location = $location;

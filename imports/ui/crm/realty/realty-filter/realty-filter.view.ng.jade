@@ -61,7 +61,7 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                         label до
                         input(ng-model='realtyFilter.filter.floorTo' ng-blur='realtyFilter.suitRealty()')
                 div(layout='row' layout-align='space-between end').mt-16
-                    label().md-subhead.text-bold Показано  10 000 объектов
+                    label().md-subhead.text-bold  {{(realtyFilter.realtyCount || realtyFilter.realtyCount===0) ? ('Показано ' + realtyFilter.realtyCount + ' объектов') : 'Ищем объекты'}}
                     md-button(aria-label='Очистить число показов').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
                         md-icon(md-svg-icon='svg/icon-delete-forever.svg')
 
