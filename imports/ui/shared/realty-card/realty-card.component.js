@@ -100,7 +100,14 @@ class RealtyCard {
 
   takeRealty(id, ev) {
     if (true != false) this.openPurchaseStart(ev);
-    Meteor.call('takeRealty', id);
+    console.log(id, 'takeRealty');
+    Meteor.call('takeRealty', id, (err, result)=>{
+      if (err){
+        console.log(err);
+      }else {
+        console.log(result);
+      }
+    });
   }
   
   updateRealty (id) {

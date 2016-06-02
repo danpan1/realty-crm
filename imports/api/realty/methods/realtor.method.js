@@ -58,9 +58,9 @@ export function addRealtyToMyList(realtyId) {
 }
 
 export function takeRealty(realtyId) {
+  if (Meteor.isServer && Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'paid')) {
 
-  if (Meteor.isServer && Meteor.userId()) {
-
+    console.log('takeRealty')
     let realty = Realty.findOne({_id: realtyId});
     if (!realty) {
       //Не даём взять объект
@@ -104,6 +104,9 @@ export function takeRealty(realtyId) {
       return 'больше 100 объектов взято в этом месяце';
     }
 
+  } else {
+    console.log('NOt paid');
+    return 'NOt paid';
   }
 }
 

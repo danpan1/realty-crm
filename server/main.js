@@ -1,4 +1,5 @@
 
+import '../imports/helpers/addUserToRolePaid';
 import '../imports/helpers/send-email.method';
 import '../imports/helpers/send-question.method';
 import '../imports/api/locations';
