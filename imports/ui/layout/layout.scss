@@ -84,6 +84,7 @@ div[md-whiteframe] {
 }
 
 md-tabs{
+  border-radius: 0;
   background-color: $white;
   md-ink-bar {
     color: color($blue, 400);

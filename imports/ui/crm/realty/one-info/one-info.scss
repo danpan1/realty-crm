@@ -34,30 +34,6 @@ one-info {
   position: relative;
 }
 
-.slide__prev,
-.slide__next {
-  z-index: 10;
-  position: absolute;
-  background: url('img/icons/icon-arrow-left.png') no-repeat;
-  width: 42px;
-  height: 42px;
-  appearance: none;
-  border: none;
-  outline: none;
-}
-
-.slide__prev {
-  top: 50%;
-  left: 0;
-  transform: translate(0, -50%) scaleX(-1);
-}
-
-.slide__next {
-  top: 50%;
-  right: 0;
-  transform: translate(0, -50%);
-}
-
 .one-info{
   &-archive{
     &__block{
