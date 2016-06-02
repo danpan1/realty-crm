@@ -11,7 +11,7 @@ class SlideShow {
     this.sliderMaxWidth = 0;
     this.slideCount = 0;
     this.slideInnerStyle = {};
-    this.marginConst = 1028;
+    this.marginConst = 664;
   }
 
   showSlides() {
