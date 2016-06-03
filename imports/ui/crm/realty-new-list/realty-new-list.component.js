@@ -27,6 +27,7 @@ class RealtyNewList {
     this.mdDialog = $mdDialog;
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
+    this.state = $state;
     
     this.autorun(function () {
       let user = Meteor.user();
@@ -71,6 +72,9 @@ class RealtyNewList {
       ];
     }, {
       onReady: function () {
+        if(vm.stateParams.page > Math.ceil(vm.getReactively('realtyCount') / vm.perPage)) {
+          vm.state.go('crm.realty-new-list', {page:1});
+        }
         vm.loaded = true;
         let timeLoaded = new Date();
         let timeRender = new Date();

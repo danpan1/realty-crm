@@ -8,6 +8,7 @@ slide-show(slides-list='realtyNewList.slideShowImages' isshown='realtyNewList.sh
 
 md-progress-circular(ng-if='!realtyNewList.loaded' md-diameter='150' style='position:absolute;left:0;right:0;top:500px;margin:0 auto;')
 div(ng-if='realtyNewList.loaded')
+    pagination-buttons(ng-if='realtyNewList.loaded' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
     .md-body-1(ng-if='realtyNewList.realty.length' layout='column', layout-align='space-around stretch' ng-init='realtyNewList.openPurchaseSuccess()')
         .listMy(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
             div().listMy_col Подано
@@ -24,4 +25,4 @@ div(ng-if='realtyNewList.loaded')
                     realty='realty'
                     slider='realtyNewList.setSliderImages(images)'
                     user='realtyNewList.user')
-pagination-buttons(ng-if='realtyNewList.loaded' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
+    pagination-buttons(ng-if='realtyNewList.loaded' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
