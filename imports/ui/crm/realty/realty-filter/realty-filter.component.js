@@ -11,9 +11,9 @@ import {CountsDan} from '/imports/api/counts';
 class RealtyFilter {
   /* @ngInject */
   constructor($scope, $reactive, $timeout, $location, $state, $stateParams) {
-    this.$timeout = $timeout;
     $reactive(this).attach($scope);
-
+    let vm = this;
+    this.$timeout = $timeout;
     this.helpers({
       realtyCount: () => {
         let с = CountsDan.findOne({});
@@ -24,18 +24,17 @@ class RealtyFilter {
         }
       }
     });
-    let vm = this;
     this.dictionary = dictionary;
     this.location = $location;
     this.stateParams = $stateParams;
     this.state = $state;
     this.filter = {};
     this.fake = true;
-    console.log(vm.stateParams);
     
     if (window.localStorage["filter"] != undefined && window.localStorage["filter"]) {
       console.log(JSON.parse(window.localStorage["filter"]));
       this.filter = JSON.parse(window.localStorage["filter"]);
+      this.filter.type = this.stateParams.operation == 'sale' ? 1 : 4;
       var roomList = this.filter.roomcount;
       this.filter.roomcount = [];
       for(var i in roomList) {
@@ -100,7 +99,7 @@ export default angular.module(moduleName, [
   bindings: {
     filter: '=',
     roomcount: '=',
-    realtyCount: '='
+    realtyCount: '=ngModel'
   },
   controllerAs: moduleName,
   controller: RealtyFilter

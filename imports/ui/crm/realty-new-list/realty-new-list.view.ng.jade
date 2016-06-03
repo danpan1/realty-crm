@@ -1,8 +1,8 @@
 div(md-whiteframe="1")
     md-tabs(md-border-bottom md-selected='realtyNewList.selectedTab').realty-list-layout__topbar
         md-tab(label='Аренда' ui-sref="crm.realty-new-list({operation: \'rent\', page: 1})")
-        md-tab(label='Продажа' ui-sref="crm.realty-new-list({operation: \'sale\', page: 1})")
-realty-filter(filter='realtyNewList.filter' roomcount='realtyNewList.roomcount' realtyCount='realtyNewList.realtyCount')
+        //md-tab(label='Продажа' ui-sref="crm.realty-new-list({operation: \'sale\', page: 1})")
+realty-filter(filter='realtyNewList.filter' ng-if='realtyNewList.realtyCount !== undefined' roomcount='realtyNewList.roomcount' ng-model='realtyNewList.realtyCount')
 slide-show(slides-list='realtyNewList.slideShowImages' isshown='realtyNewList.showSlider')
 //div {{realtyNewList.filter}} фильтр
 

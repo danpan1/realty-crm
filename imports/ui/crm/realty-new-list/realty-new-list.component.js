@@ -21,13 +21,25 @@ import './realty-new-list.view.html';
 
 class RealtyNewList {
   /* @ngInject */
-  constructor($scope, $reactive, $location, $state, $stateParams, $mdDialog) {
+  constructor($scope, $reactive, $timeout, $location, $state, $stateParams, $mdDialog) {
     $reactive(this).attach($scope);
+    this.$timeout = $timeout;
     const vm = this;
     this.mdDialog = $mdDialog;
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
     this.state = $state;
+    
+    switch ($stateParams.operation) {
+      case 'rent':
+        vm.selectedTab = 0;
+        break;
+      case 'sale':
+        vm.selectedTab = 1;
+        break;
+      default:
+        vm.selectedTab = 0;
+    }
     
     this.autorun(function () {
       let user = Meteor.user();
@@ -75,12 +87,13 @@ class RealtyNewList {
         if(vm.stateParams.page > Math.ceil(vm.getReactively('realtyCount') / vm.perPage)) {
           vm.state.go('crm.realty-new-list', {page:1});
         }
-        vm.loaded = true;
+        vm.$timeout(()=>{
+          vm.loaded = true;
+        },100)    
         let timeLoaded = new Date();
         let timeRender = new Date();
         console.log('время на закгрузку = ', ((timeLoaded - timeTestLoadData) / 1000));
         console.log('время на рендер = ', ((timeRender - timeTestRender) / 1000));
-
       }
     });
 
