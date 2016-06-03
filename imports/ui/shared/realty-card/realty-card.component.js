@@ -5,50 +5,52 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {dictionary} from '../../../helpers/dictionary';
 import {Meteor} from 'meteor/meteor';
+import {Realty} from '../../../api/realty';
 
 import './realty-card.view.html';
 
 class RealtyCard {
   /* @ngInject */
-  constructor($scope, $reactive, $mdDialog) {
+  constructor($scope, $reactive, $mdDialog, $timeout) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
+    this.timeout = $timeout;
     this.show = true;
     this.mdDialog = $mdDialog;
     var vm = this;
-    
+
     /*this.autorun(function () {
-      let user = Meteor.user();
-      if (user) {
-        vm.user = user;*/
-        vm.data = {
-            good_name: "ocaen_object_6mes",
-            bill_first_name: this.user.profile.name,
-            bill_email: this.user.emails[0].address,
-            bill_phone: this.user.profile.phone,
-            file_profile: "default",
-            offerta_accept: "true"
-        };
-      /*}
-    });*/
-    
-    
-    this.close = function() {
+     let user = Meteor.user();
+     if (user) {
+     vm.user = user;*/
+    vm.data = {
+      good_name: "ocaen_object_6mes",
+      bill_first_name: this.user.profile.name,
+      bill_email: this.user.emails[0].address,
+      bill_phone: this.user.profile.phone,
+      file_profile: "default",
+      offerta_accept: "true"
+    };
+    /*}
+     });*/
+
+
+    this.close = function () {
       this.mdDialog.cancel();
     };
-    
+
   }
 
-  agentContinue (id) {
-    if(id) this.objectAdded = true;
+  agentContinue(id) {
+    if (id) this.objectAdded = true;
     else this.show = false;
   }
 
-  changeRelationType(type,realtyId, clientId, isNew) {
-    Meteor.call('changeRelationTypeInClient', type,realtyId,clientId,isNew);
+  changeRelationType(type, realtyId, clientId, isNew) {
+    Meteor.call('changeRelationTypeInClient', type, realtyId, clientId, isNew);
   }
-  
-  openPurchaseStart (ev) {
+
+  openPurchaseStart(ev) {
     var vm = this;
     this.mdDialog.show({
       //controller: DialogController,
@@ -97,46 +99,48 @@ class RealtyCard {
                     </md-dialog-content>
                 </md-dialog>`,
       targetEvent: ev,
-      clickOutsideToClose:true
+      clickOutsideToClose: true
     })
   }
 
   takeRealty(id, ev) {
     let vm = this;
     this.isUserPaid = false;
+    console.log(this.user.roles, ' роли юзера');
     for (var i in this.user.roles) {
-      console.log(this.user.roles[i]);
-      if(this.user.roles[i] == 'paid') {
+      if (this.user.roles[i] == 'paid') {
         this.isUserPaid = true;
         break;
       }
     }
     if (!this.isUserPaid) this.openPurchaseStart(ev);
-    else{
+    else {
       console.log(id, 'takeRealty');
-      Meteor.call('takeRealty', id, (err, result)=>{
-        if (err){
-          console.log('err: '+err);
-        }else {
-          vm.realtyPhone = result.phone;
-          vm.realtyName = result.name;
-          console.log(vm.realtyPhone + vm.realtyName);
+      Meteor.call('takeRealty', id, (err, result)=> {
+        if (err) {
+          console.log('err: ' + err);
+        } else {
+          this.timeout(()=> {
+            vm.realtyPhone = result.phone;
+            vm.realtyName = result.name;
+            console.log(vm.realtyPhone + vm.realtyName);
+          }, 0);
         }
       });
     }
   }
-  
-  takeCheckedRealty(id, status){
-    Meteor.call('takeRealty', id, status, (err, result)=>{
-      if (err){
-        console.log('err: '+err);
-      }else {
+
+  takeCheckedRealty(id, status) {
+    Meteor.call('takeRealty', id, status, (err, result)=> {
+      if (err) {
+        console.log('err: ' + err);
+      } else {
         console.log(result);
       }
     });
   }
-  
-  updateRealty (id) {
+
+  updateRealty(id) {
     Realty.update({_id: id}, {
       $set: this.realty
     }, (error) => {
@@ -155,11 +159,11 @@ class RealtyCard {
 
 function DialogController($scope, $reactive, $mdDialog) {
   $reactive(this).attach($scope);
-  this.close = function() {
+  this.close = function () {
     this.mdDialog.cancel();
   };
 }
-  
+
 const moduleName = 'realtyCard';
 
 // create a module
