@@ -1,7 +1,7 @@
 div(md-whiteframe='2').realty-filter.ph-32.pv-16
     div(layout='row', layout-align="space-between center")
         div(flex='30')
-            div(layout='column' layout-align='space-between none').realty-filter__block
+            div(layout='column' layout-align='space-between none')
                 md-input-container(flex)
                     label Москва
                     md-select(ng-model='realtyFilter.filter.composition', multiple='true' ng-blur='realtyFilter.suitRealty()')
@@ -17,7 +17,7 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                     subways-changed='realtyFilter.suitRealty()')
 
         div(flex='30' flex-offset='10')
-            div(layout='column' layout-align='space-between none').realty-filter__block
+            div(layout='column' layout-align='space-between none')
                 div(layout='row' layout-align='space-between end').realty-filter__rooms
                     label().mr-8 Комнат
                     md-checkbox(
@@ -27,7 +27,7 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                     ng-blur='realtyFilter.suitRealty()'
                     md-no-ink,
                     class='md-primary') {{ item.name }}
-                md-input-container(flex)
+                md-input-container()
                     label Выбрать удобства
                     md-select(ng-model='realtyFilter.filter.conditions', multiple='true' ng-blur='realtyFilter.suitRealty()')
                         md-option(ng-value='condition.id',
@@ -43,7 +43,7 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                             ng-repeat="transport in realtyFilter.dictionary.transport") {{transport.name}}
 
         div(flex='30' flex-offset='10')
-            div(layout='column' layout-align='space-between none').realty-filter__block
+            div(layout='column' layout-align='space-between none')
                 div(layout='row' layout-align='space-between end')
                     md-input-container(flex='40')
                         label цена от
@@ -62,6 +62,6 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                         input(ng-model='realtyFilter.filter.floorTo' ng-blur='realtyFilter.suitRealty()')
                 div(layout='row' layout-align='space-between end').mt-16
                     label().md-subhead.text-bold  {{(realtyFilter.realtyCount || realtyFilter.realtyCount===0) ? ('Показано ' + (realtyFilter.realtyCount | price) + ' объектов') : 'Ищем объекты'}}
-                    md-button(aria-label='Очистить число показов').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
+                    md-button(aria-label='Очистить число показов' md-no-ink).md-icon-button.realty-filter__btn-clear-results.m-0.p-0
                         md-icon(md-svg-icon='svg/icon-delete-forever.svg')
 
