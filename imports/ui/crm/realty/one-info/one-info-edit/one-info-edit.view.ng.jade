@@ -19,8 +19,7 @@ div(ng-if="oneInfoEdit.show")
                                 label Квартира
                                 input(ng-model='oneInfoEdit.realty.address.flat')
                                 span.bottom-label Видите только вы
-                            subway-chips(ng-model='oneInfoEdit.realty.address.subways' subways-embeded='oneInfoEdit.realty.address.embeded.subways' flex
-                            ng-if='oneInfoEdit.realty.address.subways')
+                            subway-chips(ng-model='oneInfoEdit.realty.address.subways' subways-embeded='oneInfoEdit.realty.address.subwaysEmbedded' flex)
                             div(layout='row' layout-align='start end').mv-16
                                 md-input-container(flex).mv-0.pv-0.zh
                                     input(ng-model='oneInfoEdit.realty.address.metroTime', placeholder='минут')

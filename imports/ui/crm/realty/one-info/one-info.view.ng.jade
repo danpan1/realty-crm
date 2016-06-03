@@ -51,10 +51,10 @@ div(layout="column", layout-align="space-around stretch")
                             div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Район:
                                 div(flex='40') #[strong {{oneInfo.realty.address.districtName || 'Не указано'}}]
-                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                            div(layout='row' layout-align='space-around start' ng-if='oneInfo.realty.address.subwaysEmbedded[0].name').md-subhead.mv-8
                                 div(flex='60') Метро:
                                 div(flex='40') #[strong {{oneInfo.realty.address.subwaysEmbedded[0].name}}]
-                            div(layout='row' layout-align='space-around start').md-subhead.mv-8
+                            div(layout='row' layout-align='space-around start' ng-if='oneInfo.realty.address.subwaysEmbedded[0].name').md-subhead.mv-8
                                 div(flex='60') До метро:
                                 div(flex='40') #[strong {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
                         div(flex layout='column' layout-align='end start')
