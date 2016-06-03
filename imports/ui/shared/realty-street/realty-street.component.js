@@ -29,7 +29,6 @@ class RealtyStreet {
       'restrict_value': true,
       'query': query, count: 10
     }).then((res)=> {
-      console.log('street then')
       return res.suggestions;
     });
   }
@@ -48,7 +47,6 @@ class RealtyStreet {
         'restrict_value': true,
         'query': query, count: 10
       }).then((res)=> {
-      console.log('house then')
         return res.suggestions;
       });
     }

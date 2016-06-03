@@ -54,6 +54,9 @@ class OneInfoEdit {
         this.realty.price = parseInt(price);
       }
       
+      this.realty.address.street = this.realty.address.street.value || this.realty.address.street; 
+      this.realty.address.house = this.realty.address.house.value || this.realty.address.house; 
+      
       Realty.update({_id: realtyId}, {
         $set: this.realty
       }, (error) => {
