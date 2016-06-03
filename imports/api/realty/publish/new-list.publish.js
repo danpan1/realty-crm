@@ -11,7 +11,7 @@ if (Meteor.isServer) {
       if (this.userId) {
         // TODO статус добавить !!! тут нужен статус new
         selector = {
-          // status: 'list'
+          status: 'cian'
 
         };
 

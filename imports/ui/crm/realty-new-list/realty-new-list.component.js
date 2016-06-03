@@ -27,6 +27,14 @@ class RealtyNewList {
     this.mdDialog = $mdDialog;
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
+    
+    this.autorun(function () {
+      let user = Meteor.user();
+      if (user) {
+        vm.user = user;
+      }
+    });
+    
     this.realtyCount = 0;
     vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;

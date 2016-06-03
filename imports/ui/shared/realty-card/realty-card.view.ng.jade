@@ -108,16 +108,16 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
         div(ng-if="!realtyCard.realtylisttype")
             p().md-body-1.realty-card__details-text {{::realtyCard.realty.details.descr}}
             div(layout='row')
-                md-button(ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16 Взять объект
-            h3(flex).md-title {{::realtyCard.realty.contacts[0].phones[0].phone}} {{::realtyCard.realty.contacts[0].name}}
-            div(layout="row" ng-if='!realtyCard.objectAdded')
-                md-button(ng-click="realtyCard.takeObject(realtyCard.realty._id)").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
+                md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16 Взять объект
+            h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
+            div(ng-if='!realtyCard.isAgent && !realtyCard.objectAdded && realtyCard.realtyPhone' layout="row")
+                md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'taken')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
                 md-button(ng-click="realtyCard.isAgent = true").md-raised.realty-card__agent.ml-16.ph-16 Агент
             div(ng-if='realtyCard.isAgent == true && realtyCard.objectAdded != true')
                 h3(flex).md-title Хотите продолжить с ним работать?
                 div(layout="row")
-                    md-button(ng-click='realtyCard.agentContinue(realtyCard.realty._id)').md-raised.md-deafult Да 
-                    md-button(ng-click='realtyCard.agentContinue()').md-raised.md-deafult Нет
+                    md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-deafult Да 
+                    md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'agency')").md-raised.md-deafult Нет
             h3(flex ng-if='realtyCard.objectAdded == true').md-title Объект сохранен в раздел #[a «Мои объекты»]
             //md-button(ng-click="realtyCard.ngShowDescr =! realtyCard.ngShowDescr") Закрыть
         div(ng-if="realtyCard.realtylisttype == 'connections'")

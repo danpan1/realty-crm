@@ -17,20 +17,21 @@ class RealtyCard {
     this.mdDialog = $mdDialog;
     var vm = this;
     
-    this.autorun(function () {
+    /*this.autorun(function () {
       let user = Meteor.user();
       if (user) {
-        vm.user = user;
+        vm.user = user;*/
         vm.data = {
             good_name: "ocaen_object_6mes",
-            bill_first_name: user.profile.name,
-            bill_email: user.emails[0].address,
-            bill_phone: user.profile.phone,
+            bill_first_name: this.user.profile.name,
+            bill_email: this.user.emails[0].address,
+            bill_phone: this.user.profile.phone,
             file_profile: "default",
             offerta_accept: "true"
         };
-      }
-    });
+      /*}
+    });*/
+    
     
     this.close = function() {
       this.mdDialog.cancel();
@@ -57,7 +58,7 @@ class RealtyCard {
                         <h2>Оплата подписки</h2>
                         <span flex></span>
                         <md-button class="md-icon-button" ng-click="this.close()">
-                          <md-icon md-svg-src="svg/icon-close.svg" aria-label="Закрыть окно оплаты подписки"></md-icon>
+                          <!--<md-icon md-svg-src="svg/icon-close.svg" aria-label="Закрыть окно оплаты подписки"></md-icon>-->
                         </md-button>
                       </div>
                     </md-toolbar>
@@ -99,18 +100,36 @@ class RealtyCard {
       clickOutsideToClose:true
     })
   }
-  
-  takeObject(id){
-    console.log(id);
-    this.objectAdded = true;
-  }
 
   takeRealty(id, ev) {
-    if (true != false) this.openPurchaseStart(ev);
-    console.log(id, 'takeRealty');
-    Meteor.call('takeRealty', id, (err, result)=>{
+    let vm = this;
+    this.isUserPaid = false;
+    for (var i in this.user.roles) {
+      console.log(this.user.roles[i]);
+      if(this.user.roles[i] == 'paid') {
+        this.isUserPaid = true;
+        break;
+      }
+    }
+    if (!this.isUserPaid) this.openPurchaseStart(ev);
+    else{
+      console.log(id, 'takeRealty');
+      Meteor.call('takeRealty', id, (err, result)=>{
+        if (err){
+          console.log('err: '+err);
+        }else {
+          vm.realtyPhone = result.phone;
+          vm.realtyName = result.name;
+          console.log(vm.realtyPhone + vm.realtyName);
+        }
+      });
+    }
+  }
+  
+  takeCheckedRealty(id, status){
+    Meteor.call('takeRealty', id, status, (err, result)=>{
       if (err){
-        console.log(err);
+        console.log('err: '+err);
       }else {
         console.log(result);
       }
@@ -153,7 +172,8 @@ export default angular.module(moduleName, [
     slider: '&',
     relationType: '@',
     clientId: '<',
-    realtylisttype: '<'
+    realtylisttype: '<',
+    user: '<'
   },
   controllerAs: moduleName,
   controller: RealtyCard

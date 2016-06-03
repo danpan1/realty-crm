@@ -30,6 +30,7 @@ class RealtyFilter {
     this.stateParams = $stateParams;
     this.state = $state;
     this.filter = {};
+    this.fake = true;
     console.log(vm.stateParams);
     
     if (window.localStorage["filter"] != undefined && window.localStorage["filter"]) {

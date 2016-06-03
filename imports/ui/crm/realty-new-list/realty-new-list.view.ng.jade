@@ -22,5 +22,6 @@ div(ng-if='realtyNewList.loaded')
                     total-items="realtyNewList.realtyCount"
                     page-from='realtyNewList'
                     realty='realty'
-                    slider='realtyNewList.setSliderImages(images)')
+                    slider='realtyNewList.setSliderImages(images)'
+                    user='realtyNewList.user')
 pagination-buttons(ng-if='realtyNewList.loaded' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
