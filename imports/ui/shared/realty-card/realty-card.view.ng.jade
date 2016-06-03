@@ -35,7 +35,7 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
         //3-ая колонка Цена и ремонт
         div(layout='column').newList_Price.ph-16.pv-8
             div.md-body-1.mb-8.price #[b {{::realtyCard.realty.price | price}}]
-            div.md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
+            //div.md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
         md-divider
 
         //4-ая колонка Фото
@@ -50,7 +50,7 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
             div(layout='column' layout-align='space-between')
                 div().md-body-1.mb-8 {{::realtyCard.realty.roomcount}}-к квартира
                 div().md-body-1.mb-8 Длительный
-                div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
+                //div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
                 div().md-body-1.mb-8 {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} {{::realtyCard.realty.square}}м2
         md-divider
 
