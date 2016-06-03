@@ -35,7 +35,7 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
         //3-ая колонка Цена и ремонт
         div(layout='column').newList_Price.ph-16.pv-8
             div.md-body-1.mb-8.price #[b {{::realtyCard.realty.price | price}}]
-            div.md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
+            //div.md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
         md-divider
 
         //4-ая колонка Фото
@@ -50,7 +50,7 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
             div(layout='column' layout-align='space-between')
                 div().md-body-1.mb-8 {{::realtyCard.realty.roomcount}}-к квартира
                 div().md-body-1.mb-8 Длительный
-                div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
+                //div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
                 div().md-body-1.mb-8 {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} {{::realtyCard.realty.square}}м2
         md-divider
 
@@ -111,7 +111,7 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
                 md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16 Взять объект
             h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
             div(ng-if='!realtyCard.isAgent && !realtyCard.objectAdded && realtyCard.realtyPhone' layout="row")
-                md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'taken')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
+                md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
                 md-button(ng-click="realtyCard.isAgent = true").md-raised.realty-card__agent.ml-16.ph-16 Агент
             div(ng-if='realtyCard.isAgent == true && realtyCard.objectAdded != true')
                 h3(flex).md-title Хотите продолжить с ним работать?
