@@ -35,12 +35,6 @@ class OneInfoEdit {
   }
   
   onChangeRealty (realtyId) {
-      this.realty.details.composition = [];
-      for(var i in this.compositionSelected){
-          if(this.compositionSelected[i] == true){
-              this.realty.details.composition.push(i);
-          }
-      }
       if(typeof this.realty.price != 'number'){
         var price = this.realty.price.split('');
         for(var i in [1,2,3]){
