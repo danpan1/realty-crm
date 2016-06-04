@@ -29,7 +29,7 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
                         span(class='metro-color-{{subway.line}}').metro-color
                         span {{subway.name}}
                     //Пешком до метро
-                    div.md-body-1.ml-8.mb-8 {{::realtyCard.realty.address.metroTime}} мин. {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
+                    div.md-body-1.ml-8.mb-8 {{::realtyCard.realty.address.metroTime}} {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
         md-divider
 
         //3-ая колонка Цена и ремонт

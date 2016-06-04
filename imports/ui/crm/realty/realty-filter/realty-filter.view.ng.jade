@@ -26,7 +26,7 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                     ng-blur='realtyFilter.suitRealty()'
                     md-no-ink,
                     class='md-primary') {{ item.name }}
-                md-input-container()
+                md-input-container().convinience-container
                     label Выбрать удобства
                     md-select(ng-model='realtyFilter.filter.conditions', multiple='true' ng-blur='realtyFilter.suitRealty()')
                         md-option(ng-value='condition.id',
