@@ -85,6 +85,10 @@
   }
 }
 
+.cursor-default{
+  cursor: default !important;
+}
+
 .realty-card__agent {
   background-color: color($amber, 600) !important;
   color: $white !important;
