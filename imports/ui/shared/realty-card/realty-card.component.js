@@ -153,7 +153,7 @@ class RealtyCard {
   }
 
   showSlider() {
-    if(this.realty.details.images && this.realty.details.images.length){
+    if(this.realty.details.images && this.realty.details.images[0].url){
       this.slider({'images': this.realty.details.images});
     }
   }

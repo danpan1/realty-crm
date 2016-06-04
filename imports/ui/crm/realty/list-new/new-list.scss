@@ -87,6 +87,9 @@
 
 .cursor-default{
   cursor: default !important;
+  &:hover .icon-zoom {
+    visibility: hidden !important;
+  }
 }
 
 .realty-card__agent {
