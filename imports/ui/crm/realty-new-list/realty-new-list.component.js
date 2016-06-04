@@ -55,7 +55,7 @@ class RealtyNewList {
     this.slideShowImages = [];
     vm.sort = {
       // 'updated_at': -1
-      'createdAt': -1
+      '_id': -1
     };
     let timeTestLoadData = new Date();
     let timeTestRender = new Date();
