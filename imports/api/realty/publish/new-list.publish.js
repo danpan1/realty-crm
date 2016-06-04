@@ -11,15 +11,15 @@ if (Meteor.isServer) {
       if (this.userId) {
         // TODO статус добавить !!! тут нужен статус new
         selector = {
-          // status: 'list'
-
+          status: 'new',
+          type:4
         };
 
         if (search) {
           console.log('search', search);
 
           let price = {};
-
+          
           /* ЦЕНА ОТ И ДО*/
           if (search.priceFrom) {
             price.$gte = parseInt(search.priceFrom);
@@ -31,7 +31,7 @@ if (Meteor.isServer) {
             selector.price = price;
           }
           /* END ЦЕНА */
-
+          
           /* ЭТАЖИ ОТ И ДО*/
           let floor = {};
           if (search.floorFrom) {

@@ -3,10 +3,9 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
         div(flex='30')
             div(layout='column' layout-align='space-between none')
                 md-input-container(flex)
-                    label Москва
-                    md-select(ng-model='realtyFilter.filter.composition', multiple='true' ng-blur='realtyFilter.suitRealty()')
-                        md-option(ng-value='composition.id',
-                        ng-repeat="composition in realtyFilter.dictionary.composition ") {{composition.name}}
+                    label Выбрать город
+                    md-select(ng-model='realtyFilter.fake' aria-label='Выбрать город')
+                        md-option(ng-value='true') Москва
                 div(flex)
                     district-chips(ng-model="realtyFilter.filter.districts"
                     districts-embeded='realtyFilter.districtsEmbeded' flex

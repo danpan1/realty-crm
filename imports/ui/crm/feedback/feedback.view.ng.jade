@@ -31,3 +31,5 @@ div(md-whiteframe='2').one-email-card.ph-32.pv-8
                 input(type="hidden" name="offerta_accept" checked="{{feedback.data.offerta_accept}}")
                 md-button.md-primary.md-raised
                     input(type="submit" value="Заказать" name="doorder").feedback__nostyles.p-0.m-0
+
+     md-button.md-raised(ng-click='feedback.someEvent()') Metric

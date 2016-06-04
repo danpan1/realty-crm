@@ -21,12 +21,33 @@ import './realty-new-list.view.html';
 
 class RealtyNewList {
   /* @ngInject */
-  constructor($scope, $reactive, $location, $state, $stateParams, $mdDialog) {
+  constructor($scope, $reactive, $timeout, $location, $state, $stateParams, $mdDialog) {
     $reactive(this).attach($scope);
+    this.$timeout = $timeout;
     const vm = this;
     this.mdDialog = $mdDialog;
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
+    this.state = $state;
+    
+    switch ($stateParams.operation) {
+      case 'rent':
+        vm.selectedTab = 0;
+        break;
+      case 'sale':
+        vm.selectedTab = 1;
+        break;
+      default:
+        vm.selectedTab = 0;
+    }
+    
+    this.autorun(function () {
+      let user = Meteor.user();
+      if (user) {
+        vm.user = user;
+      }
+    });
+    
     this.realtyCount = 0;
     vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
@@ -34,7 +55,7 @@ class RealtyNewList {
     this.slideShowImages = [];
     vm.sort = {
       // 'updated_at': -1
-      'createdAt': -1
+      '_id': -1
     };
     let timeTestLoadData = new Date();
     let timeTestRender = new Date();
@@ -63,12 +84,16 @@ class RealtyNewList {
       ];
     }, {
       onReady: function () {
-        vm.loaded = true;
+        if(vm.stateParams.page > Math.ceil(vm.getReactively('realtyCount') / vm.perPage)) {
+          vm.state.go('crm.realty-new-list', {page:1});
+        }
+        vm.$timeout(()=>{
+          vm.loaded = true;
+        },100)    
         let timeLoaded = new Date();
         let timeRender = new Date();
         console.log('время на закгрузку = ', ((timeLoaded - timeTestLoadData) / 1000));
         console.log('время на рендер = ', ((timeRender - timeTestRender) / 1000));
-
       }
     });
 

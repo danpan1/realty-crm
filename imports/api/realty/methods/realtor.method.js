@@ -57,56 +57,76 @@ export function addRealtyToMyList(realtyId) {
   }
 }
 
-export function takeRealty(realtyId) {
-  if (Meteor.isServer && Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'paid')) {
+export function takeRealty(realtyId, status) {
+  if (Meteor.isServer && Meteor.userId()) {
+    if (Roles.userIsInRole(Meteor.userId(), 'paid')) {
 
-    console.log('takeRealty')
-    let realty = Realty.findOne({_id: realtyId});
-    if (!realty) {
-      //Не даём взять объект
-      return 'нет такого объекта';
-    }
+      console.log('takeRealty')
+      let realty = Realty.findOne({_id: realtyId});
+      if (!realty) {
+        //Не даём взять объект
+        return 'нет такого объекта';
+      }
 
-    if (realty.status !== 'new') {
-      //Не даём взять объект
-      return 'метод вызывается в неправильном месте. попытка взлома';
-    }
+      if (realty.status !== 'new' && realty.status !== 'cian') {
+        //Не даём взять объект
+        return 'метод вызывается в неправильном месте. попытка взлома';
+      }
 
-    if (realty.realtor && realty.realtor.id) {
-      //Не даём взять объект
-      return 'у объекта уже есть владелец. попытка взлома';
-    }
+      if (realty.realtor && realty.realtor.id) {
+        //Не даём взять объект
+        return 'у объекта уже есть владелец. попытка взлома';
+      }
 
-    let user = Meteor.users.findOne({_id: this.userId});
-    Meteor.users.update({_id: this.userId},
-      {$inc: {takenRealty: 1}}
-    );
-    console.log(user.takenRealty, ` = takenRealty user ${user.profile.name}`);
 
-    //Если меньше 100 объектов уже взято, тогда даём взять объект
-    if (user.takenRealty <= 100) {
+      if (status) {
 
-      Realty.update({_id: realtyId}, {
-        $set: {
-          'realtor.id': Meteor.userId(),
-          'status': 'taken'
+        let user = Meteor.users.findOne({_id: this.userId});
+        Meteor.users.update({_id: this.userId},
+          {$inc: {takenRealty: 1}}
+        );
+        console.log(user.takenRealty, ` = takenRealty user ${user.profile.name}`);
+
+        //Если меньше 100 объектов уже взято, тогда даём взять объект
+        if (status != 'agency') {
+          if (user.takenRealty <= 100 || !user.takenRealty) {
+            var nextCount = nextAutoincrement(Realty) + '';
+            Realty.update({_id: realtyId}, {
+              $set: {
+                'realtor.id': Meteor.userId(),
+                'status': status
+              }
+            }, (error) => {
+              if (error) {
+                console.log(error);
+                return;
+              } else {
+                console.log('Take Date set');
+                return;
+              }
+            });
+          } else {
+            //Не даём взять объект
+            return 'больше 100 объектов взято в этом месяце';
+          }
+        } else if (status == 'agency') {
+          Realty.update({_id: realtyId}, {
+            $set: {
+              'realtor.id': Meteor.userId(),
+              'status': 'agency'
+            }
+          });
         }
-      }, (error) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Take Date set');
-        }
-      });
-      return realty.contacts.phones[0].phone;
+
+      }
+
+      // Если действие не определено, отдаем телефоны и имя
+      return {name: realty.contacts[0].name, phone: realty.contacts[0].phones[0].phone};
+
     } else {
-      //Не даём взять объект
-      return 'больше 100 объектов взято в этом месяце';
+      console.log('NOt paid');
+      return 'NOt paid';
     }
-
-  } else {
-    console.log('NOt paid');
-    return 'NOt paid';
   }
 }
 
