@@ -31,7 +31,7 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                     md-select(ng-model='realtyFilter.filter.conditions', multiple='true' ng-blur='realtyFilter.suitRealty()')
                         md-option(ng-value='condition.id',
                         ng-repeat='condition in realtyFilter.dictionary.conditions') {{condition.name}}
-                div(layout='row' layout-align='space-between end').mt-16
+                div(layout='row' layout-align='space-between end').mt-16.convinience-container
                     label(flex='30') До метро
                     md-input-container(flex='20').mv-0.pv-0
                         input(ng-model='realtyFilter.filter.metroTime', placeholder='минут' ng-blur='realtyFilter.suitRealty()')
