@@ -4,8 +4,17 @@ import {Roles} from 'meteor/alanning:roles';
 
 Meteor.startup(function () {
   let id = '';
-  //TODO какие есть роли и как их применять
-  if (Meteor.users.find({roles : 'staff'}).count() === 0) {
+  if (Meteor.users.find({roles: 'staff', 'emails.address': 'danpan@yandex.ru'}).count() === 0) {
+    let dan = Meteor.users.findOne({'emails.address': 'danpan@yandex.ru'});
+    let den = Meteor.users.findOne({'emails.address': 'superdenceo@gmail.com'});
+    if (dan) {
+      Roles.addUsersToRoles(dan._id, ['staff', 'admin']);
+    }
+    if (den) {
+      Roles.addUsersToRoles(den._id, ['staff', 'admin']);
+    }
+  }
+  if (Meteor.users.find({roles: 'staff'}).count() === 0) {
     let admins = [
       {
         email: 'admin@rieltor.guru',

@@ -20,7 +20,7 @@ class Register {
     this.credentials = {
       email: '',
       password: '',
-      profile:{
+      profile: {
         name: '',
         phone: '',
         surName: '',
@@ -30,33 +30,40 @@ class Register {
 
     this.error = '';
   }
-     
-  filterPhoneKeyPress(){
-      if(this.credentials.profile.phone.length >= 17) return false;
-      if(this.credentials.profile.phone[0] != '8') this.credentials.profile.phone = '8 ' + this.credentials.profile.phone;
+
+  filterPhoneKeyPress() {
+    if (this.credentials.profile.phone.length >= 17) return false;
+    if (this.credentials.profile.phone[0] != '8') this.credentials.profile.phone = '8 ' + this.credentials.profile.phone;
   }
-  filterPhoneFocus () {
-      if(!this.credentials.profile.phone || this.credentials.profile.phone[0] != '8') this.credentials.profile.phone = '8';
+
+  filterPhoneFocus() {
+    if (!this.credentials.profile.phone || this.credentials.profile.phone[0] != '8') this.credentials.profile.phone = '8';
   }
-  
+
   register() {
-      
+
     var value = this.credentials.profile.phone.split('');
-    for(var i in [1,2,3]){
-        for(var i in value){
-            if(value[i].match(/\+|\(|\)|\-|\s|d/)){
-                value.splice(i,1);
-            }
+    for (var i in [1, 2, 3]) {
+      for (var i in value) {
+        if (value[i].match(/\+|\(|\)|\-|\s|d/)) {
+          value.splice(i, 1);
         }
+      }
     }
     this.credentials.profile.phone = value.join('');
-    
     console.log(this.credentials);
     Accounts.createUser(this.credentials,
       this.$bindToContext((err) => {
         if (err) {
           this.error = err;
         } else {
+          Meteor.call('sendQuestion', {
+            phone: this.credentials.profile.phone,
+            name: this.credentials.profile.name
+          }, (err, res)=>{
+            if(err) {console.log(err);}
+            else {console.log(res);}
+          });
           this.$state.go('crm.realty.list.my');
         }
       })
