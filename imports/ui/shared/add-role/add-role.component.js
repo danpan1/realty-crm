@@ -9,8 +9,20 @@ import './add-role.view.html';
 
 class AddRole {
   /* @ngInject */
-  constructor($timeout) {
+  constructor($scope, $reactive, $timeout) {
+    $reactive(this).attach($scope);
     this.timeout = $timeout;
+
+    this.subscribe('users');
+
+    this.helpers({
+      paidUsers() {
+        return Meteor.users.find({roles : 'paid'});
+      },
+      users() {
+        return Meteor.users.find({});
+      }
+    });
   }
 
   submit(valid) {

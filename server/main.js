@@ -4,6 +4,7 @@ import '../imports/helpers/send-email.method';
 import '../imports/helpers/send-question.method';
 import '../imports/helpers/metrics.method';
 import '../imports/api/counts';
+import '../imports/api/users/paid-percent.publish';
 import '../imports/api/locations';
 import '../imports/api/relations';
 import '../imports/startup';

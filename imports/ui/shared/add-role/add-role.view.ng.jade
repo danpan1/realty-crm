@@ -9,3 +9,15 @@ layout='column')
     md-button(type='submit').md-raised.md-primary Добавить роль
 
 div(md-whiteframe='2') {{addRole.result || 'Введите email'}}
+div(md-whiteframe='2')
+div(md-whiteframe='2')
+div(md-whiteframe='2') Оплаченных юзеров - {{addRole.paidUsers.length}}
+div(md-whiteframe='2') Зарегистрированных - {{addRole.users.length}}
+div(md-whiteframe='2') Процент {{addRole.paidUsers.length / addRole.users.length * 100}}%
+table
+    tr(ng-repeat='user in addRole.users')
+        td {{user.emails[0].address}}
+        td {{user.profile.name}}
+        td {{user.profile.surName}}
+        td {{user.profile.phone}}
+        td {{user.roles.indexOf('paid') ? 'Платный' : ''}}
