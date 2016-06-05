@@ -21,4 +21,5 @@ table
         td {{user.profile.name}}
         td {{user.profile.surName}}
         td {{user.profile.phone}}
-        td {{(user.roles.indexOf('paid') != -1) ? 'Платный' : ''}}
+        td {{(user.roles && user.roles.indexOf('paid') != -1) ? 'Платный' : ''}}
+        td {{user.roles}}
