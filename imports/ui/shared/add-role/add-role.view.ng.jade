@@ -16,6 +16,7 @@ div(md-whiteframe='2') Зарегистрированных - {{addRole.users.le
 div(md-whiteframe='2') Процент {{(addRole.paidUsers.length / addRole.users.length * 100).toFixed(2)}}%
 table
     tr(ng-repeat='user in addRole.users')
+        td {{$index + 1}}
         td {{user.emails[0].address}}
         td {{user.profile.name}}
         td {{user.profile.surName}}
