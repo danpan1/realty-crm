@@ -1,4 +1,5 @@
 div(md-whiteframe='2').realty-filter.ph-32.pv-16
+    p {{realtyFilter.filter}}
     div(layout='row', layout-align="space-between center")
         div(flex='30')
             div(layout='column' layout-align='space-between none')
@@ -60,7 +61,7 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                         label до
                         input(ng-model='realtyFilter.filter.floorTo' ng-blur='realtyFilter.suitRealty()')
                 div(layout='row' layout-align='space-between end').mt-16
-                    label().md-subhead.text-bold  {{(realtyFilter.realtyCount || realtyFilter.realtyCount===0) ? ('Показано ' + (realtyFilter.realtyCount | price) + ' объектов') : 'Ищем объекты'}}
-                    md-button(aria-label='Очистить число показов' md-no-ink).md-icon-button.realty-filter__btn-clear-results.m-0.p-0
+                    label().md-subhead.text-bold  {{(realtyFilter.realtyCount !== false) ? realtyFilter.realtyCount !== 0 ? ('Показано ' + (realtyFilter.realtyCount | price) + ' объектов') : 'Объекты не найдены' : 'Ищем объекты'}}
+                    md-button(aria-label='Очистить число показов' ng-click='realtyFilter.clearFilter()').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
                         md-icon(md-svg-icon='svg/icon-delete-forever.svg')
 

@@ -40,9 +40,20 @@ class RealtyCard {
     this.close = function () {
       this.mdDialog.cancel();
     };
-
+    
   }
-
+  
+  coolImage () {
+    var img = new Image(); 
+		img.src = this.realty.image;
+    this.timeout(()=>{
+      if (img.height < 10 || !this.realty.details.images[0].url) {
+        this.noPhoto = true;
+        console.log('1231');
+      }
+    })
+  }
+  
   agentContinue(id) {
     if (id) this.objectAdded = true;
     else this.show = false;
@@ -51,7 +62,7 @@ class RealtyCard {
   changeRelationType(type, realtyId, clientId, isNew) {
     Meteor.call('changeRelationTypeInClient', type, realtyId, clientId, isNew);
   }
-
+  
   openPurchaseStart(ev) {
     var vm = this;
     this.mdDialog.show({
@@ -155,7 +166,7 @@ class RealtyCard {
   }
 
   showSlider() {
-    if(this.realty.details.images && this.realty.details.images[0].url){
+    if(!this.noPhoto){
       this.slider({'images': this.realty.details.images});
     }
   }
