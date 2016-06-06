@@ -7,4 +7,4 @@ div(ng-style="slideShow.sliderStyles" ng-if="slideShow.isshown").slide__wrapper
                 img(ng-src="{{slide.url}}").slide__img
         div(ng-click="slideShow.nextSlide(true,slideShow.slidesList.length)").slide__next
     md-button(aria-label='Закрыть').md-icon-button.slide__close.m-0.p-0
-        md-icon(md-svg-icon='svg/icon-close-thin.svg')
+        md-icon(ng-click='slideShow.hideSlides()' md-svg-icon='svg/icon-close-thin.svg')

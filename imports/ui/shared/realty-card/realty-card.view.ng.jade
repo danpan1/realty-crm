@@ -40,9 +40,9 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
 
         //4-ая колонка Фото
         div(layout='column' layout-align='center center').newList_Photo
-            div(ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : !realtyCard.realty.details.images || !realtyCard.realty.details.images[0].url}').apartment-pic
-                img(ng-src='{{::realtyCard.realty.image || "realty_no_image.png"}}')
-                div(ng-if='realtyCard.realty.details.images && realtyCard.realty.details.images[0].url').icon-zoom
+            div(ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
+                img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.coolImage(realtyCard.realty.image)')
+                div(ng-if='!realtyCard.noPhoto').icon-zoom
         md-divider
 
         //5-ая Инфо об объекте
@@ -106,7 +106,7 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
     // Подоробное объявление
     div(ng-show="realtyCard.ngShowDescr").ph-32.pb-16
         div(ng-if="!realtyCard.realtylisttype")
-            p().md-body-1.realty-card__details-text {{::realtyCard.realty.details.descr}}
+            p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
             div(layout='row')
                 md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16 Взять объект
             h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}

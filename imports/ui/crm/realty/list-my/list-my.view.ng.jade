@@ -2,7 +2,7 @@
     .listMy(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
         div().listMy_col Фото
         div().listMy_col Комнат/Цена/Адрес
-        div().listMy_col Подготовлен
+        div().listMy_col Подготовка
         div().listMy_col Реклама на GetRent
         div().listMy_col Подробнее
 
@@ -23,6 +23,9 @@
                 div
                     div().price.listMy_Address-item {{::realty.roomcount}} комн. {{::realty.price | price}}
                     div().listMy_Address-item {{::realty.address.street}}
+                    div().listMy_Address-item
+                        span(class='metro-color-{{realty.address.subwaysEmbedded[0].line}}').metro-color
+                        span {{realty.address.subwaysEmbedded[0].name}}
                     div().listMy_Address-item {{::realty.address.house}} кв. {{::realty.address.flat}}
         md-divider
 

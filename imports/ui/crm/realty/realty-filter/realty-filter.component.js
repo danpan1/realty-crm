@@ -16,11 +16,12 @@ class RealtyFilter {
     this.$timeout = $timeout;
     this.helpers({
       realtyCount: () => {
+        this.realtyCount = false;
         let с = CountsDan.findOne({});
         if (с) {
           return с.count;
         } else {
-          return '';
+          return 0;
         }
       }
     });
@@ -56,6 +57,13 @@ class RealtyFilter {
     }
   }
   
+  clearFilter () {
+    this.filter = {
+      type: this.stateParams.operation == 'sale' ? 1 : 4,
+      roomcount: []
+    };
+    this.suitRealty();
+  }
   
   suitRealty () {
     window.localStorage["filter"] = JSON.stringify(this.filter, function (key, val) {
