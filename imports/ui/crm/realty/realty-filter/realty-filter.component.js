@@ -56,6 +56,13 @@ class RealtyFilter {
     }
   }
   
+  clearFilter () {
+    this.filter = {
+      type: this.stateParams.operation == 'sale' ? 1 : 4,
+      roomcount: []
+    };
+    this.suitRealty();
+  }
   
   suitRealty () {
     window.localStorage["filter"] = JSON.stringify(this.filter, function (key, val) {
