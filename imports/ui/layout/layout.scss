@@ -81,7 +81,7 @@ div[md-whiteframe] {
   margin-left: 16px;
   background-color: #bbdefb;
   box-shadow: none;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 md-tabs{
@@ -101,9 +101,9 @@ md-switch {
   .md-label {
     font-size: 16px;
   }
-  
-  .md-bar {
-    background-color: rgba(255, 82, 82, 0.5);
+
+  &.ng-empty .md-label {
+    color: grey;
   }
   
   &.md-checked .md-bar {
@@ -112,10 +112,6 @@ md-switch {
 
   [disabled] .md-bar {
     background-color: rgba(111, 193, 122, 0.5) !important;
-  }
-
-  .md-thumb {
-    background-color: rgb(255, 82, 82) !important;
   }
 
   &.md-checked .md-thumb {
