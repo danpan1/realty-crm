@@ -23,14 +23,16 @@ class RealtyCard {
      let user = Meteor.user();
      if (user) {
      vm.user = user;*/
-    vm.data = {
-      good_name: "ocaen_object_6mes",
-      bill_first_name: this.user.profile.name,
-      bill_email: this.user.emails[0].address,
-      bill_phone: this.user.profile.phone,
-      file_profile: "default",
-      offerta_accept: "true"
-    };
+    if(this.user) {
+      vm.data = {
+        good_name: "ocaen_object_6mes",
+        bill_first_name: this.user.profile.name,
+        bill_email: this.user.emails[0].address,
+        bill_phone: this.user.profile.phone,
+        file_profile: "default",
+        offerta_accept: "true"
+      };
+    }
     /*}
      });*/
 
