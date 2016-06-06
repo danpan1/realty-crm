@@ -44,10 +44,13 @@ class RealtyCard {
   coolImage () {
     var img = new Image(); 
 		img.src = this.realty.image;
-		if (img.height < 10) {
-      this.noPhoto = true;
-      this.realty.image = 'realty_no_image.png';
-    }
+    this.timeout(()=>{
+      if (img.height < 10) {
+        this.noPhoto = true;
+        console.log('1231');
+        this.realty.image = 'realty_no_image.png';
+      }
+    })
   }
   
   agentContinue(id) {
