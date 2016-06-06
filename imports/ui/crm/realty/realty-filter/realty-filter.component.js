@@ -16,11 +16,12 @@ class RealtyFilter {
     this.$timeout = $timeout;
     this.helpers({
       realtyCount: () => {
+        this.realtyCount = false;
         let с = CountsDan.findOne({});
         if (с) {
           return с.count;
         } else {
-          return '';
+          return 0;
         }
       }
     });

@@ -165,7 +165,7 @@ class RealtyCard {
   }
 
   showSlider() {
-    if(this.realty.details.images && this.realty.details.images[0].url){
+    if(!this.noPhoto){
       this.slider({'images': this.realty.details.images});
     }
   }
