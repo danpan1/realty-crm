@@ -3,7 +3,6 @@ import angular from 'angular';
 import {Meteor} from 'meteor/meteor';
 
 import uiRouter from 'angular-ui-router';
-import sanitize from 'angular-sanitize';
 import ngMaterial from 'angular-material';
 
 import {name as CRM} from '/imports/ui/crm/crm.module';
@@ -14,7 +13,7 @@ angular
   .module('app', ['app.custom', CRM, CallCenter, auth]).config(config).run(run);
 
 angular
-  .module('app.custom', [uiRouter, 'ngFileUpload', sanitize, ngMaterial, 'accounts.ui']);
+  .module('app.custom', [uiRouter, 'ngFileUpload', 'ngSanitize', ngMaterial, 'accounts.ui']);
 
 function onReady() {
   angular.bootstrap(document, [
