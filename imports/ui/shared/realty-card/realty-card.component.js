@@ -38,9 +38,18 @@ class RealtyCard {
     this.close = function () {
       this.mdDialog.cancel();
     };
-
+    
   }
-
+  
+  coolImage () {
+    var img = new Image(); 
+		img.src = this.realty.image;
+		if (img.height < 10) {
+      this.noPhoto = true;
+      this.realty.image = 'realty_no_image.png';
+    }
+  }
+  
   agentContinue(id) {
     if (id) this.objectAdded = true;
     else this.show = false;
@@ -49,7 +58,7 @@ class RealtyCard {
   changeRelationType(type, realtyId, clientId, isNew) {
     Meteor.call('changeRelationTypeInClient', type, realtyId, clientId, isNew);
   }
-
+  
   openPurchaseStart(ev) {
     var vm = this;
     this.mdDialog.show({
