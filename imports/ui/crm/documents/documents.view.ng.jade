@@ -1,81 +1,202 @@
-div(md-whiteframe="1").documents__topbar
-    md-tabs(md-dynamic-height)
-        md-tab(label='Универсальные' md-active='addClientFull.activeTab == 0' ng-click="addClientFull.activeTab = 0")
-        md-tab(label='Аренда' md-active='addClientFull.activeTab == 0' ng-click="addClientFull.activeTab = 0")
-        md-tab(label='Продажа' md-active='addClientFull.activeTab == 0' ng-click="addClientFull.activeTab = 0")
+md-tabs(md-dynamic-height).documents__topbar
+    md-tab(label='Универсальные' md-active='addClientFull.activeTab == 0' ng-click="addClientFull.activeTab = 0")
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Чек лист объекта
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Чек%20лист%20объекта.doc'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Чек%20лист%20объекта.doc' download='' target="_self" aria-label='Чек лист объекта').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+    md-tab(label='Аренда' md-active='addClientFull.activeTab == 0' ng-click="addClientFull.activeTab = 0")
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Опись
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Опись.doc' download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Опись.doc' download='' target="_self" aria-label='Опись').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Гарантийное обязательство
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Garant-obyazatelstvo.doc'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Garant-obyazatelstvo.doc' download='' target="_self" aria-label='Гарантийное обязательство').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Гарантийное письмо
+                div(layout='row' layout-align='end center')
+                    a(href='/documents/Garant-pismo.doc'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Garant-pismo.doc' download='' target="_self" aria-label='Гарантийное письмо').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Расписка, соглашение о задатке
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Расписка,%20соглашение%20о%20задатке.doc'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Расписка,%20соглашение%20о%20задатке.doc' download='' target="_self" aria-label='Расписка, соглашение о задатке').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Уведомление о расторжении договора
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Уведомление%20о%20расторжении%20договора.doc'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Уведомление%20о%20расторжении%20договора.doc' download='' target="_self" aria-label='Уведомление о расторжении договора').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Просмотр и оценка объекта
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Просмотр%20и%20оценка%20объекта.xlsx'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Просмотр%20и%20оценка%20объекта.xlsx' download='' target="_self" aria-label='Просмотр и оценка объекта').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Свидетельство регистрации
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Свидетельство%20регистрации.jpg'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Свидетельство%20регистрации.jpg' download='' target="_self" aria-label='Свидетельство регистрации').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+    md-tab(label='Продажа' md-active='addClientFull.activeTab == 0' ng-click="addClientFull.activeTab = 0")
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Опись
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Опись.doc' download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Опись.doc' download='' target="_self" aria-label='Опись').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Гарантийное обязательство
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Garant-obyazatelstvo.doc'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Garant-obyazatelstvo.doc' download='' target="_self" aria-label='Гарантийное обязательство').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Просмотр и оценка объекта
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Просмотр%20и%20оценка%20объекта.xlsx'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Просмотр%20и%20оценка%20объекта.xlsx' download='' target="_self" aria-label='Просмотр и оценка объекта').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
+        div(md-whiteframe='2').mv-16.ph-32.pv-16
+            div(layout='row' layout-align='space-between center')
+                div(flex)
+                    md-icon(md-svg-src='svg/icon-description.svg').mr-8
+                    span().documents__name.md-subhead Свидетельство регистрации
+                div(layout='row' layout-align='end center')
+                    a(href='documents/Свидетельство%20регистрации.jpg'  download='' target="_self").documents__title-download.md-subhead Скачать
+                    md-button(md-no-ink ng-href='documents/Свидетельство%20регистрации.jpg' download='' target="_self" aria-label='Свидетельство регистрации').documents__btn-download.m-0
+                        md-icon(md-svg-src='svg/icon-file-download.svg')
 
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-between center')
-        div(flex)
-            md-icon(md-svg-src='svg/icon-description.svg').mr-8
-            span().documents__name.md-title Опись
-        div(layout='row' layout-align='end center')
-            a(href='documents/Опись.doc' download='' target="_self").documents__title-download.md-title Скачать
-            md-button(md-no-ink ng-href='documents/Опись.doc' download='' target="_self" aria-label='Опись').documents__btn-download.m-0
-                md-icon(md-svg-src='svg/icon-file-download.svg')
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-between center')
-        div(flex)
-            md-icon(md-svg-src='svg/icon-description.svg').mr-8
-            span().documents__name.md-title Гарантийное обязательство
-        div(layout='row' layout-align='end center')
-            a(href='documents/Garant-obyazatelstvo.doc'  download='' target="_self").documents__title-download.md-title Скачать
-            md-button(md-no-ink ng-href='documents/Garant-obyazatelstvo.doc' download='' target="_self" aria-label='Гарантийное обязательство').documents__btn-download.m-0
-                md-icon(md-svg-src='svg/icon-file-download.svg')
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-between center')
-        div(flex)
-            md-icon(md-svg-src='svg/icon-description.svg').mr-8
-            span().documents__name.md-title Гарантийное письмо
-        div(layout='row' layout-align='end center')
-            a(href='/documents/Garant-pismo.doc'  download='' target="_self").documents__title-download.md-title Скачать
-            md-button(md-no-ink ng-href='documents/Garant-pismo.doc' download='' target="_self" aria-label='Гарантийное письмо').documents__btn-download.m-0
-                md-icon(md-svg-src='svg/icon-file-download.svg')
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-between center')
-        div(flex)
-            md-icon(md-svg-src='svg/icon-description.svg').mr-8
-            span().documents__name.md-title Расписка, соглашение о задатке
-        div(layout='row' layout-align='end center')
-            a(href='documents/Расписка,%20соглашение%20о%20задатке.doc'  download='' target="_self").documents__title-download.md-title Скачать
-            md-button(md-no-ink ng-href='documents/Расписка,%20соглашение%20о%20задатке.doc' download='' target="_self" aria-label='Расписка, соглашение о задатке').documents__btn-download.m-0
-                md-icon(md-svg-src='svg/icon-file-download.svg')
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-between center')
-        div(flex)
-            md-icon(md-svg-src='svg/icon-description.svg').mr-8
-            span().documents__name.md-title Уведомление о расторжении договора
-        div(layout='row' layout-align='end center')
-            a(href='documents/Уведомление%20о%20расторжении%20договора.doc'  download='' target="_self").documents__title-download.md-title Скачать
-            md-button(md-no-ink ng-href='documents/Уведомление%20о%20расторжении%20договора.doc' download='' target="_self" aria-label='Уведомление о расторжении договора').documents__btn-download.m-0
-                md-icon(md-svg-src='svg/icon-file-download.svg')
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-between center')
-        div(flex)
-            md-icon(md-svg-src='svg/icon-description.svg').mr-8
-            span().documents__name.md-title Чек лист объекта
-        div(layout='row' layout-align='end center')
-            a(href='documents/Чек%20лист%20объекта.doc'  download='' target="_self").documents__title-download.md-title Скачать
-            md-button(md-no-ink ng-href='documents/Чек%20лист%20объекта.doc' download='' target="_self" aria-label='Чек лист объекта').documents__btn-download.m-0
-                md-icon(md-svg-src='svg/icon-file-download.svg')
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-between center')
-        div(flex)
-            md-icon(md-svg-src='svg/icon-description.svg').mr-8
-            span().documents__name.md-title Просмотр и оценка объекта
-        div(layout='row' layout-align='end center')
-            a(href='documents/Просмотр%20и%20оценка%20объекта.xlsx'  download='' target="_self").documents__title-download.md-title Скачать
-            md-button(md-no-ink ng-href='documents/Просмотр%20и%20оценка%20объекта.xlsx' download='' target="_self" aria-label='Просмотр и оценка объекта').documents__btn-download.m-0
-                md-icon(md-svg-src='svg/icon-file-download.svg')
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row' layout-align='space-between center')
-        div(flex)
-            md-icon(md-svg-src='svg/icon-description.svg').mr-8
-            span().documents__name.md-title Свидетельство регистрации
-        div(layout='row' layout-align='end center')
-            a(href='documents/Свидетельство%20регистрации.jpg'  download='' target="_self").documents__title-download.md-title Скачать
-            md-button(md-no-ink ng-href='documents/Свидетельство%20регистрации.jpg' download='' target="_self" aria-label='Свидетельство регистрации').documents__btn-download.m-0
-                md-icon(md-svg-src='svg/icon-file-download.svg')
+table().table.table-bordered.table-shadow
+    thead
+        tr
+            th().text-normal Фамилия
+            th().text-normal Объектов
+            th().text-normal Просмотров
+            th().text-normal Подготовлено
+            th().text-normal Реклама
+            th().text-normal Звонков
+            th().text-normal Предложений
+            th().text-normal Показов
+            th().text-normal Задатков
+            th().text-normal Оплат
+    tbody
+        tr
+            td Багдаулов
+            td 100
+            td 40/50
+            td 30/35
+            td 25/30
+            td 200/20
+            td 50/200
+            td 15/50
+            td 3/15
+            td 2/3
+        tr
+            td Багдаулов
+            td 100
+            td 40/50
+            td 30/35
+            td 25/30
+            td 200/20
+            td 50/200
+            td 15/50
+            td 3/15
+            td 2/3
+        tr
+            td Багдаулов
+            td 100
+            td 40/50
+            td 30/35
+            td 25/30
+            td 200/20
+            td 50/200
+            td 15/50
+            td 3/15
+            td 2/3
+
+table().table.table-shadow.control__table.mt-32
+    tbody
+        tr
+            td Объектов
+            td 100
+            td 100%
+        tr
+            td Просмотрел
+            td 40
+            td 40%
+        tr
+            td Взял в работу
+            td 35
+            td 35%
+        tr
+            td Подготовил
+            td 30
+            td 30%
+        tr
+            td Купил рекламу
+            td 25
+            td 25%
+        tr
+            td Звонков
+            td 20
+            td 20%
+        tr
+            td Показов
+            td 15
+            td 15%
+        tr
+            td Задатков
+            td 3
+            td 3%
+        tr
+            td Оплат
+            td 2
+            td 2%
 
 //- div(md-whiteframe='2').mv-16.ph-32.pv-16
 //-     div().panel__group
