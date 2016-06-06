@@ -24,7 +24,7 @@ class OneInfoEdit {
   
   ngOnInit(price) {
     if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
-      
+      /*
     if (price) {
         var number = price.toString();
         number = number.split('').reverse().join('');
@@ -32,10 +32,11 @@ class OneInfoEdit {
         number = number.split('').reverse().join('');
         this.realty.price = number;
     }
+    */
   }
   
   onChangeRealty (realtyId) {
-      if(typeof this.realty.price != 'number'){
+      /*if(typeof this.realty.price != 'number'){
         var price = this.realty.price.split('');
         for(var i in [1,2,3]){
             for(var i in price){
@@ -46,7 +47,7 @@ class OneInfoEdit {
         }
         price = price.join('');
         this.realty.price = parseInt(price);
-      }
+      }*/
       
       this.realty.address.street = this.realty.address.street.value || this.realty.address.street; 
       this.realty.address.house = this.realty.address.house.value || this.realty.address.house; 

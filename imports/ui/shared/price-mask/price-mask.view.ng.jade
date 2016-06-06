@@ -1,0 +1,7 @@
+md-input-container(flex='{{priceMask.flex}}').md-block.mv-0.form-required.hide-count
+    label {{priceMask.label}}
+    input(ng-model='priceMask.visualPrice',
+          required='',
+          ng-focus="priceMask.filterPriceFocus()"
+          ng-keydown="priceMask.filterPriceKeyDown($event)",
+          ng-blur="priceMask.filterPriceBlur()")

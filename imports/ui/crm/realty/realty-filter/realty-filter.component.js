@@ -5,6 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {dictionary} from '../../../../helpers/dictionary';
 import {name as districtsAreaIdList} from '/imports/ui/shared/district-chips/district-chips.component.js';
+import {name as PriceMask} from '/imports/ui/shared/price-mask/price-mask.component';
 import './realty-filter.view.html';
 import {CountsDan} from '/imports/api/counts';
 
@@ -101,7 +102,8 @@ const moduleName = 'realtyFilter';
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
-  districtsAreaIdList
+  districtsAreaIdList,
+  PriceMask
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/realty-filter/realty-filter.view.html',
   bindings: {

@@ -68,7 +68,8 @@ md-tabs(md-dynamic-height)
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row' layout-align='space-between start')
-                                md-input-container(flex).form-required.mv-0.zh
+                                price-mask(ng-if='addClientFull.client' label='"Цена"' price='addClientFull.client.need.price' optflex='')
+                                //md-input-container(flex).form-required.mv-0.zh
                                     label Цена
                                     input(
                                         required,
