@@ -11,11 +11,12 @@ import './one-review.view.html';
 
 class OneReview {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams, $timeout) {
+  constructor($scope, $reactive, $stateParams, $timeout, $mdToast) {
 
     $reactive(this).attach($scope);
     this.$timeout = $timeout;
     let vm = this;
+    this.mdToast = $mdToast;
     this.uploadThumbsImagesLength = 0;
     this.uploadNormalLength = 0;
     this.mainImage = '';
@@ -37,6 +38,16 @@ class OneReview {
     });
 
   }
+  
+  showSimpleToast () {
+    this.mdToast.show(
+      this.mdToast.simple()
+        .textContent('Данные обновлены!')
+        .position('top right')
+        .hideDelay(3000)
+        .action('ОК')
+    );
+  };
 
   removeImage(image) {
     var imageIndex;
@@ -254,13 +265,17 @@ class OneReview {
     percent.isExclusive = (this.realty.realtor.isExclusive) ? 20 : 0;
     percent.isCheckout = (this.realty.realtor.isCheckout) ? 20 : 0;
     this.realty.moderator.percent.total = ((percent.photo || 0) * 0.2) + ((percent.advertisement || 0) * 0.2) + ((percent.description || 0) * 0.2) + percent.isExclusive + percent.isCheckout;
+    this.showLoader = true;
     Realty.update({_id: this.realty._id}, {
       $set: this.realty
     }, (error) => {
       if (error) {
         console.log(error);
+        this.showLoader = false;
       } else {
+        this.showSimpleToast();
         console.log('Description updated!');
+        this.showLoader = false;
       }
     });
   }
