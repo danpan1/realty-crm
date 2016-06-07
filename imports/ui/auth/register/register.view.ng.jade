@@ -33,11 +33,13 @@ md-content
                         label Ссылка на &laquoВконтакте&raquo
                         input(type='text', aria-label='Ссылка на Вконтакте' ng-model='register.credentials.profile.urlVk')
                 div(layout='row' layout-align='center center')
-                    md-button(flex='80' type='submit', aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password)').md-raised.md-primary
+                    md-button(flex='80' type='submit', aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password) || register.credentials.profile.phone.length < 16').md-raised.md-primary
                         | Зарегистрироваться
                 div(layout='column' layout-align='start center')
                     div().md-body-1 или
                     div
                         a(href='/login').md-button.md-primary Войти
             md-toolbar.md-warn(ng-show='register.error', layout='row', layout-align='center center')
-                p.md-body-1 Этот Email уже зарегистрирован
+                p(ng-if='register.error == 1').md-body-1 Телефон обязателен для регистрации
+                p(ng-if='register.error == 2').md-body-1 Этот Email уже зарегистрирован
+                p(ng-if='register.error == 3').md-body-1 Неизвестная ошибка. Попробуйте позже

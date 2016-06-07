@@ -46,8 +46,7 @@ Schema.Users = new SimpleSchema({
     optional: true
   },
   'profile.phone': {
-    type: String,
-    optional: true
+    type: String
   },
   'profile.realtorId': {
     type: String,

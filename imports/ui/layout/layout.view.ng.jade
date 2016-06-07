@@ -6,7 +6,7 @@ md-toolbar(layout='row' layout-align='center center').ph-16
     span().md-body-1.mr-0 {{layout.user.profile.name}} {{layout.user.profile.surName}}
     md-button(hide-gt-md='', ng-click='layout.toggleList()' aria-label='Открыть меню').md-icon-button.menu
         md-icon(md-svg-icon='menu')
-    md-button(show-gt-md='' ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.btn-logout
+    md-button(ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.btn-logout
         md-icon(md-svg-icon='svg/icon-exit-to-app-white.svg')
 
 // Container #2

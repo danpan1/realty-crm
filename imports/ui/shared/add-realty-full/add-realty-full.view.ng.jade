@@ -157,7 +157,8 @@ md-tabs(md-dynamic-height md-border-bottom)
                     div(layout='row')
                         div(flex='45').mv-16
                             div(layout='row' layout-align='space-between start')
-                                md-input-container(flex).mv-0.form-required.zh
+                                price-mask(ng-if='addRealtyFull.realty' label='"Цена"' price='addRealtyFull.realty.price' optflex='')
+                                //md-input-container(flex).mv-0.form-required.zh
                                     label Цена
                                     input(
                                         required 

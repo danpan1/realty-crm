@@ -468,9 +468,13 @@ th {
 
 @media screen and (max-width: 1279px) {
   .btn-logout {
-    display: none !important;
+    //display: none !important;
+    margin: 0 !important;
   }
   #content {
     margin-left: 0;
+  }
+  .md-icon-button.menu{
+    margin-right: 0 !important;
   }
 }

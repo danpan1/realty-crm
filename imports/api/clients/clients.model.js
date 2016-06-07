@@ -117,32 +117,33 @@ Clients.Schema = new SimpleSchema({
 
 Clients.before.insert(function (userId, doc) {
   doc.createdAt = Date.now();
-  console.log(doc.need.subways, 'doc.need.subways');
-  let subways = Locations.find({'_id': {$in: doc.need.subways}}).fetch();
-  if (subways && subways.length && subways[0].loc.llg) {
-    let subwaysInDistance = [];
-    subways.forEach((metro) => {
-      let foundCloseMetro = Locations.find({
-        'loc.llg': {
-          $near: {
-            $geometry: {type: 'Point', coordinates: metro.loc.llg},
-            $maxDistance: 3000
+  if (doc.need.subways && doc.need.subways.length > 0) {
+    let subways = Locations.find({'_id': {$in: doc.need.subways}}).fetch();
+    if (subways && subways.length && subways[0].loc.llg) {
+      let subwaysInDistance = [];
+      subways.forEach((metro) => {
+        let foundCloseMetro = Locations.find({
+          'loc.llg': {
+            $near: {
+              $geometry: {type: 'Point', coordinates: metro.loc.llg},
+              $maxDistance: 3000
+            }
           }
-        }
-      }).fetch();
-      subwaysInDistance = subwaysInDistance.concat(foundCloseMetro);
-    });
+        }).fetch();
+        subwaysInDistance = subwaysInDistance.concat(foundCloseMetro);
+      });
 
-    console.log('subwaysInDistance', subwaysInDistance);
-    let step1 = subwaysInDistance.map((item)=> {
-      return item._id;
-    });
-    console.log('step1', step1.length);
-    let step2 = _.uniq(step1, function (item) {
-      return item;
-    });
-    console.log('step2', step2.length);
-    doc.need.subwaysInDistance = step2;
+      console.log('subwaysInDistance', subwaysInDistance);
+      let step1 = subwaysInDistance.map((item)=> {
+        return item._id;
+      });
+      console.log('step1', step1.length);
+      let step2 = _.uniq(step1, function (item) {
+        return item;
+      });
+      console.log('step2', step2.length);
+      doc.need.subwaysInDistance = step2;
+    }
   }
 });
 

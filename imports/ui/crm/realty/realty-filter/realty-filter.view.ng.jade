@@ -1,5 +1,4 @@
 div(md-whiteframe='2').realty-filter.ph-32.pv-16
-    p {{realtyFilter.filter}}
     div(layout='row', layout-align="space-between center")
         div(flex='30')
             div(layout='column' layout-align='space-between none')
@@ -45,10 +44,12 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
         div(flex='30' flex-offset='10')
             div(layout='column' layout-align='space-between none')
                 div(layout='row' layout-align='space-between end')
-                    md-input-container(flex='40')
+                    price-mask(ng-if='realtyFilter.filter' label='"цена от"' price='realtyFilter.filter.priceFrom' optflex='40').ml-32
+                    price-mask(ng-if='realtyFilter.filter' label='"цена до"' price='realtyFilter.filter.priceTo' optflex='40').ml-32
+                    //md-input-container(flex='40')
                         label цена от
                         input(ng-model='realtyFilter.filter.priceFrom' ng-blur='realtyFilter.suitRealty()')
-                    md-input-container(flex='40' flex-offset='10')
+                    //md-input-container(flex='40' flex-offset='10')
                         label цена до
                         input(ng-model='realtyFilter.filter.priceTo' ng-blur='realtyFilter.suitRealty()')
                 div(layout='row' layout-align='space-between end').mv-18

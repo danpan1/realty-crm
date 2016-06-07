@@ -49,7 +49,6 @@ class RealtyCard {
     this.timeout(()=>{
       if (img.height < 10 || !this.realty.details.images[0].url) {
         this.noPhoto = true;
-        console.log('1231');
       }
     })
   }
