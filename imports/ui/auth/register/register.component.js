@@ -55,7 +55,9 @@ class Register {
     Accounts.createUser(this.credentials,
       this.$bindToContext((err) => {
         if (err) {
-          this.error = err;
+          if (err.reason == 'Phone is required') this.error = 1;
+          else if (err.reason == 'Email already exists.') this.error = 2;
+          else this.error = 3;
         } else {
           Meteor.call('sendQuestion', {
             phone: this.credentials.profile.phone,
