@@ -96,12 +96,31 @@ div(layout='column' md-whiteframe='2' ng-if='realtyCard.show == true').mv-8
                     span(ng-if="condition == 'balcony'") Балкон
         md-divider
 
+
+
+
+
         //7-ая Скрыть Сохранить
         div(layout='column' layout-align="space-between left").newList_Actions.ph-16.pv-8
             div(layout="column" layout-align="space-between start")
-                md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)' ng-if='realtyCard.relationType === "new" || realtyCard.relationType === "offers"' md-no-ink).md-simple-button.realty-card__btn-save.mv-8.mh-0.p-0.text-left Сохранить
-                md-button(ng-if="realtyCard.realtylisttype" ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)').md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
-                md-button(ng-if="!realtyCard.realtylisttype" ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.text-uppercase Подробнее
+
+                md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
+                ng-if='realtyCard.relationType === "new" || realtyCard.relationType === "offers"' md-no-ink).md-simple-button.realty-card__btn-save.mv-8.mh-0.p-0.text-left Сохранить
+
+                md-button(ng-if="realtyCard.realtylisttype === 'connections'"
+                ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
+                ).md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
+
+                md-button(ng-if="!realtyCard.realtylisttype"
+                ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.text-uppercase Подробнее
+                md-button(ng-if="realtyCard.realtylisttype === 'clientSuitauto' || realtyCard.realtylisttype === 'clientSuitexact'"
+                ng-click='realtyCard.sendRealtyRelation(realtyCard.realty._id)').client-card__link.text-left.m-0.p-0 Предложить клиента
+                md-button(ng-if="realtyCard.realtylisttype === 'clientSuitmy'"
+                ng-click='realtyCard.sendRealtyRelation(realtyCard.realty._id)' md-no-ink).client-card__link.text-left.m-0.p-0 Выбрать объект
+
+
+
+
 
     // Подоробное объявление
     div(ng-show="realtyCard.ngShowDescr").ph-32.pb-16

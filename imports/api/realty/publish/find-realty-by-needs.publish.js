@@ -63,7 +63,7 @@ if (Meteor.isServer) {
 
           if (clientNeeds.subways) {
             if (suitby === 'exact') {
-              selector['address.subways'] = clientNeeds.subways;
+              selector['address.subways'] = {$in: clientNeeds.subways};
             } else {
               selector['address.subways'] = {$in: clientNeeds.subwaysInDistance};
             }

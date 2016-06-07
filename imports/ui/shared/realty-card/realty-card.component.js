@@ -13,6 +13,7 @@ class RealtyCard {
   /* @ngInject */
   constructor($scope, $reactive, $mdDialog, $timeout) {
     $reactive(this).attach($scope);
+    console.log(this.realtylisttype, 'realtylisttype');
     this.dictionary = dictionary;
     this.timeout = $timeout;
     this.show = true;
@@ -152,6 +153,13 @@ class RealtyCard {
     });
   }
 
+  sendRealtyRelation(realtyId) {
+    console.log(realtyId, 'realtyId');
+    console.log(this.clientId, 'clientId');
+    Meteor.call('setRelationFindRealty', this.clientId, realtyId,  this.realtylisttype);
+    /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
+  }
+  
   updateRealty(id) {
     Realty.update({_id: id}, {
       $set: this.realty
@@ -190,7 +198,7 @@ export default angular.module(moduleName, [
     slider: '&',
     relationType: '@',
     clientId: '<',
-    realtylisttype: '<',
+    realtylisttype: '@',
     user: '<'
   },
   controllerAs: moduleName,

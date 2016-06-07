@@ -116,7 +116,7 @@ Clients.Schema = new SimpleSchema({
 });
 
 Clients.before.insert(function (userId, doc) {
-  doc.createdAt = Date.now();
+  doc.createdAt = new Date();
   if (doc.need.subways && doc.need.subways.length > 0) {
     let subways = Locations.find({'_id': {$in: doc.need.subways}}).fetch();
     if (subways && subways.length && subways[0].loc.llg) {
