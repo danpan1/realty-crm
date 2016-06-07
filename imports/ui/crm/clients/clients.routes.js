@@ -21,9 +21,9 @@ export default function routes($stateProvider) {
       template: '<client-details/>',
       controller: function ($state, $stateParams) {}
     })
-        .state('crm.clients.details.connections', {
-          url: '/connections?:client&:assort&:activetab',
-          template: '<client-connections/>',
+        .state('crm.clients.details.relations', {
+          url: '/relations?:client&:assort&:activetab',
+          template: '<client-relations/>',
           controller: function ($state, $stateParams) {}
         })
         .state('crm.clients.details.suit', {
