@@ -1,4 +1,5 @@
 // Container #1 (see wireframe)
+video-tutorial(ng-if='tutorial === true')
 md-toolbar(layout='row' layout-align='center center').ph-16
     //div(layout='row' layout-align='center center' flex).toolbar-container
     span().brand-logo
@@ -28,7 +29,7 @@ div(flex, layout='row' layout-align='center none')
                              md-ink-ripple="#bbdefb") {{item.name}}
             div
                 md-list-item(layout="row" layout-align='start' md-ink-ripple="#bbdefb").ph-0
-                    a(href='https://vk.com/write19844032' target='blank').md-list-item-inner.md-no-style.md-button.md-ink-ripple Видеоинструкции 
+                    a(ng-click = 'tutorial = !tutorial').md-list-item-inner.md-no-style.md-button.md-ink-ripple Видео-инструкции
             div
                 md-list-item(layout="row" layout-align='start' md-ink-ripple="#bbdefb").ph-0
                     a(href='https://vk.com/write19844032' target='blank').md-list-item-inner.md-no-style.md-button.md-ink-ripple Помощь 

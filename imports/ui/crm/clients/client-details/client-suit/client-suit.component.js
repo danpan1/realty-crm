@@ -13,21 +13,21 @@ class ClientSuit {
   constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
     var vm = this;
-    vm.suitby = $stateParams.suitby ? $stateParams.suitby : 'exact' ;
+    vm.suitby = $stateParams.suitby ? $stateParams.suitby : 'exact';
     vm.selectedTab = '';
-    switch($stateParams.suitby){
-        case 'my':
-            vm.selectedTab = 0;
-            break;
-        case 'exact':
-            vm.selectedTab = 1;
-            break;
-        case 'auto':
-            vm.selectedTab = 2;
-            break;
-        default:
-            vm.selectedTab = 1;
-    } 
+    switch ($stateParams.suitby) {
+      case 'my':
+        vm.selectedTab = 0;
+        break;
+      case 'exact':
+        vm.selectedTab = 1;
+        break;
+      case 'auto':
+        vm.selectedTab = 2;
+        break;
+      default:
+        vm.selectedTab = 1;
+    }
   }
 }
 

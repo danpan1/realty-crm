@@ -24,24 +24,21 @@ class ClientSuitExact {
     vm.sort = {
       'createdAt': -1
     };
-    
-    vm.subscribe('newList', () => {
+
+    vm.subscribe('findRealtyByNeeds', () => {
       return [
+        //options
         {
           limit: parseInt(vm.perPage),
           skip: parseInt((vm.getReactively('page') - 1) * vm.perPage),
           sort: vm.getReactively('sort')
         },
-        {
-          floorFrom: vm.getReactively('filter.floorFrom'),
-          floorTo: vm.getReactively('filter.floorTo'),
-          priceTo: vm.getReactively('filter.priceTo'),
-          priceFrom: vm.getReactively('filter.priceFrom'),
-          roomcount: vm.getReactively('roomcount'),
-          type: vm.getReactively('filter.type'),
-          subways: vm.getReactively('filter.subways'),
-          districts: vm.getReactively('filter.districts')
-        }
+        // client.needs
+        vm.getReactively('client.need'),
+        //client currentrelations
+        vm.getReactively('client.relations'),
+        //searchType
+        vm.getReactively('stateParams.suitby')
       ];
     }, {
       onReady: function () {
@@ -50,6 +47,9 @@ class ClientSuitExact {
     });
 
     vm.helpers({
+      client: () => {
+        return Clients.findOne({});
+      },
       realty: () => {
         return Realty.find({}, {sort: vm.getReactively('sort')});
       },
@@ -61,13 +61,13 @@ class ClientSuitExact {
       }
     });
   }
-  
+
   setSliderImages(images) {
     console.log(images);
     this.showSlider = true;
     this.slideShowImages = images;
   }
-  
+
 }
 
 const moduleName = 'clientSuitExact';
@@ -79,7 +79,9 @@ export default angular.module(moduleName, [
   PaginationButtons
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/clients/client-details/client-suit/client-suit-exact/client-suit-exact.view.html',
-  bindings: {},
+  bindings: {
+    selectedTab: '='
+  },
   controllerAs: moduleName,
   controller: ClientSuitExact
 });
