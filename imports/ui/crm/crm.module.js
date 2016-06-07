@@ -19,6 +19,7 @@ import {name as layout} from '/imports/ui/layout/layout.component';
 import {name as documents} from '/imports/ui/crm/documents/documents.component';
 import {name as newRealtyList} from '/imports/ui/crm/realty-new-list/realty-new-list.component';
 import {name as addRole} from '/imports/ui/shared/add-role/add-role.component';
+import {name as videoTutorial} from '/imports/ui/crm/video-tutorial/video-tutorial.component';
 
 const moduleName = 'app.crm';
 // create a module
@@ -27,6 +28,7 @@ export default angular.module(moduleName, [
   layout,
   //ngMenuLink,
   //ngMenuToggle,
+  videoTutorial,
   documents,
   addRole,
   ngPhoneFilter,
