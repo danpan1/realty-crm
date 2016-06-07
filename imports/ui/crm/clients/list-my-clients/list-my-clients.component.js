@@ -24,7 +24,7 @@ class ListMyClients {
     vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
-      '_id': -1
+      'createdAt': -1
     };
 
     vm.selectedTab = '';
