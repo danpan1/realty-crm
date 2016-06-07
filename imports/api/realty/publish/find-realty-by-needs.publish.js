@@ -50,8 +50,8 @@ if (Meteor.isServer) {
           };
         }
 
-        //TODO clientNeeds.price  костыль. надо переделать. моргают клиенты лишние при переключнии табов
-        if (clientNeeds && clientNeeds.price) {
+        //TODO моргают клиенты лишние при переключнии табов
+        if (clientNeeds) {
           // console.log(clientNeeds);
           if (clientNeeds.price) {
             selector['price'] = {$gte: clientNeeds.price / 1.25, $lte: clientNeeds.price * 4 / 3};

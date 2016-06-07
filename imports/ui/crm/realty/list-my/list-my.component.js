@@ -63,6 +63,16 @@ class ListMy {
     };
 
   }
+  
+  takeCheckedRealty(id, status) {
+    Meteor.call('takeRealty', id, status, (err, result)=> {
+      if (err) {
+        console.log('err: ' + err);
+      } else {
+        console.log(result);
+      }
+    });
+  }
 
 }
 

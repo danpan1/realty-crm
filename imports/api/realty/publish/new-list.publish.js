@@ -9,17 +9,18 @@ if (Meteor.isServer) {
   Meteor.publish('newList', function (options, search) {
       let selector;
       if (this.userId) {
-        // TODO статус добавить !!! тут нужен статус new
         selector = {
-          status: 'new',
-          type:4
+          $or: [
+            {status: 'new'},
+            {status: 'taken', 'realtor.id': this.userId}
+          ]
         };
 
         if (search) {
           console.log('search', search);
 
           let price = {};
-          
+
           /* ЦЕНА ОТ И ДО*/
           if (search.priceFrom) {
             price.$gte = parseInt(search.priceFrom);
@@ -31,7 +32,7 @@ if (Meteor.isServer) {
             selector.price = price;
           }
           /* END ЦЕНА */
-          
+
           /* ЭТАЖИ ОТ И ДО*/
           let floor = {};
           if (search.floorFrom) {
@@ -98,7 +99,7 @@ if (Meteor.isServer) {
           'address.metroTime': 1,
           'details.descr': 1,
           'details.renovation': 1,
-          'details.images': 1,
+          'details.images.url': 1,
           'details.conditions': 1,
           floor: 1,
           floormax: 1,
