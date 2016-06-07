@@ -3,6 +3,8 @@ md-content()
     div().mv-32.text-center
         img(src='img/logos/brand-logo-large.png')
     div(layout='column', layout-align='center center').p-32
+        md-toolbar(ng-show='login.error', layout='row', layout-align='center center').md-warn.mb-16
+            p().md-body-1 {{ login.error }}
         div(md-whiteframe='2').login-form.p-32
             form(name='loginForm' ng-submit='login.login()')
                 div(layout='row' layout-align='center center')
@@ -22,5 +24,3 @@ md-content()
                     div().md-body-1 или
                     div
                         a(href='/register').md-button.md-primary Зарегистрироваться
-            md-toolbar.md-warn(ng-show='login.error', layout='row', layout-align='center center')
-                p().md-body-1 {{ login.error }}
