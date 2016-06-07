@@ -68,12 +68,14 @@ export function takeRealty(realtyId, status) {
         return 'нет такого объекта';
       }
 
-      if (realty.status !== 'new' && realty.status !== 'cian' && (realty.status === 'taken' && !status)) {
+      // НЖНО ПОПРАВИТЬ ЭТИ ЛАЙЗЕЙКИ В ПРОВЕРКАХ БЕЗОПАСНОСТИ
+
+      if (realty.status !== 'new' && realty.status !== 'cian' && (realty.status === 'taken' && status === 'taken')) {
         //Не даём взять объект
         return 'метод вызывается в неправильном месте. попытка взлома';
       }
 
-      if (realty.realtor && realty.realtor.id) {
+      if (realty.realtor && realty.realtor.id && (realty.status === 'taken' && status === 'taken')) {
         //Не даём взять объект
         return 'у объекта уже есть владелец. попытка взлома';
       }
