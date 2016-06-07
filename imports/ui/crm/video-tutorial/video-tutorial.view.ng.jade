@@ -1,4 +1,17 @@
 div().video-modal
-    div().video-modal-content
+    div().video-modal__content
         img(src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAABaAQAAAAAXvWD/AAAAAnRSTlMAAHaTzTgAAAAWSURBVHgBY6ABGAWjYBSMglEwCkYBAAdiAAFufS70AAAAAElFTkSuQmCC').video-sizer
-        iframe(width='100%' height='100%' src='https://www.youtube.com/embed/BYjKTP4clkg' frameborder='0' allowfullscreen).youtube
+        iframe(width='80%' height='80%' src='https://www.youtube.com/embed/BYjKTP4clkg' frameborder='0' allowfullscreen).youtube
+        div().video-modal__play-list
+            a(href='#').video-modal__play-list-item.current-video Видео 1
+            a(href='#').video-modal__play-list-item Видео 1
+            a(href='#').video-modal__play-list-item Видео 1
+            a(href='#').video-modal__play-list-item Видео 1
+            a(href='#').video-modal__play-list-item Видео 1
+            a(href='#').video-modal__play-list-item Видео 1
+            a(href='#').video-modal__play-list-item Видео 1
+            a(href='#').video-modal__play-list-item Видео 1
+            a(href='#').video-modal__play-list-item Видео 1
+            a(href='#').video-modal__play-list-item Видео 1
+    md-button(aria-label='Закрыть').md-icon-button.video-modal__btn-close.m-0.p-0
+        md-icon(ng-click='slideShow.hideSlides()' md-svg-icon='svg/icon-close-thin.svg')
