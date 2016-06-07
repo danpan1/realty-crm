@@ -6,6 +6,8 @@ md-content()
         header(layout='row' layout-align='center center')
             h2().md-subhead Восстановление пароля
         div(md-whiteframe='2').resetpw-form.p-32
+            md-toolbar(ng-show='resetpw.error', layout='row', layout-align='center center').md-warn.mb-16
+                p().md-body-1 {{ resetpw.error }}
             form(name='resetForm' ng-submit='login.login()')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='80').md-block.m-0
@@ -14,5 +16,3 @@ md-content()
                 div(layout='row' layout-align='center center').mt-16.mb-8
                     md-button.md-raised.md-primary(flex='80' type='submit', ng-click="resetpw.reset()" aria-label='Восстановить пароль', ng-disabled='resetpw.resetForm.$invalid()')
                         | Восстановить пароль
-            md-toolbar.md-warn(ng-show='resetpw.error', layout='row', layout-align='center center')
-                p().md-body-1 {{ resetpw.error }}

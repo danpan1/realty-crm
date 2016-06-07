@@ -6,7 +6,7 @@ realty-filter(filter='realtyNewList.filter' ng-if='realtyNewList.realtyCount !==
 slide-show(slides-list='realtyNewList.slideShowImages' isshown='realtyNewList.showSlider')
 //div {{realtyNewList.filter}} фильтр
 
-md-progress-circular(ng-if='!realtyNewList.loaded' md-diameter='150' style='position:absolute;left:0;right:0;top:500px;margin:0 auto;')
+md-progress-circular(ng-if='!realtyNewList.loaded' md-diameter='150' style='position:absolute;left:0;right:0;top:280px;margin:0 auto;')
 div(ng-if='realtyNewList.loaded')
     pagination-buttons(ng-if='realtyNewList.loaded' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')
     div(ng-if='realtyNewList.realty.length' layout='column', layout-align='space-around stretch' ng-init='realtyNewList.openPurchaseSuccess()').md-body-1
