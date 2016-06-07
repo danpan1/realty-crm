@@ -39,23 +39,47 @@ class OneReview {
   }
 
   removeImage(image) {
-    let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
-      return (item.originalName === image.originalName);
-    });
-    if (this.realty.image === this.realty.details.thumbnails[imageIndex].url) {
-      console.log('removeImage mainImage', this.realty.image);
-      this.realty.image = '';
+    var imageIndex;
+    if (image.originalName.match(/0\/\d+/)) {
+      let imageOriginal = image.originalName.match(/0\/\d+/)[0].slice(2);
+      imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+        let itemOriginal = item.originalName.match(/5\/\d+/)[0].slice(2);
+        return (itemOriginal === imageOriginal);
+      });
+    } else {
+      imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+        return (item.originalName === image.originalName);
+      });
     }
-    this.s3DeleteImage(image);
+    //console.log(this.realty.image + ' === ' + this.realty.details.thumbnails[imageIndex].url)
+    //if (this.realty.image === this.realty.details.thumbnails[imageIndex].url) {
+    //  var imageNormalIndex = this.realty.details.images.findIndex((item)=> {
+    //    return (item.originalName === image.originalName);
+    //  });
+      this.realty.image = '';
+    //  if (this.realty.details.images[imageNormalIndex+1]) this.setMainImage(this.realty.details.images[imageNormalIndex+1]);
+    //  else this.setMainImage(this.realty.details.images[imageNormalIndex - 1]);
+    //  this.s3DeleteImage(image);
+    //} else{
+      this.s3DeleteImage(image); 
+    //}
   }
 
   setMainImage(image) {
     if (image) {
-      let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
-        return (item.originalName === image.originalName);
-      });
+      var imageIndex;
+      if (image.originalName.match(/0\/\d+/)) {
+        let imageOriginal = image.originalName.match(/0\/\d+/)[0].slice(2);
+        imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+          let itemOriginal = item.originalName.match(/5\/\d+/)[0].slice(2);
+          return (itemOriginal === imageOriginal);
+        });
+      } else { 
+        imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+          return (item.originalName === image.originalName);
+        });
+      }
       this.realty.image = this.realty.details.thumbnails[imageIndex].url;
-      console.log('setMainImage', this.realty.image);
       this.findMainImage(this.realty.image);
       this.saveNewDescription();
     }
@@ -67,9 +91,18 @@ class OneReview {
       let imageIndexThumbs = this.realty.details.thumbnails.findIndex((item)=> {
         return (item.url === imageUrl);
       });
-      let imageIndex = this.realty.details.images.findIndex((item)=> {
-        return (item.originalName === this.realty.details.thumbnails[imageIndexThumbs].originalName);
-      });
+      var imageIndex;
+      if (imageUrl.match(/5\/\d+/)) {
+        let imageOriginal = imageUrl.match(/5\/\d+/)[0].slice(2);
+        imageIndex = this.realty.details.images.findIndex((item)=> {
+          let itemOriginal = item.originalName.match(/0\/\d+/)[0].slice(2);
+          return (imageOriginal === itemOriginal);
+        });
+      } else { 
+        imageIndex = this.realty.details.images.findIndex((item)=> {
+          return (item.originalName === this.realty.details.thumbnails[imageIndexThumbs].originalName);
+        });
+      }
       vm.mainImage = vm.realty.details.images[imageIndex].url;
     }
   }
@@ -86,19 +119,30 @@ class OneReview {
   s3DeleteImage(image) {
     // debugger
     // let a = [1,2,3]
-    let imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
-      return (item.originalName === image.originalName);
-    });
+    var imageIndex;
+    if (image.originalName.match(/0\/\d+/)) {
+      let imageOriginal = image.originalName.match(/0\/\d+/)[0].slice(2);
+      imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+        let itemOriginal = item.originalName.match(/5\/\d+/)[0].slice(2);
+        return (itemOriginal === imageOriginal);
+      });
+    } else {
+      imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
+        return (item.originalName === image.originalName);
+      });
+    }
     let imageNormalIndex = this.realty.details.images.findIndex((item)=> {
       return (item.originalName === image.originalName);
     });
-
+/*
+    console.log(this.realty.details.thumbnails[imageIndex].originalName + ' == ' + this.realty.image)
+    if(this.realty.details.thumbnails[imageIndex].originalName == this.realty.image){
+      if (this.realty.details.images[imageNormalIndex+1]) this.setMainImage(this.realty.details.images[imageNormalIndex+1]);
+      else this.setMainImage(this.realty.details.images[imageNormalIndex - 1]);
+    }*/
+    
     let smallImage = this.realty.details.thumbnails.splice(imageIndex, 1);
-    // console.log(this.realty.details.images.length);
     let bigImage = this.realty.details.images.splice(imageNormalIndex, 1);
-
-    if (this.realty.details.images[imageNormalIndex]) this.setMainImage(this.realty.details.images[imageNormalIndex]);
-    else this.setMainImage(this.realty.details.images[imageNormalIndex - 1]);
 
     S3.delete(smallImage[0].relative_url, (error)=> {
         if (error) {
