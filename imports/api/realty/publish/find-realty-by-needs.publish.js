@@ -3,10 +3,9 @@
  */
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '../realty.model';
-import {Cian} from '../../cian';
-import {Locations} from '../../locations/locations.model';
 import {dictionary} from '../../../helpers/dictionary';
 import {_} from 'meteor/underscore';
+import {Counts} from 'meteor/tmeasday:publish-counts';
 
 if (Meteor.isServer) {
   /**
@@ -15,96 +14,87 @@ if (Meteor.isServer) {
    * @param {object} client - запросы клиента. параметры по которым ищем
    * @param {string} type - как ищем
    * @returns {*} - возвращает выборку объектов
-   *
-   * type
-   * my - поиск по моим объектам
-   * exactly - точное совпадение ( так же используется для модификации фильтра вручную)
-   * algorithm - поиск совпадений по расширенному алгоритму
    */
-  Meteor.publish('find-realty-by-needs', function (options, client, type) {
+  Meteor.publish('findRealtyByNeeds', function (options, clientNeeds, relations, suitby) {
 
 
       let selector, criterions = [];
-      console.log('find-realty-by-needs');
-      if (this.userId && !!client) {
-        console.log('options ', options);
-        console.log('client ', client);
-        console.log('type ', type);
+      console.log('findRealtyByNeeds');
+      console.log('clientNeeds', clientNeeds);
+      console.log('relations', relations);
+      console.log('suitby', suitby);
 
-        if (!!client.need.price) {
-          criterions.push({price: {$gt: client.need.price * 0.75, $lt: client.need.price * 1.25}});
-        }
+      if (this.userId) {
 
-        if (!!client.need.roomcount) {
-          criterions.push({roomCount: {$in: client.need.roomcount}});
-        }
-        /*
-         if (!!client.need.renovation) {
-         let renovations = [];
-         _.each(dictionary.renovation, function(renovation) {
-         if (renovation.id in client.need.renovation) {
-         renovations.push(renovation.name);
-         }
-         });
-         console.log(renovations);
-         conditions.push({renovation: {$in: renovations}});
-         }
-         */
-        let condition_map = {
-          'furniture': "жилая мебель",
-          'kitchen_furniture': "кухонная мебель",
-          'tv': "телевизор",
-          'refrigerator': "холодильник",
-          'washer': "стиральная машина",
-          'phone': "телефон",
-          'animal': "можно с животными",
-          'children': "можно с детьми",
+        let selector = {
+          status: {$in: ['realtor', 'cian', 'agency']}
         };
 
-        if (!!client.need.conditions) {
-          let conditions = [];
-          conditions = _.map(client.need.conditions, function (condition) {
-            return condition_map[condition];
-          });
-          criterions.push({conditions: {$all: conditions}});
+        let realtyRelated = [];
+        if (relations && relations.my) {
+          realtyRelated = realtyRelated.concat(relations.my);
         }
-        if (!!client.need.subways) {
-          let subways = client.need.subways;
-          let subway_locations = Locations.find({_id: {$in: subways}}).fetch();
-          if (subways.length > 0 && subways.length < 5) {
-            /*            let subway_additional = [];
-             _.each(subway_locations, function(subway_location) {
-             subway_additional = Locations.find({}).fetch();
-             }
-             */
+        if (relations && relations.saved) {
+          realtyRelated = realtyRelated.concat(relations.saved);
+        }
+        if (relations && relations.new) {
+          realtyRelated = realtyRelated.concat(relations.new);
+        }
+        if (relations && relations.offers) {
+          realtyRelated = realtyRelated.concat(relations.offers);
+        }
+
+        if (realtyRelated && realtyRelated.length) {
+          selector._id = {
+            $nin: realtyRelated
+          };
+        }
+
+        //TODO clientNeeds.price  костыль. надо переделать. моргают клиенты лишние при переключнии табов
+        if (clientNeeds && clientNeeds.price) {
+          // console.log(clientNeeds);
+          if (clientNeeds.price) {
+            selector['price'] = {$gte: clientNeeds.price / 1.25, $lte: clientNeeds.price * 4 / 3};
           }
-          if (subways.length > 0) {
-            let subway_names = [];
-            _.each(subway_locations, function (loc) {
-              subway_names.push(loc.name);
-            });
-            criterions.push({metro: {$in: subway_names}});
+
+          if (clientNeeds.roomcount && clientNeeds.roomcount.length > 0) {
+            selector['roomcount'] = {$in: clientNeeds.roomcount};
           }
+
+          if (clientNeeds.subways) {
+            if (suitby === 'exact') {
+              selector['address.subways'] = clientNeeds.subways;
+            } else {
+              selector['address.subways'] = {$in: clientNeeds.subwaysInDistance};
+            }
+          }
+
+          if (clientNeeds.conditions && clientNeeds.conditions.length) {
+
+            if (suitby === 'exact') {
+              selector['details.conditions'] = {$all: clientNeeds.conditions};
+            } else {
+              // Тут надо алгоритм такой, что если мебель указана в conditions тогда ищем мебель
+            }
+          }
+
+          if (suitby === 'my') {
+            selector['realtor.id'] = this.userId;
+          } else {
+            selector['realtor.id'] = {$ne: this.userId};
+          }
+
+          Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
+
+          console.log('selector ', selector);
+          let realty = Realty.find(selector, {limit: 20});
+          console.log('realty ', realty.length);
+          return realty;
         }
-
-        /*
-         * Поиск только по объектам риэлтора. Страница Подобрать объекта - Мои
-         */
-        if (type === 'my') {
-          criterions.push({'realtor.id': this.userId});
-        }
-
-        selector = {
-          $and: criterions
-        };
-
-        // if (id) {
-        //   selector.$and.push({_id: id});
-        // }
+        console.log('no clientNEEDS');
       }
-      console.log('selector ', selector);
-      let cian = Cian.find(selector, {limit : 20});
-      return cian;
+      console.log('no userId');
+
     }
   );
 }

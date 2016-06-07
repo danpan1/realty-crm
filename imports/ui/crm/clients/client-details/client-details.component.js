@@ -33,7 +33,7 @@ class ClientDetails {
       case 'suit':
         vm.selectedTab = 0;
         break;
-      case 'connections':
+      case 'relations':
         vm.selectedTab = 1;
         break;
       case 'analytics':

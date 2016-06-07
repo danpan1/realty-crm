@@ -5,4 +5,4 @@ div.md-whiteframe-2dp(md-whiteframe="2")
             md-tab(ui-sref="crm.clients.details.suit({suitby:'exact'})") Точное совпадение
             md-tab(ui-sref="crm.clients.details.suit({suitby:'auto'})") Авто-Подброка
             
-client-suit-exact(ng-if='clientSuit.selectedTab == 1')
+client-suit-exact(selected-tab = 'clientSuit.selectedTab')
