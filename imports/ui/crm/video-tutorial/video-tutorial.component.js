@@ -7,6 +7,13 @@ import angularMeteor from 'angular-meteor';
 import './video-tutorial.view.html';
 
 class VideoTutorial {
+  constructor(){
+
+  }
+  hideSlides(){
+    console.log('hide');
+    this.isVideoTutorial = !this.isVideoTutorial;
+  }
 }
 
 const moduleName = 'videoTutorial';
@@ -16,7 +23,9 @@ export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/video-tutorial/video-tutorial.view.html',
-  bindings: {},
+  bindings: {
+    isVideoTutorial : '='
+  },
   controllerAs: moduleName,
   controller: VideoTutorial
 });

@@ -1,5 +1,6 @@
 // Container #1 (see wireframe)
-video-tutorial(ng-if='layout.videoTutorial === true' ng-class='{\'show-video-modal\' : layout.videoTutorial}')
+video-tutorial(ng-if='layout.videoTutorial === true' ng-class='{\'show-video-modal\' : layout.videoTutorial}'
+is-video-tutorial = 'layout.videoTutorial')
 md-toolbar(layout='row' layout-align='center center').ph-16
     //div(layout='row' layout-align='center center' flex).toolbar-container
     span().brand-logo
