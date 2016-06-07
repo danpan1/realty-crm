@@ -23,10 +23,10 @@
                 div
                     div().price.listMy_Address-item {{::realty.roomcount}} комн. {{::realty.price | price}}
                     div().listMy_Address-item {{::realty.address.street}}
+                    div().listMy_Address-item {{::realty.address.house}} кв. {{::realty.address.flat}}
                     div().listMy_Address-item
                         span(class='metro-color-{{realty.address.subwaysEmbedded[0].line}}').metro-color
                         span {{realty.address.subwaysEmbedded[0].name}}
-                    div().listMy_Address-item {{::realty.address.house}} кв. {{::realty.address.flat}}
         md-divider
 
         div(layout='column' layout-align='center center' ui-sref="crm.realty.one.review({realtyId: '{{::realty._id}}'})").listMy_Progress.p-8

@@ -1,9 +1,9 @@
-realty-filter(filter='clientSuitExact.filter' roomcount='clientSuitExact.roomcount')
+realty-filter(filter='clientSuitExact.filter'
+            roomcount='clientSuitExact.roomcount'
+            ng-if='clientSuitExact.selectedTab == 1')
 slide-show(slides-list='clientSuitExact.slideShowImages' isshown='clientSuitExact.showSlider')
 div {{clientSuitExact.filter}} фильтр
 div {{clientSuitExact.realtyCount}} объектов найдено
-
-pagination-buttons(ng-if='clientSuitExact.pagesCount' uisref='\'crm.clients.details.suit\'' page='clientSuitExact.page' pagescount='clientSuitExact.pagesCount')
 
 .md-body-1(layout='column', layout-align='space-around stretch' )
     realty-card(dir-paginate="realty in clientSuitExact.realty | itemsPerPage: clientSuitExact.perPage" 

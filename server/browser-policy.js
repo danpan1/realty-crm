@@ -8,6 +8,7 @@ const allowFrameOrigin = function () {
   BrowserPolicy.content.allowScriptOrigin('mc.yandex.ru');
 
   BrowserPolicy.content.allowFontOrigin('data:');
+  BrowserPolicy.content.allowFontOrigin('themes.googleusercontent.com');
 
   BrowserPolicy.content.allowImageOrigin("*.img.avito.st");
   BrowserPolicy.content.allowImageOrigin("cdn4.cian.ru");

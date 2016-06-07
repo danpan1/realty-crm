@@ -13,8 +13,9 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {RelationsSchema} from '../relations/relations.schema';
 export const Parser = new Mongo.Collection('parser');
 export const Realty = new Mongo.Collection('realty');
+
 // mongodump -h 127.0.0.1 --port 3001 -d meteor
-// mongorestore -h 127.0.0.1 --port 3001 -d meteor ../db_dump/meteor
+// mongorestore -h 127.0.0.1 --port 3001 -d meteor ../db_dump/production
 
 Realty.allow({
   update: function (realtyId, realty) {

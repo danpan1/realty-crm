@@ -1,23 +1,39 @@
-div.md-whiteframe-2dp(md-whiteframe="2")
-    div(layout="row")
-        md-tabs(md-dynamic-height md-border-bottom md-selected="clientRelations.selectedTab" flex="80")
-            md-tab(ui-sref="crm.clients.details.relations({assort:'manual'})") Ручная подброка
-            md-tab(ui-sref="crm.clients.details.relations({assort:'auto'})") Автоподброка
-        div.one-connections__assort-client-btn(flex="20") 
-            md-button.md-raised.md-primary(ng-if="clientRelations.assort == 'manual'") Подобрать клиента
-    div.ph-16.pv-16(layout="row")
-        div.ph-8(flex="10") Подано
-        div.ph-8(flex="15") Местоположение
-        div.ph-8(flex="10") Собственник
-        div.ph-8(flex="15") Фото
-        div.ph-8(flex="15") Объект
-        div.ph-8(flex="20") Удобства
-        div.ph-8(flex="15") Действия
-        
-div.md-whiteframe-2dp(md-whiteframe="2") {{clientRelations.objects}}
-    h1 Here will be list of object cards assorted by {{clientRelations.assort}}
-    realty-card(ng-repeat='realty in newList.realty'
-                realty='realty'
-                slider='newList.setSliderImages(images)')
+slide-show(slides-list='clientRelations.slideShowImages' isshown='clientRelations.showSlider')
+div(md-whiteframe="1").mt-8
+    md-tabs(md-border-bottom md-selected='0').realty-list-layout__topbar
+        md-tab(label='Предложения от партнеров')
+
+    div
+        realty-card(ng-repeat='realty in clientRelations.realtyNew'
+        realty='realty'
+        realtylisttype="'connections'"
+        slider='clientRelations.setSliderImages(images)' relation-type= 'new'
+        client-id='clientRelations.client._id')
+    div
+        realty-card(ng-repeat='realty in clientRelations.realtyOffers'
+        realty='realty'
+        realtylisttype="'connections'"
+        slider='clientRelations.setSliderImages(images)'
+        client-id='clientRelations.client._id'
+        relation-type= 'offers')
+
+div(md-whiteframe="1")
+    md-tabs(md-border-bottom md-selected='0').realty-list-layout__topbar
+        md-tab(label='Выбранные объекты')
+
+    div
+        realty-card(ng-repeat='realty in clientRelations.realtySaved'
+                    realty='realty'
+                    realtylisttype="'connections'"
+                    slider='clientRelations.setSliderImages(images)'
+                    client-id='clientRelations.client._id'
+                    relation-type= 'saved')
+    div
+        realty-card(ng-repeat='realty in clientRelations.realtyMy'
+                    realty='realty'
+                    realtylisttype="'connections'"
+                    slider='clientRelations.setSliderImages(images)'
+                    client-id='clientRelations.client._id'
+                    relation-type= 'my')
     
     
