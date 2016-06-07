@@ -44,6 +44,10 @@ if (Meteor.isServer) {
           realtyRelated = realtyRelated.concat(relations.offers);
         }
 
+        if (relations && relations.hide) {
+          realtyRelated = realtyRelated.concat(relations.hide);
+        }
+
         if (realtyRelated && realtyRelated.length) {
           selector._id = {
             $nin: realtyRelated

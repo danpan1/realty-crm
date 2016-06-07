@@ -43,6 +43,12 @@ class RealtyCard {
     };
     
   }
+
+  agency() {
+    console.log('oceanBanAgency', this.realtyPhone, this.realtyName);
+    Meteor.call('oceanBanAgency', this.realtyPhone, this.realtyName);
+  }
+
   
   coolImage () {
     var img = new Image(); 

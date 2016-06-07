@@ -28,6 +28,9 @@ if (Meteor.isServer) {
       if (relations && relations.offers) {
         clientsRelated = clientsRelated.concat(relations.offers);
       }
+      if (relations && relations.hide) {
+        clientsRelated = clientsRelated.concat(relations.hide);
+      }
 
       console.log(filter.searchType);
 
