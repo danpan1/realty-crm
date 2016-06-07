@@ -68,7 +68,7 @@ export function takeRealty(realtyId, status) {
         return 'нет такого объекта';
       }
 
-      if (realty.status !== 'new' && realty.status !== 'cian') {
+      if (realty.status !== 'new' && realty.status !== 'cian' && (realty.status === 'taken' && !status)) {
         //Не даём взять объект
         return 'метод вызывается в неправильном месте. попытка взлома';
       }
@@ -118,6 +118,15 @@ export function takeRealty(realtyId, status) {
           });
         }
 
+      } else {
+        
+        Realty.update({_id: realtyId}, {
+          $set: {
+            'realtor.id': Meteor.userId(),
+            'status': 'taken'
+          }
+        });
+          
       }
 
       // Если действие не определено, отдаем телефоны и имя

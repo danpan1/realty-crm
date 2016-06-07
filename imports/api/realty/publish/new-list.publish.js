@@ -12,7 +12,7 @@ if (Meteor.isServer) {
         // TODO статус добавить !!! тут нужен статус new
         selector = {
           status: 'new',
-          type:4
+          type: 4
         };
 
         if (search) {

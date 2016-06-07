@@ -44,6 +44,7 @@ if (Meteor.isServer) {
             'address.street': 1,
             'address.subwaysEmbedded': 1,
             'moderator.percent.total': 1,
+            'contacts': 1,
             image: 1,
             price: 1,
             // realtor: 1,
