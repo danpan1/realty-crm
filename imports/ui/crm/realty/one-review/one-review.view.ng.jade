@@ -15,7 +15,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
             ng-disabled='oneReview.uploadNormalLength !== 0').md-primary.md-raised Добавить фото
             div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReview.uploadNormalLength !== 0')
                 div Загружается фото...
-                md-progress-circular(md-mode='indeterminate')
+                //md-progress-circular(md-mode='indeterminate')
         div(flex='50')
             h3(ng-if='oneReview.realty.moderator.comment.photo').md-headline Ответ от модератора: 
             p(ng-if='oneReview.realty.moderator.comment.photo').md-body-1 {{oneReview.realty.moderator.comment.photo}}

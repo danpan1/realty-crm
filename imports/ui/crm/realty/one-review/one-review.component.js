@@ -185,6 +185,7 @@ class OneReview {
       path: ''
     }, (error, result) => {
       if (error) {
+        this.showLoader = false;
         console.log(error);
       } else {
         this.uploadThumbsImagesLength--;
@@ -207,6 +208,7 @@ class OneReview {
 
   uploadNormalImages(files) {
     var vm = this;
+    this.showLoader = true;
     if (files) {
       this.uploadNormalLength = files.length;
     }
@@ -216,6 +218,7 @@ class OneReview {
     }, (error, result) => {
       if (error) {
         console.log(error);
+        this.showLoader = false;
       } else {
         this.uploadNormalLength--;
         if (!this.realty.details.images) {
