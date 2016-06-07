@@ -17,5 +17,13 @@ export default function routes($stateProvider) {
     .state('call-center.moderator', {
       url: '/moderator',
       template: '<moderator/>'
+    })
+    .state('call-center.otchet', {
+      url: '/otchet',
+      template: '<otchet/>'
+    })
+    .state('call-center.management', {
+      url: '/management',
+      template: '<management/>'
     });
 }
