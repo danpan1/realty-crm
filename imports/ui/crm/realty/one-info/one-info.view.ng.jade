@@ -1,4 +1,5 @@
-one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow")
+loader(ng-if="oneInfo.showLoader == true")
+one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow" ng-if="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
     div(layout="row" layout-align='start center')
         div(hide) 

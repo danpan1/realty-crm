@@ -6,16 +6,18 @@ import angularMeteor from 'angular-meteor';
 import {dictionary} from '../../../../helpers/dictionary';
 import {Realty} from '/imports/api/realty';
 import {name as OneInfoEdit} from './one-info-edit/one-info-edit.component';
+import {name as Loader} from '/imports/ui/shared/loader/loader.component';
 
 import './one-info.view.html';
 
 class OneInfo {
   /* @ngInject */
-  constructor($scope, $reactive, $state, $stateParams, $mdDialog) {
+  constructor($scope, $reactive, $state, $stateParams, $mdDialog, $mdToast) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.state = $state;
     this.mdDialog = $mdDialog;
+    this.mdToast = $mdToast;
     this.realty = Realty.findOne({_id: $stateParams.realtyId});
     // oneInfo
     this.slideNum = 0;
@@ -37,7 +39,18 @@ class OneInfo {
         return Realty.findOne({_id: $stateParams.realtyId});
       }
     });
+    
   }
+  
+  showSimpleToast () {
+    this.mdToast.show(
+      this.mdToast.simple()
+        .textContent('Готово!')
+        .position('top right')
+        .hideDelay(3000)
+        .action('ОК')
+    );
+  };
 
   archive(realty) {
     if (realty == this.realty) {
@@ -93,14 +106,17 @@ class OneInfo {
     }
     value = value.join('');
     this.realty.contacts[0].phones[0].phone = parseInt(value);
-
+    this.showLoader = true;
     Realty.update({_id: this.realty._id}, {
       $set: this.realty
     }, (error) => {
       if (error) {
         console.log(error);
+        this.showLoader = false;
       } else {
+        this.showSimpleToast();
         console.log('call recieved newObj');
+        this.showLoader = false;
       }
     });
   }
@@ -169,7 +185,8 @@ const moduleName = 'oneInfo';
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
-  OneInfoEdit
+  OneInfoEdit,
+  Loader
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/one-info/one-info.view.html',
   bindings: {},

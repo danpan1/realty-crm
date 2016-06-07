@@ -9,6 +9,7 @@ import {Relations} from '../relations';
 
 Meteor.methods({
   setRelationFindClient,
+  setRelationFindRealty,
   changeRelationTypeInClient
 });
 /**
@@ -39,6 +40,62 @@ export function setRelationFindClient(clientId, realtyId, type) {
       case 'manual' :
         fieldInClient = 'relations.new';
         fieldInRealty = 'relations.saved';
+        break;
+      default :
+        fieldInClient = 'relations.new';
+        fieldInRealty = 'relations.saved';
+        break;
+    }
+    let modificatorRealty = {};
+    let modificatorClient = {};
+
+    modificatorRealty[fieldInRealty] = clientId;
+    modificatorClient[fieldInClient] = realtyId;
+
+    Realty.update({_id: realtyId},
+      {
+        $addToSet: modificatorRealty
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('realtyRelation  ok');
+        }
+      });
+
+    Clients.update({_id: clientId},
+      {
+        $addToSet: modificatorClient
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('clientRelation  ok');
+        }
+      });
+
+  }
+
+}
+export function setRelationFindRealty(clientId, realtyId, type) {
+  //Это происходит на странице Объекты - Подобрать объект
+  // Значит это предложение для владельцев клиентов
+  if (Meteor.isServer && Meteor.userId()) {
+    console.log('setRelationFindRealty');
+    console.log('type',type);
+    console.log('realtyId',realtyId);
+    console.log('clientId',clientId);
+    let fieldInRealty, fieldInClient;
+
+    switch (type) {
+      case 'clientSuitmy' :
+        fieldInRealty = 'relations.my';
+        fieldInClient = 'relations.my';
+        break;
+      case 'clientSuitexact' :
+      case 'clientSuitauto' :
+        fieldInClient = 'relations.saved';
+        fieldInRealty = 'relations.new';
         break;
       default :
         fieldInClient = 'relations.new';

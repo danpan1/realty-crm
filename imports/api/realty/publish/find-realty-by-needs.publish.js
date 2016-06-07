@@ -44,6 +44,10 @@ if (Meteor.isServer) {
           realtyRelated = realtyRelated.concat(relations.offers);
         }
 
+        if (relations && relations.hide) {
+          realtyRelated = realtyRelated.concat(relations.hide);
+        }
+
         if (realtyRelated && realtyRelated.length) {
           selector._id = {
             $nin: realtyRelated
@@ -63,7 +67,7 @@ if (Meteor.isServer) {
 
           if (clientNeeds.subways) {
             if (suitby === 'exact') {
-              selector['address.subways'] = clientNeeds.subways;
+              selector['address.subways'] = {$in: clientNeeds.subways};
             } else {
               selector['address.subways'] = {$in: clientNeeds.subwaysInDistance};
             }

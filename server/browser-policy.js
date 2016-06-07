@@ -18,6 +18,7 @@ const allowFrameOrigin = function () {
   BrowserPolicy.content.allowImageOrigin('world-invest.pro');
 
   BrowserPolicy.content.allowStyleOrigin('cdnjs.cloudflare.com');
+  BrowserPolicy.content.allowFrameOrigin('www.youtube.com');
 
 };
 

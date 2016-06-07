@@ -6,13 +6,13 @@ div(md-whiteframe="1").mt-8
     div
         realty-card(ng-repeat='realty in clientRelations.realtyNew'
         realty='realty'
-        realtylisttype="'connections'"
+        realtylisttype="connections"
         slider='clientRelations.setSliderImages(images)' relation-type= 'new'
         client-id='clientRelations.client._id')
     div
         realty-card(ng-repeat='realty in clientRelations.realtyOffers'
         realty='realty'
-        realtylisttype="'connections'"
+        realtylisttype="connections"
         slider='clientRelations.setSliderImages(images)'
         client-id='clientRelations.client._id'
         relation-type= 'offers')
@@ -24,14 +24,14 @@ div(md-whiteframe="1")
     div
         realty-card(ng-repeat='realty in clientRelations.realtySaved'
                     realty='realty'
-                    realtylisttype="'connections'"
+                    realtylisttype="connections"
                     slider='clientRelations.setSliderImages(images)'
                     client-id='clientRelations.client._id'
                     relation-type= 'saved')
     div
         realty-card(ng-repeat='realty in clientRelations.realtyMy'
                     realty='realty'
-                    realtylisttype="'connections'"
+                    realtylisttype="connections"
                     slider='clientRelations.setSliderImages(images)'
                     client-id='clientRelations.client._id'
                     relation-type= 'my')
