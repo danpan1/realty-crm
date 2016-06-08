@@ -37,7 +37,7 @@ md-content
                         label Ссылка на &laquoВконтакте&raquo
                         input(type='text', aria-label='Ссылка на Вконтакте' ng-model='register.credentials.profile.urlVk')
                 div(layout='row' layout-align='center center')
-                    md-button(flex='80' type='submit', aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password) || register.credentials.profile.phone.length < 11').md-raised.md-primary
+                    md-button(flex='80' type='submit', aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password) || register.credentials.profile.phone.length < 16').md-raised.md-primary
                         | Зарегистрироваться
                 div(layout='column' layout-align='start center')
                     div().md-body-1 или

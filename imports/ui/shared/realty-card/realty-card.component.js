@@ -11,9 +11,8 @@ import './realty-card.view.html';
 
 class RealtyCard {
   /* @ngInject */
-  constructor($scope, $reactive, $mdDialog, $timeout, $http) {
+  constructor($scope, $reactive, $mdDialog, $timeout) {
     $reactive(this).attach($scope);
-    this.http = $http;
     this.dictionary = dictionary;
     this.timeout = $timeout;
     this.show = true;
@@ -157,41 +156,9 @@ class RealtyCard {
   }
 
   sendRealtyRelation(realtyId) {
-    let vm = this;
     console.log(realtyId, 'realtyId');
     console.log(this.clientId, 'clientId');
     Meteor.call('setRelationFindRealty', this.clientId, realtyId, this.realtylisttype);
-    
-    
-    Meteor.call('takeRealty', realtyId, (err, result)=> {
-      if (err) {
-        console.log('err: ' + err);
-      } else {
-        this.timeout(()=> {
-          
-          let sms = {
-            name: result.name,
-            realtorPhone: '79274893794' || '7'+result.phone.slice(1),
-            street: result.address.street,
-            house: result.address.house,
-            phone:vm.data.bill_phone
-          };
-          
-          console.log('http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275&to=' + sms.realtorPhone + '&text=' + sms.name + ', у меня есть клиенты на ваш объект ' + sms.street + ', ' + sms.house + '. Мой номер: ' + sms.phone + '. Ваше объявление нашел на сайте миринедвижимость.рф');
-          
-          this.http({
-            method: 'POST',
-            url: 'http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275&to=' + sms.realtorPhone + '&text=' + sms.name + ', у меня есть клиенты на ваш объект ' + sms.street + ', ' + sms.house + '. Мой номер: ' + sms.phone + '. Ваше объявление нашел на сайте миринедвижимость.рф'
-          }).then(function successCallback(response) {
-            console.log('successCallback: '+response)
-          }, function errorCallback(response) {
-            console.log('errorCallback: '+response)
-          });
-          
-        }, 0);
-      }
-    });
-    
     /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
   }
 
