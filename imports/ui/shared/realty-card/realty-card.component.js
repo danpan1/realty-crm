@@ -13,7 +13,6 @@ class RealtyCard {
   /* @ngInject */
   constructor($scope, $reactive, $mdDialog, $timeout) {
     $reactive(this).attach($scope);
-    console.log(this.realtylisttype, 'realtylisttype');
     this.dictionary = dictionary;
     this.timeout = $timeout;
     this.show = true;
@@ -54,7 +53,7 @@ class RealtyCard {
     var img = new Image(); 
 		img.src = this.realty.image;
     this.timeout(()=>{
-      if (img.height < 10 || !this.realty.details.images[0].url) {
+      if (img.height < 10 || !this.realty.details.images[0] || !this.realty.details.images[0].url) {
         this.noPhoto = true;
       }
     })
@@ -125,7 +124,6 @@ class RealtyCard {
   takeRealty(id, ev) {
     let vm = this;
     this.isUserPaid = false;
-    console.log(this.user.roles, ' роли юзера');
     for (var i in this.user.roles) {
       if (this.user.roles[i] == 'paid') {
         this.isUserPaid = true;
@@ -134,7 +132,6 @@ class RealtyCard {
     }
     if (!this.isUserPaid) this.openPurchaseStart(ev);
     else {
-      console.log(id, 'takeRealty');
       Meteor.call('takeRealty', id, (err, result)=> {
         if (err) {
           console.log('err: ' + err);
@@ -142,7 +139,8 @@ class RealtyCard {
           this.timeout(()=> {
             vm.realtyPhone = result.phone;
             vm.realtyName = result.name;
-            console.log(vm.realtyPhone + vm.realtyName);
+            vm.realtyStreet = result.address.street;
+            vm.realtyHouse = result.address.house;
           }, 0);
         }
       });

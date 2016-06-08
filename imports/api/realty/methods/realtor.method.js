@@ -132,7 +132,7 @@ export function takeRealty(realtyId, status) {
       }
 
       // Если действие не определено, отдаем телефоны и имя
-      return {name: realty.contacts[0].name, phone: realty.contacts[0].phones[0].phone};
+      return {name: realty.contacts[0].name, phone: realty.contacts[0].phones[0].phone, address: {street:realty.address.street, house:realty.address.house}};
 
     } else {
       console.log('NOt paid');
