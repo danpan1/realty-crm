@@ -20,6 +20,7 @@ class OneReview {
     this.uploadThumbsImagesLength = 0;
     this.uploadNormalLength = 0;
     this.mainImage = '';
+    this.analytics = {};
     this.subscribe('oneInfo', () => {
       return [
         $stateParams.realtyId
@@ -30,13 +31,39 @@ class OneReview {
         if (vm.realty.details && vm.realty.details.thumbnails && vm.realty.details.images) vm.findMainImage(vm.realty.image);
       }
     });
+    
 
     this.helpers({
       realty: () => {
         return Realty.findOne({});
       }
     });
-
+    
+    let subwaysEmb = this.realty.address.subwaysEmbedded.map((value) => { return value.name; });
+    Meteor.call('objectAnalytics', this.realty.roomcount, subwaysEmb, this.realty.details.materials, this.realty.details.renovation, (err, result) => {
+      if (err) {
+        console.log('err: ' + err);
+      } else {
+        this.analytics.avgPrice = result.map((item) => {return parseInt(item)})[0];
+        this.analytics.comparison = this.analytics.avgPrice > this.realty.price;
+        this.analytics.difference = this.analytics.comparison ? this.analytics.avgPrice - this.realty.price : this.analytics.price - this.realty.avgPrice;
+      }
+    });
+  
+    /*this.subscribe('objectAnalytics', () => {
+      let subwaysEmb = this.realty.address.subwaysEmbedded.map((value) => { return value.name; });
+      return [
+        this.realty.roomcount,
+        subwaysEmb
+      ];
+    }, {
+      onReady (err, result) {
+        if (err) console.log(err);
+        else console.log(result);
+        //vm.realty = Realty.findOne({});
+      }
+    });*/
+    
   }
   
   showSimpleToast () {

@@ -9,7 +9,7 @@ if (Meteor.isServer) {
   Meteor.publish('oneInfo', function (id) {
 
     if (this.userId) {
-      console.log('oneInfo',id);
+      //console.log('oneInfo',id);
       return Realty.find({'_id': id, 'realtor.id' : this.userId});
     }
 

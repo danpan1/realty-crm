@@ -17,7 +17,7 @@ if (Meteor.isServer) {
         };
 
         if (search) {
-          console.log('search', search);
+          //console.log('search', search);
 
           let price = {};
 
@@ -111,7 +111,7 @@ if (Meteor.isServer) {
         };
         //db.realty.ensureIndex({roomcount : 1})
         //         { limit: 20,   skip: 40, sort: { createdAt: -1 }},
-        console.log(selector);
+        //console.log(selector);
         // console.log(options);
         let realty = Realty.find(selector, options);
         let count = realty.count();
