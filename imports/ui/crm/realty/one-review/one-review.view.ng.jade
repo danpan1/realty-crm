@@ -13,8 +13,8 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
             ngf-resize="{width: 1500, height: 960, centerCrop: false, quality : .6}"
             ngf-resize-if="$width > 1500 || $height > 960"
             ngf-before-model-change="oneReview.showLoader = true"
-            ng-disabled='oneReview.uploadNormalLength !== 0').md-primary.md-raised Добавить фото
-            div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReview.uploadNormalLength !== 0')
+            ng-disabled='oneReview.uploadThumbnailsLength !== 0').md-primary.md-raised Добавить фото
+            div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReview.uploadThumbnailsLength !== 0')
                 div Загружается фото...
                 //md-progress-circular(md-mode='indeterminate')
         div(flex='50')
@@ -24,7 +24,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
 
 div(md-whiteframe='2' ng-if='oneReview.realty.details.images && oneReview.realty.details.thumbnails').mv-16
     div(layout='row' layout-wrap ng-init='oneReview.findMainImage(oneReview.realty.image)')
-        div(flex='33' ng-repeat='image in oneReview.realty.details.images')
+        div(flex='33' ng-repeat='image in oneReview.realty.details.thumbnails')
             md-card
                 md-button(ng-if='image.url == oneReview.mainImage' aria-label='Выбрать в качестве главного фото').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
                 md-button(ng-if='image.url != oneReview.mainImage' ng-click='oneReview.setMainImage(image)' aria-label='Сделать главным фото').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
