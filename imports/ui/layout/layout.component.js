@@ -26,6 +26,8 @@ class Layout {
       // {name: 'Отчет', uisref:'realty'},
       // {name: 'Сообщения', uisref:'realty'},
       {name:'Документы', uisref:'crm.documents'},
+      {name:'Видео-инструкции', ngClick:'layout.videoTutorial = !layout.videoTutorial'},
+      {name:'Помощь', href:'https://vk.com/write19844032'},
       // {name: 'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
