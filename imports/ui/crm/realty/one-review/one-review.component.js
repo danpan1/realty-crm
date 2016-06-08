@@ -17,11 +17,6 @@ class OneReview {
     this.qqq = $q;
     this.filter = $filter;
     this.resize = UploadResize;
-    console.log('resize');
-    console.log('resize');
-    console.log('resize');
-    console.log('resize');
-    console.log(this.resize);
     this.$timeout = $timeout;
     let vm = this;
     this.mdToast = $mdToast;
@@ -93,7 +88,7 @@ class OneReview {
 
   // удаление фото из Amazon S3
   s3DeleteImage(image) {
-    
+
     var imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
       return (item.originalName === image.originalName);
     });
