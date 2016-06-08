@@ -34,7 +34,9 @@ md-sidenav{
     .md-no-proxy.md-button {
       font-weight: 400 !important;
     }
-
+    a.md-no-style{
+      padding-top: 6px;
+    }
     a.md-button:not([disabled]):hover {
       background-color: #bbdefb;
     }
