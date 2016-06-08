@@ -8,10 +8,11 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
             md-button(
             ngf-select='',
             ngf-multiple='true',
-            ngf-change='oneReview.uploadThumbImages($files)'
+            ngf-change='oneReview.uploadImages($files)'
             ngf-accept="'image/*'"
-            ngf-resize="{width: 248, height: 186, centerCrop: false}"
-            ngf-before-model-change="oneReview.uploadNormalImages($files)"
+            ngf-resize="{width: 1500, height: 960, centerCrop: false, quality : .6}"
+            ngf-resize-if="$width > 1500 || $height > 960"
+            ngf-before-model-change="oneReview.showLoader = true"
             ng-disabled='oneReview.uploadNormalLength !== 0').md-primary.md-raised Добавить фото
             div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReview.uploadNormalLength !== 0')
                 div Загружается фото...

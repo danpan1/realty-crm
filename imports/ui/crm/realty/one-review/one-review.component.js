@@ -11,9 +11,15 @@ import './one-review.view.html';
 
 class OneReview {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams, $timeout, $mdToast) {
+  constructor($scope, $reactive, $stateParams, $timeout, $mdToast, UploadResize) {
 
     $reactive(this).attach($scope);
+    this.resize = UploadResize;
+    console.log('resize');
+    console.log('resize');
+    console.log('resize');
+    console.log('resize');
+    console.log(this.resize);
     this.$timeout = $timeout;
     let vm = this;
     this.mdToast = $mdToast;
@@ -174,10 +180,23 @@ class OneReview {
 
   // удаление фото из View
 
-  uploadThumbImages(files) {
+  uploadImages(files) {
     let vm = this;
+    vm.showLoader = true;
     if (files) {
       this.uploadThumbsImagesLength = files.length;
+      console.log(files);
+      files.forEach((file)=>{
+        console.log(file);
+        vm.showLoader = true;
+        // debugger
+        let resized = this.resize.resize(file, 186, 139).then((res)=>{
+          // vm.showLoader = false;
+          console.log('resized22');
+          console.log(res, 'resut');
+          this.uploadNormalImages([res]);
+        });
+      });
     }
 
     S3.upload({
@@ -196,6 +215,7 @@ class OneReview {
         this.$timeout(()=> {
           result.originalName = result.file.original_name;
           this.realty.details.thumbnails.push(result);
+          console.log(result);
           /*if(!this.realty.image) this.realty.image = this.realty.details.thumbnails[0].url;
            vm.setMainImage();*/
           this.saveNewDescription();
@@ -207,11 +227,14 @@ class OneReview {
 
 
   uploadNormalImages(files) {
+    // (file, width, height, quality, type, ratio, centerCrop, resizeIf, restoreExif)
     var vm = this;
     this.showLoader = true;
     if (files) {
+      // debugger
       this.uploadNormalLength = files.length;
     }
+
     S3.upload({
       files: files,
       path: ''
@@ -229,6 +252,7 @@ class OneReview {
           result.originalName = result.file.original_name;
           this.realty.details.images.push(result);
           if (!this.realty.image) vm.setMainImage(result);
+          console.log(result);
           this.saveNewDescription();
         }, 0);
         // console.log('uploaded images', this.realty.details.images);
