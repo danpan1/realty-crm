@@ -19,11 +19,7 @@ class RealtyCard {
     this.mdDialog = $mdDialog;
     var vm = this;
 
-    /*this.autorun(function () {
-     let user = Meteor.user();
-     if (user) {
-     vm.user = user;*/
-    if(this.user) {
+    if (this.user) {
       vm.data = {
         good_name: "ocaen_object_6mes",
         bill_first_name: this.user.profile.name,
@@ -33,41 +29,42 @@ class RealtyCard {
         offerta_accept: "true"
       };
     }
-    /*}
-     });*/
-
 
     this.close = function () {
       this.mdDialog.cancel();
     };
-    
+
   }
 
   agency() {
+    this.isAgent = true;
     console.log('oceanBanAgency', this.realtyPhone, this.realtyName);
     Meteor.call('oceanBanAgency', this.realtyPhone, this.realtyName);
   }
 
-  
-  coolImage () {
-    var img = new Image(); 
-		img.src = this.realty.image;
-    this.timeout(()=>{
+  coolImage() {
+    var img = new Image();
+    img.src = this.realty.image;
+    this.timeout(()=> {
       if (img.height < 10 || !this.realty.details.images[0] || !this.realty.details.images[0].url) {
         this.noPhoto = true;
       }
-    })
+    });
   }
-  
+
   agentContinue(id) {
-    if (id) this.objectAdded = true;
-    else this.show = false;
+    if (id) {
+      this.objectAdded = true;
+    }
+    else {
+      this.show = false;
+    }
   }
 
   changeRelationType(type, realtyId, clientId, isNew) {
     Meteor.call('changeRelationTypeInClient', type, realtyId, clientId, isNew);
   }
-  
+
   openPurchaseStart(ev) {
     var vm = this;
     this.mdDialog.show({
@@ -124,13 +121,14 @@ class RealtyCard {
   takeRealty(id, ev) {
     let vm = this;
     this.isUserPaid = false;
-    for (var i in this.user.roles) {
-      if (this.user.roles[i] == 'paid') {
-        this.isUserPaid = true;
-        break;
-      }
+
+    if (this.user && this.user.roles && (this.user.roles.indexOf('paid') !== -1)) {
+      this.isUserPaid = true;
     }
-    if (!this.isUserPaid) this.openPurchaseStart(ev);
+
+    if (!this.isUserPaid) {
+      this.openPurchaseStart(ev);
+    }
     else {
       Meteor.call('takeRealty', id, (err, result)=> {
         if (err) {
@@ -160,10 +158,10 @@ class RealtyCard {
   sendRealtyRelation(realtyId) {
     console.log(realtyId, 'realtyId');
     console.log(this.clientId, 'clientId');
-    Meteor.call('setRelationFindRealty', this.clientId, realtyId,  this.realtylisttype);
+    Meteor.call('setRelationFindRealty', this.clientId, realtyId, this.realtylisttype);
     /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
   }
-  
+
   updateRealty(id) {
     Realty.update({_id: id}, {
       $set: this.realty
@@ -177,7 +175,7 @@ class RealtyCard {
   }
 
   showSlider() {
-    if(!this.noPhoto){
+    if (!this.noPhoto) {
       this.slider({'images': this.realty.details.images});
     }
   }
