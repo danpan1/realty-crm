@@ -1,0 +1,53 @@
+.call {
+  &__wrapper {
+    realty-conditions md-checkbox {
+      font-size: 16px;
+    }
+  }
+  &__card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),0 1px 1px 0 rgba(0, 0, 0, 0.14),0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  }
+  &__time {
+    width: 7rem;
+  }
+  &__phone {
+    width: 16rem;
+  }
+  &__record {
+    width: 42rem;
+    .md-button {
+      width: 64px !important;
+      height: 64px !important;
+      md-icon {
+        width: 48px;
+        height: 48px;
+        color: #2196f3;
+      }
+    }
+  }
+  &__timeline {
+    width: 340px;
+    height: 38px;
+    background-color: #e3f2fd;
+    .call__timeline-elapsed {
+      width: 60%;
+      height: inherit;
+      background-color: #42a5f5;
+    }
+  }
+  &__duration {
+
+  }
+  &__all {
+    width: 15rem;
+    .md-button {
+      font-size: 16px;
+    }
+  }
+  &__add-client {
+    width: 20rem;
+    .md-button {
+      font-size: 16px;
+    }
+  }
+}

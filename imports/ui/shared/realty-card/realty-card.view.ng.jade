@@ -62,7 +62,7 @@ div(md-whiteframe='1')
                     div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
                     div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
                 div
-                    md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.text-uppercase Объявление
+                    md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Объявление
             div(layout='row', layout-wrap, layout-align='start start' ng-if="!realtyCard.realtylisttype")
                 div(flex="25" ng-repeat="condition in realtyCard.realty.details.conditions").clientCard-conditions
                     md-icon(alt='Мебель' ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').client-card__md-icon
@@ -113,7 +113,7 @@ div(md-whiteframe='1')
                 ).md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
 
                 md-button(ng-if="!realtyCard.realtylisttype"
-                ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.newList__color-blue.text-uppercase Подробнее
+                ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Подробнее
                 md-button(ng-if="realtyCard.realtylisttype === 'clientSuitauto' || realtyCard.realtylisttype === 'clientSuitexact'"
                 ng-click='realtyCard.sendRealtyRelation(realtyCard.realty._id)').client-card__link.text-left.m-0.p-0 Предложить клиента
                 md-button(ng-if="realtyCard.realtylisttype === 'clientSuitmy'"

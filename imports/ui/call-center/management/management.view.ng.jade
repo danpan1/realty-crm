@@ -45,3 +45,224 @@ table().table.table-bordered.table-shadow.mt-32
             td 15/50
             td 3/15
             td 2/3
+
+div(layout='column' md-whiteframe='2').mv-16
+    div().md-body-1.ph-32.pv-16 07 июня
+
+
+div(layout='column').mv-16
+    div(md-whiteframe='2')
+        div(layout='row').call__card.ph-16
+            div(layout='row' layout-align='center center').md-subhead.call__time.ph-16 09:00
+            div(layout='row' layout-align='center center').md-subhead.call__phone.ph-16 8 925 111 11 11
+            md-divider
+            div(layout='row' layout-align='space-between center').md-subhead.call__record.ph-32
+                md-button(aria-label='Воспроизвести').md-icon-button.m-0.p-0
+                    md-icon(md-svg-src='svg/icon-play-circle-filled.svg')
+                div().call__timeline.mh-16
+                    div().call__timeline-elapsed
+                div().md-subhead 01:33
+
+            md-divider
+            div(layout='row' layout-align='center center').call__all.ph-16 
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0 все звонки
+            md-divider
+        
+            div(layout='row' layout-align='center center').call__add-client.ph-16
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0 добавить клиента
+
+div(layout='column').mv-16
+    div(md-whiteframe='1')
+        div(layout='row').call__card.ph-16
+            div(layout='row' layout-align='center center').md-subhead.call__time.ph-16 09:00
+            div(layout='row' layout-align='center center').md-subhead.call__phone.ph-16 8 925 111 11 11
+            md-divider
+            div(layout='row' layout-align='space-between center').md-subhead.call__record.ph-32
+                md-button(aria-label='Воспроизвести').md-icon-button.m-0.p-0
+                    md-icon(md-svg-src='svg/icon-play-circle-filled.svg')
+                div().call__timeline.mh-16
+                    div().call__timeline-elapsed
+                div().md-subhead 01:33
+
+            md-divider
+            div(layout='row' layout-align='center center').call__all.ph-16 
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0 все звонки
+            md-divider
+        
+            div(layout='row' layout-align='center center').call__add-client.ph-16
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0 добавить клиента
+    div(md-whiteframe='1')
+        div(layout='row').call__card.ph-16
+            div(layout='row' layout-align='center center').md-subhead.call__time.ph-16 09:00
+            div(layout='row' layout-align='center center').md-subhead.call__phone.ph-16 8 925 111 11 11
+            md-divider
+            div(layout='row' layout-align='space-between center').md-subhead.call__record.ph-32
+                md-button(aria-label='Остановить').md-icon-button.m-0.p-0
+                    md-icon(md-svg-src='svg/icon-pause-circle-filled.svg')
+                div().call__timeline.mh-16
+                    div().call__timeline-elapsed
+                div().md-subhead 01:33
+
+            div(layout='row' layout-align='center center').call__all.ph-16 
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0
+        
+            div(layout='row' layout-align='center center').call__add-client.ph-16
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0
+    div(md-whiteframe='1')
+        div(layout='row').call__card.ph-16
+            div(layout='row' layout-align='center center').md-subhead.call__time.ph-16 09:00
+            div(layout='row' layout-align='center center').md-subhead.call__phone.ph-16 8 925 111 11 11
+            md-divider
+            div(layout='row' layout-align='space-between center').md-subhead.call__record.ph-32
+                md-button(aria-label='Воспроизвести').md-icon-button.m-0.p-0
+                    md-icon(md-svg-src='svg/icon-play-circle-filled.svg')
+                div().call__timeline.mh-16
+                    div().call__timeline-elapsed
+                div().md-subhead 01:33
+
+            div(layout='row' layout-align='center center').call__all.ph-16 
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0
+        
+            div(layout='row' layout-align='center center').call__add-client.ph-16
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0
+
+
+
+div(layout='column').mv-16.call__wrapper
+    div(md-whiteframe='2')
+        div(layout='row').call__card.ph-16
+            div(layout='row' layout-align='center center').md-subhead.call__time.ph-16 09:00
+            div(layout='row' layout-align='center center').md-subhead.call__phone.ph-16 8 925 111 11 11
+            md-divider
+            div(layout='row' layout-align='space-between center').md-subhead.call__record.ph-32
+                md-button(aria-label='Воспроизвести').md-icon-button.m-0.p-0
+                    md-icon(md-svg-src='svg/icon-play-circle-filled.svg')
+                div().call__timeline.mh-16
+                    div().call__timeline-elapsed
+                div().md-subhead 01:33
+
+            md-divider
+            div(layout='row' layout-align='center center').call__all.ph-16 
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0 все звонки
+            md-divider
+        
+            div(layout='row' layout-align='center center').call__add-client.ph-16
+                md-button(md-no-ink).btn-blue.text-lowercase.m-0.p-0 добавить клиента
+                    
+        div(layout='column').ph-32
+            div(layout='row')
+                div(flex='70')
+                    div(layout='row' layout-align='space-between start')
+                        md-input-container(flex)
+                            md-select(ng-model='addRealtyFull.realty.type' aria-label='Выбрать тип сделки')
+                                md-option(ng-value='4') Аренда
+                                md-option(ng-value='1') Продажа
+                        md-input-container(flex).ml-32
+                            md-select(ng-model='addRealtyFull.fake' aria-label='Выбрать вид жилья')
+                                md-option(ng-value='true') Квартиры
+                        md-input-container(flex).ml-32
+                            md-select(ng-model='addRealtyFull.fake' aria-label='Выбрать город')
+                                md-option(ng-value='true') Москва
+
+            div(layout='row').mv-16
+                div(flex='45')
+                    div(layout='row' layout-align='start end')
+                        md-input-container(flex).mv-0.form-required.zh
+                            label Имя клиента
+                            input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor')
+                        md-input-container(flex).mv-0.ml-32.form-required.zh
+                            label Телефон
+                            input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax')
+
+            div(layout='row').mv-16
+                div(flex='45')
+                    div(layout='row' layout-align='start end')
+                        md-input-container(flex).mv-0.form-required.zh
+                            label Цена
+                            input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor')
+                        md-input-container(flex).mv-0.ml-32.form-required
+                            label Количество комнат
+                            md-select(required ng-model='addRealtyFull.realty.roomcount', ng-change="addRealtyFull.changeRoomCount()")
+                                md-option(ng-value='roomcount.id',
+                                ng-repeat="roomcount in addRealtyFull.dictionary.roomcountBig") {{roomcount.name}}
+
+            div(layout='row')
+                div(flex='70')
+                    subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
+
+            div(layout='row').mv-16
+                div(flex='45')
+                    div(layout='row' layout-align='start end')
+                        div(flex)
+                            div(layout='row' layout-align='start end')
+                                md-input-container(flex='30').mv-0.pv-0.zh
+                                    input(ng-model='addRealtyFull.locations.metroTime', placeholder='минут')
+                                md-input-container(flex).mv-0.ml-32.pb-0
+                                    md-select(ng-model='addRealtyFull.metroTransport' aria-label='До метро')
+                                        md-option(ng-value='transport.id',
+                                        ng-repeat="transport in addRealtyFull.dictionary.transport") {{transport.name}}
+                        span(flex).ml-32
+                
+            div(layout='row').mv-16
+                div(flex='45')
+                    div(layout='row' layout-align='start end')
+                        md-input-container(flex).mv-0.form-required
+                            md-select(required ng-model='addRealtyFull.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
+                                md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
+                        md-input-container(flex).mv-0.ml-32.form-required.zh
+                            label Чем занимается
+                            input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor')
+
+            div(layout='row').mv-16
+                div(flex='45')
+                    div(layout='row' layout-align='start end')
+                        md-input-container(flex).mv-0.form-required
+                            md-select(required ng-model='addRealtyFull.realty.details.composition' multiple='true' placeholder='Ремонт')
+                                md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
+                        span(flex).ml-32
+
+            div(layout='row').mt-16
+                div(flex='70')
+                    div(layout='row' layout-wrap)
+                        realty-conditions(ng-model='addRealtyFull.realty.details.conditions' checkbox="true")
+
+            div(layout='row')
+                div(flex='80')
+                    div(layout='row').mv-32
+                        md-input-container(flex='50').mv-0.form-required
+                            label Напишите, что важно клиенту
+                            textarea(required ng-model='addClientFull.client.note', md-maxlength='300', rows='5', md-select-on-focus='' )
+
+                    div(layout="row")
+                        div(layout='row' layout-align='start center').mv-16
+                            div()
+                                span().md-subhead Актуально с
+                            md-datepicker(ng-model='addClientFull.client.searchEndDate', md-placeholder='')
+
+                        div(layout='row' layout-align='start center').mv-16.ml-32
+                            div()
+                                span().md-subhead В поиске с
+                            md-datepicker(ng-model='addClientFull.client.searchStartDate', md-placeholder='Enter date')
+
+
+            div(layout='row').mv-16
+                div(flex='45')
+                    div(layout='row' layout-align='start end')
+                        md-input-container(flex).mv-0
+                            label Email клиента
+                            input(type="email" ng-model='addClientFull.client.email')
+                        span(flex).ml-32
+
+            div
+                div(layout='row' layout-align='start center')
+                    md-checkbox(aria-label="Checkbox 1").m-0.md-primary.md-subhead Готов платить комиссию
+                    md-input-container(md-no-float layout='row').add-realty-full__comission-percent.ml-8
+                        input(type="text")
+                    span().md-subhead %
+
+            div(layout='row').mv-16
+                div(flex='50')
+                    md-button(aria-label='Добавить клиента и найти связи с объектами').md-primary.md-raised.ml-0 Добавить клиента и найти связи с объектами
+                div(flex='50')
+                    md-button(md-no-ink aria-label='отмена').md-primary.md-body-1.text-lowercase отмена
+

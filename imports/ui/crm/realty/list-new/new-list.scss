@@ -38,13 +38,6 @@
     text-transform: uppercase;
     color: #4caf50;
   }
-
-  &__color-blue {
-    color: #106cc8 !important;
-    &:hover, &:focus {
-      background-color: transparent !important;
-    }
-  }
 }
 
 .layout-row > md-divider.md-default-theme,
