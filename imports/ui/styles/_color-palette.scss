@@ -315,3 +315,10 @@ $blue-grey: (
 
 $white: #fff;
 $black: #000;
+
+.btn-blue {
+  color: #106cc8 !important;
+  &:hover, &:focus {
+    background-color: transparent !important;
+  }
+}
