@@ -111,12 +111,9 @@ Realty.Schema = new SimpleSchema({
     type: RelationsSchema,
     optional: true
   },
-  roomcount: {//Количество комнат ['1', '2', '3', '4+']
+  roomcount: {//Количество комнат ['1', '2', '3', '4+'] dictionary.roomcount
     type: Number,
     label: 'roomcount',
-    allowedValues: dictionary.roomcount.map((item)=> {
-      return item.id;
-    }),
     optional: true
   },
   square: {  // площадь помещений общая указывает на карточке
