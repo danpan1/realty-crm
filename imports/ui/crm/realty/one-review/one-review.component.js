@@ -247,7 +247,13 @@ class OneReview {
   }
 
   /* Сохранение описания и заголовка на сервер */
-  saveNewDescription() {
+  saveNewDescription(id, descr) {
+    if (descr) {
+      this.descriptionSaved = true;
+      this.$timeout(()=>{
+        this.descriptionSaved = false;
+      },3000)
+    }
     if (this.uploadThumbsImagesLength !== 0 || this.uploadNormalLength !== 0) {
       return;
     }
