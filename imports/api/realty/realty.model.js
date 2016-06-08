@@ -152,12 +152,12 @@ Realty.Schema = new SimpleSchema({
 });
 
 Realty.before.insert(function (userId, doc) {
-  doc.createdAt = Date.now();
+  doc.createdAt = new Date();
 });
 
 Realty.before.update(function (userId, doc, fieldNames, modifier, options) {
   modifier.$set = modifier.$set || {};
-  modifier.$set.modifiedAt = Date.now();
+  modifier.$set.modifiedAt = new Date();
 });
 //Каждый update  проставляет время udate now
 // Realty.before.update(function (userId, doc, fieldNames, modifier) {
