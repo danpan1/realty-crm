@@ -244,6 +244,12 @@ div(layout='column').mv-16.call__wrapper
                                 span().md-subhead В поиске с
                             md-datepicker(ng-model='addClientFull.client.searchStartDate', md-placeholder='Enter date')
 
+            div
+                div(layout='row' layout-align='start center')
+                    md-checkbox(aria-label="Checkbox 1").m-0.md-primary.md-subhead Готов платить комиссию
+                    md-input-container(md-no-float layout='row').add-realty-full__comission-percent.ml-8
+                        input(type="text")
+                    span().md-subhead %
 
             div(layout='row').mv-16
                 div(flex='45')
@@ -252,13 +258,6 @@ div(layout='column').mv-16.call__wrapper
                             label Email клиента
                             input(type="email" ng-model='addClientFull.client.email')
                         span(flex).ml-32
-
-            div
-                div(layout='row' layout-align='start center')
-                    md-checkbox(aria-label="Checkbox 1").m-0.md-primary.md-subhead Готов платить комиссию
-                    md-input-container(md-no-float layout='row').add-realty-full__comission-percent.ml-8
-                        input(type="text")
-                    span().md-subhead %
 
             div(layout='row').mv-16
                 div(flex='50')
