@@ -36,7 +36,7 @@ class OneReview {
 
     this.helpers({
       realty: () => {
-        return Realty.findOne({});
+        return Realty.findOne({_id : $stateParams.realtyId});
       }
     });
     
