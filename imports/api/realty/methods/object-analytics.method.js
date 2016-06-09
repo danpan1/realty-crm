@@ -10,8 +10,9 @@ Meteor.methods({
   objectAnalytics
 });
 
-export function objectAnalytics(roomcount, subways, materials, renovation) {
+export function objectAnalytics(type, roomcount, subways, materials, renovation) {
   
+  console.log(type);
   console.log(materials);
   console.log(renovation);
   

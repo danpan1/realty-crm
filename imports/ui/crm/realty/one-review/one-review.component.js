@@ -40,7 +40,7 @@ class OneReview {
     });
     
     let subwaysEmb = this.realty.address.subwaysEmbedded.map((value) => { return value.name; });
-    Meteor.call('objectAnalytics', this.realty.roomcount, subwaysEmb, this.realty.details.materials, this.realty.details.renovation, (err, result) => {
+    Meteor.call('objectAnalytics', this.realty.type, this.realty.roomcount, subwaysEmb, this.realty.details.materials, this.realty.details.renovation, (err, result) => {
       if (err) {
         console.log('err: ' + err);
       } else {
