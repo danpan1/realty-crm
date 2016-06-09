@@ -16,6 +16,9 @@ class OneInfoEdit {
     this.dictionary = dictionary;
     this.mdToast = $mdToast;
     this.compositionSelected = [];
+    if(!this.realty.details.composition){
+      this.realty.details.composition = [0];
+    }
     for(var i in this.dictionary.composition.length){
         this.compositionSelected.push(false);
     }

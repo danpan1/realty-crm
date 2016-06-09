@@ -16,14 +16,14 @@ class PriceMask {
     }
   }
   
-  filterPriceKeyDown(e){
+  filterPriceKeyDown(){
     if(!this.visualPrice) this.visualPrice = this.price.toString();
-    this.maskPrice(e);
+    this.maskPrice();
   }
   
-  maskPrice (e) {
-    if(this.visualPrice){
-      this.timeout(()=>{
+  maskPrice () {
+    this.timeout(()=>{
+      if(this.visualPrice){
         var oldNumber = this.visualPrice.split('');
         var number = '';
         for(var i in oldNumber){
@@ -36,8 +36,10 @@ class PriceMask {
         number = number.length > 3 ? number.length > 6 ? number.length > 9 ? number.slice(0, 3) + ' ' + number.slice(3,6) +  ' ' + number.slice(6,9) + ' ' + number.slice(9) : number.slice(0, 3) + ' ' + number.slice(3,6) + ' ' + number.slice(6) :  number.slice(0, 3) + ' ' + number.slice(3) : number;
         number = number.split('').reverse().join('');
         this.visualPrice = number;
-      })
-    }
+      } else {
+        this.price = '';
+      }
+    })
   }
   
 }
