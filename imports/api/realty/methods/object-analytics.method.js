@@ -12,10 +12,6 @@ Meteor.methods({
 
 export function objectAnalytics(type, roomcount, subways, materials, renovation) {
   
-  console.log(type);
-  console.log(materials);
-  console.log(renovation);
-  
   if (Meteor.isServer && Meteor.userId()) {
 
     let match1 =  {
@@ -43,7 +39,7 @@ export function objectAnalytics(type, roomcount, subways, materials, renovation)
     }]).map((item) => {
       return item.avgPrice;
     })
-    console.log(realtyAnalytics);
+    
     return realtyAnalytics;
   }
   

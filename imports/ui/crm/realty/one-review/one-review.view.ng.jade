@@ -98,7 +98,7 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
         div(flex="50")
             h3(style='color: #9e9e9e').md-title.text-normal.mv-8 Средняя цена: {{oneReview.analytics.avgPrice | price}}
             h3(style='color: #9e9e9e').md-title.text-normal.mv-8 Цена {{oneReview.analytics.comparison ? 'меньше' : 'больше'}} на {{oneReview.analytics.difference | price }}
-            h3(style='color: #106cc8').md-title.text-normal.mv-8 Цена в рынке!
+            h3(style='color: #106cc8').md-title.text-normal.mv-8 {{oneReview.analytics.marketOk}}
         div(flex='50')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Пройдите интенсив

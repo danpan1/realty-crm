@@ -49,6 +49,7 @@ class OneReview {
           this.analytics.avgPrice = result.map((item) => {return parseInt(item)})[0];
           this.analytics.comparison = this.analytics.avgPrice > this.realty.price;
           this.analytics.difference = this.analytics.comparison ? this.analytics.avgPrice - this.realty.price : this.realty.price - this.analytics.avgPrice;
+          this.analytics.marketOk = !this.analytics.comparison && this.analytics.difference > this.analytics.avgPrice / 10 ? 'Цена слишком высокая' : this.analytics.comparison && this.analytics.difference > this.analytics.avgPrice / 10 ? 'Цена слишком низкая' : 'Цена в рынке!';
         })
       }
     });
