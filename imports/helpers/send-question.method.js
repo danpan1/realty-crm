@@ -12,10 +12,10 @@ function sendQuestion (info) {
   if (Meteor.isServer) {
     console.log('server email question' + `${phone} ${info.name}`);
     Email.send({
-      to: 'mirestate.reg@gmail.com',
-      from: 'postmaster@e.getrent.pro',
-      subject: `${phone} ${info.name}`,
-      html: '<div>Зарегитрирован новый пользователь</div>'
+      to: 'ilya.karev1000@gmail.com',
+      from: info.useremail ? info.username+' <'+ info.useremail+'>' : 'postmaster@e.getrent.pro',
+      subject: info.topic,
+      html: info.addedinfo
     });
   }
   
