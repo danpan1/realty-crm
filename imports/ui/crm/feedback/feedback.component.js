@@ -33,9 +33,27 @@ class Feedback {
         }
       }
     });
+    
+    this.feedbackData = [
+      {question:'Вопрос 1',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      },
+      {question:'Вопрос 2',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      },
+      {question:'Вопрос 3',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      },
+      {question:'Вопрос 4',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      },
+      {question:'Вопрос 5',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      }
+    ]
   }
   
-  send () {
+  /*send () {
     if(this.proposalSent == 0){
       this.proposalSent = 1;
       Meteor.call('sendQuestion', this.info, (error, result) => {
@@ -52,7 +70,7 @@ class Feedback {
         }
       });
     }
-  }
+  }*/
   
   /***  Metrics experiments ***/
   /*someEvent () {
