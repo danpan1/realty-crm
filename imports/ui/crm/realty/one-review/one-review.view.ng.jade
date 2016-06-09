@@ -58,7 +58,7 @@ div(md-whiteframe='2').mt-0.mb-16.ph-32.pv-16
 
     div(flex)
         one-review-desc(realty='oneReview.realty')
-        md-button( ng-click='oneReview.saveNewDescription(oneReview.realty._id, true)' aria-label='Сохранить объявление' ng-class="{'md-primary':!oneReview.descriptionSaved,'md-success':oneReview.descriptionSaved}").md-primary.md-raised.ml-0 {{oneReview.descriptionSaved ? 'Сохранено' : 'Сохранить объявление'}}
+        md-button( ng-click='oneReview.saveNewDescription(oneReview.realty._id, true)' aria-label='Сохранить объявление').md-raised.one-review__btn-desc-save.ml-0 {{oneReview.descriptionSaved ? 'Сохранено' : 'Сохранить объявление'}}
 
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='row' layout-align='space-around start')

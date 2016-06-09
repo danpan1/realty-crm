@@ -30,6 +30,13 @@ one-review {
     min-width: 400px;
     min-height: 52px;
   }
+
+
+  .one-review__btn-desc-save {
+    min-width: 180px;
+    background-color: color($green, 500) !important;
+    color: $white !important;
+  }
 }
 
 .one-review-btn-group {
