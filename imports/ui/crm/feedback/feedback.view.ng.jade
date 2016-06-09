@@ -1,12 +1,39 @@
-div(md-whiteframe='2').mt-16.ph-32.pt-32.pb-8
-    div(layout='row')
-        div(flex)
-            md-input-container().md-block
-                input(ng-model='feedback.info.topic' placeholder='Задайте вопрос')
-            md-input-container().md-block
-                textarea(ng-model='feedback.info.addedinfo' placeholder='Расскажите подробнее о проблеме')
-div(md-whiteframe='2').one-email-card.ph-32.pv-8
-    div(layout='column')
-        div().mv-8
-            md-button(ng-click="feedback.send()" ng-class='{\'md-primary\':feedback.proposalSent != 2, \'md-success\':feedback.proposalSent == 2}' ng-disabled='feedback.proposalSent == 1').md-primary.md-raised.md-body-1.ml-0 {{feedback.proposalSent != 2 ? feedback.proposalSent == 1 ? 'Отправляем' : 'Отправить вопрос' : 'Успешно отправлено'}}
-            //md-button(ng-if='feedback.proposalSent == 2').md-success.md-raised.md-body-1.ml-0 Успешно отправлено
+div(md-whiteframe='1').topbar
+    div(layout='row' layout-align='start center' layout-fill)
+        md-button(aria-label='Задать вопрос').md-primary.md-raised.mh-16 Задать вопрос
+div().mv-16
+    div(md-whiteframe='1').mv-8
+        div().panel__heading.ph-16.pv-8
+            div().md-subhead Вопрос 1
+        div().md-body-1.p-16
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!
+            div(layout='column' layout-align='start end')
+                md-button().md-primary.md-raised Скрыть
+    div(md-whiteframe='1').mv-16
+        div().panel__heading.ph-16.pv-8
+            div().md-subhead Вопрос 2
+        div().md-body-1.p-16
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!
+            div(layout='column' layout-align='start end')
+                md-button().md-primary.md-raised Скрыть
+    div(md-whiteframe='1').mv-16
+        div().panel__heading.ph-16.pv-8
+            div().md-subhead Вопрос 3
+        div().md-body-1.p-16
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!
+            div(layout='column' layout-align='start end')
+                md-button().md-primary.md-raised Скрыть
+    div(md-whiteframe='1').mv-16
+        div().panel__heading.ph-16.pv-8
+            div().md-subhead Вопрос 4
+        div().md-body-1.p-16
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!
+            div(layout='column' layout-align='start end')
+                md-button().md-primary.md-raised Скрыть
+    div(md-whiteframe='1').mv-16
+        div().panel__heading.ph-16.pv-8
+            div().md-subhead Вопрос 5
+        div().md-body-1.p-16
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!
+            div(layout='column' layout-align='start end')
+                md-button().md-primary.md-raised Скрыть

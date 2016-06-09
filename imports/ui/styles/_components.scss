@@ -31,7 +31,6 @@
 }
 
 .md-success {
-    
   color: $white !important;
   &.md-raised {
     color: $white !important;
@@ -164,32 +163,5 @@
 
   &__changes{
     overflow: auto;
-  }
-}
-
-.panel {
-  margin: 5px auto;
-  border: 1px solid #dee4e8;
-  &__heading {
-    padding: 8px 0 8px 24px;
-    font-weight: bold;
-    color: #2b587a;
-    background-color: #f5f7f8;
-    border-bottom: 1px solid #ecf0f2;
-  }
-  &__title {
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .panel__body {
-    display: none;
-  }
-  &__collapse-in {
-    margin: 5px auto;
-    border: 1px solid #dee4e8;
-    .panel__body {
-      padding: 10px 24px;
-      font-size: 14px;
-    }
   }
 }
