@@ -11,7 +11,7 @@ import './one-review.view.html';
 
 class OneReview {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams, $timeout, $mdToast, UploadResize, $q, $filter) {
+  constructor($scope, $reactive, $stateParams, $timeout, UploadResize, $q, $filter) {
 
     $reactive(this).attach($scope);
     this.qqq = $q;
@@ -19,7 +19,6 @@ class OneReview {
     this.resize = UploadResize;
     this.$timeout = $timeout;
     let vm = this;
-    this.mdToast = $mdToast;
     this.uploadImagesNormalLength = 0;
     this.uploadThumbnailsLength = 0;
     this.mainImage = '';
@@ -41,16 +40,6 @@ class OneReview {
     });
 
   }
-
-  showSimpleToast() {
-    this.mdToast.show(
-      this.mdToast.simple()
-        .textContent('Данные обновлены!')
-        .position('top right')
-        .hideDelay(3000)
-        .action('ОК')
-    );
-  };
 
   removeImage(image, index) {
     if (image.url === this.realty.image) {
@@ -233,7 +222,6 @@ class OneReview {
         console.log(error);
         this.showLoader = false;
       } else {
-        this.showSimpleToast();
         console.log('Description updated!');
         this.showLoader = false;
       }
