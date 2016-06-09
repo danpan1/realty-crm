@@ -11,9 +11,10 @@ import './feedback.view.html';
 
 class Feedback {
   /* @ngInject */
-  constructor($scope, $reactive, $http) {
+  constructor($scope, $reactive, $http, $timeout) {
     $reactive(this).attach($scope);
     let vm = this;
+    this.timeout = $timeout;
     this.proposalSent = 0;
     this.http = $http;
     
@@ -30,33 +31,31 @@ class Feedback {
             username: user.profile.name + ' ' + user.profile.surName,
             useremail: /*user.emails[0].verified ?*/ user.emails[0].address /*: false*/
         }
-        vm.data = {
-            good_name: "ocaen_object_6mes",
-            bill_first_name: user.profile.name,
-            bill_email: user.emails[0].address,
-            bill_phone: user.profile.phone,
-            file_profile: "default",
-            offerta_accept: "true"
-        };
       }
     });
-    
   }
   
   send () {
-      let vm = this;
-      vm.proposalSent = 1;
-      Meteor.call('sendQuestion', vm.info, (error, result) => {
-          if (error) {
-              console.log(error);
-          } else {
-              console.log(`Cool!`);
-              vm.proposalSent = 2;
-          }
+    if(this.proposalSent == 0){
+      this.proposalSent = 1;
+      Meteor.call('sendQuestion', this.info, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(`Cool!`);
+          this.timeout(()=>{
+            this.proposalSent = 2;
+          },0)
+          this.timeout(()=>{
+            this.proposalSent = 0;
+          },3000)
+        }
       });
+    }
   }
   
-  someEvent () {
+  /***  Metrics experiments ***/
+  /*someEvent () {
     Meteor.call('metrics', (error, result)=> {
 
       if (error) {
@@ -67,7 +66,7 @@ class Feedback {
       }
 
     });
-  }
+  }*/
   
 }
 
