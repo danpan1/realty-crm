@@ -52,30 +52,32 @@ class OneReview {
     );
   };
 
-  removeImage(image) {
+  removeImage(image, index) {
     if (image.url === this.realty.image) {
       this.realty.image = '';
       // TODO find New Main image
     }
-    this.s3DeleteImage(image);
+    this.s3DeleteImage(index);
   }
 
-  setMainImage(image) {
+  setMainImage(image, index) {
     if (image) {
       this.realty.image = image.url;
-      this.findMainImage(image.url);
+      this.findMainImage(image.url, index);
       this.saveNewDescription();
     }
   }
 
-  findMainImage(imageUrl) {
-    let vm = this;
-    if (imageUrl) {
-      let imageIndexThumbs = this.realty.details.thumbnails.findIndex((item)=> {
+  findMainImage(imageUrl, index) {
+    if (!imageUrl) {
+      return;
+    }
+    let imageIndexThumbs = index || this.realty.details.thumbnails.findIndex((item)=> {
         return (item.url === imageUrl);
       });
-      vm.mainImage = vm.realty.details.thumbnails[imageIndexThumbs].url;
-    }
+
+    this.mainImage = this.realty.details.thumbnails[imageIndexThumbs].url;
+
   }
 
   sendToModerator() {
@@ -86,15 +88,10 @@ class OneReview {
     this.saveNewDescription();
   }
 
-  // удаление фото из Amazon S3
-  s3DeleteImage(image) {
-
-    var imageIndex = this.realty.details.thumbnails.findIndex((item)=> {
-      return (item.originalName === image.originalName);
-    });
-
-    let smallImage = this.realty.details.thumbnails.splice(imageIndex, 1);
-    let bigImage = this.realty.details.images.splice(imageIndex, 1);
+// удаление фото из Amazon S3
+  s3DeleteImage(index) {
+    let smallImage = this.realty.details.thumbnails.splice(index, 1);
+    let bigImage = this.realty.details.images.splice(index, 1);
 
     S3.delete(smallImage[0].relative_url);
     S3.delete(bigImage[0].relative_url);
@@ -102,7 +99,7 @@ class OneReview {
     this.saveNewDescription();
   }
 
-  // удаление фото из View
+// удаление фото из View
 
   uploadImages(filesNormal) {
     const vm = this;
