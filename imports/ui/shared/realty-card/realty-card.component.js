@@ -171,21 +171,21 @@ class RealtyCard {
           
           let sms = {
             name: result.name,
-            realtorPhone: '79274893794' || '7'+result.phone.slice(1),
+            realtorPhone: '79250759587' || '7'+result.phone.slice(1),
             street: result.address.street,
             house: result.address.house,
             phone:vm.data.bill_phone
           };
           
-          console.log('http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275&to=' + sms.realtorPhone + '&text=' + sms.name + ', у меня есть клиенты на ваш объект ' + sms.street + ', ' + sms.house + '. Мой номер: ' + sms.phone + '. Ваше объявление нашел на сайте миринедвижимость.рф');
+          let text = sms.realtorPhone + '&text=' + sms.name + ', у меня есть клиенты на ваш объект ' + sms.street + ', ' + sms.house + '. Мой номер: ' + sms.phone + '. Ваше объявление нашел на сайте миринедвижимость.рф';
+          console.log(text);
           
-          this.http({
-            method: 'POST',
-            url: 'http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275&to=' + sms.realtorPhone + '&text=' + sms.name + ', у меня есть клиенты на ваш объект ' + sms.street + ', ' + sms.house + '. Мой номер: ' + sms.phone + '. Ваше объявление нашел на сайте миринедвижимость.рф'
-          }).then(function successCallback(response) {
-            console.log('successCallback: '+response)
-          }, function errorCallback(response) {
-            console.log('errorCallback: '+response)
+          Meteor.call('sendSms', text, (err, result)=> {
+            if (err) {
+              console.log('err: ' + err);
+            } else {
+              console.log(result);
+            }
           });
           
         }, 0);
