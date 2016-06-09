@@ -177,7 +177,7 @@ class RealtyCard {
             phone:vm.data.bill_phone
           };
           
-          let text = sms.realtorPhone + '&text=' + sms.name + ', у меня есть клиенты на ваш объект ' + sms.street + ', ' + sms.house + '. Мой номер: ' + sms.phone + '. Ваше объявление нашел на сайте миринедвижимость.рф';
+          let text = sms.realtorPhone + '&text=' + sms.name + ', у меня есть клиенты на ваш объект ' + sms.street + ', ' + sms.house + '. Мой номер: ' + sms.phone + '. Ваше объявление нашел на сайте';
           console.log(text);
           
           Meteor.call('sendSms', text, (err, result)=> {
