@@ -31,16 +31,17 @@
 }
 
 .md-success {
-  color: #575757 !important;
+    
+  color: $white !important;
   &.md-raised {
-    color: #575757 !important;
-    background-color: #c4ee4b !important;
+    color: $white !important;
+    background-color: color($green, 500) !important;
     &:not([disabled]) {
       &:hover {
-        background-color: #c4ee4b !important;
+        background-color: color($green, 500) !important;
       }
       &.md-focused {
-        background-color: #c4ee4b !important;
+        background-color: color($green, 500) !important;
       }
     }
   }
