@@ -54,3 +54,11 @@ add-realty-full {
 .add-realty-full__comission-percent {
   width: 36px !important;
 }
+
+span.has-error{
+  color: rgb(221,44,0);
+  position: absolute;
+  font-size: 14px;
+  left: 2px;
+  bottom: -18px;
+}

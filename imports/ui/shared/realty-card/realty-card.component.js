@@ -18,6 +18,7 @@ class RealtyCard {
     this.show = true;
     this.mdDialog = $mdDialog;
     var vm = this;
+    console.log(this.realtylisttype);
 
     if (this.user) {
       vm.data = {
@@ -156,9 +157,41 @@ class RealtyCard {
   }
 
   sendRealtyRelation(realtyId) {
+    let vm = this;
     console.log(realtyId, 'realtyId');
     console.log(this.clientId, 'clientId');
     Meteor.call('setRelationFindRealty', this.clientId, realtyId, this.realtylisttype);
+    
+    
+    // Meteor.call('takeRealty', realtyId, (err, result)=> {
+    //   if (err) {
+    //     console.log('err: ' + err);
+    //   } else {
+    //     this.timeout(()=> {
+    //
+    //       let sms = {
+    //         name: result.name,
+    //         realtorPhone: '79250759587' || '7'+result.phone.slice(1),
+    //         street: result.address.street,
+    //         house: result.address.house,
+    //         phone:vm.data.bill_phone
+    //       };
+    //
+    //       let text = sms.realtorPhone + '&text=' + sms.name + ', у меня есть клиенты на ваш объект ' + sms.street + ', ' + sms.house + '. Мой номер: ' + sms.phone + '. Ваше объявление нашел на сайте';
+    //       console.log(text);
+    //
+    //       Meteor.call('sendSms', text, (err, result)=> {
+    //         if (err) {
+    //           console.log('err: ' + err);
+    //         } else {
+    //           console.log(result);
+    //         }
+    //       });
+    //
+    //     }, 0);
+    //   }
+    // });
+    
     /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
   }
 

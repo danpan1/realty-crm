@@ -11,11 +11,13 @@ import './one-info-edit.view.html';
 
 class OneInfoEdit {
   /* @ngInject */
-  constructor($scope, $reactive, $mdToast) {
+  constructor($scope, $reactive) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
-    this.mdToast = $mdToast;
     this.compositionSelected = [];
+    if(!this.realty.details.composition){
+      this.realty.details.composition = [0];
+    }
     for(var i in this.dictionary.composition.length){
         this.compositionSelected.push(false);
     }
@@ -45,22 +47,11 @@ class OneInfoEdit {
           console.log(error)
           this.showLoader, this.show = false;
         } else {
-          this.showSimpleToast();
           console.log('call recieved newObj');
           this.showLoader, this.show = false;
         }
       });
   }  
-  
-  showSimpleToast () {
-    this.mdToast.show(
-      this.mdToast.simple()
-        .textContent('Готово!')
-        .position('top right')
-        .hideDelay(3000)
-        .action('ОК')
-    );
-  };
   
 }
 

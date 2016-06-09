@@ -17,7 +17,7 @@ class OneInfo {
     this.dictionary = dictionary;
     this.state = $state;
     this.mdDialog = $mdDialog;
-    this.mdToast = $mdToast;
+    //this.mdToast = $mdToast;
     this.realty = Realty.findOne({_id: $stateParams.realtyId});
     // oneInfo
     this.slideNum = 0;
@@ -42,7 +42,7 @@ class OneInfo {
     
   }
   
-  showSimpleToast () {
+  /*showSimpleToast () {
     this.mdToast.show(
       this.mdToast.simple()
         .textContent('Готово!')
@@ -50,7 +50,7 @@ class OneInfo {
         .hideDelay(3000)
         .action('ОК')
     );
-  };
+  };*/
 
   archive(realty) {
     if (realty == this.realty) {
@@ -114,7 +114,7 @@ class OneInfo {
         console.log(error);
         this.showLoader = false;
       } else {
-        this.showSimpleToast();
+        //this.showSimpleToast();
         console.log('call recieved newObj');
         this.showLoader = false;
       }

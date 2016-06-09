@@ -45,7 +45,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                     md-button(ng-click='addRealtyFull.activeTab = 1'
                     ng-disabled="firstForm.$invalid || !addRealtyFull.locations.house || !addRealtyFull.locations.street").md-primary.md-raised.mh-0 Продолжить
 
-    md-tab(label='2) Параметры' md-active='addRealtyFull.activeTab == 1' ng-click='addRealtyFull.activeTab = 1' ng-disabled="firstForm.$invalid")
+    md-tab(label='2) Параметры' md-active='addRealtyFull.activeTab == 1' ng-click='addRealtyFull.activeTab = 1' ng-disabled="!firstForm.$invalid")
         md-content().ph-32.pv-16
             form(novalidate name="secondForm")
                 div(layout='column')
@@ -73,11 +73,14 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='70')
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required.zh
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
+                                    input(required name='square' ng-pattern="/^[0-9.]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
+                                    span(ng-show='secondForm.square.$viewValue.length > 0 && secondForm.square.$touched && secondForm.square.$invalid').has-error Неверно заполнено
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
+                                    input(ng-pattern="/^[0-9.]{1,}$/" name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
+                                    span(ng-show='secondForm.livingSquare.$touched && secondForm.livingSquare.$invalid').has-error Неверно заполнено
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input( ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
+                                    input(ng-pattern="/^[0-9.]{1,}$/" name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
+                                    span(ng-show='secondForm.kitchenSquare.$touched && secondForm.kitchenSquare.$invalid').has-error Неверно заполнено
                             //div().mt-16
                             //    p().md-subhead.add-realty-full-text Площадь комнат м²
                             //div(layout='row' layout-align='start center' flex).md-input-container.mt-16
@@ -157,7 +160,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                     div(layout='row')
                         div(flex='45').mv-16
                             div(layout='row' layout-align='space-between start')
-                                price-mask(ng-if='addRealtyFull.realty' label='"Цена"' price='addRealtyFull.realty.price' optflex='')
+                                price-mask(ng-if='addRealtyFull.realty' label='"Цена"' price='addRealtyFull.realty.price' optflex='' flex)
                                 //md-input-container(flex).mv-0.form-required.zh
                                     label Цена
                                     input(

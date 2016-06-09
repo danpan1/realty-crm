@@ -36,21 +36,21 @@ class RealtyOneLayout {
       // case '/demonstrations':
       //   this.selectedTab = 0;
       //   break;
-      /*case 'crm.realty.one.find':
+      case 'crm.realty.one.find':
         this.selectedTab = 0;
-        break;*/
+        break;
       case 'crm.realty.one.connections':
-        this.selectedTab = 2;
+        this.selectedTab = 1;
         break;
       case 'crm.realty.one.review':
-        this.selectedTab = 1;
+        this.selectedTab = 2;
         break;
       case 'crm.realty.one.email':
         this.selectedTab = 3;
         break;
-      /*case 'crm.realty.one.info':
-        this.selectedTab = 0;
-        break;*/
+      case 'crm.realty.one.info':
+        this.selectedTab = 4;
+        break;
       default:
         this.selectedTab = 0;
     }

@@ -11,9 +11,10 @@ import './feedback.view.html';
 
 class Feedback {
   /* @ngInject */
-  constructor($scope, $reactive, $http) {
+  constructor($scope, $reactive, $http, $timeout) {
     $reactive(this).attach($scope);
     let vm = this;
+    this.timeout = $timeout;
     this.proposalSent = 0;
     this.http = $http;
     
@@ -30,33 +31,49 @@ class Feedback {
             username: user.profile.name + ' ' + user.profile.surName,
             useremail: /*user.emails[0].verified ?*/ user.emails[0].address /*: false*/
         }
-        vm.data = {
-            good_name: "ocaen_object_6mes",
-            bill_first_name: user.profile.name,
-            bill_email: user.emails[0].address,
-            bill_phone: user.profile.phone,
-            file_profile: "default",
-            offerta_accept: "true"
-        };
       }
     });
     
+    this.feedbackData = [
+      {question:'Вопрос 1',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      },
+      {question:'Вопрос 2',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      },
+      {question:'Вопрос 3',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      },
+      {question:'Вопрос 4',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      },
+      {question:'Вопрос 5',
+       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      }
+    ]
   }
   
-  send () {
-      let vm = this;
-      vm.proposalSent = 1;
-      Meteor.call('sendQuestion', vm.info, (error, result) => {
-          if (error) {
-              console.log(error);
-          } else {
-              console.log(`Cool!`);
-              vm.proposalSent = 2;
-          }
+  /*send () {
+    if(this.proposalSent == 0){
+      this.proposalSent = 1;
+      Meteor.call('sendQuestion', this.info, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(`Cool!`);
+          this.timeout(()=>{
+            this.proposalSent = 2;
+          },0)
+          this.timeout(()=>{
+            this.proposalSent = 0;
+          },3000)
+        }
       });
-  }
+    }
+  }*/
   
-  someEvent () {
+  /***  Metrics experiments ***/
+  /*someEvent () {
     Meteor.call('metrics', (error, result)=> {
 
       if (error) {
@@ -67,7 +84,7 @@ class Feedback {
       }
 
     });
-  }
+  }*/
   
 }
 

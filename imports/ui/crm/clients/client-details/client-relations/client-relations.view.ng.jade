@@ -1,39 +1,49 @@
 slide-show(slides-list='clientRelations.slideShowImages' isshown='clientRelations.showSlider')
-div(md-whiteframe="1").mt-8
-    md-tabs(md-border-bottom md-selected='0').realty-list-layout__topbar
-        md-tab(label='Предложения от партнеров')
 
-    div
-        realty-card(ng-repeat='realty in clientRelations.realtyNew'
-        realty='realty'
-        realtylisttype="connections"
-        slider='clientRelations.setSliderImages(images)' relation-type= 'new'
-        client-id='clientRelations.client._id')
-    div
-        realty-card(ng-repeat='realty in clientRelations.realtyOffers'
-        realty='realty'
-        realtylisttype="connections"
-        slider='clientRelations.setSliderImages(images)'
-        client-id='clientRelations.client._id'
-        relation-type= 'offers')
+div(md-whiteframe='1' style='background-color: white; border-bottom: 2px solid #42a5f5').mt-8.p-16
+    div(layout='row')
+        div(flex='45')
+            div(style='color: #2196f3').md-subhead.text-uppercase Предложение от партнеров
+        div(flex='55')
+            p().md-body-1.text-bold.mt-0 Директ сообщение при звонке: (чтобы риелтор вас понял с первого раза)
+            p().md-body-1 
+                | Здравствуйте (имя риелтора)! Я звоню по вашему предложению в CRM миринедвижимость, а именно по объекту Суздальская 12, продолжаете разговор...
 
-div(md-whiteframe="1")
-    md-tabs(md-border-bottom md-selected='0').realty-list-layout__topbar
-        md-tab(label='Выбранные объекты')
+div().mt-8    
+    realty-card(ng-repeat='realty in clientRelations.realtyNew'
+    realty='realty'
+    realtylisttype="connections"
+    slider='clientRelations.setSliderImages(images)' relation-type= 'new'
+    client-id='clientRelations.client._id')
 
-    div
-        realty-card(ng-repeat='realty in clientRelations.realtySaved'
-                    realty='realty'
-                    realtylisttype="connections"
-                    slider='clientRelations.setSliderImages(images)'
-                    client-id='clientRelations.client._id'
-                    relation-type= 'saved')
-    div
-        realty-card(ng-repeat='realty in clientRelations.realtyMy'
-                    realty='realty'
-                    realtylisttype="connections"
-                    slider='clientRelations.setSliderImages(images)'
-                    client-id='clientRelations.client._id'
-                    relation-type= 'my')
-    
-    
+    realty-card(ng-repeat='realty in clientRelations.realtyOffers'
+    realty='realty'
+    realtylisttype="connections"
+    slider='clientRelations.setSliderImages(images)'
+    client-id='clientRelations.client._id'
+    relation-type= 'offers')
+
+
+
+div(md-whiteframe='1' style='background-color: white; border-bottom: 2px solid #42a5f5').mv-8.p-16
+    div(layout='row')
+        div(flex='45')
+            div(style='color: #2196f3').md-subhead.text-uppercase Выбранные объекты
+        div(flex='55')
+            p().md-body-1.text-bold.mt-0 Директ сообщение при звонке: (чтобы риелтор вас понял с первого раза)
+            p().md-body-1 
+                | Здравствуйте (имя риелтора)! Я звоню по объекту Суздальская 12, для моих клиентов CRM миринедвижимость мне подобрала ваш объект продолжаете разговор...
+div().mv-8
+    realty-card(ng-repeat='realty in clientRelations.realtySaved'
+    realty='realty'
+    realtylisttype="connections"
+    slider='clientRelations.setSliderImages(images)'
+    client-id='clientRelations.client._id'
+    relation-type= 'saved')
+
+    realty-card(ng-repeat='realty in clientRelations.realtyMy'
+    realty='realty'
+    realtylisttype="connections"
+    slider='clientRelations.setSliderImages(images)'
+    client-id='clientRelations.client._id'
+    relation-type= 'my')

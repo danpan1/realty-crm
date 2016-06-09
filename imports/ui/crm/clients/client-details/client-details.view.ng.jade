@@ -3,11 +3,11 @@ section(ng-repeat="client in clientDetails.clients")
         div(layout='row' layout-align='start center')
             md-button(aria-label='Вернуться назад' ui-sref="crm.clients.list.my({status: \'realtor\'})").btn-back.mh-16
                 md-icon(md-svg-src='svg/icon-arrow-left.svg')
-            h3.md-headline {{client.name}} / {{client.phone | phone}} / {{client.need.price | price}} / id{{client._id}}
+            h3.md-headline {{client.name}} / {{client.phone | phone}} / {{client.need.price | price}}&#8381; / id{{client._id}}
     div(md-whiteframe='1').tabbar
         md-tabs(md-dynamic-height md-selected="clientDetails.selectedTab")
-            md-tab(ui-sref="crm.clients.details.suit({client:client._id, suitby: 'exact', activetab: 'suit'})") Подобрать объект
-            md-tab(ui-sref="crm.clients.details.relations({client:client._id, assort: 'manual', activetab: 'relations'})") Связи
+            md-tab(ui-sref="crm.clients.details.info({client:client._id, activetab: 'info'})") 1. Инфо о клиенте
+            md-tab(ui-sref="crm.clients.details.suit({client:client._id, suitby: 'exact', activetab: 'suit'})") 2. Подбор объектов
+            md-tab(ui-sref="crm.clients.details.relations({client:client._id, assort: 'manual', activetab: 'relations'})") 3. Обработка объектов
             //md-tab(ui-sref="crm.clients.details.analytics({client:client._id, activetab: 'analytics'})") Аналитика
-            md-tab(ui-sref="crm.clients.details.info({client:client._id, activetab: 'info'})") Инфо о клиенте
 ui-view(ng-if="clientDetails.clients[0]")

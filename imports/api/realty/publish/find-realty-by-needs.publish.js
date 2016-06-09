@@ -27,7 +27,7 @@ if (Meteor.isServer) {
       if (this.userId) {
 
         let selector = {
-          status: {$in: ['realtor', 'cian', 'agency']}
+          status: {$in: ['realtor', 'agency', 'new']}
         };
 
         let realtyRelated = [];
@@ -58,7 +58,8 @@ if (Meteor.isServer) {
         if (clientNeeds) {
           // console.log(clientNeeds);
           if (clientNeeds.price) {
-            selector['price'] = {$gte: clientNeeds.price / 1.25, $lte: clientNeeds.price * 4 / 3};
+            // selector['price'] = {$gte: clientNeeds.price / 1.25, $lte: clientNeeds.price * 4 / 3};
+            // selector['price'] = {$gte: 0, $lte: clientNeeds.price * 4};
           }
 
           if (clientNeeds.roomcount && clientNeeds.roomcount.length > 0) {

@@ -1,35 +1,10 @@
-div(md-whiteframe='2').mt-16.ph-32.pt-32.pb-8
-    div(layout='row')
-        div(flex)
-            md-input-container().md-block
-                input(ng-model='feedback.info.topic' placeholder='Задайте вопрос')
-            md-input-container().md-block
-                textarea(ng-model='feedback.info.addedinfo' placeholder='Расскажите подробнее о проблеме')
-div(md-whiteframe='2').one-email-card.ph-32.pv-8
-    div(layout='column')
-        div().mv-8
-            md-button(ng-click="feedback.send()" ng-if='feedback.proposalSent != 2' ng-disabled='feedback.proposalSent == 1').md-primary.md-raised.md-body-1.ml-0 Отправить вопрос
-            md-button(ng-if='feedback.proposalSent == 2').md-success.md-raised.md-body-1.ml-0 Успешно отправлено
-div(md-whiteframe='2').one-email-card.ph-32.pv-8
-    div(layout='column')
-        div().mv-8
-            p 990
-            form(id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocaen_object_period/?t=20985#form" target='blank' onsubmit="return __cmsformcheck_order()")
-                input(type="hidden" name="good_name" value="{{feedback.data.good_name}}")
-                input(type="hidden" name="bill_first_name" value="{{feedback.data.bill_first_name}}")
-                input(type="hidden" name="bill_email" value="{{feedback.data.bill_email}}")
-                input(type="hidden" name="bill_phone" value="{{feedback.data.bill_phone}}")
-                input(type="hidden" name="offerta_accept" checked="{{feedback.data.offerta_accept}}")
-                md-button.md-primary.md-raised
-                    input(type="submit" value="Заказать" name="doorder").feedback__nostyles.p-0.m-0
-            p 5940
-            form(id="__cmsform_order" role="form" name='bigOrder' method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocaen_object_6mes/?t=20986#form" onsubmit="return __cmsformcheck_order()")
-                input(type="hidden" name="good_name" value="{{feedback.data.good_name}}")
-                input(type="hidden" name="bill_first_name" value="{{feedback.data.bill_first_name}}")
-                input(type="hidden" name="bill_email" value="{{feedback.data.bill_email}}")
-                input(type="hidden" name="bill_phone" value="{{feedback.data.bill_phone}}")
-                input(type="hidden" name="offerta_accept" checked="{{feedback.data.offerta_accept}}")
-                md-button.md-primary.md-raised
-                    input(type="submit" value="Заказать" name="doorder").feedback__nostyles.p-0.m-0
-
-     md-button.md-raised(ng-click='feedback.someEvent()') Metric
+div(md-whiteframe='1').topbar
+    div(layout='row' layout-align='start center' layout-fill)
+        md-button(aria-label='Задать вопрос').md-primary.md-raised.mh-16 Задать вопрос
+div().mv-16
+    div(md-whiteframe='1' ng-repeat='info in feedback.feedbackData').mv-8
+        div(ng-click='info.show = !info.show').panel__heading.ph-16.pv-8
+            div().md-subhead {{info.question}}
+        div(ng-show='info.show' ng-style='info.height').md-body-1.p-16.answer-tab {{info.answer}}
+            div(layout='column' layout-align='start end')
+                md-button(ng-click='info.show = !info.show').md-primary.md-raised Скрыть
