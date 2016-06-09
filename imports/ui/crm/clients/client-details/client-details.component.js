@@ -30,26 +30,26 @@ class ClientDetails {
     });
 
     switch ($stateParams.activetab) {
-      case 'suit':
+      case 'info':
         vm.selectedTab = 0;
         break;
-      case 'relations':
+      case 'suit':
         vm.selectedTab = 1;
         break;
-      case 'analytics':
+      case 'relations':
         vm.selectedTab = 2;
         break;
-      /*case 'demonstration':
+      /*case 'analytics':
+        vm.selectedTab = 2;
+        break;
+      case 'demonstration':
         vm.selectedTab = 1;
         break;
       case 'email':
         vm.selectedTab = 2;
         break;*/
-      case 'info':
-        vm.selectedTab = 3;
-        break;
       default:
-        vm.selectedTab = 3;
+        vm.selectedTab = 1;
     }
 
   }

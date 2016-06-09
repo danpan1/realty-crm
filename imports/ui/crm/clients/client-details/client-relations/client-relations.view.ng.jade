@@ -14,14 +14,16 @@ div().mt-8
     realty='realty'
     realtylisttype="connections"
     slider='clientRelations.setSliderImages(images)' relation-type= 'new'
-    client-id='clientRelations.client._id')
+    client-id='clientRelations.client._id'
+    user='clientRelations.user')
 
     realty-card(ng-repeat='realty in clientRelations.realtyOffers'
     realty='realty'
     realtylisttype="connections"
     slider='clientRelations.setSliderImages(images)'
     client-id='clientRelations.client._id'
-    relation-type= 'offers')
+    relation-type= 'offers'
+    user='clientRelations.user')
 
 
 
@@ -39,11 +41,13 @@ div().mv-8
     realtylisttype="connections"
     slider='clientRelations.setSliderImages(images)'
     client-id='clientRelations.client._id'
-    relation-type= 'saved')
+    relation-type= 'saved'
+    user='clientRelations.user')
 
     realty-card(ng-repeat='realty in clientRelations.realtyMy'
     realty='realty'
     realtylisttype="connections"
     slider='clientRelations.setSliderImages(images)'
     client-id='clientRelations.client._id'
-    relation-type= 'my')
+    relation-type= 'my'
+    user='clientRelations.user')

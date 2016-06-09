@@ -13,7 +13,8 @@ import nextAutoincrement from '../../../helpers/getUniqueId';
 Meteor.methods({
   addRealty,
   addRealtyToMyList,
-  takeRealty
+  takeRealty,
+  showRealtyPhone
 });
 
 /**
@@ -137,6 +138,34 @@ export function takeRealty(realtyId, status) {
     } else {
       console.log('NOt paid');
       return 'NOt paid';
+    }
+  }
+}
+
+export function showRealtyPhone (realtyId) {
+  if (Meteor.isServer && Meteor.userId()) {
+    if (Roles.userIsInRole(Meteor.userId(), 'paid')) {
+
+      let realty = Realty.findOne({_id: realtyId});
+      
+      if (!realty) {
+        return 'нет такого объекта';
+      }
+
+      if (realty.status !== 'new') {
+        return 'метод вызывается в неправильном месте. попытка взлома';
+      }
+
+      /*if (realty.realtor && realty.realtor.id && (realty.status === 'taken' && status === 'taken')) {
+        return 'у объекта уже есть владелец. попытка взлома';
+      }*/
+
+      return realty.contacts[0].phones[0].phone;
+
+    } else {
+      
+      return 'Not paid';
+      
     }
   }
 }

@@ -18,8 +18,9 @@ class RealtyCard {
     this.show = true;
     this.mdDialog = $mdDialog;
     var vm = this;
-    console.log(this.realtylisttype);
-
+    
+    console.log(this.user);
+    
     if (this.user) {
       vm.data = {
         good_name: "ocaen_object_6mes",
@@ -30,6 +31,8 @@ class RealtyCard {
         offerta_accept: "true"
       };
     }
+    
+    console.log(vm.data);
 
     this.close = function () {
       this.mdDialog.cancel();
@@ -119,8 +122,7 @@ class RealtyCard {
     })
   }
 
-  takeRealty(id, ev) {
-    let vm = this;
+  checkUserPaid (ev) {
     this.isUserPaid = false;
 
     if (this.user && this.user.roles && (this.user.roles.indexOf('paid') !== -1)) {
@@ -129,8 +131,15 @@ class RealtyCard {
 
     if (!this.isUserPaid) {
       this.openPurchaseStart(ev);
-    }
-    else {
+      return false;
+    } 
+    else return true;
+  }
+  
+  takeRealty(id, ev) {
+    let vm = this;
+    
+    if(this.checkUserPaid(ev)){
       Meteor.call('takeRealty', id, (err, result)=> {
         if (err) {
           console.log('err: ' + err);
@@ -206,8 +215,24 @@ class RealtyCard {
       }
     });
   }
+  
+  onShowPhone (realtyId, ev) {
+    if(!this.shownPhone){
+      if(this.checkUserPaid(ev)){
+        Meteor.call('showRealtyPhone', realtyId, (err, result)=> {
+          if (err) {
+            console.log('err: ' + err);
+          } else {
+            this.shownPhone = result;
+          }
+        });
+      }
+    }
+  }
+  
 
-  showSlider() {
+
+  showSlider () {
     if (!this.noPhoto) {
       this.slider({'images': this.realty.details.images});
     }
