@@ -34,11 +34,6 @@ div(flex, layout='row' layout-align='center none')
                              layout-align='start',
                              md-ink-ripple="#bbdefb").ph-0
                     a(ng-click='item.ngClick',).md-list-item-inner.md-no-style.md-button.md-ink-ripple {{item.name}}
-                md-list-item(ng-if='item.href',
-                             layout="row",
-                             layout-align='start',
-                             md-ink-ripple="#bbdefb").ph-0 
-                    a(href='item.href' target='blank').md-list-item-inner.md-no-style.md-button.md-ink-ripple {{item.name}}
             //div
                 md-list-item(layout="row" layout-align='start' md-ink-ripple="#bbdefb").ph-0
                     a(ng-click='layout.videoTutorial = !layout.videoTutorial').md-list-item-inner.md-no-style.md-button.md-ink-ripple Видео-инструкции

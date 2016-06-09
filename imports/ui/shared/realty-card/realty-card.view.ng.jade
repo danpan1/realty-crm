@@ -1,6 +1,6 @@
 div(md-whiteframe='1')
     div(layout='column' ng-if='realtyCard.show == true').mv-8
-    div.newList(layout='row')
+    div(layout='row').newList
 
         // 1-ая колонка - ID и Новая
         div(layout='column').newList_ID.md-body-1.ph-16.pv-8
@@ -15,7 +15,7 @@ div(md-whiteframe='1')
                 span().mv-8 Прочитано
                 md-checkbox(ng-click = 'realtyCard.changeRelationType("new", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
                 ng-true-value = 'undefined'
-                ng-model  = 'realtyCard.asdf'
+                ng-model = 'realtyCard.asdf'
                 flex flex-offset='5'
                 aria-label="Checkbox 2").md-primary.md-subhead.mb-0
         md-divider
