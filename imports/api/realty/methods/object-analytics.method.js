@@ -18,14 +18,19 @@ export function objectAnalytics(type, roomcount, subways, materials, renovation)
   
   if (Meteor.isServer && Meteor.userId()) {
 
-    let realtyAnalytics = Realty.aggregate([{
-      $match: {
-        "address.subwaysEmbedded.name": { $in: subways },
-        roomcount: roomcount/*,
-        materials: materials,
-        renovation: renovation*/
-      }
-    }, { 
+    let match1 =  {
+      "address.subwaysEmbedded.name": { $in: subways },
+      roomcount: roomcount,
+      type:type
+    };
+    if(materials){
+      match1["details.materials"] = materials;
+    }
+    if(renovation){
+      match1["details.renovation"] = renovation;
+    }
+
+    let realtyAnalytics = Realty.aggregate([{$match : match1}, { 
       $unwind: "$address.subwaysEmbedded" 
     }, {
       $group: {
@@ -45,3 +50,17 @@ export function objectAnalytics(type, roomcount, subways, materials, renovation)
   }
   
 }
+
+
+
+
+    /*let realtyAnalytics = Realty.aggregate([{
+      $match: {
+        "address.subwaysEmbedded.name": { $in: subways },
+        roomcount: roomcount,
+        type:type,
+        "details.materials": materials,
+        "details.renovation": renovation
+      }
+    }*/
+

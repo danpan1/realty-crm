@@ -16,6 +16,7 @@ class OneReview {
     $reactive(this).attach($scope);
     this.$timeout = $timeout;
     let vm = this;
+    this.timeout = $timeout;$timeout
     this.mdToast = $mdToast;
     this.uploadThumbsImagesLength = 0;
     this.uploadNormalLength = 0;
@@ -44,9 +45,11 @@ class OneReview {
       if (err) {
         console.log('err: ' + err);
       } else {
-        this.analytics.avgPrice = result.map((item) => {return parseInt(item)})[0];
-        this.analytics.comparison = this.analytics.avgPrice > this.realty.price;
-        this.analytics.difference = this.analytics.comparison ? this.analytics.avgPrice - this.realty.price : this.analytics.price - this.realty.avgPrice;
+        this.timeout(()=>{
+          this.analytics.avgPrice = result.map((item) => {return parseInt(item)})[0];
+          this.analytics.comparison = this.analytics.avgPrice > this.realty.price;
+          this.analytics.difference = this.analytics.comparison ? this.analytics.avgPrice - this.realty.price : this.realty.price - this.analytics.avgPrice;
+        })
       }
     });
   
