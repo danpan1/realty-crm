@@ -19,7 +19,7 @@ export function clientAnalytics(price, roomcount, subways, renovation) {
     let maxRoom = (roomcount) => { return Math.max.apply( Math, roomcount ) };
     let minRoom = (roomcount) => { return Math.min.apply( Math, roomcount ) };
 */
-    let match1 = {};
+    let match1 = {type:4};
     
     /*if(price){
       match1.type = price;
@@ -34,27 +34,22 @@ export function clientAnalytics(price, roomcount, subways, renovation) {
       match1["details.renovation"] = {$in: renovation};;
     }*/
     
-    console.log(match1);
     
     let clientAnalytics = Realty.aggregate([{$match : match1}, 
     { 
       $unwind: "$address.subwaysEmbedded" 
     }, {
       $group: {
-        _id: { roomcount: "$roomcount", subways: "$address.subwaysEmbedded.name" },
+        _id: { roomcount: "$roomcount", subways: "$address.subwaysEmbedded.name" , subwaysLine : "$address.subwaysEmbedded.line" },
         avgPrice: { $avg: "$price" },
         minPrice: { $min: "$price" },
         maxPrice: { $max: "$price" },
         totalRealty: { $sum: 1 }
       }
     }, {
-      $sort: { '_id.roomcount': 1 }
-    }]).map((item) => {
-      console.log(item.totalRealty);
-      return item.avgPrice;
-    })
+      $sort: { '_id.subways': 1, '_id.roomcount': 1 }
+    }])
     
-    console.log(clientAnalytics);
     return clientAnalytics;
   }
   

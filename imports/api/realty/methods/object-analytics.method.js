@@ -38,7 +38,7 @@ export function objectAnalytics(type, roomcount, subways, materials, renovation,
     }]).map((item) => {
       return item.avgPrice;
     });
-    console.log(realtyAnalytics);
+    
     return realtyAnalytics;
   }
   
