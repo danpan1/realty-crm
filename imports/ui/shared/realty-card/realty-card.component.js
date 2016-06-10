@@ -219,18 +219,17 @@ class RealtyCard {
   onShowPhone (realtyId, ev) {
     if(!this.shownPhone){
       if(this.checkUserPaid(ev)){
-        Meteor.call('showRealtyPhone', realtyId, (err, result)=> {
+        Meteor.call('takeRealty', realtyId, (err, result)=> {
           if (err) {
             console.log('err: ' + err);
           } else {
+            console.log(result);
             this.shownPhone = result;
           }
         });
       }
     }
   }
-  
-
 
   showSlider () {
     if (!this.noPhoto) {
