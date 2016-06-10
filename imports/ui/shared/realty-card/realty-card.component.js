@@ -19,8 +19,6 @@ class RealtyCard {
     this.mdDialog = $mdDialog;
     var vm = this;
     
-    console.log(this.user);
-    
     if (this.user) {
       vm.data = {
         good_name: "ocaen_object_6mes",
@@ -31,8 +29,6 @@ class RealtyCard {
         offerta_accept: "true"
       };
     }
-    
-    console.log(vm.data);
 
     this.close = function () {
       this.mdDialog.cancel();

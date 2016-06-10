@@ -92,7 +92,7 @@ if (Meteor.isServer) {
           Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
 
           // console.log('selector ', selector);
-          let realty = Realty.find(selector, {limit: 20});
+          let realty = Realty.find(selector, options);
           console.log('realty ', realty.length);
           return realty;
         }
