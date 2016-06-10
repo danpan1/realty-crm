@@ -39,10 +39,10 @@ class ClientDetails {
       case 'relations':
         vm.selectedTab = 2;
         break;
-      /*case 'analytics':
-        vm.selectedTab = 2;
+      case 'analytics':
+        vm.selectedTab = 3;
         break;
-      case 'demonstration':
+      /*case 'demonstration':
         vm.selectedTab = 1;
         break;
       case 'email':

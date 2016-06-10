@@ -1,6 +1,3 @@
-/**
- * Created by Danpan on 23.03.16.
- */
 'use strict';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '../realty.model.js';

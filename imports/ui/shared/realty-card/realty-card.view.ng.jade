@@ -98,7 +98,7 @@ div(md-whiteframe='1')
                         md-progress-circular(ng-if='realtyCard.loadingDetails' md-diameter='40' style='left:0;right:0;top:0px;margin:0 auto;')
                 
                 md-button(ng-if="realtyCard.realtylisttype === 'clientSuitauto' || realtyCard.realtylisttype === 'clientSuitexact'"
-                ng-click='realtyCard.sendRealtyRelation(realtyCard.realty._id)').client-card__link.text-left.m-0.p-0 Предложить клиента
+                ng-click='realtyCard.sendRealtyRelation(realtyCard.realty._id, realtyCard.user._id)').client-card__link.text-left.m-0.p-0 Предложить клиента
                 md-button(ng-if="realtyCard.realtylisttype === 'clientSuitmy'"
                 ng-click='realtyCard.sendRealtyRelation(realtyCard.realty._id)' md-no-ink).client-card__link.text-left.m-0.p-0 Выбрать объект
 
