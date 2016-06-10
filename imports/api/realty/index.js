@@ -8,5 +8,6 @@ import './publish/find-realty-by-needs.publish';
 import './methods/send-sms.method';
 import './methods/moderator.method';
 import './methods/realtor.method.js';
+import './methods/object-analytics.method.js';
 import './methods/call-center.method.js';
 export * from './realty.model';

@@ -18,11 +18,11 @@ if (Meteor.isServer) {
   Meteor.publish('findRealtyByNeeds', function (options, clientNeeds, relations, suitby) {
 
 
-      let selector, criterions = [];
+      // let selector, criterions = [];
       console.log('findRealtyByNeeds');
-      console.log('clientNeeds', clientNeeds);
-      console.log('relations', relations);
-      console.log('suitby', suitby);
+      // console.log('clientNeeds', clientNeeds);
+      // console.log('relations', relations);
+      // console.log('suitby', suitby);
 
       if (this.userId) {
 
@@ -91,7 +91,7 @@ if (Meteor.isServer) {
 
           Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
 
-          console.log('selector ', selector);
+          // console.log('selector ', selector);
           let realty = Realty.find(selector, {limit: 20});
           console.log('realty ', realty.length);
           return realty;

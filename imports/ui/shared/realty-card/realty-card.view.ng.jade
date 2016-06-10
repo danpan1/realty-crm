@@ -62,7 +62,8 @@ div(md-whiteframe='1')
                     div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
                     div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
                 div(ng-if='realtyCard.realty.status === "new"')
-                    div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.contacts[0].phones[0].phone | phone}}]
+                    md-button(ng-if='!realtyCard.shownPhone' ng-click='realtyCard.onShowPhone(realtyCard.realty._id, $event)').md-primary.mh-0.mt-0 Показать телефон
+                    div(ng-if='realtyCard.shownPhone').md-subhead.mb-8.nowrap {{realtyCard.shownPhone}}
                     div().md-subhead.mb-8 #[b Собственник {{::realtyCard.realty.contacts[0].name}}]
                 div
                     md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Объявление

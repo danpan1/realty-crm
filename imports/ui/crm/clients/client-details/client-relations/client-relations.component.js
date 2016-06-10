@@ -14,6 +14,14 @@ class ClientRelations {
   constructor($scope, $reactive, $stateParams) {
     $reactive(this).attach($scope);
     var vm = this;
+    
+    this.autorun(function () {
+      let user = Meteor.user();
+      if (user) {
+        vm.user = user;
+      }
+    });
+    
     vm.assort = $stateParams.assort ? $stateParams.assort : 'manual';
     this.client = Clients.findOne({_id: $stateParams.client});
     vm.selectedTab = '';

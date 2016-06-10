@@ -92,6 +92,18 @@ div(md-whiteframe='2').mv-16.ph-32.pv-16
             p().md-body-1 Пройдите интенсив
             p().md-body-1 Посмотрите #[a(href='http://murigin.ru/intensiv/' target='blank') «Как умело закрывать на эксклюзив за 10 минут»]
 
+div(md-whiteframe='2').mv-16.ph-32.pv-16
+    h3.md-headline.text-uppercase Аналитика объекта
+    div(layout="row")
+        div(flex="50")
+            h3(style='color: #9e9e9e').md-title.text-normal.mv-8 Средняя цена: {{oneReview.analytics.avgPrice | price}}
+            h3(style='color: #9e9e9e').md-title.text-normal.mv-8 Цена {{oneReview.analytics.comparison ? 'меньше' : 'больше'}} на {{oneReview.analytics.difference | price }}
+            h3(style='color: #106cc8').md-title.text-normal.mv-8 {{oneReview.analytics.marketOk}}
+        div(flex='50')
+            h3().md-headline Ответ от модератора:
+            p().md-body-1 Пройдите интенсив
+            p().md-body-1 Посмотрите #[a(href='http://murigin.ru/intensiv/' target='blank') «Как объяснить собственнику про стоимость на рынке»]
+
 div(layout='column' layout-align='center center')
     div(flex='30')
         md-button(ng-click='oneReview.sendToModerator()'

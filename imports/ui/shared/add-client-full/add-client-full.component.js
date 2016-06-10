@@ -23,7 +23,8 @@ class AddClientFull {
     this.client.comissionLoyal = true;
     this.client.comission = 100;
     this.client.need = {
-      metroTransport: 0
+      metroTransport: 0,
+      type : 4
     }
     this.client.searchEndDate = this.client.searchStartDate;
   }

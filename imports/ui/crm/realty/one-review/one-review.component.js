@@ -19,6 +19,7 @@ class OneReview {
     this.resize = UploadResize;
     this.$timeout = $timeout;
     let vm = this;
+    this.analytics = {};
     this.uploadImagesNormalLength = 0;
     this.uploadThumbnailsLength = 0;
     this.mainImage = '';
@@ -35,10 +36,23 @@ class OneReview {
 
     this.helpers({
       realty: () => {
-        return Realty.findOne({});
+        return Realty.findOne({_id : $stateParams.realtyId});
       }
     });
-
+    
+    let subwaysEmb = this.realty.address.subwaysEmbedded.map((value) => { return value.name; });
+    Meteor.call('objectAnalytics', this.realty.type, this.realty.roomcount, subwaysEmb, this.realty.details.materials, this.realty.details.renovation, (err, result) => {
+      if (err) {
+        console.log('err: ' + err);
+      } else {
+        this.$timeout(()=>{
+          this.analytics.avgPrice = result.map((item) => {return parseInt(item)})[0];
+          this.analytics.comparison = this.analytics.avgPrice > this.realty.price;
+          this.analytics.difference = this.analytics.comparison ? this.analytics.avgPrice - this.realty.price : this.realty.price - this.analytics.avgPrice;
+          this.analytics.marketOk = !this.analytics.comparison && this.analytics.difference > this.analytics.avgPrice / 10 ? 'Цена слишком высокая' : this.analytics.comparison && this.analytics.difference > this.analytics.avgPrice / 10 ? 'Цена слишком низкая' : 'Цена в рынке!';
+        })
+      }
+    });
   }
 
   removeImage(image, index) {

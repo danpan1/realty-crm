@@ -56,8 +56,9 @@ md-tabs(md-dynamic-height)
                         div(flex='70')
                             div(layout='row' layout-align='space-between start')
                                 md-input-container(flex)
-                                    md-select(required ng-model='addClientFull.fake' aria-label='Выбрать тип сделки')
-                                        md-option(ng-value='true') Аренда
+                                    md-select(required ng-model='addClientFull.client.need.type' aria-label='Выбрать тип сделки')
+                                        md-option(ng-value='4') Аренда
+                                        md-option(ng-value='1') Продажа
                                 md-input-container(flex).ml-32
                                     md-select(required ng-model='addClientFull.fake' aria-label='Выбрать вид жилья')
                                         md-option(ng-value='true') Квартиры
