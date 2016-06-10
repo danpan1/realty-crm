@@ -6,6 +6,7 @@ import angularMeteor from 'angular-meteor';
 import {dictionary} from '../../../helpers/dictionary';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '../../../api/realty';
+import {name as Conditions} from '../conditions/conditions.component';
 
 import './realty-card.view.html';
 
@@ -19,8 +20,6 @@ class RealtyCard {
     this.mdDialog = $mdDialog;
     var vm = this;
     
-    console.log(this.user);
-    
     if (this.user) {
       vm.data = {
         good_name: "ocaen_object_6mes",
@@ -31,8 +30,6 @@ class RealtyCard {
         offerta_accept: "true"
       };
     }
-    
-    console.log(vm.data);
 
     this.close = function () {
       this.mdDialog.cancel();
@@ -144,6 +141,7 @@ class RealtyCard {
         if (err) {
           console.log('err: ' + err);
         } else {
+          console.log(result);
           this.timeout(()=> {
             vm.realtyPhone = result.phone;
             vm.realtyName = result.name;
@@ -219,18 +217,17 @@ class RealtyCard {
   onShowPhone (realtyId, ev) {
     if(!this.shownPhone){
       if(this.checkUserPaid(ev)){
-        Meteor.call('showRealtyPhone', realtyId, (err, result)=> {
+        Meteor.call('takeRealty', realtyId, (err, result)=> {
           if (err) {
             console.log('err: ' + err);
           } else {
-            this.shownPhone = result;
+            console.log(result);
+            this.shownPhone = result.phone;
           }
         });
       }
     }
   }
-  
-
 
   showSlider () {
     if (!this.noPhoto) {
@@ -250,7 +247,8 @@ const moduleName = 'realtyCard';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  Conditions
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/realty-card/realty-card.view.html',
   bindings: {

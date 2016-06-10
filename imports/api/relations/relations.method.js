@@ -96,7 +96,7 @@ export function setRelationFindRealty(clientId, realtyId, type) {
         break;
       case 'clientSuitexact' :
       case 'clientSuitauto' :
-        sendSMS('realty', realtyId);
+        sendSMS('realty', realtyId, this.userId);
         fieldInClient = 'relations.saved';
         fieldInRealty = 'relations.new';
         break;
@@ -111,27 +111,27 @@ export function setRelationFindRealty(clientId, realtyId, type) {
     modificatorRealty[fieldInRealty] = clientId;
     modificatorClient[fieldInClient] = realtyId;
 
-    Realty.update({_id: realtyId},
-      {
-        $addToSet: modificatorRealty
-      }, (error) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('realtyRelation  ok');
-        }
-      });
-
-    Clients.update({_id: clientId},
-      {
-        $addToSet: modificatorClient
-      }, (error) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('clientRelation  ok');
-        }
-      });
+    // Realty.update({_id: realtyId},
+    //   {
+    //     $addToSet: modificatorRealty
+    //   }, (error) => {
+    //     if (error) {
+    //       console.log(error);
+    //     } else {
+    //       console.log('realtyRelation  ok');
+    //     }
+    //   });
+    //
+    // Clients.update({_id: clientId},
+    //   {
+    //     $addToSet: modificatorClient
+    //   }, (error) => {
+    //     if (error) {
+    //       console.log(error);
+    //     } else {
+    //       console.log('clientRelation  ok');
+    //     }
+    //   });
 
   }
 
@@ -177,29 +177,37 @@ export function changeRelationTypeInClient(type, realtyId, clientId, relationTyp
   // })
 }
 
-function sendSMS(type, id) {
+function sendSMS(type, id, userId) {
 
   if (Meteor.isServer && Meteor.userId()) {
     console.log('sendSMS');
+    console.log('userId', userId);
     let text = '&text=', to = '&to=';
     let noSms = false;
-    let currentUser = Meteor.users.findOne({_id: this.userId});
+    let currentUser = Meteor.users.findOne({_id: userId});
+    console.log(currentUser);
     if (type === 'client') {
       let client = Clients.findOne({_id: id});
+      noSms = true;
       to += client.realtorPhone;
       text += `Коллега, я предложил вам объект для клиента id${id}. Предложение на сайте`;
     } else if (type === 'realty') {
       let realty = Realty.findOne({_id: id});
       switch (realty.status) {
         case 'cian':
-          to += realty.contacts[0].phones[0].phone;
-          text += `${realty.contacts[0].name}, у меня есть клиенты на ваш объект ${realty.address.value}. Мой номер ${currentUser.profile.phone}, ваше объявление нашел на сайте`;
+          // to += '+7 960 057-68-54';
+          to += '79250759587';
+          //todo парсить телефон ЦИАНА
+          console.log(realty.contacts[0].phones[0].phone, 'Этелефон риэлтора');
+          text += `Здравствуйте, у меня есть клиенты на ваш объект ${realty.address.street}, ${realty.address.house}. Мой номер ${currentUser.profile.phone}, ваше объявление нашел на сайте миринедвижимость.рф`;
+          // text += `Hello777`;
           break;
         case 'new':
           noSms = true;
           text += 'НИЧЕГО НЕ ОТПРАВЛЯЕМ НИКОМУ';
           break;
         case 'realtor':
+          noSms = true;
           to += realty.realtor.phone;
           text += `Коллега, я предложил вам клиента для вашего объект ${realty.address.value}. Предложение на сайте`;
           break;
@@ -212,12 +220,12 @@ function sendSMS(type, id) {
     }
     let url = 'http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275' + to + text;
     console.log('SMS SMS SMS ' + url);
-    // HTTP.post(url, false, function (error, result) {
-    //   if (error) {
-    //     console.log(error);
-    //   } else {
-    //     console.log(result);
-    //   }
-    // });
+    HTTP.post(url, false, function (error, result) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+      }
+    });
   }
 }

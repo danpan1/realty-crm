@@ -20,6 +20,9 @@ div(md-whiteframe='2').mv-16.client-card
 
             md-divider
             div.pv-8.ph-16(layout="column" ng-if="clientCard.client.status")
+                md-button(
+                ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
+                ).md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
                 div(ng-if="clientCard.pageFrom == 'manual' || clientCard.pageFrom == 'algorithm'")
                     md-button(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)').client-card__link.text-left.m-0.p-0 Предложить объект
                 div(ng-if="clientCard.pageFrom == 'my'")

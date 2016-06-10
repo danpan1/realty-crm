@@ -16,54 +16,38 @@ class PhoneMask {
   }
         
   ngOnInit () {
-      if(this.visualPhone.length > 5){
-        var value = this.visualPhone.toString().trim().replace(/^\+/, '');
-        var country, city, number, main;
-        country = value[0];
-        city = value.slice(1, 4);
-        number = value.slice(4);
-        main = city ? city.length >= 3 ? (country + ' (' + city + ') ') : (country + ' (' + city) : country;
-        number = number ? number.length > 3 ? number.length > 5 ? number.slice(0, 3) + '-' + number.slice(3,5) + '-' + number.slice(5) :  number.slice(0, 3) + '-' + number.slice(3) : number : '';
-        this.visualPhone = (main + number).trim();
-      }
+    if(this.visualPhone.length > 5){
+      var value = this.visualPhone.toString().trim().replace(/^\+/, '');
+      var country, city, number, main;
+      country = value[0];
+      city = value.slice(1, 4);
+      number = value.slice(4);
+      main = city ? city.length >= 3 ? (country + ' (' + city + ') ') : (country + ' (' + city) : country;
+      number = number ? number.length > 3 ? number.length > 5 ? number.slice(0, 3) + '-' + number.slice(3,5) + '-' + number.slice(5) :  number.slice(0, 3) + '-' + number.slice(3) : number : '';
+      this.visualPhone = (main + number).trim();
+    }
   }
   
-  filterPhoneKeyPress(){
-      if(this.visualPhone[0] != '8') this.visualPhone = '8 ' + this.visualPhone;
-      this.phone = this.visualPhone;
-  }
-  
-  filterPhoneKeyUp () {
-      console.log(this.visualPhone);
-      if(this.errorPhoneNum.test(this.visualPhone)) {
-          let phone = this.visualPhone.split('');
-          for(var i in [1,2,3]){
-              for(var i in phone){
-                  if(!phone[i].match(/\+|\s|\(|\)|\-|[0-9]/)){
-                      phone.splice(i,1);
-                  }
-              }
-          }
-          if(phone[0] !== '8') this.visualPhone = '8 '+phone.join('');
-          return false;
+  filterPhoneKeyDown (e) {
+    if (!this.visualPhone || this.visualPhone[0] !== '8') this.visualPhone = '8' + (this.visualPhone ? this.visualPhone : '');
+    let oldValue = this.visualPhone.split('');
+    let value = '';
+    for(var i in oldValue){
+      if(oldValue[i].match(/\d/)){
+          value = value + oldValue[i];
       }
+    }
+    this.phone = value;
+    var country = this.phone[0];
+    var city = this.phone.slice(1, 4);
+    var number = this.phone.slice(4);
+    city = city ? ' (' + city : ' (';
+    number = number ? number.length > 3 ? number.length > 5 ? ') ' + number.slice(0, 3) + '-' + number.slice(3,5) + '-' + number.slice(5) :  ') ' + number.slice(0, 3) + '-' + number.slice(3) : ') ' + number : '';
+    this.visualPhone = (country + city + number).trim();
   }
   
   filterPhoneFocus () {
-      if(!this.visualPhone) this.visualPhone = '8';
-  }
-  
-  filterPhoneBlur () {
-      if(this.visualPhone.length > 14 && this.visualPhone[0] + this.visualPhone[1] + this.visualPhone[2] != '8 (') this.visualPhone = '8 ' + this.visualPhone;
-      var phone = this.visualPhone.split('');
-      for(var i in [1,2,3]){
-          for(var i in phone){
-              if(phone[i].match(/\+|\(|\)|\-|\s|d/)){
-                  phone.splice(i,1);
-              }
-          }
-      }
-      this.phone = phone.join('');
+    if(!this.visualPhone) this.visualPhone = '8';
   }
   
 }

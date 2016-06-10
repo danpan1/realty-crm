@@ -129,7 +129,7 @@ export function takeRealty(realtyId, status) {
             'status': 'taken'
           }
         });
-          
+                  
       }
 
       // Если действие не определено, отдаем телефоны и имя

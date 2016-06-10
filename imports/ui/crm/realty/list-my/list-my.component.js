@@ -13,14 +13,12 @@ import './list-my.view.html';
 
 class ListMy {
   /* @ngInject */
-  constructor($scope, $reactive, $state, $stateParams) {
+  constructor($scope, $reactive, $state, $stateParams, $timeout) {
     $reactive(this).attach($scope);
     const vm = this;
-    
+    this.$timeout = $timeout;
     this.state = $state;
     this.stateParams = $stateParams;
-    
-    vm.loaded = false;
     vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
@@ -28,6 +26,7 @@ class ListMy {
     };
 
     vm.subscribe('listMy', () => {
+      vm.loaded = false;
       return [
         {
           limit: parseInt(vm.perPage),
@@ -37,7 +36,9 @@ class ListMy {
       ];
     }, {
       onReady: function () {
-        vm.loaded = true;
+        vm.$timeout(()=>{
+          vm.loaded = true;
+        },100)  
         // subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
       }
     });
