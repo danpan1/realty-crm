@@ -168,7 +168,8 @@ export function changeRelationTypeInClient(type, realtyId, clientId, relationTyp
       });
 
   }
-}export function changeRelationTypeInRealty(type, realtyId, clientId, relationTypeCurrent) {
+}
+export function changeRelationTypeInRealty(type, realtyId, clientId, relationTypeCurrent) {
   //Это происходит на странице Объекты - Подобрать объект
   // Значит это предложение для владельцев клиентов
   if (Meteor.isServer && Meteor.userId()) {
@@ -219,12 +220,13 @@ function sendSMS(type, id, userId) {
       let realty = Realty.findOne({_id: id});
       switch (realty.status) {
         case 'cian':
-          // to += '+7 960 057-68-54';
-          to += '79250759587';
-          //todo парсить телефон ЦИАНА
-          console.log(realty.contacts[0].phones[0].phone, 'Этелефон риэлтора');
+          let phone = realty.contacts[0].phones[0].phone;
+          if (phone) {
+            phone = phone.split(';')[0];
+          }
+          to += phone;
+          console.log(phone, 'Этелефон риэлтора');
           text += `Здравствуйте, у меня есть клиенты на ваш объект ${realty.address.street}, ${realty.address.house}. Мой номер ${currentUser.profile.phone}, ваше объявление нашел на сайте`;
-          // text += `Hello777`;
           break;
         case 'new':
           noSms = true;
