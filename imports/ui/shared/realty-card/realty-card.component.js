@@ -220,7 +220,7 @@ class RealtyCard {
             console.log('err: ' + err);
           } else {
             console.log(result);
-            this.shownPhone = result;
+            this.shownPhone = result.phone;
           }
         });
       }
