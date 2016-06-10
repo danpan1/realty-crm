@@ -27,7 +27,7 @@ if (Meteor.isServer) {
       if (this.userId) {
 
         let selector = {
-          status: {$in: ['realtor', 'agency', 'new']}
+          status: {$in: ['realtor', 'agency', 'new', 'cian']}
         };
 
         let realtyRelated = [];
@@ -57,9 +57,11 @@ if (Meteor.isServer) {
         //TODO моргают клиенты лишние при переключнии табов
         if (clientNeeds) {
           // console.log(clientNeeds);
+          if (clientNeeds.type) {
+            selector['type'] = clientNeeds.type;
+          }
           if (clientNeeds.price) {
-            // selector['price'] = {$gte: clientNeeds.price / 1.25, $lte: clientNeeds.price * 4 / 3};
-            // selector['price'] = {$gte: 0, $lte: clientNeeds.price * 4};
+            selector['price'] = {$gte: clientNeeds.price / 1.25, $lte: clientNeeds.price * 4 / 3};
           }
 
           if (clientNeeds.roomcount && clientNeeds.roomcount.length > 0) {
