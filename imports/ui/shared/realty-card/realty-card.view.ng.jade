@@ -70,9 +70,9 @@ div(md-whiteframe='1')
 
 
         //6.1 УДОБСТВа
-        div(layout='column' layout-align='space-between start' ng-if="realtyCard.realtylisttype !== 'connections'").newList_contacts.ph-16.pv-8
+        div(ng-if="realtyCard.realtylisttype !== 'connections'").newList_contacts.ph-16.pv-8
             div(layout='row', layout-wrap, layout-align='start start')
-                div(flex="25" ng-repeat="condition in realtyCard.realty.details.conditions").clientCard-conditions
+                div(flex="20" ng-repeat="condition in realtyCard.realty.details.conditions").clientCard-conditions
                     md-icon(alt='Мебель' ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').client-card__md-icon
                     span(ng-if="condition == 'furniture'") Мебель
                     md-icon(alt='Кухонный гарнитур' ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture').client-card__md-icon
