@@ -71,38 +71,7 @@ div(md-whiteframe='1')
 
         //6.1 УДОБСТВа
         div(layout='column' layout-align='space-between start' ng-if="realtyCard.realtylisttype !== 'connections'").newList_contacts.ph-16.pv-8
-            div(layout='row', layout-wrap, layout-align='start start')
-                div(flex="25" ng-repeat="condition in realtyCard.realty.details.conditions").clientCard-conditions
-                    md-icon(alt='Мебель' ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').client-card__md-icon
-                    span(ng-if="condition == 'furniture'") Мебель
-                    md-icon(alt='Кухонный гарнитур' ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture').client-card__md-icon
-                    span(ng-if="condition == 'kitchen_furniture'") Кухонный гарнитур
-                    md-icon(alt='Телевизор' ng-if="condition == 'tv'" md-svg-icon='conditions_tv').client-card__md-icon
-                    span(ng-if="condition == 'tv'") Телевизор
-                    md-icon(alt='Холодильник' ng-if="condition == 'refrigerator'" md-svg-icon='conditions_refrigerator').client-card__md-icon
-                    span(ng-if="condition == 'refrigerator'") Холодильник
-                    md-icon(alt='Стиральная машина' ng-if="condition == 'washer'" md-svg-icon='conditions_washer').client-card__md-icon
-                    span(ng-if="condition == 'washer'") Стиральная машина
-                    md-icon(alt='Стационарный телефон' ng-if="condition == 'phone'" md-svg-icon='conditions_phone').client-card__md-icon
-                    span(ng-if="condition == 'phone'") Стационарный телефон
-                    md-icon(alt='С животными' ng-if="condition == 'animal'" md-svg-icon='conditions_animal').client-card__md-icon
-                    span(ng-if="condition == 'animal'") С животными
-                    md-icon(alt='Лифт' ng-if="condition == 'elevator'" md-svg-icon='conditions_elevator').icon-rotate-90.client-card__md-icon
-                    span(ng-if="condition == 'elevator'") Лифт
-                    md-icon(alt='С детьми' ng-if="condition == 'children'" md-svg-icon='conditions_children').client-card__md-icon
-                    span(ng-if="condition == 'children'") С детьми
-                    md-icon(alt='Wi-Fi' ng-if="condition == 'wifi'" md-svg-icon='conditions_wifi').client-card__md-icon
-                    span(ng-if="condition == 'wifi'") Wi-Fi
-                    md-icon(alt='Ванна' ng-if="condition == 'bathroom'" md-svg-icon='conditions_bathroom').client-card__md-icon
-                    span(ng-if="condition == 'bathroom'") Ванна
-                    md-icon(alt='Кондиционер' ng-if="condition == 'conditioner'" md-svg-icon='conditions_conditioner').client-card__md-icon
-                    span(ng-if="condition == 'conditioner'") Кондиционер
-                    md-icon(alt='Посудомойка' ng-if="condition == 'dishWasher'" md-svg-icon='conditions_dishWasher').client-card__md-icon
-                    span(ng-if="condition == 'dishWasher'") Посудомойка
-                    md-icon(alt='Душевая кабина' ng-if="condition == 'shower'" md-svg-icon='conditions_shower').client-card__md-icon
-                    span(ng-if="condition == 'shower'") Душевая кабина
-                    md-icon(alt='Балкон' ng-if="condition == 'balcony'" md-svg-icon='conditions_balcony').client-card__md-icon
-                    span(ng-if="condition == 'balcony'") Балкон
+            conditions(conditions='realtyCard.realty.details.conditions')
         md-divider
 
 
@@ -152,7 +121,9 @@ div(md-whiteframe='1')
         div(ng-if="realtyCard.realtylisttype == 'connections'")
             div(layout="row")
                 p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
-                p(flex="65").md-body-1 Удобства
+                div(flex="65").md-body-1 
+                    p Удобства
+                    conditions(conditions='realtyCard.realty.details.conditions')
             div {{::realtyCard.realty.details.descr}}
             div(layout="row")
                 div(flex="90")
