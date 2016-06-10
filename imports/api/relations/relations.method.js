@@ -11,6 +11,7 @@ import {HTTP} from 'meteor/http';
 Meteor.methods({
   setRelationFindClient,
   setRelationFindRealty,
+  changeRelationTypeInRealty,
   changeRelationTypeInClient
 });
 /**
@@ -167,14 +168,37 @@ export function changeRelationTypeInClient(type, realtyId, clientId, relationTyp
       });
 
   }
-  // db.clients.update({_id: '14'}, {
-  //   $set: {
-  //     'relations.offers': ['8', '9', '14'],
-  //     'relations.new': ['8', '9', '14'],
-  //     'relations.my': ['8', '9', '14'],
-  //     'relations.saved': ['8', '9', '14']
-  //   }
-  // })
+}export function changeRelationTypeInRealty(type, realtyId, clientId, relationTypeCurrent) {
+  //Это происходит на странице Объекты - Подобрать объект
+  // Значит это предложение для владельцев клиентов
+  if (Meteor.isServer && Meteor.userId()) {
+    console.log('changeRelationTypeInRealty');
+    console.log(type, 'type');
+    console.log(realtyId, 'realtyId');
+    console.log(relationTypeCurrent, 'relationTypeCurrent');
+    console.log(clientId, 'clientId');
+    let modificator = {};
+
+    if (relationTypeCurrent) {
+      modificator.$pull = {};
+      modificator.$pull['relations.' + relationTypeCurrent] = realtyId;
+    }
+
+    if (type) {
+      modificator.$addToSet = {};
+      modificator.$addToSet['relations.' + type] = realtyId;
+    }
+    console.log(modificator, 'modificator');
+    Realty.update({_id: realtyId},
+      modificator, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('relationTypeCurrent  ok');
+        }
+      });
+
+  }
 }
 
 function sendSMS(type, id, userId) {
@@ -199,7 +223,7 @@ function sendSMS(type, id, userId) {
           to += '79250759587';
           //todo парсить телефон ЦИАНА
           console.log(realty.contacts[0].phones[0].phone, 'Этелефон риэлтора');
-          text += `Здравствуйте, у меня есть клиенты на ваш объект ${realty.address.street}, ${realty.address.house}. Мой номер ${currentUser.profile.phone}, ваше объявление нашел на сайте миринедвижимость.рф`;
+          text += `Здравствуйте, у меня есть клиенты на ваш объект ${realty.address.street}, ${realty.address.house}. Мой номер ${currentUser.profile.phone}, ваше объявление нашел на сайте`;
           // text += `Hello777`;
           break;
         case 'new':
