@@ -1,5 +1,5 @@
 div(layout='row' layout-wrap layout-align='start start')
-    div(ng-repeat="condition in ['furniture','kitchen_furniture','refrigerator']").clientCard-conditions
+    div(ng-repeat="condition in conditions.conditions").clientCard-conditions
         md-icon(alt='Мебель' ng-if="condition == 'furniture'" md-svg-icon='conditions_furniture').client-card__md-icon
         span(ng-if="condition == 'furniture'") Мебель
         md-icon(alt='Кухонный гарнитур' ng-if="condition == 'kitchen_furniture'" md-svg-icon='conditions_kitchen_furniture').client-card__md-icon

@@ -13,6 +13,11 @@ realty-card {
   text-transform: none !important;
   color: #898989 !important;
   }
+  &__object-own{
+    background: darkseagreen;
+    color: #fff;
+    border-radius: 4px;
+  }
 }
 
 .subscription-dialog {

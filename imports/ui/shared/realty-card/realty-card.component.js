@@ -118,7 +118,33 @@ class RealtyCard {
       clickOutsideToClose: true
     })
   }
-
+  
+  onShowDetails () {
+    if(!this.realtyPhone){
+      let vm = this;
+      this.loadingDetails = true;
+      let realtyId = this.realty._id;
+      let userId = this.user._id;
+      Meteor.call('showRealtyDetails', realtyId, userId, (err, result)=> {
+        if (err) {
+          console.log('err: ' + err);
+        } else {
+          console.log(result);
+          this.timeout(()=> {
+            vm.realtyPhone = result.phone;
+            vm.realtyName = result.name;
+            vm.realtyStreet = result.address.street;
+            vm.realtyHouse = result.address.house;
+            this.loadingDetails = false;
+            this.ngShowDescr = true;
+          }, 0);
+        }
+      });
+    }else{
+      this.ngShowDescr = !this.ngShowDescr;
+    }
+  }
+  
   checkUserPaid (ev) {
     this.isUserPaid = false;
 

@@ -89,8 +89,14 @@ div(md-whiteframe='1')
                 ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
                 ).md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
 
-                md-button(ng-if="!realtyCard.realtylisttype"
+                md-button(ng-if="!realtyCard.realtylisttype && realtyCard.realty.status != 'taken'" 
                 ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Подробнее
+                md-button(ng-if="!realtyCard.realtylisttype && realtyCard.realty.status == 'taken' && !realtyCard.loadingDetails" 
+                ng-click="realtyCard.onShowDetails()" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Подробнее
+                div(layout='row' layout-fill)
+                    div(flex='100').w-100
+                        md-progress-circular(ng-if='realtyCard.loadingDetails' md-diameter='40' style='left:0;right:0;top:0px;margin:0 auto;')
+                
                 md-button(ng-if="realtyCard.realtylisttype === 'clientSuitauto' || realtyCard.realtylisttype === 'clientSuitexact'"
                 ng-click='realtyCard.sendRealtyRelation(realtyCard.realty._id)').client-card__link.text-left.m-0.p-0 Предложить клиента
                 md-button(ng-if="realtyCard.realtylisttype === 'clientSuitmy'"
@@ -102,10 +108,11 @@ div(md-whiteframe='1')
 
     // Подоробное объявление
     div(ng-show="realtyCard.ngShowDescr").ph-32.pb-16
-        div(ng-if="!realtyCard.realtylisttype")
+        div(ng-if="!realtyCard.realtylisttype").relative
+            div(ng-if='realtyCard.realty.status == \'taken\'' flex).realty-card__object-own.p-8 Это ваш объект
             p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
             div(layout='row')
-                md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16 Взять объект
+                md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
             h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
             h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyStreet}}, {{realtyCard.realtyHouse}}
             div(ng-if='!realtyCard.isAgent && !realtyCard.objectAdded && realtyCard.realtyPhone' layout="row")

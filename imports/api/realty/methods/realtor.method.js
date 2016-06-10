@@ -14,13 +14,34 @@ Meteor.methods({
   addRealty,
   addRealtyToMyList,
   takeRealty,
-  showRealtyPhone
+  showRealtyPhone,
+  showRealtyDetails
 });
 
 /**
  * takeRealty - взять объект недвижимости. Кнопка взять на странице Новые объекты.
  * @param realtyId
  */
+
+export function showRealtyDetails (realtyId, userId) {
+  if (Meteor.isServer && Meteor.userId()) {
+    
+    let realty = Realty.findOne({_id: realtyId});
+    if (!realty) {
+      //Не даём взять объект
+      return 'нет такого объекта';
+    }
+    
+    console.log(realty.realtor.id + ' == ' + userId);
+    if (realty.realtor.id != userId){
+       return 'Это не ваш объект';
+    }
+    
+    return {name: realty.contacts[0].name, phone: realty.contacts[0].phones[0].phone, address: {street:realty.address.street, house:realty.address.house}};
+    
+  }
+}
+
 export function addRealtyToMyList(realtyId) {
 
   if (Meteor.isServer && Meteor.userId()) {
