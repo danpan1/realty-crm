@@ -3,9 +3,9 @@ md-content()
     div().mv-32.text-center
         img(src='img/logos/brand-logo-large.png')
     div(layout='column', layout-align='center center').p-32
-        md-toolbar(ng-show='login.error', layout='row', layout-align='center center').md-warn.mb-16
-            p().md-body-1 {{ login.error }}
         div(md-whiteframe='2').login-form.p-32
+            md-toolbar(ng-show='login.error', layout='row', layout-align='center center').md-warn.mb-16
+                p().md-body-1 {{ login.error }}
             form(name='loginForm' ng-submit='login.login()')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='80').md-block.form-required.mb-0
