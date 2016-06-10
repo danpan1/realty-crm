@@ -1,7 +1,7 @@
 loader(ng-if="oneInfo.showLoader == true")
 one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow" ng-if="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
-    div(layout="row" layout-align='start center')
+    div(layout="row" layout-align='start center').one-info__slider
         div(hide) 
             div(ng-repeat="image in oneInfo.realty.details.images")
                 img(src="{{image.url}}")
@@ -28,7 +28,7 @@ div(layout="column", layout-align="space-around stretch")
             md-button(aria-label='Сохранить' ng-click='oneInfo.realtyUpdate()').md-primary.md-raised.m-0 Сохранить
 
     div(layout='row').mt-16
-        div(md-whiteframe='2' flex)
+        div(md-whiteframe='2' flex).one-info__realty
             div(layout='row')
                 div(flex='33' layout='row').ph-32.pv-16
                     div(layout='column' layout-align='space-between start')
@@ -124,7 +124,7 @@ div(layout="column", layout-align="space-around stretch")
                         div(flex='60') От партнера:
                         div(flex='40') #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
 
-    div(layout='row' layout-align='start start').mt-16
+    div(layout='row' layout-align='start start').one-info__close-deal.mt-16
         div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
             div(layout='row' layout-align='space-around start' layout-wrap) {{oneInfo.currentConditions[$index].presence}}
                 md-switch(flex='50' ng-model='oneInfo.currentConditions[$index].presence',
