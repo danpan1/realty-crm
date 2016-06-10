@@ -43,7 +43,7 @@ class RealtyOneLayout {
         this.selectedTab = 3;
         break;
       case 'crm.realty.one.review':
-        this.selectedTab = 2;
+        this.selectedTab = 1;
         break;
       case 'crm.realty.one.email':
         this.selectedTab = 4;
