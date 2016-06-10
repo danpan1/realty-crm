@@ -189,7 +189,7 @@ class RealtyCard {
     });
   }
 
-  sendRealtyRelation(realtyId) {
+  sendRealtyRelation(realtyId, clientId) {
     let vm = this;
     console.log(realtyId, 'realtyId');
     console.log(this.clientId, 'clientId');
