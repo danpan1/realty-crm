@@ -1,0 +1,59 @@
+@media print {
+  .md-button {
+    display: none !important;
+  }
+  .username {
+    display: none;
+  }
+  .one-info {
+    &__slider {
+      display: none !important;
+    }
+    &__realty {
+      md-divider {
+        display: none !important;
+      }
+    }
+    &__close-deal {
+      display: none !important;
+    }
+  }
+
+  .topbar .btn-back {
+    display: none !important;
+  }
+
+  .tabbar {
+    display: none !important;
+  }
+
+  md-toolbar {
+    display: none !important;
+  }
+
+  .form-required:after {
+    content: none !important;
+  }
+
+  md-switch {
+    &.ng-empty .md-label {
+      color: black;
+    }
+    
+    &.md-checked .md-bar {
+      background-color: $black !important;
+    }
+
+    [disabled] .md-bar {
+      background-color: $black !important;
+    }
+
+    &.md-checked .md-thumb {
+      background-color: $white !important;
+    }
+
+    [disabled] .md-thumb {
+      background-color: $white !important;
+    }
+  }
+}
