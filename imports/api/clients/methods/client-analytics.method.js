@@ -30,9 +30,9 @@ export function clientAnalytics(price, roomcount, subways, renovation) {
     if(subways){
       match1["address.subwaysEmbedded.name"] = {$in: subways};
     }
-    if(renovation){
+    /*if(renovation){
       match1["details.renovation"] = {$in: renovation};;
-    }
+    }*/
     
     console.log(match1);
     

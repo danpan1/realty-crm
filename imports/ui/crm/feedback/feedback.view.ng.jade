@@ -5,6 +5,6 @@ div().mv-16
     div(md-whiteframe='1' ng-repeat='info in feedback.feedbackData').mv-8
         div(ng-click='info.show = !info.show').panel__heading.ph-16.pv-8
             div().md-subhead {{info.question}}
-        div(ng-show='info.show' ng-style='info.height').md-body-1.p-16.answer-tab {{info.answer}}
+        div(ng-class='{"feedback__show pv-16":info.show,"feedback__hide pv-0":!info.show}' ng-style='info.height').md-body-1.ph-16.feedback__answer-tab {{info.answer}}
             div(layout='column' layout-align='start end')
                 md-button(ng-click='info.show = !info.show').md-primary.md-raised Скрыть
