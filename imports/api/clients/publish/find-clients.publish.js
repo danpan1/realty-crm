@@ -46,7 +46,10 @@ if (Meteor.isServer) {
       if (filter && filter.price) {
         // console.log(filter);
         if (filter.price) {
-          // selector['need.price'] = {$gte: filter.price / 1.25, $lte: filter.price * 4 / 3};
+          selector['need.price'] = {$gte: filter.price / 1.25, $lte: filter.price * 4 / 3};
+        }
+        if (filter.type) {
+          selector['need.type'] = filter.type;
         }
 
         if (filter.roomcount) {
