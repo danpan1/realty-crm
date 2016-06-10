@@ -5,27 +5,27 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 export const RelationsSchema = new SimpleSchema({
   new: {
-    type: [Number],
+    type: [String],
     optional: true
   },
   offers: {
-    type: [Number],
+    type: [String],
     optional: true
   },
   paid:{
-    type: [Number],
+    type: [String],
     optional: true
   },
   my: {
-    type: [Number],
+    type: [String],
     optional: true
   },
   saved: { // Спрятать
-    type: [Number],
+    type: [String],
     optional: true
   },
   hide: { // Предложение или выбрал сам
-    type: [Number],
+    type: [String],
     optional: true
   }
 });
