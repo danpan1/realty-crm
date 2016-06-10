@@ -9,11 +9,6 @@ Meteor.methods({
 
 export function clientAnalytics(price, roomcount, subways, renovation) {
     
-    console.log(price);
-    console.log(roomcount);
-    console.log(subways);
-    console.log(renovation);
-    
   if (Meteor.isServer && Meteor.userId()) {
       /*
     let maxRoom = (roomcount) => { return Math.max.apply( Math, roomcount ) };

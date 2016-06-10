@@ -18,11 +18,12 @@ div(layout="row" layout-wrap)
                         h2().md-display-1.mv-8 {{result.maxPrice | price}}
                     div(flex="25")
                         h3(style='color: #9e9e9e').md-title.text-normal.text-uppercase.mv-0 Предложения
-                        h2(style='color: #106cc8').md-display-1.mv-8 {{result.totalRealty}} объектов
+                        h2().md-display-1.mv-8 {{result.totalRealty}} объектов
+                        //style='color: #106cc8'
             div().p-32
                 div(style='color: #9e9e9e').md-title.text-normal.mb-8 Параметры объектов
                 span().mv-0
-                    span(class="metro-color-{{result._id.subwaysLine}}").metro-color.client-analytics__metro-color
+                    //span(class="metro-color-{{result._id.subwaysLine}}").metro-color.client-analytics__metro-color
                     span().md-title.text-normal {{result._id.subways}} / 
                     span().md-title.text-normal Комнат: {{result._id.roomcount}}
                     //span().md-title.text-normal {{result._id.materials || 'Тип дома не важен'}} / 
