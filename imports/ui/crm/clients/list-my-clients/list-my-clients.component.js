@@ -13,14 +13,14 @@ import {Clients} from '/imports/api/clients';
 
 class ListMyClients {
   /* @ngInject */
-  constructor($scope, $reactive, $state, $stateParams) {
+  constructor($scope, $reactive, $state, $stateParams, $timeout) {
     $reactive(this).attach($scope);
+    this.$timeout = $timeout;
     this.state = $state;
     this.stateParams = $stateParams;
 
     let vm = this;
     vm.status = this.stateParams.status ? this.stateParams.status : 'hot';
-    vm.loaded = false;
     vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
@@ -43,6 +43,7 @@ class ListMyClients {
         break;
     }
     vm.subscribe('listClients', () => {
+      vm.loaded = false;
       return [{
         status: vm.getReactively('status')
       },
@@ -55,7 +56,10 @@ class ListMyClients {
       ];
     }, {
       onReady: function () {
-        vm.loaded = true;
+        
+        vm.$timeout(()=>{
+          vm.loaded = true;
+        },100)  
         // console.log('onReady And the Items actually Arrive', arguments);
         // subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
       }

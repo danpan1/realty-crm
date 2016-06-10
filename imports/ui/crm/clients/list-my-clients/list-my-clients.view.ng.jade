@@ -2,12 +2,14 @@ div(md-whiteframe="1")
     md-tabs(md-dynamic-height md-selected="listMyClients.selectedTab")
         md-tab(ui-sref="crm.clients.list.my({status: \'realtor\', page: 1})") Мои клиенты
         md-tab(ui-sref="crm.clients.list.my({status: \'archive\', page: 1})") Архив
-    
-div
-    client-card(
-        dir-paginate="client in listMyClients.clients | itemsPerPage: listMyClients.perPage" 
-        total-items="listMyClients.clientsCount"
-        page-from='listMyClients'
-        client='client')
-    
-pagination-buttons(ng-if='listMyClients.pagesCount' uisref='\'crm.clients.list.my\'' page='listMyClients.page' pagescount='listMyClients.pagesCount')
+        
+md-progress-circular(ng-if='!listMyClients.loaded' md-diameter='150' style='position:absolute;left:0;right:0;top:280px;margin:0 auto;')
+div(ng-if='listMyClients.loaded')     
+    div
+        client-card(
+            dir-paginate="client in listMyClients.clients | itemsPerPage: listMyClients.perPage" 
+            total-items="listMyClients.clientsCount"
+            page-from='listMyClients'
+            client='client')
+        
+    pagination-buttons(ng-if='listMyClients.pagesCount' uisref='\'crm.clients.list.my\'' page='listMyClients.page' pagescount='listMyClients.pagesCount')

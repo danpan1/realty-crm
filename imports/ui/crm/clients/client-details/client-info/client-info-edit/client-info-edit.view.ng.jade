@@ -69,6 +69,9 @@ div(ng-if="clientInfoEdit.show")
                                         md-select(ng-model='clientInfoEdit.client.need.metroTransport' aria-label='До метро')
                                             md-option(ng-value='transport.id',
                                             ng-repeat="transport in clientInfoEdit.dictionary.transport") {{transport.name}}
+                    h2 Что важно клиенту
+                    md-input-container().mv-0
+                        textarea(ng-model='clientInfoEdit.client.note', md-maxlength='300', rows='3', md-select-on-focus='' )
                         
         div(flex='10').mt-16.ph-32
             div(layout='row' layout-align='center center')
