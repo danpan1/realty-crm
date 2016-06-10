@@ -112,27 +112,27 @@ export function setRelationFindRealty(clientId, realtyId, type) {
     modificatorRealty[fieldInRealty] = clientId;
     modificatorClient[fieldInClient] = realtyId;
 
-    // Realty.update({_id: realtyId},
-    //   {
-    //     $addToSet: modificatorRealty
-    //   }, (error) => {
-    //     if (error) {
-    //       console.log(error);
-    //     } else {
-    //       console.log('realtyRelation  ok');
-    //     }
-    //   });
-    //
-    // Clients.update({_id: clientId},
-    //   {
-    //     $addToSet: modificatorClient
-    //   }, (error) => {
-    //     if (error) {
-    //       console.log(error);
-    //     } else {
-    //       console.log('clientRelation  ok');
-    //     }
-    //   });
+    Realty.update({_id: realtyId},
+      {
+        $addToSet: modificatorRealty
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('realtyRelation  ok');
+        }
+      });
+
+    Clients.update({_id: clientId},
+      {
+        $addToSet: modificatorClient
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('clientRelation  ok');
+        }
+      });
 
   }
 
@@ -246,12 +246,12 @@ function sendSMS(type, id, userId) {
     }
     let url = 'http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275' + to + text;
     console.log('SMS SMS SMS ' + url);
-    HTTP.post(url, false, function (error, result) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(result);
-      }
-    });
+    // HTTP.post(url, false, function (error, result) {
+    //   if (error) {
+    //     console.log(error);
+    //   } else {
+    //     console.log(result);
+    //   }
+    // });
   }
 }

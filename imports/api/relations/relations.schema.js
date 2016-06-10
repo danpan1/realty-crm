@@ -14,7 +14,7 @@ export const RelationsSchema = new SimpleSchema({
   },
   paid:{
     type: [String],
-    optional: true
+    optional: true 
   },
   my: {
     type: [String],
