@@ -41,6 +41,22 @@ class AddRole {
       });
     }
   }
+  submitSale(valid) {
+    console.log(valid);
+    if (valid) {
+      Meteor.call('addUsersToRolePaidSale', this.emailSale, (err, result)=> {
+        if (err) {
+          this.timeout(()=> {
+            this.resultSale = err;
+          }, 0);
+        } else {
+          this.timeout(()=> {
+            this.resultSale = result;
+          }, 0);
+        }
+      });
+    }
+  }
 
 }
 

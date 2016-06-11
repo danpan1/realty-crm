@@ -10,7 +10,8 @@ import {Meteor} from 'meteor/meteor';
 import {Roles} from 'meteor/alanning:roles';
 
 Meteor.methods({
-  addUsersToRolePaid
+  addUsersToRolePaid,
+  addUsersToRolePaidSale
 });
 
 /**
@@ -29,7 +30,29 @@ export function addUsersToRolePaid(userEmail) {
       }
       Roles.addUsersToRoles(user._id, 'paid');
       console.log('userAdded');
-      return 'userAdded';
+      return 'userAdded Rent';
+    } else {
+      console.log('user not found');
+      return 'user not found';
+    }
+  } else {
+    console.log('no Access');
+  }
+}
+
+export function addUsersToRolePaidSale(userEmail) {
+
+  if (Meteor.isServer && Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'staff')) {
+    console.log(userEmail);
+    let user = Meteor.users.findOne({'emails.address': userEmail});
+    if (user) {
+      console.log(user);
+      if (Roles.userIsInRole(user._id, 'sale')) {
+        return 'уже добавлен в подписку';
+      }
+      Roles.addUsersToRoles(user._id, 'sale');
+      console.log('userAdded');
+      return 'userAdded Sale';
     } else {
       console.log('user not found');
       return 'user not found';
