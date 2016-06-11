@@ -2,6 +2,10 @@ layout > md-toolbar {
   background-color: #1e88e5 !important;
 }
 
+w-100{
+  width: 100%;
+}
+
 .lh{
   &-1{
     line-height: 1em;
@@ -123,6 +127,10 @@ md-switch {
   [disabled] .md-thumb {
     background-color: rgb(255, 82, 82) !important;
   }
+}
+
+.relative{
+  position: relative;
 }
 
 .topbar {

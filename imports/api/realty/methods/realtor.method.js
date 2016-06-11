@@ -14,13 +14,34 @@ Meteor.methods({
   addRealty,
   addRealtyToMyList,
   takeRealty,
-  showRealtyPhone
+  showRealtyPhone,
+  showRealtyDetails
 });
 
 /**
  * takeRealty - взять объект недвижимости. Кнопка взять на странице Новые объекты.
  * @param realtyId
  */
+
+export function showRealtyDetails (realtyId, userId) {
+  if (Meteor.isServer && Meteor.userId()) {
+    
+    let realty = Realty.findOne({_id: realtyId});
+    if (!realty) {
+      //Не даём взять объект
+      return 'нет такого объекта';
+    }
+    
+    console.log(realty.realtor.id + ' == ' + userId);
+    if (realty.realtor.id != userId){
+       return 'Это не ваш объект';
+    }
+    
+    return {name: realty.contacts[0].name, phone: realty.contacts[0].phones[0].phone, address: {street:realty.address.street, house:realty.address.house}};
+    
+  }
+}
+
 export function addRealtyToMyList(realtyId) {
 
   if (Meteor.isServer && Meteor.userId()) {
@@ -60,7 +81,7 @@ export function addRealtyToMyList(realtyId) {
 
 export function takeRealty(realtyId, status) {
   if (Meteor.isServer && Meteor.userId()) {
-    if (Roles.userIsInRole(Meteor.userId(), 'paid')) {
+    if (Roles.userIsInRole(Meteor.userId(), 'paid') || Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
 
       console.log('takeRealty')
       let realty = Realty.findOne({_id: realtyId});
@@ -92,7 +113,7 @@ export function takeRealty(realtyId, status) {
 
         //Если меньше 100 объектов уже взято, тогда даём взять объект
         if (status != 'agency') {
-          if (user.takenRealty <= 100 || !user.takenRealty) {
+          if (user.takenRealty <= 400 || !user.takenRealty) {
             var nextCount = nextAutoincrement(Realty) + '';
             Realty.update({_id: realtyId}, {
               $set: {
@@ -144,7 +165,7 @@ export function takeRealty(realtyId, status) {
 
 export function showRealtyPhone (realtyId) {
   if (Meteor.isServer && Meteor.userId()) {
-    if (Roles.userIsInRole(Meteor.userId(), 'paid')) {
+    if (Roles.userIsInRole(Meteor.userId(), 'paid') || Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
 
       let realty = Realty.findOne({_id: realtyId});
       

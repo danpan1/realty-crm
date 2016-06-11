@@ -29,7 +29,7 @@ div(ng-if='listMy.loaded')
                         div
                             div().price.listMy_Address-item {{::realty.roomcount}} комн. {{::realty.price | price}}
                             div().listMy_Address-item {{::realty.address.street}}
-                            div().listMy_Address-item {{::realty.address.house}} кв. {{::realty.address.flat}}
+                            div().listMy_Address-item {{::realty.address.house}} {{realty.address.flat ? 'кв. '+realty.address.flat : ''}}
                             div().listMy_Address-item
                                 span(class='metro-color-{{realty.address.subwaysEmbedded[0].line}}').metro-color
                                 span {{realty.address.subwaysEmbedded[0].name}}
@@ -56,6 +56,7 @@ div(ng-if='listMy.loaded')
             div(ng-show="realty.ngShowDescr").ph-32.pb-16
                 p(ng-bind-html='realty.details.descr').md-body-1.realty-card__details-text
                 h3().md-title {{realty.contacts[0].phones[0].phone}} --- {{realty.contacts[0].name}}
+                h3().md-title {{realty.address.street}}, {{realty.address.house}}
                 div(ng-if='!realty.isAgent && !realty.objectAdded' layout="row")
                     md-button(ng-click="listMy.takeCheckedRealty(realty._id, 'realtor')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
                     md-button(ng-click="realty.isAgent = true").md-raised.realty-card__agent.ml-16.ph-16 Агент

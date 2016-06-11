@@ -39,14 +39,19 @@ class OneReview {
         return Realty.findOne({_id : $stateParams.realtyId});
       }
     });
-    
-    let subwaysEmb = this.realty.address.subwaysEmbedded.map((value) => { return value.name; });
-    Meteor.call('objectAnalytics', this.realty.type, this.realty.roomcount, subwaysEmb, this.realty.details.materials, this.realty.details.renovation, (err, result) => {
+    let subwaysEmb, district;
+    if(this.realty.address.subwaysEmbedded){
+      subwaysEmb = this.realty.address.subwaysEmbedded.map((value) => { return value.name; });
+    } else if(this.realty.address.districtId){
+      district = this.realty.address.districtId;
+    }
+
+    Meteor.call('objectAnalytics', this.realty.type, this.realty.roomcount, subwaysEmb, this.realty.details.materials, this.realty.details.renovation, district, (err, result) => {
       if (err) {
         console.log('err: ' + err);
       } else {
         this.$timeout(()=>{
-          this.analytics.avgPrice = result.map((item) => {return parseInt(item)})[0];
+          this.analytics.avgPrice = parseInt(result[0]);
           this.analytics.comparison = this.analytics.avgPrice > this.realty.price;
           this.analytics.difference = this.analytics.comparison ? this.analytics.avgPrice - this.realty.price : this.realty.price - this.analytics.avgPrice;
           this.analytics.marketOk = !this.analytics.comparison && this.analytics.difference > this.analytics.avgPrice / 10 ? 'Цена слишком высокая' : this.analytics.comparison && this.analytics.difference > this.analytics.avgPrice / 10 ? 'Цена слишком низкая' : 'Цена в рынке!';

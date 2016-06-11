@@ -1,6 +1,3 @@
-/**
- * Created by Danpan on 23.03.16.
- */
 'use strict';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '../realty.model.js';
@@ -10,12 +7,11 @@ Meteor.methods({
   objectAnalytics
 });
 
-export function objectAnalytics(type, roomcount, subways, materials, renovation) {
+export function objectAnalytics(type, roomcount, subways, materials, renovation, district) {
   
   if (Meteor.isServer && Meteor.userId()) {
-
+    console.log(district, 'district');
     let match1 =  {
-      "address.subwaysEmbedded.name": { $in: subways },
       roomcount: roomcount,
       type:type
     };
@@ -25,20 +21,23 @@ export function objectAnalytics(type, roomcount, subways, materials, renovation)
     if(renovation){
       match1["details.renovation"] = renovation;
     }
-
+    if(subways){
+      match1["address.subwaysEmbedded.name"]= { $in: subways };
+    } else if(district){
+      match1["address.districtId"] = district;
+    }
+    console.log(match1, 'match1');
     let realtyAnalytics = Realty.aggregate([{$match : match1}, {
       $unwind: "$address.subwaysEmbedded" 
     }, {
       $group: {
-        _id: { roomcount: "$roomcount", subways: "$address.subwaysEmbedded.name" },
+        _id: { roomcount: "$roomcount" },
         avgPrice: { $avg: "$price" },
-        totalRealty: { $sum: 1 }
+        // totalRealty: { $sum: 1 }
       }
-    },{
-      $sort: { '_id.roomcount': 1 }
     }]).map((item) => {
       return item.avgPrice;
-    })
+    });
     
     return realtyAnalytics;
   }

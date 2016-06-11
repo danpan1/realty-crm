@@ -11,6 +11,7 @@ import {HTTP} from 'meteor/http';
 Meteor.methods({
   setRelationFindClient,
   setRelationFindRealty,
+  changeRelationTypeInRealty,
   changeRelationTypeInClient
 });
 /**
@@ -111,27 +112,27 @@ export function setRelationFindRealty(clientId, realtyId, type) {
     modificatorRealty[fieldInRealty] = clientId;
     modificatorClient[fieldInClient] = realtyId;
 
-    // Realty.update({_id: realtyId},
-    //   {
-    //     $addToSet: modificatorRealty
-    //   }, (error) => {
-    //     if (error) {
-    //       console.log(error);
-    //     } else {
-    //       console.log('realtyRelation  ok');
-    //     }
-    //   });
-    //
-    // Clients.update({_id: clientId},
-    //   {
-    //     $addToSet: modificatorClient
-    //   }, (error) => {
-    //     if (error) {
-    //       console.log(error);
-    //     } else {
-    //       console.log('clientRelation  ok');
-    //     }
-    //   });
+    Realty.update({_id: realtyId},
+      {
+        $addToSet: modificatorRealty
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('realtyRelation  ok');
+        }
+      });
+
+    Clients.update({_id: clientId},
+      {
+        $addToSet: modificatorClient
+      }, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('clientRelation  ok');
+        }
+      });
 
   }
 
@@ -167,14 +168,38 @@ export function changeRelationTypeInClient(type, realtyId, clientId, relationTyp
       });
 
   }
-  // db.clients.update({_id: '14'}, {
-  //   $set: {
-  //     'relations.offers': ['8', '9', '14'],
-  //     'relations.new': ['8', '9', '14'],
-  //     'relations.my': ['8', '9', '14'],
-  //     'relations.saved': ['8', '9', '14']
-  //   }
-  // })
+}
+export function changeRelationTypeInRealty(type, realtyId, clientId, relationTypeCurrent) {
+  //Это происходит на странице Объекты - Подобрать объект
+  // Значит это предложение для владельцев клиентов
+  if (Meteor.isServer && Meteor.userId()) {
+    console.log('changeRelationTypeInRealty');
+    console.log(type, 'type');
+    console.log(realtyId, 'realtyId');
+    console.log(relationTypeCurrent, 'relationTypeCurrent');
+    console.log(clientId, 'clientId');
+    let modificator = {};
+
+    if (relationTypeCurrent) {
+      modificator.$pull = {};
+      modificator.$pull['relations.' + relationTypeCurrent] = realtyId;
+    }
+
+    if (type) {
+      modificator.$addToSet = {};
+      modificator.$addToSet['relations.' + type] = realtyId;
+    }
+    console.log(modificator, 'modificator');
+    Realty.update({_id: realtyId},
+      modificator, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('relationTypeCurrent  ok');
+        }
+      });
+
+  }
 }
 
 function sendSMS(type, id, userId) {
@@ -195,12 +220,13 @@ function sendSMS(type, id, userId) {
       let realty = Realty.findOne({_id: id});
       switch (realty.status) {
         case 'cian':
-          // to += '+7 960 057-68-54';
-          to += '79250759587';
-          //todo парсить телефон ЦИАНА
-          console.log(realty.contacts[0].phones[0].phone, 'Этелефон риэлтора');
-          text += `Здравствуйте, у меня есть клиенты на ваш объект ${realty.address.street}, ${realty.address.house}. Мой номер ${currentUser.profile.phone}, ваше объявление нашел на сайте миринедвижимость.рф`;
-          // text += `Hello777`;
+          let phone = realty.contacts[0].phones[0].phone;
+          if (phone) {
+            phone = phone.split(';')[0];
+          }
+          to += phone;
+          console.log(phone, 'Этелефон риэлтора');
+          text += `Здравствуйте, у меня есть клиенты на ваш объект ${realty.address.street}, ${realty.address.house}. Мой номер ${currentUser.profile.phone}, ваше объявление нашел на сайте`;
           break;
         case 'new':
           noSms = true;
@@ -220,12 +246,12 @@ function sendSMS(type, id, userId) {
     }
     let url = 'http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275' + to + text;
     console.log('SMS SMS SMS ' + url);
-    HTTP.post(url, false, function (error, result) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(result);
-      }
-    });
+    // HTTP.post(url, false, function (error, result) {
+    //   if (error) {
+    //     console.log(error);
+    //   } else {
+    //     console.log(result);
+    //   }
+    // });
   }
 }

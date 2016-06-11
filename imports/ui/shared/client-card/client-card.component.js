@@ -21,6 +21,10 @@ class ClientCard {
     }
   }
 
+  changeRelationTypeInRealty(type, realtyId, clientId, isNew) {
+    Meteor.call('changeRelationTypeInRealty', type, realtyId, clientId, isNew);
+  }
+  
   sendCurrentClient(client) {
     console.log(client);
     /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
@@ -46,7 +50,8 @@ export default angular.module(moduleName, [
     client: '<',
     assort: '<',
     pageFrom: '@',
-    realtyId: '@'
+    relationType: '@',
+    realtyId: '<'
   },
   controllerAs: moduleName,
   controller: ClientCard

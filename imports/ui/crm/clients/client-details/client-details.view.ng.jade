@@ -9,5 +9,5 @@ section(ng-repeat="client in clientDetails.clients")
             md-tab(ui-sref="crm.clients.details.info({client:client._id, activetab: 'info'})") 1. Инфо о клиенте
             md-tab(ui-sref="crm.clients.details.suit({client:client._id, suitby: 'my', activetab: 'suit'})") 2. Подбор объектов
             md-tab(ui-sref="crm.clients.details.relations({client:client._id, assort: 'manual', activetab: 'relations'})") 3. Обработка объектов
-            //md-tab(ui-sref="crm.clients.details.analytics({client:client._id, activetab: 'analytics'})") Аналитика
+            md-tab(ui-sref="crm.clients.details.analytics({client:client._id, activetab: 'analytics'})") Аналитика
 ui-view(ng-if="clientDetails.clients[0]")
