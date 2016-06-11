@@ -1,7 +1,7 @@
 md-progress-circular(ng-if='!listMy.loaded' md-diameter='150' style='position:absolute;left:0;right:0;top:280px;margin:0 auto;')
 div(ng-if='listMy.loaded')
     .md-body-1(layout='column', layout-align='space-around stretch')
-        .listMy(layout='row', md-whiteframe='2').md-whiteframe-2dp.mv-8
+        div(layout='row', md-whiteframe='2').md-whiteframe-2dp.listMy.mv-8
             div().listMy_col Фото
             div().listMy_col Комнат/Цена/Адрес
             div().listMy_col Подготовка
@@ -14,7 +14,7 @@ div(ng-if='listMy.loaded')
                 md-whiteframe='2',
                 dir-paginate="realty in listMy.realty | itemsPerPage: listMy.perPage" 
                 total-items="listMy.realtyCount").md-whiteframe-2dp.mv-8
-            div(layout='row')
+            div(layout='row').listMy__frame
                 div(layout='column' ng-if='realty.status != \'taken\'' layout-align='center center' ui-sref="crm.realty.one.review({realtyId: '{{::realty._id}}'})").listMy_Photo
                     div(layout='column', layout-align='space-between')
                         div(layout='row' layout-align='center center').apartment-pic
