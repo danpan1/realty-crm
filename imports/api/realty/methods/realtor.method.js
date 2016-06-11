@@ -81,7 +81,7 @@ export function addRealtyToMyList(realtyId) {
 
 export function takeRealty(realtyId, status) {
   if (Meteor.isServer && Meteor.userId()) {
-    if (Roles.userIsInRole(Meteor.userId(), 'paid')) {
+    if (Roles.userIsInRole(Meteor.userId(), 'paid') || Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
 
       console.log('takeRealty')
       let realty = Realty.findOne({_id: realtyId});
@@ -113,7 +113,7 @@ export function takeRealty(realtyId, status) {
 
         //Если меньше 100 объектов уже взято, тогда даём взять объект
         if (status != 'agency') {
-          if (user.takenRealty <= 100 || !user.takenRealty) {
+          if (user.takenRealty <= 200 || !user.takenRealty) {
             var nextCount = nextAutoincrement(Realty) + '';
             Realty.update({_id: realtyId}, {
               $set: {
@@ -165,7 +165,7 @@ export function takeRealty(realtyId, status) {
 
 export function showRealtyPhone (realtyId) {
   if (Meteor.isServer && Meteor.userId()) {
-    if (Roles.userIsInRole(Meteor.userId(), 'paid')) {
+    if (Roles.userIsInRole(Meteor.userId(), 'paid') || Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
 
       let realty = Realty.findOne({_id: realtyId});
       

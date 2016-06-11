@@ -72,14 +72,16 @@ class RealtyCard {
    * @param type - Arenda or Sale
    */
   openPurchaseStart(ev, type) {
-    let saleOrArenda = '', text = '';
+    let saleOrArenda = '', operation = '', amount = '';
     console.log('this.realty.type', this.realty.type);
     if(this.realty.type === 1){
       saleOrArenda = 'sale';
-      text = 'Продажу';
+      operation = 'Продажу';
+      amount = '1440';
     } else {
       saleOrArenda = 'arenda';
-      text = 'Аренду';
+      operation = 'Аренду';
+      amount = '990';
     }
     const vm = this;
     this.mdDialog.show({
@@ -108,7 +110,7 @@ class RealtyCard {
                             <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
                             <div layout="row">
                               <md-button flex class=" md-raised mv-16 ph-16">
-                                <input type="submit" value="подписаться на ${text} за 990&#8381; в месяц" name="doorder" class="feedback__nostyles" style='color:black;' />
+                                <input type="submit" value="подписаться на ${operation} за ${amount}&#8381; в месяц" name="doorder" class="feedback__nostyles" style='color:black;' />
                               </md-button>
                           </form>
                         </div>
@@ -120,7 +122,7 @@ class RealtyCard {
                           <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
                           <div layout="row">
                             <md-button flex class="md-primary md-raised mv-16 ph-16 flex">
-                              <input type="submit" value="оплатить ${text} за 6 месяцев со скидкой 25%" name="doorder"  class="feedback__nostyles" />
+                              <input type="submit" value="оплатить ${operation} за 6 месяцев со скидкой 25%" name="doorder"  class="feedback__nostyles" />
                             </md-button>
                           </div>
                         </form>
@@ -132,7 +134,7 @@ class RealtyCard {
                           <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
                           <div layout="row">
                             <md-button flex class="md-warn md-raised mv-16 ph-16 flex">
-                              <input type="submit" value="оплатить аренду и продажу со скидкой 50%" name="doorder" class="feedback__nostyles" />
+                              <input type="submit" value="подписаться на  аренду и продажу за 1 880Р в месяц со скидкой 25%" name="doorder" class="feedback__nostyles" />
                             </md-button>
                           </div>
                         </form>
