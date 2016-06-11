@@ -1,10 +1,10 @@
 div(md-whiteframe='1').topbar
     div(layout='row' layout-align='start center' layout-fill)
         md-button(aria-label='Задать вопрос' href = 'https://vk.com/write19844032' target='_blank').md-primary.md-raised.mh-16 Задать вопрос
-//div().mv-16
-//    div(md-whiteframe='1' ng-repeat='info in feedback.feedbackData').mv-8
-//        div(ng-click='info.show = !info.show').panel__heading.ph-16.pv-8
-//            div().md-subhead {{info.question}}
-//        div(ng-class='{"feedback__show pv-16":info.show,"feedback__hide pv-0":!info.show}' ng-style='info.height').md-body-1.ph-16.feedback__answer-tab {{info.answer}}
-//            div(layout='column' layout-align='start end')
-//                md-button(ng-click='info.show = !info.show').md-primary.md-raised Скрыть
+div().mv-16
+    div(md-whiteframe='1' ng-repeat='info in feedback.feedbackData').mv-8
+        div(ng-click='info.show = !info.show').panel__heading.ph-16.pv-8
+            div().md-subhead {{info.question}}
+        div(ng-class='{"feedback__show pv-16":info.show,"feedback__hide pv-0":!info.show}' ng-style='info.height').md-body-1.ph-16.feedback__answer-tab {{info.answer}}
+            div(layout='column' layout-align='start end')
+                md-button(ng-click='info.show = !info.show').md-primary.md-raised Скрыть
