@@ -113,7 +113,7 @@ export function takeRealty(realtyId, status) {
 
         //Если меньше 100 объектов уже взято, тогда даём взять объект
         if (status != 'agency') {
-          if (user.takenRealty <= 200 || !user.takenRealty) {
+          if (user.takenRealty <= 400 || !user.takenRealty) {
             var nextCount = nextAutoincrement(Realty) + '';
             Realty.update({_id: realtyId}, {
               $set: {

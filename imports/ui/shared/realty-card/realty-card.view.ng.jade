@@ -109,7 +109,7 @@ div(md-whiteframe='1')
     // Подоробное объявление
     div(ng-show="realtyCard.ngShowDescr").ph-32.pb-16
         div(ng-if="!realtyCard.realtylisttype").relative
-            div(ng-if='realtyCard.realty.status == \'taken\'' flex).realty-card__object-own.p-8 Это ваш объект
+            div(ng-if='realtyCard.realty.status == \'taken\'' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам. Завершите его проверку
             p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
             div(layout='row')
                 md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
