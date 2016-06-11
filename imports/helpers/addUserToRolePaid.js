@@ -47,10 +47,10 @@ export function addUsersToRolePaidSale(userEmail) {
     let user = Meteor.users.findOne({'emails.address': userEmail});
     if (user) {
       console.log(user);
-      if (Roles.userIsInRole(user._id, 'sale')) {
+      if (Roles.userIsInRole(user._id, 'paidSale')) {
         return 'уже добавлен в подписку';
       }
-      Roles.addUsersToRoles(user._id, 'sale');
+      Roles.addUsersToRoles(user._id, 'paidSale');
       console.log('userAdded');
       return 'userAdded Sale';
     } else {
