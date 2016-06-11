@@ -101,6 +101,7 @@ if (Meteor.isServer) {
           'details.renovation': 1,
           'details.images.url': 1,
           'details.conditions': 1,
+          createdAt: 1,
           floor: 1,
           floormax: 1,
           image: 1,
