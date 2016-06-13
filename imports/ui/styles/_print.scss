@@ -1,21 +1,53 @@
 @media print {
+  md-toolbar {
+    display: none !important;
+  }
+
+  md-sidenav {
+    display: none !important;
+  }
+
   .md-button {
     display: none !important;
   }
-  .username {
-    display: none;
+
+  .has-error {
+    label {
+      color: rgba(0, 0, 0, 0.54) !important;
+    }
+    input {
+      border-bottom: none !important;
+    }
   }
+
   .one-info {
     &__slider {
       display: none !important;
     }
+    &__wrapper {
+      margin-top: 0 !important;
+    }
     &__realty {
+      .md-subhead {
+        font-size: 14px !important;
+      }
       md-divider {
         display: none !important;
       }
     }
     &__close-deal {
       display: none !important;
+    }
+    &__notes,
+    &__contacts {
+      height: 240px !important;
+      min-height: 240px !important;
+    }
+    &__current-conditions {
+      margin-right: 0 !important;
+    }
+    md-switch {
+      margin: 2px 0 0 8px !important;
     }
   }
 
@@ -36,10 +68,16 @@
   }
 
   md-switch {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
     &.ng-empty .md-label {
       color: black;
     }
     
+    .md-container .md-bar {
+      background-color: black !important;
+    }
+
     &.md-checked .md-bar {
       background-color: $black !important;
     }

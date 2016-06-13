@@ -1,14 +1,14 @@
 client-info-edit(ng-if="clientInfo.client" client="clientInfo.client" show="clientInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.client' ng-init='clientInfo.ngOnInit()')
     div(layout='row' layout-align='space-between start' ).mt-16
-        div(md-whiteframe='2' flex='66').client-info-notes.mr-16.p-16
+        div(md-whiteframe='2' flex='66').client-info__notes.mr-16.p-16
             h3().md-title.mt-0.mb-32 Заметка по клиенту
-            div(layout='column' layout-align='space-between none').client-info-notes-item
+            div(layout='column' layout-align='space-between none').client-info__notes-text
                 md-input-container().md-block.mt-0
-                    textarea(maxlength="2000" ng-model='clientInfo.client.important')
+                    textarea(maxlength="2000" ng-model='clientInfo.client.important' aria-label='Заметка по клиенту')
                 div
                     md-button(aria-label='Сохранить' ng-click='clientInfo.updateClientInfo()').md-primary.md-raised.m-0 Сохранить
-        div(md-whiteframe='2' flex='33').client-info-contacts.p-16
+        div(md-whiteframe='2' flex='33').client-info__contacts.p-16
             h3().md-title.mt-0.mb-32 Контакты клиента
             md-input-container().md-block.mt-16.mb-0
                 label Имя
