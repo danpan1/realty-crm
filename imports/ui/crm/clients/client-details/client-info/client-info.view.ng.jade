@@ -17,7 +17,7 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
             md-button(aria-label='Сохранить' ng-click='clientInfo.updateClientInfo()').md-primary.md-raised.m-0 Сохранить
 
     div(layout='row').mt-16
-        div(md-whiteframe='2' flex)
+        div(md-whiteframe='2' flex).client-info__client
             div(layout='row')
                 div(flex='33' layout='row').ph-32.pv-16
                     div(layout='column' layout-align='space-between start')
@@ -75,14 +75,14 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                     p().md-body-1 {{clientInfo.client.note}}
                     
                     
-    div(layout='row' layout-align='start start')#openArchiveDialog.mt-16
-        div(md-whiteframe='2' flex='50').mr-16.ph-32.pv-16
+    div(layout='row' layout-align='start start')#openArchiveDialog.client-info__wrapper.mt-16
+        div(md-whiteframe='2' flex='100' flex-gt-sm='50').client-info__current-conditions.mr-16.ph-32.pv-16
             div(layout='row' layout-align='space-between start' layout-wrap)
                 md-switch(flex='50',
                 ng-model='clientInfo.currentConditions[$index].presence',
                 aria-label='Switch 2'
                 ng-repeat="condition in clientInfo.dictionary.conditions"
                 ng-click="clientInfo.onConditionsChange(condition.id)").md-warn {{condition.name}}
-        div(md-whiteframe='2' flex='50').p-16
+        div(md-whiteframe='2' flex='50').client-info__close-deal.p-16
             h3().md-title.mt-0 Закрытие сделки
             md-button(ng-click='clientInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить клиента в архив').md-primary.md-raised.mt-0.mb-16.mh-0 Закрыть сделку и переместить клиента в архив

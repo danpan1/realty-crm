@@ -51,6 +51,34 @@
     }
   }
 
+  .client-info {
+    &__wrapper {
+      margin-top: 0 !important;
+    }
+    &__client {
+      .md-subhead {
+        font-size: 14px !important;
+      }
+      md-divider {
+        display: none !important;
+      }
+    }
+    &__notes,
+    &__contacts {
+      height: 240px !important;
+      min-height: 240px !important;
+    }
+    &__close-deal {
+      display: none !important;
+    }
+    &__current-conditions {
+      margin-right: 0 !important;
+    }
+    md-switch {
+      margin: 2px 0 0 8px !important;
+    }
+  }
+
   .topbar .btn-back {
     display: none !important;
   }
