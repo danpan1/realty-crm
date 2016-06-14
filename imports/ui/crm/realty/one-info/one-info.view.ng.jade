@@ -18,14 +18,14 @@ div(layout="column", layout-align="space-around stretch")
                 md-input-container().md-block.mt-0
                     textarea(maxlength="2000" ng-model="oneInfo.realty.realtor.comment" aria-label='Заметка по объекту')
                 div
-                    md-button(aria-label='Сохранить' ng-click='oneInfo.realtyUpdate()').md-primary.md-raised.m-0 Сохранить
+                    md-button(aria-label='Сохранить' ng-click='oneInfo.realtyUpdate()').md-primary.md-raised.m-0.ph-16 Сохранить
         div(md-whiteframe='2' flex='33').one-info__contacts.p-16
             h3().md-title.mt-0.mb-32 Контакты собственника
             md-input-container().md-block.mt-16.mb-0
                 label Имя
                 input(type='text' ng-model='oneInfo.realty.contacts[0].name').md-title
             phone-mask(ng-if='oneInfo.realty.contacts[0].phones[0].phone' label='"Телефон"' phone='oneInfo.realty.contacts[0].phones[0].phone').mt-16
-            md-button(aria-label='Сохранить' ng-click='oneInfo.realtyUpdate()').md-primary.md-raised.m-0 Сохранить
+            md-button(aria-label='Сохранить' ng-click='oneInfo.realtyUpdate()').md-primary.md-raised.m-0.ph-16 Сохранить
 
     div(layout='row').mt-16
         div(md-whiteframe='2' flex).one-info__realty
@@ -59,7 +59,7 @@ div(layout="column", layout-align="space-around stretch")
                                 div(flex='60') До метро:
                                 div(flex='40') #[strong {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
                         div(flex layout='column' layout-align='end start')
-                            md-button(ng-click="oneInfo.editDialogShow = true" aria-label='Изменить').md-primary.md-raised.mh-0 Изменить
+                            md-button(ng-click="oneInfo.editDialogShow = true" aria-label='Изменить').md-primary.md-raised.mh-0.ph-16 Изменить
                     
                 md-divider
                 div(flex='33').ph-32.pv-16
@@ -134,7 +134,7 @@ div(layout="column", layout-align="space-around stretch")
         div(md-whiteframe='2' flex='50').one-info__close-deal.p-16
             div(layout='column' layout-align='center start')
                 h3().md-title.mt-0 Закрытие сделки
-                md-button(ng-click='oneInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить объект в архив').md-primary.md-raised.mt-0.mb-16.mh-0  Закрыть сделку и перенести объект в архив
+                md-button(ng-click='oneInfo.openArchiveDialog($event)' aria-label='Закрыть сделку и переместить объект в архив').md-primary.md-raised.mt-0.mb-16.mh-0.ph-16  Закрыть сделку и перенести объект в архив
         
         
     
