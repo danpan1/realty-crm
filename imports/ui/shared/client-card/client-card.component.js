@@ -36,6 +36,10 @@ class ClientCard {
     Meteor.call('setRelationFindClient', clientId, this.realtyId, this.pageFrom);
     /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
   }
+  
+  moveToTab (num) {
+    this.activeTab = num;
+  }
 
 }
 
@@ -51,7 +55,8 @@ export default angular.module(moduleName, [
     assort: '<',
     pageFrom: '@',
     relationType: '@',
-    realtyId: '<'
+    realtyId: '<',
+    activeTab: '='
   },
   controllerAs: moduleName,
   controller: ClientCard

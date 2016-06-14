@@ -1,19 +1,21 @@
 div(md-whiteframe='2').mt-16.ph-32.pt-32.pb-8
-    div(layout='row')
-        div(flex)
-            md-input-container().md-block
-                input(ng-model='oneEmail.info.emails' placeholder='Получатели: начните вводить имя клиента, агента или любой email')
-            md-input-container().md-block
-                input(ng-model='oneEmail.info.topic' placeholder='Тема письма')
-            md-input-container().md-block
-                textarea(ng-model='oneEmail.info.addedinfo' placeholder='Дополнительно написать к этому объекту')
-            md-input-container().md-block
-                p {{oneEmail.info.realtyConditions}}
-div(md-whiteframe='2').one-email-card.ph-32.pv-8
-    div(layout='column')
-        div().mv-8
-            md-button(ng-click="oneEmail.send()" ng-if='oneEmail.proposalSent != 2' ng-disabled='oneEmail.proposalSent == 1').md-primary.md-raised.md-body-1.ml-0 Отправить письмо
-            md-button(ng-if='oneEmail.proposalSent == 2').md-success.md-raised.md-body-1.ml-0 Успешно отправлено
+    form(name='emailSent' ng-submit='oneEmail.send()')
+        div(layout='row')
+            div(flex)
+                md-input-container().md-block
+                    input(required type='email' ng-model='oneEmail.info.emails' ng-keyup='oneEmail.checkClientsEmails()' placeholder='Получатели: начните вводить имя клиента, агента или любой email')
+                md-input-container().md-block
+                    input(ng-model='oneEmail.info.topic' placeholder='Тема письма')
+                md-input-container().md-block
+                    textarea(ng-model='oneEmail.info.addedinfo' placeholder='Дополнительно написать к этому объекту')
+                md-input-container().md-block
+                    textarea(ng-model='oneEmail.realty.details.descr' placeholder='Описание объекта')
+                md-input-container().md-block
+                    textarea(ng-model='oneEmail.info.realtyConditions' placeholder='Условия')
+        div(layout='column')
+            div().mv-8
+                md-button(type='submit' ng-if='oneEmail.proposalSent != 2' ng-disabled='!oneEmail.clientFound ||  emailSent.$invalid || oneEmail.proposalSent == 1').md-primary.md-raised.md-body-1.ml-0 Отправить письмо
+                md-button(ng-if='oneEmail.proposalSent == 2').md-success.md-raised.md-body-1.ml-0 Успешно отправлено
 
 div()
     h2 Предварительный просмотр
@@ -51,8 +53,7 @@ div()
                                 img(src='{{img.url}}', style='margin: 5px 0;')
                             br
                             br
-                            p
-                            | {{oneEmail.realty.details.descr}}
+                            p(ng-bind-html='realty.details.descr')
                     br
                     table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px;')
                     tbody
