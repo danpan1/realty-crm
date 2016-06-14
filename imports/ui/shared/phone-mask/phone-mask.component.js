@@ -28,6 +28,17 @@ class PhoneMask {
     }
   }
   
+  filterPhoneChanged (e) {
+    let oldValue = e.phoneMask.visualPhone.split('');
+    let value = '';
+    for(var i in oldValue){
+      if(oldValue[i].match(/\d/)){
+          value = value + oldValue[i];
+      }
+    }
+    this.phone = value;
+  }
+  
   filterPhoneKeyDown (e) {
     if (!this.visualPhone || this.visualPhone[0] !== '8') this.visualPhone = '8' + (this.visualPhone ? this.visualPhone : '');
     let oldValue = this.visualPhone.split('');

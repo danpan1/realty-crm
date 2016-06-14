@@ -7,4 +7,5 @@ md-input-container(flex ng-class="{ 'has-error' : phoneMask.visualPhone.length >
     ng-keydown="phoneMask.filterPhoneKeyDown()",
     ng-focus="phoneMask.filterPhoneFocus()",
     md-minlength='17',
-    md-maxlength='17')
+    md-maxlength='17'
+    ng-change='phoneMask.filterPhoneChanged(this)')
