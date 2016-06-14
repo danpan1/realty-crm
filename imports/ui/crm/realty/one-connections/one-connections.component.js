@@ -11,10 +11,19 @@ import './one-connections.view.html';
 
 class OneConnections {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $state) {
     $reactive(this).attach($scope);
-    const vm = this;
-
+    const vm = this
+    this.state = $state;
+    
+    switch ($state.current.name) {
+      case 'crm.realty.one.connections.email':
+        this.selectedTab = 2;
+        break;
+      default:
+        this.selectedTab = 0;
+    }
+    
     this.realty = Realty.findOne({});
 
     this.subscribe('relationClients', ()=> {

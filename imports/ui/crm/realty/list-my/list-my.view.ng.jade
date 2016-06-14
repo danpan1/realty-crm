@@ -54,7 +54,11 @@ div(ng-if='listMy.loaded')
                     md-button(md-no-ink='' ng-if='realty.status != \'taken\''  ui-sref="crm.realty.one.info({realtyId: '{{::realty._id}}'})").md-primary Инфо об объекте
                     md-button(md-no-ink='' ng-if='realty.status == \'taken\'' ng-click='realty.ngShowDescr = !realty.ngShowDescr').md-primary Подробности
             div(ng-show="realty.ngShowDescr").ph-32.pb-16
-                p(ng-bind-html='realty.details.descr').md-body-1.realty-card__details-text
+                div(layout='row')
+                    p(flex='80' ng-bind-html='realty.details.descr').md-body-1.realty-card__details-text
+                    div(flex='20').md-body-1 
+                        h3() Удобства
+                        conditions(conditions='realty.details.conditions')
                 h3().md-title {{realty.contacts[0].phones[0].phone}} --- {{realty.contacts[0].name}}
                 h3().md-title {{realty.address.street}}, {{realty.address.house}}
                 div(ng-if='!realty.isAgent && !realty.objectAdded' layout="row")

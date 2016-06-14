@@ -128,7 +128,9 @@ div(md-whiteframe='1')
         div(ng-if="realtyCard.realtylisttype == 'connections'")
             div(layout="row")
                 p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
-                p(flex="65").md-body-1 Удобства
+                div(flex="65").md-body-1 
+                    p Удобства
+                    conditions(conditions='realtyCard.realty.details.conditions')
             div {{::realtyCard.realty.details.descr}}
             div(layout="row")
                 div(flex="90")

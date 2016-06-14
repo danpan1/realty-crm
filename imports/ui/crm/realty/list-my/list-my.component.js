@@ -6,6 +6,7 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
 import {name as PaginationButtons} from '/imports/ui/shared/pagination-buttons/pagination-buttons.component';
+import {name as Conditions} from '/imports/ui/shared/conditions/conditions.component';
 
 import {Realty} from '/imports/api/realty';
 import {Counts} from 'meteor/tmeasday:publish-counts';
@@ -84,7 +85,8 @@ export default angular.module(moduleName, [
   angularMeteor,
   uiRouter,
   utilsPagination,
-  PaginationButtons
+  PaginationButtons,
+  Conditions
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/list-my/list-my.view.html',
   bindings: {},
