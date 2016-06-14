@@ -86,7 +86,7 @@ div(md-whiteframe='1')
                 ng-if='realtyCard.relationType === "new" || realtyCard.relationType === "offers"' md-no-ink).md-simple-button.realty-card__btn-save.mv-8.mh-0.p-0.text-left Сохранить
                 
                 md-button(ng-if="realtyCard.realtylisttype === 'connections'"
-                ui-sref="crm.realty.one.connections.email({realtyId:realtyCard.realty._id,clientId:realtyCard.clientId})").client-card__link.text-left.m-0.p-0 Написать клиенту
+                ui-sref="crm.clients.details.email.send({realtyId:realtyCard.realty._id,clientId:realtyCard.clientId})").client-card__link.text-left.m-0.p-0 Написать клиенту
                 
                 md-button(ng-if="realtyCard.realtylisttype === 'connections'"
                 ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'

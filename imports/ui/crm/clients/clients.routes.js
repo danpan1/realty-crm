@@ -59,6 +59,11 @@ export default function routes($stateProvider) {
           url: '/email?:client&:activetab',
           template: '<client-email/>'
         })
+        .state('crm.clients.details.email.send', {
+          url: '/send?:clientId&:realtyId',
+          template: '<one-email/>',
+          controller: function ($state, $stateParams) {}
+        })
         .state('crm.clients.details.info', {
           url: '/info?:client&:activetab',
           template: '<client-info/>'
