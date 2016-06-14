@@ -1,4 +1,5 @@
-md-tabs(md-dynamic-height md-border-bottom)
+md-progress-circular(ng-if='addRealtyFull.submitted' md-diameter='150' style='position:absolute;left:0;right:0;top:280px;margin:0 auto;')
+md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
     md-tab(label='1) Расположение' md-active='addRealtyFull.activeTab == 0' ng-click='addRealtyFull.activeTab = 0')
         md-content().ph-32.pv-16
             form(novalidate name="firstForm")
@@ -73,14 +74,14 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='70')
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required.zh
-                                    input(required name='square' ng-pattern="/^[0-9.]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
-                                    span(ng-show='secondForm.square.$viewValue.length > 0 && secondForm.square.$touched && secondForm.square.$invalid').has-error Неверно заполнено
+                                    input(required name='square' ng-pattern="/^[0-9]{1,}[,]?[0-9]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
+                                    span(ng-show='secondForm.square.$viewValue.length > 0 && secondForm.square.$touched && secondForm.square.$invalid').has-error Только цифры или запятая
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9.]{1,}$/" name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
-                                    span(ng-show='secondForm.livingSquare.$touched && secondForm.livingSquare.$invalid').has-error Неверно заполнено
+                                    input(ng-pattern="/^[0-9]{1,}[,]?[0-9]{1,}$/" name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
+                                    span(ng-show='secondForm.livingSquare.$touched && secondForm.livingSquare.$invalid').has-error Только цифры или запятая
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9.]{1,}$/" name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
-                                    span(ng-show='secondForm.kitchenSquare.$touched && secondForm.kitchenSquare.$invalid').has-error Неверно заполнено
+                                    input(ng-pattern="/^[0-9]{1,}[,]?[0-9]{1,}$/" name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
+                                    span(ng-show='secondForm.kitchenSquare.$touched && secondForm.kitchenSquare.$invalid').has-error Только цифры или запятая
                             //div().mt-16
                             //    p().md-subhead.add-realty-full-text Площадь комнат м²
                             //div(layout='row' layout-align='start center' flex).md-input-container.mt-16

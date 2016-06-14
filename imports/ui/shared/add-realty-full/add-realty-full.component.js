@@ -31,6 +31,7 @@ class AddRealtyFull {
     this.activeTab = 0;
     //fake selects Аренда Москва Квартиры
     this.fake = true;
+    this.submitted = false;
   }
 
   changeRoomCount() {
@@ -46,7 +47,8 @@ class AddRealtyFull {
   }
 
   submit() {
-
+    this.submitted = true;
+        
     var price = this.realty.price.split('');
     for (var i in [1, 2, 3]) {
       for (var i in price) {
@@ -93,6 +95,11 @@ class AddRealtyFull {
     if (vm.locations.embedded) {
       this.realty.address.subwaysEmbedded = vm.locations.embedded.subways;
     }
+    
+    this.realty.square = parseInt(this.realty.square);
+    this.realty.details.livingSquare = parseInt(this.realty.details.livingSquare);
+    this.realty.details.kitchenSquare = parseInt(this.realty.details.kitchenSquare);
+    
     console.log(this.realty.address.subwaysEmbedded);
     Meteor.call('addRealty', this.realty, (error, result) => {
       if (error) {
