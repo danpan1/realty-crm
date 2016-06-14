@@ -1,17 +1,32 @@
-div(md-whiteframe="2")
-    md-tabs(md-selected="oneConnections.selectedTab" md-border-bottom md-dynamic-height='true').realty-list-layout__topbar
-        md-tab(label='Выбранные клиенты')
-            client-card(ng-repeat='client in oneConnections.clientsSaved' client='client' assort="oneConnections.assort"
-            page-from = 'realtyRelations' relation-type = 'saved' realty-id = 'oneConnections.realty._id')
-            client-card(ng-repeat='client in oneConnections.clientsMy' client='client' assort="oneConnections.assort"
-            page-from = 'realtyRelations' relation-type = 'my' realty-id = 'oneConnections.realty._id')
-        md-tab(label='Предложения от партнеров')
-            client-card(ng-repeat='client in oneConnections.clientsNew' client='client' assort="oneConnections.assort"
-            page-from = 'realtyRelations' relation-type = 'new' realty-id = 'oneConnections.realty._id')
-            client-card(ng-repeat='client in oneConnections.clientsOffers' client='client' assort="oneConnections.assort"
-            page-from = 'realtyRelations' relation-type = 'offers' realty-id = 'oneConnections.realty._id')
-        md-tab(label='Отправить Email' ui-sref='crm.realty.one.connections.email')
-
-ui-view()
+div.md-whiteframe-2dp(md-whiteframe="2")
+    div(md-whiteframe="1")
+        md-tabs(md-selected="oneConnections.selectedTab" md-border-bottom md-dynamic-height='true').realty-list-layout__topbar
+            md-tab(label='Выбранные клиенты')
+                client-card(ng-repeat='client in oneConnections.clientsSaved' active-tab='oneConnections.selectedTab' client='client' assort="oneConnections.assort"
+                page-from = 'realtyRelations' move-to-tab='oneConnections.moveToTab(number)' relation-type = 'saved' realty-id = 'oneConnections.realty._id')
+                client-card(ng-repeat='client in oneConnections.clientsMy' active-tab='oneConnections.selectedTab' client='client' assort="oneConnections.assort"
+                page-from = 'realtyRelations' relation-type = 'my' realty-id = 'oneConnections.realty._id')
+            md-tab(label='Предложения от партнеров')
+                client-card(ng-repeat='client in oneConnections.clientsNew' active-tab='oneConnections.selectedTab' client='client' assort="oneConnections.assort"
+                page-from = 'realtyRelations' relation-type = 'new' realty-id = 'oneConnections.realty._id')
+                client-card(ng-repeat='client in oneConnections.clientsOffers' active-tab='oneConnections.selectedTab' client='client' assort="oneConnections.assort"
+                page-from = 'realtyRelations' relation-type = 'offers' realty-id = 'oneConnections.realty._id')
+            md-tab(label='Отправить Email' ui-sref='crm.realty.one.connections.email')
+                ui-view()
+//div.md-whiteframe-2dp(md-whiteframe="2")
+    div(md-whiteframe="1")
+        md-tabs(md-selected="oneConnections.selectedTab" md-border-bottom md-dynamic-height='true').realty-list-layout__topbar
+            md-tab(label='Выбранные клиенты')
+                client-card(ng-repeat='client in oneConnections.clientsSaved' active-tab='oneConnections.selectedTab' client='client' assort="oneConnections.assort"
+                page-from='realtyRelations' move-to-tab='oneConnections.moveToTab(number)' relation-type='saved' realty-id='oneConnections.realty._id')
+                client-card(ng-repeat='client in oneConnections.clientsMy' active-tab='oneConnections.selectedTab' client='client' assort="oneConnections.assort"
+                page-from='realtyRelations' relation-type='my' realty-id='oneConnections.realty._id')
+            md-tab(label='Предложения от партнеров')
+                client-card(ng-repeat='client in oneConnections.clientsNew' active-tab='oneConnections.selectedTab' client='client' assort="oneConnections.assort"
+                page-from='realtyRelations' relation-type='new' realty-id='oneConnections.realty._id')
+                client-card(ng-repeat='client in oneConnections.clientsOffers' active-tab='oneConnections.selectedTab' client='client' assort="oneConnections.assort"
+                page-from='realtyRelations' relation-type='offers' realty-id='oneConnections.realty._id')
+            md-tab(label='Отправить Email' ui-sref='crm.realty.one.connections.email')
+                ui-view()
     
     

@@ -1,4 +1,5 @@
 import './methods/client-analytics.method';
+import './methods/client-emails.method';
 import './publish/clients-list.publish';
 import './publish/find-clients.publish';
 import './publish/relations-clients.publish';

@@ -19,9 +19,9 @@ function sendTest (info, realty) {
   for(var i in realty.details.thumbnails){
       if(realty.details.thumbnails[i].url != realty.image) images += `<img src="` + realty.details.thumbnails[i].url + `" style="margin: 5px 0;"><br/>`
   }
-  let materials = dictionary.materials[realty.details.materials].name;
-  let renovation = dictionary.renovation[realty.details.renovation].name;
-  let windows = dictionary.windowView[realty.details.windowView].name;
+  let materials = dictionary.materials[realty.details.materials] ? `<b>Тип здания:</b> ` +dictionary.materials[realty.details.materials].name + `<br>` : ``;
+  let renovation = dictionary.renovation[realty.details.renovation] ? `<b>Ремонта:</b> `+ dictionary.renovation[realty.details.renovation].name + `<br>` : ``;
+  let windows = dictionary.windowView[realty.details.windowView] ? `<b>Окна:</b> ` + dictionary.windowView[realty.details.windowView].name +`<br>` : ``;
   let subways = realty.address.subwaysEmbedded != undefined ? realty.address.subwaysEmbedded[0].name : false;
   let subwayStation = subways ? `м.`+subways+', '+realty.address.metroTime+` мин. `+transport +`, `: '';
   let email = realty.contacts[0].email ? `<a href="mailto:`+realty.contacts[0].email+`" target="_blank">`+realty.contacts[0].email+`</a>` : '';
@@ -74,11 +74,11 @@ function sendTest (info, realty) {
                             <b>Район:</b> ${realty.address.areaName}<br>
                             <b>Улица:</b> ${realty.address.street} ${realty.address.house} к.${realty.address.flat}<br>
                             ${metro}
-                            <b>Тип здания:</b> ${materials}<br>
+                            ${materials}
                             <b>Комнат:</b> ${realty.roomcount}-комнатная<br>
-                            <b>Ремонта:</b> ${renovation}<br>
+                            ${renovation}
                             <b>Этаж:</b> ${realty.details.livingSquare} из ${realty.details.livingSquare}<br>
-                            <b>Окна:</b> ${windows}<br>
+                            ${windows}
                             <b>Цена:</b> ${price}<br>
                             <b>Комиссия:</b> ${realty.realtor.clientpercent}%
                         </td>
