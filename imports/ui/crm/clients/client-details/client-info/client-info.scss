@@ -13,13 +13,13 @@ client-info {
   }
 }
 
-.client-info-notes,
-.client-info-contacts {
-  min-height: 268px;
-}
+.client-info {
+  &__notes,
+  &__contacts {
+    min-height: 260px;
+  }
 
-.client-info{
-  &-notes-item {
+  &__notes-text {
     min-height: 168px;
   }
 }

@@ -6,7 +6,7 @@ one-info {
   }
 
   md-switch {
-    margin: 2px 0;
+    margin: 2px 0 0 0 !important;
     &:last-of-type {
       margin-right: 0;
     }
@@ -46,5 +46,13 @@ one-info {
       margin: 0 auto;
       background: #fff;
     }
+  }
+  &__notes,
+  &__contacts {
+    min-height: 260px;
+  }
+
+  &__notes-text {
+    min-height: 168px;
   }
 }
