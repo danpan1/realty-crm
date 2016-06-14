@@ -4,11 +4,22 @@ name='addRoleForm'
 layout-align='center start'
 layout='column')
     md-input-container
-        label Email
+        label Аренда
         input(ng-model="addRole.email" type="email" required='')
-    md-button(type='submit').md-raised.md-primary Добавить роль
-
+    md-button(type='submit').md-raised.md-primary Добавить Аренда
 div(md-whiteframe='2') {{addRole.result || 'Введите email'}}
+
+form(md-whiteframe='1'
+ng-submit='addRole.submitSale(addRoleForm.$valid)'
+name='addRoleForm'
+layout-align='center start'
+layout='column')
+    md-input-container
+        label Продажа
+        input(ng-model="addRole.emailSale" type="email" required='')
+    md-button(type='submit').md-raised.md-primary Добавить Продажа
+
+div(md-whiteframe='2') {{addRole.resultSale || 'Введите email'}}
 div(md-whiteframe='2')
 div(md-whiteframe='2')
 div(md-whiteframe='2') Оплаченных юзеров - {{addRole.paidUsers.length}}

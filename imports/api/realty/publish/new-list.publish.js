@@ -101,13 +101,15 @@ if (Meteor.isServer) {
           'details.renovation': 1,
           'details.images.url': 1,
           'details.conditions': 1,
+          createdAt: 1,
           floor: 1,
           floormax: 1,
           image: 1,
           price: 1,
           roomcount: 1,
           square: 1,
-          status: 1
+          status: 1,
+          type: 1
         };
         //db.realty.ensureIndex({roomcount : 1})
         //         { limit: 20,   skip: 40, sort: { createdAt: -1 }},

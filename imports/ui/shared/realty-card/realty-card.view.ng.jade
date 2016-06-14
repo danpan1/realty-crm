@@ -62,8 +62,8 @@ div(md-whiteframe='1')
                     div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
                     div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
                 div(ng-if='realtyCard.realty.status === "new" || realtyCard.realty.status === "taken"')
-                    md-button(ng-if='!realtyCard.shownPhone && !realtyCard.realty.contacts[0].phones[0].phone' ng-click='realtyCard.onShowPhone(realtyCard.realty._id, $event)').md-primary.mh-0.mt-0 Показать телефон
-                    div(ng-if='realtyCard.shownPhone || realtyCard.realty.contacts[0].phones[0].phone').md-subhead.mb-8.nowrap {{realtyCard.shownPhone || realtyCard.realty.contacts[0].phones[0].phone | phone}}
+                    md-button(ng-if='!realtyCard.isUserPaid' ng-click='realtyCard.onShowPhone(realtyCard.realty._id, $event)').md-primary.mh-0.mt-0 Показать телефон
+                    div(ng-if='realtyCard.shownPhone || realtyCard.realty.contacts[0].phones[0].phone && realtyCard.isUserPaid').md-subhead.mb-8.nowrap {{realtyCard.shownPhone || realtyCard.realty.contacts[0].phones[0].phone | phone}}
                     div().md-subhead.mb-8 #[b Собственник {{::realtyCard.realty.contacts[0].name}}]
                 div
                     md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Объявление
@@ -109,7 +109,7 @@ div(md-whiteframe='1')
     // Подоробное объявление
     div(ng-show="realtyCard.ngShowDescr").ph-32.pb-16
         div(ng-if="!realtyCard.realtylisttype").relative
-            div(ng-if='realtyCard.realty.status == \'taken\'' flex).realty-card__object-own.p-8 Это ваш объект
+            div(ng-if='realtyCard.realty.status == \'taken\'' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам. Завершите его проверку
             p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
             div(layout='row')
                 md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
