@@ -20,9 +20,10 @@ class AddClientFull {
     this.activeTab = 0;
     this.state = $state;
     this.fake = true;
-    this.client.comissionLoyal = true;
-    this.client.comission = 100;
+    this.submitted = false;
     this.client.need = {
+      comissionLoyal: true,
+      comission: 100,
       metroTransport: 0,
       type : 4
     }
@@ -30,7 +31,7 @@ class AddClientFull {
   }
 
   submit(valid) {
-
+    this.submitted = true;
     var price = this.client.need.price.split('');
     for (var i in [1, 2, 3]) {
       for (var i in price) {
@@ -67,7 +68,7 @@ class AddClientFull {
         console.log(error);
       } else {
         console.log(result);
-        this.state.go('crm.clients.list.my', {status: 'realtor'});
+        this.state.go('crm.clients.details.suit', {client: result, suitby: 'my'});
       }
     });
     this.resetClient();

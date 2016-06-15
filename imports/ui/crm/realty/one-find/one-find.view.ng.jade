@@ -5,9 +5,11 @@ div.md-whiteframe-2dp(md-whiteframe="2")
             md-tab(ui-sref="crm.realty.one.find({searchType:'manual'})") Точное совпадение
             md-tab(ui-sref="crm.realty.one.find({searchType:'algorithm'})") Авто-подборка
 
-div.md-whiteframe-2dp(md-whiteframe="2")
+md-progress-circular(ng-if='oneFind.preloader' md-diameter='150' style='position:absolute;left:0;right:0;top:280px;margin:0 auto;')
+div.md-whiteframe-2dp(ng-if='!oneFind.preloader' md-whiteframe="2")
     client-card(ng-repeat='client in oneFind.clients'
     client='client'
     assort="oneFind.assort"
     realty-id='oneFind.realty._id'
-    page-from='{{oneFind.searchType}}')
+    page-from='{{oneFind.searchType}}'
+    preloader='oneFind.preloader')
