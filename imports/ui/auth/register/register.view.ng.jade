@@ -1,45 +1,47 @@
 md-toolbar.md-primary(layout='column')
 md-content
-    div().mv-32.text-center
-        img(src='img/logos/brand-logo-large.png')
-
+    div().mt-32.text-center
+        img(src='img/logos/brand-logo-medium.png')
+    div
+        p().register__message-text.text-center.mb-0
+            | Укажите телефон риелтора в системе 
+            br
+            | «Мир и Недвижимость», который вас подключил.
+            br
+            | Мы подарим ему и вам вам «Океан объектов» 
     div(layout='column', layout-align='center center').p-32
         div(md-whiteframe='2').register-form.p-32
+
             md-toolbar(ng-show='register.error', layout='row', layout-align='center center').md-warn.mb-16
                 p(ng-if='register.error == 1').md-body-1 Телефон обязателен для регистрации
                 p(ng-if='register.error == 2').md-body-1 Этот Email уже зарегистрирован
                 p(ng-if='register.error == 3').md-body-1 Неизвестная ошибка. Попробуйте позже
             form(name='registerForm' ng-submit='register.register()')
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='80').md-block.form-required.mb-0
-                        label Имя
-                        input(type='text', required='' ng-model='register.credentials.profile.name')
-                div(layout='row' layout-align='center center')
-                    md-input-container(flex='80').md-block.form-required.m-0
-                        label Фамилия
-                        input(type='text', required='' ng-model='register.credentials.profile.surName')
-                div(layout='row' layout-align='center center')
-                    phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone')
-                div(layout='row' layout-align='center center')
-                    md-input-container(flex='80').md-block.form-required.m-0
-                        label Email
-                        input(type='email', ng-model='register.credentials.email', required='')
-                div(layout='row' layout-align='center center')
-                    md-input-container(flex='80').md-block.form-required.m-0
-                        label Пароль
-                        input(type='password', ng-model='register.credentials.password', required='')
-                div(layout='row' layout-align='center center' ng-class='{"has-error":registerForm.passwordRepeat.$touched && register.passwordrepeat != register.credentials.password}')
-                    md-input-container(flex='80').md-block.form-required.m-0
-                        label {{ registerForm.passwordRepeat.$touched ? register.passwordrepeat == register.credentials.password ? 'Пароли совпадают' : 'Пароли не совпадают' : 'Повторите пароль'}}
-                        input(name='passwordRepeat' type='password', ng-model='register.passwordrepeat', required='')
-                div(layout='row' layout-align='center center')
-                    md-input-container(flex='80').md-block.m-0
-                        label Ссылка на &laquoВконтакте&raquo
-                        input(type='text', aria-label='Ссылка на Вконтакте' ng-model='register.credentials.profile.urlVk')
-                div(layout='row' layout-align='center center')
-                    md-button(flex='80' type='submit' aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password) || register.credentials.profile.phone.length < 11').md-raised.md-primary
-                        | Зарегистрироваться
-                div(layout='column' layout-align='start center')
-                    div().md-body-1 или
-                    div
-                        a(href='/login').md-button.md-primary Войти
+                    phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone').mt-16
+                //- div(layout='row' layout-align='center center')
+                //-     phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Ваш телефон на cian.ru"' phone='register.credentials.profile.phone').mt-16
+                //- div(layout='row' layout-align='center center')
+                //-     md-input-container(flex='80').md-block.form-required.m-0
+                //-         label Имя
+                //-         input(type='text', required='' ng-model='register.credentials.profile.name')
+                //- div(layout='row' layout-align='center center')
+                //-     md-input-container(flex='80').md-block.form-required.m-0
+                //-         label Фамилия
+                //-         input(type='text', required='' ng-model='register.credentials.profile.surName')
+                //- div(layout='row' layout-align='center center')
+                //-     md-input-container(flex='80').md-block.form-required.m-0
+                //-         label Email
+                //-         input(type='email', ng-model='register.credentials.email', required='')
+                //- div(layout='row' layout-align='center center')
+                //-     md-input-container(flex='80').md-block.form-required.m-0
+                //-         label Пароль
+                //-         input(type='password', ng-model='register.credentials.password', required='')
+                //- div(layout='row' layout-align='center center' ng-class='{"has-error":registerForm.passwordRepeat.$touched && register.passwordrepeat != register.credentials.password}')
+                //-     md-input-container(flex='80').md-block.form-required.m-0
+                //-         label {{ registerForm.passwordRepeat.$touched ? register.passwordrepeat == register.credentials.password ? 'Пароли совпадают' : 'Пароли не совпадают' : 'Повторите пароль'}}
+                //-         input(name='passwordRepeat' type='password', ng-model='register.passwordrepeat', required='')
+                //- div(layout='row' layout-align='center center')
+                //-     md-button(flex='80' type='submit' aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password) || register.credentials.profile.phone.length < 11').md-raised.md-primary.register__btn-submit
+                //-         span я хочу увеличить
+                //-         span количество сделок
