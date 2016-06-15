@@ -20,6 +20,7 @@ class RealtyCard {
     this.mdDialog = $mdDialog;
     var vm = this;
 
+    if(this.realty.status == 'taken') this.realtyIsTaken = true;
     if (this.user) {
       this.data = {
         good_name: "ocaen_object_6mes",

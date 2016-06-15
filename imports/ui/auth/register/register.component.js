@@ -53,7 +53,7 @@ class Register {
     this.credentials.profile.phone = value.join('');
     console.log(this.credentials);
     Accounts.createUser(this.credentials,
-      this.$bindToContext((err) => {
+      this.$bindToContext((err, createUserResult) => {
         if (err) {
           if (err.reason == 'Phone is required') this.error = 1;
           else if (err.reason == 'Email already exists.') this.error = 2;
@@ -66,6 +66,17 @@ class Register {
             if(err) {console.log(err);}
             else {console.log(res);}
           });
+          
+          /*console.log(createUserResult);
+          console.log(this.credentials);
+          
+          Meteor.call('addToAmoCrm', this.credentials, (err, result) => {
+            if(err) console.log(err);
+            else{
+              console.log(result);
+            }
+          })*/
+          
           this.$state.go('crm.realty.list.my');
         }
       })
