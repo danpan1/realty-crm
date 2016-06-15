@@ -13,14 +13,15 @@ import './one-find.view.html';
 
 class OneFind {
   /* @ngInject */
-  constructor($scope, $reactive, $state, $stateParams) {
+  constructor($scope, $reactive, $state, $stateParams, $timeout) {
     $reactive(this).attach($scope);
+    this.$timeout = $timeout;
     this.state = $state;
     this.stateParams = $stateParams;
-
+    this.preloader = false;
     let vm = this;
     vm.searchType = this.stateParams.searchType || 'my';
-    vm.loaded = false;
+    vm.preloader = false;
     vm.perPage = 20;
     vm.page = this.stateParams.page ? parseInt(this.stateParams.page) : 1;
     vm.sort = {
@@ -42,6 +43,7 @@ class OneFind {
         break;
     }
     vm.subscribe('findClients', () => {
+      vm.preloader = true;
       return [{
         conditions: vm.getReactively('realty.details.conditions'),
         metroTime: vm.getReactively('realty.address.metroTime'),
@@ -62,9 +64,9 @@ class OneFind {
       ];
     }, {
       onReady: function () {
-        vm.loaded = true;
-        // console.log('onReady And the Items actually Arrive', arguments);
-        // subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
+        this.$timeout(()=>{
+          vm.preloader = false;
+        })
       }
     });
     vm.helpers({
