@@ -44,14 +44,26 @@ class RealtyCard {
     Meteor.call('oceanBanAgency', this.realtyPhone, this.realtyName);
   }
 
-  coolImage() {
+  checkImage() {
     var img = new Image();
     img.src = this.realty.image;
-    this.timeout(()=> {
-      if (img.height < 10 || !this.realty.details.images[0] || !this.realty.details.images[0].url) {
-        this.noPhoto = true;
-      }
-    });
+    let count = 0;
+    let checkPhotos = () => {
+      this.timeout(()=> {
+        if (img.height < 10 || img.src.match(/realty_no_image.png/)) {
+          this.noPhoto = true;
+          this.realty.image = "/realty_no_image.png";
+        } else {
+          this.noPhoto = false;
+          this.realty.image = img.src;
+        }
+        if(count < 12) {
+          checkPhotos();
+        }
+        count++;
+      },500);
+    }
+    checkPhotos();
   }
 
   agentContinue(id) {

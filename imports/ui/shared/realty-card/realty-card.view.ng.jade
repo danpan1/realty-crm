@@ -42,7 +42,7 @@ div(md-whiteframe='1')
         //4-ая колонка Фото
         div(layout='column' layout-align='center center').newList_Photo
             div(ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
-                img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.coolImage(realtyCard.realty.image)')
+                img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
                 div(ng-if='!realtyCard.noPhoto').icon-zoom
         md-divider
 
