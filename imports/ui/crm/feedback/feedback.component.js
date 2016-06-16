@@ -53,13 +53,40 @@ class Feedback {
     ]
   }
   
-  testAmoMethod () {
+  testAmoAuth () {
     Meteor.call('amoCrmAuth', this.info, (error, result) => {
         if (error) {
           console.log(error);
         } else {
           this.timeout(()=>{
             console.log(`Cool!`);
+            console.log(result);
+          },0)
+        }
+      });
+  }
+  
+  testAmoUnsort () {
+    Meteor.call('amoCrmUnsort', this.info, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          this.timeout(()=>{
+            console.log(`Cool!`);
+            console.log(result);
+          },0)
+        }
+      });
+  }
+  
+  testAmoNewContact () {
+    Meteor.call('amoCrmNewContact', this.info, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          this.timeout(()=>{
+            console.log(`Cool!`);
+            console.log(result);
           },0)
         }
       });
