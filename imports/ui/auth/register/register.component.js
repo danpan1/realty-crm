@@ -67,16 +67,6 @@ class Register {
             else {console.log(res);}
           });
           
-          /*console.log(createUserResult);
-          console.log(this.credentials);
-          
-          Meteor.call('addToAmoCrm', this.credentials, (err, result) => {
-            if(err) console.log(err);
-            else{
-              console.log(result);
-            }
-          })*/
-          
           this.$state.go('crm.realty.list.my');
         }
       })

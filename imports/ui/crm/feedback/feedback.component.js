@@ -53,6 +53,18 @@ class Feedback {
     ]
   }
   
+  testAmoMethod () {
+    Meteor.call('amoCrmAuth', this.info, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          this.timeout(()=>{
+            console.log(`Cool!`);
+          },0)
+        }
+      });
+  }
+  
   /*send () {
     if(this.proposalSent == 0){
       this.proposalSent = 1;
