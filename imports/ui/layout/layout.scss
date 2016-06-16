@@ -488,3 +488,121 @@ th {
     margin-right: 0 !important;
   }
 }
+
+.welcome-tour {
+  display: none;
+  z-index: 111;
+  overflow: hidden;
+  &__step {
+    display: none;
+    z-index: 113;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    &-sidebar {
+      box-sizing: border-box;
+      position: absolute;
+      width: 400px;
+      height: 100%;
+      background-color: #22252c;
+      padding: 20px 40px 0;
+      transition: transform 0.2s;
+      &-left {
+        left: -400px;
+      }
+      &-right {
+        right: -400px;
+      }
+      &-title,
+      &-text {
+        opacity: 0;
+        transition: opacity 0.5s;
+        color: $white;
+      }
+    }
+    &-content {
+      
+    }
+    &-controls {
+      position: absolute;
+      left: 40px;
+      right: 40px;
+      bottom: 20px;
+      display: flex;
+      box-align: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s;
+      &-control {
+        &.left {
+          order: 1;
+        }
+        &.center {
+          order: 2;
+          flex: 1 auto;
+        }
+        &.right {
+          order: 3;
+        }
+      }
+      &-steps {
+        display: inline-block;
+        height: 10px;
+        vertical-align: middle;
+        &-step {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 7px;
+          border: 1px solid #fff;
+          margin-left: 20px;
+          vertical-align: top;
+          &:first-child {
+            margin-left: 0;
+            background: #fff;
+          }
+        }
+      }
+    }
+
+    &.welcome-tour__step-animated {
+      .welcome-tour {
+        &__step {
+          &-sidebar {
+            &-title,
+            &-text {
+              opacity: 1;
+            }
+            &-left {
+              transform: translate3d(100%, 0, 0);
+            }
+            &-right {
+              transform: translate3d(-100%, 0, 0);
+            }
+          }
+          &-controls {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.default-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  &.default-overlay__visible {
+    background: fadeOut 0.2 ease both;
+    visibility: visible;
+  }
+}
