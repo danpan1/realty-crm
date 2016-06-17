@@ -1,10 +1,16 @@
-div(md-whiteframe='1').topbar
-    div(layout='row' layout-align='start center' layout-fill)
+div(md-whiteframe='1')
+    div(layout='column' layout-align='space-between start' ).p-16
         //md-button(aria-label='Задать вопрос' href = 'https://vk.com/write19844032' target='_blank').md-primary.md-raised.mh-16 Задать вопрос
-        md-button(ng-click='feedback.testAmoAuth()').md-primary.md-raised.mh-16 test Amo Auth
-        md-button(ng-click='feedback.testAmoTest()').md-primary.md-raised.mh-16 test Amo Test
-        md-button(ng-click='feedback.testAmoUnsort()').md-primary.md-raised.mh-16 test Amo Unsort
-        md-button(ng-click='feedback.testAmoNewContact()').md-primary.md-raised.mh-16 test Amo New Contact
+        h2.md-title.text-uppercase.ml-16 amoCRM
+        div(layout='row' layout-align='start start' )
+            md-button(ng-click='feedback.testAmoAuth()').md-primary.md-raised.mh-16 Amo Auth
+            md-button(ng-click='feedback.testAmoTest()').md-primary.md-raised.mh-16 Amo Test
+            md-button(ng-click='feedback.testAmoUnsort()').md-primary.md-raised.mh-16 Amo Unsort
+            md-button(ng-click='feedback.testAmoNewContact()').md-primary.md-raised.mh-16 Amo New Contact
+        h2.md-title.text-uppercase.ml-16 getResponse
+        div(layout='row' layout-align='start start' )
+            md-button(ng-click='feedback.testGetResponse(\'post\')').md-success.md-raised.mh-16 getResponse Post
+            md-button(ng-click='feedback.testGetResponse(\'get\')').md-success.md-raised.mh-16 getResponse Get
 //- div().mv-16
 //-     div(md-whiteframe='1' ng-repeat='info in feedback.feedbackData').mv-8
 //-         div(ng-click='info.show = !info.show').panel__heading.ph-16.pv-8

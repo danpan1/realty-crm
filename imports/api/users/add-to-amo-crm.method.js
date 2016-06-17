@@ -7,7 +7,7 @@ Meteor.methods({
   amoCrmNewContact,
   amoCrmTest,
   amoCrmUnsort,
-  getResponseAuth
+  getResponseTest
 });
 
 let cookieAmoCrm;
@@ -37,36 +37,44 @@ export function amoCrmAuth() {
   }
 }
 
-export function getResponseAuth() {
+export function getResponseTest(action) {
   if (Meteor.isServer && Meteor.userId()) {
 
     let getResponseAuthUrl = 'https://api.getresponse.com/v3/contacts';
     let getResponseAuthOptions = {
-      headers:{
+      "headers":{
+        "Content-Type": "application/json",
         "X-Auth-Token": "api-key e75f681ae153ca7c870480d6957f8e42"
       },
-      params: {
+      "body": {
         "name": "Ilya Karev",
         "email": "ilya.karev1000@gmail.com",
-        "dayOfCycle": "0",
+        "dayOfCycle": 0,
         "campaign": {
-            "campaignId": 39360806
+            "campaignId": "39360806"
         }
-  }
+      }
     };
     let result;
-    try {
-      //result = HTTP.post(getResponseAuthUrl, getResponseAuthOptions);
-      result = HTTP.get(getResponseAuthUrl, getResponseAuthOptions);
-      console.log('--- GET RESPONSE AUTH RESULT ---');
-      console.log(result);
-    } catch (error) {
-      console.log('--- GET RESPONSE AUTH ERROR ---');
-      console.log(error);
-      return error;
+    if(action == 'get'){
+      try {
+        result = HTTP.get(getResponseAuthUrl, getResponseAuthOptions);
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+      return result;
+    } else if (action == 'post') {
+      try {
+        result = HTTP.post(getResponseAuthUrl, getResponseAuthOptions);
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+      return result;
     }
-    return result;
-
   }
 }
 

@@ -63,7 +63,10 @@ class Feedback {
         },100)
       }
     });
-    Meteor.call('getResponseAuth', this.info, (error, result) => {
+  }
+  
+  testGetResponse (action) {
+    Meteor.call('getResponseTest', action, (error, result) => {
       if (error) {
         console.log(error);
       } else {
