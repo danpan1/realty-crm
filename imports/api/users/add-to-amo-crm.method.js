@@ -40,21 +40,24 @@ export function amoCrmAuth() {
 export function getResponseAuth() {
   if (Meteor.isServer && Meteor.userId()) {
 
-    let getResponseAuthUrl = 'http://ariusbiz.justclick.ru/api/getresponsecallback';
+    let getResponseAuthUrl = 'https://api.getresponse.com/v3/contacts';
     let getResponseAuthOptions = {
-      params: [
-        "e75f681ae153ca7c870480d6957f8e42",
-        {
-            "campaign": "39360806",
-            "name": "Илья",
-            "email": "stardust1000@yandex.ru",
-            "cycle_day": 0
+      headers:{
+        "X-Auth-Token": "api-key e75f681ae153ca7c870480d6957f8e42"
+      },
+      params: {
+        "name": "Ilya Karev",
+        "email": "ilya.karev1000@gmail.com",
+        "dayOfCycle": "0",
+        "campaign": {
+            "campaignId": 39360806
         }
-      ]
+  }
     };
     let result;
     try {
-      result = HTTP.post(getResponseAuthUrl, getResponseAuthOptions);
+      //result = HTTP.post(getResponseAuthUrl, getResponseAuthOptions);
+      result = HTTP.get(getResponseAuthUrl, getResponseAuthOptions);
       console.log('--- GET RESPONSE AUTH RESULT ---');
       console.log(result);
     } catch (error) {
@@ -107,25 +110,16 @@ export function amoCrmNewContact() {
   if (Meteor.isServer && Meteor.userId()) {
 
     let newContactUrl = 'https://winvest.amocrm.ru/private/api/v2/json/contacts/set?type=json&USER_LOGIN=ilya.karev1000@gmail.com&USER_HASH=bab2e7256c31d9273a8fb89638fde336';
-    let newTime = new Date();
-    newTime = newTime.getTime();
-    console.log('----------newTime: ' + newTime);
     let newContactOptions = {
-      headers : {
-        Cookie : cookieAmoCrm
-      },
       params: {
         "response": {
           "contacts": {
             "add": [
               {
-                "name": 'Mister X',
-                "id": 10720147,
-                "request_id": 0
+                "name": 'Мистер Картошка'
               }
             ]
-          },
-          "server_time": newTime
+          }
         }
       }
     };
