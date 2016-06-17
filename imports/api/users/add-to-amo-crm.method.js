@@ -1,16 +1,23 @@
 'use strict';
 import {Meteor} from 'meteor/meteor';
-import {HTTP} from 'meteor/http'
+import {Users} from '/server/users.model.js';
+import {HTTP} from 'meteor/http';
+import {Roles} from 'meteor/alanning:roles';
+import {_} from 'meteor/underscore';
 
 Meteor.methods({
   amoCrmAuth,
   amoCrmNewContact,
+  amoCrmNewDeal,
+  amoCrmEditContact,
   amoCrmTest,
   amoCrmUnsort,
   getResponseTest
 });
 
+
 let cookieAmoCrm;
+
 export function amoCrmAuth() {
   if (Meteor.isServer && Meteor.userId()) {
 
@@ -46,7 +53,7 @@ export function getResponseTest(action) {
         "Content-Type": "application/json",
         "X-Auth-Token": "api-key e75f681ae153ca7c870480d6957f8e42"
       },
-      "body": {
+      "data": {
         "name": "Ilya Karev",
         "email": "ilya.karev1000@gmail.com",
         "dayOfCycle": 0,
@@ -83,10 +90,9 @@ export function amoCrmUnsort() {
     if (Meteor.isServer && Meteor.userId()) {
       let unsortUrl = 'https://winvest.amocrm.ru/api/unsorted/add?type=json&api_key=bab2e7256c31d9273a8fb89638fde336&login=ilya.karev1000@gmail.com';
       let unsortOptions = {
-        headers : {
-          Cookie : cookieAmoCrm
-        },
-        params: {
+        "data": {
+          "USER_LOGIN": 'ilya.karev1000@gmail.com',
+          "USER_HASH": 'bab2e7256c31d9273a8fb89638fde336',
           "request": {
             "unsorted": {
               "add": {
@@ -114,17 +120,21 @@ export function amoCrmUnsort() {
       return result.data.response;
     }
 }
+
+
 export function amoCrmNewContact() {
   if (Meteor.isServer && Meteor.userId()) {
 
-    let newContactUrl = 'https://winvest.amocrm.ru/private/api/v2/json/contacts/set?type=json&USER_LOGIN=ilya.karev1000@gmail.com&USER_HASH=bab2e7256c31d9273a8fb89638fde336';
+    let newContactUrl = 'https://winvest.amocrm.ru/private/api/v2/json/contacts/set?type=json';
     let newContactOptions = {
-      params: {
-        "response": {
+      "data": {
+        "USER_LOGIN": 'ilya.karev1000@gmail.com',
+        "USER_HASH": 'bab2e7256c31d9273a8fb89638fde336',
+        "request": {
           "contacts": {
             "add": [
               {
-                "name": 'Мистер Картошка'
+                "name": 'Старуха Шапокляк'
               }
             ]
           }
@@ -139,24 +149,149 @@ export function amoCrmNewContact() {
       console.log(result.data.response);
     } catch (error) {
       console.log('--- NEW CONTACT ERROR ---');
-      console.log(error);
       result = error;
       return error;
     }
-    return result.data.response;
+    console.log(result.data.response);
+    uniqueId = result.data.response.contacts.add[0].id;
+    timestamp = result.data.response.server_time;
+    if(uniqueId){
+      console.log('uniqueId: ' + uniqueId);
+      console.log('timestamp: ' + timestamp);
+      
+      let user = Meteor.users.findOne({_id: this.userId});
+      console.log('user: ' + user);
+      Meteor.users.update({_id: this.userId}, {
+        $set: {
+          'profile.amoCrm': {
+            id:uniqueId,
+            timestamp:timestamp
+          }
+        }
+      });
+      console.log('=== user.profile.amoCrm ===');
+      console.log(user.profile.amoCrm);
+    }
 
+  }
+}
+
+export function amoCrmNewDeal() {
+  if (Meteor.isServer && Meteor.userId()) {
+    
+    let newDealUrl = 'https://winvest.amocrm.ru/private/api/v2/json/leads/set?type=json';
+    let newDealOptions = {
+      "data": {
+        "USER_LOGIN": 'ilya.karev1000@gmail.com',
+        "USER_HASH": 'bab2e7256c31d9273a8fb89638fde336',
+        "request": {
+          "leads": {
+            "add": [
+              {
+                "name": 'Покупка открывашки для левшей',
+                "status_id": '11124741',
+                "price": '990'
+              }
+            ]
+          }
+        }
+      }
+    };
+    
+    let result;
+    try {
+      result = HTTP.post(newDealUrl, newDealOptions);
+      console.log('--- NEW DEAL RESULT ---');
+      console.log(result.data.response);
+    } catch (error) {
+      console.log('--- NEW DEAL ERROR ---');
+      result = error;
+      console.log(error);
+      return error;
+    }
+    console.log(result.data.response);
+    
+    dealId = result.data.response.leads.add[0].id;
+    console.log(dealId);
+    if(dealId){
+      amoCrmEditContact(dealId);
+    } else {
+      return result;
+    }
+    
+  }
+}
+
+export function amoCrmEditContact(dealId) {
+  if (Meteor.isServer && Meteor.userId() && dealId) {
+    
+    let userId = Meteor.userId();
+    let user = Meteor.users.findOne({_id: userId});
+    
+    try {
+      console.log(user.profile);
+    } catch (error) {
+      console.log('=== NO USER? ===')
+      return error;
+    }
+    
+    let newContactUrl = 'https://winvest.amocrm.ru/private/api/v2/json/contacts/set?type=json';
+    let newContactOptions = {
+      "data": {
+        "USER_LOGIN": 'ilya.karev1000@gmail.com',
+        "USER_HASH": 'bab2e7256c31d9273a8fb89638fde336',
+        "request": {
+          "contacts": {
+            "update": [
+              {
+                "id":  user.profile.amoCrm.id,
+                "linked_leads_id": [
+                  dealId
+                ],
+                "last_modified":  user.profile.amoCrm.timestamp
+              }
+            ]
+          }
+        }
+      }
+    };
+    
+    let result;
+    try {
+      result = HTTP.post(newContactUrl, newContactOptions);
+      console.log('--- EDIT CONTACT RESULT ---');
+      console.log(result.data.response);
+    } catch (error) {
+      console.log('--- EDIT CONTACT ERROR ---');
+      result = error;
+      return error;
+    }
+    
+    console.log(result.data.response);
+    timestamp = result.data.response.server_time;
+    console.log('timestamp: '+ timestamp);
+    if(timestamp){
+      Meteor.users.update({_id: this.userId}, {
+        $set: {
+          'profile.amoCrm': {
+            timestamp:timestamp
+          }
+        }
+      });
+    }
+
+  } else if (!dealId) {
+    console.log('Where is the dealId, dude?');
+    return 'Where is the dealId, dude?';
   }
 }
 
 export function amoCrmTest() {
   if (Meteor.isServer && Meteor.userId()) {
     console.log('amoCrmTest');
-    // let cookie = cookieAmoCrm.join('; ');
-    // console.log(cookie);
     let testUrl = 'https://winvest.amocrm.ru/private/api/v2/json/accounts/current';
     let testOptions = {
       headers : {
-        // Cookie : cookie
         Cookie : cookieAmoCrm
       }
     };    
@@ -173,25 +308,6 @@ export function amoCrmTest() {
 
   }
 }
-    
-    
-/*
- let newContactUrl = 'https://winvest.amocrm.ru/private/api/v2/json/contacts/set';
- let newContactOptions = {
- 'add/name':this.userId || 'mister X',
- 'update/id': 3
- }
-
- HTTP.post(newContactUrl, newContactOptions, function (error, result) {
- if (error) {
- console.log('--- NEW CONTACT ERROR ---');
- console.log(error);
- } else {
- console.log('--- NEW CONTACT RESULT ---');
- console.log(result);
- }
- });
- */
 
 function storeAuth (res) {
   var cookies = res.headers['set-cookie'];
