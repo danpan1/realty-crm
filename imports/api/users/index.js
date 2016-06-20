@@ -1,2 +1,3 @@
 import './paid-percent.publish';
-import './add-to-amo-crm.method';
+import './methods/add-to-amo-crm.method';
+import './methods/robokassa.method';

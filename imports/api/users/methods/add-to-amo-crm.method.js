@@ -97,15 +97,38 @@ export function amoCrmUnsort() {
               "add": {
                 "source": "http://getrent.ru",
                 "source_uid": null,
-                "source_data": {
-                  "from":{
-                    "email":"ilya.karev1000@gmail.com",
-                    "name":"Мир и недвижимость"
-                  },
-                  "subject":"Регистрация нового пользователя",
-                  "thread_id":null,
-                  "message_id":null
-                }
+                "data": [
+                  {
+                    "leads": {
+                      "add": [
+                        {
+                          "name": 'Покупка открывашки для левшей',
+                          "price": '990'
+                        }
+                      ]
+                    }
+                  },{
+                    "contacts": {
+                      "add": [
+                        {
+                          "name":"Mister Twister"
+                        }
+                      ],
+                      "type":"contact"
+                    }
+                  }
+                ],
+                "source_data": [
+                  {
+                    "from":{
+                      "email":"ilya.karev1000@gmail.com",
+                      "name":"Мир и недвижимость"
+                    },
+                    "subject":"Регистрация нового пользователя",
+                    "thread_id":null,
+                    "message_id":null
+                  }
+                ]
               }
             }
           }

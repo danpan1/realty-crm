@@ -6,6 +6,7 @@ import {name as outgoingCall} from './outgoing-call/outgoing-call.component';
 import {name as incomingCall} from './incoming-call/incoming-call.component';
 import {name as moderator} from './moderator/moderator.component';
 import {name as otchet} from './otchet/otchet.component';
+import {name as parsingStats} from './parsing-stats/parsing-stats.component';
 import {name as management} from './management/management.component';
 
 const moduleName = 'callCenter';
@@ -14,6 +15,7 @@ const moduleName = 'callCenter';
 export default angular.module(moduleName, [
   angularMeteor,
   incomingCall,
+  parsingStats,
   otchet,
   management,
   moderator,

@@ -1,10 +1,41 @@
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty';
 Meteor.methods({
+  parsingStats,
   operatorGet,
   operatorSave,
   operatorSet
 });
+
+
+
+function parsingStats() {
+  if (Meteor.isServer) {
+    
+    db.parsercounters.aggregate([{
+      $match: {
+        date: { 
+          $gte: new Date("2016-06-16T00:00:00.000Z") 
+        }
+      }
+    }, {
+      $group: {
+        _id: { 
+          reason: "$reason" 
+        },
+        count: { 
+          $sum: 1 
+        }
+      }
+    }, {
+      $sort: { 
+        '_id.reason': 1 
+      }
+    }])
+    
+  }
+}
+
 function operatorGet() {
 
   //TODO findAnModify
