@@ -67,9 +67,11 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                         div(flex='45')
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required.zh
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
+                                    input(required name='floor' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
+                                    span(ng-show='secondForm.floor.$touched && secondForm.floor.$invalid').has-error {{secondForm.floor.$viewValue.length == 0 ? 'Необходимо заполнить' : 'Только цифры'}}
                                 md-input-container(flex).mv-0.ml-32.form-required.zh
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
+                                    input(required name='floormax' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
+                                    span(ng-show='secondForm.floormax.$touched && secondForm.floormax.$invalid').has-error {{secondForm.floormax.$viewValue.length == 0 ? 'Необходимо заполнить' : 'Только цифры'}}
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row' layout-align='start center')

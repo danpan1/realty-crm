@@ -21,7 +21,6 @@ class OneEmail {
     this.$timeout = $timeout; 
     let vm = this;
     this.proposalSent = 0;
-    this.clientFound = false;
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {
@@ -108,7 +107,6 @@ class OneEmail {
   }
   
   checkClientsEmails () {
-    this.clientFound = false;
     let vm = this;
     Meteor.call('clientEmails', vm.info.emails, (error, result) => {
         if (error) {} 
@@ -116,7 +114,6 @@ class OneEmail {
           this.$timeout(()=>{
             if(result){
               vm.info.topic = result + ', для вас есть предложение: ' + vm.topicTemplate;
-              this.clientFound = true;
             }            
           },50)
         }

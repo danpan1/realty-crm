@@ -60,6 +60,18 @@ Schema.Users = new SimpleSchema({
     type: String,
     optional: true
   },
+  'profile.amoCrm': {
+    type: Object,
+    optional: true
+  },
+  'profile.amoCrm.id': {
+    type: String,
+    optional: true
+  },
+  'profile.amoCrm.timestamp': {
+    type: Number,
+    optional: true
+  },
   takenRealty: {
     type: Number,
     optional: true

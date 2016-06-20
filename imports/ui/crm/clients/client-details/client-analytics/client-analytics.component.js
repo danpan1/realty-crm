@@ -23,7 +23,7 @@ class ClientAnalytics {
       }
     });
     
-    let subwaysEmb = this.client.need.embedded.subways.map((value) => { return value.name; });
+    let subwaysEmb = this.client.need.embedded ? this.client.need.embedded.subways.map((value) => { return value.name; }) : undefined;
     
     Meteor.call('clientAnalytics', this.client.need.price, this.client.need.roomcount, subwaysEmb, this.client.need.renovation, (err, result) => {
       this.loaded = false;

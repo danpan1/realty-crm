@@ -13,7 +13,7 @@ div(md-whiteframe='2').mt-16
                 md-input-container().md-block
                     textarea(ng-model='oneEmail.info.realtyConditions' placeholder='Условия')
                 div
-                    md-button(type='submit' ng-if='oneEmail.proposalSent != 2' ng-disabled='!oneEmail.clientFound ||  emailSent.$invalid || oneEmail.proposalSent == 1').md-primary.md-raised.md-body-1.ml-0.mr-16.ph-16 Отправить письмо
+                    md-button(type='submit' ng-if='oneEmail.proposalSent != 2' ng-disabled=' emailSent.$invalid || oneEmail.proposalSent == 1').md-primary.md-raised.md-body-1.ml-0.mr-16.ph-16 Отправить письмо
                     md-button(ng-if='oneEmail.proposalSent == 2').md-success.md-raised.md-body-1.mh-16.ph-16 Успешно отправлено
 
 div().mh-32

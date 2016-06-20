@@ -53,7 +53,7 @@ class Register {
     this.credentials.profile.phone = value.join('');
     console.log(this.credentials);
     Accounts.createUser(this.credentials,
-      this.$bindToContext((err) => {
+      this.$bindToContext((err, createUserResult) => {
         if (err) {
           if (err.reason == 'Phone is required') this.error = 1;
           else if (err.reason == 'Email already exists.') this.error = 2;
@@ -66,6 +66,7 @@ class Register {
             if(err) {console.log(err);}
             else {console.log(res);}
           });
+          
           this.$state.go('crm.realty.list.my');
         }
       })

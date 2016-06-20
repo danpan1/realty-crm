@@ -53,6 +53,90 @@ class Feedback {
     ]
   }
   
+  testAmoAuth () {
+    Meteor.call('amoCrmAuth', this.info, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        this.timeout(()=>{
+          console.log(result);
+        },100)
+      }
+    });
+  }
+  
+  testGetResponse (action) {
+    Meteor.call('getResponseTest', action, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        this.timeout(()=>{
+          console.log(result);
+        },100)
+      }
+    });
+  }
+  
+  testAmoTest () {
+    Meteor.call('amoCrmTest', this.info, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          this.timeout(()=>{
+            console.log(result);
+          },100)
+        }
+      });
+  }
+  
+  testAmoUnsort () {
+    Meteor.call('amoCrmUnsort', this.info, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        this.timeout(()=>{
+          console.log(result);
+        },100)
+      }
+    });
+  }
+  
+  testAmoNewContact () {
+    Meteor.call('amoCrmNewContact', this.info, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          this.timeout(()=>{
+            console.log(result);
+          },100)
+        }
+      });
+  }
+  
+  testAmoNewDeal () {
+    Meteor.call('amoCrmNewDeal', this.info, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          this.timeout(()=>{
+            console.log(result);
+          },100)
+        }
+      });
+  }
+  
+  testRoboKassa () {
+    Meteor.call('roboKassaTest', this.info, (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          this.timeout(()=>{
+            console.log(result);
+          },100)
+        }
+      });
+  }
+  
   /*send () {
     if(this.proposalSent == 0){
       this.proposalSent = 1;
