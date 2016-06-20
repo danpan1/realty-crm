@@ -7,6 +7,7 @@ import '../imports/api/counts';
 import '../imports/api/users/';
 import '../imports/api/locations';
 import '../imports/api/agents';
+import '../imports/api/parsercounters';
 import '../imports/api/relations';
 import '../imports/startup';
 import '../imports/api/realty';
