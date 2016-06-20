@@ -91,14 +91,21 @@ export function amoCrmUnsort() {
       let unsortUrl = 'https://winvest.amocrm.ru/api/unsorted/add?type=json&api_key=bab2e7256c31d9273a8fb89638fde336&login=ilya.karev1000@gmail.com';
       let unsortOptions = {
         "data": {
-          "USER_LOGIN": 'ilya.karev1000@gmail.com',
-          "USER_HASH": 'bab2e7256c31d9273a8fb89638fde336',
           "request": {
             "unsorted": {
+              "category": "mail",
               "add": {
                 "source": "http://getrent.ru",
                 "source_uid": null,
-                "source_data": "amoCRM"
+                "source_data": {
+                  "from":{
+                    "email":"ilya.karev1000@gmail.com",
+                    "name":"Мир и недвижимость"
+                  },
+                  "subject":"Регистрация нового пользователя",
+                  "thread_id":null,
+                  "message_id":null
+                }
               }
             }
           }
