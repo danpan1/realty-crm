@@ -1,5 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty';
+import {ParserCounters} from '/imports/api/parsercounters';
+
 Meteor.methods({
   parsingStats,
   operatorGet,
@@ -7,18 +9,17 @@ Meteor.methods({
   operatorSet
 });
 
-
-
 function parsingStats() {
   if (Meteor.isServer) {
     
-    db.parsercounters.aggregate([{
-      $match: {
-        date: { 
-          $gte: new Date("2016-06-16T00:00:00.000Z") 
-        }
-      }
-    }, {
+    let result = ParserCounters.aggregate([//{
+      //$match: {
+      //  date: { 
+      //    $gte: new Date("2016-06-16T00:00:00.000Z") 
+      //  }
+      //}
+    //}, 
+    {
       $group: {
         _id: { 
           reason: "$reason" 
@@ -32,6 +33,8 @@ function parsingStats() {
         '_id.reason': 1 
       }
     }])
+    
+    return result;
     
   }
 }

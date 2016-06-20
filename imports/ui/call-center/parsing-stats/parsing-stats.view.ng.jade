@@ -1,3 +1,5 @@
-div incoming
-    md-button(ng-click="parsingStats.countParsers()").mr-0 Считай!
-    p {{parsers}}
+div(md-whiteframe='2').mt-16.ph-32.pv-16
+    div(layout='column')
+        div(ng-repeat="reason in parsingStats.reasons")
+            h3 "{{reason._id.reason}}": {{reason.percent}}%
+    

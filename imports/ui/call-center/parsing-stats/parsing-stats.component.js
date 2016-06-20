@@ -15,19 +15,28 @@ class ParsingStats {
     $reactive(this).attach($scope);
     let vm = this;
     this.dictionary = dictionary;
-    this.parsers = {};
-  }
-  
-  countParsers () {
+    
+    
     Meteor.call('parsingStats', (error, result) => {
       if (error) {
         console.log('error');
         console.log(error);
       } else {
-        console.log(result);
-        this.parsers = result; 
+        this.reasons = result; 
+        this.all = 0;
+        result.map((item) => {
+          this.all += item.count;
+        }) 
+        for(var i in this.reasons){
+          this.reasons[i].percent = Math.ceil((this.reasons[i].count * 100 / this.all) * 100 ) / 100;
+        };
+        console.log(this.reasons);
       }
     });
+    
+  }
+  
+  countParsers () {
   }
   
 }
