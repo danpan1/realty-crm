@@ -13,11 +13,11 @@ div(ng-if='realtyNewList.loaded')
         div(layout='row', md-whiteframe='2').realty-new-list__header.mv-8
             div().realty-new-list__header-col Подано
             div().realty-new-list__header-col Местоположение
-            div().realty-new-list__header-col Собственник
+            div().realty-new-list__header-col Цена/Ремонт
             div().realty-new-list__header-col Фото
             div().realty-new-list__header-col Объект
             div().realty-new-list__header-col Удобства
-            div().realty-new-list__header-col Действия
+            div().realty-new-list__header-col Доход
     div(layout='column', layout-align='space-around stretch' ).md-body-1
         realty-card(dir-paginate="realty in realtyNewList.realty | itemsPerPage: realtyNewList.perPage"
                     total-items="realtyNewList.realtyCount"
