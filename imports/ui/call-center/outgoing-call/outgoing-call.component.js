@@ -108,6 +108,10 @@ class OutgoingCall {
       vm.realty.address.areaId = vm.realty.address.area._id;
       vm.realty.address.areaName = vm.realty.address.area.name;
     }
+    
+    var d = new Date().getTime();
+    vm.realty.operator.oceanAdd = d;
+    
     vm.realty.status = 'list';
     console.log('save realty', vm.realty);
     Meteor.call('operatorSave', vm.realty, (error)=> {

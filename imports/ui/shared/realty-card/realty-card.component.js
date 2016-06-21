@@ -12,13 +12,15 @@ import './realty-card.view.html';
 
 class RealtyCard {
   /* @ngInject */
-  constructor($scope, $reactive, $mdDialog, $timeout) {
+  constructor($scope, $reactive, $mdDialog, $timeout, $state) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
+    this.state = $state;
     this.timeout = $timeout;
     this.show = true;
     this.mdDialog = $mdDialog;
     var vm = this;
+    
 
     if(this.realty.status == 'taken') this.realtyIsTaken = true;
     if (this.user) {
@@ -35,6 +37,37 @@ class RealtyCard {
     this.close = function () {
       this.mdDialog.cancel();
     };
+    
+    this.$onDestroy = function () {
+      if(this.globalId){
+        this.saveCheckedRealty(this.globalId, this.globalStatus);
+      }
+    };
+    
+    if(vm.realty.operator){
+      let newTime = new Date().getTime();
+      let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
+      let seconds = 298;//300 + parseInt(time);
+      this.minutes = parseInt(seconds / 60);
+      this.seconds = seconds - (this.minutes*60);
+      console.log(this.minutes+':'+this.seconds);
+      this.timeoutFunc = () => {
+        this.timeout(()=>{
+          this.seconds -= 1;
+          if(this.seconds < 0) {
+            this.minutes -= 1;
+            this.seconds = 59;
+          }
+          if(this.minutes < 0) {
+            this.realty.status = 'skip';
+            this.updateRealty(this.realty._id);
+          }
+          this.timeoutFunc();
+        },1000)
+      }
+      
+      console.log(this.seconds);
+    }
 
   }
 
@@ -80,7 +113,12 @@ class RealtyCard {
   }
   
   nextStep (nextStep) {
-    console.log(nextStep);
+    if(this.globalId){
+      this.saveCheckedRealty(this.globalId, this.globalStatus);
+    }
+    if(nextStep == 'go'){
+      this.state.go('crm.realty.one.review', {realtyId: this.realty._id});
+    }
   }
 
   /**
@@ -242,6 +280,20 @@ class RealtyCard {
   }
 
   takeCheckedRealty(id, status) {
+    let vm = this;
+    if(status == 'realtor') {
+      this.globalId = id;
+      this.globalStatus = status;
+      window.onbeforeunload = function(){
+        vm.saveCheckedRealty(vm.globalId, vm.globalStatus);
+      }
+    } else if (status == 'agency'){
+      this.saveCheckedRealty(id, status);
+    }
+    this.needNextStep = true;
+  }
+  
+  saveCheckedRealty(id, status){
     Meteor.call('takeRealty', id, status, (err, result)=> {
       if (err) {
         console.log('err: ' + err);

@@ -109,6 +109,8 @@ if (Meteor.isServer) {
           'realtor.isExclusive': 1,
           'owner.comission': 1,
           'owner.isComission': 1,
+          'operator.comment': 1,
+          'operator.oceanAdd': 1,
           createdAt: 1,
           floor: 1,
           floormax: 1,

@@ -34,5 +34,9 @@ export const RealtyOperatorSchema = new SimpleSchema({
     type: String,
     max: 500,
     optional: true
+  },
+  oceanAdd: {
+    type: Number,
+    optional: true
   }
 });
