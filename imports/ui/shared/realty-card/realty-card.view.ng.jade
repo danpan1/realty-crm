@@ -1,23 +1,25 @@
-div(md-whiteframe='1')
-    div(layout='column' ng-if='realtyCard.show == true').mv-8
-    div(layout='row').newList
-
+div().newList.mv-8.newList__blue
+    div(layout='column' ng-if='realtyCard.show == true')
+    div(layout='row')
         // 1-ая колонка - ID и Новая
-        div(layout='column').newList_ID.md-body-1.ph-16.pv-8
-            div id {{::realtyCard.realty._id | price}}
-            div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "new"')
-                span().newList__new-connections.mv-0 Новая связь
-                md-checkbox(ng-click = 'realtyCard.changeRelationType("offers", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
-                ng-model='realtyCard.readden'
-                flex flex-offset='5'
-                aria-label="Checkbox 1").md-primary.md-subhead.mb-0
-            div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "offers"')
-                span().mv-8 Прочитано
-                md-checkbox(ng-click = 'realtyCard.changeRelationType("new", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
-                ng-true-value = 'undefined'
-                ng-model = 'realtyCard.asdf'
-                flex flex-offset='5'
-                aria-label="Checkbox 2").md-primary.md-subhead.mb-0
+        div(layout='column').newList_ID.md-body-1
+            div().newList__blue-label.text-bold.pl-16 Эксклюзив!
+            div().newList__green-label.text-bold.pl-16 Платит 30% комиссии
+            div().ph-16.pv-8
+                div id {{::realtyCard.realty._id | price}}
+                div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "new"')
+                    span().newList__new-connections.mv-0 Новая связь
+                    md-checkbox(ng-click = 'realtyCard.changeRelationType("offers", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
+                    ng-model='realtyCard.readden'
+                    flex flex-offset='5'
+                    aria-label="Checkbox 1").md-primary.md-subhead.mb-0
+                div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "offers"')
+                    span().mv-8 Прочитано
+                    md-checkbox(ng-click = 'realtyCard.changeRelationType("new", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
+                    ng-true-value = 'undefined'
+                    ng-model = 'realtyCard.asdf'
+                    flex flex-offset='5'
+                    aria-label="Checkbox 2").md-primary.md-subhead.mb-0
         md-divider
 
 
@@ -70,18 +72,15 @@ div(md-whiteframe='1')
 
 
         //6.1 УДОБСТВа
-        div(layout='column' layout-align='space-between start' ng-if="realtyCard.realtylisttype !== 'connections'").newList_contacts.ph-16.pv-8
+        div(ng-if="realtyCard.realtylisttype !== 'connections'").newList_contacts.ph-16.pv-8
             conditions(conditions='realtyCard.realty.details.conditions')
         md-divider
 
-
-
-
-
         //7-ая Скрыть Сохранить
-        div(layout='column' layout-align="space-between left").newList_Actions.ph-16.pv-8
-            div(layout="column" layout-align="space-between start")
-
+        div(layout='column' layout-align="space-between left").newList_Actions
+            div().newList__income-blue.ph-16.pv-8 20 000 - 40 000
+            div(layout="column" layout-align="space-between center").ph-16.pv-8
+                
                 md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
                 ng-if='realtyCard.relationType === "new" || realtyCard.relationType === "offers"' md-no-ink).md-simple-button.realty-card__btn-save.mv-8.mh-0.p-0.text-left Сохранить
                 
@@ -106,21 +105,25 @@ div(md-whiteframe='1')
                 ng-click='realtyCard.sendRealtyRelation(realtyCard.realty._id)' md-no-ink).client-card__link.text-left.m-0.p-0 Выбрать объект
 
 
-
-
-
-    // Подоробное объявление
-    div(ng-show="realtyCard.ngShowDescr").ph-32.pb-16
+    // Подробное объявление
+    div(ng-show="realtyCard.ngShowDescr").newList__description-blue.ph-32.pb-16
         div(ng-if="!realtyCard.realtylisttype").relative
-            div(ng-if='realtyCard.realtyIsTaken' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам. Завершите его проверку
             p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
+            p 
+                | #[strong Комментарий колцентра:] текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст 
+                | текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
             div(layout='row')
                 md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
-            h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
-            h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyStreet}}, {{realtyCard.realtyHouse}}
-            div(ng-if='!realtyCard.isAgent && !realtyCard.objectAdded && realtyCard.realtyPhone' layout="row")
-                md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
-                md-button(ng-click="realtyCard.agency(realtyCard.realty._id)").md-raised.realty-card__agent.ml-16.ph-16 Агент
+            p().md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
+            p().md-title.text-normal 1) +7 925 111 22 33  Александр
+            p().md-title.text-normal 2) #[a(href='justa.html') Посмотреть источник объявления]
+            p().md-title.text-normal 3) Хотите продолжить с ним работать?
+            div(layout='row').mv-16
+                md-button(aria-label='Да').md-raised.newList__description-btn-large Да
+                md-button(aria-label='Нет').md-raised.newList__description-btn-large.mh-16 Нет
+            div(layout='row').mv-16
+                md-button(aria-label='Начать работать с объектом').md-raised.newList__description-btn-large Начать работать с объектом
+                md-button(aria-label='Продолжить выбор объектов').md-raised.newList__description-btn-large.mh-16 Продолжить выбор объектов
             div(ng-if='realtyCard.isAgent == true && realtyCard.objectAdded != true')
                 h3(flex).md-title Хотите продолжить с ним работать?
                 div(layout="row")
