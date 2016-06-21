@@ -55,9 +55,10 @@ div(md-whiteframe='2')
                         div(layout='row')
                             div(flex='50' layout='row' layout-align='space-between start')
                                 md-input-container(flex)
-                                    label Аренда
-                                    md-select(ng-model='outgoingCall.kvartiri')
-                                        md-option() Аренда
+                                    label Вид операции
+                                    md-select(ng-model='outgoingCall.realty.operation')
+                                        md-option(ng-value='operation.id',
+                                        ng-repeat="operation in outgoingCall.dictionary.operation") {{operation.name}}
                                 md-input-container(flex).ml-32
                                     label Квартиры
                                     md-select(ng-model='outgoingCall.kvartiri')
@@ -65,7 +66,7 @@ div(md-whiteframe='2')
 
                             div(flex='30' flex-offset='10')
                                 div(layout='row')
-                                    md-input-container(flex='70')
+                                    md-input-container(flex='70' ng-if='outgoingCall.realty.operation != 1')
                                         label Срок
                                         md-select(ng-model='outgoingCall.realty.type')
                                             md-option(ng-value='type.id',
@@ -152,7 +153,7 @@ div(md-whiteframe='2')
                             div(layout='row').mv-8
                                 md-button(type='submit' flex).outgoing-call__btn-save.md-success.md-raised.md-title.mh-0 Сохранить
                             div().mv-8
-                                div().outgoing-call__num-ads.md-title.text-center 50
+                                div().outgoing-call__num-ads.md-title.text-center {{outgoingCall.fullList}}
                                 div().outgoing-call__text-ads.md-body-1.text-center объявлений в очереди
 
 

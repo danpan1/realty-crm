@@ -6,7 +6,8 @@ Meteor.methods({
   parsingStats,
   operatorGet,
   operatorSave,
-  operatorSet
+  operatorSet,
+  callList
 });
 
 function parsingStats() {
@@ -37,6 +38,25 @@ function parsingStats() {
     return result;
     
   }
+}
+
+function callList () {
+  if (Meteor.isServer) {
+    
+    let result = Realty.aggregate([{
+      $group: {
+        _id: { 
+          status: "$status" 
+        },
+        count: { 
+          $sum: 1 
+        }
+      }
+    }])
+    
+    return result;
+  }
+  
 }
 
 function operatorGet() {
@@ -72,7 +92,7 @@ function operatorGet() {
     }, (error) => {
       if (error) {
         //console.log(error);
-        console.log(' === operatorGet ERROR === ')
+        setTimeout(function(){console.log(' === operatorGet ERROR === ')},100);
       } else {
         console.log('call recieved newObj');
       }
@@ -86,13 +106,12 @@ function operatorSave(realty) {
   if (Meteor.isServer) {
     realty.operator.id = Meteor.userId();
     realty.status = 'list';
-    console.log(realty.status);
     Realty.update({_id: realty._id}, {
       $set: realty
     }, (error) => {
       if (error) {
         //console.log(error);
-        console.log(' === operatorSave ERROR === ')
+        setTimeout(function(){console.log(' === operatorSave ERROR === ')},100);
       } else {
         console.log('operator save success');
       }
@@ -141,7 +160,7 @@ function operatorSet(data, notAvailable) {
     }, (error) => {
       if (error) {
         //console.log(error);
-        console.log(' === operatorSet ERROR === ')
+        setTimeout(function(){console.log(' === operatorSet ERROR === ')},100);
       } else {
         console.log(`operator ${data.status} success`);
       }

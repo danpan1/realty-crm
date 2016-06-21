@@ -21,6 +21,8 @@ class OutgoingCall {
     this.$timeout = $timeout;
     this.today = new Date();
     this.dictionary = dictionary;
+    this.fullList = 0;
+    this.getList();
     this.getNew();
   }
   
@@ -91,8 +93,10 @@ class OutgoingCall {
     if (vm.realty.comission) vm.realty.isCommission = 1; 
     vm.realty.address.districtId = district._id;
     vm.realty.address.districtName = district.name;
-    vm.realty.address.areaId = vm.realty.address.area._id;
-    vm.realty.address.areaName = vm.realty.address.area.name;
+    if (vm.realty.address.area) {
+      vm.realty.address.areaId = vm.realty.address.area._id;
+      vm.realty.address.areaName = vm.realty.address.area.name;
+    }
     vm.realty.status = 'list';
     console.log('save realty', vm.realty);
     Meteor.call('operatorSave', vm.realty, (error)=> {
@@ -100,6 +104,19 @@ class OutgoingCall {
         console.log('error', error);
       }
       vm.getNew();
+    });
+  }
+  
+  getList() {
+    Meteor.call('callList', (error, result)=> {
+      if (error) {
+        console.log('error', error);
+      } else {
+        for(var i in result) {
+          if(result[i]._id.status == 'new' || result[i]._id.status == 'later') this.fullList += result[i].count;
+        }
+        
+      }
     });
   }
 
