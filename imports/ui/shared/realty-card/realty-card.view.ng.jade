@@ -6,7 +6,13 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-16 Эксклюзив!
             div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16 Платит {{::realtyCard.realty.owner.comission}}% комиссии
             div().ph-16.pv-8
-                div id {{::realtyCard.realty._id | price}}
+                div(ng-show="realtyCard.ngShowDescr") id {{::realtyCard.realty._id | price}}
+                div(ng-show="!realtyCard.ngShowDescr && realtyCard.minutes > -1")
+                    div Объект исчезнет через
+                    div
+                        span {{realtyCard.minutes}}:
+                        span(ng-if='realtyCard.seconds < 10') 0
+                        span {{realtyCard.seconds}}
                 div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "new"')
                     span().newList__new-connections.mv-0 Новая связь
                     md-checkbox(ng-click = 'realtyCard.changeRelationType("offers", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
@@ -78,7 +84,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
         //7-ая Скрыть Сохранить
         div(layout='column' layout-align="space-between left").newList_Actions
-            div(ng-if='realtyCard.realty.type == 3 || realtyCard.realty.type == 4').newList__income-blue.ph-16.pv-8 {{(realtyCard.realty.price/2) | price}} - {{::realtyCard.realty.price | price}}
+            div(ng-if='realtyCard.realty.type == 3 || realtyCard.realty.type == 4').newList__income-blue.ph-16.pv-8 {{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}}
             div(layout="column" layout-align="space-between center").ph-16.pv-8
                 
                 md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'

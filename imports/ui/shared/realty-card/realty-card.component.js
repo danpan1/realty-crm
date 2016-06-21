@@ -44,29 +44,32 @@ class RealtyCard {
       }
     };
     
+    this.halfPrice = parseInt(this.realty.price / 2);
+    
     if(vm.realty.operator){
       let newTime = new Date().getTime();
       let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
-      let seconds = 298;//300 + parseInt(time);
-      this.minutes = parseInt(seconds / 60);
-      this.seconds = seconds - (this.minutes*60);
-      console.log(this.minutes+':'+this.seconds);
-      this.timeoutFunc = () => {
-        this.timeout(()=>{
-          this.seconds -= 1;
-          if(this.seconds < 0) {
-            this.minutes -= 1;
-            this.seconds = 59;
-          }
-          if(this.minutes < 0) {
-            this.realty.status = 'skip';
-            this.updateRealty(this.realty._id);
-          }
-          this.timeoutFunc();
-        },1000)
+      let seconds = 300 + parseInt(time);
+      if(seconds > 0){
+        this.minutes = parseInt(seconds / 60);
+        this.seconds = seconds - (this.minutes*60);
+        console.log(this.minutes+':'+this.seconds);
+        this.timeoutFunc = () => {
+          this.timeout(()=>{
+            this.seconds -= 1;
+            if(this.seconds < 0) {
+              this.minutes -= 1;
+              this.seconds = 59;
+            }
+            if(this.minutes < 0) {
+              this.realty.status = 'skip';
+              this.updateRealty(this.realty._id);
+            }
+            this.timeoutFunc();
+          },1000)
+        }
+        this.timeoutFunc(); 
       }
-      
-      console.log(this.seconds);
     }
 
   }
