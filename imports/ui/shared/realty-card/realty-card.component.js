@@ -78,6 +78,10 @@ class RealtyCard {
   changeRelationType(type, realtyId, clientId, isNew) {
     Meteor.call('changeRelationTypeInClient', type, realtyId, clientId, isNew);
   }
+  
+  nextStep (nextStep) {
+    console.log(nextStep);
+  }
 
   /**
    *

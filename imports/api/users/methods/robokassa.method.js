@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 import {Meteor} from 'meteor/meteor';
 import {Users} from '/server/users.model.js';
 import {HTTP} from 'meteor/http';
@@ -30,4 +30,4 @@ export function roboKassaTest() {
     r.checkPayment(req);
 
   }
-}
+}*/
