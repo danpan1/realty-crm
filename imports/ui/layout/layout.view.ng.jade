@@ -38,3 +38,26 @@ div(flex, layout='row' layout-align='center none')
     md-content#content(flex,md-whiteframe="4", layout="column", layout-align='space-between center')
         div#mainContainer
             ui-view
+
+// Virtual Tour
+div().welcome-tour.default-overlay.default-overlay__visible
+div().welcome-tour__step.welcome-tour__step-animated
+    div().welcome-tour__step-sidebar.welcome-tour__step-sidebar-right
+        h2().md-display-1.welcome-tour__step-sidebar-title Урок 1
+        div().welcome-tour__step-sidebar-text
+            p().md-body-1
+                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nulla odit illum aut quam, deleniti, officia necessitatibus. Dolor culpa, tenetur esse nostrum! Deleniti totam natus unde odio pariatur reprehenderit quam molestias tempora fuga laboriosam tempore, alias suscipit quasi, voluptatem ducimus sunt obcaecati iste cupiditate quibusdam. 
+            p().md-body-1
+                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nulla odit illum aut quam, deleniti, officia necessitatibus. Dolor culpa, tenetur esse nostrum! Deleniti totam natus unde odio pariatur reprehenderit quam molestias tempora fuga laboriosam tempore, alias suscipit quasi, voluptatem ducimus sunt obcaecati iste cupiditate quibusdam. 
+        div().welcome-tour__step-controls
+            div().welcome-tour__step-controls-control.left
+                md-button().md-raised Назад
+            div().welcome-tour__step-controls-control.center
+                div().welcome-tour__step-controls-steps
+                    div().welcome-tour__step-controls-steps-step.current
+                    div().welcome-tour__step-controls-steps-step
+                    div().welcome-tour__step-controls-steps-step
+                    div().welcome-tour__step-controls-steps-step
+
+            div().welcome-tour__step-controls-control.right
+                md-button().md-raised Далее
