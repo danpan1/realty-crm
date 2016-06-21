@@ -11,9 +11,10 @@ import './parsing-stats.view.html';
 
 class ParsingStats {
   /* @ngInject */
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $timeout) {
     $reactive(this).attach($scope);
     let vm = this;
+    this.$timeout = $timeout; 
     this.dictionary = dictionary;
     
     
@@ -22,15 +23,18 @@ class ParsingStats {
         console.log('error');
         console.log(error);
       } else {
-        this.reasons = result; 
-        this.all = 0;
-        result.map((item) => {
-          this.all += item.count;
-        }) 
-        for(var i in this.reasons){
-          this.reasons[i].percent = Math.ceil((this.reasons[i].count * 100 / this.all) * 100 ) / 100;
-        };
-        console.log(this.reasons);
+        
+        this.$timeout(()=>{
+          this.reasons = result; 
+          this.all = 0;
+          result.map((item) => {
+            this.all += item.count;
+          }) 
+          for(var i in this.reasons){
+            this.reasons[i].percent = Math.ceil((this.reasons[i].count * 100 / this.all) * 100 ) / 100;
+          };
+          console.log(this.reasons);
+        });
       }
     });
     

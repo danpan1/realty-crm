@@ -91,7 +91,7 @@ function operatorGet() {
       $set: {status: 'call', 'operator.id': Meteor.userId()}
     }, (error) => {
       if (error) {
-        //console.log(error);
+        console.log(error);
         setTimeout(function(){console.log(' === operatorGet ERROR === ')},100);
       } else {
         console.log('call recieved newObj');
@@ -105,12 +105,12 @@ function operatorSave(realty) {
 
   if (Meteor.isServer) {
     realty.operator.id = Meteor.userId();
-    realty.status = 'list';
+    realty.status = 'ocean';
     Realty.update({_id: realty._id}, {
       $set: realty
     }, (error) => {
       if (error) {
-        //console.log(error);
+        console.log(error);
         setTimeout(function(){console.log(' === operatorSave ERROR === ')},100);
       } else {
         console.log('operator save success');
@@ -159,7 +159,7 @@ function operatorSet(data, notAvailable) {
       $set: {status: data.status, operator: operatorData}
     }, (error) => {
       if (error) {
-        //console.log(error);
+        console.log(error);
         setTimeout(function(){console.log(' === operatorSet ERROR === ')},100);
       } else {
         console.log(`operator ${data.status} success`);

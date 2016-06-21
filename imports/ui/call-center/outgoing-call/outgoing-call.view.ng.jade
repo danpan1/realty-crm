@@ -18,23 +18,9 @@ div(md-whiteframe='2')
                     md-button(ng-click="outgoingCall.agency('agency')").outgoing-call__btn-agency.md-block.md-amber.md-raised.ph-16 Агентство
         div(flex='35').outgoing-call__inner.pv-16
             div(layout='column' layout-align='space-between center')
-                div(layout='row' layout-align='center center')
-                    md-input-container().mt-8
-                        label Квартиры
-                        md-select(ng-model='outgoingCall.kvartiri')
-                            md-option() Квартиры
-                    md-input-container().mt-8
-                        label Срок
-                        md-select(ng-model='outgoingCall.realty.type')
-                            md-option(ng-value='type.id',
-                            ng-repeat="type in outgoingCall.dictionary.type") {{type.name}}
-                    md-input-container().mt-8
-                        label Срок
-                        md-select(ng-model='outgoingCall.realty.type')
-                            md-option(ng-value='type.id',
-                            ng-repeat="type in outgoingCall.dictionary.type") {{type.name}}
+                date-time-picker(ng-model="outgoingCall.datePicked" total-days = "14" start-date='outgoingCall.today')
                 div
-                    md-button(aria-label='Перезвонить').md-primary.md-raised.ph-16.outgoing-call__btn-call Перезвонить
+                    md-button(aria-label='Перезвонить' ng-click="outgoingCall.setResolution('later', 'laterDatePicked')").md-primary.md-raised.ph-16.outgoing-call__btn-call Перезвонить
         div(flex='20').pr-32.pv-16
             div(layout='column' layout-align='space-between center').outgoing-call__header-col
                 md-button(ng-click="outgoingCall.setResolution('archive')").mr-0 Не актуально

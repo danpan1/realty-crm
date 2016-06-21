@@ -21,8 +21,6 @@ class OutgoingCall {
     this.$timeout = $timeout;
     this.today = new Date();
     this.dictionary = dictionary;
-    this.fullList = 0;
-    this.getList();
     this.getNew();
   }
   
@@ -107,17 +105,26 @@ class OutgoingCall {
     });
   }
   
-  getList() {
+  getList(isStandart) {
     Meteor.call('callList', (error, result)=> {
       if (error) {
         console.log('error', error);
       } else {
-        for(var i in result) {
-          if(result[i]._id.status == 'new' || result[i]._id.status == 'later') this.fullList += result[i].count;
-        }
-        
+        this.$timeout(()=>{
+          let counted = 0;
+          for(var i in result) {
+            if(result[i]._id.status == 'new' || result[i]._id.status == 'later' || result[i]._id.status == 'call') counted += result[i].count;
+          }
+          this.fullList = counted;
+        })
       }
     });
+    if(isStandart || !this.firstCount){
+      this.$timeout(()=>{
+        this.getList(true);
+      },2000)
+      if (!this.firstCount) this.firstCount = true;
+    }
   }
 
   getNew() {
@@ -146,6 +153,8 @@ class OutgoingCall {
           vm.realty.exclusive = true;
         }
       });
+      
+      this.getList(false);
       // this.realty.address.subways = ['FRmpz68NzBxzoPQJ7'];
 
     });

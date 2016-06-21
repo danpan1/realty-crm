@@ -11,7 +11,7 @@ if (Meteor.isServer) {
       if (this.userId) {
         selector = {
           $or: [
-            {status: 'new'},
+            {status: 'ocean'},
             {status: 'taken', 'realtor.id': this.userId}
           ]
         };
