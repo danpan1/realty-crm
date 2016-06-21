@@ -247,6 +247,7 @@ class RealtyCard {
         console.log('err: ' + err);
       } else {
         console.log(result);
+        this.needNextStep = true;
       }
     });
   }

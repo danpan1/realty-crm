@@ -118,24 +118,25 @@ div(md-whiteframe='1' ng-class='{"newList__blue":realtyCard.realty.realtor.isExc
             p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
             div(layout='row')
                 md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
-            p(flex ng-if='realtyCard.realtyPhone !== undefined').md-title 1) {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
-            p(flex).md-title 2) 
-                a(href='#') Посмотреть источник объявления
-            p(flex).md-title 3) Хотите продолжть с ним работать?
-            //h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyStreet}}, {{realtyCard.realtyHouse}}
-            //div(ng-if='!realtyCard.isAgent && !realtyCard.objectAdded && realtyCard.realtyPhone' layout="row")
-                md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
-                md-button(ng-click="realtyCard.agency(realtyCard.realty._id)").md-raised.realty-card__agent.ml-16.ph-16 Агент
-            div() 
-                //ng-if='realtyCard.isAgent == true && realtyCard.objectAdded != true'
-                div(layout="row")
-                    md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-deafult Да 
-                    md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'agency')").md-raised.md-deafult Нет
-                div(layout="row")
-                    md-button(ng-click="realtyCard.nextStep(false)").md-raised.md-deafult Начать работать с объектом
-                    md-button(ng-click="realtyCard.nextStep(true)").md-raised.md-deafult Продолжить выбор объектов
-            h3(flex ng-if='realtyCard.objectAdded == true').md-title Объект сохранен в раздел #[a «Мои объекты»]
-            //md-button(ng-click="realtyCard.ngShowDescr =! realtyCard.ngShowDescr") Закрыть
+            div(ng-if='realtyCard.realtyPhone !== undefined')
+                h3(flex).md-title Объект сохранен в раздел #[a «Мои объекты»]
+                p(flex).md-title 1) {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
+                p(flex).md-title 2) 
+                    a(href='#') Посмотреть источник объявления
+                p(flex).md-title 3) Хотите продолжть с ним работать?
+                //h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyStreet}}, {{realtyCard.realtyHouse}}
+                //div(ng-if='!realtyCard.isAgent && !realtyCard.objectAdded && realtyCard.realtyPhone' layout="row")
+                    md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
+                    md-button(ng-click="realtyCard.agency(realtyCard.realty._id)").md-raised.realty-card__agent.ml-16.ph-16 Агент
+                div() 
+                    //ng-if='realtyCard.isAgent == true && realtyCard.objectAdded != true'
+                    div(layout="row")
+                        md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-deafult Да 
+                        md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'agency')").md-raised.md-deafult Нет
+                    div(layout="row" ng-if='realtyCard.needNextStep')
+                        md-button(ng-click="realtyCard.nextStep(false)").md-raised.md-deafult Начать работать с объектом
+                        md-button(ng-click="realtyCard.nextStep(true)").md-raised.md-deafult Продолжить выбор объектов
+            //md-button(ng-click="realtyCard.ngShowDescr != realtyCard.ngShowDescr") Закрыть
         div(ng-if="realtyCard.realtylisttype == 'connections'")
             div(layout="row")
                 p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
