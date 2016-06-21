@@ -59,6 +59,11 @@ if (Meteor.isServer) {
           if (search.type) {
             selector.type = search.type;
           }
+          /*if (search.type == 1) {
+            selector.type = {$in: [1,2]};
+          } else {
+            selector.type = {$in: [3,4]};
+          }*/
           /* END ТИП ОПЕРАЦИИ */
 
           /* УДОБСТВА */
@@ -101,6 +106,9 @@ if (Meteor.isServer) {
           'details.renovation': 1,
           'details.images.url': 1,
           'details.conditions': 1,
+          'realtor.isExclusive': 1,
+          'owner.comission': 1,
+          'owner.isComission': 1,
           createdAt: 1,
           floor: 1,
           floormax: 1,

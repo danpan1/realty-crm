@@ -36,7 +36,6 @@ class RealtyFilter {
     if (window.localStorage["filter"] != undefined && window.localStorage["filter"]) {
       console.log(JSON.parse(window.localStorage["filter"]));
       this.filter = JSON.parse(window.localStorage["filter"]);
-      this.filter.type = this.stateParams.operation == 'sale' ? 1 : 4;
       var roomList = this.filter.roomcount;
       this.filter.roomcount = [];
       for(var i in roomList) {
@@ -56,6 +55,11 @@ class RealtyFilter {
         }
       }
     }
+    this.filter.type = this.stateParams.operation == 'sale' ? 1 : 4;
+    
+    console.log('FILTER: ');
+    console.log(this.filter);
+    
   }
   
   clearFilter () {

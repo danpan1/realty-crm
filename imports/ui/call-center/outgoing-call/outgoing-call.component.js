@@ -21,6 +21,8 @@ class OutgoingCall {
     this.$timeout = $timeout;
     this.today = new Date();
     this.dictionary = dictionary;
+    this.type = 4;
+    this.newBuilding = 1;
     this.getNew();
   }
   
@@ -84,13 +86,24 @@ class OutgoingCall {
       return;
     }
     vm.isLoading = true;
-    let district = {
-      _id: vm.realty.address.districtId._id,
-      name: vm.realty.address.districtId.name
-    };
-    if (vm.realty.comission) vm.realty.isCommission = 1; 
-    vm.realty.address.districtId = district._id;
-    vm.realty.address.districtName = district.name;
+    if (vm.realty.owner.comission) vm.realty.owner.isComission = true; 
+    console.log(vm.operation);
+    if (vm.operation == 1) {
+      vm.realty.type = vm.newBuilding == 1 ? 2 : 1 ;
+    } else if (vm.operation == 0) {
+      vm.realty.type = vm.type == 3 ? 3 : 4;
+    }    
+    
+    console.log(vm.realty.type);
+    
+    if (vm.realty.address.districtId){
+      let district = {
+        _id: vm.realty.address.districtId._id,
+        name: vm.realty.address.districtId.name
+      };
+      vm.realty.address.districtId = district._id;
+      vm.realty.address.districtName = district.name;
+    }
     if (vm.realty.address.area) {
       vm.realty.address.areaId = vm.realty.address.area._id;
       vm.realty.address.areaName = vm.realty.address.area.name;
@@ -149,7 +162,8 @@ class OutgoingCall {
         if (!result) {
           vm.isLoading = true;
         } else {
-          vm.realty.operation = vm.realty.operation || 0;
+          vm.operation = vm.operation || 0;
+          vm.realty.kvartiri = 1;
           vm.realty.exclusive = true;
         }
       });

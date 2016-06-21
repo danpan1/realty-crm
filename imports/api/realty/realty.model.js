@@ -8,6 +8,7 @@ import {ParseDetailsSchema} from './schemas/parseDetails.schema';
 import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
 import {RealtyRealtorSchema} from './schemas/realty-realtor.schema';
 import {RentDetailsSchema} from './schemas/details.schema';
+import {OwnerSchema} from './schemas/owner.schema';
 import {Roles} from 'meteor/alanning:roles';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {RelationsSchema} from '../relations/relations.schema';
@@ -41,24 +42,12 @@ Realty.Schema = new SimpleSchema({
   address: {
     type: AddressSchema
   },
-  comission: { // размер комиссии
-    type: String,
-    optional: true
-  },
-  comissionLoyal: { // платит или нет комиссию
-    type: Boolean,
-    optional: true
-  },
   contacts: {
     type: [ContactsSchema],
     optional: true
   },
   createdAt: {
     type: Date,
-    optional: true
-  },
-  deposit: {  // Залог
-    type: Number,
     optional: true
   },
   details: {
@@ -93,6 +82,10 @@ Realty.Schema = new SimpleSchema({
     type: RealtyOperatorSchema,
     optional: true
   }, //  TODOD в последнюю очередь реклама, рекламщик, продающий заголовок
+  owner: {
+    type: OwnerSchema,
+    optional: true
+  },
   parseDetails: {
     /*когда человек на нашем сайте добавляет этого поля не будет*/
     type: ParseDetailsSchema,
@@ -129,7 +122,7 @@ Realty.Schema = new SimpleSchema({
   },
   status: {
     type: String,
-    allowedValues: ['new', 'agency', 'taken', 'realtor', 'sale', 'sold', 'archive', 'trash', 'call', 'ocean', 'later']
+    allowedValues: ['new', 'agency', 'taken', 'realtor', 'sale', 'sold', 'archive', 'trash', 'call', 'ocean', 'later', 'skip']
   },
   title: { // Title на авито. Загловок основной.
     type: String,

@@ -12,6 +12,12 @@ w-100{
   }
 }
 
+.cursor{
+  &-pointer{
+    cursor: pointer;
+  }
+}
+
 ui-view {
   background-color: #bbdefb;
 }
