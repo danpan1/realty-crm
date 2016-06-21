@@ -1,6 +1,10 @@
 div(md-whiteframe='2').mt-16.ph-32.pv-16
     div(layout='column')
+        
         div(flex)
+            md-button(ng-click='outgoingCall.copyInfo()').md-raised.md-warn Copy
+            div(style='opacity:0;position:fixed;left:-100%;')
+                input(value='{{outgoingCall.realty.contacts[0].phones[0].phone}} - {{outgoingCall.realty.contacts[0].name}}' id="hiddenInfo")
             strong().md-title {{outgoingCall.realty.contacts[0].phones[0].phone}} &mdash;
             strong().md-title  {{outgoingCall.realty.contacts[0].name}}
         div(layout='row' layout-align="start start")
@@ -24,20 +28,26 @@ div(md-whiteframe='2').mt-16.ph-32.pv-16
                     md-button(ng-click="outgoingCall.setResolution('analyze')").mr-0 Пропустить
 
 div(md-whiteframe='2').ph-32.pv-16
+    div(layout='row')
+        div(flex='50' ng-repeat='image in outgoingCall.realty.details.images | limitTo:2')
+            img(ng-src='{{image.url}}')
+    div {{outgoingCall.realty.details.descr}}
+
+div(md-whiteframe='2').ph-32.pv-16
     form(ng-submit='outgoingCall.save(realtyCallForm.$valid)' name='realtyCallForm')
         div(layout='column')
             div(layout='row')
                 div(flex='60' layout='row' layout-align='space-between start')
                     md-input-container()
                         label Вид операции
-                        md-select(ng-model='outgoingCall.operation')
+                        md-select(ng-model='outgoingCall.realty.operation')
                             md-option(ng-value='operation.id',
                             ng-repeat="operation in outgoingCall.dictionary.operation") {{operation.name}}
                     md-input-container()
                         label Квартиры
                         md-select(ng-model='outgoingCall.kvartiri')
                             md-option() Квартиры
-                    md-input-container()
+                    md-input-container(ng-if='outgoingCall.realty.operation != 1')
                         label Срок
                         md-select(ng-model='outgoingCall.realty.type')
                             md-option(ng-value='type.id',
@@ -50,8 +60,8 @@ div(md-whiteframe='2').ph-32.pv-16
                     md-input-container(flex-offset='5')
                         label Комнат
                         md-select(ng-model='outgoingCall.realty.roomcount' required='')
-                            md-option(ng-value='room',
-                            ng-repeat="room in outgoingCall.dictionary.roomcount") {{room}}
+                            md-option(ng-value='room.id',
+                            ng-repeat="room in outgoingCall.dictionary.roomcount") {{room.name}}
 
             div(layout='row' layout-align='start end').mv-16
                 div(flex='60')
@@ -76,8 +86,8 @@ div(md-whiteframe='2').ph-32.pv-16
                     ng-if='!outgoingCall.isLoading')
 
                 div(layout='row' layout-align='start end' flex='40' flex-offset='5')
-                    realty-street(ng-model='outgoingCall.realty.address.meta.street'
-                    house = 'outgoingCall.realty.address.meta.house')
+                    realty-street(ng-model='outgoingCall.realty.address.street'
+                    house='outgoingCall.realty.address.house')
                     //md-input-container().mv-0.pb-0
                     //    input(ng-model='realtyFilter.filter.floorFrom' placeholder='Таганская')
                     //md-input-container(flex='20' flex-offset='5').mv-0.pb-0
@@ -106,6 +116,14 @@ div(md-whiteframe='2').ph-32.pv-16
                 div(flex='60')
                     div(layout='row' layout-wrap)
                         realty-conditions(ng-model='outgoingCall.realty.details.conditions' required='')
+            div
+                span Готов ли платить комиссию
+                md-input-container()
+                    input(type="text" ng-model='outgoingCall.realty.comission')
+                span %
+            div
+                md-checkbox(name="comissionloyal" ng-model='outgoingCall.realty.exclusive' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead.mb-0 {{ outgoingCall.realty.exclusive ? 'Готов' : 'Не готов'}} на эксклюзив
+                
             div(layout='row').mv-16
                 div(flex='60')
                     h3().md-subhead Собственник:

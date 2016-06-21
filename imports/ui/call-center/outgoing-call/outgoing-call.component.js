@@ -22,9 +22,14 @@ class OutgoingCall {
     this.today = new Date();
     this.dictionary = dictionary;
     this.getNew();
-
   }
-
+  
+  copyInfo () {
+    var input = document.getElementById("hiddenInfo");
+    input.select();
+    document.execCommand("copy");
+  }
+  
   setResolution(status, laterCall) {
     const vm = this;
     let notAvailable = '';
@@ -83,10 +88,12 @@ class OutgoingCall {
       _id: vm.realty.address.districtId._id,
       name: vm.realty.address.districtId.name
     };
+    if (vm.realty.comission) vm.realty.isCommission = 1; 
     vm.realty.address.districtId = district._id;
     vm.realty.address.districtName = district.name;
     vm.realty.address.areaId = vm.realty.address.area._id;
     vm.realty.address.areaName = vm.realty.address.area.name;
+    vm.realty.status = 'list';
     console.log('save realty', vm.realty);
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {
@@ -117,6 +124,9 @@ class OutgoingCall {
         // vm.realty.details.conditions = ['kitchen_furniture','tv'];
         if (!result) {
           vm.isLoading = true;
+        } else {
+          vm.realty.operation = vm.realty.operation || 0;
+          vm.realty.exclusive = true;
         }
       });
       // this.realty.address.subways = ['FRmpz68NzBxzoPQJ7'];

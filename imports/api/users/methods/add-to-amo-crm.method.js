@@ -88,6 +88,7 @@ export function getResponseTest(action) {
 
 export function amoCrmUnsort() {
     if (Meteor.isServer && Meteor.userId()) {
+      let newdate = new Date().getTime();
       let unsortUrl = 'https://winvest.amocrm.ru/api/unsorted/add?type=json&api_key=bab2e7256c31d9273a8fb89638fde336&login=ilya.karev1000@gmail.com';
       let unsortOptions = {
         "data": {
@@ -96,7 +97,7 @@ export function amoCrmUnsort() {
               "category": "mail",
               "add": {
                 "source": "http://getrent.ru",
-                "source_uid": null,
+                //"source_uid": null,
                 "data": [
                   {
                     "leads": {
@@ -124,6 +125,7 @@ export function amoCrmUnsort() {
                       "email":"ilya.karev1000@gmail.com",
                       "name":"Мир и недвижимость"
                     },
+                    "date": newdate,
                     "subject":"Регистрация нового пользователя",
                     "thread_id":null,
                     "message_id":null

@@ -71,7 +71,8 @@ function operatorGet() {
       $set: {status: 'call', 'operator.id': Meteor.userId()}
     }, (error) => {
       if (error) {
-        console.log(error);
+        //console.log(error);
+        console.log(' === operatorGet ERROR === ')
       } else {
         console.log('call recieved newObj');
       }
@@ -85,11 +86,13 @@ function operatorSave(realty) {
   if (Meteor.isServer) {
     realty.operator.id = Meteor.userId();
     realty.status = 'list';
+    console.log(realty.status);
     Realty.update({_id: realty._id}, {
       $set: realty
     }, (error) => {
       if (error) {
-        console.log(error);
+        //console.log(error);
+        console.log(' === operatorSave ERROR === ')
       } else {
         console.log('operator save success');
       }
@@ -100,17 +103,16 @@ function operatorSave(realty) {
 /**
  * Устанавливаем резолюцию после звонка.
  * @param data
- * @param notAvailable Если не отвечает абонент, переносим звонок на час позже. Если 3 раза не отвечает удаляем
+ * @param notAvailable Если не отвечает абонент, переносим звонок. Если 3 раза не отвечает удаляем
  */
 function operatorSet(data, notAvailable) {
 
   if (Meteor.isServer) {
 
     let countLaterCalls = Realty.findOne({_id: data._id}).operator.laterCount;
-    if (!countLaterCalls)
-      countLaterCalls = 0;
-
-    if (countLaterCalls == 2) data.status = 'analyze';
+    
+    if (!countLaterCalls) countLaterCalls = 0;
+    if (countLaterCalls == 3) data.status = 'analyze';
 
     let operatorData = {
       id: Meteor.userId(),
@@ -126,7 +128,9 @@ function operatorSet(data, notAvailable) {
     //когда собственник не отвечает по телефону
     if (notAvailable == 'notAvailable') {
       let date = new Date();
-      date.setHours(date.getHours() + 1);
+      if(countLaterCalls == 0) date.setHours(date.getHours() + 3);
+      if(countLaterCalls == 1) date.setHours(date.getHours() + 24);
+      if(countLaterCalls == 2) date.setHours(date.getHours() + 168);
       // date.setMinutes(date.getMinutes() + 1);
       operatorData.laterCall = date;
       operatorData.laterCount = countLaterCalls + 1;
@@ -136,7 +140,8 @@ function operatorSet(data, notAvailable) {
       $set: {status: data.status, operator: operatorData}
     }, (error) => {
       if (error) {
-        console.log(error)
+        //console.log(error);
+        console.log(' === operatorSet ERROR === ')
       } else {
         console.log(`operator ${data.status} success`);
       }
