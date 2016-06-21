@@ -1,6 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty';
-import {ParserCounters} from '/imports/api/parsercounters';
+import {ParserCounters} from '/imports/api/parsercounters/';
 
 Meteor.methods({
   parsingStats,
