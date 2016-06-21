@@ -124,7 +124,7 @@ class Feedback {
         }
       });
   }
-  
+  /*
   testRoboKassa () {
     Meteor.call('roboKassaTest', this.info, (error, result) => {
         if (error) {
@@ -136,7 +136,7 @@ class Feedback {
         }
       });
   }
-  
+  */
   /*send () {
     if(this.proposalSent == 0){
       this.proposalSent = 1;

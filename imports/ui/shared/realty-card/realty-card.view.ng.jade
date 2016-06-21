@@ -118,17 +118,16 @@ div(md-whiteframe='1' ng-class='{"newList__blue":realtyCard.realty.realtor.isExc
             p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
             div(layout='row')
                 md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
-            div(flex ng-if='realtyCard.realtyPhone !== undefined').md-title 1) {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
-            div(flex).md-title 2) 
+            p(flex ng-if='realtyCard.realtyPhone !== undefined').md-title 1) {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
+            p(flex).md-title 2) 
                 a(href='#') Посмотреть источник объявления
-            div(flex).md-title 3) Хотите продолжть с ним работать?
+            p(flex).md-title 3) Хотите продолжть с ним работать?
             //h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyStreet}}, {{realtyCard.realtyHouse}}
             //div(ng-if='!realtyCard.isAgent && !realtyCard.objectAdded && realtyCard.realtyPhone' layout="row")
                 md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
                 md-button(ng-click="realtyCard.agency(realtyCard.realty._id)").md-raised.realty-card__agent.ml-16.ph-16 Агент
             div() 
                 //ng-if='realtyCard.isAgent == true && realtyCard.objectAdded != true'
-                h3(flex).md-title Хотите продолжить с ним работать?
                 div(layout="row")
                     md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-deafult Да 
                     md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'agency')").md-raised.md-deafult Нет
