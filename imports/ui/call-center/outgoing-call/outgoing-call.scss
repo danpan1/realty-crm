@@ -31,6 +31,10 @@ outgoing-call {
     min-width: 130px !important;
   }
 
+  &__info-copied{
+    color: #4CAF50 !important;
+  }
+
   &__inner {
     border-right: 1px solid #e1e1e1;
   }

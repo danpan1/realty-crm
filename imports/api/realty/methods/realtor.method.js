@@ -15,7 +15,8 @@ Meteor.methods({
   addRealtyToMyList,
   takeRealty,
   showRealtyPhone,
-  showRealtyDetails
+  showRealtyDetails,
+  updateRealty
 });
 
 /**
@@ -160,6 +161,25 @@ export function takeRealty(realtyId, status) {
       console.log('NOt paid');
       return 'NOt paid';
     }
+  }
+}
+export function updateRealty (id, status) {
+  if (Meteor.isServer) {
+    console.log('updateRealty')
+    let realty = Realty.findOne({_id: id});
+    if (!realty) {
+      return 'нет такого объекта';
+    }
+    if (status) {
+      Realty.update({_id: id}, {
+        $set: {
+          'status': status
+        }
+      });  
+      return realty.status;   
+    }
+  } else {
+    return 'Что-то пошло не так';
   }
 }
 

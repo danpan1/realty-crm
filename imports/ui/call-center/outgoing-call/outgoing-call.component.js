@@ -30,6 +30,7 @@ class OutgoingCall {
     var input = document.getElementById("hiddenInfo");
     input.select();
     document.execCommand("copy");
+    this.infoWasCopied = true;
   }
   
   setResolution(status, laterCall) {
@@ -57,6 +58,8 @@ class OutgoingCall {
       }
       vm.getNew();
     });
+
+    this.infoWasCopied = false;
 
   }
 
@@ -86,7 +89,7 @@ class OutgoingCall {
       return;
     }
     vm.isLoading = true;
-    if (vm.realty.owner.comission) vm.realty.owner.isComission = true; 
+    if (vm.realty.owner && vm.realty.owner.comission) vm.realty.owner.isComission = true; 
     console.log(vm.operation);
     if (vm.operation == 1) {
       vm.realty.type = vm.newBuilding == 1 ? 2 : 1 ;
@@ -170,6 +173,7 @@ class OutgoingCall {
           vm.realty.kvartiri = 1;
           vm.realty.exclusive = true;
         }
+        this.infoWasCopied = false;
       });
       
       this.getList(false);

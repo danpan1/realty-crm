@@ -112,36 +112,42 @@ class OneReview {
   uploadImages(filesNormal) {
     const vm = this;
     if (!filesNormal) {
+      this.showLoader = false;
       return;
     }
-    this.uploadImagesNormalLength = filesNormal.length;
-    let promises = [];
-    //Ресайзим
-    filesNormal.forEach((file)=> {
-      promises.push(this.resize.resize(file, 186, 139));
-    });
-    //КОгда все отресайзится тогда заливаем
-    this.qqq.all(promises).then((smallImages)=> {
-      this.uploadThumbnails(smallImages);
-    });
+    try {
+      this.uploadImagesNormalLength = filesNormal.length;
+      let promises = [];
+      //Ресайзим
+      filesNormal.forEach((file)=> {
+        promises.push(this.resize.resize(file, 186, 139));
+      });
+      //КОгда все отресайзится тогда заливаем
+      this.qqq.all(promises).then((smallImages)=> {
+        this.uploadThumbnails(smallImages);
+      });
 
-    let resultsImages = [];
-    S3.upload({
-      files: filesNormal,
-      path: ''
-    }, (error, result) => {
-      if (error) {
-        this.showLoader = false;
-        console.log(error);
-      } else {
-        vm.uploadImagesNormalLength--;
-        result.originalName = result.file.original_name;
-        resultsImages.push(result);
-        if (vm.uploadImagesNormalLength === 0) {
-          vm.saveImages(resultsImages);
+      let resultsImages = [];
+      S3.upload({
+        files: filesNormal,
+        path: ''
+      }, (error, result) => {
+        if (error) {
+          this.showLoader = false;
+          console.log(error);
+        } else {
+          vm.uploadImagesNormalLength--;
+          result.originalName = result.file.original_name;
+          resultsImages.push(result);
+          if (vm.uploadImagesNormalLength === 0) {
+            vm.saveImages(resultsImages);
+          }
         }
-      }
-    });
+      });
+    } catch (error) {
+      console.log(error);
+      this.showLoader = false;
+    }
   }
 
   saveImages(resultsImages) {

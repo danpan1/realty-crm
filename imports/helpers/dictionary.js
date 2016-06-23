@@ -112,6 +112,8 @@ export const dictionary = {
     {id: 1, name: 'транспортом'}
   ],
   type: [
+    {id: 1, name: 'вторичка'},
+    {id: 2, name: 'новостройка'},
     {id: 3, name: 'посуточно'},
     {id: 4, name: 'длительный срок'}
     //{id: 2, name: ''},

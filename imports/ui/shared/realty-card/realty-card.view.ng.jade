@@ -6,8 +6,8 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-16 Эксклюзив!
             div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16 Платит {{::realtyCard.realty.owner.comission}}% комиссии
             div().ph-16.pv-8
-                div(ng-show="realtyCard.ngShowDescr") id {{::realtyCard.realty._id | price}}
-                div(ng-show="!realtyCard.ngShowDescr && realtyCard.minutes > -1")
+                div(ng-show="realtyCard.ngShowDescr && !realtyCard.realtylisttype") id {{::realtyCard.realty._id | price}}
+                div(ng-show="realtyCard.minutes > -1" ng-if='!realtyCard.realtyIsTaken')
                     div Объект исчезнет через
                     div
                         span {{realtyCard.minutes}}:
@@ -44,23 +44,28 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         //3-ая колонка Цена и ремонт
         div(layout='column').newList_Price.ph-16.pv-8
             div.md-body-1.mb-8.price #[b {{::realtyCard.realty.price | price}}]
-            //div.md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
+            //div(ng-if='!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission').md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
         md-divider
 
         //4-ая колонка Фото
         div(layout='column' layout-align='center center').newList_Photo
-            div(ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
+            div(ng-if='(realtyCard.realty.realtor.isExclusive || realtyCard.realty.owner.comission) && realtyCard.realtyPhone === undefined && !realtyCard.realtyIsTaken').realty-card__hidden-img
+                span Остальные фото доступны только после добавления объекта
+                img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
+            div(ng-if='(!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission) || realtyCard.realtyPhone !== undefined || realtyCard.realtyIsTaken' ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
                 img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
                 div(ng-if='!realtyCard.noPhoto').icon-zoom
+            div(ng-if='!realtyCard.noPhoto').absolute.realty-card__images-qty {{realtyCard.realty.details.images.length}}
         md-divider
 
         //5-ая Инфо об объекте
         div().newList_Info.ph-16.pv-8
             div(layout='column' layout-align='space-between')
                 div().md-body-1.mb-8 {{::realtyCard.realty.roomcount}}-к квартира
-                div().md-body-1.mb-8 Длительный
-                //div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
-                div().md-body-1.mb-8 {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} {{::realtyCard.realty.square}}м2
+                div(ng-if='!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission')
+                    div().md-body-1.mb-8 Длительный
+                    //div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
+                    div().md-body-1.mb-8 {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} {{::realtyCard.realty.square}}м2
         md-divider
 
         //6-ая Телефонн Риэлтора и Объявление
@@ -78,8 +83,10 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
 
         //6.1 УДОБСТВа
-        div(ng-if="realtyCard.realtylisttype !== 'connections'").newList_contacts.ph-16.pv-8
+        div(ng-if="realtyCard.realtylisttype !== 'connections' || (!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission)").newList_contacts.ph-16.pv-8
             conditions(conditions='realtyCard.realty.details.conditions')
+            div
+                md-button(ng-if="realtyCard.realtylisttype === 'clientSuitauto' || realtyCard.realtylisttype === 'clientSuitexact'" ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Объявление
         md-divider
 
         //7-ая Скрыть Сохранить
@@ -113,9 +120,9 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
     // Подробное объявление
     div(ng-show="realtyCard.ngShowDescr").newList__description-blue.ph-32.pb-16
+        div(ng-if='realtyCard.realtyIsTaken' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам. Завершите его проверку
+        p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
         div(ng-if="!realtyCard.realtylisttype").relative
-            div(ng-if='realtyCard.realtyIsTaken' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам. Завершите его проверку
-            p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
             p 
                 | #[strong Комментарий колцентра:] {{realtyCard.realty.operator.comment}}
             div(layout='row')

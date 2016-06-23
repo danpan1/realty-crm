@@ -61,14 +61,13 @@ class RealtyCard {
               this.minutes -= 1;
               this.seconds = 59;
             }
-            if(this.minutes < 0) {
-              this.realty.status = 'skip';
-              this.updateRealty(this.realty._id);
-            }
-            this.timeoutFunc();
+            if(this.minutes < 0) this.updateRealty(this.realty._id, 'skip');
+            else this.timeoutFunc();
           },1000)
         }
         this.timeoutFunc(); 
+      } else {
+        if(this.realty.status != 'taken') this.updateRealty(this.realty._id, 'skip');
       }
     }
 
@@ -314,16 +313,15 @@ class RealtyCard {
     Meteor.call('setRelationFindRealty', this.clientId, realtyId, this.realtylisttype);
   }
 
-  updateRealty(id) {
-    Realty.update({_id: id}, {
-      $set: this.realty
-    }, (error) => {
-      if (error) {
-        console.log(error);
+  updateRealty(id, status) {
+    Meteor.call('updateRealty', id, status, (err, result)=> {
+      if (err) {
+        console.log('err: ' + err);
       } else {
-        console.log('call recieved newObj');
+        console.log(result);
       }
     });
+
   }
   
   onShowPhone (realtyId, ev) {

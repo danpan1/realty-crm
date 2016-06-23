@@ -99,12 +99,6 @@ export function amoCrmUnsort() {
                 "source": "http://getrent.ru",
                 "source_uid": null,
                 "data": {
-                  /*"leads": [
-                    {
-                      "name": 'Покупка открывашки для левшей',
-                      "price": '990'
-                    }
-                  ],*/
                   "contacts": [
                     {
                       "name":"Mister Twister"
