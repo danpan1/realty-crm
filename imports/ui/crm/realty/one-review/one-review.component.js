@@ -60,6 +60,13 @@ class OneReview {
     });
   }
 
+  beforeChange(files) {
+    if (files.length > 0) {
+      console.log(files);
+      this.showLoader = true;
+    }
+  }
+
   removeImage(image, index) {
     if (image.url === this.realty.image) {
       this.realty.image = '';
@@ -126,6 +133,8 @@ class OneReview {
     });
 
     let resultsImages = [];
+    console.log(filesNormal);
+
     S3.upload({
       files: filesNormal,
       path: ''
@@ -135,8 +144,10 @@ class OneReview {
         console.log(error);
       } else {
         vm.uploadImagesNormalLength--;
+        console.log(result);
         result.originalName = result.file.original_name;
         resultsImages.push(result);
+        console.log(result.file);
         if (vm.uploadImagesNormalLength === 0) {
           vm.saveImages(resultsImages);
         }
@@ -177,6 +188,7 @@ class OneReview {
     }
     this.uploadThumbnailsLength = files.length;
     let uploadResult = [];
+    console.log(files);
     S3.upload({
       files: files,
       path: ''
@@ -187,6 +199,8 @@ class OneReview {
       } else {
         this.uploadThumbnailsLength--;
         result.originalName = result.file.original_name;
+        console.log(result);
+        console.log(result.file);
         uploadResult.push(result);
         if (this.uploadThumbnailsLength === 0) {
           this.saveThumbnails(uploadResult);
