@@ -62,7 +62,6 @@ class OneReview {
 
   beforeChange(files) {
     if (files.length > 0) {
-      console.log(files);
       this.showLoader = true;
     }
   }
