@@ -122,7 +122,7 @@ Realty.Schema = new SimpleSchema({
   },
   status: {
     type: String,
-    allowedValues: ['new', 'agency', 'taken', 'realtor', 'sale', 'sold', 'archive', 'trash', 'call', 'ocean', 'later', 'skip']
+    allowedValues: ['new', 'agency', 'taken', 'realtor', 'sale', 'sold', 'archive', 'trash', 'call', 'ocean', 'later', 'skip', 'analyze']
   },
   title: { // Title на авито. Загловок основной.
     type: String,

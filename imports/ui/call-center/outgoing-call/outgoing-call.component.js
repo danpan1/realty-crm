@@ -34,6 +34,7 @@ class OutgoingCall {
   }
   
   setResolution(status, laterCall) {
+    this.showLoader = true;
     const vm = this;
     let notAvailable = '';
     vm.isLoading = true;
@@ -54,6 +55,7 @@ class OutgoingCall {
 
     Meteor.call('operatorSet', data, notAvailable, (error)=> {
       if (error) {
+        this.showLoader = false;
         console.log('error', error);
       }
       vm.getNew();
@@ -64,6 +66,7 @@ class OutgoingCall {
   }
 
   agency() {
+    this.showLoader = true;
     const vm = this;
     //добавляем телефон из объявления
     Agents.insert({
@@ -83,6 +86,7 @@ class OutgoingCall {
   }
 
   save(valid) {
+    this.showLoader = true;
     const vm = this;
     console.log(valid, 'valid');
     if (!valid) {
@@ -112,13 +116,16 @@ class OutgoingCall {
       vm.realty.address.areaName = vm.realty.address.area.name;
     }
     
-    var d = new Date().getTime();
-    vm.realty.operator.oceanAdd = d;
+    if ((vm.realty.owner && vm.realty.owner.isComission) || vm.realty.realtor.isExclusive) {
+      var d = new Date().getTime();
+      vm.realty.operator.oceanAdd = d;
+    }
     
     vm.realty.status = 'list';
     console.log('save realty', vm.realty);
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {
+        this.showLoader = false;
         console.log('error', error);
       }
       vm.getNew();
@@ -148,12 +155,14 @@ class OutgoingCall {
   }
 
   getNew() {
+    this.showLoader = true;
     this.isLoading = true;
     const vm = this;
     Meteor.call('operatorGet', (error, result)=> {
       // vm.realty.address.subways = ['FRmpz68NzBxzoPQJ7'];
 
       if (error) {
+        this.showLoader = false;
         console.log('error', error);
       }
 
@@ -167,11 +176,14 @@ class OutgoingCall {
         console.log('новый объект', vm.realty);
         // vm.realty.details.conditions = ['kitchen_furniture','tv'];
         if (!result) {
+          this.showLoader = false;
           vm.isLoading = true;
         } else {
+          this.showLoader = false;
           vm.operation = vm.operation || 0;
           vm.realty.kvartiri = 1;
-          vm.realty.exclusive = true;
+          if(!vm.realty.realtor) vm.realty.realtor = {isExclusive: true}
+          else vm.realty.realtor.isExclusive = true;
         }
         this.infoWasCopied = false;
       });

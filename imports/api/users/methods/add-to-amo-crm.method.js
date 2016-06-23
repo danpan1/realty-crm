@@ -58,8 +58,9 @@ export function getResponseTest(action) {
         "email": "ilya.karev1000@gmail.com",
         "dayOfCycle": 0,
         "campaign": {
-            "campaignId": "39360806"
+            "campaignId": "pmy7D"
         }
+        //pmBFs - for paid clients
       }
     };
     let result;
