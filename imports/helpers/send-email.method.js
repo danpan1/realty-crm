@@ -26,6 +26,7 @@ function sendTest (info, realty) {
   let subwayStation = subways ? `м.`+subways+', '+realty.address.metroTime+` мин. `+transport +`, `: '';
   let email = realty.contacts[0].email ? `<a href="mailto:`+realty.contacts[0].email+`" target="_blank">`+realty.contacts[0].email+`</a>` : '';
   let metro = ``;
+  let clientpercent = realty.realtor ? `<b>Комиссия:</b> ${realty.realtor.clientpercent}%`: '' ;
   if(subways && realty.address.metroTime && transport) metro = `<b>Метро:</b> ${subways} ${realty.address.metroTime} мин. ${transport}<br>`
   // Площадь комнат: 100, 20, 40, 50, 60, 22
   //Апартаменты, Пентхаус<br>
@@ -80,7 +81,7 @@ function sendTest (info, realty) {
                             <b>Этаж:</b> ${realty.details.livingSquare} из ${realty.details.livingSquare}<br>
                             ${windows}
                             <b>Цена:</b> ${price}<br>
-                            <b>Комиссия:</b> ${realty.realtor.clientpercent}%
+                            ${clientpercent}
                         </td>
                         <td valign="top" style="padding-left:60px;">
                             <b>Общая площадь:</b> ${realty.square} м²<br>
@@ -123,6 +124,7 @@ function sendTest (info, realty) {
   
   if (Meteor.isServer) {
     console.log('server email');
+    console.log(info.emails);
     Email.send({
       to: info.emails,
       from: info.useremail ? info.username+' <'+ info.useremail+'>' : 'postmaster@e.getrent.pro',
