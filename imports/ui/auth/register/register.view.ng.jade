@@ -2,7 +2,7 @@ md-toolbar.md-primary(layout='column')
 md-content
     div().mt-32.text-center
         img(src='img/logos/brand-logo-medium.png')
-    div
+    //div
         p().register__message-text.text-center.mb-0
             | Укажите телефон риелтора в системе 
             br
@@ -17,31 +17,31 @@ md-content
                 p(ng-if='register.error == 2').md-body-1 Этот Email уже зарегистрирован
                 p(ng-if='register.error == 3').md-body-1 Неизвестная ошибка. Попробуйте позже
             form(name='registerForm' ng-submit='register.register()')
-                div(layout='row' layout-align='center center')
+                //div(layout='row' layout-align='center center')
                     phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone').mt-16
-                //- div(layout='row' layout-align='center center')
-                //-     phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Ваш телефон на cian.ru"' phone='register.credentials.profile.phone').mt-16
-                //- div(layout='row' layout-align='center center')
-                //-     md-input-container(flex='80').md-block.form-required.m-0
-                //-         label Имя
-                //-         input(type='text', required='' ng-model='register.credentials.profile.name')
-                //- div(layout='row' layout-align='center center')
-                //-     md-input-container(flex='80').md-block.form-required.m-0
-                //-         label Фамилия
-                //-         input(type='text', required='' ng-model='register.credentials.profile.surName')
-                //- div(layout='row' layout-align='center center')
-                //-     md-input-container(flex='80').md-block.form-required.m-0
-                //-         label Email
-                //-         input(type='email', ng-model='register.credentials.email', required='')
-                //- div(layout='row' layout-align='center center')
-                //-     md-input-container(flex='80').md-block.form-required.m-0
-                //-         label Пароль
-                //-         input(type='password', ng-model='register.credentials.password', required='')
-                //- div(layout='row' layout-align='center center' ng-class='{"has-error":registerForm.passwordRepeat.$touched && register.passwordrepeat != register.credentials.password}')
-                //-     md-input-container(flex='80').md-block.form-required.m-0
-                //-         label {{ registerForm.passwordRepeat.$touched ? register.passwordrepeat == register.credentials.password ? 'Пароли совпадают' : 'Пароли не совпадают' : 'Повторите пароль'}}
-                //-         input(name='passwordRepeat' type='password', ng-model='register.passwordrepeat', required='')
-                //- div(layout='row' layout-align='center center')
-                //-     md-button(flex='80' type='submit' aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password) || register.credentials.profile.phone.length < 11').md-raised.md-primary.register__btn-submit
-                //-         span я хочу увеличить
-                //-         span количество сделок
+                div(layout='row' layout-align='center center')
+                    phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Ваш телефон на cian.ru"' phone='register.credentials.profile.phone').mt-16
+                div(layout='row' layout-align='center center')
+                    md-input-container(flex='80').md-block.form-required.m-0
+                        label Имя
+                        input(type='text', required='' ng-model='register.credentials.profile.name')
+                div(layout='row' layout-align='center center')
+                    md-input-container(flex='80').md-block.form-required.m-0
+                        label Фамилия
+                        input(type='text', required='' ng-model='register.credentials.profile.surName')
+                div(layout='row' layout-align='center center')
+                    md-input-container(flex='80').md-block.form-required.m-0
+                        label Email
+                        input(type='email', ng-model='register.credentials.email', required='')
+                div(layout='row' layout-align='center center')
+                    md-input-container(flex='80').md-block.form-required.m-0
+                        label Пароль
+                        input(type='password', ng-model='register.credentials.password', required='')
+                div(layout='row' layout-align='center center' ng-class='{"has-error":registerForm.passwordRepeat.$touched && register.passwordrepeat != register.credentials.password}')
+                    md-input-container(flex='80').md-block.form-required.m-0
+                        label {{ registerForm.passwordRepeat.$touched ? register.passwordrepeat == register.credentials.password ? 'Пароли совпадают' : 'Пароли не совпадают' : 'Повторите пароль'}}
+                        input(name='passwordRepeat' type='password', ng-model='register.passwordrepeat', required='')
+                div(layout='row' layout-align='center center')
+                    md-button(flex='80' type='submit' aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password) || register.credentials.profile.phone.length < 11').md-raised.md-primary.register__btn-submit Зарегистрироваться
+                        //span я хочу увеличить
+                        //span количество сделок

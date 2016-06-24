@@ -115,14 +115,14 @@ class Feedback {
   
   testAmoNewDeal () {
     Meteor.call('amoCrmNewDeal', this.info, (error, result) => {
-        if (error) {
-          console.log(error);
-        } else {
-          this.timeout(()=>{
-            console.log(result);
-          },100)
-        }
-      });
+      if (error) {
+        console.log(error);
+      } else {
+        this.timeout(()=>{
+          console.log(result);
+        },100)
+      }
+    });
   }
   /*
   testRoboKassa () {

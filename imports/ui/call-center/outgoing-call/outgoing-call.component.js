@@ -9,6 +9,7 @@ import {name as subwayChips} from '/imports/ui/shared/subway-chips/subway-chips.
 import {name as realtyStreet} from '/imports/ui/shared/realty-street/realty-street.component';
 import {name as districtSingle} from '/imports/ui/shared/district-single/district-single.component';
 import {name as dateTimepPicker} from '/imports/ui/shared/date-time-picker/date-time-picker.component';
+import {name as PriceMask} from '/imports/ui/shared/price-mask/price-mask.component';
 import {dictionary} from '/imports/helpers/dictionary';
 import {Realty} from '/imports/api/realty';
 import {Agents} from '/imports/api/agents';
@@ -184,6 +185,7 @@ class OutgoingCall {
           vm.realty.kvartiri = 1;
           if(!vm.realty.realtor) vm.realty.realtor = {isExclusive: true}
           else vm.realty.realtor.isExclusive = true;
+          console.log(vm.realty.price);
         }
         this.infoWasCopied = false;
       });
@@ -206,7 +208,8 @@ export default angular.module(moduleName, [
   realtyStreet,
   dateTimepPicker,
   districtSingle,
-  subwayChips
+  subwayChips,
+  PriceMask
 ]).component(moduleName, {
   templateUrl: 'imports/ui/call-center/outgoing-call/outgoing-call.view.html',
   bindings: {},

@@ -49,13 +49,13 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
         //4-ая колонка Фото
         div(layout='column' layout-align='center center').newList_Photo
-            div(ng-if='(realtyCard.realty.realtor.isExclusive || realtyCard.realty.owner.comission) && realtyCard.realtyPhone === undefined && !realtyCard.realtyIsTaken').realty-card__hidden-img
-                span Остальные фото доступны только после добавления объекта
-                img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
-            div(ng-if='(!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission) || realtyCard.realtyPhone !== undefined || realtyCard.realtyIsTaken' ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
+            div(ng-if='(realtyCard.realty.realtor.isExclusive || realtyCard.realty.owner.comission) && realtyCard.contacts.realtyPhone === undefined && !realtyCard.realtyIsTaken').realty-card__hidden-img
+                span Фото объекта доступны только после добавления объекта
+                img(ng-src='realty_no_image.png' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
+            div(ng-if='(!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission) || realtyCard.contacts.realtyPhone !== undefined || realtyCard.realtyIsTaken' ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
                 img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
                 div(ng-if='!realtyCard.noPhoto').icon-zoom
-            div(ng-if='!realtyCard.noPhoto').absolute.realty-card__images-qty {{realtyCard.realty.details.images.length}}
+                div(ng-if='!realtyCard.noPhoto').absolute.realty-card__images-qty {{realtyCard.realty.details.images.length}}
         md-divider
 
         //5-ая Инфо об объекте
@@ -126,10 +126,11 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             p 
                 | #[strong Комментарий колцентра:] {{realtyCard.realty.operator.comment}}
             div(layout='row')
-                md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
-            div(ng-if='realtyCard.realtyPhone !== undefined')
+                //md-button(ng-if='!realtyCard.contacts.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
+                realty-card-purchase(ng-if='realtyCard.realty' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
+            div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
                 p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
-                p().md-title.text-normal 1) {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
+                p().md-title.text-normal 1) {{realtyCard.contacts.realtyPhone}} --- {{realtyCard.contacts.realtyName}}
                 p().md-title.text-normal 2) #[a(href='justa.html') Посмотреть источник объявления]
                 p().md-title.text-normal 3) Хотите продолжить с ним работать?
                 div(layout='row' ng-if='!realtyCard.needNextStep').mv-16

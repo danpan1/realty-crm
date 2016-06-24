@@ -72,6 +72,18 @@ Schema.Users = new SimpleSchema({
     type: Number,
     optional: true
   },
+  'profile.getResponse': {
+    type: Object,
+    optional: true
+  },
+  'profile.getResponse.rieltor_guru': {
+    type: Boolean,
+    optional: true
+  },
+  'profile.getResponse.rieltor_guru_clients': {
+    type: Boolean,
+    optional: true
+  },
   takenRealty: {
     type: Number,
     optional: true
