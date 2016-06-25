@@ -72,8 +72,8 @@ export default angular.module(moduleName, [
   bindings: {
     street: '=ngModel',
     house: '=house',
-    dataFull: '=dadata'
-
+    dataFull: '=dadata',
+    nohouse: '<'
   },
   controllerAs: moduleName,
   controller: RealtyStreet

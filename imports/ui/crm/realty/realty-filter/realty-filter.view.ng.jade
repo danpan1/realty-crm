@@ -17,7 +17,7 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
 
         div(flex='30' flex-offset='10')
             div(layout='column' layout-align='space-between none')
-                div(layout='row' layout-align='space-between end').realty-filter__rooms
+                div(layout='row' layout-align='space-between end').realty-filter__rooms.mt-16
                     label().mr-8 Комнат
                     md-checkbox(
                     ng-checked='realtyFilter.existsRoomcount(item)',
@@ -26,6 +26,8 @@ div(md-whiteframe='2').realty-filter.ph-32.pv-16
                     ng-blur='realtyFilter.suitRealty()'
                     md-no-ink,
                     class='md-primary') {{ item.name }}
+                div.mt-16
+                    realty-street(ng-model='realtyFilter.filter.street' nohouse='true' layout = 'row' flex='66').addRealtyFull-street.zh.w-100
                 md-input-container().convinience-container
                     label Выбрать удобства
                     md-select(ng-model='realtyFilter.filter.conditions', multiple='true' ng-blur='realtyFilter.suitRealty()')

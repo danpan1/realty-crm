@@ -89,6 +89,12 @@ if (Meteor.isServer) {
           if (search.subways && !_.isEmpty(search.subways)) {
             query.push({'address.subways': {$in: search.subways}});
           }
+          
+          console.log(search.street);
+          
+          if(search.street) {
+            query.push({'address.street': search.street});
+          }
 
           if (query && !_.isEmpty(query)) {
             selector.$or = query;

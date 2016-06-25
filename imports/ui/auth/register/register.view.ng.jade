@@ -17,9 +17,9 @@ md-content
                 p(ng-if='register.error == 2').md-body-1 Этот Email уже зарегистрирован
                 p(ng-if='register.error == 3').md-body-1 Неизвестная ошибка. Попробуйте позже
             form(name='registerForm' ng-submit='register.register()')
-                //div(layout='row' layout-align='center center')
-                    phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone').mt-16
                 div(layout='row' layout-align='center center')
+                    phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone').mt-16
+                //div(layout='row' layout-align='center center')
                     phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Ваш телефон на cian.ru"' phone='register.credentials.profile.phone').mt-16
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='80').md-block.form-required.m-0
