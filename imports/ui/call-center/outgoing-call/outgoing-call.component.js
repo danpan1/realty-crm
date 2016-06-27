@@ -17,14 +17,30 @@ import './outgoing-call.view.html';
 
 class OutgoingCall {
   /* @ngInject */
-  constructor($scope, $reactive, $timeout) {
+  constructor($scope, $reactive, $timeout, $state) {
     $reactive(this).attach($scope);
+    let vm = this;
+    this.$state = $state;
     this.$timeout = $timeout;
     this.today = new Date();
     this.dictionary = dictionary;
     this.type = 4;
     this.newBuilding = 1;
-    this.getNew();
+
+    this.autorun(function () {
+      let user = Meteor.user();
+      if (user) {
+        vm.user = user;
+        if(user.roles.indexOf('operator') > -1) {
+          vm.getNew();
+          console.log('Всё ок');
+        } else {
+          console.log('Нет доступа к коллцентру');
+          vm.$state.go('crm.realty.list.my');
+        }
+      }
+    });
+
   }
   
   copyInfo () {

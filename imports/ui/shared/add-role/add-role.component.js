@@ -25,7 +25,7 @@ class AddRole {
     });
   }
 
-  submit(valid) {
+  submit(valid, role) {
     console.log(valid);
     if (valid) {
       Meteor.call('addUsersToRolePaid', this.email, (err, result)=> {
