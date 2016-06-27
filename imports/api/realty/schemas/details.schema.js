@@ -83,6 +83,10 @@ export const RentDetailsSchema = new SimpleSchema({
     label: 'images',
     optional: true
   },
+  'images.$.md5Hash': {
+    type: String,
+    optional: true
+  },
   'images.$.url': {
     type: String
   },
