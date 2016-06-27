@@ -1,0 +1,32 @@
+form(md-whiteframe='1'
+ng-submit='addRoleOperator.submit(addRoleFormOperator.$valid, 1)'
+name='addRoleFormOperator'
+layout-align='center start'
+layout='column')
+    md-input-container
+        label Добавить оператора
+        input(ng-model="addRoleOperator.emailAddOperator" type="email" required='')
+    md-button(type='submit').md-raised.md-primary Добавить оператора
+div(md-whiteframe='2') {{addRoleOperator.resultAdd || 'Введите email'}}
+
+form(md-whiteframe='1'
+ng-submit='addRoleOperator.submit(addRoleFormOperatorFire.$valid, 0)'
+name='addRoleFormOperatorFire'
+layout-align='center start'
+layout='column')
+    md-input-container
+        label Убрать оператора
+        input(ng-model="addRoleOperator.emailRemoveOperator" type="email" required='')
+    md-button(type='submit').md-raised.md-primary Убрать оператора
+div(md-whiteframe='2') {{addRoleOperatorFire.resultRemove || 'Введите email'}}
+
+div(md-whiteframe='2')
+div(md-whiteframe='2') Операторов - {{addRoleOperator.operators.length}}
+table
+    tr(ng-repeat='operator in addRoleOperator.operators')
+        td {{$index + 1}}
+        td {{operator.emails[0].address}}
+        td {{operator.profile.name}}
+        td {{operator.profile.surName}}
+        td {{operator.profile.phone}}
+        td {{operator.roles}}
