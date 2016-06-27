@@ -52,6 +52,7 @@ function run($rootScope, $state) {
       event.preventDefault();
       console.log("Please login");
       $state.go('auth.login');
+      //window.location = 'http://promo.rieltor.guru';
     }
   });
 }

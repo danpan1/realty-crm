@@ -129,7 +129,8 @@ function sendTest (info, realty) {
       to: info.emails,
       from: 'object@e.getrent.pro',//info.useremail ? info.username+' <'+ info.useremail+'>' : 'postmaster@e.getrent.pro',
       subject: info.topic,
-      html: list
+      html: list,
+      replyTo: 'danpan@yandex.ru'
     });
   }
   
