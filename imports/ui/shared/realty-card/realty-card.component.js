@@ -48,7 +48,7 @@ class RealtyCard {
     
     this.halfPrice = parseInt(this.realty.price / 2);
     
-    if(vm.realty.operator){
+    if((vm.realty.operator && vm.realty.operator.oceanAdd) || vm.realty.realtor.isExclusive){
       let newTime = new Date().getTime();
       let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
       let seconds = 300 + parseInt(time);

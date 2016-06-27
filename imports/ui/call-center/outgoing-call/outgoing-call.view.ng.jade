@@ -97,7 +97,7 @@ div(md-whiteframe='2')
                     div(flex='90')
                         div(layout='row')
                             div(flex='50')
-                                realty-street(ng-model='outgoingCall.realty.address.meta.street'
+                                realty-street(ng-if='outgoingCall.realty' ng-model='outgoingCall.realty.address.meta.street'
                                 house = 'outgoingCall.realty.address.meta.house')
                             div(flex='30' flex-offset='10')
                                 div(layout='row' layout-align='space-between end')

@@ -127,7 +127,7 @@ function sendTest (info, realty) {
     console.log(info.emails);
     Email.send({
       to: info.emails,
-      from: info.useremail ? info.username+' <'+ info.useremail+'>' : 'postmaster@e.getrent.pro',
+      from: 'object@e.getrent.pro',//info.useremail ? info.username+' <'+ info.useremail+'>' : 'postmaster@e.getrent.pro',
       subject: info.topic,
       html: list
     });

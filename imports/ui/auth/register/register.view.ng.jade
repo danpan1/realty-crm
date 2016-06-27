@@ -43,5 +43,9 @@ md-content
                         input(name='passwordRepeat' type='password', ng-model='register.passwordrepeat', required='')
                 div(layout='row' layout-align='center center')
                     md-button(flex='80' type='submit' aria-label='register' ng-disabled='registerForm.$invalid || (register.passwordrepeat != register.credentials.password) || register.credentials.profile.phone.length < 11').md-raised.md-primary.register__btn-submit Зарегистрироваться
+                div(layout='column' layout-align='start center')
+                    div().md-body-1 или
+                    div
+                        a(href='/login').md-button.md-primary Войти
                         //span я хочу увеличить
                         //span количество сделок

@@ -129,6 +129,7 @@ class OutgoingCall {
         this.showLoader = false;
         console.log('error', error);
       }
+      vm.realty = {};
       vm.getNew();
     });
   }
