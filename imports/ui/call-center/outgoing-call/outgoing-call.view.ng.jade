@@ -43,13 +43,13 @@ div(md-whiteframe='2')
                             div(flex='50' layout='row' layout-align='space-between start')
                                 md-input-container(flex)
                                     label Вид операции
-                                    md-select(ng-model='outgoingCall.operation')
-                                        md-option(ng-value='operation.id',
-                                        ng-repeat="operation in outgoingCall.dictionary.operation") {{operation.name}}
+                                    md-select(ng-model='outgoingCall.realty.type')
+                                        md-option(ng-value='4') Аренда
+                                        md-option(ng-value='1') Продажа
                                 md-input-container(flex).ml-32
                                     label Квартиры
                                     md-select(ng-model='outgoingCall.realty.kvartiri')
-                                        md-option(ng-value='1') Квартиры
+                                        md-option(ng-value='undefined') Квартиры
 
                             div(flex='30' flex-offset='10')
                                 div(layout='row')
@@ -57,7 +57,7 @@ div(md-whiteframe='2')
                                         label Срок
                                         md-select(ng-model='outgoingCall.type')
                                             //md-option(ng-value='type.id' ng-repeat="type in outgoingCall.dictionary.type") {{type.name}}
-                                            md-option(ng-value='4') Длительный
+                                            md-option(ng-value='undefined') Длительный
                                     md-input-container(flex='70' ng-if='outgoingCall.operation == 1')
                                         label Тип здания
                                         md-select(ng-model='outgoingCall.newBuilding')

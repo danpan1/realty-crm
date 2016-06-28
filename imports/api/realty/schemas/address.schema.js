@@ -58,6 +58,11 @@ export const AddressSchema = new SimpleSchema({
     type: String,
     optional: true
   },
+  subway: { // ID метро
+    type: Object,
+    blackbox: true,
+    optional: true
+  },
   subways: { // ID метро
     type: [String],
     optional: true

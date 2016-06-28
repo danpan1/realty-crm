@@ -24,7 +24,6 @@ class OutgoingCall {
     this.$timeout = $timeout;
     this.today = new Date();
     this.dictionary = dictionary;
-    this.type = 4;
     this.newBuilding = 1;
 
     this.autorun(function () {
@@ -111,12 +110,6 @@ class OutgoingCall {
     }
     vm.isLoading = true;
     if (vm.realty.owner && vm.realty.owner.comission) vm.realty.owner.isComission = true; 
-    console.log(vm.operation);
-    if (vm.operation == 1) {
-      vm.realty.type = vm.newBuilding == 1 ? 2 : 1 ;
-    } else if (vm.operation == 0) {
-      vm.realty.type = vm.type == 3 ? 3 : 4;
-    }    
     
     console.log(vm.realty.type);
     
@@ -198,8 +191,6 @@ class OutgoingCall {
           vm.isLoading = true;
         } else {
           this.showLoader = false;
-          vm.operation = vm.operation || 0;
-          vm.realty.kvartiri = 1;
           if(!vm.realty.realtor) vm.realty.realtor = {isExclusive: true}
           else vm.realty.realtor.isExclusive = true;
           console.log(vm.realty.price);

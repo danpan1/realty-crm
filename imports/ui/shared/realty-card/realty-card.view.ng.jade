@@ -34,11 +34,11 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(layout='column', layout-align='space-between')
                 p.mv-0
                     //Метро
-                    div(ng-repeat='subway in ::realtyCard.realty.address.subwaysEmbedded').metro-name.md-body-1.mb-8
-                        span(class='metro-color-{{subway.line}}').metro-color
-                        span {{subway.name}}
+                    div().metro-name.md-body-1.mb-8
+                        span(class='metro-color-{{::realtyCard.realty.address.subway.line}}').metro-color
+                        span {{::realtyCard.realty.address.subway.name}}
                     //Пешком до метро
-                    div.md-body-1.ml-8.mb-8 {{::realtyCard.realty.address.metroTime}} {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
+                    div.md-body-1.ml-8.mb-8 {{::realtyCard.realty.address.metroTime}} мин. {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
         md-divider
 
         //3-ая колонка Цена и ремонт
