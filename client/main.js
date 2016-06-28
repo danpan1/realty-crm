@@ -13,7 +13,7 @@ angular
   .module('app', ['app.custom', CRM, CallCenter, auth]).config(config).run(run);
 
 angular
-  .module('app.custom', [uiRouter, 'ngFileUpload', 'ngSanitize', ngMaterial, 'accounts.ui']);
+  .module('app.custom', [uiRouter, 'ngFileUpload', 'ngSanitize', ngMaterial, 'accounts.ui', 'angular-md5']);
 
 function onReady() {
   angular.bootstrap(document, [
