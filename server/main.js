@@ -12,5 +12,6 @@ import '../imports/api/relations';
 import '../imports/startup';
 import '../imports/api/realty';
 import '../imports/api/clients';
+import '../imports/api/operators';
 import '../imports/startup/loadUsers';
 

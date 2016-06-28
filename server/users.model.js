@@ -1,6 +1,7 @@
 //// возможно customers и users это одно и то же
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+//import {OperatorSchema} from '../imports/api/users/schemas/operator.schema';
 var Schema = {};
 
 Schema.Users = new SimpleSchema({
@@ -45,6 +46,10 @@ Schema.Users = new SimpleSchema({
     type: String,
     optional: true
   },
+  //'profile.operator': {
+  //  type: OperatorSchema,
+  //  optional: true
+  //},
   'profile.phone': {
     type: String
   },

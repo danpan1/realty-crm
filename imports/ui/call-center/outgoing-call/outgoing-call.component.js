@@ -26,6 +26,7 @@ class OutgoingCall {
     this.dictionary = dictionary;
     this.type = 4;
     this.newBuilding = 1;
+    this.stat = '';
 
     this.autorun(function () {
       let user = Meteor.user();
@@ -60,13 +61,19 @@ class OutgoingCall {
       status: status,
       operator: vm.operator
     };
-
-    if (laterCall == 'laterDatePicked') {
-      data.laterCall = vm.datePicked;
-    }
-    else if (laterCall == 'notAvailable') {
-      notAvailable = 'notAvailable';
-    }
+    if (laterCall) {
+      if (laterCall == 'laterDatePicked') {
+        data.laterCall = vm.datePicked;
+        vm.stat = 'objectsDelayed';
+      }
+      else if (laterCall == 'notAvailable') {
+        notAvailable = 'notAvailable';
+        vm.stat = 'objectsNotAvailable';
+      }
+    } 
+    else if(status == 'archive') vm.stat = 'objectsNoActual';
+    else if(status == 'analyze') vm.stat = 'objectsSkipped';
+    else if(status == 'agency') vm.stat = 'objectsAgency';
 
     console.log(status, data);
 
@@ -74,6 +81,11 @@ class OutgoingCall {
       if (error) {
         this.showLoader = false;
         console.log('error', error);
+      } else {
+        Meteor.call('operatorStat', vm.stat, (error, result) => {
+          if (error) console.log(error)
+          else console.log(result);
+        });
       }
       vm.getNew();
     });
@@ -110,7 +122,12 @@ class OutgoingCall {
       return;
     }
     vm.isLoading = true;
-    if (vm.realty.owner && vm.realty.owner.comission) vm.realty.owner.isComission = true; 
+    if (vm.realty.owner && vm.realty.owner.comission) {
+      vm.statComission = true;
+      vm.realty.owner.isComission = true; 
+    } else {
+      vm.statComission = false;
+    }
     console.log(vm.operation);
     if (vm.operation == 1) {
       vm.realty.type = vm.newBuilding == 1 ? 2 : 1 ;
@@ -139,11 +156,17 @@ class OutgoingCall {
     }
     
     vm.realty.status = 'list';
+    vm.stat = 'objectsSaved';
     console.log('save realty', vm.realty);
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {
         this.showLoader = false;
         console.log('error', error);
+      } else {
+        Meteor.call('operatorStat', vm.stat, vm.realty.realtor.isExclusive, vm.statComission, (error, result) => {
+          if (error) console.log(error)
+          else console.log(result);
+        });
       }
       vm.realty = {};
       vm.getNew();

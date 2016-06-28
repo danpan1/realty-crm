@@ -11,15 +11,29 @@ class AddRoleOperator {
   /* @ngInject */
   constructor($scope, $reactive, $timeout) {
     $reactive(this).attach($scope);
+    let vm = this;
     this.timeout = $timeout;
-
+    this.stat = 'Ничего нового';
     this.subscribe('users');
 
     this.helpers({
       operators() {
-        return Meteor.users.find({roles : 'operator'});
+        let opers = Meteor.users.find({roles : 'operator'});
+        return opers;
       }
     });
+
+    Meteor.call('operatorGetStat', (err, result) => {
+      if (err) {
+        console.log('err: ' + err);
+      } else {
+        vm.timeout(()=>{
+          console.log(result);
+          vm.stat = result;
+        });
+      }
+    });
+
   }
 
   submit(valid, role) {
