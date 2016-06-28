@@ -24,7 +24,7 @@ class OutgoingCall {
     this.$timeout = $timeout;
     this.today = new Date();
     this.dictionary = dictionary;
-    this.newBuilding = 1;
+    this.newBuilding = 0;
 
     this.autorun(function () {
       let user = Meteor.user();
@@ -130,6 +130,9 @@ class OutgoingCall {
       var d = new Date().getTime();
       vm.realty.operator.oceanAdd = d;
     }
+    if (vm.newBuilding === 1) {
+      vm.realty.type = 2;
+    }
 
     vm.realty.status = 'list';
     console.log('save realty', vm.realty);
@@ -156,7 +159,7 @@ class OutgoingCall {
     if (isStandart || !this.firstCount) {
       this.$timeout(()=> {
         this.getList(true);
-      }, 2000)
+      }, 2000);
       if (!this.firstCount) this.firstCount = true;
     }
   }

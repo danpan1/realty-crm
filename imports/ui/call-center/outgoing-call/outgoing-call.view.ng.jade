@@ -53,16 +53,16 @@ div(md-whiteframe='2')
 
                             div(flex='30' flex-offset='10')
                                 div(layout='row')
-                                    md-input-container(flex='70' ng-if='outgoingCall.operation != 1')
+                                    md-input-container(flex='70' ng-if='outgoingCall.realty.type != 1')
                                         label Срок
                                         md-select(ng-model='outgoingCall.type')
                                             //md-option(ng-value='type.id' ng-repeat="type in outgoingCall.dictionary.type") {{type.name}}
                                             md-option(ng-value='undefined') Длительный
-                                    md-input-container(flex='70' ng-if='outgoingCall.operation == 1')
+                                    md-input-container(flex='70' ng-if='outgoingCall.realty.type == 1')
                                         label Тип здания
                                         md-select(ng-model='outgoingCall.newBuilding')
-                                            //md-option(ng-value='building.id' ng-repeat="building in outgoingCall.dictionary.isNewBuilding") {{building.name}}
-                                            md-option(ng-value='0') Вторичка
+                                            md-option(ng-value='building.id' ng-repeat="building in outgoingCall.dictionary.isNewBuilding") {{building.name}}
+                                            //md-option(ng-value='0') Вторичка
                                     md-input-container(flex='30').ml-32.form-required
                                         label Комнат
                                         md-select(ng-model='outgoingCall.realty.roomcount' required='')
