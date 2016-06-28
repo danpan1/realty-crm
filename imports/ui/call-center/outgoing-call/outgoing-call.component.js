@@ -32,7 +32,7 @@ class OutgoingCall {
       let user = Meteor.user();
       if (user) {
         vm.user = user;
-        if(user.roles.indexOf('operator') > -1) {
+        if (user.roles.indexOf('operator') > -1) {
           vm.getNew();
           console.log('Всё ок');
         } else {
@@ -43,14 +43,14 @@ class OutgoingCall {
     });
 
   }
-  
-  copyInfo () {
+
+  copyInfo() {
     var input = document.getElementById("hiddenInfo");
     input.select();
     document.execCommand("copy");
     this.infoWasCopied = true;
   }
-  
+
   setResolution(status, laterCall) {
     this.showLoader = true;
     const vm = this;
@@ -122,6 +122,7 @@ class OutgoingCall {
       return;
     }
     vm.isLoading = true;
+    
     if (vm.realty.owner && vm.realty.owner.comission) {
       vm.statComission = true;
       vm.realty.owner.isComission = true; 
@@ -136,8 +137,8 @@ class OutgoingCall {
     }    
     
     console.log(vm.realty.type);
-    
-    if (vm.realty.address.districtId){
+
+    if (vm.realty.address.districtId) {
       let district = {
         _id: vm.realty.address.districtId._id,
         name: vm.realty.address.districtId.name
@@ -149,12 +150,15 @@ class OutgoingCall {
       vm.realty.address.areaId = vm.realty.address.area._id;
       vm.realty.address.areaName = vm.realty.address.area.name;
     }
-    
+
     if ((vm.realty.owner && vm.realty.owner.isComission) || vm.realty.realtor.isExclusive) {
       var d = new Date().getTime();
       vm.realty.operator.oceanAdd = d;
     }
-    
+    if (vm.newBuilding === 1) {
+      vm.realty.type = 2;
+    }
+
     vm.realty.status = 'list';
     vm.stat = 'objectsSaved';
     console.log('save realty', vm.realty);
@@ -172,25 +176,21 @@ class OutgoingCall {
       vm.getNew();
     });
   }
-  
+
   getList(isStandart) {
     Meteor.call('callList', (error, result)=> {
       if (error) {
         console.log('error', error);
       } else {
-        this.$timeout(()=>{
-          let counted = 0;
-          for(var i in result) {
-            if(result[i]._id.status == 'new' || result[i]._id.status == 'later' || result[i]._id.status == 'call') counted += result[i].count;
-          }
-          this.fullList = counted;
-        })
+        this.$timeout(()=> {
+          this.fullList = result;
+        });
       }
     });
-    if(isStandart || !this.firstCount){
-      this.$timeout(()=>{
+    if (isStandart || !this.firstCount) {
+      this.$timeout(()=> {
         this.getList(true);
-      },2000)
+      }, 2000);
       if (!this.firstCount) this.firstCount = true;
     }
   }
@@ -209,29 +209,24 @@ class OutgoingCall {
 
       this.$timeout(()=> {
         vm.realty = result;
-        // vm.realty.address.subways = result.address.subways;
-        // vm.subways22 = result.address.subways.slice();
-        // vm.realty.address.districtIdForm = vm.realty.address.districtId;
         vm.isLoading = false;
         vm.operator = {};
         console.log('новый объект', vm.realty);
-        // vm.realty.details.conditions = ['kitchen_furniture','tv'];
         if (!result) {
           this.showLoader = false;
           vm.isLoading = true;
         } else {
           this.showLoader = false;
-          vm.operation = vm.operation || 0;
-          vm.realty.kvartiri = 1;
-          if(!vm.realty.realtor) vm.realty.realtor = {isExclusive: true}
-          else vm.realty.realtor.isExclusive = true;
+          if (vm.realty.square === 0) {
+            vm.realty.square = '';
+            if(vm.realty.realtor) vm.realty.realtor.isExclusive = true; else vm.realty.realtor = {isExclusive:true};
+          }
           console.log(vm.realty.price);
         }
         this.infoWasCopied = false;
       });
-      
+
       this.getList(false);
-      // this.realty.address.subways = ['FRmpz68NzBxzoPQJ7'];
 
     });
 

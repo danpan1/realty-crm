@@ -84,10 +84,9 @@ export const dictionary = {
   ],
   renovation: [
     {id: 0, name: 'Косметический', cianId : 1},
-    {id: 1, name: 'Чистовая отделка', cianId : 1},
-    {id: 2, name: 'Отделка дорогими материалами', cianId : 3},
-    {id: 3, name: 'Качественный', cianId : 2},
-    {id: 4, name: 'Капитальный', cianId : 2}
+    {id: 1, name: 'Евроремонт', cianId : 2},
+    {id: 2, name: 'Дизайнерский', cianId : 3},
+    {id: 3, name: 'Чистовая отделка', cianId : 1}
   ],
   roomcount: [
     {id: 1, name: '1'},

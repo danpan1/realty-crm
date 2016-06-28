@@ -43,26 +43,26 @@ div(md-whiteframe='2')
                             div(flex='50' layout='row' layout-align='space-between start')
                                 md-input-container(flex)
                                     label Вид операции
-                                    md-select(ng-model='outgoingCall.operation')
-                                        md-option(ng-value='operation.id',
-                                        ng-repeat="operation in outgoingCall.dictionary.operation") {{operation.name}}
+                                    md-select(ng-model='outgoingCall.realty.type')
+                                        md-option(ng-value='4') Аренда
+                                        md-option(ng-value='1') Продажа
                                 md-input-container(flex).ml-32
                                     label Квартиры
                                     md-select(ng-model='outgoingCall.realty.kvartiri')
-                                        md-option(ng-value='1') Квартиры
+                                        md-option(ng-value='undefined') Квартиры
 
                             div(flex='30' flex-offset='10')
                                 div(layout='row')
-                                    md-input-container(flex='70' ng-if='outgoingCall.operation != 1')
+                                    md-input-container(flex='70' ng-if='outgoingCall.realty.type != 1')
                                         label Срок
                                         md-select(ng-model='outgoingCall.type')
                                             //md-option(ng-value='type.id' ng-repeat="type in outgoingCall.dictionary.type") {{type.name}}
-                                            md-option(ng-value='4') Длительный
-                                    md-input-container(flex='70' ng-if='outgoingCall.operation == 1')
+                                            md-option(ng-value='undefined') Длительный
+                                    md-input-container(flex='70' ng-if='outgoingCall.realty.type == 1')
                                         label Тип здания
                                         md-select(ng-model='outgoingCall.newBuilding')
-                                            //md-option(ng-value='building.id' ng-repeat="building in outgoingCall.dictionary.isNewBuilding") {{building.name}}
-                                            md-option(ng-value='0') Вторичка
+                                            md-option(ng-value='building.id' ng-repeat="building in outgoingCall.dictionary.isNewBuilding") {{building.name}}
+                                            //md-option(ng-value='0') Вторичка
                                     md-input-container(flex='30').ml-32.form-required
                                         label Комнат
                                         md-select(ng-model='outgoingCall.realty.roomcount' required='')
@@ -74,16 +74,18 @@ div(md-whiteframe='2')
                 div(layout='row').mb-32
                     div(flex='90')
                         div(layout='row' layout-align='start end')
+                            //div(flex='50')
+                            //    subway-chips(ng-model='outgoingCall.realty.address.subways'
+                            //    subways-embeded='outgoingCall.subwaysEmbeded'
+                            //    ng-if='!outgoingCall.isLoading' flex)
                             div(flex='50')
-                                subway-chips(ng-model='outgoingCall.realty.address.subways'
-                                subways-embeded='outgoingCall.subwaysEmbeded'
-                                ng-if='!outgoingCall.isLoading' flex)
+                                div Метро {{outgoingCall.realty.address.subway.name}}
 
                             div(flex='30' flex-offset='10')
                                 div(layout='row' layout-align='space-between end').outgoing-call__metro
                                     label(flex='65').md-subhead До метро
                                     md-input-container(flex='35').ml-32.mv-0.pb-0.form-required
-                                        input(ng-model='outgoingCall.realty.address.metroPeshkom' aria-label='До метро' placeholder='' required='')
+                                        input(ng-model='outgoingCall.realty.address.metroTime' aria-label='До метро' placeholder='' required='')
                                 
                             div(flex='20' flex-offset='10')
                                 div(layout='row')
@@ -97,8 +99,8 @@ div(md-whiteframe='2')
                     div(flex='90')
                         div(layout='row')
                             div(flex='50')
-                                realty-street(ng-if='outgoingCall.realty' ng-model='outgoingCall.realty.address.meta.street'
-                                house = 'outgoingCall.realty.address.meta.house')
+                                realty-street(ng-if='outgoingCall.realty' ng-model='outgoingCall.realty.address.street'
+                                house = 'outgoingCall.realty.address.house')
                             div(flex='30' flex-offset='10')
                                 div(layout='row' layout-align='space-between end')
                                     md-input-container(flex='70').mv-0.pb-0.form-required

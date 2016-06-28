@@ -13,7 +13,7 @@ class AddRoleOperator {
     $reactive(this).attach($scope);
     let vm = this;
     this.timeout = $timeout;
-    this.stat = 'Ничего нового';
+    this.stat = [];
     this.subscribe('users');
 
     this.helpers({

@@ -21,33 +21,33 @@ layout='column')
 div(md-whiteframe='2') {{addRoleOperator.resultRemove || 'Введите email'}}
 
 
-div(md-whiteframe='2') Операторов - {{addRoleOperator.operators.length}}
-table
-    thead
-        tr
-            td №
-            td Имя
-            td Телефон
-            td Email
-            td(rowspan='2' colspan='6')
-                table
-                    tr Объектов
-                    tr
-                        td В океан
-                        td Не доступен
-                        td Агентство
-                        td Перезвонить
-                        td Не актуально
-                        td Не согласился
-    tbody
-        tr(ng-repeat='operator in addRoleOperator.stat track by $index')
-            td {{$index + 1}}
-            td {{operator.name}}
-            td {{operator.phone}}
-            td {{operator.email}}
-            td {{operator.objectsSaved || '0'}}
-            td {{operator.objectsNotAvailable || '0'}}
-            td {{operator.objectsAgency || '0'}}
-            td {{operator.objectsDelayed || '0'}}
-            td {{operator.objectsNoActual || '0'}}
-            td {{operator.objectsSkipped || '0'}}
+div(md-whiteframe='2' ng-if='addRoleOperator.operators.length') Операторов - {{addRoleOperator.operators.length}}
+    table
+        thead
+            tr
+                td №
+                td Имя
+                td Телефон
+                td Email
+                td(rowspan='2' colspan='6')
+                    table
+                        tr Объектов
+                        tr
+                            td В океан
+                            td Не доступен
+                            td Агентство
+                            td Перезвонить
+                            td Не актуально
+                            td Не согласился
+        tbody
+            tr(ng-repeat='operator in addRoleOperator.stat track by $index')
+                td {{$index + 1}}
+                td {{operator.name}}
+                td {{operator.phone}}
+                td {{operator.email}}
+                td {{operator.objectsSaved || '0'}}
+                td {{operator.objectsNotAvailable || '0'}}
+                td {{operator.objectsAgency || '0'}}
+                td {{operator.objectsDelayed || '0'}}
+                td {{operator.objectsNoActual || '0'}}
+                td {{operator.objectsSkipped || '0'}}
