@@ -13,9 +13,10 @@ class RealtyStreet {
 
   clearHouse() {
     this.searchTextHouse = '';
-    this.house = null;
-    this.dataFull = null;
-    console.log('street: ' + this.street)
+    console.log('house: ' + this.house);
+    // this.house = null;
+    // this.dataFull = null;
+    console.log('street: ' + this.street);
     if(!this.street){
       this.searchTextStreet = '';
     }
