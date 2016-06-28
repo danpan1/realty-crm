@@ -15,8 +15,8 @@ function parsingStats() {
 
     let result = ParserCounters.aggregate([//{
       //$match: {
-      //  date: { 
-      //    $gte: new Date("2016-06-16T00:00:00.000Z") 
+      //  date: {
+      //    $gte: new Date("2016-06-16T00:00:00.000Z")
       //  }
       //}
       //},
@@ -33,7 +33,7 @@ function parsingStats() {
         $sort: {
           '_id.reason': 1
         }
-      }])
+      }]);
 
     return result;
 
@@ -42,19 +42,7 @@ function parsingStats() {
 
 function callList() {
   if (Meteor.isServer) {
-
-    let result = Realty.aggregate([{
-      $group: {
-        _id: {
-          status: "$status"
-        },
-        count: {
-          $sum: 1
-        }
-      }
-    }])
-
-    return result;
+    return Realty.find({status : {$in : ['new', 'later', 'call']}}).count();
   }
 
 }
