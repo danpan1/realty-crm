@@ -11,25 +11,9 @@ export function operatorGetStat() {
 
   if (Meteor.isServer && Meteor.userId()) {
     let nullMatch = {};
-
-    /*
-     db.operators.aggregate([{$group: {
-     _id: { type: '$result.type' },
-     totalType: { $sum: 1 }
-     }},
-     {
-     $group: {
-     _id: { operatorId: '$operatorId' }
-     }
-     }, {
-     $sort: { '_id.operatorId': 1 }
-     }])
-     */
-
-
     let opers = Operators.aggregate([{
       $group: {
-        _id: {type: '$result.type', operatorId: '$operatorId'},
+        _id: {type: '$result', operatorId: '$operatorId'},
         totalType: {$sum: 1}
       }
     }, {
@@ -42,14 +26,30 @@ export function operatorGetStat() {
       $sort: {'_id.operatorId': 1}
     }]).map((operator)=> {
       let newOperator = {};
+      newOperator.totalCalls = operator.totalCalls;
+      newOperator.percents = {};
+      console.log(operator);
+      var oper = Meteor.users.findOne({_id: operator._id.operatorId});
+      if (oper) {
+        newOperator.name = oper.profile.name + (oper.profile.surName ? ' ' + oper.profile.surName : '');
+        newOperator.phone = oper.profile.phone;
+        newOperator.email = oper.emails[0].address;
+      }
       operator.stats.forEach((stat)=> {
         newOperator[stat.type] = stat.count;
+        newOperator.ocean = (newOperator.objectsSaved || 0) + (newOperator.objectsSavedExc || 0) + (newOperator.objectsSavedCom || 0) + (newOperator.objectsSavedComAndExc || 0);
+        newOperator.objectsSavedCom = (newOperator.objectsSavedCom || 0) + (newOperator.objectsSavedComAndExc || 0);
+        newOperator.objectsSavedExc = (newOperator.objectsSavedExc || 0) + (newOperator.objectsSavedComAndExc || 0);
+        newOperator.percents[stat.type] = parseInt(100 / newOperator.totalCalls * stat.count);
+        newOperator.percents.ocean = parseInt(100 / newOperator.totalCalls * newOperator.ocean);
+        newOperator.percents.objectsSavedCom = parseInt(100 / newOperator.ocean * newOperator.objectsSavedCom);
+        newOperator.percents.objectsSavedExc = parseInt(100 / newOperator.ocean * newOperator.objectsSavedExc);
       });
       newOperator.id = operator._id.operatorId;
-      newOperator.totalCalls = operator.totalCalls;
       return newOperator;
     });
-    console.log(opers);
+    return opers;
+  }
 
 // for (let o in opers) {
 //
@@ -80,8 +80,6 @@ export function operatorGetStat() {
 //   })
 // }
 
-    return opers;
-  }
 
 }
 

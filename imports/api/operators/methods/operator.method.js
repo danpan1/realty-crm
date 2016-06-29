@@ -8,7 +8,7 @@ Meteor.methods({
   operatorStat
 });
 
-export function operatorStat(choice, exclusive, comission) {
+export function operatorStat(choice) {
 
   if (Meteor.isServer && Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'operator')) {
     
@@ -25,16 +25,16 @@ export function operatorStat(choice, exclusive, comission) {
     newCallResult.createdAt = new Date();
 
     // set call result
-    if (choice) newCallResult.result.type = choice; else return 'Результат звонка не определен';
+    if (choice) newCallResult.result = choice; else return 'Результат звонка не определен';
 
     // set object exclusive and comission
-    newCallResult.result.exclusive = exclusive || false;
-    newCallResult.result.comission = comission || false;
+    //newCallResult.result.exclusive = exclusive || false;
+    //newCallResult.result.comission = comission || false;
 
 
     console.log(' === newCallResult ==== ');
     console.log(newCallResult);
-    if (newCallResult.createdAt && newCallResult.result.type && newCallResult.result.exclusive !== undefined && newCallResult.result.comission !== undefined){ 
+    if (newCallResult.createdAt && newCallResult.result){ 
       Operators.insert(newCallResult, (error, result) => {
         if (error) {
           console.log(error);

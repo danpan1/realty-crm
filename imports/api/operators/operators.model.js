@@ -19,17 +19,8 @@ Schema.Operators = new SimpleSchema({
     type: String
   },
   result: {
-    type: Object
-  },
-  'result.type': {
     type: String
-  },
-  'result.exclusive': {
-    type: Boolean
-  },
-  'result.comission': {
-    type: Boolean
-  },
+  }
 });
 
 Operators.attachSchema(Schema.Operators);

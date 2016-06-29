@@ -151,7 +151,10 @@ class OutgoingCall {
       vm.realty.address.areaName = vm.realty.address.area.name;
     }
 
-    if ((vm.realty.owner && vm.realty.owner.isComission) || vm.realty.realtor.isExclusive) {
+    let exclusive = vm.realty.realtor ? vm.realty.realtor.isExclusive : false;
+    let comission = vm.realty.owner ? vm.realty.owner.isComission : false;
+
+    if (comission || exclusive) {
       var d = new Date().getTime();
       vm.realty.operator.oceanAdd = d;
     }
@@ -160,14 +163,14 @@ class OutgoingCall {
     }
 
     vm.realty.status = 'list';
-    vm.stat = 'objectsSaved';
+    vm.stat = comission ? exclusive ? 'objectsSavedComAndExc' : 'objectsSavedCom' : exclusive ? 'objectsSavedExc' : 'objectsSaved';
     console.log('save realty', vm.realty);
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {
         this.showLoader = false;
         console.log('error', error);
       } else {
-        Meteor.call('operatorStat', vm.stat, vm.realty.realtor.isExclusive, vm.statComission, (error, result) => {
+        Meteor.call('operatorStat', vm.stat, (error, result) => {
           if (error) console.log(error)
           else console.log(result);
         });

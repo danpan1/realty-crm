@@ -23,17 +23,22 @@ div(md-whiteframe='2') {{addRoleOperator.resultRemove || 'Введите email'}
 
 div(md-whiteframe='2' ng-if='addRoleOperator.operators.length') Операторов - {{addRoleOperator.operators.length}}
     table
-        thead
+        thead(style='text-align:center;')
             tr
                 td №
                 td Имя
                 td Телефон
                 td Email
-                td(rowspan='2' colspan='6')
+                td(rowspan='3' colspan='8')
                     table
                         tr Объектов
                         tr
-                            td В океан
+                            td(rowspan='2' colspan='3') В океан
+                                table
+                                    tr
+                                        td Всего
+                                        td Эксклюзив
+                                        td Комиссия
                             td Не доступен
                             td Агентство
                             td Перезвонить
@@ -45,9 +50,11 @@ div(md-whiteframe='2' ng-if='addRoleOperator.operators.length') Оператор
                 td {{operator.name}}
                 td {{operator.phone}}
                 td {{operator.email}}
-                td {{operator.objectsSaved || '0'}}
-                td {{operator.objectsNotAvailable || '0'}}
-                td {{operator.objectsAgency || '0'}}
-                td {{operator.objectsDelayed || '0'}}
-                td {{operator.objectsNoActual || '0'}}
-                td {{operator.objectsSkipped || '0'}}
+                td #[b {{operator.ocean || '0'}}] / {{operator.percents.ocean || '0'}}%
+                td #[b {{operator.objectsSavedCom || '0'}}]  / {{operator.percents.objectsSavedCom || '0'}}%
+                td #[b {{operator.objectsSavedExc || '0'}}]  / {{operator.percents.objectsSavedExc || '0'}}%
+                td #[b {{operator.objectsNotAvailable || '0'}}]  / {{operator.percents.objectsNotAvailable || '0'}}%
+                td #[b {{operator.objectsAgency || '0'}}]  / {{operator.percents.objectsAgency || '0'}}%
+                td #[b {{operator.objectsDelayed || '0'}}]  / {{operator.percents.objectsDelayed || '0'}}%
+                td #[b {{operator.objectsNoActual || '0'}}]  / {{operator.percents.objectsNoActual || '0'}}%
+                td #[b {{operator.objectsSkipped || '0'}}]  / {{operator.percents.objectsSkipped || '0'}}%
