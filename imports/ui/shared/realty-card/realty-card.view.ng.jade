@@ -71,13 +71,12 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         //6-ая Телефонн Риэлтора и Объявление
         div(layout='column' layout-align='space-between start' ng-if="realtyCard.realtylisttype === 'connections'").newList_contacts.ph-16.pv-8
             div()
-                div(ng-if='realtyCard.realty.status !== "new" && realtyCard.realty.status !== "taken" && realtyCard.realty.status !== "realtor"')
+                div(ng-if='realtyCard.realty.status !== "connection" && realtyCard.realty.status !== "new" && realtyCard.realty.status !== "taken" && realtyCard.realty.status !== "realtor"')
                     div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
                     div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
-                div(ng-if='realtyCard.realty.status === "new" || realtyCard.realty.status === "taken" || realtyCard.realty.status === "realtor"')
+                div(ng-if='realtyCard.realty.status === "connection" || realtyCard.realty.status === "new" || realtyCard.realty.status === "taken" || realtyCard.realty.status === "realtor"')
                     div(ng-if='realtyCard.isUserPaid && !realtyCard.addedToMine')  
-                        realty-card-purchase(ng-if='realtyCard.realty' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
-                        //сonnections='realtyCard.realtylisttype'
+                        realty-card-purchase(ng-if='realtyCard.realty' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty' con='true')
                     div().md-subhead.mb-8 #[b Собственник {{::realtyCard.realty.contacts[0].name}}]
                 div
                     md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Объявление

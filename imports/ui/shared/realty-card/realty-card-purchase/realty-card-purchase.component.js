@@ -17,10 +17,14 @@ class RealtyCardPurchase {
     this.state = $state;
     this.timeout = $timeout;
     this.mdDialog = $mdDialog;
-    this.realtyPhone = this.realty.contacts ? this.realty.contacts[0].phones[0].phone : '';
+    this.contacts.realtyPhone = this.realty.contacts ? this.realty.contacts[0].phones[0].phone : '';
     var vm = this;
     
     vm.contacts = {};
+
+    if (vm.con && vm.userpaid) {
+      
+    }
     
   }
 
@@ -178,32 +182,39 @@ class RealtyCardPurchase {
     }
   }
   
-  takeRealty(id, ev) {
+  takeRealty(id, ev, connection) {
     let vm = this;
-    if(this.userpaid && !this.сonnections){
-      Meteor.call('takeRealty', id, (err, result)=> {
-        if (err) {
-          console.log('err: ' + err);
-        } else {
-          console.log(result);
-          this.timeout(()=> {
-            vm.contacts = {
-              realtyPhone: result.phone,
-              realtyName: result.name,
-              realtyStreet: result.address.street,
-              realtyHouse: result.address.house
+    if(this.userpaid){
+      if(!this.con){
+        Meteor.call('takeRealty', id, (err, result) => {
+          if (err) {
+            console.log('err: ' + err);
+          } else {
+            console.log(result);
+            this.timeout(()=> {
+              vm.contacts.realtyPhone = result.phone,
+              vm.contacts.realtyName = result.name;
+              vm.contacts.realtyStreet = result.address.street;
+              vm.contacts.realtyHouse = result.address.house;
+            }, 0);
+          }
+        });
+      } else {
+        Meteor.call('takeRealtyToConnections', id, connection, (err, result) => {
+          if (err) {
+            console.log('err: ' + err);
+          } else {
+            console.log(result);
+            if(connection == 'connection'){
+              this.timeout(()=> {
+                vm.contacts.realtyPhone = result.phone;
+              }, 0);
             }
-          }, 0);
-        }
-      });
+          }
+        });
+      }
     } else {
       this.openPurchaseStart(ev);
-    }
-  }
-  
-  addToMyObjects () {
-    if (this.сonnections) {
-
     }
   }
   
@@ -220,8 +231,8 @@ export default angular.module(moduleName, [
     data: '=',
     contacts: '=',
     realty: '=',
-    userpaid: '<'/*,
-    сonnections: '<'*/
+    userpaid: '=',
+    con: '<'
   },
   controllerAs: moduleName,
   controller: RealtyCardPurchase

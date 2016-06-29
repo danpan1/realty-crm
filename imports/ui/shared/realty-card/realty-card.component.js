@@ -22,7 +22,8 @@ class RealtyCard {
     this.mdDialog = $mdDialog;
     var vm = this;
     
-    this.contacts = {};    
+    this.contacts = {};   
+    if (this.realty.status == 'connection' || this.realty.status == 'taken') this.onShowDetails(true); 
 
     if(this.realty.status == 'taken') this.realtyIsTaken = true;
     if (this.user) {
@@ -125,10 +126,10 @@ class RealtyCard {
     }
   }
   
-  onShowDetails () {
+  onShowDetails (justInfo) {
     if(!this.contacts.realtyPhone){
       let vm = this;
-      this.loadingDetails = true;
+      if(!justInfo) this.loadingDetails = true;
       let realtyId = this.realty._id;
       let userId = this.user._id;
       Meteor.call('showRealtyDetails', realtyId, userId, (err, result)=> {
@@ -141,8 +142,10 @@ class RealtyCard {
             vm.contacts.realtyName = result.name;
             vm.contacts.realtyStreet = result.address.street;
             vm.contacts.realtyHouse = result.address.house;
-            this.loadingDetails = false;
-            this.ngShowDescr = true;
+            if(!justInfo) {
+              this.loadingDetails = false;
+              this.ngShowDescr = true;
+            }
           }, 0);
         }
       });
@@ -195,7 +198,7 @@ class RealtyCard {
 
   }
   
-  checkUserPaid () {
+  checkUserPaid (ev) {
     this.isUserPaid = false;
 
     if (this.user && this.user.roles){

@@ -16,7 +16,8 @@ Meteor.methods({
   takeRealty,
   showRealtyPhone,
   showRealtyDetails,
-  updateRealty
+  updateRealty,
+  takeRealtyToConnections
 });
 
 /**
@@ -255,4 +256,65 @@ export function addRealty(realty, notRealtor) {
     return realty._id;
   }
 
+}
+
+export function takeRealtyToConnections (realtyId, status) {
+
+  if (Meteor.isServer && Meteor.userId()) {
+    if (Roles.userIsInRole(Meteor.userId(), 'paid') || Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
+
+      console.log('==== takeRealtyToConnections ====')
+
+      let realty = Realty.findOne({_id: realtyId});
+      if (!realty) {
+        //Не даём взять объект
+        return 'нет такого объекта';
+      }
+
+      if (status == 'connection') {
+
+        let user = Meteor.users.findOne({_id: this.userId});
+        Meteor.users.update({_id: this.userId},
+          {$inc: {takenRealty: 1}}
+        );
+        console.log(user.takenRealty, ` = takenRealty user ${user.profile.name}`);
+
+        if (user.takenRealty <= 400 || !user.takenRealty) {
+          var nextCount = nextAutoincrement(Realty) + '';
+          Realty.update({_id: realtyId}, {
+            $set: {
+              'realtor.id': Meteor.userId(),
+              'status': 'connection'
+            }
+          }, (error) => {
+            if (error) {
+              console.log(error);
+              return;
+            } else {
+              console.log('Added to connections');
+            }
+          });
+          return {phone: realty.contacts[0].phones[0].phone};
+        } else return 'больше 100 объектов взято в этом месяце';
+
+      } else if (status == 'taken') {
+
+        Realty.update({_id: realtyId}, {
+          $set: {
+            'status': 'taken'
+          }
+        }, (error) => {
+          if (error) {
+            console.log(error);
+            return;
+          } else {
+            console.log('Added to my objects');
+            return;
+          }
+        });
+
+      }
+
+    }
+  }
 }
