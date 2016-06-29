@@ -163,10 +163,10 @@ class RealtyCard {
       window.onbeforeunload = function(){
         vm.saveCheckedRealty(vm.globalId, vm.globalStatus);
       }
+      this.needNextStep = true;
     } else if (status == 'agency'){
       this.saveCheckedRealty(id, status);
     }
-    this.needNextStep = true;
   }
   
   saveCheckedRealty(id, status){

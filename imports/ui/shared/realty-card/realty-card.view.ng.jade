@@ -55,7 +55,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(ng-if='(!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission) || realtyCard.contacts.realtyPhone !== undefined || realtyCard.realtyIsTaken' ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
                 img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
                 div(ng-if='!realtyCard.noPhoto').icon-zoom
-                div(ng-if='!realtyCard.noPhoto').absolute.realty-card__images-qty {{realtyCard.realty.details.images.length}}
+                //div(ng-if='!realtyCard.noPhoto').absolute.realty-card__images-qty {{realtyCard.realty.details.images.length}}
         md-divider
 
         //5-ая Инфо об объекте

@@ -76,13 +76,13 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                         div(flex='70')
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required.zh
-                                    input(required name='square' ng-pattern="/^[0-9]{1,}[,]?[0-9]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
+                                    input(required name='square' ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
                                     span(ng-show='secondForm.square.$viewValue.length > 0 && secondForm.square.$touched && secondForm.square.$invalid').has-error Только цифры или запятая
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9]{1,}[,]?[0-9]{1,}$/" name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
+                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
                                     span(ng-show='secondForm.livingSquare.$touched && secondForm.livingSquare.$invalid').has-error Только цифры или запятая
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9]{1,}[,]?[0-9]{1,}$/" name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
+                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
                                     span(ng-show='secondForm.kitchenSquare.$touched && secondForm.kitchenSquare.$invalid').has-error Только цифры или запятая
                             //div().mt-16
                             //    p().md-subhead.add-realty-full-text Площадь комнат м²
