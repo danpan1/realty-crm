@@ -48,7 +48,7 @@ class RealtyCard {
     
     this.halfPrice = parseInt(this.realty.price / 2);
     
-    if((vm.realty.operator && vm.realty.operator.oceanAdd) || vm.realty.realtor.isExclusive){
+    if((vm.realty.operator && vm.realty.operator.oceanAdd) || (vm.realty.realtor && vm.realty.realtor.isExclusive)){
       let newTime = new Date().getTime();
       let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
       let seconds = 300 + parseInt(time);
@@ -195,7 +195,7 @@ class RealtyCard {
 
   }
   
-  checkUserPaid (ev) {
+  checkUserPaid () {
     this.isUserPaid = false;
 
     if (this.user && this.user.roles){
@@ -214,20 +214,6 @@ class RealtyCard {
     else return true;
   }
   
-  onShowPhone (realtyId, ev) {
-    if(!this.shownPhone){
-      if(this.checkUserPaid(ev)){
-        Meteor.call('takeRealty', realtyId, (err, result)=> {
-          if (err) {
-            console.log('err: ' + err);
-          } else {
-            console.log(result);
-            this.shownPhone = result.phone;
-          }
-        });
-      }
-    }
-  }
 
   showSlider () {
     if (!this.noPhoto) {

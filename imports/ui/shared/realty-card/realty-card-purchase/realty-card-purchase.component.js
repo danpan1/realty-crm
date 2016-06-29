@@ -17,6 +17,7 @@ class RealtyCardPurchase {
     this.state = $state;
     this.timeout = $timeout;
     this.mdDialog = $mdDialog;
+    this.realtyPhone = this.realty.contacts ? this.realty.contacts[0].phones[0].phone : '';
     var vm = this;
     
     vm.contacts = {};
@@ -158,11 +159,28 @@ class RealtyCardPurchase {
       clickOutsideToClose: true
     })
   }
+
+  
+  onShowPhone (realtyId, ev) {
+    if(!this.shownPhone){
+      if(this.userpaid){
+        Meteor.call('takeRealty', realtyId, (err, result)=> {
+          if (err) {
+            console.log('err: ' + err);
+          } else {
+            console.log(result);
+            this.shownPhone = result.phone;
+          }
+        });
+      } else {
+        this.openPurchaseStart(ev);
+      }
+    }
+  }
   
   takeRealty(id, ev) {
     let vm = this;
-    
-    if(this.userpaid){
+    if(this.userpaid && !this.сonnections){
       Meteor.call('takeRealty', id, (err, result)=> {
         if (err) {
           console.log('err: ' + err);
@@ -183,7 +201,11 @@ class RealtyCardPurchase {
     }
   }
   
-  
+  addToMyObjects () {
+    if (this.сonnections) {
+
+    }
+  }
   
 }
 
@@ -198,7 +220,8 @@ export default angular.module(moduleName, [
     data: '=',
     contacts: '=',
     realty: '=',
-    userpaid: '<'
+    userpaid: '<'/*,
+    сonnections: '<'*/
   },
   controllerAs: moduleName,
   controller: RealtyCardPurchase
