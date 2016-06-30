@@ -2,7 +2,7 @@
  * Created by Danpan on 30.06.16.
  */
 import {Meteor} from 'meteor/meteor';
-import client from '../../server/redis';
+import client from '../../server/redis/db-connect';
 // const client = redis.createClient({db : 1, host : 'redis.int.invest5.ru'});
 let setnxKeyToBlock = function (key, callback) {
   // client.set(key, 'world', 'NX', 'EX', 300, callback);

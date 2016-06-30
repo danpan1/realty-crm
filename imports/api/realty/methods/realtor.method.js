@@ -32,46 +32,59 @@ Meteor.methods({
 
 export function buyRealtyOcean(realtyId) {
 
-  if (Meteor.isServer && Meteor.userId()) {
+  if (Meteor.isServer && this.userId) {
+    let userId = this.userId;
+    console.log(this.userId);
     console.log('call redis');
-    Meteor.call('setRedis', '12321' , 12);
-    if (!Meteor.call('redis')) {
-      return 'Ктото уже взял этот объект';
-    }
-    if (!setRedisKey(this.userId)) {
-      return 'Нельзя совершать 2 операции покупки одновременно. Заввершите первую операцию';
-    }
+    Meteor.call('setRedisBlock', realtyId, this.userId, function (err, res) {
+      if (err) {
+        console.log(err, 'err redis');
+      }
+      console.log(res, 'res redis');
 
-    let realty = Realty.findOne({_id: realtyId});
-    //todo price опеределить по параметрам
-    let price = 500;
-    //todo в случае неудачи надо возвращать статус Океан
-    Realty.update({_id: realtyId}, {$set: {status: 'transaction'}});
-    // realty.status, realty.realtor.id, realty.type
-    if (realty.status !== 'ocean' || (realty.realtor && realty.realtor.id)) {
-      return 'объект не из океана';
-    }
-    if (realty.type === 4 && !Roles.userIsInRole(Meteor.userId(), 'paid')) {
-      return 'надо оплатить подписку на аренду';
-    }
-    if (realty.type === 1 && !Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
-      return 'надо оплатить подписку на продажу';
-    }
-    /*   ОПЛАТА  */
-    let payResult = pay(price);
+      let realty = Realty.findOne({_id: realtyId});
+      //todo price опеределить по параметрам
+      let price = 500;
+      if (realty.status !== 'ocean' || (realty.realtor && realty.realtor.id)) {
+        return 'объект не из океана';
+      }
+      Realty.update({_id: realtyId}, {$set: {status: 'transaction'}});
+      if (realty.type === 4 && !Roles.userIsInRole(Meteor.userId(), 'paid')) {
+        Realty.update({_id: realtyId}, {$set: {status: 'ocean'}});
+        return 'надо оплатить подписку на аренду';
+      }
+      if (realty.type === 1 && !Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
+        Realty.update({_id: realtyId}, {$set: {status: 'ocean'}});
+        return 'надо оплатить подписку на продажу';
+      }
+      /*   ОПЛАТА  */
+      Balance.update({userId: userId}, {$inc: {current: -price}});
+      /*проверяем положительный баланс*/
+      if (Balance.findOne({userId: userId}).current < 0) {
+        //TODO trhrow error. return false
+        Realty.update({_id: realtyId}, {$set: {status: 'ocean'}});
+        Balance.update({userId: this.userId}, {$inc: {current: price}});
+        console.log('Недостаточно средств');
+        return 'Недостаточно средств';
+      }
+      /* если все прошло успешно прошло удаляем ключ*/
+      /*   ОПЛАТА  */
 
-    if (!payResult) {
-      return 'оплата не прошла';
-    }
+      /*Успешно прошло */
 
-    /*Успешно прошло */
-
-    Realty.update({_id: realtyId}, {$set: {status: 'taken', 'realtor.id': this.userId}});
-    //todo проверить получилось ли сделать update
+      Realty.update({_id: realtyId}, {$set: {status: 'taken', 'realtor.id': userId}});
+      Meteor.call('delRedisBlock', function(){
+        if (err) {
+          console.log(err, 'err  delRedisBlockredis');
+        }
+        console.log(res, 'res delRedisBlock');
+      });
+      //todo проверить получилось ли сделать update
+    });
 
     /*Удаляем транзакцию блокировку */
-    delRedisKey(realtyId);
-    delRedisKey(this.userId);
+    // delRedisKey(realtyId);
+    // delRedisKey(this.userId);
     console.log('jr');
     //todo return телефон собственника
   }
@@ -140,7 +153,7 @@ export function takeRealty(realtyId, status) {
   if (Meteor.isServer && Meteor.userId()) {
 
 
-    Balance.pay(this.userId, 12);
+    // Balance.pay(this.userId, 12);
     if (Roles.userIsInRole(Meteor.userId(), 'paid') || Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
 
       console.log('takeRealty')
@@ -380,18 +393,6 @@ export function takeRealtyToConnections(realtyId, status) {
     }
   }
 }
-function pay(amount) {
-  console.log(Balance.findOne({userId: this.userId}));
-  Balance.update({userId: this.userId}, {$inc: {current: -amount}});
-  console.log(Balance.findOne({userId: this.userId}));
-
-  /*проверяем положительный баланс*/
-  let balance = Balance.findOne({userId: this.userId}).current;
-  if (balance < 0) {
-    //TODO trhrow error. return false
-    Balance.update({userId: this.userId}, {$inc: {current: amount}});
-    return 'Недостаточно средств';
-  }
-  /* если все прошло успешно прошло удаляем ключ*/
-  return true;
+function pay(amount, userId) {
+  console.log(userId);
 }

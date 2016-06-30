@@ -42,6 +42,11 @@ Schema.Users = new SimpleSchema({
     type: Object,
     optional: true
   },
+  'profile.balance': {
+    type: Number,
+    decimal: true,
+    optional: true
+  },
   'profile.name': {
     type: String,
     optional: true

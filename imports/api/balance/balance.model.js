@@ -30,6 +30,9 @@ const balanceSchema = new SimpleSchema({
 
 Balance.attachSchema(balanceSchema);
 
+Balance.after.update(function (userId, doc) {
+  Meteor.users.update({_id : userId}, {$set : {'profile.balance' : doc.current}});
+});
 /*
 {
   credit : 0 ,
