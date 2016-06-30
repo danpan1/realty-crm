@@ -5,7 +5,7 @@ import {Meteor} from 'meteor/meteor';
 import client from './db-connect';
 
 let setnxKeyToBlock = function (key, callback) {
-  client.set(key, 'world', 'NX', 'EX', 15, callback);
+  client.set(key, 'world', 'NX', 'EX', 150, callback);
 };
 
 function setRedisKey(key) {
@@ -23,12 +23,15 @@ function delRedisKey(key) {
 Meteor.methods({
   setRedisBlock: function (realtyId, userId) {
     if (!setRedisKey(realtyId)) {
-      return 'Ктото уже взял этот объект';
+      console.log('Ктото уже взял этот объект');
+      return false;
     }
     if (!setRedisKey(userId)) {
-      return 'Нельзя совершать 2 операции покупки одновременно. Заввершите первую операцию';
+      console.log('Нельзя совершать 2 операции покупки одновременно. Заввершите первую операцию');
+      return false;
     }
-    return 'Можно идти дальше';
+    console.log('Можно идти дальше');
+    return true;
   },
   delRedisBlock: function (realtyId, userId) {
     console.log('delRedisBlock');

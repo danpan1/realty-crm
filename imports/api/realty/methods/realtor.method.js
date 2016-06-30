@@ -36,6 +36,7 @@ export function buyRealtyOcean(realtyId) {
     let userId = this.userId;
     console.log(this.userId);
     console.log('call redis');
+    //todo timer 150 на процедуру иначе отбой
     Meteor.call('setRedisBlock', realtyId, this.userId, function (err, res) {
       if (err) {
         console.log(err, 'err redis');
