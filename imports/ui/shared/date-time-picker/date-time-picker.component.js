@@ -28,10 +28,7 @@ class DateTimePicker {
     }
 
     this.$onChanges = function (obj) {
-      console.log('onChanges');
-      console.log(obj);
       if(this.meeting && !this.datePicked){
-        console.log('this.datePicked: ', this.datePicked);
         this.hour = '';
         this.min = '';
       }
@@ -57,7 +54,7 @@ class DateTimePicker {
     if (now.getHours() < this.hoursDictionary[this.hoursDictionary.length - 1] && now.getMinutes() >= this.minsDictionary[this.minsDictionary.length - 1]) plus = 1;  //в 17:45  убираем 17. делаем 18
     this.hours = this.hoursDictionary.slice(now.getHours() + plus);
     if (this.hour < now.getHours() + plus) {
-      this.hour = this.meeting ? '' : this.hours[0];
+      this.hour = this.hours[0];
     }
 
   };
@@ -66,7 +63,7 @@ class DateTimePicker {
     if (now.getHours() != this.hour)  return;
     for (let i = 0; i < this.minsDictionary.length - 1; i++) { // mins.length - 1 чтобы не попадать на '45 минут' , чтобы можно было index плюсануть
       if (now.getMinutes() >= this.minsDictionary[i]) {
-        this.mins = this.meeting ? '' : this.minsDictionary.slice(i + 1);
+        this.mins = this.minsDictionary.slice(i + 1);
       }
     }
 
@@ -133,7 +130,7 @@ export default angular.module(moduleName, [
     startDate: '=',
     totalDays: '=',
     meeting: '<',
-    ourdate: '<' // Нужно для проверки, отправил ли оператор объект 
+    restart: '<' // Нужно для проверки, отправил ли оператор объект 
   },
   controllerAs: moduleName,
   controller: DateTimePicker

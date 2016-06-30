@@ -6,6 +6,7 @@ import {Meteor} from 'meteor/meteor';
 import angularMeteor from 'angular-meteor';
 import {name as realtyConditions} from '../../shared/realty-conditions/realty-conditions.component';
 import {name as subwayChips} from '/imports/ui/shared/subway-chips/subway-chips.component';
+import {name as subwayChoice} from '/imports/ui/shared/subway-choice/subway-choice.component';
 import {name as realtyStreet} from '/imports/ui/shared/realty-street/realty-street.component';
 import {name as districtSingle} from '/imports/ui/shared/district-single/district-single.component';
 import {name as dateTimepPicker} from '/imports/ui/shared/date-time-picker/date-time-picker.component';
@@ -26,6 +27,7 @@ class OutgoingCall {
     this.dictionary = dictionary;
     this.type = 4;
     this.newBuilding = 1;
+    this.newObjectRecieved = 1;
     this.stat = '';
 
     this.autorun(function () {
@@ -122,12 +124,15 @@ class OutgoingCall {
     }
     vm.isLoading = true;
     
+    // платит ли комиссию
     if (vm.realty.owner && vm.realty.owner.comission) {
       vm.statComission = true;
       vm.realty.owner.isComission = true; 
     } else {
       vm.statComission = false;
     }
+
+    // определяем тип объекта
     if (vm.operation == 1) {
       vm.realty.type = vm.newBuilding == 1 ? 2 : 1 ;
     } else if (vm.operation == 0) {
@@ -164,11 +169,13 @@ class OutgoingCall {
 
     vm.realty.status = 'list';
     vm.stat = comission ? exclusive ? 'objectsSavedComAndExc' : 'objectsSavedCom' : exclusive ? 'objectsSavedExc' : 'objectsSaved';
+    console.log(vm.realty.address)
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {
         this.showLoader = false;
         console.log('error', error);
       } else {
+        vm.newObjectRecieved = (vm.newObjectRecieved + 1);
         Meteor.call('operatorStat', vm.stat, (error, result) => {
           if (error) console.log(error)
         });
@@ -243,6 +250,7 @@ export default angular.module(moduleName, [
   dateTimepPicker,
   districtSingle,
   subwayChips,
+  subwayChoice,
   PriceMask
 ]).component(moduleName, {
   templateUrl: 'imports/ui/call-center/outgoing-call/outgoing-call.view.html',

@@ -79,6 +79,12 @@ div(md-whiteframe='2')
                             //    subways-embeded='outgoingCall.subwaysEmbeded'
                             //    ng-if='!outgoingCall.isLoading' flex)
                             div(flex='50')
+                                h3 Метро
+                                subway-choice(ng-if='outgoingCall.realty'
+                                              ng-model='outgoingCall.realty.address.subways' 
+                                              subways-embedded='outgoingCall.realty.address.subwaysEmbedded'
+                                              restart='outgoingCall.newObjectRecieved')
+                            //div(flex='50')
                                 div Метро {{outgoingCall.realty.address.subway.name}}
 
                             div(flex='30' flex-offset='10')
@@ -123,7 +129,7 @@ div(md-whiteframe='2')
                     div(flex='45').bg-egg.p-8
                         div(layout='column' layout-align='start start')
                             h2 Время встречи
-                            date-time-picker(ng-model="outgoingCall.meetingTime" meeting='true' ourdate='outgoingCall.meetingTime' total-days="7" start-date='outgoingCall.today')
+                            date-time-picker(ng-model="outgoingCall.meetingTime" meeting='true' restart='outgoingCall.newObjectRecieved' total-days="7" start-date='outgoingCall.today')
                         div(layout='row')
                             div(flex='90')
                                 div(layout='row' layout-align='start center')

@@ -100,6 +100,7 @@ function operatorSave(realty) {
   if (Meteor.isServer) {
     realty.operator.id = Meteor.userId();
     realty.status = 'ocean';
+    console.log(realty.address)
     Realty.update({_id: realty._id}, {
       $set: realty
     }, (error) => {

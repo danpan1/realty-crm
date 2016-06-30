@@ -1,8 +1,11 @@
 import {Meteor} from 'meteor/meteor';
 // import {Realty} from '../realty';
 // import {Clients} from '../clients';
+//Meteor.startup(function () {
+//  process.env.MAIL_URL = "smtp://object@e.getrent.pro:4KtnYEN7CJyj@smtp.mailgun.org:587";
+//});
 Meteor.startup(function () {
-  process.env.MAIL_URL = "smtp://object@e.getrent.pro:4KtnYEN7CJyj@smtp.mailgun.org:587";
+  process.env.MAIL_URL = "smtp://mirestate-conf@mail.ru:k5nEZ8eqScSYR@smtp-pulse.com:2525";
 });
 /*Meteor.startup(function () {
   smtp = {
