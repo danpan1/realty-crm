@@ -81,8 +81,7 @@ div(md-whiteframe='2')
                             div(flex='50')
                                 h3 Метро
                                 subway-choice(ng-if='outgoingCall.realty'
-                                              ng-model='outgoingCall.realty.address.subways' 
-                                              subways-embedded='outgoingCall.realty.address.subwaysEmbedded'
+                                              ng-model='outgoingCall.realty.address.subway'
                                               restart='outgoingCall.newObjectRecieved')
                             //div(flex='50')
                                 div Метро {{outgoingCall.realty.address.subway.name}}

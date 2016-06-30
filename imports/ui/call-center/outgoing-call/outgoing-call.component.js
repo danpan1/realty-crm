@@ -226,7 +226,7 @@ class OutgoingCall {
           this.showLoader = false;
           if (vm.realty.square === 0) {
             vm.realty.square = '';
-            if(vm.realty.realtor) vm.realty.realtor.isExclusive = true; else vm.realty.realtor = {isExclusive:true};
+            //if(vm.realty.realtor) vm.realty.realtor.isExclusive = true; else vm.realty.realtor = {isExclusive:true};
           }
         }
         this.infoWasCopied = false;

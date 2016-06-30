@@ -13,7 +13,7 @@ class SubwayChoice {
     const vm = this;
     this.$timeout = $timeout;
     this.stateParams = $stateParams;
-    this.searchText = this.subwaysIdList && this.subwaysEmbedded ? this.subwaysEmbedded[0].name : '';
+    this.searchText = this.subway ? this.subway.name : '';
     this.query = this.searchText;
     console.log(this.query);
     vm.subwaysSuggestionList = [];
@@ -30,15 +30,15 @@ class SubwayChoice {
 
     this.$onChanges = function () {
       let checkRealty = function () {
-        if(vm.subwaysEmbedded){
-          vm.searchText = vm.subwaysEmbedded[0].name;
+        if(vm.subway){
+          vm.searchText = vm.subway.name;
           vm.query = vm.searchText;
-        } else {
+        }/* else {
           console.log('no way!')
           vm.$timeout(()=>{
             checkRealty();
           },200)
-        }
+        }*/
       }
       checkRealty();
     }
@@ -49,11 +49,11 @@ class SubwayChoice {
     if(this.selectedSubway){
       console.log(this.subwaysSuggestionList);
       console.log(this.selectedSubway);
-      this.subwaysIdList = [this.selectedSubway._id];
-      this.subwaysEmbedded = [{
-        name: this.selectedSubway.name, 
+      this.subway = {
+        id: this.selectedSubway._id,
+        name: this.selectedSubway.name,
         line: this.selectedSubway.meta.lineId
-      }];
+      }
     }
   }
 
@@ -74,8 +74,7 @@ export default angular.module(moduleName, [
   templateUrl: `imports/ui/shared/subway-choice/subway-choice.view.html`,
   controllerAs: moduleName,
   bindings: {
-    subwaysIdList: '=ngModel',
-    subwaysEmbedded: '=',
+    subway: '=ngModel',
     subwaysChanged: '&',
     restart: '<'
   },
