@@ -186,7 +186,7 @@ class RealtyCardPurchase {
     let vm = this;
     if(this.userpaid){
       if(!this.con){
-        Meteor.call('takeRealty', id, (err, result) => {
+        Meteor.call('buyRealtyOcean', id, (err, result) => {
           if (err) {
             console.log('err: ' + err);
           } else {
