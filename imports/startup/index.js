@@ -5,7 +5,7 @@ import {Meteor} from 'meteor/meteor';
 //  process.env.MAIL_URL = "smtp://object@e.getrent.pro:4KtnYEN7CJyj@smtp.mailgun.org:587";
 //});
 Meteor.startup(function () {
-  process.env.MAIL_URL = "smtp://mirestate-conf@mail.ru:k5nEZ8eqScSYR@smtp-pulse.com:2525";
+  process.env.MAIL_URL = "smtp://superdenceo@gmail.com:k3pJBGET7pnY@smtp-pulse.com:2525";
 });
 /*Meteor.startup(function () {
   smtp = {
@@ -17,4 +17,3 @@ Meteor.startup(function () {
   process.env.MAIL_URL = 'smtp://ilya.karev1000%40mail.ru:futurama1000@smtp.mail.ru:25';
 });*/
 //
-
