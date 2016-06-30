@@ -118,22 +118,22 @@ div(md-whiteframe='2')
                                         input(ng-model='outgoingCall.realty.floor' placeholder='Этаж' required='')
                                     label().md-subhead.mh-16 из
                                     md-input-container(flex='35').mv-0.pb-0.form-required
-                                        input(ng-model='outgoingCall.realty.floormax' placeholder='Этажей' required='')
-                div(layout='row')
-                    div(flex='90')
+                                        input(ng-model='outgoingCall.realty.floormax' placeholder='Этажей' required='') 
+                div(layout='row') 
+                    div(flex='45').bg-egg.p-8
+                        div(layout='column' layout-align='start start')
+                            h2 Время встречи
+                            date-time-picker(ng-model="outgoingCall.meetingTime" meeting='true' ourdate='outgoingCall.meetingTime' total-days="7" start-date='outgoingCall.today')
                         div(layout='row')
-                            div(flex='50')
+                            div(flex='90')
                                 div(layout='row' layout-align='start center')
-                                    span().md-subhead Готов ли платить комиссию
+                                    span().md-subhead Готов платить комиссию
                                     md-input-container().add-realty-full__comission-percent.ml-16
                                         input(type="text" ng-model='outgoingCall.realty.owner.comission')
                                     span().md-subhead.ml-16 %
-                            div(flex)
-                div(layout='row')
-                    div(flex='90')
                         div(layout='row')
-                            div(flex='50')
-                                md-checkbox(id="isExclusive" name="isExclusive" ng-model='outgoingCall.realty.realtor.isExclusive' aria-label="Checkbox 1").m-0.md-primary.md-subhead {{ outgoingCall.realty.realtor.isExclusive ? 'Готов' : 'Не готов'}} на эксклюзив
+                            div(flex='90')
+                                md-checkbox(id="isExclusive" name="isExclusive" ng-model='outgoingCall.realty.realtor.isExclusive' aria-label="Checkbox 1").m-0.md-primary.md-subhead Готов на эксклюзив
                 div(layout='row').mt-16
                     div(flex='55')
                         md-input-container(md-no-float layout='row').form-required

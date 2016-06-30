@@ -11,11 +11,12 @@ if (Meteor.isServer) {
       if (this.userId) {
         selector = {
           $or: [
-            {status: 'new'},
+            {status: 'ocean'},
             {status: 'taken', 'realtor.id': this.userId}
           ]
         };
-
+        console.log(' ==== search: =====')
+        console.log(search)
         if (search) {
           console.log('search', search);
 
@@ -119,6 +120,7 @@ if (Meteor.isServer) {
           'owner.isComission': 1,
           'operator.comment': 1,
           'operator.oceanAdd': 1,
+          'operator.meetingTime':1,
           createdAt: 1,
           floor: 1,
           floormax: 1,
@@ -134,7 +136,11 @@ if (Meteor.isServer) {
         console.log(selector);
         // console.log(options);
         let realty = Realty.find(selector, options);
+        //console.log('==== Realty.length: ' + realty + ' ======')
+        //console.log('==== Realty.length ======')
+        //console.log(realty)
         let count = realty.count();
+        console.log('==== Realty.length: ' + count + ' ======')
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});
         CountsDan.find({_id: countId});
         return [realty, CountsDan.find({_id: this.userId})];

@@ -17,9 +17,25 @@ class DateTimePicker {
     this.minsDictionary = this.mins = ['00', '15', '30', '45'];
 
     this.day = this.days[0] + '';
-    this.hour = '12';
-    this.min = '00';
-    this.setDate();
+    // Проверка, чтобы не было дефолтной даты -- для назаначения встречи оператором
+    this.hour = this.meeting ? '' : '12';
+    this.min = this.meeting ? '' : '00';
+    if (!this.meeting) this.setDate();
+    else {
+      let now = new Date();
+      this.checkAvailableHours(now);
+      this.checkAvailableMins(now);
+    }
+
+    this.$onChanges = function (obj) {
+      console.log('onChanges');
+      console.log(obj);
+      if(this.meeting && !this.datePicked){
+        console.log('this.datePicked: ', this.datePicked);
+        this.hour = '';
+        this.min = '';
+      }
+    };
 
   }
 
@@ -41,7 +57,7 @@ class DateTimePicker {
     if (now.getHours() < this.hoursDictionary[this.hoursDictionary.length - 1] && now.getMinutes() >= this.minsDictionary[this.minsDictionary.length - 1]) plus = 1;  //в 17:45  убираем 17. делаем 18
     this.hours = this.hoursDictionary.slice(now.getHours() + plus);
     if (this.hour < now.getHours() + plus) {
-      this.hour = this.hours[0];
+      this.hour = this.meeting ? '' : this.hours[0];
     }
 
   };
@@ -50,7 +66,7 @@ class DateTimePicker {
     if (now.getHours() != this.hour)  return;
     for (let i = 0; i < this.minsDictionary.length - 1; i++) { // mins.length - 1 чтобы не попадать на '45 минут' , чтобы можно было index плюсануть
       if (now.getMinutes() >= this.minsDictionary[i]) {
-        this.mins = this.minsDictionary.slice(i + 1);
+        this.mins = this.meeting ? '' : this.minsDictionary.slice(i + 1);
       }
     }
 
@@ -115,7 +131,9 @@ export default angular.module(moduleName, [
   bindings: {
     datePicked: '=ngModel',
     startDate: '=',
-    totalDays: '='
+    totalDays: '=',
+    meeting: '<',
+    ourdate: '<' // Нужно для проверки, отправил ли оператор объект 
   },
   controllerAs: moduleName,
   controller: DateTimePicker

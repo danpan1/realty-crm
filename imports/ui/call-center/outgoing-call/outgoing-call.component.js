@@ -117,7 +117,6 @@ class OutgoingCall {
   save(valid) {
     this.showLoader = true;
     const vm = this;
-    console.log(valid, 'valid');
     if (!valid) {
       return;
     }
@@ -129,14 +128,11 @@ class OutgoingCall {
     } else {
       vm.statComission = false;
     }
-    console.log(vm.operation);
     if (vm.operation == 1) {
       vm.realty.type = vm.newBuilding == 1 ? 2 : 1 ;
     } else if (vm.operation == 0) {
       vm.realty.type = vm.type == 3 ? 3 : 4;
-    }    
-    
-    console.log(vm.realty.type);
+    }
 
     if (vm.realty.address.districtId) {
       let district = {
@@ -158,13 +154,16 @@ class OutgoingCall {
       var d = new Date().getTime();
       vm.realty.operator.oceanAdd = d;
     }
-    if (vm.newBuilding === 1) {
+    /*if (vm.newBuilding === 1) {
       vm.realty.type = 2;
+    }*/
+    if(vm.meetingTime){
+      vm.realty.operator.meetingTime = vm.meetingTime;
+      vm.meetingTime = undefined;
     }
 
     vm.realty.status = 'list';
     vm.stat = comission ? exclusive ? 'objectsSavedComAndExc' : 'objectsSavedCom' : exclusive ? 'objectsSavedExc' : 'objectsSaved';
-    console.log('save realty', vm.realty);
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {
         this.showLoader = false;
@@ -172,7 +171,6 @@ class OutgoingCall {
       } else {
         Meteor.call('operatorStat', vm.stat, (error, result) => {
           if (error) console.log(error)
-          else console.log(result);
         });
       }
       vm.realty = {};
@@ -214,7 +212,6 @@ class OutgoingCall {
         vm.realty = result;
         vm.isLoading = false;
         vm.operator = {};
-        console.log('новый объект', vm.realty);
         if (!result) {
           this.showLoader = false;
           vm.isLoading = true;
@@ -224,7 +221,6 @@ class OutgoingCall {
             vm.realty.square = '';
             if(vm.realty.realtor) vm.realty.realtor.isExclusive = true; else vm.realty.realtor = {isExclusive:true};
           }
-          console.log(vm.realty.price);
         }
         this.infoWasCopied = false;
       });
