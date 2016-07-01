@@ -15,4 +15,5 @@ import '../imports/api/realty';
 import '../imports/api/clients';
 import '../imports/api/operators';
 import '../imports/startup/loadUsers';
+import '../imports/api/realty/methods/realtor.method';
 
