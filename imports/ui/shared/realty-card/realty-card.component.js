@@ -37,15 +37,8 @@ class RealtyCard {
       };
     }
     this.checkUserPaid(false);
-    this.close = function () {
-      this.mdDialog.cancel();
-    };
     
-    this.$onDestroy = function () {
-      if(this.globalId){
-        this.saveCheckedRealty(this.globalId, this.globalStatus);
-      }
-    };
+
     
     this.halfPrice = parseInt(this.realty.price / 2);
     
@@ -117,14 +110,7 @@ class RealtyCard {
     Meteor.call('changeRelationTypeInClient', type, realtyId, clientId, isNew);
   }
   
-  nextStep (nextStep) {
-    if(this.globalId){
-      this.saveCheckedRealty(this.globalId, this.globalStatus);
-    }
-    if(nextStep == 'go'){
-      this.state.go('crm.realty.one.review', {realtyId: this.realty._id});
-    }
-  }
+  
   
   onShowDetails (justInfo) {
     if(!this.contacts.realtyPhone){
@@ -153,32 +139,64 @@ class RealtyCard {
       this.ngShowDescr = !this.ngShowDescr;
     }
   }
-  
+  returnToCallCenterConfirm (id) {
+    this.updateRealty(id, 'call');
+  }
 
-  takeCheckedRealty(id, status) {
-    let vm = this;
-    if(status == 'realtor') {
-      this.globalId = id;
-      this.globalStatus = status;
-      window.onbeforeunload = function(){
-        vm.saveCheckedRealty(vm.globalId, vm.globalStatus);
-      }
-      this.needNextStep = true;
-    } else if (status == 'agency'){
-      this.saveCheckedRealty(id, status);
+  returnToCallCenter (id, ev) {
+    const vm = this;
+    
+    const realtyCardDialogController = function ($mdDialog) {
+      this.close = () => {
+        $mdDialog.cancel();
+      };
+      this.confirm = () => {
+        vm.returnToCallCenterConfirm(id);
+        $mdDialog.cancel();
+      };
+      this.refuse = () => {
+        $mdDialog.cancel();
+      };
     }
+    realtyCardDialogController.$inject = ['$mdDialog'];
+
+    this.mdDialog.show({
+      controller: realtyCardDialogController,
+      controllerAs : 'dialog',
+      template: `<md-dialog class="subscription-dialog" aria-label="Отказ от объекта" ng-cloak>
+                    <md-toolbar>
+                      <div class="md-toolbar-tools">
+                        <h2>Отказ от объекта</h2>
+                        <span flex></span>
+                        <md-button class="md-icon-button" ng-click="dialog.close()">
+                          <md-icon md-svg-src="svg/icon-close.svg" aria-label="Закрыть окно оплаты подписки"></md-icon>
+                        </md-button>
+                      </div>
+                    </md-toolbar>
+                    <md-dialog-content>
+                      <div class="md-dialog-content pv-16">
+                        <div layout="column">
+                          <div layout="row" flex="80">
+                            <h3 class="md-subhead text-center">Вы уверены, что хотите отказаться от этого объекта? Вы не сможете вернуться к работе с ним в дальнейшем.</h3>
+                          </div>
+                          <div layout='row' layout-align='center center'>
+                            <md-button flex class="md-raised md-primary md-mv-16 ph-16" ng-click='dialog.confirm()'>Да</md-button>
+                            <md-button flex class="md-raised md-warn md-mv-16 ph-16" ng-click='dialog.refuse()'>Нет</md-button>
+                          </div>
+                        </div>
+                    </md-dialog-content>
+                </md-dialog>`,
+      preserveScope: true,
+      targetEvent: ev,
+      clickOutsideToClose: true
+    })
   }
   
-  saveCheckedRealty(id, status){
+  saveCheckedRealty(id, goToObject){
     console.log('saveCheckedRealty');
-    Meteor.call('buyRealtyOcean', id, status, (err, result)=> {
-      if (err) {
-        console.log('err: ' + err);
-      } else {
-        console.log(result);
-        this.needNextStep = true;
-      }
-    });
+    if(this.updateRealty(id, 'realtor')){
+        if (goToObject) this.state.go('crm.realty.one.review', {realtyId: id}); else this.ngShowDescr = false;
+    }
   }
 
   sendRealtyRelation(realtyId, clientId) {
@@ -194,9 +212,9 @@ class RealtyCard {
         console.log('err: ' + err);
       } else {
         console.log(result);
+        return true;
       }
     });
-
   }
   
   checkUserPaid (ev) {
