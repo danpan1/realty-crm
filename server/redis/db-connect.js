@@ -4,8 +4,8 @@
 import {Meteor} from "meteor/meteor";
 import redis from "redis";
 
-// const client = redis.createClient({db : 1});
-const client = redis.createClient({db: 1, host: 'redis.int.invest5.ru'});
+// const client = redis.createClient({db : 0}); //это локально
+const client = redis.createClient({db: 1, host: 'redis.int.invest5.ru'}); // это на серваках
 
 
 client.setSync = Meteor.wrapAsync(client.set);
