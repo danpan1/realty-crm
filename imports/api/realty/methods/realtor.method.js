@@ -36,7 +36,7 @@ export function buyRealtyOcean(realtyId) {
   }
 
   const userId = this.userId;
-  console.log('call redis userId =', userID, 'realtyId = ', realtyId);
+  console.log('call redis userId =', userId, 'realtyId = ', realtyId);
   //todo timer 150 на процедуру иначе отбой
 
   if (!setRedisKey(realtyId)) {
@@ -51,7 +51,7 @@ export function buyRealtyOcean(realtyId) {
   let oldStatus = realty.status;
   Realty.update({_id: realtyId}, {$set: {status: 'transaction'}});
 
-  //todo price опеределить по параметрам
+  //todo price опеределить по параметрамs
   let price = 500;
 
   if (oldStatus !== 'ocean' || (realty.realtor && realty.realtor.id)) {
@@ -81,12 +81,6 @@ export function buyRealtyOcean(realtyId) {
   delRedisKey(realtyId);
   delRedisKey(userId);
   console.log('Transaction buy completed');
-  return {
-    name: realty.contacts[0].name,
-    phone: realty.contacts[0].phones[0].phone,
-    address: {street: realty.address.street, house: realty.address.house}
-  };
-  //todo return телефон собственника
 
   function buyOceanBackwardsCommits(stage) {
     if (stage > 0) {
@@ -98,6 +92,13 @@ export function buyRealtyOcean(realtyId) {
     delRedisKey(realtyId);
     delRedisKey(userId);
   }
+  return {
+    name: realty.contacts[0].name,
+    phone: realty.contacts[0].phones[0].phone,
+    address: {street: realty.address.street, house: realty.address.house}
+  };
+  //todo return телефон собственника
+
 }
 
 export function showRealtyDetails(realtyId, userId) {
