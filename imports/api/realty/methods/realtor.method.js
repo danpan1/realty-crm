@@ -10,9 +10,8 @@ import {Locations} from '/imports/api/locations';
 import {_} from 'meteor/underscore';
 import {Roles} from 'meteor/alanning:roles';
 import nextAutoincrement from '../../../helpers/getUniqueId';
-
-// import {setRedisKey} from '../../../redis/redis-SET-DEL';
-// import {delRedisKey} from '../../../redis/redis-SET-DEL';
+import {setRedisKey} from '../../../redis/redis-SET-DEL';
+import {delRedisKey} from '../../../redis/redis-SET-DEL';
 
 Meteor.methods({
   addRealty,
@@ -32,64 +31,75 @@ Meteor.methods({
 
 export function buyRealtyOcean(realtyId) {
 
-  if (Meteor.isServer && this.userId) {
-    let userId = this.userId;
-    console.log(this.userId);
-    console.log('call redis');
-    //todo timer 150 на процедуру иначе отбой
-    Meteor.call('setRedisBlock', realtyId, this.userId, function (err, res) {
-      if (err) {
-        console.log(err, 'err redis');
-      }
-      console.log(res, 'res redis');
+  if (!(Meteor.isServer && this.userId)) {
+    throw new Meteor.Error('logged-out', 'The user must be logged in to take realty.');
+  }
 
-      let realty = Realty.findOne({_id: realtyId});
-      //todo price опеределить по параметрам
-      let price = 500;
-      if (realty.status !== 'ocean' || (realty.realtor && realty.realtor.id)) {
-        return 'объект не из океана';
-      }
-      Realty.update({_id: realtyId}, {$set: {status: 'transaction'}});
-      if (realty.type === 4 && !Roles.userIsInRole(Meteor.userId(), 'paid')) {
-        Realty.update({_id: realtyId}, {$set: {status: 'ocean'}});
-        return 'надо оплатить подписку на аренду';
-      }
-      if (realty.type === 1 && !Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
-        Realty.update({_id: realtyId}, {$set: {status: 'ocean'}});
-        return 'надо оплатить подписку на продажу';
-      }
-      /*   ОПЛАТА  */
-      Balance.update({userId: userId}, {$inc: {current: -price}});
-      /*проверяем положительный баланс*/
-      if (Balance.findOne({userId: userId}).current < 0) {
-        //TODO trhrow error. return false
-        Realty.update({_id: realtyId}, {$set: {status: 'ocean'}});
-        Balance.update({userId: this.userId}, {$inc: {current: price}});
-        console.log('Недостаточно средств');
-        return 'Недостаточно средств';
-      }
-      /* если все прошло успешно прошло удаляем ключ*/
-      /*   ОПЛАТА  */
+  const userId = this.userId;
+  console.log('call redis userId =', userID, 'realtyId = ', realtyId);
+  //todo timer 150 на процедуру иначе отбой
 
-      /*Успешно прошло */
+  if (!setRedisKey(realtyId)) {
+    throw new Meteor.Error('Объект заблокирован', 'Ктото уже взял этот объект. Не известно этот юзер или другой');
+  }
+  if (!setRedisKey(userId)) {
+    delRedisKey(realtyId);
+    throw new Meteor.Error('Баланс пользователя заблокирован', 'Нельзя совершать 2 операции покупки одновременно. Заввершите первую операцию');
+  }
 
-      Realty.update({_id: realtyId}, {$set: {status: 'taken', 'realtor.id': userId}});
-      Meteor.call('delRedisBlock', function(){
-        if (err) {
-          console.log(err, 'err  delRedisBlockredis');
-        }
-        console.log(res, 'res delRedisBlock');
-      });
-      //todo проверить получилось ли сделать update
-    });
+  let realty = Realty.findOne({_id: realtyId});
+  let oldStatus = realty.status;
+  Realty.update({_id: realtyId}, {$set: {status: 'transaction'}});
 
-    /*Удаляем транзакцию блокировку */
-    // delRedisKey(realtyId);
-    // delRedisKey(this.userId);
-    console.log('jr');
-    //todo return телефон собственника
+  //todo price опеределить по параметрам
+  let price = 500;
+
+  if (oldStatus !== 'ocean' || (realty.realtor && realty.realtor.id)) {
+    buyOceanBackwardsCommits(1);
+    throw new Meteor.Error('объект не из океана');
+  }
+  if (realty.type === 4 && !Roles.userIsInRole(Meteor.userId(), 'paid')) {
+    buyOceanBackwardsCommits(1);
+    throw new Meteor.Error('надо оплатить подписку на аренду');
+  }
+  if (realty.type === 1 && !Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
+    buyOceanBackwardsCommits(1);
+    throw new Meteor.Error('надо оплатить подписку на продажу');
+  }
+  /*   ОПЛАТА  */
+  Balance.update({userId: userId}, {$inc: {current: -price}});
+  /*проверяем положительный баланс*/
+  if (Balance.findOne({userId: userId}).current < 0) {
+    buyOceanBackwardsCommits(2);
+    throw new Meteor.Error('Недостаточно средств');
+  }
+  /*Успешно прошла вся транзакция приписывает объект риэлтору */
+  Realty.update({_id: realtyId}, {$set: {status: 'taken', 'realtor.id': userId}});
+  //todo проверить получилось ли сделать update
+
+  /*Удаляем транзакцию блокировку */
+  delRedisKey(realtyId);
+  delRedisKey(userId);
+  console.log('Transaction buy completed');
+  return {
+    name: realty.contacts[0].name,
+    phone: realty.contacts[0].phones[0].phone,
+    address: {street: realty.address.street, house: realty.address.house}
+  };
+  //todo return телефон собственника
+
+  function buyOceanBackwardsCommits(stage) {
+    if (stage > 0) {
+      Realty.update({_id: realtyId}, {$set: {status: oldStatus}});
+    }
+    if (stage > 1) {
+      Balance.update({userId: userId}, {$inc: {current: price}});
+    }
+    delRedisKey(realtyId);
+    delRedisKey(userId);
   }
 }
+
 export function showRealtyDetails(realtyId, userId) {
   if (Meteor.isServer && Meteor.userId()) {
 
@@ -394,6 +404,8 @@ export function takeRealtyToConnections(realtyId, status) {
     }
   }
 }
+
 function pay(amount, userId) {
   console.log(userId);
 }
+
