@@ -170,7 +170,8 @@ class RealtyCard {
   }
   
   saveCheckedRealty(id, status){
-    Meteor.call('takeRealty', id, status, (err, result)=> {
+    console.log('saveCheckedRealty');
+    Meteor.call('buyRealtyOcean', id, status, (err, result)=> {
       if (err) {
         console.log('err: ' + err);
       } else {
