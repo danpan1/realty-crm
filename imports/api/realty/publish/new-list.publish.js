@@ -15,7 +15,8 @@ if (Meteor.isServer) {
             {status: 'taken', 'realtor.id': this.userId}
           ]
         };
-
+        console.log(' ==== search: =====')
+        console.log(search)
         if (search) {
           console.log('search', search);
 
@@ -89,6 +90,12 @@ if (Meteor.isServer) {
           if (search.subways && !_.isEmpty(search.subways)) {
             query.push({'address.subways': {$in: search.subways}});
           }
+          
+          console.log(search.street);
+          
+          if(search.street) {
+            query.push({'address.street': search.street});
+          }
 
           if (query && !_.isEmpty(query)) {
             selector.$or = query;
@@ -101,7 +108,9 @@ if (Meteor.isServer) {
         //TODO раскомментить только то что надо на клиенте
         options.fields = {
           'address.subwaysEmbedded': 1,
+          'address.subway': 1,
           'address.metroTime': 1,
+          'address.metroTransport': 1,
           'details.descr': 1,
           'details.renovation': 1,
           'details.images.url': 1,
@@ -111,6 +120,7 @@ if (Meteor.isServer) {
           'owner.isComission': 1,
           'operator.comment': 1,
           'operator.oceanAdd': 1,
+          'operator.meetingTime':1,
           createdAt: 1,
           floor: 1,
           floormax: 1,
@@ -126,7 +136,11 @@ if (Meteor.isServer) {
         console.log(selector);
         // console.log(options);
         let realty = Realty.find(selector, options);
+        //console.log('==== Realty.length: ' + realty + ' ======')
+        //console.log('==== Realty.length ======')
+        //console.log(realty)
         let count = realty.count();
+        console.log('==== Realty.length: ' + count + ' ======')
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});
         CountsDan.find({_id: countId});
         return [realty, CountsDan.find({_id: this.userId})];

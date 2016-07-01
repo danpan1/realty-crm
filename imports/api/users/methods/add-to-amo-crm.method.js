@@ -25,7 +25,7 @@ export function amoCrmAuth() {
     let authOptions = {
       params: {
         USER_LOGIN: 'ilya.karev1000@gmail.com',
-        USER_HASH: 'bab2e7256c31d9273a8fb89638fde336'
+        USER_HASH: '80b3ab5cf5cfda0cc4743d1f996a0e5f'
       }
     };
     let result;
@@ -44,7 +44,7 @@ export function amoCrmAuth() {
   }
 }
 
-export function getResponseTest(action) {
+export function getResponseTest(action, info) {
   if (Meteor.isServer && Meteor.userId()) {
 
     let getResponseAuthUrl = 'https://api.getresponse.com/v3/contacts';
@@ -54,12 +54,13 @@ export function getResponseTest(action) {
         "X-Auth-Token": "api-key e75f681ae153ca7c870480d6957f8e42"
       },
       "data": {
-        "name": "Ilya Karev",
-        "email": "ilya.karev1000@gmail.com",
+        "name": info.name,
+        "email": info.email,
         "dayOfCycle": 0,
         "campaign": {
-            "campaignId": "39360806"
+            "campaignId": "pmy7D"
         }
+        //pmBFs - for paid clients
       }
     };
     let result;
@@ -89,7 +90,7 @@ export function getResponseTest(action) {
 export function amoCrmUnsort() {
     if (Meteor.isServer && Meteor.userId()) {
       let newdate = new Date().getTime();
-      let unsortUrl = 'https://winvest.amocrm.ru/api/unsorted/add?type=json&api_key=bab2e7256c31d9273a8fb89638fde336&login=ilya.karev1000@gmail.com';
+      let unsortUrl = 'https://winvest.amocrm.ru/api/unsorted/add?type=json&api_key=80b3ab5cf5cfda0cc4743d1f996a0e5f&login=ilya.karev1000@gmail.com';
       let unsortOptions = {
         "data": {
           "request": {
@@ -99,12 +100,6 @@ export function amoCrmUnsort() {
                 "source": "http://getrent.ru",
                 "source_uid": null,
                 "data": {
-                  /*"leads": [
-                    {
-                      "name": 'Покупка открывашки для левшей',
-                      "price": '990'
-                    }
-                  ],*/
                   "contacts": [
                     {
                       "name":"Mister Twister"
@@ -144,19 +139,50 @@ export function amoCrmUnsort() {
 }
 
 
-export function amoCrmNewContact() {
+export function amoCrmNewContact(info) {
   if (Meteor.isServer && Meteor.userId()) {
-
+    
+    if(!info || !info.name) info = {
+      name: 'Дедушка Пёс',
+      phone: '89235755159',
+      email: 'grandpa-dog@yandex.ru'
+    }; 
+    
+    console.log('==== INFO ====')
+    console.log(info.name)
+    console.log(info.phone)
+    console.log(info.email)
+    
     let newContactUrl = 'https://winvest.amocrm.ru/private/api/v2/json/contacts/set?type=json';
     let newContactOptions = {
       "data": {
         "USER_LOGIN": 'ilya.karev1000@gmail.com',
-        "USER_HASH": 'bab2e7256c31d9273a8fb89638fde336',
+        "USER_HASH": '80b3ab5cf5cfda0cc4743d1f996a0e5f',
         "request": {
           "contacts": {
             "add": [
               {
-                "name": 'Старуха Шапокляк'
+                "name": info.name,
+                "custom_fields":  [
+                  {
+                    "id":  55400,
+                    "values":  [
+                      {
+                        "value": info.phone,
+                        "enum": "MOB"
+                      }
+                    ]
+                  },
+                  {
+                    "id":  55402,
+                    "values":  [
+                      {
+                        "value": info.email,
+                        "enum": "WORK"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -198,21 +224,21 @@ export function amoCrmNewContact() {
   }
 }
 
-export function amoCrmNewDeal() {
+export function amoCrmNewDeal(purchaseInfo) {
   if (Meteor.isServer && Meteor.userId()) {
     
     let newDealUrl = 'https://winvest.amocrm.ru/private/api/v2/json/leads/set?type=json';
     let newDealOptions = {
       "data": {
         "USER_LOGIN": 'ilya.karev1000@gmail.com',
-        "USER_HASH": 'bab2e7256c31d9273a8fb89638fde336',
+        "USER_HASH": '80b3ab5cf5cfda0cc4743d1f996a0e5f',
         "request": {
           "leads": {
             "add": [
               {
-                "name": 'Покупка открывашки для левшей',
+                "name": purchaseInfo.name,
                 "status_id": '11124741',
-                "price": '990'
+                "price": purchaseInfo.price
               }
             ]
           }
@@ -261,7 +287,7 @@ export function amoCrmEditContact(dealId) {
     let newContactOptions = {
       "data": {
         "USER_LOGIN": 'ilya.karev1000@gmail.com',
-        "USER_HASH": 'bab2e7256c31d9273a8fb89638fde336',
+        "USER_HASH": '80b3ab5cf5cfda0cc4743d1f996a0e5f',
         "request": {
           "contacts": {
             "update": [

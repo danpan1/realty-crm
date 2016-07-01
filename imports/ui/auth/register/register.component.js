@@ -59,12 +59,40 @@ class Register {
           else if (err.reason == 'Email already exists.') this.error = 2;
           else this.error = 3;
         } else {
+          
           Meteor.call('sendQuestion', {
             phone: this.credentials.profile.phone,
             name: this.credentials.profile.name
           }, (err, res)=>{
             if(err) {console.log(err);}
             else {console.log(res);}
+          });
+          
+          // Add new contact at amoCRM
+          let amoInfo = {
+            name: this.credentials.profile.name + ' ' + this.credentials.profile.surName,
+            phone: this.credentials.profile.phone,
+            email: this.credentials.email
+          }   
+                 
+          Meteor.call('amoCrmNewContact', amoInfo, (error, result) => {
+            if (error) {
+              console.log(error);
+            } else {
+              this.timeout(()=>{
+                console.log(result);
+              },100)
+            }
+          });
+          
+          Meteor.call('getResponseTest', 'post', amoInfo, (error, result) => {
+            if (error) {
+              console.log(error);
+            } else {
+              this.timeout(()=>{
+                console.log(result);
+              },100)
+            }
           });
           
           this.$state.go('crm.realty.list.my');

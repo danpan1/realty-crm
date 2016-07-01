@@ -100,7 +100,8 @@ class OneEmail {
         let realtyConditions = vm.price + ' рублей в месяц, депозит ' + vm.price + ' рублей';
         let comission = vm.realty.comission ? ', комиссия ' + vm.realty.comission : '';
         vm.info.realtyConditions = realtyConditions + comission;
-        vm.realty.details.descr = this.realty.details.descr.replace(/<p>/g,'').replace(/<\/p>/g,' \r\n  \r\n').replace(/<br>|<br\/>|<br \/>/g,' \r\n');
+        console.log(vm.realty);
+        vm.realty.details.descr = vm.realty.details.descr.replace(/<p>/g,'').replace(/<\/p>/g,' \r\n  \r\n').replace(/<br>|<br\/>|<br \/>/g,' \r\n');
       }
     });
     

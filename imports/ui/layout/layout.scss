@@ -1,9 +1,16 @@
+.bg{
+  &-egg{
+    background-color: #fcf9e6;
+  }
+}
+
 layout > md-toolbar {
   background-color: #1e88e5 !important;
 }
 
-w-100{
-  width: 100%;
+.w-100{
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .lh{

@@ -17,9 +17,22 @@ class DateTimePicker {
     this.minsDictionary = this.mins = ['00', '15', '30', '45'];
 
     this.day = this.days[0] + '';
-    this.hour = '12';
-    this.min = '00';
-    this.setDate();
+    // Проверка, чтобы не было дефолтной даты -- для назаначения встречи оператором
+    this.hour = this.meeting ? '' : '12';
+    this.min = this.meeting ? '' : '00';
+    if (!this.meeting) this.setDate();
+    else {
+      let now = new Date();
+      this.checkAvailableHours(now);
+      this.checkAvailableMins(now);
+    }
+
+    this.$onChanges = function (obj) {
+      if(this.meeting && !this.datePicked){
+        this.hour = '';
+        this.min = '';
+      }
+    };
 
   }
 
@@ -115,7 +128,9 @@ export default angular.module(moduleName, [
   bindings: {
     datePicked: '=ngModel',
     startDate: '=',
-    totalDays: '='
+    totalDays: '=',
+    meeting: '<',
+    restart: '<' // Нужно для проверки, отправил ли оператор объект 
   },
   controllerAs: moduleName,
   controller: DateTimePicker

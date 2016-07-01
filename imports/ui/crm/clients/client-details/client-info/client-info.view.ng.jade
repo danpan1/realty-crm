@@ -71,10 +71,12 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
 
                 md-divider
                 div(flex='33').ph-32.pv-16
-                    h3().md-subhead.text-bold.text-uppercase.mt-0 Что важно клиенту
+                    h3(ng-if='clientInfo.client.note').md-subhead.text-bold.text-uppercase.mt-0 Что важно клиенту
                     p().md-body-1 {{clientInfo.client.note}}
-                    h3().md-subhead.text-bold.text-uppercase.mt-0 Email
+                    h3(ng-if='clientInfo.client.email').md-subhead.text-bold.text-uppercase.mt-0 Email
                     p().md-body-1 {{clientInfo.client.email}}
+                    h3(ng-if='clientInfo.client.age').md-subhead.text-bold.text-uppercase.mt-0 Возраст
+                    p().md-body-1 {{clientInfo.client.age}}
                     
                     
     div(layout='row' layout-align='start start')#openArchiveDialog.client-info__wrapper.mt-16

@@ -11,9 +11,9 @@ import './one-review.view.html';
 
 class OneReview {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams, $timeout, UploadResize, $q, $filter) {
-
+  constructor($scope, $reactive, $stateParams, $timeout, UploadResize, $q, $filter, md5) {
     $reactive(this).attach($scope);
+    this.md5 = md5;
     this.qqq = $q;
     this.filter = $filter;
     this.resize = UploadResize;
@@ -36,13 +36,15 @@ class OneReview {
 
     this.helpers({
       realty: () => {
-        return Realty.findOne({_id : $stateParams.realtyId});
+        return Realty.findOne({_id: $stateParams.realtyId});
       }
     });
     let subwaysEmb, district;
-    if(this.realty.address.subwaysEmbedded){
-      subwaysEmb = this.realty.address.subwaysEmbedded.map((value) => { return value.name; });
-    } else if(this.realty.address.districtId){
+    if (this.realty.address.subwaysEmbedded) {
+      subwaysEmb = this.realty.address.subwaysEmbedded.map((value) => {
+        return value.name;
+      });
+    } else if (this.realty.address.districtId) {
       district = this.realty.address.districtId;
     }
 
@@ -50,14 +52,20 @@ class OneReview {
       if (err) {
         console.log('err: ' + err);
       } else {
-        this.$timeout(()=>{
+        this.$timeout(()=> {
           this.analytics.avgPrice = parseInt(result[0]);
           this.analytics.comparison = this.analytics.avgPrice > this.realty.price;
           this.analytics.difference = this.analytics.comparison ? this.analytics.avgPrice - this.realty.price : this.realty.price - this.analytics.avgPrice;
           this.analytics.marketOk = !this.analytics.comparison && this.analytics.difference > this.analytics.avgPrice / 10 ? 'Цена слишком высокая' : this.analytics.comparison && this.analytics.difference > this.analytics.avgPrice / 10 ? 'Цена слишком низкая' : 'Цена в рынке!';
-        })
+        });
       }
     });
+  }
+
+  beforeChange(files) {
+    if (files.length > 0) {
+      this.showLoader = true;
+    }
   }
 
   removeImage(image, index) {
@@ -109,39 +117,74 @@ class OneReview {
 
 // удаление фото из View
 
+  getFileMd5Hash(blob) {
+    const vm = this;
+    let deferred = this.qqq.defer();
+    let image = new FileReader();
+    image.readAsBinaryString(blob);
+    image.onloadend = function () {
+      let imageResult = {
+        hash: vm.md5.createHash(image.result),
+        ngfName: blob.$ngfName,
+        name: blob.name
+      };
+      deferred.resolve(imageResult);
+    };
+    return deferred.promise;
+  }
+
   uploadImages(filesNormal) {
     const vm = this;
     if (!filesNormal) {
+      this.showLoader = false;
       return;
     }
-    this.uploadImagesNormalLength = filesNormal.length;
-    let promises = [];
-    //Ресайзим
-    filesNormal.forEach((file)=> {
-      promises.push(this.resize.resize(file, 186, 139));
-    });
-    //КОгда все отресайзится тогда заливаем
-    this.qqq.all(promises).then((smallImages)=> {
-      this.uploadThumbnails(smallImages);
-    });
 
-    let resultsImages = [];
-    S3.upload({
-      files: filesNormal,
-      path: ''
-    }, (error, result) => {
-      if (error) {
-        this.showLoader = false;
-        console.log(error);
-      } else {
-        vm.uploadImagesNormalLength--;
-        result.originalName = result.file.original_name;
-        resultsImages.push(result);
-        if (vm.uploadImagesNormalLength === 0) {
-          vm.saveImages(resultsImages);
-        }
-      }
-    });
+
+    try {
+      this.uploadImagesNormalLength = filesNormal.length;
+      let promises = [];
+      let promisesMD5 = [];
+      //Ресайзим
+      filesNormal.forEach((file)=> {
+        promises.push(this.resize.resize(file, 186, 139));
+      });
+      //КОгда все отресайзится тогда заливаем
+      this.qqq.all(promises).then((smallImages)=> {
+        this.uploadThumbnails(smallImages);
+      });
+
+      //MD5 SUMMING XRENOV
+      filesNormal.forEach((file)=> {
+        promisesMD5.push(this.getFileMd5Hash(file));
+      });
+      //все файлы просчитают МД5
+      this.qqq.all(promisesMD5).then((md5Hash)=> {
+        let resultsImages = [];
+        S3.upload({
+          files: filesNormal,
+          path: ''
+        }, (error, result) => {
+          if (error) {
+            this.showLoader = false;
+            console.log(error);
+          } else {
+            vm.uploadImagesNormalLength--;
+            result.originalName = result.file.original_name;
+            result.md5Hash = md5Hash.find((hash)=> {
+              return hash.name === result.originalName;
+            }).hash;
+            resultsImages.push(result);
+            if (vm.uploadImagesNormalLength === 0) {
+              vm.saveImages(resultsImages);
+            }
+          }
+        });
+      });
+    } catch (error) {
+      console.log(error);
+      this.showLoader = false;
+    }
   }
 
   saveImages(resultsImages) {
@@ -152,7 +195,6 @@ class OneReview {
     console.log(resultsImages);
     let ordered = this.filter('orderBy')(resultsImages, 'originalName');
     this.realty.details.images = this.realty.details.images.concat(ordered);
-    console.log('this.realty.details.images', this.realty.details.images);
     this.saveNewDescription();
   }
 
@@ -160,11 +202,8 @@ class OneReview {
     if (!this.realty.details.thumbnails) {
       this.realty.details.thumbnails = [];
     }
-    console.log('saveThumbnails');
-    console.log(resultsImages);
     let orderred = this.filter('orderBy')(resultsImages, 'originalName');
     this.realty.details.thumbnails = this.realty.details.thumbnails.concat(orderred);
-    console.log('this.realty.details.thumbnails', this.realty.details.thumbnails);
     if (!this.realty.image) {
       this.setMainImage(this.realty.details.thumbnails[0]);
     }
@@ -261,4 +300,3 @@ export default angular.module(moduleName, [
   controllerAs: moduleName,
   controller: OneReview
 });
-

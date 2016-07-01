@@ -13,7 +13,7 @@ angular
   .module('app', ['app.custom', CRM, CallCenter, auth]).config(config).run(run);
 
 angular
-  .module('app.custom', [uiRouter, 'ngFileUpload', 'ngSanitize', ngMaterial, 'accounts.ui']);
+  .module('app.custom', [uiRouter, 'ngFileUpload', 'ngSanitize', ngMaterial, 'accounts.ui', 'angular-md5']);
 
 function onReady() {
   angular.bootstrap(document, [
@@ -52,6 +52,7 @@ function run($rootScope, $state) {
       event.preventDefault();
       console.log("Please login");
       $state.go('auth.login');
+      //window.location = 'http://promo.rieltor.guru';
     }
   });
 }

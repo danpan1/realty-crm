@@ -1,0 +1,7 @@
+md-button(ng-if='!realtyCardPurchase.contacts.realtyPhone && !realtyCardPurchase.con' ng-click='realtyCardPurchase.takeRealty(realtyCardPurchase.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
+div(ng-if='realtyCardPurchase.con')
+    md-button(ng-if='!realtyCardPurchase.userpaid' ng-click='realtyCardPurchase.takeRealty(realtyCardPurchase.realty._id, $event)').md-primary.mh-0.mt-0 Показать телефон
+    md-button(ng-if='realtyCardPurchase.userpaid && realtyCardPurchase.realty.status != "connection" && realtyCardPurchase.realty.status != "taken"' ng-click='realtyCardPurchase.takeRealty(realtyCardPurchase.realty._id, $event, "connection")').ml-0.mr-16.ph-16.mt-8 Взять объект
+    div(ng-if='realtyCardPurchase.userpaid && realtyCardPurchase.contacts.realtyPhone')
+        div().md-subhead.mb-8.nowrap {{realtyCardPurchase.contacts.realtyPhone}}
+        md-button(ng-if='realtyCardPurchase.realty.status == "connection"' ng-click='realtyCardPurchase.takeRealty(realtyCardPurchase.realty._id, $event, "taken")').ml-0.mr-16.ph-16.mt-8 Добавить в мои объекты

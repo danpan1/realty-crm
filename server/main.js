@@ -9,8 +9,10 @@ import '../imports/api/locations';
 import '../imports/api/agents';
 import '../imports/api/parsercounters';
 import '../imports/api/relations';
+import '../imports/api/balance';
 import '../imports/startup';
 import '../imports/api/realty';
 import '../imports/api/clients';
+import '../imports/api/operators';
 import '../imports/startup/loadUsers';
 

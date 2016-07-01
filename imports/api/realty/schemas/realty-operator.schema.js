@@ -17,6 +17,10 @@ export const RealtyOperatorSchema = new SimpleSchema({
     type: Date,
     optional: true
   },
+  meetingTime: {
+    type: Date,
+    optional: true
+  },
   laterCount: {
     type: Number,
     max: 9,

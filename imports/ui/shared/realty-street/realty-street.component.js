@@ -13,8 +13,13 @@ class RealtyStreet {
 
   clearHouse() {
     this.searchTextHouse = '';
-    this.house = null;
-    this.dataFull = null;
+    console.log('house: ' + this.house);
+    // this.house = null;
+    // this.dataFull = null;
+    console.log('street: ' + this.street);
+    if(!this.street){
+      this.searchTextStreet = '';
+    }
   }
 
   querySearch(query) {
@@ -72,8 +77,8 @@ export default angular.module(moduleName, [
   bindings: {
     street: '=ngModel',
     house: '=house',
-    dataFull: '=dadata'
-
+    dataFull: '=dadata',
+    nohouse: '<'
   },
   controllerAs: moduleName,
   controller: RealtyStreet
