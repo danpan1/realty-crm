@@ -4,8 +4,8 @@
 import {Meteor} from "meteor/meteor";
 import redis from "redis";
 
-const client = redis.createClient({db : 1});
-// const client = redis.createClient({db: 1, host: 'redis.int.invest5.ru'});
+// const client = redis.createClient({db : 1});
+const client = redis.createClient({db: 1, host: 'redis.int.invest5.ru'});
 
 
 client.setSync = Meteor.wrapAsync(client.set);
