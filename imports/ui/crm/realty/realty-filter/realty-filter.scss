@@ -1,9 +1,23 @@
 .realty-filter {
+  position: relative;
   margin-bottom: 20px;
   background-color: white;
   .realty-filter__col div[layout='column'] {
     min-height: 278px;
   }
+
+  .realty-filter__divider {
+    position: absolute;
+    top: 0;
+    left: 31%;
+    width: 1px;
+    height: 358px;
+    background-color: #f9f9f9;
+    &:nth-child(2) {
+      left: 69%;
+    }
+  }
+
 
   subway-chips .metro {
     margin-top: 0 !important;
