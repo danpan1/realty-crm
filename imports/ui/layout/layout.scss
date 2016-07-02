@@ -456,11 +456,6 @@ th {
   padding-right: 32px !important;
 }
 
-.mv-18 {
-  margin-top: 18px !important;
-  margin-bottom: 18px !important;
-}
-
 .nowrap {
   white-space: nowrap;
 }
@@ -490,10 +485,6 @@ th {
 }
 
 @media screen and (max-width: 1279px) {
-  .btn-logout {
-    //display: none !important;
-    margin: 0 !important;
-  }
   #content {
     margin-left: 0;
   }

@@ -1,3 +1,13 @@
+realty-new-list {
+  > div[md-whiteframe] {
+    z-index: 2;
+    position: relative;
+  }
+  .md-tab {
+    line-height: 44px;
+  }
+}
+
 .realty-new-list__header-col {
   padding: 15px 16px;
   &:nth-child(1) {
