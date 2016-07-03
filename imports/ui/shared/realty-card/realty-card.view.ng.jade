@@ -92,7 +92,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
         //7-ая Скрыть Сохранить
         div(layout='column' layout-align="space-between left").newList_Actions
-            div(ng-if='realtyCard.realty.type == 3 || realtyCard.realty.type == 4').newList__income-blue.ph-16.pv-8 {{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}} &#8381;
+            div(ng-if='realtyCard.realty.type == 3 || realtyCard.realty.type == 4').newList__income-blue.p-8.text-center{{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}} &#8381;
             div(layout="column" layout-align="space-between center").ph-16.pv-8
                 
                 md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'

@@ -6,24 +6,24 @@ md-toolbar(layout='row' layout-align='center center').ph-16
     span(flex).md-body-1.text-center Сегодня в системе 52 сделки на сумму 900 000 Р
     span().md-body-1.mr-0 {{layout.user.profile.balance}}
     span().md-body-1.mr-0 {{layout.user.profile.name}} {{layout.user.profile.surName}}
-    md-button(hide-gt-md='', ng-click='layout.toggleList()' aria-label='Открыть меню').md-icon-button.menu
-        md-icon(md-svg-icon='menu')
     md-button(ng-click='layout.toggleList()' aria-label='Добавить процент').md-icon-button.mh-0
         md-icon(md-svg-icon='svg/icon-add-circle-outline.svg')
-    md-button(ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.mh-0
+    md-button(hide-gt-md='', ng-click='layout.toggleList()' aria-label='Открыть меню').md-icon-button.menu.mh-0
+        md-icon(md-svg-icon='menu')
+    md-button(ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.layout__btn-logout.mh-0
         md-icon(md-svg-icon='svg/icon-exit-to-app-white.svg')
 
 // Container #2
 div(flex, layout='row' layout-align='center none')
     // Container #3
-    md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left").pv-8
+    md-sidenav(md-is-locked-open="$mdMedia('gt-md')", md-component-id="right").md-whiteframe-z2.md-sidenav-right.pv-8
         menu-toggle(section="layout.actions")
         md-select(ng-model='layout.select' md-selected-text = 'layout.selectText()' aria-label='Добавить объект или клиента').sideNav-btn-add
             md-option( ng-value='1' ng-click='layout.toggleList()' ui-sref='crm.realty.add') Объект
             md-option( ng-value='2' ng-click='layout.toggleList()' ui-sref='crm.clients.add') Клиента
 
         md-list
-            div(ng-repeat="item in layout.sideNavItems")
+            div(ng-repeat="item in layout.sideNavItems").sideNav__item
                 md-list-item(ng-if='item.uisref'
                              ui-sref='{{item.uisref}}',
                              ui-sref-active="active",

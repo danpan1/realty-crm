@@ -80,7 +80,7 @@ div[md-whiteframe] {
 }
 
 #select_container_4 {
-  left: 0 !important;
+  right: 0 !important;
   min-width: 192px !important;
   md-select-menu {
     md-content {
@@ -608,5 +608,25 @@ th {
   &.default-overlay__visible {
     background: fadeOut 0.2 ease both;
     visibility: visible;
+  }
+}
+
+.md-button.layout {
+  &__btn-logout {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .md-button.layout {
+    &__btn-logout {
+      display: block;
+    }
+  }
+
+  .sideNav__item {
+    &:last-of-type {
+      display: none;
+    }
   }
 }
