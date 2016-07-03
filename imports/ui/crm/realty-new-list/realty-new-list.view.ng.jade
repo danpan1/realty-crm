@@ -1,7 +1,19 @@
 div(md-whiteframe="1")
-    md-tabs(md-border-bottom md-selected='realtyNewList.selectedTab').realty-list-layout__topbar
-        md-tab(label='Аренда' ui-sref="crm.realty-new-list({operation: \'rent\', page: 1})")
-        md-tab(label='Продажа' ui-sref="crm.realty-new-list({operation: \'sale\', page: 1})")
+    //- md-tabs(md-border-bottom md-selected='realtyNewList.selectedTab').realty-list-layout__topbar
+    //-     md-tab(label='Аренда' ui-sref="crm.realty-new-list({operation: \'rent\', page: 1})")
+    //-     md-tab(label='Продажа' ui-sref="crm.realty-new-list({operation: \'sale\', page: 1})")
+    div(layout='row' layout-align='space-between none').ph-16
+        div(flex='60' layout='row' layout-align='space-between none')
+            md-input-container(flex='40').ml-16
+                label Продажа и аренда
+                md-select(ng-model='realtyFilter.fake' aria-label='Продажа и аренда')
+                    md-option(ng-value='true') Продажа и аренда
+            md-input-container(flex='40')
+                label Выбрать город
+                md-select(ng-model='realtyFilter.fake' aria-label='Выбрать город')
+                    md-option(ng-value='true') Москва
+        md-button(md-no-ink).realty-new-list__link Сохраненные фильтры
+
 realty-filter(filter='realtyNewList.filter' ng-if='realtyNewList.realtyCount !== undefined' roomcount='realtyNewList.roomcount' ng-model='realtyNewList.realtyCount')
 slide-show(slides-list='realtyNewList.slideShowImages' isshown='realtyNewList.showSlider')
 //div {{realtyNewList.filter}} фильтр
