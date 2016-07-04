@@ -62,6 +62,10 @@ export const dictionary = {
     {id: 0, name: 'Вторичка'},
     {id: 1, name: 'Новостройка'}
   ],
+  rentDuration: [
+    {id: 0, name: 'Длительный'},
+    {id: 1, name: 'Посуточно'}
+  ],
   materials: [
     {id: 0, name: 'Панельный', cian: 'панельный', avito : 2, cianFeed : 1, avitoFeed : 'Панельный'},
     {id: 1, name: 'Монолитно-кирпичный', cian: 'кирпично-монолитный', avito : 'отсутсвует', cianFeed : 4, avitoFeed : 'Монолитный'},

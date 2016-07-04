@@ -41,9 +41,9 @@ div(md-whiteframe='2')
                     div(flex='90')
                         div(layout='row')
                             div(flex='50' layout='row' layout-align='space-between start')
-                                md-input-container(flex)
+                                md-input-container(flex).form-required
                                     label Вид операции
-                                    md-select(ng-model='outgoingCall.realty.type')
+                                    md-select(ng-model='outgoingCall.realty.type' required)
                                         md-option(ng-value='4') Аренда
                                         md-option(ng-value='1') Продажа
                                 md-input-container(flex).ml-32
@@ -53,14 +53,14 @@ div(md-whiteframe='2')
 
                             div(flex='30' flex-offset='10')
                                 div(layout='row')
-                                    md-input-container(flex='70' ng-if='outgoingCall.realty.type != 1')
+                                    md-input-container(flex='70' ng-if='outgoingCall.realty.type != 1').form-required
                                         label Срок
-                                        md-select(ng-model='outgoingCall.type')
-                                            //md-option(ng-value='type.id' ng-repeat="type in outgoingCall.dictionary.type") {{type.name}}
-                                            md-option(ng-value='undefined') Длительный
-                                    md-input-container(flex='70' ng-if='outgoingCall.realty.type == 1')
+                                        md-select(ng-model='outgoingCall.rentDuration' required)
+                                            md-option(ng-value='duration.id' ng-repeat="duration in outgoingCall.dictionary.rentDuration") {{duration.name}}
+                                            //md-option(ng-value='undefined') Длительный
+                                    md-input-container(flex='70' ng-if='outgoingCall.realty.type == 1').form-required
                                         label Тип здания
-                                        md-select(ng-model='outgoingCall.newBuilding')
+                                        md-select(ng-model='outgoingCall.newBuilding' required)
                                             md-option(ng-value='building.id' ng-repeat="building in outgoingCall.dictionary.isNewBuilding") {{building.name}}
                                             //md-option(ng-value='0') Вторичка
                                     md-input-container(flex='30').ml-32.form-required

@@ -27,6 +27,7 @@ class OutgoingCall {
     this.dictionary = dictionary;
     this.type = 4;
     this.newBuilding = 1;
+    this.rentDuration = 0;
     this.newObjectRecieved = 1;
     this.stat = '';
 
@@ -136,7 +137,7 @@ class OutgoingCall {
     if (vm.operation == 1) {
       vm.realty.type = vm.newBuilding == 1 ? 2 : 1 ;
     } else if (vm.operation == 0) {
-      vm.realty.type = vm.type == 3 ? 3 : 4;
+      vm.realty.type = vm.rentDuration == 0 ? 3 : 4;
     }
 
     if (vm.realty.address.districtId) {
