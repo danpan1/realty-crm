@@ -251,6 +251,7 @@ export function takeRealty(realtyId, status) {
     }
   }
 }
+
 export function updateRealty(id, status, add) {
   if (Meteor.isServer) {
     let realty = Realty.findOne({_id: id});
@@ -282,7 +283,7 @@ export function updateRealty(id, status, add) {
   }
 }
 
-export function showRealtyPhone(realtyId) {
+export function showRealtyPhone (realtyId) {
   if (Meteor.isServer && Meteor.userId()) {
     if (Roles.userIsInRole(Meteor.userId(), 'paid') || Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
 
