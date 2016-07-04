@@ -1,3 +1,4 @@
+realty-new-list-filter(ng-if='realtyNewList.filterModalOpened' modal='realtyNewList.filterModalOpened')
 div(md-whiteframe="1")
     div(layout='row' layout-align='space-between none').ph-16
         div(flex='55' layout='row' layout-align='space-between none')
@@ -5,7 +6,7 @@ div(md-whiteframe="1")
                 label Продажа и аренда
                 md-select(ng-model='realtyFilter.fake' aria-label='Продажа и аренда')
                     md-option(ng-value='true') Продажа и аренда
-            md-button(md-no-ink).realty-new-list__link Сохраненные фильтры
+            md-button(md-no-ink ng-click='realtyNewList.filterModalOpened = true').realty-new-list__link Сохраненные фильтры
         md-input-container(flex='25')
             label Выбрать город
             md-select(ng-model='realtyFilter.fake' aria-label='Выбрать город')
