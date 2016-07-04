@@ -3,7 +3,7 @@
  */
 import {Meteor} from 'meteor/meteor';
 import redis from 'redis';
-const client = redis.createClient({db : 1});
+const client = redis.createClient({db : 2});
 let setnxKeyToBlock = function (key, callback) {
   client.set(key, 'world', 'NX', 'EX', 300, callback);
 };

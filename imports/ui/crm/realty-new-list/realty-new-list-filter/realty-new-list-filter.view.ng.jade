@@ -1,0 +1,8 @@
+div(md-whiteframe="1")
+    md-button(ng-click='realtyNewListFilter.modal = false') Закрыть
+    md-checkbox(id="comissionloyal" ng-model='realtyNewListFilter.showFilter' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead.mb-0 Переключалка
+    div(ng-if='realtyNewListFilter.showFilter')
+        div Первый экран
+    div(ng-if='!realtyNewListFilter.showFilter')
+        div Второй экран
+    

@@ -62,6 +62,10 @@ export const dictionary = {
     {id: 0, name: 'Вторичка'},
     {id: 1, name: 'Новостройка'}
   ],
+  rentDuration: [
+    {id: 0, name: 'Длительный'},
+    {id: 1, name: 'Посуточно'}
+  ],
   materials: [
     {id: 0, name: 'Панельный', cian: 'панельный', avito : 2, cianFeed : 1, avitoFeed : 'Панельный'},
     {id: 1, name: 'Монолитно-кирпичный', cian: 'кирпично-монолитный', avito : 'отсутсвует', cianFeed : 4, avitoFeed : 'Монолитный'},
@@ -81,6 +85,16 @@ export const dictionary = {
     {id: 0, name: 'Плохой'},
     {id: 1, name: 'Нормальный'},
     {id: 2, name: 'Лояльный'}
+  ],
+  priceList: [
+    {id: 0, price: 60,   descr: 'common'    },  // Обычные объекты
+    {id: 1, price: 250,  descr: 'meeting'   },  // Встреча
+    {id: 2, price: 250,  descr: 'comission' },  // Платит комиссию
+    {id: 3, price: 2000, descr: 'exclusive' },  // Эксклюзив
+    {id: 4, price: 400,  descr: 'meetCom'   },  // Встреча + платит комиссию
+    {id: 5, price: 2100, descr: 'excMeet'   },  // Эксклюзив + Встреча
+    {id: 6, price: 2100, descr: 'excCom'    },  // Эксклюзив + Платит комиссию
+    {id: 7, price: 2200, descr: 'excComMeet'},  // Эксклюзив + Платит комиссию + Встреча
   ],
   renovation: [
     {id: 0, name: 'Косметический', cianId : 1},

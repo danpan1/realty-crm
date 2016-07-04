@@ -1,5 +1,5 @@
 div(md-whiteframe="2")
-    md-tabs(md-selected="oneConnections.selectedTab" md-border-bottom md-dynamic-height='true').realty-list-layout__topbar
+    md-tabs(md-selected="oneConnections.selectedTab" md-dynamic-height='true')
         md-tab(label='Выбранные клиенты')
             client-card(ng-repeat='client in oneConnections.clientsSaved' client='client' assort="oneConnections.assort"
             page-from = 'realtyRelations' relation-type = 'saved' realty-id = 'oneConnections.realty._id')

@@ -1,6 +1,12 @@
 .realty-list-layout__topbar {
     md-tabs-canvas {
-        height: 47px;
+        height: 67px;
         overflow: visible;
+    }
+    md-pagination-wrapper {
+    	height: 68px;
+    }
+    md-tab-item {
+    	font-weight: 400;
     }
 }

@@ -92,7 +92,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
         //7-ая Скрыть Сохранить
         div(layout='column' layout-align="space-between left").newList_Actions
-            div(ng-if='realtyCard.realty.type == 3 || realtyCard.realty.type == 4').newList__income-blue.ph-16.pv-8 {{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}}
+            div(ng-if='realtyCard.realty.type == 3 || realtyCard.realty.type == 4').newList__income-blue.p-8.text-center {{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}} &#8381;
             div(layout="column" layout-align="space-between center").ph-16.pv-8
                 
                 md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
@@ -100,10 +100,11 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                 
                 md-button(ng-if="realtyCard.realtylisttype === 'connections'"
                 ui-sref="crm.clients.details.email.send({realtyId:realtyCard.realty._id,clientId:realtyCard.clientId})").client-card__link.text-left.m-0.p-0 Написать клиенту
-                
                 md-button(ng-if="realtyCard.realtylisttype === 'connections'"
-                ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
-                ).md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
+                    ng-click="realtyCard.returnToCallCenter(realtyCard.realty._id, $event, 'clearRelations')").md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
+                //md-button(ng-if="realtyCard.realtylisttype === 'connections'"
+                    ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
+                    ).md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
 
                 md-button(ng-if="!realtyCard.realtylisttype && realtyCard.realty.status != 'taken'" 
                 ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Подробнее
@@ -133,13 +134,12 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                 p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
                 p().md-title.text-normal 1) {{realtyCard.contacts.realtyPhone}} --- {{realtyCard.contacts.realtyName}}
                 p().md-title.text-normal 2) #[a(href='justa.html') Посмотреть источник объявления]
-                p().md-title.text-normal 3) Хотите продолжить с ним работать?
-                div(layout='row' ng-if='realtyCard.isUserPaid && !realtyCard.needNextStep').mv-16
-                    md-button(aria-label='Да' ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.newList__description-btn-large Да
-                    md-button(aria-label='Нет' ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'agency')").md-raised.newList__description-btn-large.mh-16 Нет
-                div(layout='row' ng-if='realtyCard.needNextStep').mv-16
-                    md-button(aria-label='Начать работать с объектом' ng-click="realtyCard.nextStep('go')").md-raised.newList__description-btn-large Начать работать с объектом
-                    md-button(aria-label='Продолжить выбор объектов' ng-click="realtyCard.nextStep()").md-raised.newList__description-btn-large.mh-16 Продолжить выбор объектов
+                div(layout='row' ng-if='realtyCard.isUserPaid').mv-16
+                    md-button(aria-label='Редактировать' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id, 'go')").md-raised.newList__description-btn-large Редактировать
+                    md-button(aria-label='Остаться в океане' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id)").md-raised.newList__description-btn-large.mh-16 Остаться в океане
+                    md-button(aria-label='Не подходит' ng-click="realtyCard.returnToCallCenter(realtyCard.realty._id, $event)").md-raised.newList__description-btn-large.mh-16 Не подходит
+                    
+                    
                 //div(ng-if='realtyCard.isAgent == true && realtyCard.objectAdded != true')
                 //    h3(flex).md-title Хотите продолжить с ним работать?
                 //    div(layout="row")
