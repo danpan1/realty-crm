@@ -139,11 +139,8 @@ class RealtyCard {
       this.ngShowDescr = !this.ngShowDescr;
     }
   }
-  returnToCallCenterConfirm (id) {
-    this.updateRealty(id, 'call');
-  }
 
-  returnToCallCenter (id, ev) {
+  returnToCallCenter (id, ev, add) {
     const vm = this;
     
     const realtyCardDialogController = function ($mdDialog) {
@@ -151,7 +148,7 @@ class RealtyCard {
         $mdDialog.cancel();
       };
       this.confirm = () => {
-        vm.returnToCallCenterConfirm(id);
+        vm.updateRealty(id, 'call', add);
         $mdDialog.cancel();
       };
       this.refuse = () => {
@@ -206,14 +203,21 @@ class RealtyCard {
     Meteor.call('setRelationFindRealty', this.clientId, realtyId, this.realtylisttype);
   }
 
-  updateRealty(id, status) {
-    Meteor.call('updateRealty', id, status, (err, result)=> {
+  updateRealty(id, status, add) {
+    Meteor.call('updateRealty', id, status, add, (err, result)=> {
       if (err) {
         console.log('err: ' + err);
       } else {
         console.log(result);
+        this.clearRelations(id, this.clientId);
         return true;
       }
+    });
+  }
+
+  clearRelations (id, clientId) {
+    Meteor.call('clearRelations', id, clientId, (err, result)=> {
+      if (err) console.log('err: ' + err); else console.log(result);
     });
   }
   

@@ -251,9 +251,8 @@ export function takeRealty(realtyId, status) {
     }
   }
 }
-export function updateRealty(id, status) {
+export function updateRealty(id, status, add) {
   if (Meteor.isServer) {
-    console.log('updateRealty')
     let realty = Realty.findOne({_id: id});
     if (!realty) {
       return 'нет такого объекта';
@@ -264,7 +263,19 @@ export function updateRealty(id, status) {
           'status': status
         }
       });
-      return realty.status;
+
+      if (add == 'clearRelations') { // Удаление из связей
+        console.log('clearRelations')
+        Realty.update({_id: id}, {
+          $set: {
+            'realtor': '',
+            'relations': ''
+          }
+        });
+        console.log(realty.realtor);
+        return realty;
+      }
+
     }
   } else {
     return 'Что-то пошло не так';
