@@ -15,10 +15,10 @@ import {delRedisKey} from '../../../redis/redis-SET-DEL';
 
 Meteor.methods({
   addRealty,
-  addRealtyToMyList,
+  //addRealtyToMyList,
   buyRealtyOcean,
-  takeRealty,
-  showRealtyPhone,
+  //takeRealty,
+  //showRealtyPhone,
   showRealtyDetails,
   updateRealty,
   takeRealtyToConnections
@@ -40,24 +40,24 @@ export function buyRealtyOcean(realtyId) {
   //todo timer 150 на процедуру иначе отбой
 
   if (!setRedisKey(realtyId)) {
-    throw new Meteor.Error('Объект заблокирован', 'Ктото уже взял этот объект. Не известно этот юзер или другой');
+    throw new Meteor.Error('Объект заблокирован', 'Кто-то уже взял этот объект. Неизвестно? этот юзер или другой');
   }
   if (!setRedisKey(userId)) {
     delRedisKey(realtyId);
-    throw new Meteor.Error('Баланс пользователя заблокирован', 'Нельзя совершать 2 операции покупки одновременно. Заввершите первую операцию');
+    throw new Meteor.Error('Баланс пользователя заблокирован', 'Нельзя совершать 2 операции покупки одновременно. Завершите первую операцию');
   }
 
   let realty = Realty.findOne({_id: realtyId});
   let oldStatus = realty.status;
-  Realty.update({_id: realtyId}, {$set: {status: 'transaction'}});
+  Realty.update({_id: realtyId}, {$set: {status: 'transaction', transactionUser: this.userId}}); // transactionUser нужен, чтобы объект не исчезал из океана юзера, совершающего транзакцию, на время транзакции
 
   //todo price опеределить по параметрамs
   let price = 500;
 
-  if (oldStatus !== 'ocean' || (realty.realtor && realty.realtor.id)) {
-    buyOceanBackwardsCommits(1);
-    throw new Meteor.Error('объект не из океана');
-  }
+  //if (oldStatus !== 'ocean' || (realty.realtor && realty.realtor.id)) {
+  //  buyOceanBackwardsCommits(1);
+  //  throw new Meteor.Error('объект не из океана');
+  //}
   if (realty.type === 4 && !Roles.userIsInRole(Meteor.userId(), 'paid')) {
     buyOceanBackwardsCommits(1);
     throw new Meteor.Error('надо оплатить подписку на аренду');
@@ -74,7 +74,7 @@ export function buyRealtyOcean(realtyId) {
     throw new Meteor.Error('Недостаточно средств');
   }
   /*Успешно прошла вся транзакция приписывает объект риэлтору */
-  Realty.update({_id: realtyId}, {$set: {status: 'taken', 'realtor.id': userId}});
+  Realty.update({_id: realtyId}, {$set: {status: 'taken', transactionUser: '', 'realtor.id': userId}}); // Затираем transactionUser
   //todo проверить получилось ли сделать update
 
   /*Удаляем транзакцию блокировку */
@@ -84,7 +84,7 @@ export function buyRealtyOcean(realtyId) {
 
   function buyOceanBackwardsCommits(stage) {
     if (stage > 0) {
-      Realty.update({_id: realtyId}, {$set: {status: oldStatus}});
+      Realty.update({_id: realtyId}, {$set: {status: oldStatus, transactionUser: ''}});
     }
     if (stage > 1) {
       Balance.update({userId: userId}, {$inc: {current: price}});
@@ -124,7 +124,7 @@ export function showRealtyDetails(realtyId, userId) {
   }
 }
 
-export function addRealtyToMyList(realtyId) {
+/*export function addRealtyToMyList(realtyId) {
 
   if (Meteor.isServer && Meteor.userId()) {
 
@@ -159,9 +159,9 @@ export function addRealtyToMyList(realtyId) {
     return 'по идее ок';
 
   }
-}
+}*/
 
-export function takeRealty(realtyId, status) {
+/*export function takeRealty(realtyId, status) {
   if (Meteor.isServer && Meteor.userId()) {
 
 
@@ -250,7 +250,7 @@ export function takeRealty(realtyId, status) {
       return 'NOt paid';
     }
   }
-}
+}*/
 
 export function updateRealty(id, status, add) {
   if (Meteor.isServer) {
@@ -283,7 +283,7 @@ export function updateRealty(id, status, add) {
   }
 }
 
-export function showRealtyPhone (realtyId) {
+/*export function showRealtyPhone (realtyId) {
   if (Meteor.isServer && Meteor.userId()) {
     if (Roles.userIsInRole(Meteor.userId(), 'paid') || Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
 
@@ -297,9 +297,9 @@ export function showRealtyPhone (realtyId) {
         return 'метод вызывается в неправильном месте. попытка взлома';
       }
 
-      /*if (realty.realtor && realty.realtor.id && (realty.status === 'taken' && status === 'taken')) {
-       return 'у объекта уже есть владелец. попытка взлома';
-       }*/
+      //if (realty.realtor && realty.realtor.id && (realty.status === 'taken' && status === 'taken')) {
+      //  return 'у объекта уже есть владелец. попытка взлома';
+      //}
 
       return realty.contacts[0].phones[0].phone;
 
@@ -309,7 +309,7 @@ export function showRealtyPhone (realtyId) {
 
     }
   }
-}
+}*/
 
 export function addRealty(realty, notRealtor) {
 

@@ -191,9 +191,7 @@ class RealtyCard {
   
   saveCheckedRealty(id, goToObject){
     console.log('saveCheckedRealty');
-    if(this.updateRealty(id, 'realtor')){
-        if (goToObject) this.state.go('crm.realty.one.review', {realtyId: id}); else this.ngShowDescr = false;
-    }
+    this.updateRealty(id, 'realtor', goToObject);
   }
 
   sendRealtyRelation(realtyId, clientId) {
@@ -208,9 +206,8 @@ class RealtyCard {
       if (err) {
         console.log('err: ' + err);
       } else {
-        console.log(result);
-        this.clearRelations(id, this.clientId);
-        return true;
+        if (add == 'clearRelations') this.clearRelations(id, this.clientId);
+        if (add == 'go') this.state.go('crm.realty.one.review', {realtyId: id}); else if (this.ngShowDescr) this.ngShowDescr = false;
       }
     });
   }
