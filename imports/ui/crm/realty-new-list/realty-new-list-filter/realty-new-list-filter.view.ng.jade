@@ -6,24 +6,24 @@ div().modal
                 div().text-right.md-body-1.ph-16 SMS оповещение
                 div().mv-16.ph-16
                     div(layout='row' layout-align='start center')
-                        div(flex='40')
+                        div(flex='35')
                             span().md-subhead.realty-new-list-filter__col 1. Бабушкины двушки
-                        div(flex='40' layout='row' layout-align='space-between none').ml-32
-                            span().md-body-1.realty-new-list-filter__col показать объекты
-                            span().md-body-1.realty-new-list-filter__col критерии
-                            span().md-body-1.realty-new-list-filter__col изменить
-                            span().md-body-1.realty-new-list-filter__col удалить
+                        div(flex='45' layout='row' layout-align='space-between none').ml-32
+                            md-button().realty-new-list-filter__link показать объекты
+                            md-button().realty-new-list-filter__link критерии
+                            md-button().realty-new-list-filter__link изменить
+                            md-button().realty-new-list-filter__link удалить
                         div(layout='row' layout-align='center center' flex flex-offset='5')
                             md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
                 div().realty-new-list-filter__selected.mv-16.ph-16
                     div(layout='row' layout-align='start center')
-                        div(flex='40')
+                        div(flex='35')
                             span().md-subhead.realty-new-list-filter__col 2. Элитные трешки
-                        div(flex='40' layout='row' layout-align='space-between none').ml-32
-                            span().md-body-1.realty-new-list-filter__col показать объекты
-                            span().md-body-1.realty-new-list-filter__col критерии
-                            span().md-body-1.realty-new-list-filter__col изменить
-                            span().md-body-1.realty-new-list-filter__col удалить
+                        div(flex='45' layout='row' layout-align='space-between none').ml-32
+                            md-button().realty-new-list-filter__link показать объекты
+                            md-button().realty-new-list-filter__link критерии
+                            md-button().realty-new-list-filter__link изменить
+                            md-button().realty-new-list-filter__link удалить
                         div(layout='row' layout-align='center center' flex flex-offset='5')
                             md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
                     div().m-16
@@ -32,29 +32,29 @@ div().modal
                         p().md-body-1.mv-8 1 - 5 этаж, 30 - 40 м², Новостройка, Вторичка
                 div().mv-16.ph-16
                     div(layout='row' layout-align='start center')
-                        div(flex='40')
+                        div(flex='35')
                             span().md-subhead.realty-new-list-filter__col 3. Евроремонт ЦАО
-                        div(flex='40' layout='row' layout-align='space-between none').ml-32
-                            span().md-body-1.realty-new-list-filter__col показать объекты
-                            span().md-body-1.realty-new-list-filter__col критерии
-                            span().md-body-1.realty-new-list-filter__col изменить
-                            span().md-body-1.realty-new-list-filter__col удалить
+                        div(flex='45' layout='row' layout-align='space-between none').ml-32
+                            md-button().realty-new-list-filter__link показать объекты
+                            md-button().realty-new-list-filter__link критерии
+                            md-button().realty-new-list-filter__link изменить
+                            md-button().realty-new-list-filter__link удалить
                         div(layout='row' layout-align='center center' flex flex-offset='5')
                             md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
                 div().mv-16.ph-16
                     div(layout='row' layout-align='start center')
-                        div(flex='40')
+                        div(flex='35')
                             span().md-subhead.realty-new-list-filter__col 4. Дизайнерский двушки ЦАО
-                        div(flex='40' layout='row' layout-align='space-between none').ml-32
-                            span().md-body-1.realty-new-list-filter__col показать объекты
-                            span().md-body-1.realty-new-list-filter__col критерии
-                            span().md-body-1.realty-new-list-filter__col изменить
-                            span().md-body-1.realty-new-list-filter__col удалить
+                        div(flex='45' layout='row' layout-align='space-between none').ml-32
+                            md-button().realty-new-list-filter__link показать объекты
+                            md-button().realty-new-list-filter__link критерии
+                            md-button().realty-new-list-filter__link изменить
+                            md-button().realty-new-list-filter__link удалить
                         div(layout='row' layout-align='center center' flex flex-offset='5')
                             md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
                 div(layout='row' layout-align='space-between center').mv-32.ph-16
                     md-button().md-primary.md-raised.ph-16.ml-0 Добавить фильтр
-                    md-button().realty-new-list-filter__link.text-normal.mr-16 Скрыть
+                    md-button(ng-click='realtyNewListFilter.modal = false').realty-new-list-filter__link.text-normal.mr-16 Скрыть
                 div().mt-8.ph-16
                     md-checkbox(aria-label='Checkbox 1').md-primary.md-subhead Присылать SMS о всех новых объектах со статусами назначена встреча, собственник платит комиссию, эксклюзив
             
