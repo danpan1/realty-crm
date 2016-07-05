@@ -1,14 +1,14 @@
 div(md-whiteframe='2').mv-16.ph-32.pv-16
     div(layout='row')
         div(flex='50')
-            h3.md-headline.text-uppercase Эксклюзив {{(oneReviewMeetingExclusive.isexclusive === undefined || oneReviewMeetingExclusive.isexclusive === false) ? '0%' : '100%'}}
+            h3.md-headline.text-uppercase Эксклюзив {{(oneReviewMeetingExclusive.isExclusive === undefined || oneReviewMeetingExclusive.isExclusive === false) ? '0%' : '100%'}}
             div().one-review-btn-group
-                md-button(ng-click = 'oneReviewMeetingExclusive.isExclusive(true)'
-                ng-class='{"md-primary": oneReviewMeetingExclusive.isexclusive}' aria-label='Экслюзив').md-raised Эксклюзив
+                md-button(ng-click = 'oneReviewMeetingExclusive.isExclusiveFunc(true)'
+                ng-class='{"md-primary": oneReviewMeetingExclusive.isExclusive}' aria-label='Экслюзив').md-raised Эксклюзив
                 md-button(flex-offset='10'
-                ng-click = 'oneReviewMeetingExclusive.isExclusive(false)'
-                ng-class='{"md-primary": oneReviewMeetingExclusive.isexclusive  === false}' aria-label='Не эксклюзив').md-raised Не эксклюзив
-        div(flex='50' ng-if='oneReviewMeetingExclusive.isexclusive === false')
+                ng-click = 'oneReviewMeetingExclusive.isExclusiveFunc(false)'
+                ng-class='{"md-primary": oneReviewMeetingExclusive.isExclusive  === false}' aria-label='Не эксклюзив').md-raised Не эксклюзив
+        div(flex='50' ng-if='oneReviewMeetingExclusive.isExclusive === false')
             h3().md-headline Ответ от модератора:
             p().md-body-1 Пройдите интенсив
             p().md-body-1 Посмотрите #[a(href='http://murigin.ru/intensiv/' target='blank') «Как умело закрывать на эксклюзив за 10 минут»]

@@ -3,7 +3,7 @@ div(md-whiteframe='1').tabbar
     md-tabs(md-selected="realtyOneLayout.selectedTab" md-dynamic-height)
         md-tab(label='1. Встреча')
             md-content
-                one-review-meeting(realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
+                one-review-meeting(realty='oneReview.realty' save-review='oneReview.saveNewDescription(id)')
         md-tab(label='2. Фотографии')
             md-content
                 one-review-photo(thumbcontrol='oneReview.uploadThumbnailsLength' imagecontrol='oneReview.uploadImagesNormalLength' realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')

@@ -21,7 +21,7 @@ class OneReviewMeeting {
   }
   
   saveReview () {
-    this.savereview({id:this.realty._id})
+    this.saveReview({id:this.realty._id})
   }
     
 }
@@ -39,7 +39,7 @@ export default angular.module(moduleName, [
     templateUrl: 'imports/ui/crm/realty/one-review/one-review-meeting/one-review-meeting.view.html',
     bindings: {
         realty:'=',
-        savereview:'&'
+        saveReview:'&'
     },
     controllerAs: moduleName,
     controller: OneReviewMeeting
