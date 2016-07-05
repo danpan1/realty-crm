@@ -4,6 +4,17 @@ one-review {
     margin: 0;
   }
 
+  md-tabs {
+    background: transparent;
+    md-tabs-wrapper {
+      background: #fff;
+    }
+  }
+
+  > md-tabs > md-tabs-content-wrapper > md-tab-content md-content {
+    background: transparent;
+  }
+
   md-card {
     position: relative;
     box-shadow: none;

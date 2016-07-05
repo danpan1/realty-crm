@@ -1,3 +1,7 @@
+img {
+  max-width: 100%;
+}
+
 .bg{
   &-egg{
     background-color: #fcf9e6;
@@ -156,7 +160,7 @@ md-switch {
 
 .topbar {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   height: 70px;
   .btn-back {
     background-color: #f5f5f5;
@@ -169,7 +173,14 @@ md-switch {
 }
 
 .tabbar {
-  box-shadow: 0 0 4px rgba(106, 106, 106, 0.7) !important;
+  position: relative;
+  z-index: 3;
+}
+
+.sub-tabbar {
+  position: relative;
+  z-index: 2;
+  background: transparent !important;
 }
 
 .table {

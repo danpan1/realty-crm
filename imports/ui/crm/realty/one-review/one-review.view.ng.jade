@@ -1,47 +1,20 @@
 loader(ng-if="oneReview.showLoader == true")
-div(md-whiteframe='1').tabbar
-    md-tabs(md-selected="realtyOneLayout.selectedTab" md-dynamic-height)
-        md-tab(label='1. Встреча')
-            md-content
-                one-review-meeting(realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
-        md-tab(label='2. Фотографии')
-            md-content
-                one-review-photo(thumbcontrol='oneReview.uploadThumbnailsLength' imagecontrol='oneReview.uploadImagesNormalLength' realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
-        md-tab(label='3. Объявление')
-            md-content
-                div.pv-16.ph-32
-                    one-review-desc(realty='oneReview.realty')
-                    md-button( ng-click='oneReview.saveNewDescription(oneReview.realty._id, true)' ng-class='{"md-success":oneReview.descriptionSaved,"md-primary":!oneReview.descriptionSaved}' aria-label='Сохранить объявление').md-raised.one-review__btn-desc-save.ml-0 {{oneReview.descriptionSaved ? 'Сохранено'  : 'Сохранить объявление'}}
-        md-tab(label='4. Реклама')
-            md-content
-                one-review-advert(realty='oneReview.realty')
-        md-tab(label='5. Модератор')
-            md-content
-                one-review-moderator(realty='oneReview.realty')
-//div
-    div(md-whiteframe='2').mt-16.ph-32.pv-16
-        div(layout='row' layout-align='space-around start')
-            div(flex='50')
-                h3.md-headline.text-uppercase Качество рекламы {{(oneReview.realty.moderator.percent.description || 0)}}%
-            div(flex='50')
-                h3(ng-if='oneReview.realty.moderator.comment.description').md-headline Ответ от модератора:
-                p(ng-if='oneReview.realty.moderator.comment.description').md-body-1 {{oneReview.realty.moderator.comment.description}}
-    div(md-whiteframe='2').mt-16.ph-32.pv-16
-        div(layout='row' layout-align='space-around start')
-            div(flex='50')
-                h3.md-headline.text-uppercase Объем рекламы {{(oneReview.realty.moderator.percent.advertisement || 0)}}%
-            div(flex='50')
-                h3(ng-if='oneReview.realty.moderator.comment.advertisement').md-headline Ответ от модератора:
-                p(ng-if='oneReview.realty.moderator.comment.advertisement').md-body-1 {{oneReview.realty.moderator.comment.advertisement}}
-    div(md-whiteframe='2').ph-16
-        div(layout='column' layout-padding)
-            h4().md-title Платные доски
-            div(layout='row')
-                div(flex='25').md-body-1 GetRent.pro
-                div(flex='75' ng-if='oneReview.realty.status === "sale"').md-body-1.one-review-board-green Размещено!
-                div(flex='75' ng-if='oneReview.realty.status !== "sale" && oneReview.realty.moderator.status === "done"').md-body-1.one-review-board-red Подготовьте качественно объект!
-                div(flex='75' ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"').md-body-1.one-review-board-red Будет размещено после одобрения модератором
-
+md-tabs(md-selected="3" md-dynamic-height)
+    md-tab(label='1. Встреча')
+        md-content
+            one-review-meeting(realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
+    md-tab(label='2. Фотографии')
+        md-content
+            one-review-photo(thumbcontrol='oneReview.uploadThumbnailsLength' imagecontrol='oneReview.uploadImagesNormalLength' realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
+    md-tab(label='3. Объявление')
+        md-content
+            one-review-desc(realty='oneReview.realty')
+    md-tab(label='4. Реклама')
+        md-content
+            one-review-advert(realty='oneReview.realty')
+    md-tab(label='5. Модератор')
+        md-content
+            one-review-moderator(realty='oneReview.realty')
 
 div(layout='column' layout-align='center center')
     div(flex='30')
