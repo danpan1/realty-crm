@@ -11,7 +11,7 @@ if (Meteor.isServer) {
       if (this.userId) {
         selector = {
           $or: [
-            {status: 'new'},
+            {status: 'ocean'},
             {status: 'transaction', transactionUser: this.userId},
             {status: 'taken', 'realtor.id': this.userId}
           ]
@@ -132,16 +132,8 @@ if (Meteor.isServer) {
           status: 1,
           type: 1
         };
-        //db.realty.ensureIndex({roomcount : 1})
-        //         { limit: 20,   skip: 40, sort: { createdAt: -1 }},
-        console.log(selector);
-        // console.log(options);
         let realty = Realty.find(selector, options);
-        //console.log('==== Realty.length: ' + realty + ' ======')
-        //console.log('==== Realty.length ======')
-        //console.log(realty)
         let count = realty.count();
-        console.log('==== Realty.length: ' + count + ' ======')
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});
         CountsDan.find({_id: countId});
         return [realty, CountsDan.find({_id: this.userId})];
