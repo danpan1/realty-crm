@@ -62,7 +62,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         //5-ая колонка Инфо об объекте
         div().newList_Info.ph-16.pv-8
             div(layout='column' layout-align='space-between')
-                div().md-body-1.mb-8 {{::realtyCard.realty.roomcount}}-к квартира
+                div().md-body-1.mb-8 {{::realtyCard.realty.roomcount | count}}
                 div(ng-if='!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission')
                     div().md-body-1.mb-8 Длительный
                     //div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
@@ -134,7 +134,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                     md-button(aria-label='Не подходит' ng-click="realtyCard.returnToCallCenter(realtyCard.realty._id, $event)").md-raised.newList__description-btn-large.mh-16 Не подходит
         div(ng-if="realtyCard.realtylisttype == 'connections'")
             div(layout="row")
-                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
+                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount | count}}, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
                 div(flex="65").md-body-1 
                     p Удобства
                     conditions(conditions='realtyCard.realty.details.conditions')
@@ -145,7 +145,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                     md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr") Закрыть
         div(ng-if="realtyCard.realtylisttype == 'demonstration'")
             div(layout="row")
-                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
+                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount | count}}, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
                 p(flex="65").md-body-1 Удобства
             div  {{::realtyCard.realty.details.descr}}
             div(layout="row")

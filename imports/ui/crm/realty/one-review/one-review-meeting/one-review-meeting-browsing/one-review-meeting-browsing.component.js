@@ -10,15 +10,18 @@ import './one-review-meeting-browsing.view.html';
 
 class OneReviewMeetingBrowsing {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams) {
+  constructor($scope, $reactive, $stateParams, $timeout) {
 
     $reactive(this).attach($scope);
+    this.$timeout = $timeout;
     
   }
   
-  isCheckout(trueOrFalse) {
-    this.ischeckout = trueOrFalse;
-    this.savereview();
+  isCheckoutFunc(trueOrFalse) {
+    this.isCheckout = trueOrFalse;
+    this.$timeout(()=>{
+      this.saveReview();
+    },1)
   }
 
 }
@@ -32,8 +35,8 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
     templateUrl: 'imports/ui/crm/realty/one-review/one-review-meeting/one-review-meeting-browsing/one-review-meeting-browsing.view.html',
     bindings: {
-        ischeckout:'=',
-        savereview:'&'
+        isCheckout:'=',
+        saveReview:'&'
     },
     controllerAs: moduleName,
     controller: OneReviewMeetingBrowsing

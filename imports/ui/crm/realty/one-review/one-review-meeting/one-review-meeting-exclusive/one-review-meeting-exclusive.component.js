@@ -10,15 +10,18 @@ import './one-review-meeting-exclusive.view.html';
 
 class OneReviewMeetingExclusive {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams) {
+  constructor($scope, $reactive, $stateParams, $timeout) {
 
     $reactive(this).attach($scope);
+    this.$timeout = $timeout;
     
   }
 
-  isExclusive(trueOrFalse) {
-    this.isexclusive = trueOrFalse;
-    this.savereview();
+  isExclusiveFunc(trueOrFalse) {
+    this.isExclusive = trueOrFalse;
+    this.$timeout(()=>{
+      this.saveReview();
+    },1)
   }
 
 }
@@ -32,8 +35,8 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
     templateUrl: 'imports/ui/crm/realty/one-review/one-review-meeting/one-review-meeting-exclusive/one-review-meeting-exclusive.view.html',
     bindings: {
-        isexclusive:'=',
-        savereview:'&'
+        isExclusive:'=',
+        saveReview:'&'
     },
     controllerAs: moduleName,
     controller: OneReviewMeetingExclusive

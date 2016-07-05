@@ -6,20 +6,25 @@ Meteor.methods({
   clearRelations
 });
 
-export function clearRelations(realtyId, clientId) {
+export function clearRelations(realtyId, clientId, relationType) {
   console.log(' ====== realtyId: ' + realtyId);
   console.log(' ====== clientId: ' + clientId);
   if (Meteor.isServer) {
     let client = Clients.findOne({_id: clientId});
     if (!client) return 'нет такого клиента';
     if (realtyId) {
-      let relationIndex = client.relations.new.indexOf(realtyId);
-      if (relationIndex < 0) {
+      
+      let relationIndex;
+      console.log(relationType);
+      
+      if (relationType == 'new') {
+        relationIndex = client.relations.new.indexOf(realtyId);
+        client.relations.new.splice(relationIndex, 1);
+      } else if (relationType == 'saved') {
         relationIndex = client.relations.saved.indexOf(realtyId);
         client.relations.saved.splice(relationIndex, 1);
-      } else {
-        client.relations.new.splice(relationIndex, 1);
       }
+
       Clients.update({_id: clientId}, {
           $set: client
       });

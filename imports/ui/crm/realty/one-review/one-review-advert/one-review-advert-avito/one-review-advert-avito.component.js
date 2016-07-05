@@ -13,7 +13,15 @@ class OneReviewAdvertAvito {
   constructor($scope, $reactive, $stateParams) {
 
     $reactive(this).attach($scope);
-    
+    this.params = {
+      premium: false,
+      vip:false,
+      select:false,
+      up: false,
+      turbo:true,
+      noSetOff:true,
+      longTime:true
+    }
   }
 
 }

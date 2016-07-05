@@ -13,19 +13,13 @@ class RealtyCardPurchase {
   /* @ngInject */
   constructor($scope, $reactive, $mdDialog, $timeout, $state) {
     $reactive(this).attach($scope);
+    var vm = this;
     this.dictionary = dictionary;
     this.state = $state;
     this.timeout = $timeout;
     this.mdDialog = $mdDialog;
-    this.contacts.realtyPhone = this.realty.contacts ? this.realty.contacts[0].phones[0].phone : '';
-    var vm = this;
-    
-    vm.contacts = {};
-
-    if (vm.con && vm.userpaid) {
-      
-    }
-    
+    this.cardContacts = this.contacts || {};
+    //this.cardContacts.realtyPhone = this.realty.contacts ? this.realty.contacts[0].phones[0].phone : '';
   }
 
   /**
@@ -165,7 +159,8 @@ class RealtyCardPurchase {
   }
 
   
-  onShowPhone (realtyId, ev) {
+  /*onShowPhone (realtyId, ev) {
+    let vm = this;
     if(!this.shownPhone){
       if(this.userpaid){
         Meteor.call('takeRealty', realtyId, (err, result)=> {
@@ -173,14 +168,14 @@ class RealtyCardPurchase {
             console.log('err: ' + err);
           } else {
             console.log(result);
-            this.shownPhone = result.phone;
+            vm.shownPhone = result.phone;
           }
         });
       } else {
         this.openPurchaseStart(ev);
       }
     }
-  }
+  }*/
   
   takeRealty(id, ev, connection) {
     let vm = this;
@@ -192,23 +187,24 @@ class RealtyCardPurchase {
           } else {
             console.log(result);
             this.timeout(()=> {
-              vm.contacts.realtyPhone = result.phone,
-              vm.contacts.realtyName = result.name;
-              vm.contacts.realtyStreet = result.address.street;
-              vm.contacts.realtyHouse = result.address.house;
+              vm.cardContacts.realtyPhone = result.phone,
+              vm.cardContacts.realtyName = result.name;
+              vm.cardContacts.realtyStreet = result.address.street;
+              vm.cardContacts.realtyHouse = result.address.house;
             }, 0);
           }
         });
       } else {
-        Meteor.call('takeRealtyToConnections', id, connection, (err, result) => {
+        Meteor.call('buyRealtyOcean', id, connection, (err, result) => {
           if (err) {
             console.log('err: ' + err);
           } else {
             console.log(result);
             if(connection == 'connection'){
-              this.timeout(()=> {
-                vm.contacts.realtyPhone = result.phone;
-              }, 0);
+              vm.cardContacts.realtyPhone = result.phone;
+              vm.timeout(()=> {
+                vm.cardContacts.realtyPhone = result.phone;
+              }, 500);
             }
           }
         });
@@ -229,7 +225,7 @@ export default angular.module(moduleName, [
   templateUrl: 'imports/ui/shared/realty-card/realty-card-purchase/realty-card-purchase.view.html',
   bindings: {
     data: '=',
-    contacts: '=',
+    contacts: '<',
     realty: '=',
     userpaid: '=',
     con: '<'

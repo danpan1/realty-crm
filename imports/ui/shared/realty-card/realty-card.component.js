@@ -202,18 +202,22 @@ class RealtyCard {
   }
 
   updateRealty(id, status, add) {
+    console.log('====');
+    console.log('id: '+id);
+    console.log('status: '+status);
+    console.log('add: '+ add);
+    if (add == 'clearRelations') this.clearRelations(id, this.clientId);
     Meteor.call('updateRealty', id, status, add, (err, result)=> {
       if (err) {
         console.log('err: ' + err);
       } else {
-        if (add == 'clearRelations') this.clearRelations(id, this.clientId);
         if (add == 'go') this.state.go('crm.realty.one.review', {realtyId: id}); else if (this.ngShowDescr) this.ngShowDescr = false;
       }
     });
   }
 
   clearRelations (id, clientId) {
-    Meteor.call('clearRelations', id, clientId, (err, result)=> {
+    Meteor.call('clearRelations', id, clientId, this.relationType, (err, result)=> {
       if (err) console.log('err: ' + err); else console.log(result);
     });
   }

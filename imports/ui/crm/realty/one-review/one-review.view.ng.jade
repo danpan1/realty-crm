@@ -3,7 +3,7 @@ div(md-whiteframe='1').tabbar
     md-tabs(md-selected="realtyOneLayout.selectedTab" md-dynamic-height)
         md-tab(label='1. Встреча')
             md-content
-                one-review-meeting(realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
+                one-review-meeting(realty='oneReview.realty' save-review='oneReview.saveNewDescription(id)')
         md-tab(label='2. Фотографии')
             md-content
                 one-review-photo(thumbcontrol='oneReview.uploadThumbnailsLength' imagecontrol='oneReview.uploadImagesNormalLength' realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
@@ -41,7 +41,6 @@ div(md-whiteframe='1').tabbar
                 div(flex='75' ng-if='oneReview.realty.status === "sale"').md-body-1.one-review-board-green Размещено!
                 div(flex='75' ng-if='oneReview.realty.status !== "sale" && oneReview.realty.moderator.status === "done"').md-body-1.one-review-board-red Подготовьте качественно объект!
                 div(flex='75' ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"').md-body-1.one-review-board-red Будет размещено после одобрения модератором
-
 
 div(layout='column' layout-align='center center')
     div(flex='30')

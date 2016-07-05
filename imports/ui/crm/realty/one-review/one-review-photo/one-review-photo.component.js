@@ -51,11 +51,12 @@ class OneReviewPhoto {
     if (!imageUrl) {
       return;
     }
-    let imageIndexThumbs = index || this.realty.details.thumbnails.findIndex((item)=> {
+    if(this.realty.details.thumbnails.length){
+      let imageIndexThumbs = index || this.realty.details.thumbnails.findIndex((item)=> {
         return (item.url === imageUrl);
       });
-
-    this.mainImage = this.realty.details.thumbnails[imageIndexThumbs].url;
+      this.mainImage = this.realty.details.thumbnails[imageIndexThumbs].url;
+    }
 
   }
   
