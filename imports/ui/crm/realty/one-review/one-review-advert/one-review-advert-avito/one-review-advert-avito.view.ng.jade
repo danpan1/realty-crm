@@ -41,12 +41,12 @@ div(md-whiteframe='2').one-review-advert-avito.mv-16
         div(layout='column' layout-align='center center').one-review-advert-avito__turbo-sale.mv-16
             div().one-review-advert-avito__turbo-sale-outer.ph-32.pv-16
                 div().one-review-advert-avito__turbo-sale-inner
-                    md-checkbox(aria-label='Checkbox 1').md-primary.text-bold.md-subhead Турбо продажа 7 дней: 2219 Р
+                    md-checkbox(aria-label='Checkbox 1' ng-model='true').md-primary.text-bold.md-subhead Турбо продажа 7 дней: 2219 Р
                     div().one-review-advert-avito__economy.md-subhead.mv-8.ml-32 Рекомендуем [Экономия 45%]
-                    md-checkbox(aria-label='Checkbox 1').md-primary.md-body-1 не выкючать до закрытия объекта
+                    md-checkbox(aria-label='Checkbox 1' ng-model='true').md-primary.md-body-1 не выключать до закрытия объекта
             div().one-review-advert-avito__turbo-sale-inner
                 div().text-left.mv-16
-                    md-checkbox(aria-label='Checkbox 1' ng-disabled="true").md-primary.md-subhead.text-bold Размещение на 30 дней: #[span().text-normal 53 Р]
+                    md-checkbox(aria-label='Checkbox 1' ng-disabled='true' ng-model='true').md-primary.md-subhead.text-bold Размещение на 30 дней: #[span().text-normal 53 Р]
                 div().one-review-advert-avito__separator
                 div(layout='row' layout-align='space-between start').one-review-advert-avito__in-total.mv-16
                     span().md-title.text-uppercase Итого:

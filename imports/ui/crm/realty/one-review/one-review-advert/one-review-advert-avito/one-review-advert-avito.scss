@@ -53,7 +53,7 @@
 			background: #f1f8fd;
 		}
 		&-inner {
-			width: 268px;
+			width: 274px;
 			margin: 0 auto;
 			md-checkbox {
 				margin: 0 0 4px 0 !important;
@@ -74,6 +74,9 @@
 	}
 	&__center-col {
 		margin-right: 70px;
+	}
+	md-checkbox.md-default-theme[disabled] .md-label, md-checkbox[disabled] .md-label {
+		color: #333;
 	}
 	.md-button {
 		min-width: 194px !important;
