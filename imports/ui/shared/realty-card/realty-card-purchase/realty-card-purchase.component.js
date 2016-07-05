@@ -11,7 +11,7 @@ import './realty-card-purchase.view.html';
 
 class RealtyCardPurchase {
   /* @ngInject */
-  constructor($scope, $reactive, $mdDialog, $timeout, $state, $rootElement) {
+  constructor($scope, $reactive, $mdDialog, $timeout, $state) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.state = $state;

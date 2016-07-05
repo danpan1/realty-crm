@@ -1,108 +1,47 @@
 loader(ng-if="oneReview.showLoader == true")
-div(md-whiteframe='2').mv-16.ph-32.pv-16
+div(md-whiteframe='1').tabbar
+    md-tabs(md-selected="realtyOneLayout.selectedTab" md-dynamic-height)
+        md-tab(label='1. Встреча')
+            md-content
+                one-review-meeting(realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
+        md-tab(label='2. Фотографии')
+            md-content
+                one-review-photo(thumbcontrol='oneReview.uploadThumbnailsLength' imagecontrol='oneReview.uploadImagesNormalLength' realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
+        md-tab(label='3. Объявление')
+            md-content
+                div.pv-16.ph-32
+                    one-review-desc(realty='oneReview.realty')
+                    md-button( ng-click='oneReview.saveNewDescription(oneReview.realty._id, true)' ng-class='{"md-success":oneReview.descriptionSaved,"md-primary":!oneReview.descriptionSaved}' aria-label='Сохранить объявление').md-raised.one-review__btn-desc-save.ml-0 {{oneReview.descriptionSaved ? 'Сохранено'  : 'Сохранить объявление'}}
+        md-tab(label='4. Реклама')
+            md-content
+                one-review-advert(realty='oneReview.realty')
+        md-tab(label='5. Модератор')
+            md-content
+                one-review-moderator(realty='oneReview.realty')
+//div
+    div(md-whiteframe='2').mt-16.ph-32.pv-16
+        div(layout='row' layout-align='space-around start')
+            div(flex='50')
+                h3.md-headline.text-uppercase Качество рекламы {{(oneReview.realty.moderator.percent.description || 0)}}%
+            div(flex='50')
+                h3(ng-if='oneReview.realty.moderator.comment.description').md-headline Ответ от модератора:
+                p(ng-if='oneReview.realty.moderator.comment.description').md-body-1 {{oneReview.realty.moderator.comment.description}}
+    div(md-whiteframe='2').mt-16.ph-32.pv-16
+        div(layout='row' layout-align='space-around start')
+            div(flex='50')
+                h3.md-headline.text-uppercase Объем рекламы {{(oneReview.realty.moderator.percent.advertisement || 0)}}%
+            div(flex='50')
+                h3(ng-if='oneReview.realty.moderator.comment.advertisement').md-headline Ответ от модератора:
+                p(ng-if='oneReview.realty.moderator.comment.advertisement').md-body-1 {{oneReview.realty.moderator.comment.advertisement}}
+    div(md-whiteframe='2').ph-16
+        div(layout='column' layout-padding)
+            h4().md-title Платные доски
+            div(layout='row')
+                div(flex='25').md-body-1 GetRent.pro
+                div(flex='75' ng-if='oneReview.realty.status === "sale"').md-body-1.one-review-board-green Размещено!
+                div(flex='75' ng-if='oneReview.realty.status !== "sale" && oneReview.realty.moderator.status === "done"').md-body-1.one-review-board-red Подготовьте качественно объект!
+                div(flex='75' ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"').md-body-1.one-review-board-red Будет размещено после одобрения модератором
 
-    div(layout='row' layout-align='space-around start')
-        div(flex='25')
-            h3.md-headline.text-uppercase Фото {{(oneReview.realty.moderator.percent.photo || 0)}}%
-        div(flex='25')
-            md-button(
-            ngf-select='',
-            ngf-multiple='true',
-            ngf-change='oneReview.uploadImages($files)'
-            ngf-accept="'image/*'"
-            ngf-resize="{width: 1500, height: 700, centerCrop: false, quality : .7}"
-            ngf-resize-if="$width > 1500 || $height > 700"
-            ngf-before-model-change="oneReview.beforeChange($files)"
-            ng-disabled='oneReview.uploadThumbnailsLength !== 0').md-primary.md-raised Добавить фото
-            div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReview.uploadThumbnailsLength !== 0')
-                div Загружается фото...
-                //md-progress-circular(md-mode='indeterminate')
-        div(flex='50')
-            h3(ng-if='oneReview.realty.moderator.comment.photo').md-headline Ответ от модератора: 
-            p(ng-if='oneReview.realty.moderator.comment.photo').md-body-1 {{oneReview.realty.moderator.comment.photo}}
-            p(ng-if='oneReview.realty.moderator.percent.photo && oneReview.realty.moderator.percent.photo < 60').md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
-
-div(md-whiteframe='2' ng-if='oneReview.realty.details.images && oneReview.realty.details.thumbnails').mv-16
-    div(layout='row' layout-wrap ng-init='oneReview.findMainImage(oneReview.realty.image)')
-        div(flex='25' ng-repeat='image in oneReview.realty.details.thumbnails')
-            md-card
-                md-button(ng-if='image.url == oneReview.mainImage' aria-label='Выбрать в качестве главного фото').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
-                md-button(ng-if='image.url != oneReview.mainImage' ng-click='oneReview.setMainImage(image, $index)' aria-label='Сделать главным фото').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
-                md-button(ng-click="oneReview.removeImage(image, $index)" aria-label='Удалить фото').btn-remove-photo
-                    md-icon(md-svg-icon='svg/icon-close.svg')
-                div.one-review-photo(style='background-image:url({{image.url}});')
-
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row')
-        div(flex='50')
-            h3.md-headline.text-uppercase Просмотр {{(oneReview.realty.realtor.isCheckout === undefined || oneReview.realty.realtor.isCheckout === false) ? '0%' : '100%'}}
-            div(layout='row' layout-align='space-between start' flex='65').one-review-btn-group
-                md-button(ng-class='{"md-primary": oneReview.realty.realtor.isCheckout}'
-                ng-click = 'oneReview.isCheckout(true)' aria-label='Была встреча').md-raised Была встреча
-                md-button(ng-class='{"md-primary": oneReview.realty.realtor.isCheckout === false}'
-                ng-click = 'oneReview.isCheckout(false)' aria-label='Не встречались').md-raised Не встречались
-        div(flex='50' ng-if="oneReview.realty.realtor.isCheckout === false")
-            h3().md-headline Ответ от модератора:
-            p().md-body-1 Без просмотра сложнее совершать сделки.
-            p().md-body-1 Посмотрите #[a(href='http://murigin.ru/intensiv/' target='blank') «Как делать эффективный просмотр»]
-
-div(md-whiteframe='2').mt-16.ph-32.pv-16
-    div(layout='row' layout-align='space-around start')
-        div(flex='50')
-            h3.md-headline.text-uppercase Качество рекламы {{(oneReview.realty.moderator.percent.description || 0)}}%
-        div(flex='50')
-            h3(ng-if='oneReview.realty.moderator.comment.description').md-headline Ответ от модератора:
-            p(ng-if='oneReview.realty.moderator.comment.description').md-body-1 {{oneReview.realty.moderator.comment.description}}
-
-div(md-whiteframe='2').mt-0.mb-16.ph-32.pv-16
-
-    div(flex)
-        one-review-desc(realty='oneReview.realty')
-        md-button( ng-click='oneReview.saveNewDescription(oneReview.realty._id, true)' ng-class='{"md-success":oneReview.descriptionSaved,"md-primary":!oneReview.descriptionSaved}' aria-label='Сохранить объявление').md-raised.one-review__btn-desc-save.ml-0 {{oneReview.descriptionSaved ? 'Сохранено'  : 'Сохранить объявление'}}
-
-div(md-whiteframe='2').mt-16.ph-32.pv-16
-    div(layout='row' layout-align='space-around start')
-        div(flex='50')
-            h3.md-headline.text-uppercase Объем рекламы {{(oneReview.realty.moderator.percent.advertisement || 0)}}%
-        div(flex='50')
-            h3(ng-if='oneReview.realty.moderator.comment.advertisement').md-headline Ответ от модератора:
-            p(ng-if='oneReview.realty.moderator.comment.advertisement').md-body-1 {{oneReview.realty.moderator.comment.advertisement}}
-
-div(md-whiteframe='2').ph-16
-    div(layout='column' layout-padding)
-        h4().md-title Платные доски
-        div(layout='row')
-            div(flex='25').md-body-1 GetRent.pro
-            div(flex='75' ng-if='oneReview.realty.status === "sale"').md-body-1.one-review-board-green Размещено!
-            div(flex='75' ng-if='oneReview.realty.status !== "sale" && oneReview.realty.moderator.status === "done"').md-body-1.one-review-board-red Подготовьте качественно объект!
-            div(flex='75' ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"').md-body-1.one-review-board-red Будет размещено после одобрения модератором
-
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    div(layout='row')
-        div(flex='50')
-            h3.md-headline.text-uppercase Эксклюзив {{(oneReview.realty.realtor.isExclusive === undefined || oneReview.realty.realtor.isExclusive === false) ? '0%' : '100%'}}
-            div().one-review-btn-group
-                md-button(ng-click = 'oneReview.isExclusive(true)'
-                ng-class='{"md-primary": oneReview.realty.realtor.isExclusive}' aria-label='Экслюзив').md-raised Эксклюзив
-                md-button(flex-offset='10'
-                ng-click = 'oneReview.isExclusive(false)'
-                ng-class='{"md-primary": oneReview.realty.realtor.isExclusive  === false}' aria-label='Не эксклюзив').md-raised Не эксклюзив
-        div(flex='50' ng-if='oneReview.realty.realtor.isExclusive === false')
-            h3().md-headline Ответ от модератора:
-            p().md-body-1 Пройдите интенсив
-            p().md-body-1 Посмотрите #[a(href='http://murigin.ru/intensiv/' target='blank') «Как умело закрывать на эксклюзив за 10 минут»]
-
-div(md-whiteframe='2').mv-16.ph-32.pv-16
-    h3.md-headline.text-uppercase Аналитика объекта
-    div(layout="row")
-        div(flex="50")
-            h3(style='color: #9e9e9e').md-title.text-normal.mv-8 Средняя цена: {{oneReview.analytics.avgPrice | price}}
-            h3(ng-if='oneReview.analytics.difference !== 0' style='color: #9e9e9e').md-title.text-normal.mv-8 Цена {{oneReview.analytics.comparison ? 'меньше' : 'больше'}} на {{oneReview.analytics.difference | price }}
-            h3(style='color: #106cc8').md-title.text-normal.mv-8 {{oneReview.analytics.marketOk}}
-        div(flex='50')
-            h3().md-headline Ответ от модератора:
-            p().md-body-1 Пройдите интенсив
-            p().md-body-1 Посмотрите #[a(href='http://murigin.ru/intensiv/' target='blank') «Как объяснить собственнику про стоимость на рынке»]
 
 div(layout='column' layout-align='center center')
     div(flex='30')

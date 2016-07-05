@@ -6,6 +6,7 @@ const allowFrameOrigin = function () {
 
   // BrowserPolicy.content.allowScriptOrigin('cdnjs.cloudflare.com');
   BrowserPolicy.content.allowScriptOrigin('mc.yandex.ru');
+  BrowserPolicy.content.allowScriptOrigin('cdn.sendpulse.com');
 
   BrowserPolicy.content.allowFontOrigin('data:');
   BrowserPolicy.content.allowFontOrigin('themes.googleusercontent.com');

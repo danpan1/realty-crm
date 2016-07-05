@@ -1,0 +1,13 @@
+div(md-whiteframe='2').mv-16.ph-32.pv-16
+    div(layout='row')
+        div(flex='50')
+            h3.md-headline.text-uppercase Просмотр {{(oneReviewMeetingBrowsing.ischeckout === undefined || oneReviewMeetingBrowsing.ischeckout === false) ? '0%' : '100%'}}
+            div(layout='row' layout-align='space-between start' flex='65').one-review-btn-group
+                md-button(ng-class='{"md-primary": oneReviewMeetingBrowsing.ischeckout}'
+                ng-click = 'oneReviewMeetingBrowsing.isCheckout(true)' aria-label='Была встреча').md-raised Была встреча
+                md-button(ng-class='{"md-primary": oneReviewMeetingBrowsing.ischeckout === false}'
+                ng-click = 'oneReviewMeetingBrowsing.isCheckout(false)' aria-label='Не встречались').md-raised Не встречались
+        div(flex='50' ng-if="oneReviewMeetingBrowsing.ischeckout === false")
+            h3().md-headline Ответ от модератора:
+            p().md-body-1 Без просмотра сложнее совершать сделки.
+            p().md-body-1 Посмотрите #[a(href='http://murigin.ru/intensiv/' target='blank') «Как делать эффективный просмотр»]

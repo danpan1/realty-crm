@@ -1,0 +1,31 @@
+div(md-whiteframe='2').mv-16.ph-32.pv-16
+    div(layout='row' layout-align='space-around start')
+        div(flex='25')
+            h3.md-headline.text-uppercase Фото {{(oneReviewPhoto.realty.moderator.percent.photo || 0)}}%
+        div(flex='25')
+            md-button(
+            ngf-select='',
+            ngf-multiple='true',
+            ngf-change='oneReviewPhoto.uploadImages($files)'
+            ngf-accept="'image/*'"
+            ngf-resize="{width: 1500, height: 700, centerCrop: false, quality : .7}"
+            ngf-resize-if="$width > 1500 || $height > 700"
+            ngf-before-model-change="oneReviewPhoto.beforeChange($files)"
+            ng-disabled='oneReviewPhoto.thumbcontrol !== 0').md-primary.md-raised Добавить фото
+            div(layout='row', layout-sm='column', layout-align='space-around' ng-if='oneReviewPhoto.thumbcontrol !== 0')
+                div Загружается фото...
+                //md-progress-circular(md-mode='indeterminate')
+        div(flex='50')
+            h3(ng-if='oneReviewPhoto.realty.moderator.comment.photo').md-headline Ответ от модератора: 
+            p(ng-if='oneReviewPhoto.realty.moderator.comment.photo').md-body-1 {{oneReviewPhoto.realty.moderator.comment.photo}}
+            p(ng-if='oneReviewPhoto.realty.moderator.percent.photo && oneReviewPhoto.realty.moderator.percent.photo < 60').md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
+
+div(md-whiteframe='2' ng-if='oneReviewPhoto.realty.details.images && oneReviewPhoto.realty.details.thumbnails').mv-16
+    div(layout='row' layout-wrap ng-init='oneReviewPhoto.findMainImage(oneReviewPhoto.realty.image)')
+        div(flex='25' ng-repeat='image in oneReviewPhoto.realty.details.thumbnails')
+            md-card
+                md-button(ng-if='image.url == oneReviewPhoto.mainImage' aria-label='Выбрать в качестве главного фото').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
+                md-button(ng-if='image.url != oneReviewPhoto.mainImage' ng-click='oneReviewPhoto.setMainImage(image, $index)' aria-label='Сделать главным фото').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото
+                md-button(ng-click="oneReviewPhoto.removeImage(image, $index)" aria-label='Удалить фото').btn-remove-photo
+                    md-icon(md-svg-icon='svg/icon-close.svg')
+                div.one-review-photo(style='background-image:url({{image.url}});')
