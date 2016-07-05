@@ -11,6 +11,7 @@ import {name as ngPhoneFilter} from '../../filters/phone-filter.directive.js';
 import {name as ngPriceFilter} from '../../filters/price-filter.directive.js';
 import {name as priceFilter} from '../../filters/price.filter.js';
 import {name as phoneFilter} from '../../filters/phone.filter.js';
+import {name as countFilter} from '../../filters/count.filter.js';
 import {name as selectedSubway} from '../../filters/selected-subway.filter.js';
 import {name as Realty}from './realty/realty.component';
 import {name as Feedback}from './feedback/feedback.component';
@@ -38,6 +39,7 @@ export default angular.module(moduleName, [
   priceFilter,
   newRealtyList,
   phoneFilter,
+  countFilter,
   selectedSubway,
   clients,
   Realty,
