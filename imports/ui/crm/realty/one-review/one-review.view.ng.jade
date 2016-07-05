@@ -42,7 +42,6 @@ div(md-whiteframe='1').tabbar
                 div(flex='75' ng-if='oneReview.realty.status !== "sale" && oneReview.realty.moderator.status === "done"').md-body-1.one-review-board-red Подготовьте качественно объект!
                 div(flex='75' ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "inprogress" || oneReview.realty.moderator.status === "todo"').md-body-1.one-review-board-red Будет размещено после одобрения модератором
 
-
 div(layout='column' layout-align='center center')
     div(flex='30')
         md-button(ng-click='oneReview.sendToModerator()'

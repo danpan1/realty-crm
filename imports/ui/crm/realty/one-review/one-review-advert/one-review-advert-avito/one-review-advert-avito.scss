@@ -1,0 +1,84 @@
+.one-review-advert-avito {
+	padding-bottom: 64px;
+	&__ads-box {
+		position: relative;
+		box-sizing: border-box;
+		width: 210px;
+		height: 216px;
+		border: 2px solid;
+		padding: 16px 4px 16px 16px;
+		&:nth-of-type(1) {
+			border-color: #ffd54f;
+		}
+		&:nth-of-type(2) {
+			border-color: #ffab91;
+		}
+		&:nth-of-type(3) {
+			border-color: #ffeb3b;
+		}
+		&:nth-of-type(4) {
+			border-color: #a5d6a7;
+		}
+		&-header {
+			min-height: 60px;
+			margin-top: 8px;
+			span, img {
+				vertical-align: middle;
+			}
+			span {
+				margin-left: 6px;
+			}
+		}
+	}
+	&__content {
+		margin-top: 10px;
+		padding-right: 12px;
+		line-height: 20px;
+	}
+	&__checkbox-container {
+		position: absolute;
+		top: 10px;
+		right: -3px;
+	}
+	&__footer {
+		position: absolute;
+		bottom: 10px;
+		left: 16px;
+		padding-right: 12px;
+	}
+	&__turbo-sale {
+		width: 345px;
+		&-outer {
+			border-radius: 14px;
+			background: #f1f8fd;
+		}
+		&-inner {
+			width: 274px;
+			margin: 0 auto;
+			md-checkbox {
+				margin: 0 0 4px 0 !important;
+			}
+		}
+	}
+	&__separator {
+		width: 226px;
+		margin: 21px 0 22px 30px;
+		border-bottom: 1px solid #cbcbcb;
+	}
+	&__in-total {
+		width: 226px;
+		margin-left: 30px;
+	}
+	&__link {
+		color: #106cc8 !important;
+	}
+	&__center-col {
+		margin-right: 70px;
+	}
+	md-checkbox.md-default-theme[disabled] .md-label, md-checkbox[disabled] .md-label {
+		color: #333;
+	}
+	.md-button {
+		min-width: 194px !important;
+	}
+}
