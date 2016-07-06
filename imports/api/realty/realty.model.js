@@ -9,6 +9,7 @@ import {RealtyOperatorSchema} from './schemas/realty-operator.schema';
 import {RealtyRealtorSchema} from './schemas/realty-realtor.schema';
 import {RentDetailsSchema} from './schemas/details.schema';
 import {OwnerSchema} from './schemas/owner.schema';
+import {AdvertSchema} from './schemas/advert.schema';
 import {Roles} from 'meteor/alanning:roles';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {RelationsSchema} from '../relations/relations.schema';
@@ -41,6 +42,10 @@ Realty.Schema = new SimpleSchema({
   //Это все относится к Карточка которые показываются в Листах
   address: {
     type: AddressSchema
+  },
+  advert: {
+    type: AdvertSchema,
+    optional: true
   },
   contacts: {
     type: [ContactsSchema],
