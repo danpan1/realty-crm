@@ -38,6 +38,12 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                             div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') В поиске с:
                                 div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.MM'}}]
+                            div(layout='row' ng-if='clientInfo.client.business' layout-align='space-around start').md-subhead.mv-8
+                                div(flex='60') Чем занимается:
+                                div(flex='40') #[strong {{clientInfo.client.business}}]
+                            div(layout='row' ng-if='clientInfo.client.age' layout-align='space-around start').md-subhead.mv-8
+                                div(flex='60') Возраст:
+                                div(flex='40') #[strong {{clientInfo.client.age}}]
                         div(flex layout='column' layout-align='end start')
                             md-button(aria-label='Изменить' ng-click="clientInfo.showEditDialog($event)").md-primary.md-raised.mt-32.mh-0 Изменить
                 md-divider
@@ -75,8 +81,6 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                     p().md-body-1 {{clientInfo.client.note}}
                     h3(ng-if='clientInfo.client.email').md-subhead.text-bold.text-uppercase.mt-0 Email
                     p().md-body-1 {{clientInfo.client.email}}
-                    h3(ng-if='clientInfo.client.age').md-subhead.text-bold.text-uppercase.mt-0 Возраст
-                    p().md-body-1 {{clientInfo.client.age}}
                     
                     
     div(layout='row' layout-align='start start')#openArchiveDialog.client-info__wrapper.mt-16

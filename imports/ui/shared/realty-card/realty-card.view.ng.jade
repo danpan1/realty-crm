@@ -72,10 +72,10 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         //6-ая колонка Телефон Риэлтора и Объявление
         div(layout='column' layout-align='space-between start' ng-if="realtyCard.realtylisttype === 'connections'").newList_contacts.ph-16.pv-8
             div()
-                div(ng-if='realtyCard.realty.status !== "connection" && realtyCard.realty.status !== "new" && realtyCard.realty.status !== "taken" && realtyCard.realty.status !== "realtor"')
+                div(ng-if='realtyCard.realty.status !== "connection" && realtyCard.realty.status !== "new" && realtyCard.realty.status !== "taken"')
                     div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
                     div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
-                div(ng-if='realtyCard.realty.status === "connection" || realtyCard.realty.status === "new" || realtyCard.realty.status === "taken" || realtyCard.realty.status === "realtor"')
+                div(ng-if='realtyCard.realty.status === "connection" || realtyCard.realty.status === "new" || realtyCard.realty.status === "taken"')
                     div(ng-if='realtyCard.isUserPaid && !realtyCard.addedToMine')  
                         realty-card-purchase(ng-if='realtyCard.realty' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty' con='true')
                     div().md-subhead.mb-8 #[b Собственник {{::realtyCard.realty.contacts[0].name}}]
@@ -135,9 +135,8 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         div(ng-if="realtyCard.realtylisttype == 'connections'")
             div(layout="row")
                 p(flex="35").md-body-1 {{::realtyCard.realty.roomcount | count}}, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
-                div(flex="65").md-body-1 
-                    p Удобства
-                    conditions(conditions='realtyCard.realty.details.conditions')
+                div(flex="65" layout='row').md-body-1 
+                    conditions(flex='25' conditions='realtyCard.realty.details.conditions')
             div {{::realtyCard.realty.details.descr}}
             div(layout="row")
                 div(flex="90")
