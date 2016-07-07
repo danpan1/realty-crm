@@ -51,8 +51,8 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         //4-ая колонка Фото
         div(layout='column' layout-align='center center').newList_Photo
             div(ng-if='(realtyCard.realty.realtor.isExclusive || realtyCard.realty.owner.comission) && realtyCard.contacts.realtyPhone === undefined && !realtyCard.realtyIsTaken').realty-card__hidden-img
-                span Фото объекта доступны только после добавления объекта
-                img(ng-src='realty_no_image.png' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
+                div Фото объекта доступны только после добавления объекта
+                //img(ng-src='realty_no_image.png' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
             div(ng-if='(!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission) || realtyCard.contacts.realtyPhone !== undefined || realtyCard.realtyIsTaken' ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
                 img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
                 div(ng-if='!realtyCard.noPhoto').icon-zoom
@@ -126,8 +126,13 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                 realty-card-purchase(ng-if='realtyCard.realty' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
             div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
                 p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
-                p().md-title.text-normal 1) {{realtyCard.contacts.realtyPhone}} --- {{realtyCard.contacts.realtyName}}
-                p().md-title.text-normal 2) #[a(href='justa.html') Посмотреть источник объявления]
+                p().md-title.text-normal 1) Собственник ждет звонка в течение 
+                    span {{realtyCard.minutes}}:
+                    span(ng-if='realtyCard.seconds < 10') 0
+                    span {{realtyCard.seconds}}
+                p().md-title.text-normal 2) {{realtyCard.contacts.realtyPhone}} --- {{realtyCard.contacts.realtyName}}
+                p().md-title.text-normal 3) #[a(href='justa.html') Посмотреть источник объявления]
+                p().md-title.text-normal 4) #[Хотите продолжить с ним работать?]
                 div(layout='row' ng-if='realtyCard.isUserPaid').mv-16
                     md-button(aria-label='Редактировать' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id, 'go')").md-raised.newList__description-btn-large Редактировать
                     md-button(aria-label='Остаться в океане' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id)").md-raised.newList__description-btn-large.mh-16 Остаться в океане

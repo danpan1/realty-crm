@@ -121,6 +121,7 @@ class OutgoingCall {
 
     if (typeof this.realty.address.street != 'string') this.realty.address.street = this.realty.address.street.value;
     if (typeof this.realty.address.house != 'string') this.realty.address.house = this.realty.address.house.value;
+    if(!this.realty.address.city) this.realty.address.city = "Москва";
 
     this.showLoader = true;
     const vm = this;

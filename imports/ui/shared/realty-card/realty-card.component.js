@@ -45,7 +45,7 @@ class RealtyCard {
     if((vm.realty.operator && vm.realty.operator.oceanAdd) || (vm.realty.realtor && vm.realty.realtor.isExclusive)){
       let newTime = new Date().getTime();
       let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
-      let seconds = 300 + parseInt(time);
+      let seconds = 300;// + parseInt(time);
       if(seconds > 0){
         this.minutes = parseInt(seconds / 60);
         this.seconds = seconds - (this.minutes*60);
@@ -174,7 +174,7 @@ class RealtyCard {
                       <div class="md-dialog-content pv-16">
                         <div layout="column">
                           <div layout="row" flex="80">
-                            <h3 class="md-subhead text-center">Вы уверены, что хотите отказаться от этого объекта? Вы не сможете вернуться к работе с ним в дальнейшем.</h3>
+                            <h3 class="md-subhead text-center">Вы не сможете вернуться к работе с ним в дальнейшем. Вы уверены, что хотите отказаться от этого объекта?</h3>
                           </div>
                           <div layout='row' layout-align='center center'>
                             <md-button flex class="md-raised md-primary md-mv-16 ph-16" ng-click='dialog.confirm()'>Да</md-button>

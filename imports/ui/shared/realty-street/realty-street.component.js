@@ -13,13 +13,13 @@ class RealtyStreet {
 
   clearHouse() {
     this.searchTextHouse = '';
-    console.log('house: ' + this.house);
+    /*console.log('house: ' + this.house);
     // this.house = null;
     // this.dataFull = null;
     console.log('street: ' + this.street);
     if(!this.street){
       this.searchTextStreet = '';
-    }
+    }*/
   }
 
   querySearch(query) {
@@ -34,6 +34,7 @@ class RealtyStreet {
       'restrict_value': true,
       'query': query, count: 10
     }).then((res)=> {
+      this.clearHouse();
       return res.suggestions;
     });
   }
