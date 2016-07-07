@@ -685,9 +685,7 @@ th {
     }
   }
 
-  .sideNav__item {
-    &:last-of-type {
-      display: none;
-    }
+  .layout__logout-item {
+    display: none;
   }
 }
