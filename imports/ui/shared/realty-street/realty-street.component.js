@@ -4,6 +4,8 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {AddressService} from '/imports/helpers/AddressService';
+import {name as RealtyStreetStreet} from './realty-street-street/realty-street-street.component';
+import {name as RealtyStreetHouse} from './realty-street-house/realty-street-house.component';
 import './realty-street.view.html';
 
 class RealtyStreet {
@@ -13,16 +15,10 @@ class RealtyStreet {
 
   clearHouse() {
     this.searchTextHouse = '';
-    /*console.log('house: ' + this.house);
-    // this.house = null;
-    // this.dataFull = null;
-    console.log('street: ' + this.street);
-    if(!this.street){
-      this.searchTextStreet = '';
-    }*/
   }
 
   querySearch(query) {
+    console.log('querySearch: ',query);
     if (!query) {
       console.log('!query')
       return;
@@ -72,14 +68,18 @@ const moduleName = 'realtyStreet';
 
 // create a module
 export default angular.module(moduleName, [
-  angularMeteor
+  angularMeteor,
+  RealtyStreetStreet,
+  RealtyStreetHouse
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/realty-street/realty-street.view.html',
   bindings: {
     street: '=ngModel',
     house: '=house',
     dataFull: '=dadata',
-    nohouse: '<'
+    isFilter: '<',
+    streetFlex: '<',
+    houseFlex: '<'
   },
   controllerAs: moduleName,
   controller: RealtyStreet

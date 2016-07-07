@@ -108,18 +108,11 @@ if (Meteor.isServer) {
           }
 
           if (search.street) {
-            selector['address.street'] = search.street;
-            if (search.house) {
-              selector['address.house'] = search.house;
-            }
-          }
-          
-          /*if (search.street) {
             query.push({'address.street' : search.street});
             if (search.house) {
               query.push({'address.house' : search.house});
             }
-          }*/
+          }
 
           if (query && !_.isEmpty(query)) {
             selector.$or[0].$or = query;
