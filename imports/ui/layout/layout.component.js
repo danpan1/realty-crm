@@ -30,7 +30,6 @@ class Layout {
       //{name:'Помощь', href:'https://vk.com/write19844032'},
       {name:'Помощь', uisref:'https://vk.com/write19844032'},
       {name:'150 за 6', uisref:'http://murigin.ru/intensiv/'},
-      // {name:'Выход', ngСlick:'layout.logout()', uisref:'auth.login'},
       // {name: 'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
@@ -58,6 +57,12 @@ class Layout {
 
   logout() {
     Accounts.logout();
+  }
+  replenishTheBalance() {
+    Meteor.call('replenishTheBalance', 100, 'Пополнение баланса', (err, res)=>{
+      console.log(err);
+      console.log(res);
+    });
   }
 }
 

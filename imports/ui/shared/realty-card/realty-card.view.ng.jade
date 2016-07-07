@@ -4,14 +4,14 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
         // 1-ая колонка - ID и Новая
         div(layout='column').newList_ID.md-body-1
-            div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-8 Эксклюзив!
-            div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-8 Платит {{::realtyCard.realty.owner.comission}}% комиссии
-            div(ng-if='::realtyCard.realty.operator.meetingTime').newList__purple-label.text-bold.pl-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
-            div().ph-16.pv-8
+            div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-16.pr-8 Эксклюзив!
+            div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16.pr-8 Платит {{::realtyCard.realty.owner.comission}}% комиссии
+            div(ng-if='::realtyCard.realty.operator.meetingTime').newList__purple-label.text-bold.pl-16.pr-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
+            div().pl-16.pr-8.pv-8
                 div(ng-show="realtyCard.ngShowDescr && !realtyCard.realtylisttype") id {{::realtyCard.realty._id | price}}
                 div(ng-show="realtyCard.minutes > -1" ng-if='!realtyCard.realtyIsTaken')
-                    div Объект исчезнет через
-                    div
+                    div().realty-card__timer-title Объект исчезнет через
+                    div().realty-card__timer.mt-8
                         span {{realtyCard.minutes}}:
                         span(ng-if='realtyCard.seconds < 10') 0
                         span {{realtyCard.seconds}}

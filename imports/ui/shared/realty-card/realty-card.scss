@@ -46,6 +46,16 @@ realty-card {
       display: block;
     }
   }
+  &__timer {
+    span {
+      font-size: 24px;
+      font-weight: bold;
+      color: color($deep-orange, 500);
+    }
+    &-title {
+      color: #757575;
+    }
+  }
 }
 
 .subscription-dialog {
