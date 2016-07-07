@@ -90,9 +90,9 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' ng-if='oneInfo.realty.details.kitchenSquare' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Кухни:
                         div(flex='40') #[strong {{oneInfo.realty.details.kitchenSquare}}]
-                    div(layout='row' ng-if='oneInfo.realty.details.loggia' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Лоджия:
-                        div(flex='40') #[strong {{oneInfo.realty.details.loggia}}]
+                        div(flex='40') #[strong {{oneInfo.realty.details.loggia || 0}}]
                     div(layout='row' ng-if='oneInfo.realty.details.balcony' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Балкон:
                         div(flex='40') #[strong {{oneInfo.realty.details.balcony}}]
