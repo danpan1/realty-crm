@@ -82,6 +82,8 @@ class RealtyNewList {
           street: vm.getReactively('filter.street.value'),
           house: vm.getReactively('filter.house.value'),
           conditions: vm.getReactively('filter.conditions'),
+          renovation: vm.getReactively('filter.renovation'),
+          materials: vm.getReactively('filter.materials'),
           priceFrom: vm.getReactively('filter.priceFrom'),
           roomcount: vm.getReactively('roomcount'),
           type: vm.getReactively('filter.type'),

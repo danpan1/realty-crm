@@ -83,11 +83,6 @@ if (Meteor.isServer) {
            }*/
           /* END ТИП ОПЕРАЦИИ */
 
-          /* УДОБСТВА */
-          if (search.conditions && !_.isEmpty(search.conditions)) {
-            selector.conditions = {$all: search.conditions};
-          }
-          /* END УДОБСТВА */
 
           /* ВРЕМЯ ДО МЕТРО и Транспорт до метро */
           if (search.metroTime) {
@@ -95,6 +90,25 @@ if (Meteor.isServer) {
             selector.metroTransport = search.metroTransport;
           }
           /* END ВРЕМЯ ДО МЕТРО */
+
+          /* УДОБСТВА */
+          if (search.conditions && !_.isEmpty(search.conditions)) {
+            selector['details.conditions'] = {$all: search.conditions};
+          }
+          /* END УДОБСТВА */
+
+          /* ТИП ДОМА */
+          if (search.materials && !_.isEmpty(search.materials)) {
+            selector['details.materials'] = {$in: search.materials};
+          }
+          /* END ТИП ДОМА */
+
+          /* РЕМОНТ */
+          if (search.renovation && !_.isEmpty(search.renovation)) {
+            selector['details.renovation'] = {$in: search.renovation};
+          }
+          /* END РЕМОНТ */
+
 
           /* РАЙОНЫ МЕТРО */
           let query = [];
@@ -108,18 +122,11 @@ if (Meteor.isServer) {
           }
 
           if (search.street) {
-            selector['address.street'] = search.street;
-            if (search.house) {
-              selector['address.house'] = search.house;
-            }
-          }
-          
-          /*if (search.street) {
             query.push({'address.street' : search.street});
             if (search.house) {
               query.push({'address.house' : search.house});
             }
-          }*/
+          }
 
           if (query && !_.isEmpty(query)) {
             selector.$or[0].$or = query;

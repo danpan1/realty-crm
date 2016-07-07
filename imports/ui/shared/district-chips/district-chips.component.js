@@ -53,6 +53,11 @@ class DistrictChips {
         });
       }
     });
+
+    this.$onChanges = function () {
+      vm.districtsAreaInForm = [];
+    }
+
   }
 
   changeChips() {
@@ -88,7 +93,8 @@ export default angular.module(moduleName, [
     bindings: {
       districtsAreaIdList: '=ngModel',
       districtsEmbeded: '=',
-      districtsChanged: '&'
+      districtsChanged: '&',
+      refresh:'<'
     },
     controllerAs: moduleName,
     controller: DistrictChips
