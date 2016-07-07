@@ -52,9 +52,9 @@ div(layout="column", layout-align="space-around stretch")
                             div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Район:
                                 div(flex='40') #[strong {{oneInfo.realty.address.districtName || 'Не указано'}}]
-                            div(layout='row' layout-align='space-around start' ng-if='oneInfo.realty.address.subwaysEmbedded[0].name').md-subhead.mv-8
+                            div(layout='row' layout-align='space-around start' ng-if='oneInfo.realty.address.subway.name').md-subhead.mv-8
                                 div(flex='60') Метро:
-                                div(flex='40') #[strong {{oneInfo.realty.address.subwaysEmbedded[0].name}}]
+                                div(flex='40') #[strong {{oneInfo.realty.address.subway.name}}]
                             div(layout='row' layout-align='space-around start' ng-if='oneInfo.realty.address.metroTime').md-subhead.mv-8
                                 div(flex='60') До метро:
                                 div(flex='40') #[strong {{oneInfo.realty.address.metroTime}} мин. {{oneInfo.dictionary.transport[oneInfo.realty.address.metroTransport].name}}]
@@ -90,15 +90,15 @@ div(layout="column", layout-align="space-around stretch")
                     div(layout='row' ng-if='oneInfo.realty.details.kitchenSquare' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Кухни:
                         div(flex='40') #[strong {{oneInfo.realty.details.kitchenSquare}}]
-                    div(layout='row' ng-if='oneInfo.realty.details.loggia' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Лоджия:
-                        div(flex='40') #[strong {{oneInfo.realty.details.loggia}}]
+                        div(flex='40') #[strong {{oneInfo.realty.details.loggia || 0}}]
                     div(layout='row' ng-if='oneInfo.realty.details.balcony' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Балкон:
                         div(flex='40') #[strong {{oneInfo.realty.details.balcony}}]
-                    div(layout='row' ng-if='oneInfo.realty.details.elevator' layout-align='space-around start').md-subhead.mv-8
+                    div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Пасс. лифтов:
-                        div(flex='40') #[strong {{oneInfo.realty.details.elevator}}]
+                        div(flex='40') #[strong {{oneInfo.realty.details.elevator || 0}}]
                     div(layout='row' ng-if='oneInfo.realty.details.elevatorBig' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Груз. лифтов:
                         div(flex='40') #[strong {{oneInfo.realty.details.elevatorBig}}]

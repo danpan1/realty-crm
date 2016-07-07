@@ -49,6 +49,11 @@ class SubwayChips {
         });
       }
     });
+
+    this.$onChanges = function () {
+      vm.subwaysInForm = [];
+    }
+
   }
 
   changeChips() {
@@ -87,7 +92,8 @@ export default angular.module(moduleName, [
   bindings: {
     subwaysIdList: '=ngModel',
     subwaysEmbeded: '=',
-    subwaysChanged: '&'
+    subwaysChanged: '&',
+    refresh:'<'
   },
   controller: SubwayChips
 });

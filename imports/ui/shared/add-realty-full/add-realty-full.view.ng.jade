@@ -22,15 +22,16 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                         div(flex='70')
                             div(layout='row')
                                 realty-street(ng-model='addRealtyFull.locations.street' house='addRealtyFull.locations.house'
-                                dadata='addRealtyFull.locations.full' layout = 'row' flex='66').addRealtyFull-street.zh
-                                md-input-container(flex='33').ml-32.zh
+                                dadata='addRealtyFull.locations.full' layout = 'row' flex='66').addRealtyFull-street.mv-16.zh
+                                md-input-container(flex='33').ml-32.mv-16.zh
                                     label Квартира
                                     input(ng-model='addRealtyFull.locations.flat')
                                     span.bottom-label Видите только вы
 
                     div(layout='row')
-                        div(flex='70')
-                            subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
+                        div(flex='50')
+                            //subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
+                            subway-choice(ng-model='addRealtyFull.locations.subway')
 
                     div(layout='row').mv-16
                         div(flex='45')

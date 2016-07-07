@@ -2,6 +2,9 @@ realty-card {
   .realty-card__details-text {
     line-height: 24px;
   }
+  conditions .clientCard-conditions {
+    margin-top: 4px;
+  }
 }
 
 .realty-card {
@@ -45,6 +48,19 @@ realty-card {
     &:hover > span{
       display: block;
     }
+  }
+  &__timer {
+    span {
+      font-size: 24px;
+      font-weight: bold;
+      color: color($deep-orange, 500);
+    }
+    &-title {
+      color: #757575;
+    }
+  }
+  &__photo-text {
+    line-height: 24px;
   }
 }
 

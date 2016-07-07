@@ -14,6 +14,11 @@ class PriceMask {
     if(this.price) {
       this.filterPriceKeyDown();
     }
+    
+    this.$onChanges = function () {
+      if (!this.price) this.visualPrice = '';
+    }
+
   }
 
   filterPriceBlur () {
@@ -62,7 +67,10 @@ export default angular.module(moduleName, [
       price: '=',
       label: '<',
       flex: '<',
-      change:'&'
+      change:'&',
+      noRequired: '<',
+      isFilter: '<',
+      refresh:'<'
   },
   controllerAs: moduleName,
   controller: PriceMask

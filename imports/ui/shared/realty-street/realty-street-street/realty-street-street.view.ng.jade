@@ -1,0 +1,20 @@
+md-autocomplete(flex='',
+required='',
+md-input-name='autocompleteFieldStreet',
+md-input-minlength='2',
+md-no-cache='realtyStreetStreet.noCache',
+md-selected-item='realtyStreetStreet.street',
+md-search-text='realtyStreetStreet.searchTextStreet',
+md-items='item in realtyStreetStreet.streetQuerySearch(realtyStreetStreet.searchTextStreet)',
+md-item-text='item.value',
+md-floating-label='Улица').form-required
+    md-item-template
+        span(md-highlight-text='realtyStreetStreet.searchTextStreet') {{item.value}}
+    div(ng-messages='searchForm.autocompleteField.$error',
+    ng-if='searchForm.autocompleteField.$touched')
+        div(ng-message='required')
+            | You
+            b must
+            |  have a favorite state.
+        div(ng-message='minlength') Your entry is not long enough.
+        div(ng-message='maxlength') Your entry is too long.

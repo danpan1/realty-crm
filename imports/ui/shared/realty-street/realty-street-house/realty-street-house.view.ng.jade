@@ -1,0 +1,17 @@
+md-autocomplete(flex='',
+required='',
+ng-disabled="!realtyStreetHouse.street.value"
+md-input-name='autocompleteFieldHouse',
+md-input-minlength='1',
+md-no-cache='realtyStreetHouse.noCache',
+md-selected-item='realtyStreetHouse.house',
+md-search-text='realtyStreetHouse.searchTextHouse',
+md-selected-item-change='realtyStreetHouse.requestFullData(realtyStreetHouse.house)',
+md-items='item in realtyStreetHouse.querySearchHouse(realtyStreetHouse.searchTextHouse)',
+md-item-text='item.value',
+md-floating-label='Дом и корпус').form-required
+    md-item-template
+        span(md-highlight-text='realtyStreetHouse.searchTextHouse') {{item.value}}
+    div(ng-messages='searchForm.autocompleteField.$error',
+        ng-if='(!realtyStreetHouse.dataFull && realtyStreetHouse.searchTextHouse && realtyStreetHouse.street.value) || (realtyStreetHouse.dataFull.unrestricted_value !== realtyStreetHouse.house.unrestricted_value && realtyStreetHouse.house.unrestricted_value !== undefined)')
+        div(ng-message='required') Выбор номера дома возможен только из предложенных вариантов

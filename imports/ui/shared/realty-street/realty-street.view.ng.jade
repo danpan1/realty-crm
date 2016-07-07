@@ -1,6 +1,13 @@
-md-autocomplete(flex='',
-required='',
-ng-class='{"w-100":realtyStreet.nohouse, "m-0":realtyStreet.nohouse}'
+//realty-street-street(street='this.street'
+                     query-search='realtyStreet.querySearch(query)')
+//realty-street-house(house='this.house'
+                    street='this.street'
+                    search-text-house='realtyStreet.searchTextHouse'
+                    query-search-house='realtyStreet.querySearchHouse(query)'
+                    request-full-data='realtyStreet.requestFullData(query)')
+md-autocomplete(flex
+ng-required='!realtyStreet.isFilter',
+ng-class='{"w-100":realtyStreet.nohouse, "m-0":realtyStreet.nohouse, "form-required":!realtyStreet.isFilter, "no-min-width":!realtyStreet.isFilter}'
 md-input-name='autocompleteFieldStreet',
 md-input-minlength='2',
 md-no-cache='realtyStreet.noCache',
@@ -8,7 +15,7 @@ md-selected-item='realtyStreet.street',
 md-search-text='realtyStreet.searchTextStreet',
 md-items='item in realtyStreet.querySearch(realtyStreet.searchTextStreet)',
 md-item-text='item.value',
-md-floating-label='Улица').form-required
+md-floating-label='Улица',)
     md-item-template
         span(md-highlight-text='realtyStreet.searchTextStreet') {{item.value}}
     div(ng-messages='searchForm.autocompleteField.$error',
@@ -16,12 +23,12 @@ md-floating-label='Улица').form-required
         div(ng-message='required')
             | You
             b must
-            |  have a favorite state.
+            | have a favorite state.
         div(ng-message='minlength') Your entry is not long enough.
         div(ng-message='maxlength') Your entry is too long.
 //md-selected-item-change='realtyStreet.clearHouse()',
-md-autocomplete(flex='',
-required='',
+md-autocomplete(flex
+ng-required='!realtyStreet.isFilter',
 ng-if='!realtyStreet.nohouse'
 ng-disabled="!realtyStreet.street.value"
 md-input-name='autocompleteFieldHouse',
@@ -32,7 +39,8 @@ md-search-text='realtyStreet.searchTextHouse',
 md-selected-item-change='realtyStreet.requestFullData(realtyStreet.house)',
 md-items='item in realtyStreet.querySearchHouse(realtyStreet.searchTextHouse)',
 md-item-text='item.value',
-md-floating-label='Дом и корпус').form-required
+md-floating-label='{{realtyStreet.label}}'
+ng-class='{"form-required":!realtyStreet.isFilter, "no-min-width":!realtyStreet.isFilter}')
     md-item-template
         span(md-highlight-text='realtyStreet.searchTextHouse') {{item.value}}
     div(ng-messages='searchForm.autocompleteField.$error',

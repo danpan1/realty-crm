@@ -1,3 +1,24 @@
+realty-filter {
+  realty-street {
+    max-width: 100%;
+    md-autocomplete {
+      md-input-container {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      &:first-of-type {
+        min-width: 0;
+        max-width: 80%;
+      }
+      &:last-of-type {
+        min-width: 0;
+        max-width: 20%;
+        margin-left: 16px;
+      }
+    }
+  }
+}
+
 .realty-filter {
   position: relative;
   margin-bottom: 20px;

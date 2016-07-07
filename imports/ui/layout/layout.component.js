@@ -10,8 +10,10 @@ import './layout.view.html';
 
 class Layout {
   /* @ngInject */
-  constructor($scope, $reactive, $mdSidenav) {
+  constructor($scope, $reactive, $mdSidenav, $window) {
+
     $reactive(this).attach($scope);
+    this.$window = $window;
     this.$mdSidenav = $mdSidenav;
     this.sideNavItems = [
       // {name: 'Добавить клиента', uisref: 'crm.clients.add'},
@@ -25,12 +27,11 @@ class Layout {
       // {name: 'Дела', uisref:'realty'},
       // {name: 'Отчет', uisref:'realty'},
       // {name: 'Сообщения', uisref:'realty'},
-      {name:'Документы', uisref:'crm.documents'},
-      {name:'Видео-инструкции', ngClick:'layout.videoTutorial = !layout.videoTutorial'},
+      {name: 'Документы', uisref: 'crm.documents'},
+      {name: 'Видео-инструкции', ngClick: 'layout.videoTutorial = !layout.videoTutorial'},
       //{name:'Помощь', href:'https://vk.com/write19844032'},
-      {name:'Помощь', uisref:'https://vk.com/write19844032'},
-      {name:'150 за 6', uisref:'http://murigin.ru/intensiv/'},
-      {name:'Выход', ngСlick:'layout.logout()', uisref:'auth.login'},
+      {name: 'Помощь', uisref: 'https://vk.com/write19844032'},
+      {name: '150 за 6', uisref: 'http://murigin.ru/intensiv/'},
       // {name: 'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
@@ -58,6 +59,17 @@ class Layout {
 
   logout() {
     Accounts.logout();
+  }
+
+  replenishTheBalance(summ) {
+
+    console.log('replenishTheBalance');
+    let description = 'Пополнение баланса CRM Мир и Недвижимость на ' + summ;
+    Meteor.call('replenishTheBalance', summ, description, (err, res)=> {
+      console.log(err);
+      this.$window.open(res, '_self');
+      console.log(res);
+    });
   }
 }
 
