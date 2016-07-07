@@ -59,6 +59,12 @@ class Layout {
   logout() {
     Accounts.logout();
   }
+  replenishTheBalance() {
+    Meteor.call('replenishTheBalance', 100, 'Пополнение баланса', (err, res)=>{
+      console.log(err);
+      console.log(res);
+    });
+  }
 }
 
 const moduleName = 'layout';
