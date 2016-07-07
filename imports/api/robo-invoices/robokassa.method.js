@@ -5,9 +5,9 @@ import {RoboInvoices} from './robo-invoices.model';
 import Robokassa from './robokassa';
 import nextAutoincrement from '../../helpers/getUniqueId';
 const robokassa = new Robokassa({
-  login: "world-invest",
-  password1: "qq8OB0UE4ACE5iovIW5T",
-  password2: 'vnP816lFijta1fHfVfx6'
+  login: "rieltor.guru",
+  password1: "cOL2cvZvKq38u3ubQC2x",
+  password2: 'GC9VBC3tPCj3EL0V1mGl'
 });
 
 Meteor.methods({
