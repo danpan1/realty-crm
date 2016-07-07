@@ -77,6 +77,7 @@ class RealtyNewList {
           floorTo: vm.getReactively('filter.floorTo'),
           priceTo: vm.getReactively('filter.priceTo'),
           street: vm.getReactively('filter.street.value'),
+          house: vm.getReactively('filter.house.value'),
           conditions: vm.getReactively('filter.conditions'),
           priceFrom: vm.getReactively('filter.priceFrom'),
           roomcount: vm.getReactively('roomcount'),

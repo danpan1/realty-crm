@@ -62,7 +62,8 @@ export default angular.module(moduleName, [
       price: '=',
       label: '<',
       flex: '<',
-      change:'&'
+      change:'&',
+      noRequired: '<'
   },
   controllerAs: moduleName,
   controller: PriceMask

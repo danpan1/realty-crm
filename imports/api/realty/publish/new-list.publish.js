@@ -61,6 +61,9 @@ if (Meteor.isServer) {
           if (search.type) {
             selector.type = search.type;
           }
+          if (search.status) {
+            selector.status = search.status;
+          }
           /*if (search.type == 1) {
             selector.type = {$in: [1,2]};
           } else {
@@ -89,13 +92,14 @@ if (Meteor.isServer) {
           }
 
           if (search.subways && !_.isEmpty(search.subways)) {
-            query.push({'address.subways': {$in: search.subways}});
+            query.push({'address.subway.id': {$in: search.subways}});
           }
-          
-          console.log(search.street);
-          
-          if(search.street) {
-            query.push({'address.street': search.street});
+
+          if(search.street || search.house) {
+            //if (!selector.address) { selector.address = {}; 
+            if (search.street) { selector['address.street'] = search.street };
+            if (search.street && search.house) { selector['address.house'] = search.house };
+            //}
           }
 
           if (query && !_.isEmpty(query)) {
@@ -132,8 +136,11 @@ if (Meteor.isServer) {
           status: 1,
           type: 1
         };
+        console.log("=====selector: ");
+        console.log(selector);
         let realty = Realty.find(selector, options);
         let count = realty.count();
+        console.log("====realty.count(): "+realty.count())
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});
         CountsDan.find({_id: countId});
         return [realty, CountsDan.find({_id: this.userId})];

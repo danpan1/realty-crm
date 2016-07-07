@@ -1,4 +1,4 @@
-md-input-container(flex='{{priceMask.flex}}').mv-0.form-required.hide-count
+md-input-container(flex='{{priceMask.flex}}' ng-class='{"form-required":!priceMask.noRequired}').mv-0.hide-count
     label {{priceMask.label}}
     input(ng-model='priceMask.visualPrice',
           required='',
