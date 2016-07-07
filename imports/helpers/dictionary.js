@@ -101,7 +101,7 @@ export const dictionary = {
     {id: 1, name: 'Евроремонт', cianId : 2},
     {id: 2, name: 'Дизайнерский', cianId : 3},
     {id: 3, name: 'Чистовая отделка', cianId : 1},
-    {id: 4, name: 'Бабушкин ремонт', cianId : 4},
+    {id: 4, name: 'Бабушкин ремонт', cianId : 1}
   ],
   roomcount: [
     {id: 1, name: '1'},
