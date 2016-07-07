@@ -2,7 +2,7 @@ div().modal
     div().modal__bg
     div().modal__inner
         div(md-whiteframe='2').pv-16
-            div(layout='column' ng-if='realtyNewListFilter.showFilter')
+            div(layout='column' ng-if='!realtyNewListFilter.showFilter')
                 div().text-right.md-body-1.ph-16 SMS оповещение
                 div().mv-16.ph-16
                     div(layout='row' layout-align='start center')
@@ -53,12 +53,12 @@ div().modal
                         div(layout='row' layout-align='center center' flex flex-offset='5')
                             md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
                 div(layout='row' layout-align='space-between center').mv-32.ph-16
-                    md-button().md-primary.md-raised.ph-16.ml-0 Добавить фильтр
+                    md-button(ng-model='realtyNewListFilter.showFilter').md-primary.md-raised.ph-16.ml-0 Добавить фильтр
                     md-button(ng-click='realtyNewListFilter.modal = false').realty-new-list-filter__link.text-normal.mr-16 Скрыть
                 div().mt-8.ph-16
                     md-checkbox(aria-label='Checkbox 1').md-primary.md-subhead Присылать SMS о всех новых объектах со статусами назначена встреча, собственник платит комиссию, эксклюзив
             
-            div(ng-if='!realtyNewListFilter.showFilter').realty-filter.pl-32.pr-16
+            div(ng-if='realtyNewListFilter.showFilter').realty-filter.pl-32.pr-16
                 div(layout='row', layout-align="space-between center")
                     div(flex='30').realty-filter__col.mt-16
                         div(layout='column' layout-align='space-between none')
@@ -132,14 +132,6 @@ div().modal
                 div(layout='row').mv-32
                     md-input-container(flex='33').mv-0.pv-0
                         input(placeholder='Название фильтра')
-                div(layout='row' layout-align='space-between center').mv-32
+                div(layout='row').mv-32
                     md-button().md-primary.md-raised.ph-16.ml-0 Сохранить фильтр
-
-        
-        md-checkbox(id="comissionloyal" ng-model='realtyNewListFilter.showFilter' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead.mb-0 Переключалка
-        //- md-button(ng-click='realtyNewListFilter.modal = false') Закрыть
-        //- div(ng-if='realtyNewListFilter.showFilter')
-        //-     div Первый экран
-        //- div(ng-if='!realtyNewListFilter.showFilter')
-        //-     div Второй экран
-    
+                    md-button().md-primary.md-raised.ph-16 Отмена
