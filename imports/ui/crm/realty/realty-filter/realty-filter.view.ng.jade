@@ -68,11 +68,11 @@ div(md-whiteframe='2').realty-filter.pl-32.pr-16.pt-16.pb-32
                     label(flex='30') Площадь
                     md-input-container(flex='25').mv-0.pv-0
                         label от
-                        input(ng-model='realtyFilter.filter.floorFrom' ng-blur='realtyFilter.suitRealty()')
+                        input(ng-model='realtyFilter.filter.squareFrom' ng-blur='realtyFilter.suitRealty()')
                     span().hyphen
                     md-input-container(flex='25').mv-0.pv-0
                         label до
-                        input(ng-model='realtyFilter.filter.floorTo' ng-blur='realtyFilter.suitRealty()')
+                        input(ng-model='realtyFilter.filter.squareTo' ng-blur='realtyFilter.suitRealty()')
                 md-input-container
                     label Тип дома
                     md-select(ng-model='realtyFilter.filter.conditions', multiple='true' ng-blur='realtyFilter.suitRealty()')

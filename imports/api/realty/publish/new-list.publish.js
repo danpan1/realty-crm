@@ -46,6 +46,18 @@ if (Meteor.isServer) {
           if (!_.isEmpty(floor)) {
             selector.floor = floor;
           }
+
+          /* ПЛОЩАДЬ ОТ И ДО*/
+          let square = {};
+          if (search.squareFrom) {
+            square.$gte = parseInt(search.squareFrom);
+          }
+          if (search.squareTo) {
+            square.$lte = parseInt(search.squareTo);
+          }
+          if (!_.isEmpty(square)) {
+            selector.square = square;
+          }
           /* END ЭТАЖИ ОТ И ДО */
 
           /* КОЛИЧЕСТВО КОМНАТ */
