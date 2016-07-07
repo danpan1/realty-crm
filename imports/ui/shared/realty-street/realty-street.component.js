@@ -17,6 +17,7 @@ class RealtyStreet {
       this.searchTextStreet = '';
     }
 
+    this.label = this.isFilter ? 'Дом' : 'Дом и корпус'
   }
 
   clearHouse() {

@@ -23,7 +23,7 @@ md-floating-label='Улица',)
         div(ng-message='required')
             | You
             b must
-            |  have a favorite state.
+            | have a favorite state.
         div(ng-message='minlength') Your entry is not long enough.
         div(ng-message='maxlength') Your entry is too long.
 //md-selected-item-change='realtyStreet.clearHouse()',
@@ -39,7 +39,7 @@ md-search-text='realtyStreet.searchTextHouse',
 md-selected-item-change='realtyStreet.requestFullData(realtyStreet.house)',
 md-items='item in realtyStreet.querySearchHouse(realtyStreet.searchTextHouse)',
 md-item-text='item.value',
-md-floating-label='Дом и корпус'
+md-floating-label='{{realtyStreet.label}}'
 ng-class='{"form-required":!realtyStreet.isFilter, "no-min-width":!realtyStreet.isFilter}')
     md-item-template
         span(md-highlight-text='realtyStreet.searchTextHouse') {{item.value}}

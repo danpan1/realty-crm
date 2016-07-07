@@ -23,12 +23,8 @@ div(md-whiteframe='2').realty-filter.pl-32.pr-16.pt-16.pb-32
                         md-select(ng-model='realtyFilter.filter.metroTransport' required='' ng-blur='realtyFilter.suitRealty()')
                             md-option(ng-value='transport.id',
                             ng-repeat="transport in realtyFilter.dictionary.transport") {{transport.name}}
-                div(layout='row' layout-align='space-between end').mt-8
+                div(layout='row' layout-align='space-between end')
                     realty-street(refresh='realtyFilter.refresh' is-filter='true' ng-model='realtyFilter.filter.street' house='realtyFilter.filter.house')
-                    //md-input-container(flex='80').mv-0.pv-0
-                        input(placeholder='Улица' )
-                    //md-input-container(flex='20').mv-0.ml-16.pv-0
-                        input(placeholder='Дом' )
 
         div(flex='30' flex-offset='10').realty-filter__col.mt-32
             div(layout='column' layout-align='space-between none')
