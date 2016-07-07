@@ -45,7 +45,7 @@ class RealtyCard {
     if((vm.realty.operator && vm.realty.operator.oceanAdd) || (vm.realty.realtor && vm.realty.realtor.isExclusive)){
       let newTime = new Date().getTime();
       let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
-      let seconds = 300;// + parseInt(time);
+      let seconds = 300 + parseInt(time);
       if(seconds > 0){
         this.minutes = parseInt(seconds / 60);
         this.seconds = seconds - (this.minutes*60);
@@ -57,7 +57,7 @@ class RealtyCard {
               this.minutes -= 1;
               this.seconds = 59;
             }
-            if(this.minutes < 0) this.updateRealty(this.realty._id, 'skip');
+            if(this.minutes < 0 && this.realty.status != 'taken') this.updateRealty(this.realty._id, 'skip');
             else this.timeoutFunc();
           },1000)
         }
