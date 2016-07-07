@@ -10,7 +10,6 @@ md-tabs(md-selected="realtyOneLayout.selectedTab" md-dynamic-height)
     md-tab(label='3. Объявление')
         md-content
             one-review-desc(realty='oneReview.realty')
-            md-button( ng-click='oneReview.saveNewDescription(oneReview.realty._id, true)' ng-class='{"md-success":oneReview.descriptionSaved,"md-primary":!oneReview.descriptionSaved}' aria-label='Сохранить объявление').md-raised.one-review__btn-desc-save.ml-0 {{oneReview.descriptionSaved ? 'Сохранено'  : 'Сохранить объявление'}}
     md-tab(label='4. Реклама')
         md-content
             one-review-advert(realty='oneReview.realty')
