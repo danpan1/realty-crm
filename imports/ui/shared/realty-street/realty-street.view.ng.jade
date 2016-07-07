@@ -5,8 +5,8 @@
                     search-text-house='realtyStreet.searchTextHouse'
                     query-search-house='realtyStreet.querySearchHouse(query)'
                     request-full-data='realtyStreet.requestFullData(query)')
-md-autocomplete(flex='{{realtyStreet.streetFlex}}',
-required='',
+md-autocomplete(flex
+ng-required='!realtyStreet.isFilter',
 ng-class='{"w-100":realtyStreet.nohouse, "m-0":realtyStreet.nohouse, "form-required":!realtyStreet.isFilter, "no-min-width":!realtyStreet.isFilter}'
 md-input-name='autocompleteFieldStreet',
 md-input-minlength='2',
@@ -27,8 +27,8 @@ md-floating-label='Улица',)
         div(ng-message='minlength') Your entry is not long enough.
         div(ng-message='maxlength') Your entry is too long.
 //md-selected-item-change='realtyStreet.clearHouse()',
-md-autocomplete(flex='{{realtyStreet.houseFlex}}',
-required='',
+md-autocomplete(flex
+ng-required='!realtyStreet.isFilter',
 ng-if='!realtyStreet.nohouse'
 ng-disabled="!realtyStreet.street.value"
 md-input-name='autocompleteFieldHouse',

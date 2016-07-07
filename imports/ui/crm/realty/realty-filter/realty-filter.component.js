@@ -68,6 +68,7 @@ class RealtyFilter {
       roomcount: []
     };
     this.suitRealty();
+    this.refresh = !this.refresh;
   }
   
   suitRealty () {

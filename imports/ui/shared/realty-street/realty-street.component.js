@@ -11,6 +11,12 @@ import './realty-street.view.html';
 class RealtyStreet {
   constructor() {
     this.noCache = false;
+
+    this.$onChanges = function () {
+      this.searchTextHouse = '';
+      this.searchTextStreet = '';
+    }
+
   }
 
   clearHouse() {
@@ -78,8 +84,7 @@ export default angular.module(moduleName, [
     house: '=house',
     dataFull: '=dadata',
     isFilter: '<',
-    streetFlex: '<',
-    houseFlex: '<'
+    refresh:'<'
   },
   controllerAs: moduleName,
   controller: RealtyStreet

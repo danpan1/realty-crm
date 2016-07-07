@@ -69,7 +69,7 @@ div(md-whiteframe='2')
                                             md-option(ng-value='room.id' ng-repeat="room in outgoingCall.dictionary.roomcount") {{room.name}}
                             
                             div(flex='20' flex-offset='10').pt-16
-                                price-mask(ng-if='outgoingCall.realty.price' label='"Цена"' price='outgoingCall.realty.price' optflex='')
+                                price-mask(ng-if='outgoingCall.realty' label='"Цена"' price='outgoingCall.realty.price' optflex='')
                                 
                 div(layout='row').mb-32
                     div(flex='90')
