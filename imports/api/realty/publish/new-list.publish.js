@@ -65,10 +65,10 @@ if (Meteor.isServer) {
             selector.status = search.status;
           }
           /*if (search.type == 1) {
-            selector.type = {$in: [1,2]};
-          } else {
-            selector.type = {$in: [3,4]};
-          }*/
+           selector.type = {$in: [1,2]};
+           } else {
+           selector.type = {$in: [3,4]};
+           }*/
           /* END ТИП ОПЕРАЦИИ */
 
           /* УДОБСТВА */
@@ -95,15 +95,24 @@ if (Meteor.isServer) {
             query.push({'address.subway.id': {$in: search.subways}});
           }
 
-          if(search.street || search.house) {
-            //if (!selector.address) { selector.address = {}; 
-            if (search.street) { selector['address.street'] = search.street };
-            if (search.street && search.house) { selector['address.house'] = search.house };
-            //}
+          if (search.street) {
+            selector['address.street'] = search.street;
+            if (search.house) {
+              selector['address.house'] = search.house;
+            }
           }
+          
+          /*if (search.street) {
+            query.push({'address.street' : search.street});
+            if (search.house) {
+              query.push({'address.house' : search.house});
+            }
+          }*/
 
           if (query && !_.isEmpty(query)) {
-            selector.$or = query;
+            selector.$or[0].$or = query;
+            selector.$or[1].$or = query;
+            selector.$or[2].$or = query;
           }
           /* END РАЙОНЫ МЕТРО */
 
@@ -125,7 +134,7 @@ if (Meteor.isServer) {
           'owner.isComission': 1,
           'operator.comment': 1,
           'operator.oceanAdd': 1,
-          'operator.meetingTime':1,
+          'operator.meetingTime': 1,
           createdAt: 1,
           floor: 1,
           floormax: 1,
@@ -140,7 +149,7 @@ if (Meteor.isServer) {
         console.log(selector);
         let realty = Realty.find(selector, options);
         let count = realty.count();
-        console.log("====realty.count(): "+realty.count())
+        console.log("====realty.count(): " + realty.count())
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});
         CountsDan.find({_id: countId});
         return [realty, CountsDan.find({_id: this.userId})];
