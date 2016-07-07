@@ -2,8 +2,8 @@
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 import {RoboInvoices} from './robo-invoices.model';
-import Robokassa from 'robokassa';
-
+import Robokassa from './robokassa';
+import nextAutoincrement from '../../helpers/getUniqueId';
 const robokassa = new Robokassa({
   login: "world-invest",
   password1: "qq8OB0UE4ACE5iovIW5T",
@@ -20,15 +20,19 @@ Meteor.methods({
  * return {string} url ссылка для перехода в робокассу
  */
 export function replenishTheBalance(summ, description) {
+  let url;
+  console.log(summ, 'sum покупки');
+  if (!(Meteor.isServer && this.userId)) {
+    console.log('ereror');
+    throw new Meteor.Error('auth');
+  }
   check(summ, Number);
   check(description, String);
-  let url;
-  console.log(sum, 'sum покупки');
-  if (Meteor.isServer && this.userId) {
-    throw new Meteor.error('auth');
-  }
+  console.log('no ereror');
   try {
-    let invoiceId = RoboInvoices.insert({
+    let id = nextAutoincrement(RoboInvoices) + '';
+    RoboInvoices.insert({
+      _id: id,
       createDate: new Date(),
       description: description,
       userId: this.userId,
@@ -43,11 +47,11 @@ export function replenishTheBalance(summ, description) {
      * order.lang
      *
      */
-
-    url = robokassa.merchantUrl({id: invoiceId, summ: summ, description: description});
-  } catch (e){
+    let order = {id: id, summ: summ, description: description};
+    console.log(order);
+    return robokassa.merchantUrl(order);
+  } catch (e) {
     console.log(e);
     throw new Meteor.error('RoboInvoise Insert');
   }
-  return url;
 }

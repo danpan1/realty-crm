@@ -6,6 +6,9 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 export const RoboInvoices = new Mongo.Collection('robo_invoices');
 const roboSchema = new SimpleSchema({
+  _id: {
+    type: String
+  },
   createDate: {
     type: Date
   },

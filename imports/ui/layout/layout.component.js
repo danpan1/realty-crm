@@ -58,8 +58,10 @@ class Layout {
   logout() {
     Accounts.logout();
   }
-  replenishTheBalance() {
-    Meteor.call('replenishTheBalance', 100, 'Пополнение баланса', (err, res)=>{
+  replenishTheBalance(summ) {
+    console.log('replenishTheBalance');
+    let description = 'Пополнение баланса CRM Мир и Недвижимость на ' + summ;
+    Meteor.call('replenishTheBalance', summ, description, (err, res)=>{
       console.log(err);
       console.log(res);
     });
