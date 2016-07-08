@@ -7,10 +7,9 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-16.pr-8 Эксклюзив
             div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16.pr-8 Платит {{::realtyCard.realty.owner.comission}}% комиссии
             div(ng-if='::realtyCard.realty.operator.meetingTime').newList__green-label.text-bold.pl-16.pr-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
-            div.pl-8 Подано: {{::realtyCard.realty.createdAt | date:'dd.MM, HH:mm'}}
-            div.pl-8 id: {{::realtyCard.realty._id}}
             div().pl-16.pr-8.pv-8
-                div(ng-show="realtyCard.ngShowDescr && !realtyCard.realtylisttype") id {{::realtyCard.realty._id | price}}
+                div Подано: {{::realtyCard.realty.createdAt | date:'dd.MM, HH:mm'}}
+                div id: {{::realtyCard.realty._id | price}}
                 div(ng-show="realtyCard.minutes > -1" ng-if='realtyCard.realty.status == \'ocean\'')
                     div().realty-card__timer-title Объект исчезнет через
                     div().realty-card__timer.mt-8
@@ -79,7 +78,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                     div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
                 div(ng-if='realtyCard.realty.status === "connection" || realtyCard.realty.status === "new" || realtyCard.realty.status === "taken"')
                     div(ng-if='realtyCard.isUserPaid && !realtyCard.addedToMine')  
-                        realty-card-purchase(ng-if='realtyCard.realty' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty' con='true')
+                        realty-card-purchase(ng-if='realtyCard.realty' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty' con='true')
                     div().md-subhead.mb-8 #[b Собственник {{::realtyCard.realty.contacts[0].name}}]
                 div
                     md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Объявление
@@ -125,7 +124,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             p 
                 | #[strong Комментарий колцентра:] {{realtyCard.realty.operator.comment}}
             div(layout='row')
-                realty-card-purchase(ng-if='realtyCard.realty' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
+                realty-card-purchase(ng-if='realtyCard.realty' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
             div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
                 p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
                 p(ng-if='(5 + realtyCard.minutes) > 0').md-title.text-normal 1) Собственник ждет звонка в течение 

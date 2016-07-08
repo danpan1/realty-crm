@@ -93,13 +93,11 @@ export const dictionary = {
   ],
   priceList: [
     {id: 0, price: 60,   descr: 'common'    },  // Обычные объекты
-    {id: 1, price: 250,  descr: 'meeting'   },  // Встреча
-    {id: 2, price: 250,  descr: 'comission' },  // Платит комиссию
+    {id: 1, price: 250,  descr: 'meetingOrComission'   },  // Встреча ИЛИ платит комиссию
+    {id: 2, price: 400,  descr: 'meetCom'   },  // Встреча + платит комиссию
     {id: 3, price: 2000, descr: 'exclusive' },  // Эксклюзив
-    {id: 4, price: 400,  descr: 'meetCom'   },  // Встреча + платит комиссию
-    {id: 5, price: 2100, descr: 'excMeet'   },  // Эксклюзив + Встреча
-    {id: 6, price: 2100, descr: 'excCom'    },  // Эксклюзив + Платит комиссию
-    {id: 7, price: 2200, descr: 'excComMeet'},  // Эксклюзив + Платит комиссию + Встреча
+    {id: 4, price: 2100, descr: 'excMeet'   },  // Эксклюзив + Встреча ИЛИ Эксклюзив + Платит комиссию
+    {id: 5, price: 2200, descr: 'excComMeet'},  // Эксклюзив + Платит комиссию + Встреча
   ],
   renovation: [
     {id: 0, name: 'Косметический', cianId : 1},
