@@ -175,6 +175,20 @@ class OutgoingCall {
 
     vm.realty.status = 'list';
     vm.stat = comission ? exclusive ? 'objectsSavedComAndExc' : 'objectsSavedCom' : exclusive ? 'objectsSavedExc' : 'objectsSaved';
+    
+    let price = 0; // Определяем цену объекта
+    if (exclusive) {
+      if (comission) {
+        if (vm.realty.operator.meetingTime) price = 5;
+        else price = 4;
+      } else if (vm.realty.operator.meetingTime) price = 4;
+        else price = 3;
+    } else if (comission) {
+      if (vm.realty.operator.meetingTime) price = 2;
+      else price = 1;
+    } else if (vm.realty.operator.meetingTime) price = 1
+    
+    vm.realty.operator.oceanPrice = price;
     console.log(vm.realty.address)
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {

@@ -19,6 +19,14 @@ class RealtyCardPurchase {
     this.timeout = $timeout;
     this.mdDialog = $mdDialog;
     this.cardContacts = this.contacts || {};
+    if(this.realty.operator.oceanPrice){
+      this.price = this.dictionary.priceList[this.realty.operator.oceanPrice].price;
+      let userBalance = this.user.profile.balance;
+      this.change = this.price - userBalance > 0 ? this.price - userBalance < 1000 ? 1000 : this.price - userBalance : false;
+      this.purchaseText = this.change 
+      ? 'Пополнить баланс на ' + this.change + ' рублей' 
+      : 'Взять за ' + this.price + ' рублей'
+    }
     //this.cardContacts.realtyPhone = this.realty.contacts ? this.realty.contacts[0].phones[0].phone : '';
   }
 
@@ -177,37 +185,41 @@ class RealtyCardPurchase {
     }
   }*/
   
-  takeRealty(id, ev, connection) {
+  takeRealty(id, ev, price, connection) {
     let vm = this;
     if(this.userpaid){
-      if(!this.con){
-        Meteor.call('buyRealtyOcean', id, (err, result) => {
-          if (err) {
-            console.log('err: ' + err);
-          } else {
-            console.log(result);
-            this.timeout(()=> {
-              vm.cardContacts.realtyPhone = result.phone,
-              vm.cardContacts.realtyName = result.name;
-              vm.cardContacts.realtyStreet = result.address.street;
-              vm.cardContacts.realtyHouse = result.address.house;
-            }, 0);
-          }
-        });
+      if(this.change){
+        console.log('Go to RoboKassa');
       } else {
-        Meteor.call('buyRealtyOcean', id, connection, (err, result) => {
-          if (err) {
-            console.log('err: ' + err);
-          } else {
-            console.log(result);
-            if(connection == 'connection'){
-              vm.cardContacts.realtyPhone = result.phone;
-              vm.timeout(()=> {
-                vm.cardContacts.realtyPhone = result.phone;
-              }, 500);
+        if(!this.con){
+          Meteor.call('buyRealtyOcean', id, price, (err, result) => {
+            if (err) {
+              console.log('err: ' + err);
+            } else {
+              console.log(result);
+              this.timeout(()=> {
+                vm.cardContacts.realtyPhone = result.phone,
+                vm.cardContacts.realtyName = result.name;
+                vm.cardContacts.realtyStreet = result.address.street;
+                vm.cardContacts.realtyHouse = result.address.house;
+              }, 0);
             }
-          }
-        });
+          });
+        } else {
+          Meteor.call('buyRealtyOcean', id, price, connection, (err, result) => {
+            if (err) {
+              console.log('err: ' + err);
+            } else {
+              console.log(result);
+              if(connection == 'connection'){
+                vm.cardContacts.realtyPhone = result.phone;
+                vm.timeout(()=> {
+                  vm.cardContacts.realtyPhone = result.phone;
+                }, 500);
+              }
+            }
+          });
+        }
       }
     } else {
       this.openPurchaseStart(ev);
@@ -228,7 +240,8 @@ export default angular.module(moduleName, [
     contacts: '<',
     realty: '=',
     userpaid: '=',
-    con: '<'
+    con: '<',
+    user: '<'
   },
   controllerAs: moduleName,
   controller: RealtyCardPurchase

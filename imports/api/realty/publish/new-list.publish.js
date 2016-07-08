@@ -176,6 +176,7 @@ if (Meteor.isServer) {
           'operator.comment': 1,
           'operator.oceanAdd': 1,
           'operator.meetingTime': 1,
+          'operator.oceanPrice': 1,
           createdAt: 1,
           floor: 1,
           floormax: 1,

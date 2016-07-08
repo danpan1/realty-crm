@@ -25,7 +25,7 @@ Meteor.methods({
  * @param realtyId
  */
 
-export function buyRealtyOcean(realtyId, setStatus) {
+export function buyRealtyOcean(realtyId, realtyPrice, setStatus) {
 
   if (!(Meteor.isServer && this.userId)) {
     throw new Meteor.Error('logged-out', 'The user must be logged in to take realty.');
@@ -52,7 +52,7 @@ export function buyRealtyOcean(realtyId, setStatus) {
     Realty.update({_id: realtyId}, {$set: {status: 'transaction', transactionUser: this.userId}}); // transactionUser нужен, чтобы объект не исчезал из океана юзера, совершающего транзакцию, на время транзакции
 
     //todo price опеределить по параметрамs
-    let price = 500;
+    let price = realtyPrice || 60;
 
     console.log(oldStatus);
 
