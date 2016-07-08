@@ -41,6 +41,7 @@ function run($rootScope, $state) {
     (event, toState, toParams, fromState, fromParams, error) => {
       if (error === 'AUTH_REQUIRED') {
         // $state.go('auth.login');
+        //система.миринедвижимость.рф
         window.location = 'http://xn--80ajirwbh.xn--b1adcggadb2aietqyp4n.xn--p1ai/';
       }
     }
@@ -53,6 +54,7 @@ function run($rootScope, $state) {
       event.preventDefault();
       console.log("Please login");
       // $state.go('auth.login');
+      //система.миринедвижимость.рф
       window.location = 'http://xn--80ajirwbh.xn--b1adcggadb2aietqyp4n.xn--p1ai/';
     }
   });
