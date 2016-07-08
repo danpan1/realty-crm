@@ -58,7 +58,7 @@ class RealtyNewList {
     this.showSlider = false;
     this.slideShowImages = [];
     vm.sort = {
-      // 'updated_at': -1
+      'operator.oceanPrice': -1,
       'createdAt': -1
     };
     let timeTestLoadData = new Date();
