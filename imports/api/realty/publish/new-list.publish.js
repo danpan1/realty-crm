@@ -86,8 +86,8 @@ if (Meteor.isServer) {
 
           /* ВРЕМЯ ДО МЕТРО и Транспорт до метро */
           if (search.metroTime) {
-            selector.metroTime = {$lte: search.metroTime};
-            selector.metroTransport = search.metroTransport;
+            selector['address.metroTime'] = {$lte: search.metroTime};
+            selector['address.metroTransport'] = search.metroTransport;
           }
           /* END ВРЕМЯ ДО МЕТРО */
 

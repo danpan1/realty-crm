@@ -59,12 +59,20 @@ div(ng-if='listMy.loaded')
                     div(flex='20').md-body-1 
                         h3() Удобства
                         conditions(conditions='realty.details.conditions')
-                h3().md-title {{realty.contacts[0].phones[0].phone}} --- {{realty.contacts[0].name}}
-                h3().md-title {{realty.address.street}}, {{realty.address.house}}
-                div(ng-if='!realty.isAgent && !realty.objectAdded' layout="row")
+
+                
+                p().md-title.text-normal 1)  {{realty.contacts[0].phones[0].phone}} {{realty.contacts[0].name}}
+                p().md-title.text-normal 2) #[a(href='justa.html') Посмотреть источник объявления]
+                p().md-title.text-normal 3) #[Хотите продолжить с ним работать?]
+                div(layout='row').mv-16
+                    md-button(aria-label='Редактировать' ng-click="listMy.updateRealty(realty._id, 'realtor', 'go')").md-raised.newList__description-btn-large Редактировать
+                    md-button(aria-label='Не подходит' ng-click="listMy.returnToCallCenter(realty._id, $event)").md-raised.newList__description-btn-large.mh-16 Не подходит
+                //h3().md-title {{realty.contacts[0].phones[0].phone}} --- {{realty.contacts[0].name}}
+                //h3().md-title {{realty.address.street}}, {{realty.address.house}}
+                //div(ng-if='!realty.isAgent && !realty.objectAdded' layout="row")
                     md-button(ng-click="listMy.takeCheckedRealty(realty._id, 'realtor')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
                     md-button(ng-click="realty.isAgent = true").md-raised.realty-card__agent.ml-16.ph-16 Агент
-                div(ng-if='realty.isAgent == true && realty.objectAdded != true')
+                //div(ng-if='realty.isAgent == true && realty.objectAdded != true')
                     h3(flex).md-title Хотите продолжить с ним работать?
                     div(layout="row")
                         md-button(ng-click="listMy.takeCheckedRealty(realty._id, 'realtor')").md-raised.md-deafult Да 
