@@ -128,6 +128,7 @@ class RealtyCard {
             vm.contacts.realtyName = result.name;
             vm.contacts.realtyStreet = result.address.street;
             vm.contacts.realtyHouse = result.address.house;
+            vm.parseDetails = result.parseDetails;
             if(!justInfo) {
               this.loadingDetails = false;
               this.ngShowDescr = true;

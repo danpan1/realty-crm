@@ -47,6 +47,7 @@ if (Meteor.isServer) {
             'details.conditions': 1,
             'details.descr' :1,
             'contacts': 1,
+            parseDetails: 1,
             image: 1,
             price: 1,
             // realtor: 1,

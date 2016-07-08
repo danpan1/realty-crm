@@ -30,8 +30,8 @@ class Layout {
       {name: 'Документы', uisref: 'crm.documents'},
       {name: 'Видео-инструкции', ngClick: 'layout.videoTutorial = !layout.videoTutorial'},
       //{name:'Помощь', href:'https://vk.com/write19844032'},
-      {name: 'Помощь', uisref: 'https://vk.com/write19844032'},
-      {name: '150 за 6', uisref: 'http://murigin.ru/intensiv/'},
+      {name: 'Помощь', href: 'https://vk.com/write19844032'},
+      {name: '150 за 6', href: 'http://murigin.ru/intensiv/'},
       // {name: 'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
@@ -46,6 +46,11 @@ class Layout {
         this.user = user;
       }
     });
+  }
+
+  goToPage (url) {
+    console.log(url);
+    window.open(url);
   }
 
   selectText() {

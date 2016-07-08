@@ -79,6 +79,7 @@ class RealtyNewList {
           squareTo: vm.getReactively('filter.squareTo'),
           priceTo: vm.getReactively('filter.priceTo'),
           metroTime: vm.getReactively('filter.metroTime'),
+          metroTransport: vm.getReactively('filter.metroTransport'),
           street: vm.getReactively('filter.street.value'),
           house: vm.getReactively('filter.house.value'),
           conditions: vm.getReactively('filter.conditions'),
