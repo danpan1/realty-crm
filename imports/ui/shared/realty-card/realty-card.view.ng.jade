@@ -134,7 +134,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                     span {{realtyCard.seconds}}
                 p().md-title.text-normal 2) {{realtyCard.contacts.realtyPhone}} {{realtyCard.contacts.realtyName}}
                 p().md-title.text-normal 3) #[a(ng-href='{{realtyCard.parseDetails.url}}' target='blank') Посмотреть источник объявления]
-                p().md-title.text-normal 4) #[Хотите продолжить с ним работать?]
+                p().md-title.text-normal 4) #[strong Хотите продолжить с ним работать?]
                 div(layout='row' ng-if='realtyCard.isUserPaid').mv-16
                     md-button(aria-label='Редактировать' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id, 'go')").md-raised.newList__description-btn-large Редактировать
                     md-button(aria-label='Остаться в океане' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id)").md-raised.newList__description-btn-large.mh-16 Остаться в океане

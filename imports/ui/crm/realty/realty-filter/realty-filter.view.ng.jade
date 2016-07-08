@@ -77,7 +77,7 @@ div(md-whiteframe='2').realty-filter.pl-32.pr-16.pt-16.pb-32
                         md-option(ng-value='material.id',
                         ng-repeat='material in realtyFilter.dictionary.materials') {{material.name}}
                 div(layout='row' layout-align='space-between end').mt-16
-                    label().md-subhead.text-bold  {{(realtyFilter.realtyCount !== false) ? realtyFilter.realtyCount !== 0 ? ('Показано ' + (realtyFilter.realtyCount | price) + ' объектов') : 'Объекты не найдены' : 'Ищем объекты'}}
+                    label().md-subhead.text-bold {{(realtyFilter.realtyCount !== false) ? realtyFilter.realtyCount !== 0 ? ('Показано ' + (realtyFilter.realtyCount | price) + ' объектов') : 'Объекты не найдены' : 'Ищем объекты'}}
                     md-button(aria-label='Очистить число показов' ng-click='realtyFilter.clearFilter()').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
                         md-icon(md-svg-icon='svg/icon-delete-forever.svg')
 

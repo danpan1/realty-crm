@@ -21,6 +21,28 @@ if (Meteor.isServer) {
         if (search) {
           console.log('search', search);
 
+          if (search.type !== undefined) {
+            selector.type = search.type;
+            if (search.type == 0) {
+              selector.type = {$in: [3,4]};
+            }
+            else if (search.type == 1) {
+              selector.type = {$in: [1,2]};
+            }
+            else if (search.type == 2) {
+              selector.type = {$in: [1,2,3,4]};
+            }
+          }
+
+          /* КОЛИЧЕСТВО КОМНАТ */
+          if (search.roomcount && !_.isEmpty(search.roomcount)) {
+            let rooms = search.roomcount.map((item)=> {
+              return item.id;
+            });
+            selector.roomcount = {$in: rooms};
+          }
+          /* END КОЛИЧЕСТВО КОМНАТ */
+
           let price = {};
 
           /* ЦЕНА ОТ И ДО*/
@@ -70,9 +92,9 @@ if (Meteor.isServer) {
           /* END КОЛИЧЕСТВО КОМНАТ */
 
           /* ТИП ОПЕРАЦИИ 1-продажа квартир вторичных 2-долгосрочная аренда квартир */
-          if (search.type) {
+          /*if (search.type) {
             selector.type = search.type;
-          }
+          }*/
           if (search.status) {
             selector.status = search.status;
           }
