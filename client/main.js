@@ -40,7 +40,9 @@ function run($rootScope, $state) {
   $rootScope.$on('$stateChangeError',
     (event, toState, toParams, fromState, fromParams, error) => {
       if (error === 'AUTH_REQUIRED') {
-        $state.go('auth.login');
+        // $state.go('auth.login');
+        //система.миринедвижимость.рф
+        window.location = 'http://xn--80ajirwbh.xn--b1adcggadb2aietqyp4n.xn--p1ai/';
       }
     }
   );
@@ -51,8 +53,9 @@ function run($rootScope, $state) {
       console.log(toState.name);
       event.preventDefault();
       console.log("Please login");
-      $state.go('auth.login');
-      //window.location = 'http://promo.rieltor.guru';
+      // $state.go('auth.login');
+      //система.миринедвижимость.рф
+      window.location = 'http://xn--80ajirwbh.xn--b1adcggadb2aietqyp4n.xn--p1ai/';
     }
   });
 }

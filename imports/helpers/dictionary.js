@@ -58,6 +58,11 @@ export const dictionary = {
     {id: 3, name: '3'},
     {id: 4, name: '4'}
   ],
+  filterType: [
+    {id: 0, name: 'Аренда'},
+    {id: 1, name: 'Продажа'},
+    {id: 2, name: 'Аренда и Продажа'},
+  ],
   isNewBuilding: [
     {id: 0, name: 'Вторичка'},
     {id: 1, name: 'Новостройка'}

@@ -212,7 +212,7 @@ class RealtyCard {
       if (err) {
         console.log('err: ' + err);
       } else {
-        if (add == 'go') this.state.go('crm.realty.one.review', {realtyId: id}); else if (this.ngShowDescr) this.ngShowDescr = false;
+        if (add == 'go') this.state.go('crm.realty.one.info', {realtyId: id}); else if (this.ngShowDescr) this.ngShowDescr = false;
       }
     });
   }
