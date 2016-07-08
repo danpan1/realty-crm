@@ -62,7 +62,7 @@ div(ng-if='listMy.loaded')
 
                 
                 p().md-title.text-normal 1)  {{realty.contacts[0].phones[0].phone}} {{realty.contacts[0].name}}
-                p().md-title.text-normal 2) #[a(href='justa.html') Посмотреть источник объявления]
+                p().md-title.text-normal 2) #[a(ng-href='{{realty.parseDetails.url}}' target='blank') Посмотреть источник объявления]
                 p().md-title.text-normal 3) #[Хотите продолжить с ним работать?]
                 div(layout='row').mv-16
                     md-button(aria-label='Редактировать' ng-click="listMy.updateRealty(realty._id, 'realtor', 'go')").md-raised.newList__description-btn-large Редактировать

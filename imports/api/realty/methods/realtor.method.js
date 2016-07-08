@@ -107,7 +107,8 @@ export function buyRealtyOcean(realtyId, setStatus) {
   return {
     name: realty.contacts[0].name,
     phone: realty.contacts[0].phones[0].phone,
-    address: {street: realty.address.street, house: realty.address.house}
+    address: {street: realty.address.street, house: realty.address.house},
+    parseDetails: realty.parseDetails
   };
   //todo return телефон собственника
 
@@ -130,7 +131,8 @@ export function showRealtyDetails(realtyId, userId) {
     return {
       name: realty.contacts[0].name,
       phone: realty.contacts[0].phones[0].phone,
-      address: {street: realty.address.street, house: realty.address.house}
+      address: {street: realty.address.street, house: realty.address.house},
+      parseDetails: realty.parseDetails
     };
 
   }

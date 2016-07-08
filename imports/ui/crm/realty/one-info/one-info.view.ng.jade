@@ -1,7 +1,7 @@
 loader(ng-if="oneInfo.showLoader == true")
 one-info-edit(realty="oneInfo.realty" show="oneInfo.editDialogShow" ng-if="oneInfo.editDialogShow")
 div(layout="column", layout-align="space-around stretch")
-    div(layout="row" layout-align='start center').one-info__slider
+    div(layout="row" layout-align='start start').one-info__slider
         div(hide) 
             div(ng-repeat="image in oneInfo.realty.details.images")
                 img(src="{{image.url}}")
@@ -10,6 +10,8 @@ div(layout="column", layout-align="space-around stretch")
             button.slide__next(ng-click="oneInfo.nextImage(true,oneInfo.realty.details.images.length)").md-raised
             div.oneInfo-image-inner
                 img(src="{{oneInfo.realty.details.images[oneInfo.slideNum].url}}")
+        div(ng-if='oneInfo.realty.parseDetails').p-16
+            md-button(ng-click='oneInfo.openAdSource(oneInfo.realty.parseDetails.url)').md-raised.md-default Посмотреть источник объявления
 
     div(layout='row' layout-align='space-between start')
         div(md-whiteframe='2' flex='66').one-info__notes.mr-16.p-16

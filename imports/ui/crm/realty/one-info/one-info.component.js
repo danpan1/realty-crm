@@ -93,6 +93,10 @@ class OneInfo {
     this.realtyUpdate();
   }
 
+  openAdSource (url) {
+    window.open(url);
+  }
+
   realtyUpdate() {
 
 

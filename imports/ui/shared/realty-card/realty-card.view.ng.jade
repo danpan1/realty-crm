@@ -1,4 +1,4 @@
-div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__green":realtyCard.realty.owner.comission && !realtyCard.realty.realtor.isExclusive, "newList__blue":realtyCard.realty.realtor.isExclusive && realtyCard.realty.owner.comission, "newList__green":realtyCard.realty.operator.meetingTime}').newList.mv-8
+div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__green": realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList.mv-8.newList__default
     div(layout='column' ng-if='realtyCard.show == true')
     div(layout='row')
 
@@ -7,6 +7,8 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-16.pr-8 Эксклюзив
             div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16.pr-8 Платит {{::realtyCard.realty.owner.comission}}% комиссии
             div(ng-if='::realtyCard.realty.operator.meetingTime').newList__green-label.text-bold.pl-16.pr-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
+            div.pl-8 Подано: {{::realtyCard.realty.createdAt | date:'dd.MM, HH:mm'}}
+            div.pl-8 id: {{::realtyCard.realty._id}}
             div().pl-16.pr-8.pv-8
                 div(ng-show="realtyCard.ngShowDescr && !realtyCard.realtylisttype") id {{::realtyCard.realty._id | price}}
                 div(ng-show="realtyCard.minutes > -1" ng-if='realtyCard.realty.status == \'ocean\'')
@@ -91,7 +93,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
         //7-ая колонка Скрыть Сохранить
         div(layout='column' layout-align="space-between left").newList_Actions
-            div(ng-if='realtyCard.realty.type == 3 || realtyCard.realty.type == 4').newList__income-blue.p-8.text-center {{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}} &#8381;
+            div(ng-if='realtyCard.realty.type == 3 || realtyCard.realty.type == 4' ng-class='{"newList__income-blue":realtyCard.realty.realtor.isExclusive,"newList__income-green":realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList__income-default.p-8.text-center {{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}} &#8381;
             div(layout="column" layout-align="space-between center").ph-16.pv-8
                 
                 md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
@@ -131,7 +133,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                     span(ng-if='realtyCard.seconds < 10') 0
                     span {{realtyCard.seconds}}
                 p().md-title.text-normal 2) {{realtyCard.contacts.realtyPhone}} {{realtyCard.contacts.realtyName}}
-                p().md-title.text-normal 3) #[a(href='justa.html') Посмотреть источник объявления]
+                p().md-title.text-normal 3) #[a(ng-href='{{realtyCard.parseDetails.url}}' target='blank') Посмотреть источник объявления]
                 p().md-title.text-normal 4) #[Хотите продолжить с ним работать?]
                 div(layout='row' ng-if='realtyCard.isUserPaid').mv-16
                     md-button(aria-label='Редактировать' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id, 'go')").md-raised.newList__description-btn-large Редактировать
