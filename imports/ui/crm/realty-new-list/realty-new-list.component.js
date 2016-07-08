@@ -30,9 +30,11 @@ class RealtyNewList {
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
     this.state = $state;
+    this.filterType = 2;
+    this.filterCity = 0;
     this.filterModalOpened = false;
     
-    switch ($stateParams.operation) {
+    /*switch ($stateParams.operation) {
       case 'rent':
         vm.selectedTab = 0;
         break;
@@ -41,7 +43,7 @@ class RealtyNewList {
         break;
       default:
         vm.selectedTab = 0;
-    }
+    }*/
     
     this.autorun(function () {
       let user = Meteor.user();
@@ -87,7 +89,7 @@ class RealtyNewList {
           materials: vm.getReactively('filter.materials'),
           priceFrom: vm.getReactively('filter.priceFrom'),
           roomcount: vm.getReactively('roomcount'),
-          type: vm.getReactively('filter.type'),
+          type: vm.getReactively('filterType'),
           subways: vm.getReactively('filter.subways'),
           districts: vm.getReactively('filter.districts')
         }

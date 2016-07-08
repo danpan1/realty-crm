@@ -55,7 +55,7 @@ class RealtyFilter {
         }
       }
     }
-    this.filter.type = this.stateParams.operation == 'sale' ? 1 : 4;
+    //this.filter.type = this.stateParams.operation == 'sale' ? 1 : 4;
     
     console.log('FILTER: ');
     console.log(this.filter);
@@ -64,7 +64,7 @@ class RealtyFilter {
   
   clearFilter () {
     this.filter = {
-      type: this.stateParams.operation == 'sale' ? 1 : 4,
+      //type: this.stateParams.operation == 'sale' ? 1 : 4,
       roomcount: []
     };
     this.suitRealty();
