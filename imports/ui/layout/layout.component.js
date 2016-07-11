@@ -32,6 +32,7 @@ class Layout {
       //{name:'Помощь', href:'https://vk.com/write19844032'},
       {name: 'Помощь', href: 'https://vk.com/write19844032'},
       {name: '150 за 6', href: 'http://murigin.ru/intensiv/'},
+      {name: 'О сервисе', uisref: 'crm.feedback'},
       // {name: 'Настройки', uisref:'realty'},
       // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
       // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},

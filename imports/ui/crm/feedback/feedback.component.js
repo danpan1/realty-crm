@@ -35,20 +35,27 @@ class Feedback {
     });
     
     this.feedbackData = [
-      {question:'Вопрос 1',
-       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      {question:'Какова цена объектов в Океане объектов?',
+       answer:`
+               Обычные объекты - 60 руб.
+               Встреча - 250 руб.
+               Платит комиссию - 250 руб.
+               Эксклюзив - 2000 руб.
+               Встреча + платит комиссию - 400 руб.
+               Эксклюзив + Встреча - 2100 руб.
+               Эксклюзив + Платит комиссию - 2100 руб.
+               Эксклюзив + Платит комиссию + Встреча - 2200 руб.
+               `
       },
-      {question:'Вопрос 2',
-       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
-      },
-      {question:'Вопрос 3',
-       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
-      },
-      {question:'Вопрос 4',
-       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
-      },
-      {question:'Вопрос 5',
-       answer:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro voluptas culpa magnam nesciunt vitae est reiciendis ipsam accusantium rerum eveniet velit voluptatum voluptate, dignissimos, beatae asperiores distinctio provident nam dolores, unde delectus. Explicabo saepe nobis commodi perferendis dolorum excepturi asperiores, culpa ipsa quae illum, quo fuga doloribus nihil amet omnis consequatur. Necessitatibus, dicta illo vitae architecto expedita nulla omnis sapiente dolorem beatae numquam provident porro, accusantium nihil dolores tenetur dolor aut itaque a modi voluptatibus. Vel labore quis iure, velit vitae dolorem sit, quae dolorum unde deleniti cumque molestiae accusantium tenetur, ipsum laudantium! Minus necessitatibus vero, ullam? Culpa, distinctio, eos!'
+      {question:'Контакты организации',
+       answer:`
+               ИП Мурыгин Александр Иванович
+               ИНН 503199439647
+               ОГРН/ОГРНИП 313503114900040
+               Юридический адрес 142402, РОССИЯ, обл. Московская, р-н. Ногинский, г. Ногинск, ул.Ильича, д.81, кв.137
+               Фактический адрес 142402, РОССИЯ, обл. Московская, р-н. Ногинский, г. Ногинск, ул.Ильича, д.81, кв.137
+               Контактный телефон: +7(925) 075-95-87
+               `      
       }
     ]
   }

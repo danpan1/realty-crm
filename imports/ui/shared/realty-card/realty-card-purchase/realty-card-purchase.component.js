@@ -21,11 +21,13 @@ class RealtyCardPurchase {
     this.cardContacts = this.contacts || {};
     if(this.realty.operator && this.realty.operator.oceanPrice !== undefined){
       this.price = this.dictionary.priceList[this.realty.operator.oceanPrice].price;
-      let userBalance = this.user.profile.balance;
-      this.change = this.price - userBalance > 0 ? this.price - userBalance < 1000 ? 1000 : this.price - userBalance : false;
-      this.purchaseText = this.change 
-      ? 'Пополнить баланс на ' + this.change + ' рублей' 
-      : 'Взять за ' + this.price + ' рублей'
+      this.userBalance = this.user.profile.balance;
+      this.change = this.price - this.userBalance > 0 ? this.price - this.userBalance < 1000 ? 1000 : this.price - this.userBalance : false;
+      
+      // Если это взятие в связях
+      if (this.con) this.purchaseText = 'Взять за ' + this.price + ' рублей';
+      // В другом месте
+      else this.purchaseText = this.change ? 'Пополнить баланс на ' + this.change + ' рублей' : 'Взять за ' + this.price + ' рублей'
     }
     //this.cardContacts.realtyPhone = this.realty.contacts ? this.realty.contacts[0].phones[0].phone : '';
   }
@@ -33,137 +35,186 @@ class RealtyCardPurchase {
   /**
    *
    * @param ev - event
-   * @param type - Arenda or Sale
+   * 
    */
   
   openPurchaseStart (ev, type) {
-    let saleOrArenda = '', operation = '', amount = '';
-    console.log('this.realty.type', this.realty.type);
-    if(this.realty.type === 1){
-      saleOrArenda = 'sale';
-      operation = 'Продажу';
-      amount = '1440';
-      price = {
-        arenda1:1440,
-        arenda6:6480
+    if (type != 'connection') {
+      let saleOrArenda = '', operation = '', amount = '';
+      console.log('this.realty.type', this.realty.type);
+      if(this.realty.type === 1){
+        saleOrArenda = 'sale';
+        operation = 'Продажу';
+        amount = '1440';
+        price = {
+          arenda1:1440,
+          arenda6:6480
+        }
+      } else {
+        saleOrArenda = 'arenda';
+        operation = 'Аренду';
+        amount = '990';
+        price = {
+          arenda1:990,
+          arenda6:4455
+        }
+        price.arendaIprodaza1 = 1880;
+        price.arendaIprodaza6 = 7290;
       }
-    } else {
-      saleOrArenda = 'arenda';
-      operation = 'Аренду';
-      amount = '990';
-      price = {
-        arenda1:990,
-        arenda6:4455
-      }
-      price.arendaIprodaza1 = 1880;
-      price.arendaIprodaza6 = 7290;
     }
     const vm = this;
     
     const DialogController = function ($mdDialog) {
+      if (type == 'connection') {
+        // Если это взятие в связях
+
+        this.amount = 5000;
+
+        this.refillBalance = (amount) => {
+          // Сюда добавить функцию, которая будет направлять в робокассу.
+          console.log('Request to RoboKassa: refill balance by '+amount+' rubles');
+          this.close();
+        }
+
+      } else {
+        // Если в другом месте
+
+        this.createLead = (name, price) => {
+          let purchaseInfo = {
+            name: name,
+            price: price
+          }
+          try {
+            Meteor.call('amoCrmNewDeal', purchaseInfo, (error, result) => {
+              if (error) {
+                console.log(error);
+              } else {
+                vm.timeout(()=>{
+                  console.log(result);
+                },100)
+              }
+            });
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        
+      }
+
       this.close = () => {
         $mdDialog.cancel();
         console.log('success!');
       };
       
-      this.createLead = (name, price) => {
-        let purchaseInfo = {
-          name: name,
-          price: price
-        }
-        try {
-          Meteor.call('amoCrmNewDeal', purchaseInfo, (error, result) => {
-            if (error) {
-              console.log(error);
-            } else {
-              vm.timeout(()=>{
-                console.log(result);
-              },100)
-            }
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      }
     }
     DialogController.$inject = ['$mdDialog'];
-
-    this.mdDialog.show({
-      controller: DialogController,
-      controllerAs : 'dialog',
-      //onsubmit="return __cmsformcheck_order()"
-      template: `<md-dialog class="subscription-dialog" aria-label="Оплата подписки" ng-cloak>
-                    <md-toolbar>
-                      <div class="md-toolbar-tools">
-                        <h2>Оплата «Океан объектов»</h2>
-                        <span flex></span>
-                        <md-button class="md-icon-button" ng-click="dialog.close()">
-                          <md-icon md-svg-src="svg/icon-close.svg" aria-label="Закрыть окно оплаты подписки"></md-icon>
-                        </md-button>
-                      </div>
-                    </md-toolbar>
-                    <md-dialog-content>
-                      <div class="md-dialog-content pv-16">
-                        <div layout="column">
-                          <div layout="row" flex="80">
-                            <h3 class="md-subhead text-center">Безлимитное количество объектов</h3>
-                          </div>
-                          <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocean_object_${saleOrArenda}_1mes/" target='blank'>
-                            <input type="hidden" name="good_name" value="ocean_object_${saleOrArenda}_1mes" />
-                            <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
-                            <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
-                            <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
-                            <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
-                            <div layout="row">
-                              <md-button flex class=" md-raised mv-16 ph-16" ng-click='dialog.createLead("Океан: аренда на один месяц", ${price.arenda1})'>
-                                <input type="submit" value="подписаться на ${operation} за ${amount}&#8381; в месяц" name="doorder" class="feedback__nostyles" style='color:black;' />
+    this.timeout( () => {
+      var htmlTemplate;
+      if (type == 'connection') {
+        htmlTemplate = `<md-dialog class="subscription-dialog" aria-label="Оплата подписки">
+                              <md-toolbar>
+                                <div class="md-toolbar-tools">
+                                  <h2>Необходимо пополнить баланс</h2>
+                                  <span flex></span>
+                                  <md-button class="md-icon-button" ng-click="dialog.close()">
+                                    <md-icon md-svg-src="svg/icon-close.svg" aria-label="Закрыть окно оплаты подписки"></md-icon>
+                                  </md-button>
+                                </div>
+                              </md-toolbar>
+                              <md-dialog-content>
+                                <div class="md-dialog-content pv-16">
+                                  <div layout="column">
+                                    <form name="connection-purchase">
+                                        <p> Укажите сумму не меньше 1000 рублей </p>
+                                        <md-input-container>
+                                          <input type="text" ng-model="dialog.amount" />
+                                        </md-input-container>
+                                        <md-button flex ng-disabled="dialog.amount < 1000" class="md-raised mv-16 ph-16" ng-click='dialog.refillBalance(dialog.amount)'>Пополнить</md-button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </md-dialog-content>
+                            </md-dialog>`
+      } else {
+        htmlTemplate = `<md-dialog class="subscription-dialog" aria-label="Оплата подписки" ng-cloak>
+                          <md-toolbar>
+                            <div class="md-toolbar-tools">
+                              <h2>Оплата «Океан объектов»</h2>
+                              <span flex></span>
+                              <md-button class="md-icon-button" ng-click="dialog.close()">
+                                <md-icon md-svg-src="svg/icon-close.svg" aria-label="Закрыть окно оплаты подписки"></md-icon>
                               </md-button>
-                          </form>
-                        </div>
-                        <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocean_object_${saleOrArenda}_6mes/" target='blank'>
-                          <input type="hidden" class="good-name" name="good_name" value="ocean_object_${saleOrArenda}_6mes" />
-                          <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
-                          <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
-                          <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
-                          <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
-                          <div layout="row">
-                            <md-button flex class="md-primary md-raised mv-16 ph-16 flex" ng-click='dialog.createLead("Океан: аренда на 6 месяцев", ${price.arenda6})'>
-                              <input type="submit" value="оплатить ${operation} за 6 месяцев со скидкой 25%" name="doorder" class="feedback__nostyles" />
-                            </md-button>
-                          </div>
-                        </form>
-                        <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocean_object_arenda_sale_1mes/" target='blank'>
-                          <input type="hidden" class="good-name" name="good_name" value="ocean_object_arenda_sale_1mes" />
-                          <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
-                          <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
-                          <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
-                          <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
-                          <div layout="row">
-                            <md-button flex class="md-warn md-raised mv-16 ph-16 flex" ng-click='dialog.createLead("Океан: аренда и продажа на один месяц", ${price.arendaIprodaza1})'>
-                              <input type="submit" value="подписаться на аренду и продажу за 1 880Р в месяц со скидкой 25%" name="doorder" class="feedback__nostyles" />
-                            </md-button>
-                          </div>
-                        </form>
-                        <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocean_object_arenda_sale_6mes/" target='blank'>
-                          <input type="hidden" class="good-name" name="good_name" value="ocean_object_arenda_sale_6mes" />
-                          <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
-                          <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
-                          <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
-                          <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
-                          <div layout="row">
-                            <md-button flex class="md-warn md-raised mv-16 ph-16 flex" ng-click='dialog.createLead("Океан: аренда и продажа на 6 месяцев", ${price.arendaIprodaza6})'>
-                              <input type="submit" value="оплатить аренду и продажу за 6 месяцев со скидкой 50%" name="doorder" class="feedback__nostyles" />
-                            </md-button>
-                          </div>
-                        </form>
-                        
-                      </div>
-                    </md-dialog-content>
-                </md-dialog>`,
-      preserveScope: true,
-      targetEvent: ev,
-      clickOutsideToClose: true
-    })
+                            </div>
+                          </md-toolbar>
+                          <md-dialog-content>
+                            <div class="md-dialog-content pv-16">
+                              <div layout="column">
+                                <div layout="row" flex="80">
+                                  <h3 class="md-subhead text-center">Безлимитное количество объектов</h3>
+                                </div>
+                                <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocean_object_${saleOrArenda}_1mes/" target='blank'>
+                                  <input type="hidden" name="good_name" value="ocean_object_${saleOrArenda}_1mes" />
+                                  <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
+                                  <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
+                                  <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
+                                  <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
+                                  <div layout="row">
+                                    <md-button flex class=" md-raised mv-16 ph-16" ng-click='dialog.createLead("Океан: аренда на один месяц", ${price.arenda1})'>
+                                      <input type="submit" value="подписаться на ${operation} за ${amount}&#8381; в месяц" name="doorder" class="feedback__nostyles" style='color:black;' />
+                                    </md-button>
+                                </form>
+                              </div>
+                              <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocean_object_${saleOrArenda}_6mes/" target='blank'>
+                                <input type="hidden" class="good-name" name="good_name" value="ocean_object_${saleOrArenda}_6mes" />
+                                <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
+                                <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
+                                <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
+                                <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
+                                <div layout="row">
+                                  <md-button flex class="md-primary md-raised mv-16 ph-16 flex" ng-click='dialog.createLead("Океан: аренда на 6 месяцев", ${price.arenda6})'>
+                                    <input type="submit" value="оплатить ${operation} за 6 месяцев со скидкой 25%" name="doorder" class="feedback__nostyles" />
+                                  </md-button>
+                                </div>
+                              </form>
+                              <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocean_object_arenda_sale_1mes/" target='blank'>
+                                <input type="hidden" class="good-name" name="good_name" value="ocean_object_arenda_sale_1mes" />
+                                <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
+                                <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
+                                <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
+                                <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
+                                <div layout="row">
+                                  <md-button flex class="md-warn md-raised mv-16 ph-16 flex" ng-click='dialog.createLead("Океан: аренда и продажа на один месяц", ${price.arendaIprodaza1})'>
+                                    <input type="submit" value="подписаться на аренду и продажу за 1 880Р в месяц со скидкой 25%" name="doorder" class="feedback__nostyles" />
+                                  </md-button>
+                                </div>
+                              </form>
+                              <form id="__cmsform_order" role="form" method="POST" action="http://ariusbiz.justclick.ru/order/confirm/ocean_object_arenda_sale_6mes/" target='blank'>
+                                <input type="hidden" class="good-name" name="good_name" value="ocean_object_arenda_sale_6mes" />
+                                <input type="hidden" name="bill_first_name" value="${this.data.bill_first_name}" />
+                                <input type="hidden" name="bill_email" value="${this.data.bill_email}" />
+                                <input type="hidden" name="bill_phone" value="${this.data.bill_phone}" />
+                                <input type="hidden" name="offerta_accept" checked="${this.data.offerta_accept}" />
+                                <div layout="row">
+                                  <md-button flex class="md-warn md-raised mv-16 ph-16 flex" ng-click='dialog.createLead("Океан: аренда и продажа на 6 месяцев", ${price.arendaIprodaza6})'>
+                                    <input type="submit" value="оплатить аренду и продажу за 6 месяцев со скидкой 50%" name="doorder" class="feedback__nostyles" />
+                                  </md-button>
+                                </div>
+                              </form>
+                              
+                            </div>
+                          </md-dialog-content>
+                      </md-dialog>`
+      }
+      this.mdDialog.show({
+        controller: DialogController,
+        controllerAs : 'dialog',
+        //onsubmit="return __cmsformcheck_order()"
+        template: htmlTemplate,
+        preserveScope: true,
+        targetEvent: ev,
+        clickOutsideToClose: true
+      })
+    },50)
   }
 
   
@@ -188,9 +239,6 @@ class RealtyCardPurchase {
   takeRealty(id, ev, price, connection) {
     let vm = this;
     if(this.userpaid){
-      if(this.change){
-        console.log('Go to RoboKassa');
-      } else {
         if(!this.con){
           Meteor.call('buyRealtyOcean', id, price, (err, result) => {
             if (err) {
@@ -202,23 +250,29 @@ class RealtyCardPurchase {
                 vm.cardContacts.realtyName = result.name;
                 vm.cardContacts.realtyStreet = result.address.street;
                 vm.cardContacts.realtyHouse = result.address.house;
+                vm.parseDetails = result.parseDetails;
               }, 0);
             }
           });
         } else {
-          Meteor.call('buyRealtyOcean', id, price, connection, (err, result) => {
-            if (err) {
-              console.log('err: ' + err);
-            } else {
-              console.log(result);
-              if(connection == 'connection'){
-                vm.cardContacts.realtyPhone = result.phone;
-                vm.timeout(()=> {
+          console.log('this.price - this.userBalance = ', this.price - this.userBalance)
+          if (this.price - this.userBalance > 0){
+            this.openPurchaseStart(ev, connection);
+            console.log('Open dialog')
+          } else {
+            Meteor.call('buyRealtyOcean', id, price, connection, (err, result) => {
+              if (err) {
+                console.log('err: ' + err);
+              } else {
+                console.log(result);
+                if(connection == 'connection'){
                   vm.cardContacts.realtyPhone = result.phone;
-                }, 500);
+                  vm.timeout(()=> {
+                    vm.cardContacts.realtyPhone = result.phone;
+                  }, 500);
+                }
               }
-            }
-          });
+            });
         }
       }
     } else {
@@ -241,7 +295,8 @@ export default angular.module(moduleName, [
     realty: '=',
     userpaid: '=',
     con: '<',
-    user: '<'
+    user: '<',
+    parseDetails: '='
   },
   controllerAs: moduleName,
   controller: RealtyCardPurchase

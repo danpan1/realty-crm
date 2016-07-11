@@ -17,6 +17,11 @@ class RealtyNewListFilter {
     const vm = this;
     this.dictionary = dictionary;
   }
+
+  saveNewFilter () {
+    
+  }
+
 }
 
 const moduleName = 'realtyNewListFilter';
