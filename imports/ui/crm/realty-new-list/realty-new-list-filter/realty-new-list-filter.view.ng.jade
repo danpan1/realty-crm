@@ -1,137 +1,138 @@
 div().modal
     div().modal__bg
-    div().modal__inner
-        div(md-whiteframe='2').pv-16
-            div(layout='column' ng-if='!realtyNewListFilter.showFilter')
-                div().text-right.md-body-1.ph-16 SMS оповещение
-                div().mv-16.ph-16
-                    div(layout='row' layout-align='start center')
-                        div(flex='35')
-                            span().md-subhead.realty-new-list-filter__col 1. Бабушкины двушки
-                        div(flex='45' layout='row' layout-align='space-between none').ml-32
-                            md-button().realty-new-list-filter__link показать объекты
-                            md-button().realty-new-list-filter__link критерии
-                            md-button().realty-new-list-filter__link изменить
-                            md-button().realty-new-list-filter__link удалить
-                        div(layout='row' layout-align='center center' flex flex-offset='5')
-                            md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
-                div().realty-new-list-filter__selected.mv-16.ph-16
-                    div(layout='row' layout-align='start center')
-                        div(flex='35')
-                            span().md-subhead.realty-new-list-filter__col 2. Элитные трешки
-                        div(flex='45' layout='row' layout-align='space-between none').ml-32
-                            md-button().realty-new-list-filter__link показать объекты
-                            md-button().realty-new-list-filter__link критерии
-                            md-button().realty-new-list-filter__link изменить
-                            md-button().realty-new-list-filter__link удалить
-                        div(layout='row' layout-align='center center' flex flex-offset='5')
-                            md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
-                    div().m-16
-                        p().md-body-1.mv-8 Маяковского, Тверсткая, 15 мин. пешком, Тверская 25
-                        p().md-body-1.mv-8 1 комн., 2 комн., 40 000 - 60 000, Косметический, Евроремонт, Телевизор, Холодильник, Стир. машина, Кондиционер
-                        p().md-body-1.mv-8 1 - 5 этаж, 30 - 40 м², Новостройка, Вторичка
-                div().mv-16.ph-16
-                    div(layout='row' layout-align='start center')
-                        div(flex='35')
-                            span().md-subhead.realty-new-list-filter__col 3. Евроремонт ЦАО
-                        div(flex='45' layout='row' layout-align='space-between none').ml-32
-                            md-button().realty-new-list-filter__link показать объекты
-                            md-button().realty-new-list-filter__link критерии
-                            md-button().realty-new-list-filter__link изменить
-                            md-button().realty-new-list-filter__link удалить
-                        div(layout='row' layout-align='center center' flex flex-offset='5')
-                            md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
-                div().mv-16.ph-16
-                    div(layout='row' layout-align='start center')
-                        div(flex='35')
-                            span().md-subhead.realty-new-list-filter__col 4. Дизайнерский двушки ЦАО
-                        div(flex='45' layout='row' layout-align='space-between none').ml-32
-                            md-button().realty-new-list-filter__link показать объекты
-                            md-button().realty-new-list-filter__link критерии
-                            md-button().realty-new-list-filter__link изменить
-                            md-button().realty-new-list-filter__link удалить
-                        div(layout='row' layout-align='center center' flex flex-offset='5')
-                            md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
-                div(layout='row' layout-align='space-between center').mv-32.ph-16
-                    md-button(ng-model='realtyNewListFilter.showFilter').md-primary.md-raised.ph-16.ml-0 Добавить фильтр
-                    md-button(ng-click='realtyNewListFilter.modal = false').realty-new-list-filter__link.text-normal.mr-16 Скрыть
-                div().mt-8.ph-16
-                    md-checkbox(aria-label='Checkbox 1').md-primary.md-subhead Присылать SMS о всех новых объектах со статусами назначена встреча, собственник платит комиссию, эксклюзив
-            
-            div(ng-if='realtyNewListFilter.showFilter').realty-filter.pl-32.pr-16
-                div(layout='row', layout-align="space-between center")
-                    div(flex='30').realty-filter__col.mt-16
-                        div(layout='column' layout-align='space-between none')
-                            div(flex).mb-32
-                                subway-chips(ng-model="realtyFilter.filter.subways"
-                                subways-embeded='realtyFilter.subwaysEmbeded' flex
-                                subways-changed='realtyFilter.suitRealty()')
-                            div(flex).mb-16
-                                district-chips(ng-model="realtyFilter.filter.districts"
-                                districts-embeded='realtyFilter.districtsEmbeded' flex
-                                districts-changed='realtyFilter.suitRealty()')
-                            div(layout='row' layout-align='space-between end').mv-32
-                                label(flex='30') До метро
-                                md-input-container(flex='20').mv-0.pv-0
-                                    input(ng-model='realtyFilter.filter.metroTime', placeholder='минут' ng-blur='realtyFilter.suitRealty()')
-                                md-input-container().mv-0.pb-0
-                                    label пешком
-                                    md-select(ng-model='realtyFilter.filter.metroTransport' required='' ng-blur='realtyFilter.suitRealty()')
-                                        md-option(ng-value='transport.id',
-                                        ng-repeat="transport in realtyFilter.dictionary.transport") {{transport.name}}
-                            div(layout='row' layout-align='space-between end').mt-8
-                                md-input-container(flex='80').mv-0.pv-0
-                                    input(placeholder='Улица')
-                                md-input-container(flex='20').mv-0.ml-16.pv-0
-                                    input(placeholder='Дом')
+    div().modal__outer
+        div().modal__inner.ml-8
+            div(md-whiteframe='2').pv-16
+                div(layout='column' ng-if='!realtyNewListFilter.showFilter')
+                    div().text-right.md-body-1.ph-16 SMS оповещение
+                    div().mv-16.ph-16
+                        div(layout='row' layout-align='start center')
+                            div(flex='35')
+                                span().md-subhead.realty-new-list-filter__col 1. Бабушкины двушки
+                            div(flex='45' layout='row' layout-align='space-between none').ml-32
+                                md-button().realty-new-list-filter__link показать объекты
+                                md-button().realty-new-list-filter__link критерии
+                                md-button().realty-new-list-filter__link изменить
+                                md-button().realty-new-list-filter__link удалить
+                            div(layout='row' layout-align='center center' flex flex-offset='5')
+                                md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
+                    div().realty-new-list-filter__selected.mv-16.ph-16
+                        div(layout='row' layout-align='start center')
+                            div(flex='35')
+                                span().md-subhead.realty-new-list-filter__col 2. Элитные трешки
+                            div(flex='45' layout='row' layout-align='space-between none').ml-32
+                                md-button().realty-new-list-filter__link показать объекты
+                                md-button().realty-new-list-filter__link критерии
+                                md-button().realty-new-list-filter__link изменить
+                                md-button().realty-new-list-filter__link удалить
+                            div(layout='row' layout-align='center center' flex flex-offset='5')
+                                md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
+                        div().m-16
+                            p().md-body-1.mv-8 Маяковского, Тверсткая, 15 мин. пешком, Тверская 25
+                            p().md-body-1.mv-8 1 комн., 2 комн., 40 000 - 60 000, Косметический, Евроремонт, Телевизор, Холодильник, Стир. машина, Кондиционер
+                            p().md-body-1.mv-8 1 - 5 этаж, 30 - 40 м², Новостройка, Вторичка
+                    div().mv-16.ph-16
+                        div(layout='row' layout-align='start center')
+                            div(flex='35')
+                                span().md-subhead.realty-new-list-filter__col 3. Евроремонт ЦАО
+                            div(flex='45' layout='row' layout-align='space-between none').ml-32
+                                md-button().realty-new-list-filter__link показать объекты
+                                md-button().realty-new-list-filter__link критерии
+                                md-button().realty-new-list-filter__link изменить
+                                md-button().realty-new-list-filter__link удалить
+                            div(layout='row' layout-align='center center' flex flex-offset='5')
+                                md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
+                    div().mv-16.ph-16
+                        div(layout='row' layout-align='start center')
+                            div(flex='35')
+                                span().md-subhead.realty-new-list-filter__col 4. Дизайнерский двушки ЦАО
+                            div(flex='45' layout='row' layout-align='space-between none').ml-32
+                                md-button().realty-new-list-filter__link показать объекты
+                                md-button().realty-new-list-filter__link критерии
+                                md-button().realty-new-list-filter__link изменить
+                                md-button().realty-new-list-filter__link удалить
+                            div(layout='row' layout-align='center center' flex flex-offset='5')
+                                md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
+                    div(layout='row' layout-align='space-between center').mv-32.ph-16
+                        md-button(ng-model='realtyNewListFilter.showFilter').md-primary.md-raised.ph-16.ml-0 Добавить фильтр
+                        md-button(ng-click='realtyNewListFilter.modal = false').realty-new-list-filter__link.text-normal.mr-16 Скрыть
+                    div().mt-8.ph-16
+                        md-checkbox(aria-label='Checkbox 1').md-primary.md-subhead Присылать SMS о всех новых объектах со статусами назначена встреча, собственник платит комиссию, эксклюзив
+                
+                div(ng-if='realtyNewListFilter.showFilter').realty-filter.pl-32.pr-16
+                    div(layout='row', layout-align="space-between center")
+                        div(flex='30').realty-filter__col.mt-16
+                            div(layout='column' layout-align='space-between none')
+                                div(flex).mb-32
+                                    subway-chips(ng-model="realtyFilter.filter.subways"
+                                    subways-embeded='realtyFilter.subwaysEmbeded' flex
+                                    subways-changed='realtyFilter.suitRealty()')
+                                div(flex).mb-16
+                                    district-chips(ng-model="realtyFilter.filter.districts"
+                                    districts-embeded='realtyFilter.districtsEmbeded' flex
+                                    districts-changed='realtyFilter.suitRealty()')
+                                div(layout='row' layout-align='space-between end').mv-32
+                                    label(flex='30') До метро
+                                    md-input-container(flex='20').mv-0.pv-0
+                                        input(ng-model='realtyFilter.filter.metroTime', placeholder='минут' ng-blur='realtyFilter.suitRealty()')
+                                    md-input-container().mv-0.pb-0
+                                        label пешком
+                                        md-select(ng-model='realtyFilter.filter.metroTransport' required='' ng-blur='realtyFilter.suitRealty()')
+                                            md-option(ng-value='transport.id',
+                                            ng-repeat="transport in realtyFilter.dictionary.transport") {{transport.name}}
+                                div(layout='row' layout-align='space-between end').mt-8
+                                    md-input-container(flex='80').mv-0.pv-0
+                                        input(placeholder='Улица')
+                                    md-input-container(flex='20').mv-0.ml-16.pv-0
+                                        input(placeholder='Дом')
 
-                    div(flex='30' flex-offset='10').realty-filter__col.mt-32
-                        div(layout='column' layout-align='space-between none')
-                            div(layout='row' layout-align='space-between end').realty-filter__rooms.mv-16
-                                label().mr-8 Комнат
-                                md-checkbox(
-                                ng-checked='realtyFilter.existsRoomcount(item)',
-                                ng-repeat='item in realtyFilter.dictionary.roomcount',
-                                ng-click='realtyFilter.toggleRoomcount(item)',
-                                ng-blur='realtyFilter.suitRealty()'
-                                md-no-ink,
-                                class='md-primary') {{ item.name }}
-                            div(layout='row' layout-align='space-between end').mv-32
-                                price-mask(ng-if='realtyFilter.filter' label='"цена от"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceFrom' optflex='40')
-                                price-mask(ng-if='realtyFilter.filter' label='"цена до"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceTo' optflex='40').ml-32
-                            md-input-container().mv-16
-                                label Ремонт
-                                md-select(ng-model='realtyFilter.filter.conditions', multiple='true' ng-blur='realtyFilter.suitRealty()')
-                                    md-option(ng-value='condition.id',
-                                    ng-repeat='condition in realtyFilter.dictionary.conditions') {{condition.name}}
+                        div(flex='30' flex-offset='10').realty-filter__col.mt-32
+                            div(layout='column' layout-align='space-between none')
+                                div(layout='row' layout-align='space-between end').realty-filter__rooms.mv-16
+                                    label().mr-8 Комнат
+                                    md-checkbox(
+                                    ng-checked='realtyFilter.existsRoomcount(item)',
+                                    ng-repeat='item in realtyFilter.dictionary.roomcount',
+                                    ng-click='realtyFilter.toggleRoomcount(item)',
+                                    ng-blur='realtyFilter.suitRealty()'
+                                    md-no-ink,
+                                    class='md-primary') {{ item.name }}
+                                div(layout='row' layout-align='space-between end').mv-32
+                                    price-mask(ng-if='realtyFilter.filter' label='"цена от"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceFrom' optflex='40')
+                                    price-mask(ng-if='realtyFilter.filter' label='"цена до"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceTo' optflex='40').ml-32
+                                md-input-container().mv-16
+                                    label Ремонт
+                                    md-select(ng-model='realtyFilter.filter.conditions', multiple='true' ng-blur='realtyFilter.suitRealty()')
+                                        md-option(ng-value='condition.id',
+                                        ng-repeat='condition in realtyFilter.dictionary.conditions') {{condition.name}}
 
-                    div(flex='30' flex-offset='10').realty-filter__col.mt-32
-                        div(layout='column' layout-align='space-between none')
-                            div(layout='row' layout-align='space-between end').mv-16
-                                label(flex='30') Этаж
-                                md-input-container(flex='25').mv-0.pv-0
-                                    label от
-                                    input(ng-model='realtyFilter.filter.floorFrom' ng-blur='realtyFilter.suitRealty()')
-                                span().hyphen
-                                md-input-container(flex='25').mv-0.pv-0
-                                    label до
-                                    input(ng-model='realtyFilter.filter.floorTo' ng-blur='realtyFilter.suitRealty()')
-                            div(layout='row' layout-align='space-between end').mv-32
-                                label(flex='30') Площадь
-                                md-input-container(flex='25').mv-0.pv-0
-                                    label от
-                                    input(ng-model='realtyFilter.filter.floorFrom' ng-blur='realtyFilter.suitRealty()')
-                                span().hyphen
-                                md-input-container(flex='25').mv-0.pv-0
-                                    label до
-                                    input(ng-model='realtyFilter.filter.floorTo' ng-blur='realtyFilter.suitRealty()')
-                            div(layout='row' layout-align='space-between end').mt-16
-                                label().md-subhead.text-bold  {{(realtyFilter.realtyCount !== false) ? realtyFilter.realtyCount !== 0 ? ('Показано ' + (realtyFilter.realtyCount | price) + ' объектов') : 'Объекты не найдены' : 'Ищем объекты'}}
-                                md-button(aria-label='Очистить число показов' ng-click='realtyFilter.clearFilter()').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
-                                    md-icon(md-svg-icon='svg/icon-delete-forever.svg')
-                div(layout='row').mv-32
-                    md-input-container(flex='33').mv-0.pv-0
-                        input(placeholder='Название фильтра')
-                div(layout='row').mv-32
-                    md-button().md-primary.md-raised.ph-16.ml-0 Сохранить фильтр
-                    md-button().md-primary.md-raised.ph-16 Отмена
+                        div(flex='30' flex-offset='10').realty-filter__col.mt-32
+                            div(layout='column' layout-align='space-between none')
+                                div(layout='row' layout-align='space-between end').mv-16
+                                    label(flex='30') Этаж
+                                    md-input-container(flex='25').mv-0.pv-0
+                                        label от
+                                        input(ng-model='realtyFilter.filter.floorFrom' ng-blur='realtyFilter.suitRealty()')
+                                    span().hyphen
+                                    md-input-container(flex='25').mv-0.pv-0
+                                        label до
+                                        input(ng-model='realtyFilter.filter.floorTo' ng-blur='realtyFilter.suitRealty()')
+                                div(layout='row' layout-align='space-between end').mv-32
+                                    label(flex='30') Площадь
+                                    md-input-container(flex='25').mv-0.pv-0
+                                        label от
+                                        input(ng-model='realtyFilter.filter.floorFrom' ng-blur='realtyFilter.suitRealty()')
+                                    span().hyphen
+                                    md-input-container(flex='25').mv-0.pv-0
+                                        label до
+                                        input(ng-model='realtyFilter.filter.floorTo' ng-blur='realtyFilter.suitRealty()')
+                                div(layout='row' layout-align='space-between end').mt-16
+                                    label().md-subhead.text-bold  {{(realtyFilter.realtyCount !== false) ? realtyFilter.realtyCount !== 0 ? ('Показано ' + (realtyFilter.realtyCount | price) + ' объектов') : 'Объекты не найдены' : 'Ищем объекты'}}
+                                    md-button(aria-label='Очистить число показов' ng-click='realtyFilter.clearFilter()').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
+                                        md-icon(md-svg-icon='svg/icon-delete-forever.svg')
+                    div(layout='row').mv-32
+                        md-input-container(flex='33').mv-0.pv-0
+                            input(placeholder='Название фильтра')
+                    div(layout='row').mv-32
+                        md-button().md-primary.md-raised.ph-16.ml-0 Сохранить фильтр
+                        md-button().md-primary.md-raised.ph-16 Отмена

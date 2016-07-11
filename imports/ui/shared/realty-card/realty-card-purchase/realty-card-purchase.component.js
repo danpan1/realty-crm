@@ -19,7 +19,7 @@ class RealtyCardPurchase {
     this.timeout = $timeout;
     this.mdDialog = $mdDialog;
     this.cardContacts = this.contacts || {};
-    if(this.realty.operator.oceanPrice){
+    if(this.realty.operator && this.realty.operator.oceanPrice !== undefined){
       this.price = this.dictionary.priceList[this.realty.operator.oceanPrice].price;
       let userBalance = this.user.profile.balance;
       this.change = this.price - userBalance > 0 ? this.price - userBalance < 1000 ? 1000 : this.price - userBalance : false;

@@ -1,9 +1,15 @@
-realty-new-list-filter .modal__inner {
-  width: 100%;
-  max-width: 1024px;
-  top: 120px;
-  bottom: 0;
-  overflow-y: scroll;
+realty-new-list-filter {
+  .modal__outer {
+    width: 100%;
+    max-width: 1040px;
+    top: 120px;
+    bottom: 0;
+    margin-left: -8px;
+    padding: 2px 0px;
+  }
+  .modal__inner {
+    max-width: 1024px;
+  }
 }
 
 .realty-new-list-filter {
@@ -21,7 +27,7 @@ realty-new-list-filter .modal__inner {
   }
 }
 
-.modal {
+.modal { 
   position: relative;
   &__bg {
     z-index: 70;
@@ -32,12 +38,15 @@ realty-new-list-filter .modal__inner {
     height: 100%;
     background: rgba(253, 253, 253, 0.79);
   }
-  &__inner {
+  &__outer {
     box-sizing: border-box;
     z-index: 71;
     position: fixed;
     margin: 0 auto;
     padding: 0;
+    overflow-y: scroll;
+  }
+  &__inner {
   }
 }
 
