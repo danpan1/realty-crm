@@ -49,7 +49,7 @@ function run($rootScope, $state) {
 
   $rootScope.$on('$stateChangeStart', function (event, toState, fromParams) {
 
-    if (Meteor.userId() == null && toState.name !== 'auth.login' && toState.name !== 'auth.register' && toState.name !== 'auth.resetpw') {
+    if (Meteor.userId() == null && toState.name !== 'auth.login' && toState.name !== 'auth.register' && toState.name !== 'auth.resetpw' && toState.name !== 'crm.feedback') {
       console.log(toState.name);
       event.preventDefault();
       console.log("Please login");
