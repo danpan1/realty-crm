@@ -21,7 +21,7 @@ class RealtyCard {
     this.show = true;
     this.mdDialog = $mdDialog;
     var vm = this;
-    
+
     this.contacts = {};   
     if (this.realty.status == 'connection' || this.realty.status == 'taken') this.onShowDetails(true); 
 
