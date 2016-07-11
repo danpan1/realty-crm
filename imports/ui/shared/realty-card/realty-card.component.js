@@ -40,7 +40,8 @@ class RealtyCard {
     
 
     
-    this.halfPrice = parseInt(this.realty.price / 2);
+    if(this.realty.type > 2) this.halfPrice = parseInt(this.realty.price / 2);
+    if(this.realty.type < 3) this.salePrice = parseInt(this.realty.price /100 * (this.realty.price > 7000000 ? 3 : 4));
     
     if((vm.realty.operator && vm.realty.operator.oceanAdd) || (vm.realty.realtor && vm.realty.realtor.isExclusive)){
       let newTime = new Date().getTime();

@@ -20,15 +20,12 @@ if (Meteor.isServer) {
 
       // let selector, criterions = [];
       console.log('findRealtyByNeeds');
-      // console.log('clientNeeds', clientNeeds);
-      // console.log('relations', relations);
-      // console.log('suitby', suitby);
 
       if (this.userId) {
 
         let selector = {
           // status: {$in: ['realtor', 'agency', 'new', 'cian']}
-          status: {$in: ['realtor', 'agency', 'new']}
+          status: {$in: [/*'realtor', 'agency',*/ 'ocean']}
         };
 
         let realtyRelated = [];
@@ -57,7 +54,6 @@ if (Meteor.isServer) {
 
         //TODO моргают клиенты лишние при переключнии табов
         if (clientNeeds) {
-          // console.log(clientNeeds);
           if (clientNeeds.type) {
             selector['type'] = clientNeeds.type;
           }
@@ -73,7 +69,7 @@ if (Meteor.isServer) {
             if (suitby === 'exact') {
               selector['address.subways'] = {$in: clientNeeds.subways};
             } else {
-              selector['address.subways'] = {$in: clientNeeds.subwaysInDistance};
+              if (clientNeeds.subwaysInDistance) selector['address.subways'] = {$in: clientNeeds.subwaysInDistance};
             }
           }
 
@@ -94,9 +90,8 @@ if (Meteor.isServer) {
 
           Counts.publish(this, 'realtyCount', Realty.find(selector), {noReady: true});
 
-          // console.log('selector ', selector);
           let realty = Realty.find(selector, options);
-          console.log('realty ', realty.length);
+          console.log('realty length: ', realty.length);
           return realty;
         }
         console.log('no clientNEEDS');

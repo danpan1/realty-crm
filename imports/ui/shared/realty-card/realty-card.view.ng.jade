@@ -73,12 +73,12 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         //6-ая колонка Телефон Риэлтора и Объявление
         div(layout='column' layout-align='space-between start' ng-if="realtyCard.realtylisttype === 'connections'").newList_contacts
             div()
-                div(ng-if='realtyCard.realty.status !== "connection" && realtyCard.realty.status !== "new" && realtyCard.realty.status !== "taken"')
+                div(ng-if='realtyCard.realty.status !== "connection" && realtyCard.realty.status !== "ocean" && realtyCard.realty.status !== "taken"')
                     div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
                     div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
-                div(ng-if='realtyCard.realty.status === "connection" || realtyCard.realty.status === "new" || realtyCard.realty.status === "taken"')
+                div(ng-if='realtyCard.realty.status === "connection" || realtyCard.realty.status === "ocean" || realtyCard.realty.status === "taken"')
                     div(ng-if='realtyCard.isUserPaid && !realtyCard.addedToMine')  
-                        realty-card-purchase(ng-if='realtyCard.realty' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty' con='true')
+                        realty-card-purchase(ng-if='realtyCard.realty' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty' parse-details='realtyCard.parseDetails' con='true')
                     div().md-subhead.mb-8 #[b Собственник {{::realtyCard.realty.contacts[0].name}}]
                 div
                     md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Объявление
@@ -92,7 +92,9 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
         //7-ая колонка Скрыть Сохранить
         div(layout='column' layout-align="space-between left").newList_Actions
-            div(ng-if='realtyCard.realty.type == 3 || realtyCard.realty.type == 4' ng-class='{"newList__income-blue":realtyCard.realty.realtor.isExclusive,"newList__income-green":realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList__income-default.p-8.text-center {{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}} &#8381;
+            div(ng-class='{"newList__income-blue":realtyCard.realty.realtor.isExclusive,"newList__income-green":realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList__income-default.p-8.text-center 
+                span(ng-if='realtyCard.realty.type > 2') {{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}} &#8381;
+                span(ng-if='realtyCard.realty.type < 3') {{realtyCard.salePrice | price}} &#8381;
             div(layout="column" layout-align="space-between center").ph-16.pv-8
                 
                 md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
@@ -124,7 +126,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             p 
                 | #[strong Комментарий колцентра:] {{realtyCard.realty.operator.comment}}
             div(layout='row')
-                realty-card-purchase(ng-if='realtyCard.realty' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
+                realty-card-purchase(ng-if='realtyCard.realty' parse-details='realtyCard.parseDetails' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
             div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
                 p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
                 p(ng-if='(5 + realtyCard.minutes) > 0').md-title.text-normal 1) Собственник ждет звонка в течение 

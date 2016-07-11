@@ -54,7 +54,7 @@ div().modal
                             div(layout='row' layout-align='center center' flex flex-offset='5')
                                 md-switch(aria-label='Switch 2').md-warn.realty-new-list-filter__sms
                     div(layout='row' layout-align='space-between center').mv-32.ph-16
-                        md-button(ng-model='realtyNewListFilter.showFilter').md-primary.md-raised.ph-16.ml-0 Добавить фильтр
+                        md-button(ng-click='realtyNewListFilter.showFilter = true').md-primary.md-raised.ph-16.ml-0 Добавить фильтр
                         md-button(ng-click='realtyNewListFilter.modal = false').realty-new-list-filter__link.text-normal.mr-16 Скрыть
                     div().mt-8.ph-16
                         md-checkbox(aria-label='Checkbox 1').md-primary.md-subhead Присылать SMS о всех новых объектах со статусами назначена встреча, собственник платит комиссию, эксклюзив
@@ -134,5 +134,5 @@ div().modal
                         md-input-container(flex='33').mv-0.pv-0
                             input(placeholder='Название фильтра')
                     div(layout='row').mv-32
-                        md-button().md-primary.md-raised.ph-16.ml-0 Сохранить фильтр
-                        md-button().md-primary.md-raised.ph-16 Отмена
+                        md-button(ng-click='realtyNewListFilter.saveNewFilter()').md-primary.md-raised.ph-16.ml-0 Сохранить фильтр
+                        md-button(ng-click='realtyNewListFilter.showFilter = false').md-primary.md-raised.ph-16 Отмена
