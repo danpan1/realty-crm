@@ -109,8 +109,8 @@ class AddRealtyFull {
       if (error) {
         console.log(error);
       } else {
-        console.log(`Realty added : cleintSide, ${vm.realty}`);
-        this.state.go('crm.realty.one.review', {realtyId: result});
+        console.log(`Realty added :  cleintSide, ${vm.realty}`);
+        this.state.go('crm.realty.one.info', {realtyId: result});
       }
     });
 
