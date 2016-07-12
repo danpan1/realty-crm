@@ -79,7 +79,11 @@ class RealtyNewListFilter {
     this.newFilter = {
       filter: this.myFilters[index].filter,
       name: this.myFilters[index].name,
-      id: this.myFilters[index]._id
+      id: this.myFilters[index]._id,
+      user: {
+        id: this.user._id,
+        phone: this.user.profile.phone
+      }
     };
     this.changingFilter = index;
     this.showFilter = true;
@@ -114,15 +118,16 @@ class RealtyNewListFilter {
 
     console.log(this.newFilter);
 
-    if (this.changingFilter) {
+    if (this.changingFilter != undefined) {
       Meteor.call('changeFilter', this.newFilter, (error, result) => {
         if (error) {
           console.log(error);
           console.log('Ошибка!');
         } else {
-          console.log(`Filter added : filter, ${vm.newFilter}`);
-          this.showFilter = false;
-          console.log('Все отлично!');
+          console.log(`Filter changed`);
+          this.$timeout(()=>{
+            this.showFilter = false;
+          },10)
         }
       });
       this.changingFilter = undefined;
@@ -132,9 +137,10 @@ class RealtyNewListFilter {
           console.log(error);
           console.log('Ошибка!');
         } else {
-          console.log(`Filter added : filter, ${vm.newFilter}`);
-          this.showFilter = false;
-          console.log('Все отлично!');
+          console.log(`Filter added`);
+          this.$timeout(()=>{
+            this.showFilter = false;
+          },10)
         }
       });
     }

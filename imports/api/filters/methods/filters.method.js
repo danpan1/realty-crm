@@ -10,6 +10,10 @@ Meteor.methods({
 
 export function addFilter(filter) {
 
+  console.log('========= addFilter');
+  console.log('filter.user.id: '+filter.user.id);
+  console.log('this.userId: '+this.userId);
+
   if (Meteor.isServer && Meteor.userId()) {
     
     let newFilter = filter;
@@ -26,12 +30,15 @@ export function addFilter(filter) {
         console.log(`Filter added`);
       }
     });
-
+    
   } else {
     console.log('no Access');
   }
+
 }
 export function changeFilter(data) {
+
+  console.log('========= changeFilter');
 
   if (Meteor.isServer && Meteor.userId()) {
 
@@ -57,6 +64,8 @@ export function changeFilter(data) {
 }
 
 export function removeFilter(id) {
+
+  console.log('========= removeFilter');
 
   if (Meteor.isServer && Meteor.userId()) {
 

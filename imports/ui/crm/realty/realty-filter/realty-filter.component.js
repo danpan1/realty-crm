@@ -55,6 +55,7 @@ class RealtyFilter {
               break;
           }
         }
+        if(!this.filter.metroTransport) this.filter.metroTransport = 0;
       }
     }    
   }
