@@ -10,10 +10,11 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div().pl-16.pr-8.pv-8
                 div Подано: {{::realtyCard.realty.createdAt | date:'dd.MM, HH:mm'}}
                 div id: {{::realtyCard.realty._id | price}}
-                div(ng-show="realtyCard.minutes > -1" ng-if='realtyCard.realty.status == \'ocean\'')
+                div(ng-show="(realtyCard.reason == 'meeting' && realtyCard.minutes > 5) || ((realtyCard.reason == 'exclusive' || realtyCard.reason == 'comission') && realtyCard.minutes > 10)" ng-if='realtyCard.realty.status == \'ocean\'')
                     div().realty-card__timer-title Объект исчезнет через
                     div().realty-card__timer.mt-8
-                        span {{realtyCard.minutes}}:
+                        span(ng-if='realtyCard.reason == "exclusive" || realtyCard.reason == "comission"') {{realtyCard.minutes - 10}}:
+                        span(ng-if='realtyCard.reason == "meeting"') {{realtyCard.minutes - 5}}:
                         span(ng-if='realtyCard.seconds < 10') 0
                         span {{realtyCard.seconds}}
                 div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "new"')
@@ -119,7 +120,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
 
     // Подробное объявление
-    div(ng-show="realtyCard.ngShowDescr" ng-class='{"newList__description-blue":realtyCard.realty.realtor.isExclusive, "newListt__description-green": realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList__description.ph-32.pb-16
+    div(ng-show="realtyCard.ngShowDescr" ng-class='{"newList__description-blue":realtyCard.realty.realtor.isExclusive, "newList__description-green": realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList__description.ph-32.pb-16
         div(ng-if='realtyCard.realtyIsTaken' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам. Завершите его проверку
         p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
         div(ng-if="!realtyCard.realtylisttype").relative
@@ -129,8 +130,9 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                 realty-card-purchase(ng-if='realtyCard.realty' parse-details='realtyCard.parseDetails' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
             div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
                 p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
-                p(ng-if='(5 + realtyCard.minutes) > 0').md-title.text-normal 1) Собственник ждет звонка в течение 
-                    span {{5 + realtyCard.minutes}}:
+                p(ng-if='(realtyCard.reason == "meeting" && realtyCard.minutes > 0) || ((realtyCard.reason == "exclusive" || realtyCard.reason == "comission") && realtyCard.minutes > 5)').md-title.text-normal 1) Собственник ждет звонка в течение 
+                    span(ng-if='realtyCard.reason == "exclusive" || realtyCard.reason == "comission"') {{realtyCard.minutes - 5}}:
+                    span(ng-if='realtyCard.reason == "meeting"') {{realtyCard.minutes}}:
                     span(ng-if='realtyCard.seconds < 10') 0
                     span {{realtyCard.seconds}}
                 p().md-title.text-normal 2) {{realtyCard.contacts.realtyPhone}} {{realtyCard.contacts.realtyName}}
