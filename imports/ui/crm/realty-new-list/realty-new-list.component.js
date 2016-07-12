@@ -135,6 +135,10 @@ class RealtyNewList {
 
   }
 
+  suitRealty () {
+    this.refresh = !this.refresh;
+  }
+
   openPurchaseSuccess(ev) {
     // Если совершена покупка, открываем окно с сообщением
     if(this.stateParams.purchase){
@@ -156,6 +160,10 @@ class RealtyNewList {
     console.log(images);
     this.showSlider = true;
     this.slideShowImages = images;
+  }
+
+  useSavedFilter (filter) {
+    this.filter = filter;
   }
 
 }
