@@ -84,6 +84,8 @@ class AddRealtyFull {
       districtName: vm.locations.full.data.city_district,
       flat: vm.locations.flat,
       house: vm.locations.house.value,
+      lat: vm.locations.full.data.geo_lat,
+      lon: vm.locations.full.data.geo_lon,
       loc: [+vm.locations.full.data.geo_lon, +vm.locations.full.data.geo_lat],
       meta: vm.locations.full.data,
       metroTime: vm.locations.metroTime,
