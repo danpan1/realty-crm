@@ -24,8 +24,8 @@ if (Meteor.isServer) {
       if (this.userId) {
 
         let selector = {
-          // status: {$in: ['realtor', 'agency', 'new', 'cian']}
-          status: {$in: [/*'realtor', 'agency',*/ 'ocean']}
+          status: {$in: ['realtor', 'agency', 'ocean', 'taken']}
+          // status: {$in: [/*'realtor', 'agency',*/ 'ocean']}
         };
 
         let realtyRelated = [];
