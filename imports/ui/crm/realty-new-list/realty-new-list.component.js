@@ -135,6 +135,10 @@ class RealtyNewList {
 
   }
 
+  suitRealty () {
+    this.refresh = !this.refresh;
+  }
+
   openPurchaseSuccess(ev) {
     // Если совершена покупка, открываем окно с сообщением
     if(this.stateParams.purchase){
