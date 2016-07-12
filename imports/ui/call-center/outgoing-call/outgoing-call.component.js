@@ -157,21 +157,22 @@ class OutgoingCall {
       vm.realty.address.areaId = vm.realty.address.area._id;
       vm.realty.address.areaName = vm.realty.address.area.name;
     }
+    if(vm.meetingTime){
+      vm.realty.operator.meetingTime = vm.meetingTime;
+      vm.meetingTime = undefined;
+    }
 
     let exclusive = vm.realty.realtor ? vm.realty.realtor.isExclusive : false;
     let comission = vm.realty.owner ? vm.realty.owner.isComission : false;
+    let meeting = vm.realty.operator.meetingTime ? true : false;
 
-    if (comission || exclusive) {
+    if (comission || exclusive || meeting) {
       var d = new Date().getTime();
       vm.realty.operator.oceanAdd = d;
     }
     /*if (vm.newBuilding === 1) {
       vm.realty.type = 2;
     }*/
-    if(vm.meetingTime){
-      vm.realty.operator.meetingTime = vm.meetingTime;
-      vm.meetingTime = undefined;
-    }
 
     vm.realty.status = 'list';
     vm.stat = comission ? exclusive ? 'objectsSavedComAndExc' : 'objectsSavedCom' : exclusive ? 'objectsSavedExc' : 'objectsSaved';

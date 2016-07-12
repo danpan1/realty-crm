@@ -29,6 +29,12 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                             div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Платить комиссию:
                                 div(flex='40') #[strong {{clientInfo.client.comissionLoyal ? 'Да' : 'Нет'}}]
+                            div(layout='row' ng-if='clientInfo.client.business' layout-align='space-around start').md-subhead.mv-8
+                                div(flex='60') Чем занимается:
+                                div(flex='40') #[strong {{clientInfo.client.business}}]
+                            div(layout='row' ng-if='clientInfo.client.age' layout-align='space-around start').md-subhead.mv-8
+                                div(flex='60') Возраст:
+                                div(flex='40') #[strong {{clientInfo.client.age}}]
                             div(layout='row' ng-if='clientInfo.client.comission' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') Сколько:
                                 div(flex='40') #[strong {{clientInfo.client.comission}}%]
@@ -38,12 +44,6 @@ div(layout="column", layout-align="space-around stretch" ng-if='clientInfo.clien
                             div(layout='row' layout-align='space-around start').md-subhead.mv-8
                                 div(flex='60') В поиске с:
                                 div(flex='40') #[strong {{clientInfo.client.searchEndDate | date:'dd.MM'}}]
-                            div(layout='row' ng-if='clientInfo.client.business' layout-align='space-around start').md-subhead.mv-8
-                                div(flex='60') Чем занимается:
-                                div(flex='40') #[strong {{clientInfo.client.business}}]
-                            div(layout='row' ng-if='clientInfo.client.age' layout-align='space-around start').md-subhead.mv-8
-                                div(flex='60') Возраст:
-                                div(flex='40') #[strong {{clientInfo.client.age}}]
                         div(flex layout='column' layout-align='end start')
                             md-button(aria-label='Изменить' ng-click="clientInfo.showEditDialog($event)").md-primary.md-raised.mt-32.mh-0 Изменить
                 md-divider

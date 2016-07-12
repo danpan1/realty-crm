@@ -1,0 +1,21 @@
+div().m-16
+    p().md-body-1.mv-8 
+        span(ng-if='realtyNewListFilterOne.filter.subways' ng-repeat='subway in realtyNewListFilterOne.filter.subways') {{subway}}, 
+        span(ng-if='realtyNewListFilterOne.filter.metroTime && realtyNewListFilterOne.filter.metroTransport') {{realtyNewListFilterOne.filter.metroTime}} мин. {{realtyNewListFilterOne.filter.metroTransport}}, 
+        span(ng-if='realtyNewListFilterOne.filter.street') {{realtyNewListFilterOne.filter.street}} 
+        span(ng-if='realtyNewListFilterOne.filter.house') {{realtyNewListFilterOne.filter.house}} 
+    p().md-body-1.mv-8
+        span(ng-if='realtyNewListFilterOne.filter.roomcount' ng-repeat='room in realtyNewListFilterOne.filter.roomcount') {{room}} комн., 
+        span(ng-if='realtyNewListFilterOne.filter.priceFrom') от {{realtyNewListFilterOne.filter.priceFrom | price}} 
+        span(ng-if='realtyNewListFilterOne.filter.priceTo') до {{realtyNewListFilterOne.filter.priceTo | price}} 
+        span(ng-if='realtyNewListFilterOne.filter.priceTo || realtyNewListFilterOne.filter.priceFrom') , 
+        span(ng-if='realtyNewListFilterOne.filter.renovation' ng-repeat='renovation in realtyNewListFilterOne.filter.renovation') {{realtyNewListFilterOne.dictionary.renovation[renovation].name}}, 
+        span(ng-if='realtyNewListFilterOne.conditionNames' ng-repeat='condition in realtyNewListFilterOne.conditionNames') {{realtyNewListFilterOne.dictionary.conditions[condition].name}}, 
+    p().md-body-1.mv-8
+        span(ng-if='realtyNewListFilterOne.filter.floorFrom') от {{realtyNewListFilterOne.filter.floorFrom}} 
+        span(ng-if='realtyNewListFilterOne.filter.floorTo') до {{realtyNewListFilterOne.filter.floorTo}} 
+        span(ng-if='realtyNewListFilterOne.filter.floorFrom || realtyNewListFilterOne.filter.floorTo') этажа, 
+        span(ng-if='realtyNewListFilterOne.filter.squareFrom') от {{realtyNewListFilterOne.filter.squareFrom}} 
+        span(ng-if='realtyNewListFilterOne.filter.squareTo') до {{realtyNewListFilterOne.filter.squareTo}} 
+        span(ng-if='realtyNewListFilterOne.filter.squareFrom || realtyNewListFilterOne.filter.squareTo') м#[sup 2], 
+        span(ng-if='realtyNewListFilterOne.filter.materials' ng-repeat='material in realtyNewListFilterOne.filter.materials') {{realtyNewListFilterOne.dictionary.materials[material].name}}, 
