@@ -36,7 +36,6 @@ class RealtyFilter {
     if (window.localStorage["filter"] != undefined && window.localStorage["filter"]) {
       console.log(JSON.parse(window.localStorage["filter"]));
       this.filter = JSON.parse(window.localStorage["filter"]);
-      this.filter.type = this.stateParams.operation == 'sale' ? 1 : 4;
       var roomList = this.filter.roomcount;
       this.filter.roomcount = [];
       for(var i in roomList) {
@@ -56,14 +55,20 @@ class RealtyFilter {
         }
       }
     }
+    //this.filter.type = this.stateParams.operation == 'sale' ? 1 : 4;
+    
+    console.log('FILTER: ');
+    console.log(this.filter);
+    
   }
   
   clearFilter () {
     this.filter = {
-      type: this.stateParams.operation == 'sale' ? 1 : 4,
+      //type: this.stateParams.operation == 'sale' ? 1 : 4,
       roomcount: []
     };
     this.suitRealty();
+    this.refresh = !this.refresh;
   }
   
   suitRealty () {
@@ -77,6 +82,7 @@ class RealtyFilter {
   }
 
   toggleRoomcount(item) {
+    if(!this.filter.roomcount) this.filter.roomcount = []; 
       var idx = this.filter.roomcount.indexOf(item);
       if (idx > -1) {
         this.filter.roomcount.splice(idx, 1);

@@ -24,7 +24,6 @@ class ClientSuitExact {
     vm.sort = {
       'createdAt': -1
     };
-    
 
     vm.subscribe('findRealtyByNeeds', () => {
       vm.loaded = false;

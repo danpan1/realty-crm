@@ -1,140 +1,112 @@
-div(md-whiteframe='2').mt-16.ph-32.pt-32.pb-8
-    div(layout='row')
-        div(flex)
-            md-input-container().md-block
-                input(ng-model='oneEmail.info.emails' placeholder='Получатели: начните вводить имя клиента, агента или любой email')
-            md-input-container().md-block
-                input(ng-model='oneEmail.info.topic' placeholder='Тема письма')
-            md-input-container().md-block
-                textarea(ng-model='oneEmail.info.addedinfo' placeholder='Дополнительно написать к этому объекту')
-            md-input-container().md-block
-                p {{oneEmail.info.realtyConditions}}
-div(md-whiteframe='2').one-email-card.ph-32.pv-8
-    div(layout='column')
-        div().mv-8
-            md-button(ng-click="oneEmail.send()" ng-if='oneEmail.proposalSent != 2' ng-disabled='oneEmail.proposalSent == 1').md-primary.md-raised.md-body-1.ml-0 Отправить письмо
-            md-button(ng-if='oneEmail.proposalSent == 2').md-success.md-raised.md-body-1.ml-0 Успешно отправлено
+div(md-whiteframe='2').mt-16
+    form(name='emailSent' ng-submit='oneEmail.send()')
+        div(layout='row')
+            div(flex).p-32
+                md-input-container().md-block
+                    input(required type='email' ng-model='oneEmail.info.emails' ng-keyup='oneEmail.checkClientsEmails()' placeholder='Получатели: начните вводить имя клиента, агента или любой email')
+                md-input-container().md-block
+                    input(ng-model='oneEmail.info.topic' placeholder='Тема письма')
+                md-input-container().md-block
+                    textarea(ng-model='oneEmail.info.addedinfo' placeholder='Дополнительно написать к этому объекту')
+                md-input-container().md-block
+                    textarea(ng-model='oneEmail.realty.details.descr' placeholder='Описание объекта')
+                md-input-container().md-block
+                    textarea(ng-model='oneEmail.info.realtyConditions' placeholder='Условия')
+                div
+                    md-button(type='submit' ng-if='oneEmail.proposalSent != 2' ng-disabled=' emailSent.$invalid || oneEmail.proposalSent == 1').md-primary.md-raised.md-body-1.ml-0.mr-16.ph-16 Отправить письмо
+                    md-button(ng-if='oneEmail.proposalSent == 2').md-success.md-raised.md-body-1.mh-16.ph-16 Успешно отправлено
 
-div()
-    h2 Предварительный просмотр
-    div(layout="row")
-        div(md-whiteframe='2' flex-offset='5' flex='50')
-            table(style='width:550px; margin:0 auto; padding: 0 15px;')
-                tbody
-                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px;')
+div().mh-32
+    h2(flex='60').md-title.text-uppercase.text-normal.text-center Предварительный просмотр
+    div
+        div
+            div(style='max-width: 568px; overflow: auto; padding: 0 16px; box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2),0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12); background-color: #fff;')
+                p(style='font-family:arial; font-size: 15px') #[b(style='display: inline-block; width: 33%') Имя отправителя:] {{oneEmail.info.username}}
+                p(style='font-family:arial; font-size: 15px') #[b(style='display: inline-block; width: 33%') Email отправителя:] {{oneEmail.user.emails[0].address}}
+                p(style='font-family:arial; font-size: 15px') #[b(style='display: inline-block; width: 33%') Email для ответа:] {{oneEmail.user.emails[0].address}}
+        div(style='padding-top: 16px')
+            div(style='max-width: 600px; box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2),0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12); background-color: #fff;')
+                table(style='width: 100%; height: 75px; margin:0 auto; padding: 0 16px; font-family:arial; font-size: 17px; box-shadow: 0 4.3px 6px rgba(150, 150, 150, 0.4);')
+                    tr
+                        td {{oneEmail.realty.contacts[0].name}}, {{oneEmail.realty.contacts[0].phones[0].phone | phone}}, {{oneEmail.realty.contacts[0].email}}
+                div(style='padding: 0 16px;')
+                    p(style='font-family: arial; font-size: 20px;')
+                        span {{oneEmail.realty.roomcount}}-комнатная, 
+                        span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') м.{{oneEmail.realty.address.subwaysEmbedded[0].name}} 
+                        span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTime}} мин. 
+                        span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTransport == 0 ? 'пешком' : 'транспортом'}}, 
+                        span {{oneEmail.realty.price | price}} руб.
+                    p
+                        | {{oneEmail.info.addedinfo}}
+                    p(ng-repeat='img in oneEmail.realty.details.images' style='text-align: center')
+                        img(src='{{img.url}}', style='max-width: 100%; margin: 5px 0;')
+                    br
+                    p(ng-bind-html='realty.details.descr' style='font-family:arial; font-size: 14px; line-height: 22px;')
+                br
+                table(style='width: 100%; margin:0 auto; padding: 0 16px; font-family: arial; font-size: 15px; line-height: 30px;')
                     tbody
                         tr
-                        td(style='width:55%')
-                            img(src='http://world-invest.pro/img/logo.jpg')
-                        td(style='width:25%; line-height: 18px;')
-                            span
-                            | {{oneEmail.realty.contacts[0].name}}
-                            br
-                            | {{oneEmail.realty.contacts[0].phones[0].phone | phone}}
-                            br
-                            a(ng-if='oneEmail.realty.contacts[0].email' href='mailto:{{oneEmail.realty.contacts[0].email}}', target='_blank') {{oneEmail.realty.contacts[0].email}}
-                    center
-                    img(src='http://world-invest.pro/img/shadow_1.jpg')
-                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px; text-align:justify;')
-                    tbody
-                        tr
-                        td
-                            p(style='font-size:20px;')
-                                span {{oneEmail.realty.roomcount}}-комнатная, 
+                            td(valign='top')
+                                b Район:
+                                |  {{oneEmail.realty.address.areaName}}
+                                br
+                                b Улица: 
+                                | {{oneEmail.realty.address.street}} {{oneEmail.realty.address.house}} к.{{oneEmail.realty.address.flat}}
+                                br
+                                b(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') Метро: 
                                 span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') м.{{oneEmail.realty.address.subwaysEmbedded[0].name}} 
                                 span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTime}} мин. 
-                                span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTransport == 0 ? 'пешком' : 'транспортом'}}, 
-                                span {{oneEmail.realty.price | price}} руб.
-                            p
-                            | {{oneEmail.info.addedinfo}}
-                            p(ng-repeat='img in oneEmail.realty.details.images' layout='column' layout-align='center center')
-                                img(src='{{img.url}}', style='margin: 5px 0;')
-                            br
-                            br
-                            p
-                            | {{oneEmail.realty.details.descr}}
-                    br
-                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px; line-height: 22px;')
-                    tbody
-                        tr
-                        td(valign='top', style='padding-right:15px;')
-                            b Район:
-                            |  {{oneEmail.realty.address.areaName}}
-                            br
-                            b Улица: 
-                            | {{oneEmail.realty.address.street}} {{oneEmail.realty.address.house}} к.{{oneEmail.realty.address.flat}}
-                            br
-                            b(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') Метро: 
-                            span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') м.{{oneEmail.realty.address.subwaysEmbedded[0].name}} 
-                            span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTime}} мин. 
-                            span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTransport == 0 ? 'пешком' : 'транспортом'}},
-                            br
-                            b Тип здания: 
-                            | {{oneEmail.dictionary.materials[oneEmail.realty.details.materials].name}}
-                            br
-                            b Комнат: 
-                            | {{oneEmail.realty.roomcount}}-комнатная
-                            br
-                            b Ремонт: 
-                            | {{oneEmail.dictionary.renovation[oneEmail.realty.details.renovation].name}}
-                            br
-                            //span() Апартаменты
-                            //span() , 
-                            //span() Пентхаус
-                            //br
-                            b Этаж: 
-                            | 10 из 55
-                            br
-                            b Окна: 
-                            | {{oneEmail.dictionary.windowView[oneEmail.realty.details.windowView].name}}
-                            br
-                            b Цена: 
-                            | {{oneEmail.realty.price | price}}
-                            br
-                            b Комиссия: 
-                            | {{oneEmail.realty.realtor.clientpercent}}
-                        td(valign='top', style='padding-left:60px;')
-                            b Общая площадь: 
-                            | {{oneEmail.realty.square}} м²
-                            br
-                            b Жилая площадь: 
-                            | {{oneEmail.realty.details.livingSquare}} м²
-                            br
-                            b Площадь кухни: 
-                            | {{oneEmail.realty.details.kitchenSquare}} м²
-                            br
-                            b Площадь комнат: 
-                            span(ng-repeat='room in oneEmail.realty.details.roomsSquare') {{room.square}}
-                            br 
-                            b Лоджия: 
-                            | {{oneEmail.realty.details.loggia}}
-                            br
-                            b Балкон: 
-                            | {{oneEmail.realty.details.balcony}}
-                            br
-                            b Пассажирских лифтов: 
-                            | {{oneEmail.realty.details.elevator}}
-                            br
-                            b Грузовых лифтов:
-                            | {{oneEmail.realty.details.elevatorBig}}
-                    br
-                    br
-                    center
-                    img(src='http://world-invest.pro/img/shadow_2.jpg')
-                    br
-                    table(style='width:520px; margin:0 auto; font-family:arial; font-size: 14px;')
-                    tbody
-                        tr
-                        td(style='width:55%')
-                            img(src='http://world-invest.pro/img/logo.jpg')
-                       td(style='width:25%; line-height: 18px;')
-                            span
-                            | {{oneEmail.realty.contacts[0].name}}
-                            br
-                            | {{oneEmail.realty.contacts[0].phones[0].phone | phone}}
-                            br
-                            a(ng-if='oneEmail.realty.contacts[0].email' href='mailto:{{oneEmail.realty.contacts[0].email}}', target='_blank') {{oneEmail.realty.contacts[0].email}}
-        div(md-whiteframe='2' flex-offset='5' flex='40')
-            p #[b Имя отправителя:] {{oneEmail.info.username}}
-            p #[b Email отправителя:] {{oneEmail.user.emails[0].address}}
-            p #[b Email для ответа:] {{oneEmail.user.emails[0].address}}
+                                span(ng-if='oneEmail.realty.address.subwaysEmbedded[0].name') {{oneEmail.realty.address.metroTransport == 0 ? 'пешком' : 'транспортом'}},
+                                br
+                                b Тип здания: 
+                                | {{oneEmail.dictionary.materials[oneEmail.realty.details.materials].name}}
+                                br
+                                b Комнат: 
+                                | {{oneEmail.realty.roomcount}}-комнатная
+                                br
+                                b Ремонт: 
+                                | {{oneEmail.dictionary.renovation[oneEmail.realty.details.renovation].name}}
+                                br
+                                b Этаж: 
+                                | 10 из 55
+                                br
+                                b Окна: 
+                                | {{oneEmail.dictionary.windowView[oneEmail.realty.details.windowView].name}}
+                                br
+                                b Цена: 
+                                | {{oneEmail.realty.price | price}}
+                                br
+                                b Комиссия: 
+                                | {{oneEmail.realty.realtor.clientpercent}}
+                            td(valign='top', style='padding-left:60px;')
+                                b Общая площадь: 
+                                | {{oneEmail.realty.square}} м²
+                                br
+                                b Жилая площадь: 
+                                | {{oneEmail.realty.details.livingSquare}} м²
+                                br
+                                b Площадь кухни: 
+                                | {{oneEmail.realty.details.kitchenSquare}} м²
+                                br
+                                b Площадь комнат: 
+                                span(ng-repeat='room in oneEmail.realty.details.roomsSquare') {{room.square}}
+                                br 
+                                b Лоджия: 
+                                | {{oneEmail.realty.details.loggia}}
+                                br
+                                b Балкон: 
+                                | {{oneEmail.realty.details.balcony}}
+                                br
+                                b Пассажирских лифтов: 
+                                | {{oneEmail.realty.details.elevator}}
+                                br
+                                b Грузовых лифтов:
+                                | {{oneEmail.realty.details.elevatorBig}}
+                br
+                br
+                br
+        div(style='padding-bottom: 16px;')
+            div(style='max-width: 600px; box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2),0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12); background-color: #fff;')
+                table(style='width: 100%; height: 75px; margin:0 auto; padding: 0 16px; font-family:arial; font-size: 17px; box-shadow: 0 -4.3px 6px rgba(150, 150, 150, 0.4);')
+                    tr
+                        td {{oneEmail.realty.contacts[0].name}}, {{oneEmail.realty.contacts[0].phones[0].phone | phone}}, #[a(ng-if='oneEmail.realty.contacts[0].email' href='mailto:{{oneEmail.realty.contacts[0].email}}', target='_blank')] {{oneEmail.realty.contacts[0].email}}

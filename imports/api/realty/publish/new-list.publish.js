@@ -11,13 +11,37 @@ if (Meteor.isServer) {
       if (this.userId) {
         selector = {
           $or: [
-            {status: 'new'},
+            {status: 'ocean'},
+            {status: 'transaction', transactionUser: this.userId},
             {status: 'taken', 'realtor.id': this.userId}
           ]
         };
-
+        console.log(' ==== search: =====')
+        console.log(search)
         if (search) {
           console.log('search', search);
+
+          if (search.type !== undefined) {
+            selector.type = search.type;
+            if (search.type == 0) {
+              selector.type = {$in: [3,4]};
+            }
+            else if (search.type == 1) {
+              selector.type = {$in: [1,2]};
+            }
+            else if (search.type == 2) {
+              selector.type = {$in: [1,2,3,4]};
+            }
+          }
+
+          /* КОЛИЧЕСТВО КОМНАТ */
+          if (search.roomcount && !_.isEmpty(search.roomcount)) {
+            let rooms = search.roomcount.map((item)=> {
+              return item.id;
+            });
+            selector.roomcount = {$in: rooms};
+          }
+          /* END КОЛИЧЕСТВО КОМНАТ */
 
           let price = {};
 
@@ -44,6 +68,18 @@ if (Meteor.isServer) {
           if (!_.isEmpty(floor)) {
             selector.floor = floor;
           }
+
+          /* ПЛОЩАДЬ ОТ И ДО*/
+          let square = {};
+          if (search.squareFrom) {
+            square.$gte = parseInt(search.squareFrom);
+          }
+          if (search.squareTo) {
+            square.$lte = parseInt(search.squareTo);
+          }
+          if (!_.isEmpty(square)) {
+            selector.square = square;
+          }
           /* END ЭТАЖИ ОТ И ДО */
 
           /* КОЛИЧЕСТВО КОМНАТ */
@@ -56,23 +92,45 @@ if (Meteor.isServer) {
           /* END КОЛИЧЕСТВО КОМНАТ */
 
           /* ТИП ОПЕРАЦИИ 1-продажа квартир вторичных 2-долгосрочная аренда квартир */
-          if (search.type) {
+          /*if (search.type) {
             selector.type = search.type;
+          }*/
+          if (search.status) {
+            selector.status = search.status;
           }
+          /*if (search.type == 1) {
+           selector.type = {$in: [1,2]};
+           } else {
+           selector.type = {$in: [3,4]};
+           }*/
           /* END ТИП ОПЕРАЦИИ */
 
-          /* УДОБСТВА */
-          if (search.conditions && !_.isEmpty(search.conditions)) {
-            selector.conditions = {$all: search.conditions};
-          }
-          /* END УДОБСТВА */
 
           /* ВРЕМЯ ДО МЕТРО и Транспорт до метро */
           if (search.metroTime) {
-            selector.metroTime = {$lte: search.metroTime};
-            selector.metroTransport = search.metroTransport;
+            selector['address.metroTime'] = {$lte: search.metroTime};
+            selector['address.metroTransport'] = search.metroTransport;
           }
           /* END ВРЕМЯ ДО МЕТРО */
+
+          /* УДОБСТВА */
+          if (search.conditions && !_.isEmpty(search.conditions)) {
+            selector['details.conditions'] = {$all: search.conditions};
+          }
+          /* END УДОБСТВА */
+
+          /* ТИП ДОМА */
+          if (search.materials && !_.isEmpty(search.materials)) {
+            selector['details.materials'] = {$in: search.materials};
+          }
+          /* END ТИП ДОМА */
+
+          /* РЕМОНТ */
+          if (search.renovation && !_.isEmpty(search.renovation)) {
+            selector['details.renovation'] = {$in: search.renovation};
+          }
+          /* END РЕМОНТ */
+
 
           /* РАЙОНЫ МЕТРО */
           let query = [];
@@ -82,11 +140,20 @@ if (Meteor.isServer) {
           }
 
           if (search.subways && !_.isEmpty(search.subways)) {
-            query.push({'address.subways': {$in: search.subways}});
+            query.push({'address.subway.id': {$in: search.subways}});
+          }
+
+          if (search.street) {
+            query.push({'address.street' : search.street});
+            if (search.house) {
+              query.push({'address.house' : search.house});
+            }
           }
 
           if (query && !_.isEmpty(query)) {
-            selector.$or = query;
+            selector.$or[0].$or = query;
+            selector.$or[1].$or = query;
+            selector.$or[2].$or = query;
           }
           /* END РАЙОНЫ МЕТРО */
 
@@ -96,11 +163,21 @@ if (Meteor.isServer) {
         //TODO раскомментить только то что надо на клиенте
         options.fields = {
           'address.subwaysEmbedded': 1,
+          'address.subway': 1,
           'address.metroTime': 1,
+          'address.metroTransport': 1,
           'details.descr': 1,
           'details.renovation': 1,
           'details.images.url': 1,
           'details.conditions': 1,
+          'realtor.isExclusive': 1,
+          'owner.comission': 1,
+          'owner.isComission': 1,
+          'operator.comment': 1,
+          'operator.oceanAdd': 1,
+          'operator.meetingTime': 1,
+          'operator.oceanPrice': 1,
+          createdAt: 1,
           floor: 1,
           floormax: 1,
           image: 1,
@@ -110,12 +187,11 @@ if (Meteor.isServer) {
           status: 1,
           type: 1
         };
-        //db.realty.ensureIndex({roomcount : 1})
-        //         { limit: 20,   skip: 40, sort: { createdAt: -1 }},
+        console.log("=====selector: ");
         console.log(selector);
-        // console.log(options);
         let realty = Realty.find(selector, options);
         let count = realty.count();
+        console.log("====realty.count(): " + realty.count())
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});
         CountsDan.find({_id: countId});
         return [realty, CountsDan.find({_id: this.userId})];

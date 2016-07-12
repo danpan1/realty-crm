@@ -47,32 +47,31 @@ export const RealtyRealtorSchema = new SimpleSchema({
     type: Boolean,
     optional: true
   },
-  isCommission: {
-    type: Boolean,
-    allowedValues: [0, 1],
-    optional: true
-  },
   isCheckout: {
     type: Boolean,
     optional: true
   },
-  commission: {
+  // Комиссия, которую платит клиент риелтору
+  clientCommission: {
     type: Number,
     optional: true
   },
+  isClientCommission: {
+    type: Boolean,
+    optional: true
+  },
   isKeys: {
-    type: Number,
-    allowedValues: [0, 1],
+    type: Boolean,
     optional: true
   },
   competitors: {
     type: Number,
     optional: true
   },
-  clientpercent: {
+  /*clientpercent: {
     type: Number,
     optional: true
-  },
+  },*/
   partnerpercent: {
     type: Number,
     optional: true

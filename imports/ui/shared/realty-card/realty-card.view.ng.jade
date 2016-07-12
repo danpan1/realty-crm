@@ -1,94 +1,109 @@
-div(md-whiteframe='1')
-    div(layout='column' ng-if='realtyCard.show == true').mv-8
-    div(layout='row').newList
+div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__green": realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList.mv-8.newList__default
+    div(layout='column' ng-if='realtyCard.show == true')
+    div(layout='row')
 
         // 1-ая колонка - ID и Новая
-        div(layout='column').newList_ID.md-body-1.ph-16.pv-8
-            div id {{::realtyCard.realty._id | price}}
-            div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "new"')
-                span().newList__new-connections.mv-0 Новая связь
-                md-checkbox(ng-click = 'realtyCard.changeRelationType("offers", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
-                ng-model='realtyCard.readden'
-                flex flex-offset='5'
-                aria-label="Checkbox 1").md-primary.md-subhead.mb-0
-            div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "offers"')
-                span().mv-8 Прочитано
-                md-checkbox(ng-click = 'realtyCard.changeRelationType("new", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
-                ng-true-value = 'undefined'
-                ng-model = 'realtyCard.asdf'
-                flex flex-offset='5'
-                aria-label="Checkbox 2").md-primary.md-subhead.mb-0
+        div(layout='column').newList_ID.md-body-1
+            div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-16.pr-8 Эксклюзив
+            div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16.pr-8 Платит {{::realtyCard.realty.owner.comission}}% комиссии
+            div(ng-if='::realtyCard.realty.operator.meetingTime').newList__green-label.text-bold.pl-16.pr-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
+            div().pl-16.pr-8.pv-8
+                div Подано: {{::realtyCard.realty.createdAt | date:'dd.MM, HH:mm'}}
+                div id: {{::realtyCard.realty._id | price}}
+                div(ng-show="realtyCard.minutes > -1" ng-if='realtyCard.realty.status == \'ocean\'')
+                    div().realty-card__timer-title Объект исчезнет через
+                    div().realty-card__timer.mt-8
+                        span {{realtyCard.minutes}}:
+                        span(ng-if='realtyCard.seconds < 10') 0
+                        span {{realtyCard.seconds}}
+                div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "new"')
+                    span().newList__new-connections.mv-0 Новая связь
+                    md-checkbox(ng-click = 'realtyCard.changeRelationType("offers", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
+                    ng-model='realtyCard.readden'
+                    flex flex-offset='5'
+                    aria-label="Checkbox 1").md-primary.md-subhead.mb-0
+                div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "offers"')
+                    span().mv-8 Прочитано
+                    md-checkbox(ng-click = 'realtyCard.changeRelationType("new", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
+                    ng-true-value = 'undefined'
+                    ng-model = 'realtyCard.asdf'
+                    flex flex-offset='5'
+                    aria-label="Checkbox 2").md-primary.md-subhead.mb-0
         md-divider
-
 
         //2-ая колонка Метро и Метро пешком
         div().newList_Address.ph-16.pv-8
             div(layout='column', layout-align='space-between')
                 p.mv-0
                     //Метро
-                    div(ng-repeat='subway in ::realtyCard.realty.address.subwaysEmbedded').metro-name.md-body-1.mb-8
-                        span(class='metro-color-{{subway.line}}').metro-color
-                        span {{subway.name}}
+                    div().metro-name.md-body-1.mb-8
+                        span(class='metro-color-{{::realtyCard.realty.address.subway.line}}').metro-color
+                        span {{::realtyCard.realty.address.subway.name}}
                     //Пешком до метро
-                    div.md-body-1.ml-8.mb-8 {{::realtyCard.realty.address.metroTime}} {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
+                    div.md-body-1.ml-8.mb-8 {{::realtyCard.realty.address.metroTime}} мин. {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
         md-divider
 
         //3-ая колонка Цена и ремонт
         div(layout='column').newList_Price.ph-16.pv-8
             div.md-body-1.mb-8.price #[b {{::realtyCard.realty.price | price}}]
-            //div.md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
+            //div(ng-if='!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission').md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
         md-divider
 
         //4-ая колонка Фото
         div(layout='column' layout-align='center center').newList_Photo
-            div(ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
-                img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.coolImage(realtyCard.realty.image)')
+            div(ng-if='(realtyCard.realty.realtor.isExclusive || realtyCard.realty.owner.comission) && realtyCard.contacts.realtyPhone === undefined && !realtyCard.realtyIsTaken').realty-card__hidden-img
+                div().realty-card__photo-text.text-center Фото объекта доступны только после добавления объекта
+                //img(ng-src='realty_no_image.png' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
+            div(ng-if='(!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission) || realtyCard.contacts.realtyPhone !== undefined || realtyCard.realtyIsTaken' ng-click="realtyCard.showSlider( )" ng-class='{"cursor-default" : realtyCard.noPhoto }').apartment-pic
+                img(ng-src='{{realtyCard.realty.image || "realty_no_image.png"}}' ng-init='realtyCard.checkImage(realtyCard.realty.image)')
                 div(ng-if='!realtyCard.noPhoto').icon-zoom
+                //div(ng-if='!realtyCard.noPhoto').absolute.realty-card__images-qty {{realtyCard.realty.details.images.length}}
         md-divider
 
-        //5-ая Инфо об объекте
+        //5-ая колонка Инфо об объекте
         div().newList_Info.ph-16.pv-8
             div(layout='column' layout-align='space-between')
-                div().md-body-1.mb-8 {{::realtyCard.realty.roomcount}}-к квартира
-                div().md-body-1.mb-8 Длительный
-                //div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
-                div().md-body-1.mb-8 {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} {{::realtyCard.realty.square}}м2
+                div().md-body-1.mb-8 {{::realtyCard.realty.roomcount | count}}
+                div(ng-if='!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission')
+                    div().md-body-1.mb-8 Длительный
+                    //div().md-body-1.mb-8 {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name || 'Не известно материалы'}}
+                    div().md-body-1.mb-8 {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}} {{::realtyCard.realty.square}}м²
         md-divider
 
-        //6-ая Телефонн Риэлтора и Объявление
-        div(layout='column' layout-align='space-between start' ng-if="realtyCard.realtylisttype === 'connections'").newList_contacts.ph-16.pv-8
+        //6-ая колонка Телефон Риэлтора и Объявление
+        div(layout='column' layout-align='space-between start' ng-if="realtyCard.realtylisttype === 'connections'").newList_contacts
             div()
-                div(ng-if='realtyCard.realty.status !== "new" && realtyCard.realty.status !== "taken"')
+                div(ng-if='realtyCard.realty.status !== "connection" && realtyCard.realty.status !== "ocean" && realtyCard.realty.status !== "taken"')
                     div().md-subhead.mb-8.nowrap #[b {{::realtyCard.realty.realtor.phone | phone}}]
                     div().md-subhead.mb-8 #[b Риелтор {{::realtyCard.realty.realtor.name}}]
-                div(ng-if='realtyCard.realty.status === "new" || realtyCard.realty.status === "taken"')
-                    md-button(ng-if='!realtyCard.isUserPaid' ng-click='realtyCard.onShowPhone(realtyCard.realty._id, $event)').md-primary.mh-0.mt-0 Показать телефон
-                    div(ng-if='realtyCard.shownPhone || realtyCard.realty.contacts[0].phones[0].phone && realtyCard.isUserPaid').md-subhead.mb-8.nowrap {{realtyCard.shownPhone || realtyCard.realty.contacts[0].phones[0].phone | phone}}
+                div(ng-if='realtyCard.realty.status === "connection" || realtyCard.realty.status === "ocean" || realtyCard.realty.status === "taken"')
+                    div(ng-if='realtyCard.isUserPaid && !realtyCard.addedToMine')  
+                        realty-card-purchase(ng-if='realtyCard.realty' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty' parse-details='realtyCard.parseDetails' con='true')
                     div().md-subhead.mb-8 #[b Собственник {{::realtyCard.realty.contacts[0].name}}]
                 div
                     md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Объявление
 
-
         //6.1 УДОБСТВа
-        div(layout='column' layout-align='space-between start' ng-if="realtyCard.realtylisttype !== 'connections'").newList_contacts.ph-16.pv-8
+        div(ng-if="realtyCard.realtylisttype !== 'connections' || (!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission)").newList_contacts.ph-16
             conditions(conditions='realtyCard.realty.details.conditions')
+            div
+                md-button(ng-if="realtyCard.realtylisttype === 'clientSuitauto' || realtyCard.realtylisttype === 'clientSuitexact'" ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Объявление
         md-divider
 
-
-
-
-
-        //7-ая Скрыть Сохранить
-        div(layout='column' layout-align="space-between left").newList_Actions.ph-16.pv-8
-            div(layout="column" layout-align="space-between start")
-
+        //7-ая колонка Скрыть Сохранить
+        div(layout='column' layout-align="space-between left").newList_Actions
+            div(ng-class='{"newList__income-blue":realtyCard.realty.realtor.isExclusive,"newList__income-green":realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList__income-default.p-8.text-center 
+                span(ng-if='realtyCard.realty.type > 2') {{realtyCard.halfPrice | price}} - {{::realtyCard.realty.price | price}} &#8381;
+                span(ng-if='realtyCard.realty.type < 3') {{realtyCard.salePrice | price}} &#8381;
+            div(layout="column" layout-align="space-between center").ph-16.pv-8
+                
                 md-button(ng-click='realtyCard.changeRelationType("saved", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
                 ng-if='realtyCard.relationType === "new" || realtyCard.relationType === "offers"' md-no-ink).md-simple-button.realty-card__btn-save.mv-8.mh-0.p-0.text-left Сохранить
-
+                
                 md-button(ng-if="realtyCard.realtylisttype === 'connections'"
-                ng-click='realtyCard.changeRelationType("hide", realtyCard.realty._id, realtyCard.clientId, realtyCard.relationType)'
-                ).md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
-
+                ui-sref="crm.clients.details.email.send({realtyId:realtyCard.realty._id,clientId:realtyCard.clientId})").client-card__link.text-left.m-0.p-0 Написать клиенту
+                md-button(ng-if="realtyCard.realtylisttype === 'connections'"
+                    ng-click="realtyCard.returnToCallCenter(realtyCard.realty._id, $event, 'clearRelations')").md-simple-button.realty-card__btn-hide.mv-8.mh-0.p-0.text-left скрыть
                 md-button(ng-if="!realtyCard.realtylisttype && realtyCard.realty.status != 'taken'" 
                 ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr" md-no-ink).md-body-1.mh-0.p-0.btn-blue.text-uppercase Подробнее
                 md-button(ng-if="!realtyCard.realtylisttype && realtyCard.realty.status == 'taken' && !realtyCard.loadingDetails" 
@@ -103,32 +118,33 @@ div(md-whiteframe='1')
                 ng-click='realtyCard.sendRealtyRelation(realtyCard.realty._id)' md-no-ink).client-card__link.text-left.m-0.p-0 Выбрать объект
 
 
-
-
-
-    // Подоробное объявление
-    div(ng-show="realtyCard.ngShowDescr").ph-32.pb-16
+    // Подробное объявление
+    div(ng-show="realtyCard.ngShowDescr").newList__description-blue.ph-32.pb-16
+        div(ng-if='realtyCard.realtyIsTaken' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам. Завершите его проверку
+        p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
         div(ng-if="!realtyCard.realtylisttype").relative
-            div(ng-if='realtyCard.realty.status == \'taken\'' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам. Завершите его проверку
-            p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
+            p 
+                | #[strong Комментарий колцентра:] {{realtyCard.realty.operator.comment}}
             div(layout='row')
-                md-button(ng-if='!realtyCard.realtyPhone' ng-click='realtyCard.takeRealty(realtyCard.realty._id, $event)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 Взять объект
-            h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyPhone}} --- {{realtyCard.realtyName}}
-            h3(flex ng-if='realtyCard.realtyPhone !== undefined').md-title {{realtyCard.realtyStreet}}, {{realtyCard.realtyHouse}}
-            div(ng-if='!realtyCard.isAgent && !realtyCard.objectAdded && realtyCard.realtyPhone' layout="row")
-                md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-primary.ml-0.mr-16.ph-16 Собственник
-                md-button(ng-click="realtyCard.agency(realtyCard.realty._id)").md-raised.realty-card__agent.ml-16.ph-16 Агент
-            div(ng-if='realtyCard.isAgent == true && realtyCard.objectAdded != true')
-                h3(flex).md-title Хотите продолжить с ним работать?
-                div(layout="row")
-                    md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'realtor')").md-raised.md-deafult Да 
-                    md-button(ng-click="realtyCard.takeCheckedRealty(realtyCard.realty._id, 'agency')").md-raised.md-deafult Нет
-            h3(flex ng-if='realtyCard.objectAdded == true').md-title Объект сохранен в раздел #[a «Мои объекты»]
-            //md-button(ng-click="realtyCard.ngShowDescr =! realtyCard.ngShowDescr") Закрыть
+                realty-card-purchase(ng-if='realtyCard.realty' parse-details='realtyCard.parseDetails' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
+            div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
+                p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
+                p(ng-if='(5 + realtyCard.minutes) > 0').md-title.text-normal 1) Собственник ждет звонка в течение 
+                    span {{5 + realtyCard.minutes}}:
+                    span(ng-if='realtyCard.seconds < 10') 0
+                    span {{realtyCard.seconds}}
+                p().md-title.text-normal 2) {{realtyCard.contacts.realtyPhone}} {{realtyCard.contacts.realtyName}}
+                p().md-title.text-normal 3) #[a(ng-href='{{realtyCard.parseDetails.url}}' target='blank') Посмотреть источник объявления]
+                p().md-title.text-normal 4) #[strong Хотите продолжить с ним работать?]
+                div(layout='row' ng-if='realtyCard.isUserPaid').mv-16
+                    md-button(aria-label='Редактировать' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id, 'go')").md-raised.newList__description-btn-large Редактировать
+                    md-button(aria-label='Остаться в океане' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id)").md-raised.newList__description-btn-large.mh-16 Остаться в океане
+                    md-button(aria-label='Не подходит' ng-click="realtyCard.returnToCallCenter(realtyCard.realty._id, $event)").md-raised.newList__description-btn-large.mh-16 Не подходит
         div(ng-if="realtyCard.realtylisttype == 'connections'")
             div(layout="row")
-                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
-                p(flex="65").md-body-1 Удобства
+                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount | count}}, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
+                div(flex="65" layout='row').md-body-1 
+                    conditions(flex='25' conditions='realtyCard.realty.details.conditions')
             div {{::realtyCard.realty.details.descr}}
             div(layout="row")
                 div(flex="90")
@@ -136,7 +152,7 @@ div(md-whiteframe='1')
                     md-button(ng-click="realtyCard.ngShowDescr = !realtyCard.ngShowDescr") Закрыть
         div(ng-if="realtyCard.realtylisttype == 'demonstration'")
             div(layout="row")
-                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount}} комнаты, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
+                p(flex="35").md-body-1 {{::realtyCard.realty.roomcount | count}}, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
                 p(flex="65").md-body-1 Удобства
             div  {{::realtyCard.realty.details.descr}}
             div(layout="row")

@@ -3,38 +3,68 @@ video-tutorial(ng-if='layout.videoTutorial === true' ng-class='{\'show-video-mod
 is-video-tutorial = 'layout.videoTutorial')
 md-toolbar(layout='row' layout-align='center center').ph-16
     span().brand-logo
-    span(flex)
-    span().md-body-1.username.mr-0 {{layout.user.profile.name}} {{layout.user.profile.surName}}
-    md-button(hide-gt-md='', ng-click='layout.toggleList()' aria-label='Открыть меню').md-icon-button.menu
+    span(flex).layout__total-amount.md-body-1.text-center Сегодня в системе 52 сделки на сумму 900 000 ₽
+    span().md-body-1.mr-0 {{layout.user.profile.name}} {{layout.user.profile.surName}}
+    span().md-body-1.layout__balance {{layout.user.profile.balance | price}} ₽
+    md-button(aria-label='Пополнить баланс' ng-click='layout.replenishTheBalance(100)').md-icon-button.mh-0
+        md-icon(md-svg-icon='svg/icon-add-circle-outline.svg')
+    md-button(hide-gt-md='', ng-click='layout.toggleList()' aria-label='Открыть меню').md-icon-button.menu.mh-0
         md-icon(md-svg-icon='menu')
-    md-button(ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.btn-logout
+    md-button(ng-click='layout.logout()', ui-sref='auth.login' aria-label='logOut').md-icon-button.layout__btn-logout.mh-0
         md-icon(md-svg-icon='svg/icon-exit-to-app-white.svg')
 
 // Container #2
 div(flex, layout='row' layout-align='center none')
     // Container #3
-    md-sidenav.sideNav.md-whiteframe-z2(md-is-locked-open="$mdMedia('gt-md')",md-component-id="left").pv-8
-        menu-toggle(section="layout.actions")
-        md-select(ng-model='layout.select' md-selected-text = 'layout.selectText()' aria-label='Добавить объект или клиента').sideNav-btn-add
-            md-option( ng-value='1' ng-click='layout.toggleList()' ui-sref='crm.realty.add') Объект
-            md-option( ng-value='2' ng-click='layout.toggleList()' ui-sref='crm.clients.add') Клиента
+    md-sidenav(md-is-locked-open="$mdMedia('gt-md')", md-component-id="right").md-whiteframe-z2.md-sidenav-right.pv-8
+        div(layout='column' layout-align='space-between none' layout-fill)
+            div
+                menu-toggle(section="layout.actions")
+                md-select(ng-model='layout.select' md-selected-text = 'layout.selectText()' aria-label='Добавить объект или клиента').sideNav-btn-add
+                    md-option( ng-value='1' ng-click='layout.toggleList()' ui-sref='crm.realty.add') Объект
+                    md-option( ng-value='2' ng-click='layout.toggleList()' ui-sref='crm.clients.add') Клиента
 
-        md-list
-            div(ng-repeat="item in layout.sideNavItems")
-                md-list-item(ng-if='item.uisref'
-                             ui-sref='{{item.uisref}}',
-                             ui-sref-active="active",
-                             layout="row",
-                             layout-align='start',
-                             ng-click='layout.toggleList()',
-                             md-ink-ripple="#bbdefb") {{item.name}}
-                //- md-list-item(ng-if='item.ngClick',
-                //-              layout="row",
-                //-              layout-align='start',
-                //-              md-ink-ripple="#bbdefb").ph-0
-                //-     a(ng-click='item.ngClick',).md-list-item-inner.md-no-style.md-button.md-ink-ripple {{item.name}}
-
+                md-list
+                    div(ng-repeat="item in layout.sideNavItems").sideNav__item
+                        md-list-item(ng-if='item.uisref'
+                                     ui-sref='{{item.uisref}}',
+                                     ui-sref-active="active",
+                                     layout="row",
+                                     layout-align='start',
+                                     ng-click='layout.toggleList()',
+                                     md-ink-ripple="#bbdefb") {{item.name}}
+                        md-list-item(ng-if='item.href'
+                                     layout="row",
+                                     ng-click='layout.goToPage(item.href)',
+                                     layout-align='start',
+                                     md-ink-ripple="#bbdefb").m-8 {{item.name}}
+            div().layout__logout-item
+                a(ng-click='layout.logout()', ui-sref='auth.login').md-button.md-ink-ripple.layout__btn-logout-text
+                    div().layout__btn-logout-text-inner Выход
     // Container #4
     md-content#content(flex,md-whiteframe="4", layout="column", layout-align='space-between center')
         div#mainContainer
             ui-view
+
+// Virtual Tour
+div().welcome-tour.default-overlay.default-overlay__visible
+div().welcome-tour__step.welcome-tour__step-animated
+    div().welcome-tour__step-sidebar.welcome-tour__step-sidebar-right
+        h2().md-display-1.welcome-tour__step-sidebar-title Урок 1
+        div().welcome-tour__step-sidebar-text
+            p().md-body-1
+                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nulla odit illum aut quam, deleniti, officia necessitatibus. Dolor culpa, tenetur esse nostrum! Deleniti totam natus unde odio pariatur reprehenderit quam molestias tempora fuga laboriosam tempore, alias suscipit quasi, voluptatem ducimus sunt obcaecati iste cupiditate quibusdam. 
+            p().md-body-1
+                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nulla odit illum aut quam, deleniti, officia necessitatibus. Dolor culpa, tenetur esse nostrum! Deleniti totam natus unde odio pariatur reprehenderit quam molestias tempora fuga laboriosam tempore, alias suscipit quasi, voluptatem ducimus sunt obcaecati iste cupiditate quibusdam. 
+        div().welcome-tour__step-controls
+            div().welcome-tour__step-controls-control.left
+                md-button().md-raised Назад
+            div().welcome-tour__step-controls-control.center
+                div().welcome-tour__step-controls-steps
+                    div().welcome-tour__step-controls-steps-step.current
+                    div().welcome-tour__step-controls-steps-step
+                    div().welcome-tour__step-controls-steps-step
+                    div().welcome-tour__step-controls-steps-step
+
+            div().welcome-tour__step-controls-control.right
+                md-button().md-raised Далее

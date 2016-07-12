@@ -7,6 +7,7 @@ import {dictionary} from '/imports/helpers/dictionary';
 import {Meteor} from 'meteor/meteor';
 import {Realty} from '/imports/api/realty/realty.model';
 import {name as PhoneMask} from '/imports/ui/shared/phone-mask/phone-mask.component';
+import {name as subwayChoice} from '/imports/ui/shared/subway-choice/subway-choice.component';
 
 import './add-realty-full.view.html';
 
@@ -31,6 +32,7 @@ class AddRealtyFull {
     this.activeTab = 0;
     //fake selects Аренда Москва Квартиры
     this.fake = true;
+    this.submitted = false;
   }
 
   changeRoomCount() {
@@ -46,7 +48,8 @@ class AddRealtyFull {
   }
 
   submit() {
-
+    this.submitted = true;
+        
     var price = this.realty.price.split('');
     for (var i in [1, 2, 3]) {
       for (var i in price) {
@@ -71,6 +74,7 @@ class AddRealtyFull {
     this.realty.realtor.name = Meteor.user().profile.name;
     this.realty.realtor.realtorIdShort = Meteor.user().profile.realtorId;
     this.realty.type = 4;
+    console.log(vm.locations.subway);
     this.realty.address = {
       areaId: '',
       areaName: '',
@@ -86,20 +90,27 @@ class AddRealtyFull {
       metroTransport: vm.metroTransport,
       street: vm.locations.street.value,
       streetFiasId: vm.locations.street.data.fias_id,
-      subways: vm.locations.subways,
+      subway: vm.locations.subway,
+      //subways: vm.locations.subways,
       //subwaysEmbedded : vm.locations.embedded.subways,
       value: vm.locations.full.unrestricted_value
     };
-    if (vm.locations.embedded) {
+    /*if (vm.locations.embedded) {
       this.realty.address.subwaysEmbedded = vm.locations.embedded.subways;
-    }
+    }*/
+    console.log(this.realty.address);
+    
+    this.realty.square = parseInt(this.realty.square);
+    this.realty.details.livingSquare = parseInt(this.realty.details.livingSquare);
+    this.realty.details.kitchenSquare = parseInt(this.realty.details.kitchenSquare);
+    
     console.log(this.realty.address.subwaysEmbedded);
     Meteor.call('addRealty', this.realty, (error, result) => {
       if (error) {
         console.log(error);
       } else {
         console.log(`Realty added : cleintSide, ${vm.realty}`);
-        this.state.go('crm.realty.one.review', {realtyId: result});
+        this.state.go('crm.realty.one.info', {realtyId: result});
       }
     });
 
@@ -112,7 +123,8 @@ const moduleName = 'addRealtyFull';
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
-  PhoneMask
+  PhoneMask,
+  subwayChoice
 ]).component(moduleName, {
   templateUrl: 'imports/ui/shared/add-realty-full/add-realty-full.view.html',
   bindings: {},

@@ -1,0 +1,30 @@
+md-autocomplete(md-selected-item="subwayChoice.selectedSubway" 
+                md-search-text="subwayChoice.searchText" 
+                md-items="subway in subwayChoice.subwaysSuggestionList" 
+                md-item-text="subway.name"
+                placeholder='Метро'
+                md-search-text-change='subwayChoice.searchTextChange(subwayChoice.searchText)',
+                md-selected-item-change="subwayChoice.changeChoice()")
+  md-item-template
+    span(md-highlight-text="subwayChoice.searchText") {{subway.name}}
+  md-not-found No matches found.
+//div().metro.mt-16
+    md-chips(ng-model='subwayChips.subwaysInForm',
+    md-autocomplete-snap='',
+    md-require-match='true',
+    md-on-add='subwayChips.changeChips()',
+    md-on-remove='subwayChips.changeChips()')
+        md-autocomplete(md-selected-item='subwayChips.selectedItem',
+        md-search-text='subwayChips.searchText',
+        md-search-text-change='subwayChips.searchTextChange(subwayChips.searchText)',
+        md-items='item in subwayChips.subwaysSuggestionList | selectedSubway:subwayChips.subwaysInForm',
+        placeholder='Метро',
+        md-no-cache='true')
+            span(class="metro-color-{{item.meta.lineId}}").metro-color
+            span(md-highlight-text='subwayChips.searchText') {{item.name}}
+            md-not-found
+                | Не найдено "{{subwayChips.searchText}}"
+        md-chip-template
+            span
+                span(class='metro-color metro-color-{{$chip.meta.lineId}}')
+                span().md-caption {{$chip.name}}

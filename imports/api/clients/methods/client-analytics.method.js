@@ -10,15 +10,8 @@ Meteor.methods({
 export function clientAnalytics(price, roomcount, subways, renovation) {
     
   if (Meteor.isServer && Meteor.userId()) {
-      /*
-    let maxRoom = (roomcount) => { return Math.max.apply( Math, roomcount ) };
-    let minRoom = (roomcount) => { return Math.min.apply( Math, roomcount ) };
-*/
     let match1 = {type:4};
     
-    /*if(price){
-      match1.type = price;
-    }*/
     if(roomcount){
       match1.roomcount = {$in: roomcount}; //{ $lte: maxRoom(roomcount), $gte: minRoom(roomcount) };
     }

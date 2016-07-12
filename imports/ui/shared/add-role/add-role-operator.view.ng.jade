@@ -1,0 +1,60 @@
+form(md-whiteframe='1'
+ng-submit='addRoleOperator.submit(addRoleFormOperator.$valid, 1)'
+name='addRoleFormOperator'
+layout-align='center start'
+layout='column')
+    md-input-container
+        label Добавить оператора
+        input(ng-model="addRoleOperator.emailAddOperator" type="email" required='')
+    md-button(type='submit').md-raised.md-primary Добавить оператора
+div(md-whiteframe='2') {{addRoleOperator.resultAdd || 'Введите email'}}
+
+form(md-whiteframe='1'
+ng-submit='addRoleOperator.submit(addRoleFormOperatorFire.$valid, 0)'
+name='addRoleFormOperatorFire'
+layout-align='center start'
+layout='column')
+    md-input-container
+        label Убрать оператора
+        input(ng-model="addRoleOperator.emailRemoveOperator" type="email" required='')
+    md-button(type='submit').md-raised.md-primary Убрать оператора
+div(md-whiteframe='2') {{addRoleOperator.resultRemove || 'Введите email'}}
+
+
+div(md-whiteframe='2' ng-if='addRoleOperator.operators.length') Операторов - {{addRoleOperator.operators.length}}
+    table
+        thead(style='text-align:center;')
+            tr
+                td №
+                td Имя
+                td Телефон
+                td Email
+                td(rowspan='3' colspan='8')
+                    table
+                        tr Объектов
+                        tr
+                            td(rowspan='2' colspan='3') В океан
+                                table
+                                    tr
+                                        td Всего
+                                        td Эксклюзив
+                                        td Комиссия
+                            td Не доступен
+                            td Агентство
+                            td Перезвонить
+                            td Не актуально
+                            td Не согласился
+        tbody
+            tr(ng-repeat='operator in addRoleOperator.stat track by $index')
+                td {{$index + 1}}
+                td {{operator.name}}
+                td {{operator.phone}}
+                td {{operator.email}}
+                td #[b {{operator.ocean || '0'}}] / {{operator.percents.ocean || '0'}}%
+                td #[b {{operator.objectsSavedCom || '0'}}]  / {{operator.percents.objectsSavedCom || '0'}}%
+                td #[b {{operator.objectsSavedExc || '0'}}]  / {{operator.percents.objectsSavedExc || '0'}}%
+                td #[b {{operator.objectsNotAvailable || '0'}}]  / {{operator.percents.objectsNotAvailable || '0'}}%
+                td #[b {{operator.objectsAgency || '0'}}]  / {{operator.percents.objectsAgency || '0'}}%
+                td #[b {{operator.objectsDelayed || '0'}}]  / {{operator.percents.objectsDelayed || '0'}}%
+                td #[b {{operator.objectsNoActual || '0'}}]  / {{operator.percents.objectsNoActual || '0'}}%
+                td #[b {{operator.objectsSkipped || '0'}}]  / {{operator.percents.objectsSkipped || '0'}}%

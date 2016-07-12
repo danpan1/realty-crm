@@ -39,6 +39,9 @@ class OneReviewDescContent {
     vm.desc.details = vm.realty.details.descr || '';
     vm.desc.nextdetails = vm.realty.details.descr || '';
     this.setActiveBenefit();
+    
+    
+    vm.desc.details = this.desc.details.replace(/<p>/g,'').replace(/<\/p>/g,' \r\n  \r\n').replace(/<br>|<br\/>|<br \/>/g,' \r\n');
 
   }
   

@@ -1,4 +1,5 @@
-md-tabs(md-dynamic-height)
+md-progress-circular(ng-if='addClientFull.submitted' md-diameter='150' style='position:absolute;left:0;right:0;top:280px;margin:0 auto;')
+md-tabs(ng-if='!addClientFull.submitted' md-dynamic-height)
     md-tab(label='1) Особенности клиента' md-active='addClientFull.activeTab == 0' ng-click="addClientFull.activeTab = 0")
         md-content().ph-32.pv-16
             form(name="firstForm")
@@ -30,6 +31,10 @@ md-tabs(md-dynamic-height)
                                 md-input-container(flex-offset='5').mv-0
                                     label Чем занимается
                                     input(type="text" ng-model='addClientFull.client.business')
+                                md-input-container(flex-offset='5').mv-0
+                                    label Возраст
+                                    input(type='string' ng-pattern="/^[0-9]{1,}$/" name='age' ng-model='addClientFull.client.age')
+                                    span(ng-show='firstForm.age.$viewValue.length > 0 && firstForm.age.$touched && firstForm.age.$invalid').has-error Только цифры
 
                     div(layout='row')
                         div(flex='80')
@@ -108,7 +113,7 @@ md-tabs(md-dynamic-height)
                             div(layout='row' layout-wrap)
                                 realty-conditions(ng-model='addClientFull.client.need.conditions' checkbox="true")
 
-div(layout='row').mv-16.mh-32
+div(ng-if='!addClientFull.submitted' layout='row').mv-16.mh-32
     md-button(ng-click="addClientFull.activeTab = 1" ng-disabled="firstForm.$invalid" ng-if="addClientFull.activeTab == 0" aria-label='Продолжить').md-primary.md-raised Продолжить
     md-button(ng-if="addClientFull.activeTab == 1" ng-disabled="secondForm.$invalid || addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo"  ng-click='addClientFull.submit(true)' aria-label='Добавить клиента и найти связи с объектами').md-primary.md-raised Добавить клиента и найти связи с объектами
     md-button(md-no-ink ng-if="addClientFull.activeTab == 1" ng-click="addClientFull.activeTab = 0" flex-offset='10' aria-label='Вернуться на шаг назад').md-primary.md-body-1 Вернуться на шаг назад

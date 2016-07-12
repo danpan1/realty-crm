@@ -31,10 +31,23 @@ class ClientCard {
   }
 
   sendRealtyRelation(clientId) {
+    this.preloader = true;
     console.log(clientId, 'clientId');
     console.log(this.realtyId, 'realtyId');
-    Meteor.call('setRelationFindClient', clientId, this.realtyId, this.pageFrom);
+    Meteor.call('setRelationFindClient', clientId, this.realtyId, this.pageFrom, (error, result) => {
+      if (err) {
+          this.preloader = false;
+        } else {
+          this.timeout(()=> {
+            this.preloader = false;
+          }, 0);
+        }
+    });
     /*ClientCard.$scope.$emit('sendingCurrentClient', client);*/
+  }
+  
+  moveToTab (num) {
+    this.activeTab = num;
   }
 
 }
@@ -51,7 +64,9 @@ export default angular.module(moduleName, [
     assort: '<',
     pageFrom: '@',
     relationType: '@',
-    realtyId: '<'
+    realtyId: '<',
+    activeTab: '=',
+    preloader: '='
   },
   controllerAs: moduleName,
   controller: ClientCard

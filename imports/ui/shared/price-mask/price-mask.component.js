@@ -14,6 +14,18 @@ class PriceMask {
     if(this.price) {
       this.filterPriceKeyDown();
     }
+    
+    this.$onChanges = function () {
+      if (!this.price) this.visualPrice = '';
+    }
+
+  }
+
+  filterPriceBlur () {
+    if( this.label=='цена от' || this.label=='цена до' ){
+      console.log('Gogo!')
+      this.change();
+    }
   }
   
   filterPriceKeyDown(){
@@ -54,7 +66,11 @@ export default angular.module(moduleName, [
   bindings: {
       price: '=',
       label: '<',
-      flex: '<'
+      flex: '<',
+      change:'&',
+      noRequired: '<',
+      isFilter: '<',
+      refresh:'<'
   },
   controllerAs: moduleName,
   controller: PriceMask

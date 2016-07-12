@@ -1,26 +1,44 @@
 .newList {
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2),0 2px 2px 0 rgba(0, 0, 0, 0.14),0 3px 1px -2px rgba(0, 0, 0, 0.12);
+  background-color: $white;
+  &__default {
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2),0 2px 2px 0 rgba(0, 0, 0, 0.14),0 3px 1px -2px rgba(0, 0, 0, 0.12);
+  }
+  &__green {
+    border: 3px solid #66bb6a;
+    .realty-card__photo-text {
+      color: color($green, 400);
+    }
+  }
+
+  &__blue {
+    border: 3px solid #2196f3;
+    .realty-card__photo-text {
+      color: color($blue, 500);
+    }
+  }
+
   &_ID {
-    width: 9rem;
+    width: 21.5rem;
   }
   &_Address {
-    width: 15.5rem;
+    width: 17rem;
   }
   &_Price {
-    width: 13.5rem;
+    width: 14rem;
   }
   &_Photo {
-    width: 15.5rem;
+    width: 18rem;
     img {
-      max-width: 14rem;
-      max-height: 10.5rem;
+      max-width: 15rem;
     }
   }
   &_Info {
-    width: 11rem;
+    width: 9rem;
   }
   &_contacts {
-    width: 20rem;
+    width: 11rem;
+    padding-top: 4px;
+    padding-bottom: 8px;
   }
   &_Conditions {
     width: 19rem;
@@ -37,6 +55,49 @@
     font-size: 14px;
     text-transform: uppercase;
     color: #4caf50;
+  }
+
+  &__green-label {
+    background-color: #4caf50;
+  }
+
+  &__blue-label {
+    background-color: #2196f3;
+  }
+  
+  &__purple-label,
+  &__blue-label, 
+  &__green-label {
+    height: 26px;
+    line-height: 26px;
+    color: $white;
+  }
+
+  &__description {
+    overflow: auto;
+  }
+
+  &__description-blue {
+    border-top: 3px solid #2196f3;
+  }
+  
+  &__description-green {
+    border-top: 3px solid #66bb6a;
+  }
+
+  &__income-default {
+    border-bottom: 1px solid #f3f3f3;
+  }
+  &__income-green {
+    border-left: 2px solid #66bb6a;
+    border-bottom: 2px solid #66bb6a;
+  }
+  &__income-blue {
+    border-left: 2px solid #2196f3;
+    border-bottom: 2px solid #2196f3;
+  }
+  &__description-btn-large {
+    min-width: 260px !important;
   }
 }
 

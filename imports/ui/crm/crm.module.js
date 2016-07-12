@@ -11,6 +11,7 @@ import {name as ngPhoneFilter} from '../../filters/phone-filter.directive.js';
 import {name as ngPriceFilter} from '../../filters/price-filter.directive.js';
 import {name as priceFilter} from '../../filters/price.filter.js';
 import {name as phoneFilter} from '../../filters/phone.filter.js';
+import {name as countFilter} from '../../filters/count.filter.js';
 import {name as selectedSubway} from '../../filters/selected-subway.filter.js';
 import {name as Realty}from './realty/realty.component';
 import {name as Feedback}from './feedback/feedback.component';
@@ -19,6 +20,7 @@ import {name as layout} from '/imports/ui/layout/layout.component';
 import {name as documents} from '/imports/ui/crm/documents/documents.component';
 import {name as newRealtyList} from '/imports/ui/crm/realty-new-list/realty-new-list.component';
 import {name as addRole} from '/imports/ui/shared/add-role/add-role.component';
+import {name as addRoleOperator} from '/imports/ui/shared/add-role/add-role-operator.component';
 import {name as videoTutorial} from '/imports/ui/crm/video-tutorial/video-tutorial.component';
 
 const moduleName = 'app.crm';
@@ -31,11 +33,13 @@ export default angular.module(moduleName, [
   videoTutorial,
   documents,
   addRole,
+  addRoleOperator,
   ngPhoneFilter,
   ngPriceFilter,
   priceFilter,
   newRealtyList,
   phoneFilter,
+  countFilter,
   selectedSubway,
   clients,
   Realty,

@@ -11,6 +11,7 @@ import {dictionary} from '../../../helpers/dictionary';
 import {Locations} from '/imports/api/locations';
 import {name as PaginationButtons} from '/imports/ui/shared/pagination-buttons/pagination-buttons.component';
 import {name as realtyFilter} from '/imports/ui/crm/realty/realty-filter/realty-filter.component';
+import {name as RealtyNewListFilter} from './realty-new-list-filter/realty-new-list-filter.component';
 // import {Meteor} from 'meteor/meteor';
 
 // import {name as realtyFilter} from '../realty/realty-filter/realty-filter.component';
@@ -29,8 +30,11 @@ class RealtyNewList {
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
     this.state = $state;
+    this.filterType = 2;
+    this.filterCity = 0;
+    this.filterModalOpened = false;
     
-    switch ($stateParams.operation) {
+    /*switch ($stateParams.operation) {
       case 'rent':
         vm.selectedTab = 0;
         break;
@@ -39,7 +43,7 @@ class RealtyNewList {
         break;
       default:
         vm.selectedTab = 0;
-    }
+    }*/
     
     this.autorun(function () {
       let user = Meteor.user();
@@ -54,8 +58,8 @@ class RealtyNewList {
     this.showSlider = false;
     this.slideShowImages = [];
     vm.sort = {
-      // 'updated_at': -1
-      '_id': -1
+      'operator.oceanPrice': -1,
+      'createdAt': -1
     };
     let timeTestLoadData = new Date();
     let timeTestRender = new Date();
@@ -73,11 +77,19 @@ class RealtyNewList {
         {
           floorFrom: vm.getReactively('filter.floorFrom'),
           floorTo: vm.getReactively('filter.floorTo'),
+          squareFrom: vm.getReactively('filter.squareFrom'),
+          squareTo: vm.getReactively('filter.squareTo'),
           priceTo: vm.getReactively('filter.priceTo'),
+          metroTime: vm.getReactively('filter.metroTime'),
+          metroTransport: vm.getReactively('filter.metroTransport'),
+          street: vm.getReactively('filter.street.value'),
+          house: vm.getReactively('filter.house.value'),
           conditions: vm.getReactively('filter.conditions'),
+          renovation: vm.getReactively('filter.renovation'),
+          materials: vm.getReactively('filter.materials'),
           priceFrom: vm.getReactively('filter.priceFrom'),
           roomcount: vm.getReactively('roomcount'),
-          type: vm.getReactively('filter.type'),
+          type: vm.getReactively('filterType'),
           subways: vm.getReactively('filter.subways'),
           districts: vm.getReactively('filter.districts')
         }
@@ -154,7 +166,8 @@ const moduleName = 'realtyNewList';
 export default angular.module(moduleName, [
   angularMeteor,
   realtyFilter,
-  PaginationButtons
+  PaginationButtons,
+  RealtyNewListFilter
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty-new-list/realty-new-list.view.html',
   bindings: {},

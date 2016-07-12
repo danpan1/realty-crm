@@ -1,12 +1,9 @@
 one-info {
   display: block;
   margin-bottom: 130px;
-  .md-button {
-    min-width: 110px;
-  }
 
   md-switch {
-    margin: 2px 0;
+    margin: 2px 0 0 0 !important;
     &:last-of-type {
       margin-right: 0;
     }
@@ -20,12 +17,12 @@ one-info {
 .oneInfo-image-container {
   position: relative;
   background: white;
-  width: 664px;
+  width: 671px;
   height: 442px;
   text-align: center;
   img {
+    max-width: 671px;
     max-height: 442px;
-    max-width: 664px;
   }
 }
 
@@ -46,5 +43,13 @@ one-info {
       margin: 0 auto;
       background: #fff;
     }
+  }
+  &__notes,
+  &__contacts {
+    min-height: 260px;
+  }
+
+  &__notes-text {
+    min-height: 168px;
   }
 }

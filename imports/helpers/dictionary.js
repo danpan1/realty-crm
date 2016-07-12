@@ -17,30 +17,30 @@ export const dictionary = {
   ],
   clientStatuses: ['archive', 'realtor', 'hot'],
   composition: [
-    {id: 0, name: 'Для всех'},
-    {id: 1, name: 'Семейная пара'},
-    {id: 2, name: 'Одна женщина'},
-    {id: 3, name: 'Две женщины'},
-    {id: 4, name: 'Один мужчина'},
-    {id: 5, name: 'Двое мужчин'},
-    {id: 6, name: 'Более двух человек'}
+    {id: 0, name: 'Для всех', cianId : 1},
+    {id: 1, name: 'Семейная пара', cianId : 2},
+    {id: 2, name: 'Одна женщина', cianId : 3},
+    {id: 3, name: 'Две женщины', cianId : 3},
+    {id: 4, name: 'Один мужчина', cianId : 4},
+    {id: 5, name: 'Двое мужчин', cianId : 4},
+    {id: 6, name: 'Более двух человек', cianId : 1}
   ],
   conditions: [
     // {id: 'phone', name: 'Телефон', cian : 'телефон'},
-    {id: 'animal', name: 'С животными', cian: 'можно с животными', avito : 'Можно с питомцами'},
-    {id: 'balcony', name: 'Балкон', cian: 'балкон', avito : 'Балкон / лоджия'},
-    {id: 'bathroom', name: 'Ванна', cian: '', avito : ''},
-    {id: 'children', name: 'С детьми', cian: 'можно с детьми', avito : 'Можно с детьми'},
-    {id: 'conditioner', name: 'Кондиционер', cian: 'кондиционер', avito : 'Кондиционер'},
-    {id: 'dishWasher', name: 'Посудомойка', cian: 'посудомоечная машина', avito : ''},
-    {id: 'elevator', name: 'Лифт', cian: '', avito : ''},
-    {id: 'furniture', name: 'Мебель', cian: 'жилая мебель', avito : ''},
-    {id: 'kitchen_furniture', name: 'Кух. мебель', cian: 'кухонная мебель', avito : ''},
-    {id: 'refrigerator', name: 'Холодильник', cian: 'холодильник', avito : 'Холодильник'},
-    {id: 'shower', name: 'Душевая кабина', cian: '', avito : ''},
-    {id: 'tv', name: 'Телевизор', cian: 'телевизор', avito : 'Телевизор'},
-    {id: 'washer', name: 'Стир. машина', cian: 'стиральная машина', avito : 'Стиральная машина'},
-    {id: 'wifi', name: 'Интернет', cian: 'интернет', avito :'Wi-Fi'}
+    {id: 'animal', name: 'С животными', cian: 'можно с животными', avito : 'Можно с питомцами', cianId : 'pets'},
+    {id: 'balcony', name: 'Балкон', cian: 'балкон', avito : 'Балкон / лоджия', cianId : 'balcon'},
+    {id: 'bathroom', name: 'Ванна', cian: '', avito : '', cianId : 'bath'},
+    {id: 'children', name: 'С детьми', cian: 'можно с детьми', avito : 'Можно с детьми', cianId : 'kids'},
+    {id: 'conditioner', name: 'Кондиционер', cian: 'кондиционер', avito : 'Кондиционер', cianId : 'conditioner'},
+    {id: 'dishWasher', name: 'Посудомойка', cian: 'посудомоечная машина', avito : '', cianId : 'dishwasher'},
+    {id: 'elevator', name: 'Лифт', cian: '', avito : '', cianId : ''},
+    {id: 'furniture', name: 'Мебель', cian: 'жилая мебель', avito : '', cianId : 'mebel'},
+    {id: 'kitchen_furniture', name: 'Кух. мебель', cian: 'кухонная мебель', avito : '', cianId : 'mebel_kitchen'},
+    {id: 'refrigerator', name: 'Холодильник', cian: 'холодильник', avito : 'Холодильник', cianId : 'rfgr'},
+    {id: 'shower', name: 'Душевая кабина', cian: '', avito : '', cianId : 'shower'},
+    {id: 'tv', name: 'Телевизор', cian: 'телевизор', avito : 'Телевизор', cianId : 'tv	'},
+    {id: 'washer', name: 'Стир. машина', cian: 'стиральная машина', avito : 'Стиральная машина', cianId : 'wm'},
+    {id: 'wifi', name: 'Интернет', cian: 'интернет', avito :'Wi-Fi', cianId : 'internet'}
   ],
   customerQualification: [
     {id: 0, name: 'Турист'},
@@ -58,18 +58,27 @@ export const dictionary = {
     {id: 3, name: '3'},
     {id: 4, name: '4'}
   ],
+  filterType: [
+    {id: 0, name: 'Аренда'},
+    {id: 1, name: 'Продажа'},
+    {id: 2, name: 'Аренда и Продажа'},
+  ],
   isNewBuilding: [
     {id: 0, name: 'Вторичка'},
     {id: 1, name: 'Новостройка'}
   ],
+  rentDuration: [
+    {id: 0, name: 'Длительный'},
+    {id: 1, name: 'Посуточно'}
+  ],
   materials: [
-    {id: 0, name: 'Панельный', cian: 'панельный'},
-    {id: 1, name: 'Монолитно-кирпичный', cian: 'кирпично-монолитный'},
-    {id: 2, name: 'Монолитный', cian: 'монолитный'},
-    {id: 3, name: 'Блочный', cian: 'блочный'},
-    {id: 4, name: 'Кирпичный', cian: 'кирпичный'},
-    {id: 5, name: 'Деревянный', cian: ''},
-    {id: 6, name: 'Сталинский', cian: 'сталинский'}
+    {id: 0, name: 'Панельный', cian: 'панельный', avito : 2, cianFeed : 1, avitoFeed : 'Панельный'},
+    {id: 1, name: 'Монолитно-кирпичный', cian: 'кирпично-монолитный', avito : 'отсутсвует', cianFeed : 4, avitoFeed : 'Монолитный'},
+    {id: 2, name: 'Монолитный', cian: 'монолитный', avito : 4, cianFeed : 3, avitoFeed : 'Монолитный'},
+    {id: 3, name: 'Блочный', cian: 'блочный', avito : 3, cianFeed : 5, avitoFeed : 'Блочный'},
+    {id: 4, name: 'Кирпичный', cian: 'кирпичный', avito : 1, cianFeed : 2, avitoFeed : 'Кирпичный'},
+    {id: 5, name: 'Деревянный', cian: '', avito : 5, cianFeed : 6, avitoFeed : 'Деревянный'},
+    {id: 6, name: 'Сталинский', cian: 'сталинский', avito : 'отсутсвует', cianFeed : 7, avitoFeed : 'Кирпичный'}
   ],
   //квалификация собственника от колл-центра
   operation: [
@@ -82,12 +91,20 @@ export const dictionary = {
     {id: 1, name: 'Нормальный'},
     {id: 2, name: 'Лояльный'}
   ],
+  priceList: [
+    {id: 0, price: 60,   descr: 'common'    },  // Обычные объекты
+    {id: 1, price: 250,  descr: 'meetingOrComission'   },  // Встреча ИЛИ платит комиссию
+    {id: 2, price: 400,  descr: 'meetCom'   },  // Встреча + платит комиссию
+    {id: 3, price: 2000, descr: 'exclusive' },  // Эксклюзив
+    {id: 4, price: 2100, descr: 'excMeet'   },  // Эксклюзив + Встреча ИЛИ Эксклюзив + Платит комиссию
+    {id: 5, price: 2200, descr: 'excComMeet'},  // Эксклюзив + Платит комиссию + Встреча
+  ],
   renovation: [
-    {id: 0, name: 'Косметический'},
-    {id: 1, name: 'Чистовая отделка'},
-    {id: 2, name: 'Отделка дорогими материалами'},
-    {id: 3, name: 'Качественный'},
-    {id: 4, name: 'Капитальный'}
+    {id: 0, name: 'Косметический', cianId : 1},
+    {id: 1, name: 'Евроремонт', cianId : 2},
+    {id: 2, name: 'Дизайнерский', cianId : 3},
+    {id: 3, name: 'Чистовая отделка', cianId : 1},
+    {id: 4, name: 'Бабушкин ремонт', cianId : 1}
   ],
   roomcount: [
     {id: 1, name: '1'},
@@ -112,6 +129,8 @@ export const dictionary = {
     {id: 1, name: 'транспортом'}
   ],
   type: [
+    {id: 1, name: 'вторичка'},
+    {id: 2, name: 'новостройка'},
     {id: 3, name: 'посуточно'},
     {id: 4, name: 'длительный срок'}
     //{id: 2, name: ''},
@@ -119,8 +138,8 @@ export const dictionary = {
     //{id: 4, name: 'длительный срок'}
   ],
   windowView: [
-    {id: 0, name: 'Панорамный вид'},
-    {id: 1, name: 'Вид на двор'},
-    {id: 2, name: 'Вид на проезжую часть'}
+    {id: 0, name: 'Панорамный вид', cianId : 3},
+    {id: 1, name: 'Вид на двор', cianId : 1},
+    {id: 2, name: 'Вид на проезжую часть', cianId : 2}
   ]
 };

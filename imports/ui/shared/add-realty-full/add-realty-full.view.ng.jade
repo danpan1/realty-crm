@@ -1,4 +1,5 @@
-md-tabs(md-dynamic-height md-border-bottom)
+md-progress-circular(ng-if='addRealtyFull.submitted' md-diameter='150' style='position:absolute;left:0;right:0;top:280px;margin:0 auto;')
+md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
     md-tab(label='1) Расположение' md-active='addRealtyFull.activeTab == 0' ng-click='addRealtyFull.activeTab = 0')
         md-content().ph-32.pv-16
             form(novalidate name="firstForm")
@@ -21,15 +22,16 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='70')
                             div(layout='row')
                                 realty-street(ng-model='addRealtyFull.locations.street' house='addRealtyFull.locations.house'
-                                dadata='addRealtyFull.locations.full' layout = 'row' flex='66').addRealtyFull-street.zh
-                                md-input-container(flex='33').ml-32.zh
+                                dadata='addRealtyFull.locations.full' layout = 'row' flex='66').addRealtyFull-street.mv-16.zh
+                                md-input-container(flex='33').ml-32.mv-16.zh
                                     label Квартира
                                     input(ng-model='addRealtyFull.locations.flat')
                                     span.bottom-label Видите только вы
 
                     div(layout='row')
-                        div(flex='70')
-                            subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
+                        div(flex='50')
+                            //subway-chips(ng-model='addRealtyFull.locations.subways' subways-embeded = 'addRealtyFull.locations.embedded.subways' flex)
+                            subway-choice(ng-model='addRealtyFull.locations.subway')
 
                     div(layout='row').mv-16
                         div(flex='45')
@@ -66,21 +68,23 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='45')
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required.zh
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
+                                    input(required name='floor' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
+                                    span(ng-show='secondForm.floor.$touched && secondForm.floor.$invalid').has-error {{secondForm.floor.$viewValue.length == 0 ? 'Необходимо заполнить' : 'Только цифры'}}
                                 md-input-container(flex).mv-0.ml-32.form-required.zh
-                                    input(required ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
+                                    input(required name='floormax' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
+                                    span(ng-show='secondForm.floormax.$touched && secondForm.floormax.$invalid').has-error {{secondForm.floormax.$viewValue.length == 0 ? 'Необходимо заполнить' : 'Только цифры'}}
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required.zh
-                                    input(required name='square' ng-pattern="/^[0-9.]{1,}$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
-                                    span(ng-show='secondForm.square.$viewValue.length > 0 && secondForm.square.$touched && secondForm.square.$invalid').has-error Неверно заполнено
+                                    input(required name='square' ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
+                                    span(ng-show='secondForm.square.$viewValue.length > 0 && secondForm.square.$touched && secondForm.square.$invalid').has-error Только цифры или запятая
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9.]{1,}$/" name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
-                                    span(ng-show='secondForm.livingSquare.$touched && secondForm.livingSquare.$invalid').has-error Неверно заполнено
+                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
+                                    span(ng-show='secondForm.livingSquare.$touched && secondForm.livingSquare.$invalid').has-error Только цифры или запятая
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9.]{1,}$/" name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
-                                    span(ng-show='secondForm.kitchenSquare.$touched && secondForm.kitchenSquare.$invalid').has-error Неверно заполнено
+                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
+                                    span(ng-show='secondForm.kitchenSquare.$touched && secondForm.kitchenSquare.$invalid').has-error Только цифры или запятая
                             //div().mt-16
                             //    p().md-subhead.add-realty-full-text Площадь комнат м²
                             //div(layout='row' layout-align='start center' flex).md-input-container.mt-16
@@ -188,7 +192,7 @@ md-tabs(md-dynamic-height md-border-bottom)
                         div(flex='50').mv-16
                             div(layout='row' layout-align='space-between start')
                                 md-input-container(flex='45').mv-0.zh
-                                    input(ng-model='addRealtyFull.realty.realtor.clientpercent' placeholder='От прямого клиента')
+                                    input(ng-model='addRealtyFull.realty.realtor.clientpercent' placeholder='От своего клиента')
                                 md-input-container(flex='55').mv-0.ml-32.zh
                                     input(ng-model='addRealtyFull.realty.realtor.partnerpercent' placeholder='От клиента другого агента')
 

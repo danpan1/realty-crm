@@ -1,20 +1,19 @@
 import {Meteor} from 'meteor/meteor';
 // import {Realty} from '../realty';
 // import {Clients} from '../clients';
+//Meteor.startup(function () {
+//  process.env.MAIL_URL = "smtp://object@e.getrent.pro:4KtnYEN7CJyj@smtp.mailgun.org:587";
+//});
 Meteor.startup(function () {
-  process.env.MAIL_URL = "smtp://postmaster@e.getrent.pro:d97a939b0dd55b626aec13e78cd559a3@smtp.mailgun.org:587";
-  
-  // try {
-  //   Realty.insert({_id: 'autoincrement', value: 0});
-  // } catch (err) {
-  //   // Will always get here once the doc's in place, so just ignore
-  // }
-  // // console.log('Clients');
-  // try {
-  //   Clients.insert({_id: 'autoincrement', value: 0});
-  // } catch (err) {
-  //   // Will always get here once the doc's in place, so just ignore
-  // }
-  // db.realty.insert({_id: 'autoincrement', value: 0});
-
+  process.env.MAIL_URL = "smtp://superdenceo@gmail.com:k3pJBGET7pnY@smtp-pulse.com:2525";
 });
+/*Meteor.startup(function () {
+  smtp = {
+    username: 'ilya.karev1000@mail.ru',   // eg: server@gentlenode.com
+    password: 'futurama1000',   // eg: 3eeP1gtizk5eziohfervU
+    server:   'smtp.mail.ru',  // eg: mail.gandi.net
+    port: 25
+  }
+  process.env.MAIL_URL = 'smtp://ilya.karev1000%40mail.ru:futurama1000@smtp.mail.ru:25';
+});*/
+//

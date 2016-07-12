@@ -17,6 +17,10 @@ export const RealtyOperatorSchema = new SimpleSchema({
     type: Date,
     optional: true
   },
+  meetingTime: {
+    type: Date,
+    optional: true
+  },
   laterCount: {
     type: Number,
     max: 9,
@@ -33,6 +37,14 @@ export const RealtyOperatorSchema = new SimpleSchema({
   comment: {
     type: String,
     max: 500,
+    optional: true
+  },
+  oceanAdd: {
+    type: Number,
+    optional: true
+  },
+  oceanPrice: {
+    type: Number,
     optional: true
   }
 });

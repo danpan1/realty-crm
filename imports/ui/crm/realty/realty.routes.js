@@ -26,10 +26,6 @@ export default function routes($stateProvider) {
       url: '/review',
       template: '<one-review/>'
     })
-    .state('crm.realty.one.email', {
-      url: '/email',
-      template: '<one-email/>'
-    })
     .state('crm.realty.one.info', {
       url: '/info',
       template: '<one-info/>'
@@ -37,6 +33,11 @@ export default function routes($stateProvider) {
     .state('crm.realty.one.connections', {
       url: '/connections?:assort',
       template: '<one-connections/>',
+      controller: function ($state, $stateParams) {}
+    })
+    .state('crm.realty.one.connections.email', {
+      url: '/email?:clientId',
+      template: '<one-email/>',
       controller: function ($state, $stateParams) {}
     })
     .state('crm.realty.list.new', {

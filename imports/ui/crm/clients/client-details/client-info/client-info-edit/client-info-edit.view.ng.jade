@@ -13,12 +13,7 @@ div(ng-if="clientInfoEdit.show")
                 div(flex='25')
                     h2 Особенности клиента
                     div(layout='column')
-                        md-input-container(flex).md-block.mt-16
-                            label Цена:
-                            input(ng-model='clientInfoEdit.client.need.price'
-                                  ng-price-filter,
-                                  ng-keypress="clientInfoEdit.client.need.price = ' '+this.clientInfoEdit.client.need.price"
-                                  ng-init="clientInfoEdit.ngOnInit(clientInfoEdit.client.need.price)")
+                        price-mask(ng-if='clientInfoEdit.client' label='"Цена"' price='clientInfoEdit.client.need.price' optflex='')
                         div(layout='row')
                             md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='clientInfoEdit.client.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ clientInfoEdit.client.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
                         div(layout='row' layout-align='start center')
@@ -31,7 +26,14 @@ div(ng-if="clientInfoEdit.show")
                         div().mv-16
                             div().md-subhead В поиске с 
                             md-datepicker(ng-model='clientInfoEdit.client.searchStartDate', md-placeholder='Enter date' flex)
-
+                        div().mv-16
+                            md-input-container().mv-0
+                                label Чем занимается 
+                                input(ng-model='clientInfoEdit.client.business', md-select-on-focus='')
+                        div().mv-16
+                            md-input-container().mv-0
+                                label Возраст 
+                                input(ng-model='clientInfoEdit.client.age', md-select-on-focus='')
                 div(flex='25')
                     h2 Объект
                     div(layout='row')
@@ -60,8 +62,7 @@ div(ng-if="clientInfoEdit.show")
                         div().vertical-divider-2
                         div(layout='row' layout-fill)
                             div(flex)
-                                subway-chips(ng-model='clientInfoEdit.client.need.subways' subways-embeded='clientInfoEdit.client.need.embedded.subways' flex
-                                ng-if='clientInfoEdit.client.need.subways')
+                                subway-chips(ng-model='clientInfoEdit.client.need.subways' subways-embeded='clientInfoEdit.client.need.embedded.subways' flex)
                                 div(layout='row' layout-align='start end').mv-32
                                     md-input-container(flex).mv-0.pv-0.zh
                                         input(ng-model='clientInfoEdit.client.need.metroTime', placeholder='минут')
@@ -72,6 +73,9 @@ div(ng-if="clientInfoEdit.show")
                     h2 Что важно клиенту
                     md-input-container().mv-0
                         textarea(ng-model='clientInfoEdit.client.note', md-maxlength='300', rows='3', md-select-on-focus='' )
+                    h2 Email
+                    md-input-container().mv-0
+                        input(ng-model='clientInfoEdit.client.email', md-select-on-focus='')
                         
         div(flex='10').mt-16.ph-32
             div(layout='row' layout-align='center center')

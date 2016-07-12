@@ -1,0 +1,35 @@
+.one-review-moderator {
+  &__photo {
+    max-width: 186px;
+    margin-top: 12px;
+  }
+  &__title {
+    color: #106cc8;
+  }
+  &__text {
+
+  }
+  &__info {
+    width: 332px;
+    border-radius: 14px;
+    background: #f1f8fd;
+  }
+  &__name {
+    color: #106cc8;
+  }
+  &__date {
+    color: #333;
+  }
+  &__in-total-wrapper {
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  &__separator {
+    width: 280px;
+    border-bottom: 1px solid #cbcbcb;
+  }
+  &__btn-send {
+    min-width: 280px !important;
+  }
+}

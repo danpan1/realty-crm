@@ -10,7 +10,7 @@ div(ng-if="oneInfoEdit.show")
                     md-icon(md-svg-icon='svg/icon-close.svg')
         div.ph-32.modal__changes(layout="row" flex="90")
             div(layout='row' layout-align='space-between start')
-                div(flex='25')
+                //div(flex='25')
                     h2 Месторасположение
                     div(layout='row')
                         div(flex)
@@ -29,10 +29,10 @@ div(ng-if="oneInfoEdit.show")
                                         md-option(ng-value='transport.id',
                                         ng-repeat="transport in oneInfoEdit.dictionary.transport") {{transport.name}}
                    
-                div(flex='25')
+                div(flex='40')
                     h2 Объект
                     div(layout='row')
-                        div().vertical-divider-1
+                        div(style='left:47% !important;').vertical-divider-1
                         div(flex)
                             md-input-container().md-block
                                 label Тип здания:
@@ -88,10 +88,10 @@ div(ng-if="oneInfoEdit.show")
                                     md-select(ng-model="oneInfoEdit.realty.details.elevatorBig")
                                         md-option(ng-value='i' ng-repeat="i in [0,1,2,3,4]") {{i}}
                 
-                div(flex='25')
+                div(flex='40')
                     h2 Условия
                     div(layout='row')
-                        div().vertical-divider-2
+                        //div().vertical-divider-2
                         div(flex)
                             md-input-container(flex).md-block.mv-16.form-required
                                 md-select(required ng-model='oneInfoEdit.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
@@ -108,13 +108,18 @@ div(ng-if="oneInfoEdit.show")
                                       ng-price-filter
                                       ng-keypress="oneInfoEdit.realty.price = ' '+this.oneInfoEdit.realty.price"
                                       ng-init="oneInfoEdit.ngOnInit(oneInfoEdit.realty.price)")
-                            md-input-container(flex).md-block.mv-32.zh
+                            //md-input-container(flex).md-block.mv-32.zh
                                 md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='oneInfoEdit.realty.comissionLoyal' flex flex-offset='5'
-                                aria-label="Checkbox 1"
-                                ).md-primary.md-subhead {{oneInfoEdit.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
-                            md-input-container(flex ng-if='oneInfoEdit.realty.comissionLoyal').md-block.mv-32.zh
+                                aria-label="Checkbox 1").md-primary.md-subhead {{oneInfoEdit.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
+                            //md-input-container(flex ng-if='oneInfoEdit.realty.comissionLoyal').md-block.mv-32.zh
                                 input(type="text"
                                 ng-model='oneInfoEdit.realty.comission' placeholder='Сколько готов платить комиссии (% или рублей)')
+                            div(layout='row').mt-16
+                                md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='oneInfoEdit.realty.comissionLoyal' flex-offset='5' aria-label="Checkbox 1").md-primary.md-subhead {{ oneInfoEdit.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
+                            div(layout='row' layout-align='start center')
+                                md-input-container(md-no-float layout='row' ng-if='oneInfoEdit.realty.comissionLoyal').add-client-full__comission-percent.ml-8.mv-0.zh
+                                    input(type="text" ng-model='oneInfoEdit.realty.comission')
+                                span(ng-if='oneInfoEdit.realty.comission').md-subhead %
                             md-input-container(flex).md-block.mv-32.zh
                                 label Процент от клиента
                                 input(ng-model="oneInfoEdit.realty.realtor.clientpercent")

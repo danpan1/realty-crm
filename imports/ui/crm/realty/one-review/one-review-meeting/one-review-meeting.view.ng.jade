@@ -1,0 +1,4 @@
+div(ng-if='oneReviewMeeting.realty')
+    one-review-meeting-analytics(realty='oneReviewMeeting.realty')
+    one-review-meeting-browsing(save-review='oneReviewMeeting.saveReview()' is-checkout='oneReviewMeeting.realty.realtor.isCheckout')
+    one-review-meeting-exclusive(save-review='oneReviewMeeting.saveReview()' is-exclusive='oneReviewMeeting.realty.realtor.isExclusive')

@@ -1,6 +1,7 @@
 //// возможно customers и users это одно и то же
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+//import {OperatorSchema} from '../imports/api/users/schemas/operator.schema';
 var Schema = {};
 
 Schema.Users = new SimpleSchema({
@@ -41,10 +42,19 @@ Schema.Users = new SimpleSchema({
     type: Object,
     optional: true
   },
+  'profile.balance': {
+    type: Number,
+    decimal: true,
+    optional: true
+  },
   'profile.name': {
     type: String,
     optional: true
   },
+  //'profile.operator': {
+  //  type: OperatorSchema,
+  //  optional: true
+  //},
   'profile.phone': {
     type: String
   },
@@ -58,6 +68,30 @@ Schema.Users = new SimpleSchema({
   },
   'profile.urlVk': {
     type: String,
+    optional: true
+  },
+  'profile.amoCrm': {
+    type: Object,
+    optional: true
+  },
+  'profile.amoCrm.id': {
+    type: String,
+    optional: true
+  },
+  'profile.amoCrm.timestamp': {
+    type: Number,
+    optional: true
+  },
+  'profile.getResponse': {
+    type: Object,
+    optional: true
+  },
+  'profile.getResponse.rieltor_guru': {
+    type: Boolean,
+    optional: true
+  },
+  'profile.getResponse.rieltor_guru_clients': {
+    type: Boolean,
     optional: true
   },
   takenRealty: {

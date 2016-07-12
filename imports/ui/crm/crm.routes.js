@@ -13,6 +13,10 @@ export default function routes($stateProvider) {
     .state('crm.add-role', {
       url: '/add-role',
       template: '<add-role/>'
+    })
+    .state('crm.add-operator', {
+      url: '/add-operator',
+      template: '<add-role-operator/>'
     });
  
 }

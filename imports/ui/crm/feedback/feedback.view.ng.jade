@@ -1,10 +1,35 @@
-div(md-whiteframe='1').topbar
-    div(layout='row' layout-align='start center' layout-fill)
-        md-button(aria-label='Задать вопрос' href = 'https://vk.com/write19844032' target='_blank').md-primary.md-raised.mh-16 Задать вопрос
-//div().mv-16
-//    div(md-whiteframe='1' ng-repeat='info in feedback.feedbackData').mv-8
-//        div(ng-click='info.show = !info.show').panel__heading.ph-16.pv-8
-//            div().md-subhead {{info.question}}
-//        div(ng-class='{"feedback__show pv-16":info.show,"feedback__hide pv-0":!info.show}' ng-style='info.height').md-body-1.ph-16.feedback__answer-tab {{info.answer}}
-//            div(layout='column' layout-align='start end')
-//                md-button(ng-click='info.show = !info.show').md-primary.md-raised Скрыть
+div().mv-16
+    //div(md-whiteframe='1' ng-repeat='info in feedback.feedbackData').mv-8
+        div(ng-click='info.show = !info.show').panel__heading.ph-16.pv-8
+            div().md-subhead {{info.question}}
+        div(ng-class='{"feedback__show pv-16":info.show,"feedback__hide pv-0":!info.show}' ng-style='info.height').md-body-1.ph-16.feedback__answer-tab {{info.answer}}
+            div(layout='column' layout-align='start end')
+                md-button(ng-click='info.show = !info.show').md-primary.md-raised Скрыть
+    div(md-whiteframe='1').mv-8
+        div(ng-click='feedback.info1 = !feedback.info1').panel__heading.ph-16.pv-8
+            div().md-subhead Какова цена объектов в Океане объектов?
+        div(ng-class='{"feedback__show pv-16":feedback.info1,"feedback__hide pv-0":!feedback.info1}' ng-style='info.height').md-body-1.ph-16.feedback__answer-tab 
+            ul
+                li Обычные объекты - 60 руб.
+                li Встреча - 250 руб.
+                li Платит комиссию - 250 руб.
+                li Эксклюзив - 2000 руб.
+                li Встреча + платит комиссию - 400 руб.
+                li Эксклюзив + Встреча - 2100 руб.
+                li Эксклюзив + Платит комиссию - 2100 руб.
+                li Эксклюзив + Платит комиссию + Встреча - 2200 руб.
+            div(layout='column' layout-align='start end')
+                md-button(ng-click='feedback.info1 = !feedback.info1').md-primary.md-raised Скрыть
+    div(md-whiteframe='1').mv-8
+        div(ng-click='feedback.info2 = !feedback.info2').panel__heading.ph-16.pv-8
+            div().md-subhead Контакты организации
+        div(ng-class='{"feedback__show pv-16":feedback.info2,"feedback__hide pv-0":!feedback.info2}' ng-style='info.height').md-body-1.ph-16.feedback__answer-tab
+            ul
+                li ИП Мурыгин Александр Иванович
+                li ИНН 503199439647
+                li ОГРН/ОГРНИП 313503114900040
+                li Юридический адрес 142402, РОССИЯ, обл. Московская, р-н. Ногинский, г. Ногинск, ул.Ильича, д.81, кв.137
+                li Фактический адрес 142402, РОССИЯ, обл. Московская, р-н. Ногинский, г. Ногинск, ул.Ильича, д.81, кв.137
+                li Контактный телефон: +7(925) 075-95-87
+            div(layout='column' layout-align='start end')
+                md-button(ng-click='feedback.info2 = !feedback.info2').md-primary.md-raised Скрыть

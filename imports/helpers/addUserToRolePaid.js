@@ -11,7 +11,8 @@ import {Roles} from 'meteor/alanning:roles';
 
 Meteor.methods({
   addUsersToRolePaid,
-  addUsersToRolePaidSale
+  addUsersToRolePaidSale,
+  addUsersToRoleOperator
 });
 
 /**
@@ -53,6 +54,38 @@ export function addUsersToRolePaidSale(userEmail) {
       Roles.addUsersToRoles(user._id, 'paidSale');
       console.log('userAdded');
       return 'userAdded Sale';
+    } else {
+      console.log('user not found');
+      return 'user not found';
+    }
+  } else {
+    console.log('no Access');
+  }
+}
+
+export function addUsersToRoleOperator(userEmail, addOrNot) {
+
+  if (Meteor.isServer && Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'staff')) {
+    console.log(userEmail);
+    let user = Meteor.users.findOne({'emails.address': userEmail});
+    if (user) {
+      console.log(user);
+      if (addOrNot === true) {
+        if(Roles.userIsInRole(user._id, 'operator')) {
+          return 'У пользователя уже есть роль "оператор"';
+        }
+        Roles.addUsersToRoles(user._id, 'operator');
+        console.log('userAddedOperator'); 
+        return 'Пользователю добавлена роль "Оператор"';
+      } else if (addOrNot === false){
+        if(!Roles.userIsInRole(user._id, 'operator')) {
+          return 'У пользователя нет роли оператор';
+        }
+        Roles.removeUsersFromRoles(user._id, 'operator');
+        console.log('userRemovedOperator');
+        return 'Пользователь лишен роли "Оператор"';
+      }
+      
     } else {
       console.log('user not found');
       return 'user not found';

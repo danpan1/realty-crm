@@ -25,5 +25,9 @@ export default function routes($stateProvider) {
     .state('call-center.management', {
       url: '/management',
       template: '<management/>'
+    })
+    .state('call-center.parsing-stats', {
+      url: '/parsing-stats',
+      template: '<parsing-stats/>'
     });
 }

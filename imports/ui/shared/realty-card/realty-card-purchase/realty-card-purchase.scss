@@ -1,0 +1,53 @@
+realty-card {
+  .realty-card__details-text {
+    line-height: 24px;
+  }
+}
+
+.realty-card {
+  &__btn-save {
+  color: #106cc8 !important;
+  }
+  &__btn-hide {
+  font-size: 12px !important;
+  text-transform: none !important;
+  color: #898989 !important;
+  }
+  &__object-own{
+    background: darkseagreen;
+    color: #fff;
+    border-radius: 4px;
+  }
+  &__images-qty{
+    padding: 0px 7px;
+    border: 1px solid #898989;
+    z-index: 10;
+    background: #fff;
+    position: absolute;
+    min-height: 15px;
+    line-height: 20px;
+    margin: -20px 10px;
+  }
+  &__hidden-img{
+    position: relative;
+    & > span{
+      display: none;
+      position: absolute;
+      padding: 5px 10px;
+      border: 1px solid #898989;
+      z-index: 10;
+      background: #fff;
+      font-size: 13px;
+      line-height: 14px;
+      width: 115px;
+      margin: 20px -39px;
+    }
+    &:hover > span{
+      display: block;
+    }
+  }
+}
+
+.subscription-dialog {
+  max-width: 670px !important;
+}

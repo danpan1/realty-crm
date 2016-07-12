@@ -13,7 +13,7 @@ angular
   .module('app', ['app.custom', CRM, CallCenter, auth]).config(config).run(run);
 
 angular
-  .module('app.custom', [uiRouter, 'ngFileUpload', 'ngSanitize', ngMaterial, 'accounts.ui']);
+  .module('app.custom', [uiRouter, 'ngFileUpload', 'ngSanitize', ngMaterial, 'accounts.ui', 'angular-md5']);
 
 function onReady() {
   angular.bootstrap(document, [
@@ -40,18 +40,22 @@ function run($rootScope, $state) {
   $rootScope.$on('$stateChangeError',
     (event, toState, toParams, fromState, fromParams, error) => {
       if (error === 'AUTH_REQUIRED') {
-        $state.go('auth.login');
+        // $state.go('auth.login');
+        //система.миринедвижимость.рф
+        window.location = 'http://xn--80ajirwbh.xn--b1adcggadb2aietqyp4n.xn--p1ai/';
       }
     }
   );
 
   $rootScope.$on('$stateChangeStart', function (event, toState, fromParams) {
 
-    if (Meteor.userId() == null && toState.name !== 'auth.login' && toState.name !== 'auth.register' && toState.name !== 'auth.resetpw') {
+    if (Meteor.userId() == null && toState.name !== 'auth.login' && toState.name !== 'auth.register' && toState.name !== 'auth.resetpw' && toState.name !== 'crm.feedback') {
       console.log(toState.name);
       event.preventDefault();
       console.log("Please login");
-      $state.go('auth.login');
+      // $state.go('auth.login');
+      //система.миринедвижимость.рф
+      window.location = 'http://xn--80ajirwbh.xn--b1adcggadb2aietqyp4n.xn--p1ai/';
     }
   });
 }

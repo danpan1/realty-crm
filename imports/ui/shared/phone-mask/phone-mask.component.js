@@ -28,6 +28,24 @@ class PhoneMask {
     }
   }
   
+  filterPhoneChanged (e) {
+    console.log('filterPhoneChanged');
+    let oldValue = e.phoneMask.visualPhone.split('');
+    let value = '';
+    for(var i in oldValue){
+      if(oldValue[i].match(/\d/)){
+          value = value + oldValue[i];
+      }
+    }
+    this.phone = value;
+    var country = this.phone[0];
+    var city = this.phone.slice(1, 4);
+    var number = this.phone.slice(4);
+    city = city ? ' (' + city : ' (';
+    number = number ? number.length > 3 ? number.length > 5 ? ') ' + number.slice(0, 3) + '-' + number.slice(3,5) + '-' + number.slice(5) :  ') ' + number.slice(0, 3) + '-' + number.slice(3) : ') ' + number : '';
+    this.visualPhone = (country + city + number).trim();
+  }
+  
   filterPhoneKeyDown (e) {
     if (!this.visualPhone || this.visualPhone[0] !== '8') this.visualPhone = '8' + (this.visualPhone ? this.visualPhone : '');
     let oldValue = this.visualPhone.split('');

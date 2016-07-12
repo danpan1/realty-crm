@@ -32,6 +32,10 @@ Clients.allow({
 });
 
 Clients.Schema = new SimpleSchema({
+  age: { // возраст
+    type: Number,
+    optional: true
+  },
   business: { // чем занимается
     type: String,
     optional: true
