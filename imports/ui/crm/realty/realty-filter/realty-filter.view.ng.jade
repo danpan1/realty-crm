@@ -1,7 +1,7 @@
-div(md-whiteframe='2').realty-filter.pl-32.pr-16.pt-16.pb-32
+div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}").realty-filter.pl-32.pr-16.pt-16.pb-32
     div(layout='row', layout-align="space-between center")
-        div().realty-filter__divider
-        div().realty-filter__divider
+        div(ng-if='realtyFilter.parent == "ocean"').realty-filter__divider
+        div(ng-if='realtyFilter.parent == "ocean"').realty-filter__divider
         div(flex='30').realty-filter__col.mt-16
             div(layout='column' layout-align='space-between none')
                 div(flex).mb-32

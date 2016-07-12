@@ -158,6 +158,10 @@ class RealtyNewList {
     this.slideShowImages = images;
   }
 
+  useSavedFilter (filter) {
+    this.filter = filter;
+  }
+
 }
 
 const moduleName = 'realtyNewList';

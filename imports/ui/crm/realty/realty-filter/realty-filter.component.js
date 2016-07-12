@@ -15,51 +15,48 @@ class RealtyFilter {
     $reactive(this).attach($scope);
     let vm = this;
     this.$timeout = $timeout;
-    this.helpers({
-      realtyCount: () => {
-        this.realtyCount = false;
-        let с = CountsDan.findOne({});
-        if (с) {
-          return с.count;
-        } else {
-          return 0;
-        }
-      }
-    });
     this.dictionary = dictionary;
     this.location = $location;
     this.stateParams = $stateParams;
     this.state = $state;
     this.filter = {};
     this.fake = true;
-    
-    if (window.localStorage["filter"] != undefined && window.localStorage["filter"]) {
-      console.log(JSON.parse(window.localStorage["filter"]));
-      this.filter = JSON.parse(window.localStorage["filter"]);
-      var roomList = this.filter.roomcount;
-      this.filter.roomcount = [];
-      for(var i in roomList) {
-        switch (roomList[i].id) {
-          case 1:
-            this.toggleRoomcount(this.dictionary.roomcount[0]);
-            break;
-          case 2:
-            this.toggleRoomcount(this.dictionary.roomcount[1]);
-            break;
-          case 3:
-            this.toggleRoomcount(this.dictionary.roomcount[2]);
-            break;
-          case 99:
-            this.toggleRoomcount(this.dictionary.roomcount[3]);
-            break;
+    console.log('parent: '+this.parent);
+    if(this.parent == 'ocean') {
+      this.helpers({
+        realtyCount: () => {
+          this.realtyCount = false;
+          let с = CountsDan.findOne({});
+          if (с) {
+            return с.count;
+          } else {
+            return 0;
+          }
+        }
+      });
+      if (window.localStorage["filter"] != undefined && window.localStorage["filter"]) {
+        console.log(JSON.parse(window.localStorage["filter"]));
+        this.filter = JSON.parse(window.localStorage["filter"]);
+        var roomList = this.filter.roomcount;
+        this.filter.roomcount = [];
+        for(var i in roomList) {
+          switch (roomList[i].id) {
+            case 1:
+              this.toggleRoomcount(this.dictionary.roomcount[0]);
+              break;
+            case 2:
+              this.toggleRoomcount(this.dictionary.roomcount[1]);
+              break;
+            case 3:
+              this.toggleRoomcount(this.dictionary.roomcount[2]);
+              break;
+            case 99:
+              this.toggleRoomcount(this.dictionary.roomcount[3]);
+              break;
+          }
         }
       }
-    }
-    //this.filter.type = this.stateParams.operation == 'sale' ? 1 : 4;
-    
-    console.log('FILTER: ');
-    console.log(this.filter);
-    
+    }    
   }
   
   clearFilter () {
@@ -72,13 +69,19 @@ class RealtyFilter {
   }
   
   suitRealty () {
-    window.localStorage["filter"] = JSON.stringify(this.filter, function (key, val) {
-      if (key == '$$hashKey') {
-        return undefined;
-      }
-      return val;
-    });
-    console.log(window.localStorage["filter"]);
+    // Если это фильтр океана, сохраняем в localStorage
+    if (this.parent == 'ocean') {
+      window.localStorage["filter"] = JSON.stringify(this.filter, function (key, val) {
+        if (key == '$$hashKey') {
+          return undefined;
+        }
+        return val;
+      });
+      console.log(window.localStorage["filter"]);
+    // Если это кастомный фильтр, просто сохраняем в переменную
+    } else if (this.parent == 'custom') {
+      console.log(this.filter);
+    }
   }
 
   toggleRoomcount(item) {
@@ -97,7 +100,6 @@ class RealtyFilter {
   }
 
   existsRoomcount(item) {
-    // console.log(this.filter.roomcount);
     if(this.filter.roomcount) return this.filter.roomcount.indexOf(item) > -1;
   }
 
@@ -115,7 +117,8 @@ export default angular.module(moduleName, [
   bindings: {
     filter: '=',
     roomcount: '=',
-    realtyCount: '=ngModel'
+    realtyCount: '=',
+    parent: '<'
   },
   controllerAs: moduleName,
   controller: RealtyFilter

@@ -1,4 +1,4 @@
-realty-new-list-filter(ng-if='realtyNewList.filterModalOpened' modal='realtyNewList.filterModalOpened')
+realty-new-list-filter(filter-modal-opened='realtyNewList.filterModalOpened' use-saved-filter='realtyNewList.useSavedFilter(filter)' user='realtyNewList.user' ng-if='realtyNewList.user' ng-show='realtyNewList.filterModalOpened' modal='realtyNewList.filterModalOpened')
 div(md-whiteframe="1")
     div(layout='row' layout-align='space-between none').ph-16
         div(flex='55' layout='row' layout-align='space-between none')
@@ -12,7 +12,7 @@ div(md-whiteframe="1")
             md-select(ng-model='realtyNewList.filterCity' aria-label='Выбрать город')
                 md-option(ng-value='0') Москва
 
-realty-filter(filter='realtyNewList.filter' ng-if='realtyNewList.realtyCount !== undefined' roomcount='realtyNewList.roomcount' ng-model='realtyNewList.realtyCount')
+realty-filter(parent='"ocean"' filter='realtyNewList.filter' ng-if='realtyNewList.realtyCount !== undefined' roomcount='realtyNewList.roomcount' realty-count='realtyNewList.realtyCount')
 slide-show(slides-list='realtyNewList.slideShowImages' isshown='realtyNewList.showSlider')
 //div {{realtyNewList.filter}} фильтр
 
