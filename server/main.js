@@ -12,6 +12,7 @@ import '../imports/api/robo-invoices/robokassa.method';
 import '../imports/api/parsercounters';
 import '../imports/api/relations';
 import '../imports/api/balance';
+import '../imports/api/balance/createBalance.method';
 import '../imports/startup';
 import '../imports/api/realty';
 import '../imports/api/clients';
