@@ -45,7 +45,7 @@ class RealtyCard {
     
     if((vm.realty.operator && vm.realty.operator.oceanAdd) || (vm.realty.operator && vm.realty.operator.meetingTime) || (vm.realty.realtor && vm.realty.realtor.isExclusive)){
       if (vm.realty.realtor && vm.realty.realtor.isExclusive) vm.reason = 'exclusive';
-      else if (vm.realty.operator && vm.realty.operator.oceanAdd) vm.reason = 'comission';
+      else if (vm.realty.owner && vm.realty.owner.isComission) vm.reason = 'comission';
       else if (vm.realty.operator && vm.realty.operator.meetingTime) vm.reason = 'meeting';
       let newTime = new Date().getTime();
       let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
@@ -68,7 +68,7 @@ class RealtyCard {
         }
         this.timeoutFunc(); 
       } else {
-        this.minutes = 0;
+        this.minutes = -1;
         if(this.realty.status != 'taken') this.updateRealty(this.realty._id, 'skip');
       }
     }

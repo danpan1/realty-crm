@@ -96,7 +96,8 @@ function operatorGet() {
 }
 
 function operatorSave(realty) {
-
+  console.log('========operatorSave owner: ');
+  console.log(realty.owner);
   if (Meteor.isServer) {
     realty.operator.id = Meteor.userId();
     realty.status = 'ocean';
