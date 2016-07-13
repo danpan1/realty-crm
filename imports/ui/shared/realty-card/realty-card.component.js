@@ -20,6 +20,7 @@ class RealtyCard {
     this.timeout = $timeout;
     this.show = true;
     this.mdDialog = $mdDialog;
+    this.specNumber = 0;
     var vm = this;
 
     this.contacts = {};   
