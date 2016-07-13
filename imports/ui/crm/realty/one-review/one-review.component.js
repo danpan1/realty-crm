@@ -47,14 +47,8 @@ class OneReview {
   }
 
   /* Сохранение описания и заголовка на сервер */
-  saveNewDescription(id, descr) {
-    console.log('Saving descr started')
-    if (descr) {
-      this.descriptionSaved = true;
-      this.$timeout(()=> {
-        this.descriptionSaved = false;
-      }, 3000)
-    }
+  saveNewDescription(id) {
+    console.log(id);
     if (this.uploadImagesNormalLength !== 0 || this.uploadThumbnailsLength !== 0) {
       console.log(this.uploadImagesNormalLength);
       console.log(this.uploadThumbnailsLength);

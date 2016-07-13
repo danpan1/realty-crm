@@ -1,3 +1,9 @@
+// Убираем стрелочки в input[type='button']
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none; margin: 0px;
+}
+
 img {
   max-width: 100%;
 }
@@ -6,6 +12,9 @@ img {
   &-egg{
     background-color: #fcf9e6;
   }
+}
+.nowrap{
+  white-space: nowrap;
 }
 
 layout > md-toolbar {

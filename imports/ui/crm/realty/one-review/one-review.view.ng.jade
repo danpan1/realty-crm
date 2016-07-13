@@ -9,7 +9,7 @@ md-tabs(md-selected="3" md-dynamic-height)
             one-review-photo(thumbcontrol='oneReview.uploadThumbnailsLength' imagecontrol='oneReview.uploadImagesNormalLength' realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
     md-tab(label='3. Объявление')
         md-content
-            one-review-desc(realty='oneReview.realty')
+            one-review-desc(realty='oneReview.realty' save-review='oneReview.saveNewDescription(id)')
     md-tab(label='4. Реклама')
         md-content
             one-review-advert(realty='oneReview.realty')

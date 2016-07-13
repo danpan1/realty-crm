@@ -54,8 +54,6 @@ export function buyRealtyOcean(realtyId, realtyPrice, setStatus) {
     //todo price опеределить по параметрамs
     let price = realtyPrice || 60;
 
-    console.log(oldStatus);
-
     // Объект должен добавляться либо из Океана, либо из связей (тогда аргумент setStatus будет connection или taken)
     if ((oldStatus !== 'ocean' && (setStatus !== 'connection' && setStatus !== 'taken')) || (realty.realtor && realty.realtor.id)) {
       buyOceanBackwardsCommits(1);
@@ -123,7 +121,6 @@ export function showRealtyDetails(realtyId, userId) {
       return 'нет такого объекта';
     }
 
-    console.log(realty.realtor.id + ' == ' + userId);
     if (realty.realtor.id != userId) {
       return 'Это не ваш объект';
     }

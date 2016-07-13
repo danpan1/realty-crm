@@ -16,10 +16,7 @@ if (Meteor.isServer) {
             {status: 'taken', 'realtor.id': this.userId}
           ]
         };
-        console.log(' ==== search: =====')
-        console.log(search)
         if (search) {
-          console.log('search', search);
 
           if (search.type !== undefined) {
             selector.type = search.type;
@@ -187,11 +184,8 @@ if (Meteor.isServer) {
           status: 1,
           type: 1
         };
-        console.log("=====selector: ");
-        console.log(selector);
         let realty = Realty.find(selector, options);
         let count = realty.count();
-        console.log("====realty.count(): " + realty.count())
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});
         CountsDan.find({_id: countId});
         return [realty, CountsDan.find({_id: this.userId})];

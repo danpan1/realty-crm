@@ -132,10 +132,11 @@ class OutgoingCall {
     
     // платит ли комиссию
     if (vm.realty.owner && vm.realty.owner.comission) {
-      vm.statComission = true;
-      vm.realty.owner.isComission = true; 
+      this.statComission = true;
+      this.realty.owner.isComission = true; 
+      this.realty.owner.comission = parseInt(this.realty.owner.comission); 
     } else {
-      vm.statComission = false;
+      this.statComission = false;
     }
 
     // определяем тип объекта
@@ -163,7 +164,7 @@ class OutgoingCall {
     }
 
     let exclusive = vm.realty.realtor ? vm.realty.realtor.isExclusive : false;
-    let comission = vm.realty.owner ? vm.realty.owner.isComission : false;
+    let comission = this.realty.owner ? this.realty.owner.isComission : false;
     let meeting = vm.realty.operator.meetingTime ? true : false;
 
     if (comission || exclusive || meeting) {
@@ -190,21 +191,30 @@ class OutgoingCall {
     } else if (vm.realty.operator.meetingTime) price = 1
     
     vm.realty.operator.oceanPrice = price;
-    console.log(vm.realty.address)
+    console.log(vm.realty.owner)
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {
         this.showLoader = false;
         console.log('error', error);
+        this.continue();
       } else {
         vm.newObjectRecieved = (vm.newObjectRecieved + 1);
         Meteor.call('operatorStat', vm.stat, (error, result) => {
-          if (error) console.log(error)
+          if (error) {
+            console.log(error);
+            this.continue();
+          } else {
+            this.continue();
+          }
         });
       }
-      vm.realty = {};
-      vm.getNew();
     });
   }
+  continue () {
+    this.realty = {};
+    this.getNew();
+  }
+  
 
   getList(isStandart) {
     Meteor.call('callList', (error, result)=> {
