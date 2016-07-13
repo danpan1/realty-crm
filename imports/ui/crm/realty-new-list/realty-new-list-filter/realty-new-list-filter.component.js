@@ -41,12 +41,11 @@ class RealtyNewListFilter {
 
     vm.helpers({
       myFilters: () => {
-
         return Filters.find();
       }
     });
 
-    vm.$timeout(()=>{
+    /*vm.$timeout(()=>{
       for(var f in this.myFilters){
         console.log(this.myFilters);
         if(this.myFilters[f].filter.conditions){
@@ -57,8 +56,19 @@ class RealtyNewListFilter {
           })
         }
       }
-    },1000);
+    },1000);*/
 
+    if(this.user.profile.changeUserGetSmsPremium == undefined) this.user.profile.changeUserGetSmsPremium = true;
+
+  }
+
+  checkSmsIsActive () {
+    for(var f in this.myFilters){
+      if(this.myFilters[f].isActive == undefined) {
+        this.myFilters[f].isActive = true;
+        this.saveNewFilter(f);
+      }
+    }
   }
 
   useFilter (index) {
@@ -89,6 +99,20 @@ class RealtyNewListFilter {
     this.showFilter = true;
   }
 
+  changeFilterSms (index) {
+    let filter = this.myFilters[index]
+    console.log(this.myFilters[index].isActive);
+    Meteor.call('changeFilterSms', filter._id, filter.isActive, (error, result) => {
+      if (error) {
+        console.log('Filter sms error!');
+        console.log(error);
+      } else {
+        console.log(`Filter sms changed`);
+      }
+    });
+  }
+
+
   deleteFilter (index) {
     Meteor.call('removeFilter', this.myFilters[index]._id, (error, result) => {
       if (error) {
@@ -101,7 +125,7 @@ class RealtyNewListFilter {
   }
 
 
-  saveNewFilter () {
+  saveNewFilter (filterIndex) {
     let vm = this;
 
     if (this.newFilter.filter.street == null) { delete this.newFilter.filter.street; }
@@ -115,7 +139,16 @@ class RealtyNewListFilter {
         return parseInt(item.name);
       })
     }*/
-
+    if (filterIndex) this.changingFilter = filterIndex;
+    this.newFilter = {
+      filter: this.myFilters[filterIndex].filter,
+      name: this.myFilters[filterIndex].name,
+      id: this.myFilters[filterIndex]._id,
+      user: {
+        id: this.user._id,
+        phone: this.user.profile.phone
+      }
+    };
     console.log(this.newFilter);
 
     if (this.changingFilter != undefined) {
@@ -149,6 +182,17 @@ class RealtyNewListFilter {
   backToFiltersList () {
     if(this.changingFilter) this.changingFilter = undefined;
     this.showFilter = false;
+  }
+
+  changeUserGetSmsPremium (isActive) {
+    Meteor.call('changeUserGetSmsPremium', isActive, (error, result) => {
+      if (error) {
+        console.log('Ошибка!');
+        console.log(error);
+      } else {
+        console.log(`UserGetSmsPremium changed`);
+      }
+    });
   }
 
 }

@@ -117,7 +117,7 @@ class OutgoingCall {
     vm.setResolution('agency');
   }
 
-  save(valid) {
+  save (valid) {
 
     if (typeof this.realty.address.street != 'string') this.realty.address.street = this.realty.address.street.value;
     if (typeof this.realty.address.house != 'string') this.realty.address.house = this.realty.address.house.value;
@@ -205,6 +205,12 @@ class OutgoingCall {
             this.continue();
           } else {
             this.continue();
+          }
+        });
+        Meteor.call('sendFilterSms', vm.realty, (error, result) => {
+          if (error) {
+            console.log(error);
+          } else {
           }
         });
       }

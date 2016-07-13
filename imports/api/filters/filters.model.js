@@ -13,6 +13,9 @@ Schema.Filters = new SimpleSchema({
   filter: {
     type: FilterDetailsSchema
   },
+  isActive: {
+    type: Boolean
+  },
   name: {
     type: String
   },

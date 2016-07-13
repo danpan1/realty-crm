@@ -157,7 +157,6 @@ class RealtyNewList {
   }
 
   setSliderImages(images) {
-    console.log(images);
     this.showSlider = true;
     this.slideShowImages = images;
   }
