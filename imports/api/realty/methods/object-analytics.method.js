@@ -10,7 +10,6 @@ Meteor.methods({
 export function objectAnalytics(type, roomcount, subways, materials, renovation, district) {
   
   if (Meteor.isServer && Meteor.userId()) {
-    console.log(district, 'district');
     let match1 =  {
       roomcount: roomcount,
       type:type

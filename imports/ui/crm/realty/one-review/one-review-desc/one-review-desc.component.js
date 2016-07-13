@@ -13,12 +13,19 @@ import './one-review-desc.view.html';
 
 class OneReviewDesc {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams) {
-
+  constructor($scope, $reactive, $stateParams, $timeout) {
+    this.$timeout = $timeout;
     $reactive(this).attach($scope);
     /* Устанавливаем дефолтные значения для всех используемых в компоненте переменных */
    }
   
+    saveReviewDesc () {
+      this.saveReview({id:this.realty._id});
+      this.descriptionSaved = true;
+      this.$timeout(()=> {
+        this.descriptionSaved = false;
+      }, 3000)
+    }
     
 }
 
@@ -33,7 +40,8 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
     templateUrl: 'imports/ui/crm/realty/one-review/one-review-desc/one-review-desc.view.html',
     bindings: {
-        realty:'='
+        realty:'=',
+        saveReview: '&'
     },
     controllerAs: moduleName,
     controller: OneReviewDesc

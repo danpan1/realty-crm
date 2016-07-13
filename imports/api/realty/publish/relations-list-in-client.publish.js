@@ -29,12 +29,10 @@ if (Meteor.isServer) {
         realtyRelated = realtyRelated.concat(relations.offers);
       }
       
-      console.log(realtyRelated, 'realtyRelated');
       let selector = {
         _id: {$in: realtyRelated},
         // status: 'realtor'
       };
-      console.log('realtyRelated', selector);
       return Realty.find(selector);
     }
   });
