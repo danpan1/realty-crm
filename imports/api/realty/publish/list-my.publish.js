@@ -46,6 +46,7 @@ if (Meteor.isServer) {
             'moderator.percent.total': 1,
             'details.conditions': 1,
             'details.descr' :1,
+            'operator.comment': 1,
             'contacts': 1,
             parseDetails: 1,
             image: 1,

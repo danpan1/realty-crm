@@ -43,33 +43,37 @@ class RealtyCard {
     if(this.realty.type > 2) this.halfPrice = parseInt(this.realty.price / 2);
     if(this.realty.type < 3) this.salePrice = parseInt(this.realty.price /100 * (this.realty.price > 7000000 ? 3 : 4));
     
-    if((vm.realty.operator && vm.realty.operator.oceanAdd) || (vm.realty.operator && vm.realty.operator.meetingTime) || (vm.realty.realtor && vm.realty.realtor.isExclusive)){
+    if((vm.realty.owner && vm.realty.owner.isComission) || (vm.realty.operator && vm.realty.operator.meetingTime) || (vm.realty.realtor && vm.realty.realtor.isExclusive)){
       if (vm.realty.realtor && vm.realty.realtor.isExclusive) vm.reason = 'exclusive';
       else if (vm.realty.owner && vm.realty.owner.isComission) vm.reason = 'comission';
       else if (vm.realty.operator && vm.realty.operator.meetingTime) vm.reason = 'meeting';
       let newTime = new Date().getTime();
-      let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
-      let seconds = 900 + parseInt(time);
-      if(seconds > 0){
-        this.minutes = parseInt(seconds / 60);
-        this.seconds = seconds - (this.minutes*60);
-        console.log(this.minutes+':'+this.seconds);
-        this.timeoutFunc = () => {
-          this.timeout(()=>{
-            this.seconds -= 1;
-            if(this.seconds < 0) {
-              this.minutes -= 1;
-              this.seconds = 59;
-            }
-            if (this.minutes < 10 && this.realty.status != 'taken' && (vm.reason == 'exclusive' || vm.reason == 'comission')) this.updateRealty(this.realty._id, 'skip');
-            else if (this.minutes < 5 && this.realty.status != 'taken' && vm.reason == 'meeting') this.updateRealty(this.realty._id, 'skip');
-            else this.timeoutFunc();
-          },1000)
+      try {
+        let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
+        let seconds = 900 + parseInt(time);
+        if(seconds > 0){
+          this.minutes = parseInt(seconds / 60);
+          this.seconds = seconds - (this.minutes*60);
+          console.log(this.minutes+':'+this.seconds);
+          this.timeoutFunc = () => {
+            this.timeout(()=>{
+              this.seconds -= 1;
+              if(this.seconds < 0) {
+                this.minutes -= 1;
+                this.seconds = 59;
+              }
+              if (this.minutes < 10 && this.realty.status != 'taken' && (vm.reason == 'exclusive' || vm.reason == 'comission')) this.updateRealty(this.realty._id, 'skip');
+              else if (this.minutes < 5 && this.realty.status != 'taken' && vm.reason == 'meeting') this.updateRealty(this.realty._id, 'skip');
+              else this.timeoutFunc();
+            },1000)
+          }
+          this.timeoutFunc(); 
+        } else {
+          this.minutes = -1;
+          if(this.realty.status != 'taken') this.updateRealty(this.realty._id, 'skip');
         }
-        this.timeoutFunc(); 
-      } else {
-        this.minutes = -1;
-        if(this.realty.status != 'taken') this.updateRealty(this.realty._id, 'skip');
+      } catch (error) {
+        console.log(error);
       }
     }
 
