@@ -75,6 +75,6 @@ export const FilterDetailsSchema = new SimpleSchema({
   subways: { // Метро
     type: [String],
     optional: true
-  },
+  }
 });
 
