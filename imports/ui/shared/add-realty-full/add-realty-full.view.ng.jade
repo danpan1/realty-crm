@@ -70,6 +70,7 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                                 md-input-container(flex).mv-0.form-required.zh
                                     input(required name='floor' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
                                     span(ng-show='secondForm.floor.$touched && secondForm.floor.$invalid').has-error {{secondForm.floor.$viewValue.length == 0 ? 'Необходимо заполнить' : 'Только цифры'}}
+                                    span(ng-show='addRealtyFull.realty.floor > addRealtyFull.realty.floormax').has-error.nowrap Этаж выше, чем указано в доме.
                                 md-input-container(flex).mv-0.ml-32.form-required.zh
                                     input(required name='floormax' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
                                     span(ng-show='secondForm.floormax.$touched && secondForm.floormax.$invalid').has-error {{secondForm.floormax.$viewValue.length == 0 ? 'Необходимо заполнить' : 'Только цифры'}}
@@ -77,21 +78,16 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                         div(flex='70')
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required.zh
-                                    input(required name='square' ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
+                                    input(required name='square' type='number' ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
                                     span(ng-show='secondForm.square.$viewValue.length > 0 && secondForm.square.$touched && secondForm.square.$invalid').has-error Только цифры или запятая
+                                    span(ng-show='addRealtyFull.realty.square < 10 && !secondForm.square.$invalid').has-error.nowrap Площадь меньше 10 м²
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
+                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" type='number' name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
                                     span(ng-show='secondForm.livingSquare.$touched && secondForm.livingSquare.$invalid').has-error Только цифры или запятая
+                                    span(ng-show='addRealtyFull.realty.details.livingSquare + addRealtyFull.realty.details.kitchenSquare > addRealtyFull.realty.square && secondForm.livingSquare.$touched && secondForm.kitchenSquare.$touched').has-error.nowrap Сумма площадей больше общей площади
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
+                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" type='number' name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
                                     span(ng-show='secondForm.kitchenSquare.$touched && secondForm.kitchenSquare.$invalid').has-error Только цифры или запятая
-                            //div().mt-16
-                            //    p().md-subhead.add-realty-full-text Площадь комнат м²
-                            //div(layout='row' layout-align='start center' flex).md-input-container.mt-16
-                            //    md-input-container(flex ng-repeat='room in addRealtyFull.realty.details.roomsSquare').mv-0
-                            //        label {{$index + 1}}-я комната
-                            //        input(ng-pattern="/^[0-9]{1,}$/" ng-model='room.square')
-                                
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row')
@@ -146,10 +142,11 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
 
                     div(layout='row').mv-32
                         md-button(ng-click='addRealtyFull.activeTab = 2'
-                        ng-disabled="firstForm.$invalid || secondForm.$invalid").md-primary.md-raised.mh-0 Продолжить
+                        ng-disabled="firstForm.$invalid || secondForm.$invalid || addRealtyFull.realty.floor > addRealtyFull.realty.floormax || addRealtyFull.realty.square < 10 || addRealtyFull.realty.details.livingSquare + addRealtyFull.realty.details.kitchenSquare > addRealtyFull.realty.square"
+                        ).md-primary.md-raised.mh-0 Продолжить
                         md-button(md-no-ink ng-click='addRealtyFull.activeTab = 0').md-primary.md-body-1.ml-32 Вернуться на шаг назад
 
-    md-tab(label='3) Стоимость' md-active='addRealtyFull.activeTab == 2' ng-click='addRealtyFull.activeTab = 2' ng-disabled="firstForm.$invalid || secondForm.$invalid") 
+    md-tab(label='3) Стоимость' md-active='addRealtyFull.activeTab == 2' ng-click='addRealtyFull.activeTab = 2' ng-disabled="firstForm.$invalid || secondForm.$invalid || addRealtyFull.realty.floor > addRealtyFull.realty.floormax || addRealtyFull.realty.square < 10 || addRealtyFull.realty.details.livingSquare + addRealtyFull.realty.details.kitchenSquare > addRealtyFull.realty.square") 
         md-content().ph-32.pv-16
             form(novalidate name="thirdForm")
 
@@ -165,14 +162,6 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                         div(flex='45').mv-16
                             div(layout='row' layout-align='space-between start')
                                 price-mask(ng-if='addRealtyFull.realty' label='"Цена"' price='addRealtyFull.realty.price' optflex='' flex)
-                                //md-input-container(flex).mv-0.form-required.zh
-                                    label Цена
-                                    input(
-                                        required 
-                                        ng-model='addRealtyFull.realty.price'
-                                        ng-price-filter
-                                        ng-keypress="addRealtyFull.realty.price = ' '+this.addRealtyFull.realty.price"
-                                    )
                                 md-input-container(flex).mv-0.ml-32.form-required
                                     md-select(required ng-model='addRealtyFull.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
                                         md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}

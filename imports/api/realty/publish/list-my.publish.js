@@ -13,11 +13,7 @@ if (Meteor.isServer) {
 
       let selector;
 
-      console.log(options);
-
       if (this.userId) {
-
-        console.log(options.status);
 
         selector = {
           $and: [
@@ -46,6 +42,7 @@ if (Meteor.isServer) {
             'moderator.percent.total': 1,
             'details.conditions': 1,
             'details.descr' :1,
+            'operator.comment': 1,
             'contacts': 1,
             parseDetails: 1,
             image: 1,
@@ -57,7 +54,6 @@ if (Meteor.isServer) {
             title: 1
           };
         }
-        console.log(options);
         return Realty.find(selector, options);
       }
 
