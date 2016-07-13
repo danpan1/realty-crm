@@ -165,6 +165,7 @@ if (Meteor.isServer) {
           'address.metroTransport': 1,
           'details.descr': 1,
           'details.renovation': 1,
+          'details.materials': 1,
           'details.images.url': 1,
           'details.conditions': 1,
           'realtor.isExclusive': 1,

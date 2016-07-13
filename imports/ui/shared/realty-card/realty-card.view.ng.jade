@@ -7,9 +7,9 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-16.pr-8 Эксклюзив
             div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16.pr-8 Платит {{::realtyCard.realty.owner.comission}}% комиссии
             div(ng-if='::realtyCard.realty.operator.meetingTime').newList__green-label.text-bold.pl-16.pr-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
-            div(ng-if='!realtyCard.reason').pl-16.pr-8
-                div() Подано: {{::realtyCard.realty.createdAt | date:'MM.dd, HH:mm'}}
-                div() Id: {{::realtyCard.realty._id | price}}
+            div(ng-if='!realtyCard.reason').pl-16.pr-8.pt-8
+                div() {{::realtyCard.realty.createdAt | date:'MM.dd'}}
+                div() Id {{::realtyCard.realty._id | price}}
             div().pl-16.pr-8.pv-8
                 div(ng-show="(realtyCard.reason == 'meeting' && realtyCard.minutes >= 5) || ((realtyCard.reason == 'exclusive' || realtyCard.reason == 'comission') && realtyCard.minutes >= 10)" ng-if='realtyCard.realty.status == \'ocean\'')
                     h3 reason: {{realtyCard.reason}}, minutes: {{realtyCard.minutes}}
@@ -40,8 +40,9 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                 p.mv-0
                     //Метро
                     div().metro-name.md-body-1.mb-8
-                        span(class='metro-color-{{::realtyCard.realty.address.subway.line}}').metro-color
-                        span {{::realtyCard.realty.address.subway.name}}
+                        span.nowrap
+                            span(class='metro-color-{{::realtyCard.realty.address.subway.line}}').metro-color
+                            span() {{::realtyCard.realty.address.subway.name}}
                     //Пешком до метро
                     div.md-body-1.ml-8.mb-8 {{::realtyCard.realty.address.metroTime}} мин. {{::realtyCard.dictionary.transport[realtyCard.realty.address.metroTransport].name}}
         md-divider
@@ -49,7 +50,8 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         //3-ая колонка Цена и ремонт
         div(layout='column').newList_Price.ph-16.pv-8
             div.md-body-1.mb-8.price #[b {{::realtyCard.realty.price | price}}]
-            //div(ng-if='!realtyCard.realty.realtor.isExclusive && !realtyCard.realty.owner.comission').md-body-1.mb-8.type-repair {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name || 'Не известно ремонт'}}
+            div().md-body-1.mb-8.type-repair.nowrap {{::realtyCard.dictionary.renovation[realtyCard.realty.details.renovation].name}}
+            div().md-body-1.mb-8.type-repair.nowrap {{::realtyCard.dictionary.materials[realtyCard.realty.details.materials].name}}
         md-divider
 
         //4-ая колонка Фото
@@ -131,19 +133,19 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(layout='row')
                 realty-card-purchase(ng-if='realtyCard.realty' parse-details='realtyCard.parseDetails' user='realtyCard.user' contacts='realtyCard.contacts' userpaid='realtyCard.isUserPaid' data='realtyCard.data' realty='realtyCard.realty')
             div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
-                p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
-                p(ng-if='(realtyCard.reason == "meeting" && realtyCard.minutes >= 0) || ((realtyCard.reason == "exclusive" || realtyCard.reason == "comission") && realtyCard.minutes >= 5)').md-title.text-normal 1) Собственник ждет звонка в течение 
+                //p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
+                p(ng-if='(realtyCard.reason == "meeting" && realtyCard.minutes >= 0) || ((realtyCard.reason == "exclusive" || realtyCard.reason == "comission") && realtyCard.minutes >= 5)').md-title.text-normal Собственник ждет звонка в течение
                     span(ng-if='realtyCard.reason == "exclusive" || realtyCard.reason == "comission"') {{realtyCard.minutes - 5}}:
                     span(ng-if='realtyCard.reason == "meeting"') {{realtyCard.minutes}}:
                     span(ng-if='realtyCard.seconds < 10') 0
                     span {{realtyCard.seconds}}
-                p().md-title.text-normal 2) {{realtyCard.contacts.realtyPhone}} {{realtyCard.contacts.realtyName}}
-                p().md-title.text-normal 3) #[a(ng-href='{{realtyCard.parseDetails.url}}' target='blank') Посмотреть источник объявления]
-                p().md-title.text-normal 4) #[strong Хотите продолжить с ним работать?]
-                div(layout='row' ng-if='realtyCard.isUserPaid').mv-16
-                    md-button(aria-label='Редактировать' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id, 'go')").md-raised.newList__description-btn-large Редактировать
-                    md-button(aria-label='Остаться в океане' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id)").md-raised.newList__description-btn-large.mh-16 Остаться в океане
-                    md-button(aria-label='Не подходит' ng-click="realtyCard.returnToCallCenter(realtyCard.realty._id, $event)").md-raised.newList__description-btn-large.mh-16 Не подходит
+                p().md-title.text-normal 1) {{realtyCard.contacts.realtyPhone}} {{realtyCard.contacts.realtyName}}
+                p().md-title.text-normal 2) #[a(ng-href='{{realtyCard.parseDetails.url}}' target='blank') Посмотреть источник объявления]
+                p().md-title.text-normal 3) Хотите продолжить с ним работать?
+                div(layout='row' layout-align='start start' ng-if='realtyCard.isUserPaid').mv-16
+                    md-button(aria-label='Редактировать' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id, 'go')").md-raised.ph-16 Редактировать
+                    md-button(aria-label='Остаться в океане' ng-click="realtyCard.saveCheckedRealty(realtyCard.realty._id)").md-raised.mh-16.ph-16 Остаться в океане
+                    md-button(aria-label='Не подходит' ng-click="realtyCard.returnToCallCenter(realtyCard.realty._id, $event)").md-raised.mh-16.ph-16 Не подходит
         div(ng-if="realtyCard.realtylisttype == 'connections'")
             div(layout="row")
                 p(flex="35").md-body-1 {{::realtyCard.realty.roomcount | count}}, длительная, Кирпичный, {{::realtyCard.realty.floor}}/{{::realtyCard.realty.floormax}}, 50м #[sup 2]
