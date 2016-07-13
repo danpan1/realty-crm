@@ -47,6 +47,10 @@ Schema.Users = new SimpleSchema({
     decimal: true,
     optional: true
   },
+  'profile.getSmsPremiumObjects': {
+    type: Boolean,
+    optional: true
+  },
   'profile.name': {
     type: String,
     optional: true

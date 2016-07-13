@@ -14,6 +14,7 @@ if (Meteor.isServer) {
       let options = {
         fields: {
           'name': 1,
+          'isActive': 1,
           'filter.conditions': 1, 
           'filter.districts': 1, 
           'filter.floorFrom': 1, 
