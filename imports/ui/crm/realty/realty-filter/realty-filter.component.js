@@ -5,6 +5,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {dictionary} from '../../../../helpers/dictionary';
 import {name as districtsAreaIdList} from '/imports/ui/shared/district-chips/district-chips.component.js';
+import {name as SubwayChips} from '/imports/ui/shared/subway-chips/subway-chips.component.js';
 import {name as PriceMask} from '/imports/ui/shared/price-mask/price-mask.component';
 import './realty-filter.view.html';
 import {CountsDan} from '/imports/api/counts';
@@ -19,10 +20,9 @@ class RealtyFilter {
     this.location = $location;
     this.stateParams = $stateParams;
     this.state = $state;
-    this.filter = {};
     this.fake = true;
-    console.log('parent: '+this.parent);
     if(this.parent == 'ocean') {
+      //this.filter = {};
       this.helpers({
         realtyCount: () => {
           this.realtyCount = false;
@@ -37,76 +37,85 @@ class RealtyFilter {
       if (window.localStorage["filter"] != undefined && window.localStorage["filter"]) {
         console.log(JSON.parse(window.localStorage["filter"]));
         this.filter = JSON.parse(window.localStorage["filter"]);
-        var roomList = this.filter.roomcount;
-        this.filter.roomcount = [];
-        for(var i in roomList) {
-          switch (roomList[i].id) {
-            case 1:
-              this.toggleRoomcount(this.dictionary.roomcount[0]);
-              break;
-            case 2:
-              this.toggleRoomcount(this.dictionary.roomcount[1]);
-              break;
-            case 3:
-              this.toggleRoomcount(this.dictionary.roomcount[2]);
-              break;
-            case 99:
-              this.toggleRoomcount(this.dictionary.roomcount[3]);
-              break;
-          }
-        }
+        this.checkRooms();
         if(this.filter.type !== undefined) this.filterType = this.filter.type;
         if(!this.filter.metroTransport) this.filter.metroTransport = 0;
       }
-    }    
-    
-    this.$onChanges = function (changed) {
-      console.log(changed.name);
-      this.suitRealty();
+    } else if (this.parent == 'custom') {
+      this.checkRooms();
     }
-
+    if (this.parent == 'ocean'){
+      this.$onChanges = function (changed) {
+        console.log(changed.name);
+        this.checkRooms();
+        this.suitRealty();
+      }
+    }
   }
   
+  checkRooms () {
+    var roomList = this.filter.roomcount;
+      this.filter.roomcount = [];
+      for(var i in roomList) {
+        switch (roomList[i].id) {
+          case 1:
+            this.toggleRoomcount(this.dictionary.roomcount[0]);
+            break;
+          case 2:
+            this.toggleRoomcount(this.dictionary.roomcount[1]);
+            break;
+          case 3:
+            this.toggleRoomcount(this.dictionary.roomcount[2]);
+            break;
+          case 99:
+            this.toggleRoomcount(this.dictionary.roomcount[3]);
+            break;
+        }
+      }
+  }
+
   clearFilter () {
     this.filter = {
       //type: this.stateParams.operation == 'sale' ? 1 : 4,
       roomcount: []
     };
     this.suitRealty();
-    this.refresh = !this.refresh;
+    this.refreshSublings = !this.refreshSublings;
   }
   
   suitRealty () {
-    // Если это фильтр океана, сохраняем в localStorage
     if (this.parent == 'ocean') {
       this.filter.type = this.filterType;
-      console.log('this.filter.type: '+this.filter.type);
       window.localStorage["filter"] = JSON.stringify(this.filter, function (key, val) {
         if (key == '$$hashKey') {
           return undefined;
         }
         return val;
       });
-      console.log(window.localStorage["filter"]);
-    // Если это кастомный фильтр, просто сохраняем в переменную
-    } else if (this.parent == 'custom') {
-      console.log(this.filter);
     }
   }
 
   toggleRoomcount(item) {
     if(!this.filter.roomcount) this.filter.roomcount = []; 
-      var idx = this.filter.roomcount.indexOf(item);
-      if (idx > -1) {
-        this.filter.roomcount.splice(idx, 1);
-      }
-      else {
-        this.filter.roomcount.push(item);
-      }
-      this.roomcount = this.filter.roomcount.slice();
-    this.$timeout(()=>{
-      this.suitRealty();
-    },100)    
+    console.log('Item:');
+    console.log(item);
+    var idx = this.filter.roomcount.indexOf(item);
+    console.log('idx:');
+    console.log(idx);
+    if (idx > -1) {
+      this.filter.roomcount.splice(idx, 1);
+    }
+    else {
+      this.filter.roomcount.push(item);
+    }
+    this.roomcount = this.filter.roomcount.slice();
+    console.log('roomcount:');
+    console.log(this.roomcount);
+    if (this.parent == 'ocean') {
+      this.$timeout(()=>{
+        this.suitRealty();
+      },100)  
+    }
   }
 
   existsRoomcount(item) {
@@ -121,7 +130,8 @@ const moduleName = 'realtyFilter';
 export default angular.module(moduleName, [
   angularMeteor,
   districtsAreaIdList,
-  PriceMask
+  PriceMask,
+  SubwayChips
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty/realty-filter/realty-filter.view.html',
   bindings: {

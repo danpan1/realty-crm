@@ -18,15 +18,17 @@ class RealtyNewListFilter {
     $reactive(this).attach($scope);
     this.$timeout = $timeout;
     const vm = this;
+    this.loaded = true;
     this.dictionary = dictionary;
 
     vm.subscribe('myFilters', () => {
+      this.loaded = false;
       return [];
     }, {
       onReady: function () {
         vm.$timeout(()=>{
-        },100)  
-        // subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
+          this.loaded = true;
+        })  
       }
     });
 
@@ -74,10 +76,23 @@ class RealtyNewListFilter {
   useFilter (index) {
     this.$timeout(()=>{
       this.useSavedFilter({filter:this.myFilters[index].filter});
+      this.filterModalOpened = false;
     },100);
-    this.filterModalOpened = false;
   }
   
+  createFilter () {
+    this.refresh = !this.refresh;
+    this.newFilter = {
+      filter:{},
+      name:'',
+      user: {
+        id: this.user._id,
+        phone: this.user.profile.phone
+      }
+    };
+    this.showFilter = true; 
+  }
+
   changeFilter (index) {
     /*if(this.myFilters[index].filter.roomcount && typeof this.myFilters[index].filter.roomcount[0] == 'number'){
       this.myFilters[index].filter.roomcount = this.myFilters[index].filter.roomcount.map((item)=>{
@@ -85,7 +100,6 @@ class RealtyNewListFilter {
       })
     }*/
 
-    console.log(this.myFilters[index].filter);
     this.newFilter = {
       filter: this.myFilters[index].filter,
       name: this.myFilters[index].name,
@@ -95,7 +109,9 @@ class RealtyNewListFilter {
         phone: this.user.profile.phone
       }
     };
+    this.roomcount = this.newFilter.filter.roomcount;
     this.changingFilter = index;
+    this.refresh = !this.refresh;
     this.showFilter = true;
   }
 
@@ -128,6 +144,8 @@ class RealtyNewListFilter {
   saveNewFilter (filterIndex) {
     let vm = this;
 
+    this.newFilter.filter.roomcount = this.roomcount; 
+
     if (this.newFilter.filter.street == null) { delete this.newFilter.filter.street; }
     else if(this.newFilter.filter.street && typeof this.newFilter.filter.street != 'string') this.newFilter.filter.street = this.newFilter.filter.street.value;
 
@@ -139,19 +157,21 @@ class RealtyNewListFilter {
         return parseInt(item.name);
       })
     }*/
-    if (filterIndex) this.changingFilter = filterIndex;
-    this.newFilter = {
-      filter: this.myFilters[filterIndex].filter,
-      name: this.myFilters[filterIndex].name,
-      id: this.myFilters[filterIndex]._id,
-      user: {
-        id: this.user._id,
-        phone: this.user.profile.phone
-      }
-    };
+    if (filterIndex) {
+      this.changingFilter = filterIndex;
+      this.newFilter = {
+        filter: this.myFilters[filterIndex].filter,
+        name: this.myFilters[filterIndex].name,
+        id: this.myFilters[filterIndex]._id,
+        user: {
+          id: this.user._id,
+          phone: this.user.profile.phone
+        }
+      };
+    }
     console.log(this.newFilter);
 
-    if (this.changingFilter != undefined) {
+    if (this.changingFilter != undefined) { 
       Meteor.call('changeFilter', this.newFilter, (error, result) => {
         if (error) {
           console.log(error);

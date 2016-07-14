@@ -2,8 +2,10 @@ div().modal
     div().modal__bg
     div().modal__outer
         div().modal__inner
-            div(md-whiteframe='2' ng-if='realtyNewListFilter.myFilters').pv-16
-                div(layout='column' ng-show='!realtyNewListFilter.showFilter')
+            div(md-whiteframe='2' style='min-height: 500px;' ng-if='!realtyNewListFilter.loaded').pv-16
+                md-progress-circular(md-diameter='150' style='margin:180px auto;')
+            div(md-whiteframe='2' ng-if='realtyNewListFilter.loaded').pv-16
+                div(layout='column' ng-if='!realtyNewListFilter.showFilter')
                     div().text-right.md-body-1.ph-16.pt-32 SMS оповещение
                     div(ng-repeat='filter in realtyNewListFilter.myFilters')
                         div(ng-class='{"realty-new-list-filter__selected":filter.show}' ng-init='realtyNewListFilter.checkSmsIsActive()' ).mv-8.ph-16
@@ -19,13 +21,13 @@ div().modal
                                     md-switch(aria-label='Switch 2' ng-change='realtyNewListFilter.changeFilterSms($index)' ng-model='filter.isActive').md-warn.realty-new-list-filter__sms
                             realty-new-list-filter-one(ng-if='filter.filter && filter.shown' filter='filter.filter').pb-16
                     div(layout='row' layout-align='space-between center').mv-32.ph-16
-                        md-button(ng-click='realtyNewListFilter.showFilter = true').md-primary.md-raised.ph-16.ml-0 Добавить фильтр
+                        md-button(ng-click='realtyNewListFilter.createFilter()').md-primary.md-raised.ph-16.ml-0 Добавить фильтр
                         //md-button(ng-click='realtyNewListFilter.modal = false').realty-new-list-filter__link.text-normal.mr-16 Скрыть
                     div().mt-8.ph-16
                         md-checkbox(aria-label='Checkbox 1' ng-change='realtyNewListFilter.changeUserGetSmsPremium(realtyNewListFilter.user.profile.getSmsPremiumObjects)' ng-model='realtyNewListFilter.user.profile.getSmsPremiumObjects').md-primary.md-subhead Присылать SMS о всех новых объектах со статусами назначена встреча, собственник платит комиссию, эксклюзив
                 
-                div(ng-show='realtyNewListFilter.showFilter').realty-filter.pl-32.pr-16
-                    realty-filter(parent='"custom"' filter='realtyNewListFilter.newFilter.filter' roomcount='realtyNewListFilter.newFilter.filter.roomcount')
+                div(ng-if='realtyNewListFilter.showFilter').realty-filter.pl-32.pr-16
+                    realty-filter(refresh='realtyNewListFilter.refresh' parent='"custom"' filter='realtyNewListFilter.newFilter.filter' roomcount='realtyNewListFilter.roomcount')
                     //div(layout='row', layout-align="space-between center")
                         div(flex='30').realty-filter__col.mt-16
                             div(layout='column' layout-align='space-between none')

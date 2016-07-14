@@ -60,6 +60,14 @@ export const FilterDetailsSchema = new SimpleSchema({
     type: [Object],
     optional: true
   },
+  'roomcount.$.id': {
+    type: Number,
+    optional: true
+  },
+  'roomcount.$.name': {
+    type: String,
+    optional: true
+  },
   squareFrom: {  // Цена
     type: Number,
     optional: true

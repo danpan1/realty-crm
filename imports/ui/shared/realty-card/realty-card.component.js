@@ -133,7 +133,6 @@ class RealtyCard {
         if (err) {
           console.log('err: ' + err);
         } else {
-          console.log(result);
           this.timeout(()=> {
             vm.contacts.realtyPhone = result.phone;
             vm.contacts.realtyName = result.name;
