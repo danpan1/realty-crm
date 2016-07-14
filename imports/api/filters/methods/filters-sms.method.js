@@ -30,30 +30,10 @@ export function sendFilterSms(filter) {
         options.fields = {
            'profile.phone': 1
         };
-        let users = Meteor.users.find({'profile.getSmsPremiumObjects':true},options);
+        let users = Meteor.users.find({'profile.getSmsPremiumObjects':true},options).fetch();
+        console.log(users);
         if (users) {
-            let text = ''
-            if(filter.realtor && filter.realtor.isExclusive) text += 'Эксклюзив. ';
-            if(filter.owner && filter.owner.isComission) text += 'Комиссия '+filter.owner.comission+'%. ';
-            if(filter.operator && filter.operator.meetingTime) {
-                text += 'Встреча '+filter.operator.meetingTime;
-            }
-            if(filter.roomcount) text += filter.roomcount+'к., ';
-            if(filter.address.subway) text += filter.address.subway+' '+filter.address.metroTime+' мин. '+filter.address.metroTransport;
-            if(filter.details.renovation) text += filter.details.renovation+', '
-            if(filter.price) {
-                var oldNumber = filter.price.toString().split('');
-                var number = '';
-                for(var i in oldNumber){
-                    if(oldNumber[i].match(/\d/)){
-                        number = number + oldNumber[i];
-                    }
-                }
-                number = number.split('').reverse().join('');
-                number = number.length > 3 ? number.length > 6 ? number.length > 9 ? number.slice(0, 3) + ' ' + number.slice(3,6) +  ' ' + number.slice(6,9) + ' ' + number.slice(9) : number.slice(0, 3) + ' ' + number.slice(3,6) + ' ' + number.slice(6) :  number.slice(0, 3) + ' ' + number.slice(3) : number;
-                number = number.split('').reverse().join('');
-                text += number+' руб.';
-            } 
+            let text = setText(filter);
             for(var i in users) {
                 sendSms(text, users[i].profile.phone);
             }
@@ -101,17 +81,32 @@ export function sendFilterSms(filter) {
             console.log('conditions: '+filter.conditions);
             params['filter.conditions'] = filter.conditions;
         }*/
-        /*if (filter.floor) {
-            params['filter.floorFrom'] = { $lte: parseInt(filter.floor)};
-            params['filter.floorTo'] = {$gte : parseInt(filter.floor)};
+        /*params.$and = [];
+        if (filter.floor) {
+            params.$and.push(
+                { $or: [{ 'filter.floorFrom': { $gte: parseInt(filter.floor) }}, {'filter.floorFrom' : null}] },
+                { $or: [{ 'filter.floorTo': { $gt: parseInt(filter.floor) }}, {'filter.floorTo' : null}] }
+            )
+
+            //params['filter.floorFrom'] = { $lte: parseInt(filter.floor)};
+            //params['filter.floorTo'] = {$gte : parseInt(filter.floor)};
         }
         if (filter.square) {
-            params['filter.squareFrom'] = {$lte : parseInt(filter.square)};
-            params['filter.squareTo'] = {$gte : parseInt(filter.square)};
+            params.$and.push(
+                { $or: [{ 'filter.squareFrom': { $gte: parseInt(filter.square) }}, {'filter.squareFrom' : null}] },
+                { $or: [{ 'filter.squareTo': { $gt: parseInt(filter.square) }}, {'filter.squareTo' : null}] }
+            )
+
+            //params['filter.squareFrom'] = {$lte : parseInt(filter.square)};
+            //params['filter.squareTo'] = {$gte : parseInt(filter.square)};
         }
         if (filter.price) {
-            params['filter.priceFrom'] = {$lte : parseInt(filter.price)};
-            params['filter.priceTo'] = {$gte : parseInt(filter.price)};
+            params.$and.push(
+                { $or: [{ 'filter.priceFrom': { $gte: parseInt(filter.price) }}, {'filter.priceFrom' : null}] },
+                { $or: [{ 'filter.priceTo': { $gt: parseInt(filter.price) }}, {'filter.priceTo' : null}] }
+            )
+            //params['filter.priceFrom'] = {$lte : parseInt(filter.price)};
+            //params['filter.priceTo'] = {$gte : parseInt(filter.price)};
         }*/
 
         console.log('============= params: ');
@@ -127,8 +122,43 @@ export function sendFilterSms(filter) {
 
         console.log(foundFilters);
 
+        if (foundFilters) {
+            let text = setText(filter);
+            for(var i in foundFilters) {
+                sendSms(text, foundFilters[i].user.phone);
+            }
+        }
     }
   }
+}
+
+function setText (filter) {
+    let text = ''
+    if(filter.realtor && filter.realtor.isExclusive) text += 'Эксклюзив. ';
+    if(filter.owner && filter.owner.isComission) text += 'Комиссия '+filter.owner.comission+'%. ';
+    if(filter.operator && filter.operator.meetingTime) {
+        text += 'Встреча '+filter.operator.meetingTime;
+    }
+    if(filter.roomcount) text += filter.roomcount+'к., ';
+    if(filter.address.subway) {
+        console.log(filter.address.subway)
+        text += filter.address.subway.name+' '+filter.address.metroTime+' мин. '+filter.address.metroTransport;
+    }
+    if(filter.details.renovation) text += filter.details.renovation+', '
+    if(filter.price) {
+        var oldNumber = filter.price.toString().split('');
+        var number = '';
+        for(var i in oldNumber){
+            if(oldNumber[i].match(/\d/)){
+                number = number + oldNumber[i];
+            }
+        }
+        number = number.split('').reverse().join('');
+        number = number.length > 3 ? number.length > 6 ? number.length > 9 ? number.slice(0, 3) + ' ' + number.slice(3,6) +  ' ' + number.slice(6,9) + ' ' + number.slice(9) : number.slice(0, 3) + ' ' + number.slice(3,6) + ' ' + number.slice(6) :  number.slice(0, 3) + ' ' + number.slice(3) : number;
+        number = number.split('').reverse().join('');
+        text += number+' руб.';
+    } 
+    return text;
 }
 
 function sendSms (text, phone) {
