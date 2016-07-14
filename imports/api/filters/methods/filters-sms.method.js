@@ -123,7 +123,7 @@ export function sendFilterSms(filter) {
            'user.phone': 1
         };
 
-        let foundFilters = Filters.find(params,options);
+        let foundFilters = Filters.find(params,options).fetch();
 
         console.log(foundFilters);
 
