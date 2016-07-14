@@ -1,11 +1,11 @@
 div().m-16
     p().md-body-1.mv-8 
-        span(ng-if='realtyNewListFilterOne.filter.subways' ng-repeat='subway in realtyNewListFilterOne.filter.subways') {{subway}}, 
+        span(ng-if='realtyNewListFilterOne.filter.subways' ng-repeat='subway in realtyNewListFilterOne.subwaysNames') {{subway}}, 
         span(ng-if='realtyNewListFilterOne.filter.metroTime && realtyNewListFilterOne.filter.metroTransport') {{realtyNewListFilterOne.filter.metroTime}} мин. {{realtyNewListFilterOne.filter.metroTransport}}, 
         span(ng-if='realtyNewListFilterOne.filter.street') {{realtyNewListFilterOne.filter.street}} 
         span(ng-if='realtyNewListFilterOne.filter.house') {{realtyNewListFilterOne.filter.house}} 
     p().md-body-1.mv-8
-        span(ng-if='realtyNewListFilterOne.filter.roomcount' ng-repeat='room in realtyNewListFilterOne.filter.roomcount') {{room}} комн., 
+        span(ng-if='realtyNewListFilterOne.filter.roomcount' ng-repeat='room in realtyNewListFilterOne.filter.roomcount') {{room.id}} комн., 
         span(ng-if='realtyNewListFilterOne.filter.priceFrom') от {{realtyNewListFilterOne.filter.priceFrom | price}} 
         span(ng-if='realtyNewListFilterOne.filter.priceTo') до {{realtyNewListFilterOne.filter.priceTo | price}} 
         span(ng-if='realtyNewListFilterOne.filter.priceTo || realtyNewListFilterOne.filter.priceFrom') , 

@@ -104,8 +104,8 @@ class RealtyNewList {
         },100)    
         let timeLoaded = new Date();
         let timeRender = new Date();
-        console.log('время на закгрузку = ', ((timeLoaded - timeTestLoadData) / 1000));
-        console.log('время на рендер = ', ((timeRender - timeTestRender) / 1000));
+        //console.log('время на закгрузку = ', ((timeLoaded - timeTestLoadData) / 1000));
+        //console.log('время на рендер = ', ((timeRender - timeTestRender) / 1000));
       }
     });
 
@@ -163,6 +163,8 @@ class RealtyNewList {
 
   useSavedFilter (filter) {
     this.filter = filter;
+    this.roomcount = this.filter.roomcount;
+    //this.suitRealty();
   }
 
 }

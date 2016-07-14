@@ -4,13 +4,15 @@ div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}")
         div(ng-if='realtyFilter.parent == "ocean"').realty-filter__divider
         div(flex='30').realty-filter__col.mt-16
             div(layout='column' layout-align='space-between none')
+                div {{realtyFilter.filter.subways}}
                 div(flex).mb-32
-                    subway-chips(refresh='realtyFilter.refresh' 
+                    subway-chips(refresh='realtyFilter.refreshSublings' 
                     ng-model="realtyFilter.filter.subways"
                     subways-embeded='realtyFilter.subwaysEmbeded' flex
                     subways-changed='realtyFilter.suitRealty()')
+                div {{realtyFilter.filter.districts}}
                 div(flex).mb-16
-                    district-chips(refresh='realtyFilter.refresh' 
+                    district-chips(refresh='realtyFilter.refreshSublings' 
                     ng-model="realtyFilter.filter.districts"
                     districts-embeded='realtyFilter.districtsEmbeded' flex
                     districts-changed='realtyFilter.suitRealty()')
@@ -24,7 +26,7 @@ div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}")
                             md-option(ng-value='transport.id',
                             ng-repeat="transport in realtyFilter.dictionary.transport") {{transport.name}}
                 div(layout='row' layout-align='space-between end')
-                    realty-street(refresh='realtyFilter.refresh' is-filter='true' ng-model='realtyFilter.filter.street' house='realtyFilter.filter.house')
+                    realty-street(refresh='realtyFilter.refreshSublings' is-filter='true' ng-model='realtyFilter.filter.street' house='realtyFilter.filter.house')
 
         div(flex='30' flex-offset='10').realty-filter__col.mt-32
             div(layout='column' layout-align='space-between none')
@@ -76,7 +78,7 @@ div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}")
                     md-select(ng-model='realtyFilter.filter.materials', multiple='true' ng-blur='realtyFilter.suitRealty()')
                         md-option(ng-value='material.id',
                         ng-repeat='material in realtyFilter.dictionary.materials') {{material.name}}
-                div(layout='row' layout-align='space-between end').mt-16
+                div(layout='row' ng-if='realtyFilter.parent == "ocean"' layout-align='space-between end').mt-16
                     label().md-subhead.text-bold {{(realtyFilter.realtyCount !== false) ? realtyFilter.realtyCount !== 0 ? ('Показано ' + (realtyFilter.realtyCount | price) + ' объектов') : 'Объекты не найдены' : 'Ищем объекты'}}
                     md-button(aria-label='Очистить число показов' ng-click='realtyFilter.clearFilter()').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
                         md-icon(md-svg-icon='svg/icon-delete-forever.svg')

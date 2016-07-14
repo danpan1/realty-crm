@@ -24,6 +24,14 @@ class RealtyNewListFilterOne {
       })
     }
 
+    if(this.filter.subways){
+      this.getSubwaysNames();
+    }
+
+  }
+
+  getSubwaysNames () {
+    subwaysNames = [];
   }
 
 }
