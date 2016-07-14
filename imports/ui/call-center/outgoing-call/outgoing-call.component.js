@@ -217,7 +217,9 @@ class OutgoingCall {
     });
   }
   continue () {
-    this.realty = {};
+    console.log('continue');
+    this.realty = {
+    };
     this.getNew();
   }
   
@@ -241,6 +243,7 @@ class OutgoingCall {
   }
 
   getNew() {
+    console.log('getNew');
     this.showLoader = true;
     this.isLoading = true;
     const vm = this;
@@ -252,8 +255,11 @@ class OutgoingCall {
         console.log('error', error);
       }
 
+      console.log('loaded ', result);
       this.$timeout(()=> {
         vm.realty = result;
+        vm.realty.price = result.price;
+        vm.newObjectRecieved += 1;
         vm.isLoading = false;
         vm.operator = {};
         if (!result) {
