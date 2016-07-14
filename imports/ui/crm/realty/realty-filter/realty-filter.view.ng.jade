@@ -1,4 +1,4 @@
-div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}").realty-filter.pl-32.pr-16.pt-16.pb-32
+div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}").realty-filter.pt-16.pb-32
     div(layout='row', layout-align="space-between center")
         div(ng-if='realtyFilter.parent == "ocean"').realty-filter__divider
         div(ng-if='realtyFilter.parent == "ocean"').realty-filter__divider
@@ -47,14 +47,14 @@ div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}")
                     md-select(ng-model='realtyFilter.filter.renovation', multiple='true' ng-blur='realtyFilter.suitRealty()')
                         md-option(ng-value='renovation.id',
                         ng-repeat='renovation in realtyFilter.dictionary.renovation') {{renovation.name}}
-                md-input-container().mt-16.mb-0
+                md-input-container(ng-if='realtyFilter.parent != "custom"').mt-16.mb-0
                     label Удобства
                     md-select(ng-model='realtyFilter.filter.conditions', multiple='true' ng-blur='realtyFilter.suitRealty()')
                         md-option(ng-value='condition.id',
                         ng-repeat='condition in realtyFilter.dictionary.conditions') {{condition.name}}
 
         div(flex='30' flex-offset='10').realty-filter__col.mt-32
-            div(layout='column' layout-align='space-between none')
+            div(layout='column' layout-align='start none')
                 div(layout='row' layout-align='space-between end').mv-16
                     label(flex='30') Этаж
                     md-input-container(flex='25').mv-0.pv-0
@@ -73,7 +73,7 @@ div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}")
                     md-input-container(flex='25').mv-0.pv-0
                         label до
                         input(ng-model='realtyFilter.filter.squareTo' ng-blur='realtyFilter.suitRealty()')
-                md-input-container
+                md-input-container(ng-if='realtyFilter.parent != "custom"')
                     label Тип дома
                     md-select(ng-model='realtyFilter.filter.materials', multiple='true' ng-blur='realtyFilter.suitRealty()')
                         md-option(ng-value='material.id',

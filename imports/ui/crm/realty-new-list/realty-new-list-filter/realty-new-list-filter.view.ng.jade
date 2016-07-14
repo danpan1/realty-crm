@@ -16,7 +16,7 @@ div().modal
                                     md-button(ng-click='realtyNewListFilter.useFilter($index)').realty-new-list-filter__link показать объекты
                                     md-button(ng-click='filter.shown = !filter.shown').realty-new-list-filter__link критерии
                                     md-button(ng-click='realtyNewListFilter.changeFilter($index)').realty-new-list-filter__link изменить
-                                    md-button(ng-click='realtyNewListFilter.deleteFilter($index)').realty-new-list-filter__link удалить
+                                    md-button(ng-click='realtyNewListFilter.deleteFilter($index, $event)').realty-new-list-filter__link удалить
                                 div(layout='row' layout-align='center center' flex flex-offset='5')
                                     md-switch(aria-label='Switch 2' ng-change='realtyNewListFilter.changeFilterSms($index)' ng-model='filter.isActive').md-warn.realty-new-list-filter__sms
                             realty-new-list-filter-one(ng-if='filter.filter && filter.shown' filter='filter.filter').pb-16
@@ -102,7 +102,7 @@ div().modal
                         md-input-container(flex='33').mv-0.pv-0
                             input(placeholder='Название фильтра' ng-model='realtyNewListFilter.newFilter.name')
                     div(layout='row').mv-32
-                        md-button(ng-disabled='!realtyNewListFilter.newFilter.name' ng-click='realtyNewListFilter.saveNewFilter()').md-primary.md-raised.ph-16.ml-0 Сохранить фильтр
+                        md-button(ng-disabled='!realtyNewListFilter.newFilter.name' ng-click='realtyNewListFilter.saveNewFilter()').md-primary.md-raised.ph-16.ml-0 {{realtyNewListFilter.changingFilter !== undefined ? 'Сохранить фильтр' : 'Добавить фильтр' }}
                         md-button(ng-click='realtyNewListFilter.backToFiltersList()').md-primary.ph-16 Отмена
             md-button(aria-label='Закрыть').md-icon-button.slide__close.m-0.p-0.realty-new-list-filter__btn_close
                 md-icon(ng-click='realtyNewListFilter.modal = false' md-svg-icon='svg/icon-close-thin.svg')

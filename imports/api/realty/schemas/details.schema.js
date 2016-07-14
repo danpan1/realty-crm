@@ -53,6 +53,14 @@ export const RentDetailsSchema = new SimpleSchema({
     }),
     optional: true
   },
+  depositSum: {
+    type: Number,
+    optional: true
+  },
+  depositTime: {
+    type: Number,
+    optional: true
+  },
   // Описание
   descr: {
     type: String,

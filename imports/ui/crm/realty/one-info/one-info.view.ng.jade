@@ -107,15 +107,22 @@ div(layout="column", layout-align="space-around stretch")
                 md-divider
                 div(flex='33').ph-32.pv-16
                     h3().md-subhead.text-bold.text-uppercase.mt-0 Условия
-                    div(ng-if='oneInfo.realty.details.composition').md-subhead Состав съемщиков
+                    div(ng-if='oneInfo.realty.details.composition && (oneInfo.realty.type == 3 || oneInfo.realty.type == 4)').md-subhead Состав съемщиков
                         div(ng-repeat="position in oneInfo.realty.details.composition")
                             div().md-subhead #[strong {{oneInfo.dictionary.composition[position].name}} ]
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
-                        div(flex='60') Срок:
-                        div(flex='40') #[strong длительный]
+                        div(flex='60' ng-if='oneInfo.realty.type == 3 || oneInfo.realty.type == 4' ) Срок:
+                        div(flex='60' ng-if='oneInfo.realty.type == 1 || oneInfo.realty.type == 2' ) Тип дома:
+                        div(flex='40') #[strong {{oneInfo.dictionary.type[oneInfo.realty.type - 1].name}}]
                     div(layout='row' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Цена:
                         div(flex='40') #[strong {{oneInfo.realty.price | price}}]
+                    div(layout='row' ng-if='oneInfo.realty.details.depositSum' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Залог:
+                        div(flex='40') #[strong {{oneInfo.realty.details.depositSum | price}}]
+                    div(layout='row' ng-if='oneInfo.realty.details.depositSum && oneInfo.realty.details.depositTime != 2' layout-align='space-around start').md-subhead.mv-8
+                        div(flex='60') Разбивается на:
+                        div(flex='40') #[strong {{oneInfo.dictionary.depositTime[oneInfo.realty.details.depositTime].name}}]
                     div(layout='row' ng-if='oneInfo.realty.comission && oneInfo.realty.comissionLoyal' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Собственник:
                         div(flex='40') #[strong {{oneInfo.realty.comission}}]%
@@ -127,7 +134,7 @@ div(layout="column", layout-align="space-around stretch")
                         div(flex='40') #[strong {{oneInfo.realty.realtor.partnerpercent || 0}}]%
 
     div(layout='row' layout-align='start start').one-info__wrapper.mt-16
-        div(md-whiteframe='2' flex='100' flex-gt-sm='50').one-info__current-conditions.mr-16.ph-32.pv-16
+        div(md-whiteframe='2' flex='100' ng-if='oneInfo.realty.type == 3 || oneInfo.realty.type == 4' flex-gt-sm='50').one-info__current-conditions.mr-16.ph-32.pv-16
             div(layout='row' layout-align='space-around start' layout-wrap) {{oneInfo.currentConditions[$index].presence}}
                 md-switch(flex='50' ng-model='oneInfo.currentConditions[$index].presence',
                 aria-label='Switch 2'

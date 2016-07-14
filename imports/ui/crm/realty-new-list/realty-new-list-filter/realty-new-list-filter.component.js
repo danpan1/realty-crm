@@ -14,8 +14,9 @@ import './realty-new-list-filter.view.html';
 
 class RealtyNewListFilter {
   /* @ngInject */
-  constructor($scope, $reactive, $timeout) {
+  constructor($scope, $reactive, $timeout, $mdDialog) {
     $reactive(this).attach($scope);
+    this.mdDialog = $mdDialog;
     this.$timeout = $timeout;
     const vm = this;
     this.loaded = true;
@@ -60,8 +61,7 @@ class RealtyNewListFilter {
       }
     },1000);*/
 
-    if(this.user.profile.changeUserGetSmsPremium == undefined) this.user.profile.changeUserGetSmsPremium = true;
-
+    if(this.user.profile.getSmsPremiumObjects == undefined) this.user.profile.getSmsPremiumObjects = true;
   }
 
   checkSmsIsActive () {
@@ -129,7 +129,24 @@ class RealtyNewListFilter {
   }
 
 
-  deleteFilter (index) {
+  deleteFilter(index, ev) {
+    let vm = this;
+    //console.log(angular.element(document.querySelector('#openArchiveDialog')));
+    var confirm = this.mdDialog.confirm()
+      .parent(angular.element(document.body))
+      .clickOutsideToClose(true)
+      .title('Удалить фильтр')
+      .textContent('Фильтр будет удален, вы уверены?')
+      .ariaLabel('Filter deleting confirmation')
+      .ok('Да')
+      .cancel('Нет')
+      .targetEvent(ev);
+    this.mdDialog.show(confirm).then(function () {
+      vm.deleteFilterConfirm(index)
+    })
+  }
+
+  deleteFilterConfirm (index) {
     Meteor.call('removeFilter', this.myFilters[index]._id, (error, result) => {
       if (error) {
         console.log('Ошибка!');
@@ -200,7 +217,7 @@ class RealtyNewListFilter {
   }
 
   backToFiltersList () {
-    if(this.changingFilter) this.changingFilter = undefined;
+    if(this.changingFilter != undefined) this.changingFilter = undefined;
     this.showFilter = false;
   }
 

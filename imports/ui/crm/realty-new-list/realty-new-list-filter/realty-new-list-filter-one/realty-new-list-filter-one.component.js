@@ -3,6 +3,7 @@
  */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import {Locations} from '/imports/api/locations';
 import {dictionary} from '/imports/helpers/dictionary';
 
 
@@ -31,7 +32,27 @@ class RealtyNewListFilterOne {
   }
 
   getSubwaysNames () {
+    let vm = this;
     subwaysNames = [];
+    vm.subscribe('subwayChips', ()=> {
+      return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), this.filter.subways];
+    }, {
+      onReady: function () {
+        if (!vm.loaded) {
+          vm.subwaysNames = Locations.find({
+            type: 'subway'
+          }).fetch();
+        }
+      }
+    });
+
+    vm.helpers({
+      subwaysNames () {
+        return Locations.find({
+          type: 'subway'
+        });
+      }
+    });
   }
 
 }

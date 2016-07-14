@@ -1,6 +1,6 @@
 slide-show(slides-list='clientRelations.slideShowImages' isshown='clientRelations.showSlider')
 
-div(md-whiteframe='1' style='background-color: white; border-bottom: 2px solid #42a5f5').mt-8.p-16
+div(md-whiteframe='1' ng-if='clientRelations.realtyNew.length || clientRelations.realtyOffers.length' style='background-color: white; border-bottom: 2px solid #42a5f5').mt-8.p-16
     div(layout='row')
         div(flex='45')
             div(style='color: #2196f3').md-subhead.text-uppercase Предложение от партнеров
