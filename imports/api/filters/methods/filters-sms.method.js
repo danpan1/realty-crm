@@ -1,6 +1,7 @@
 'use strict';
 import {Meteor} from 'meteor/meteor';
 import {Filters} from '../filters.model.js';
+import {dictionary} from '/imports/helpers/dictionary';
 import {HTTP} from 'meteor/http';
 
 Meteor.methods({
@@ -50,7 +51,7 @@ export function sendFilterSms(filter) {
         }
         if(filter.address.metroTime){
             console.log(filter.address.metroTime+' min by ' + filter.address.metroTransport);
-            //params['filter.metroTime'] = {$lte: filter.address.metroTime};
+            //params['filter.metroTime'] = {$in: [{$lte: filter.address.metroTime}, null]};
             params['filter.metroTransport'] = {$in : [filter.address.metroTransport, null]};
         }
         if(filter.district){
@@ -66,8 +67,13 @@ export function sendFilterSms(filter) {
             params['filter.house'] = {$in : [filter.address.house, null]};
         }
         if(filter.roomcount){
-            console.log('roomcount: '+filter.roomcount);
-            params['filter.roomcount'] = {$in : [filter.roomcount, null]};
+            console.log(filter.roomcount);
+            let roomSearch =  {
+                id: parseInt(filter.roomcount),
+                name: ''+filter.roomcount
+            }
+            console.log('roomcount: '+roomSearch);
+            params['filter.roomcount'] = {$in : [roomSearch, null]};
         }
         if(filter.materials){
             console.log('materials: '+filter.materials);
@@ -81,11 +87,11 @@ export function sendFilterSms(filter) {
             console.log('conditions: '+filter.conditions);
             params['filter.conditions'] = filter.conditions;
         }*/
-        /*params.$and = [];
+        params.$and = [];
         if (filter.floor) {
             params.$and.push(
-                { $or: [{ 'filter.floorFrom': { $gte: parseInt(filter.floor) }}, {'filter.floorFrom' : null}] },
-                { $or: [{ 'filter.floorTo': { $gt: parseInt(filter.floor) }}, {'filter.floorTo' : null}] }
+                { $or: [{ 'filter.floorFrom': { $lte: parseInt(filter.floor) }}, {'filter.floorFrom' : null}] },
+                { $or: [{ 'filter.floorTo': { $gte: parseInt(filter.floor) }}, {'filter.floorTo' : null}] }
             )
 
             //params['filter.floorFrom'] = { $lte: parseInt(filter.floor)};
@@ -93,8 +99,8 @@ export function sendFilterSms(filter) {
         }
         if (filter.square) {
             params.$and.push(
-                { $or: [{ 'filter.squareFrom': { $gte: parseInt(filter.square) }}, {'filter.squareFrom' : null}] },
-                { $or: [{ 'filter.squareTo': { $gt: parseInt(filter.square) }}, {'filter.squareTo' : null}] }
+                { $or: [{ 'filter.squareFrom': { $lte: parseInt(filter.square) }}, {'filter.squareFrom' : null}] },
+                { $or: [{ 'filter.squareTo': { $gte: parseInt(filter.square) }}, {'filter.squareTo' : null}] }
             )
 
             //params['filter.squareFrom'] = {$lte : parseInt(filter.square)};
@@ -102,12 +108,12 @@ export function sendFilterSms(filter) {
         }
         if (filter.price) {
             params.$and.push(
-                { $or: [{ 'filter.priceFrom': { $gte: parseInt(filter.price) }}, {'filter.priceFrom' : null}] },
-                { $or: [{ 'filter.priceTo': { $gt: parseInt(filter.price) }}, {'filter.priceTo' : null}] }
+                { $or: [{ 'filter.priceFrom': { $lte: parseInt(filter.price) }}, {'filter.priceFrom' : null}] },
+                { $or: [{ 'filter.priceTo': { $gte: parseInt(filter.price) }}, {'filter.priceTo' : null}] }
             )
             //params['filter.priceFrom'] = {$lte : parseInt(filter.price)};
             //params['filter.priceTo'] = {$gte : parseInt(filter.price)};
-        }*/
+        }
 
         console.log('============= params: ');
         console.log(params);
@@ -142,9 +148,9 @@ function setText (filter) {
     if(filter.roomcount) text += filter.roomcount+'к., ';
     if(filter.address.subway) {
         console.log(filter.address.subway)
-        text += filter.address.subway.name+' '+filter.address.metroTime+' мин. '+filter.address.metroTransport;
+        text += filter.address.subway.name+' '+filter.address.metroTime+' мин. '+dictionary.transport[filter.address.metroTransport].name+', ';
     }
-    if(filter.details.renovation) text += filter.details.renovation+', '
+    if(filter.details.renovation) text += dictionary.renovation[filter.details.renovation].name+', '
     if(filter.price) {
         var oldNumber = filter.price.toString().split('');
         var number = '';
