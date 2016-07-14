@@ -4,8 +4,8 @@
 md-progress-circular(ng-if='!clientSuitExact.loaded' md-diameter='150' style='position:absolute;left:0;right:0;top:280px;margin:0 auto;')
 div(ng-if='clientSuitExact.loaded')
     slide-show(slides-list='clientSuitExact.slideShowImages' isshown='clientSuitExact.showSlider')
-    div {{clientSuitExact.filter}} фильтр
-    div {{clientSuitExact.realtyCount}} объектов найдено
+    //div {{clientSuitExact.filter}} фильтр
+    //div {{clientSuitExact.realtyCount}} объектов найдено
 
     .md-body-1(layout='column', layout-align='space-around stretch')
         realty-card(dir-paginate="realty in clientSuitExact.realty | itemsPerPage: clientSuitExact.perPage" 

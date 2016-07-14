@@ -23,6 +23,15 @@ export function clearRelations(realtyId, clientId, relationType) {
       } else if (relationType == 'saved') {
         relationIndex = client.relations.saved.indexOf(realtyId);
         client.relations.saved.splice(relationIndex, 1);
+      } else if (relationType == 'my') {
+        relationIndex = client.relations.my.indexOf(realtyId);
+        client.relations.my.splice(relationIndex, 1);
+      } else if (relationType == 'offers') {
+        relationIndex = client.relations.offers.indexOf(realtyId);
+        client.relations.offers.splice(relationIndex, 1);
+      } else if (relationType == 'hide') {
+        relationIndex = client.relations.hide.indexOf(realtyId);
+        client.relations.hide.splice(relationIndex, 1);
       }
 
       Clients.update({_id: clientId}, {

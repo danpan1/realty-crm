@@ -4,11 +4,15 @@ import {check} from 'meteor/check';
 import {RoboInvoices} from './robo-invoices.model';
 import Robokassa from './robokassa';
 import nextAutoincrement from '../../helpers/getUniqueId';
+/* HIGHLy IMPORTANT DONT CHANGE*/
+/* HIGHLy IMPORTANT DONT CHANGE*/
+/* HIGHLy IMPORTANT DONT CHANGE*/
 const robokassa = new Robokassa({
   login: "rieltor.guru",
-  password1: "cOL2cvZvKq38u3ubQC2x",
-  password2: 'GC9VBC3tPCj3EL0V1mGl'
+  password1: "bGH4cKsja370cKuf9QIS",
+  password2: 'Scpt2T6SJ1Tu5zJVpyK2'
 });
+/* HIGHLy IMPORTANT DONT CHANGE*/
 
 Meteor.methods({
   replenishTheBalance
@@ -21,9 +25,9 @@ Meteor.methods({
  */
 export function replenishTheBalance(summ, description) {
   let url;
+  summ = 1;
   console.log(summ, 'sum покупки');
   if (!(Meteor.isServer && this.userId)) {
-    console.log('ereror');
     throw new Meteor.Error('auth');
   }
   check(summ, Number);
@@ -49,7 +53,9 @@ export function replenishTheBalance(summ, description) {
      */
     let order = {id: id, summ: summ, description: description};
     console.log(order);
-    return robokassa.merchantUrl(order);
+    let roboUrl = robokassa.merchantUrl(order);
+    console.log(roboUrl);
+    return roboUrl;
   } catch (e) {
     console.log(e);
     throw new Meteor.error('RoboInvoise Insert');

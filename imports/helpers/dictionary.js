@@ -51,6 +51,11 @@ export const dictionary = {
     {id: 0, name: 'с залогом'},
     {id: 1, name: 'без залога'}
   ],
+  depositTime: [
+    {id: 0, name: '2 мес.'},
+    {id: 1, name: '3 мес.'},
+    {id: 2, name: 'Не разбивается'}
+  ],
   elevator: [
     {id: 0, name: '0'},
     {id: 1, name: '1'},

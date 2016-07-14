@@ -66,7 +66,7 @@ export default angular.module(moduleName, [
   bindings: {
       price: '=',
       label: '<',
-      flex: '<',
+      optflex: '<',
       change:'&',
       noRequired: '<',
       isFilter: '<',

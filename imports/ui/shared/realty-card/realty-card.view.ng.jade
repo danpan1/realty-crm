@@ -8,11 +8,10 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16.pr-8 Платит {{::realtyCard.realty.owner.comission}}% комиссии
             div(ng-if='::realtyCard.realty.operator.meetingTime').newList__green-label.text-bold.pl-16.pr-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
             div(ng-if='!realtyCard.reason').pl-16.pr-8.pt-8
-                div() {{::realtyCard.realty.createdAt | date:'MM.dd'}}
-                div() Id {{::realtyCard.realty._id | price}}
+                div() {{::realtyCard.realty.createdAt | date:'dd.MM'}}
+                div() id {{::realtyCard.realty._id | price}}
             div().pl-16.pr-8.pv-8
                 div(ng-show="(realtyCard.reason == 'meeting' && realtyCard.minutes >= 5) || ((realtyCard.reason == 'exclusive' || realtyCard.reason == 'comission') && realtyCard.minutes >= 10)" ng-if='realtyCard.realty.status == \'ocean\'')
-                    h3 reason: {{realtyCard.reason}}, minutes: {{realtyCard.minutes}}
                     div().realty-card__timer-title Объект исчезнет через
                     div().realty-card__timer.mt-8
                         span(ng-if='realtyCard.reason == "exclusive" || realtyCard.reason == "comission"') {{realtyCard.minutes - 10}}:

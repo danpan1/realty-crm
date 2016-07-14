@@ -59,35 +59,35 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                                     md-select(required ng-model='addRealtyFull.realty.roomcount', ng-change="addRealtyFull.changeRoomCount()")
                                         md-option(ng-value='roomcount.id',
                                         ng-repeat="roomcount in addRealtyFull.dictionary.roomcountBig") {{roomcount.name}}
-                                div(flex='33').ml-32
+                                //div(flex='33').ml-32
                                     md-checkbox(aria-label='Checkbox 1' md-no-ink ng-model='addRealtyFull.realty.details.apartaments').md-primary.md-subhead.mb-0 Апартаменты
-                                div(flex='33').ml-32
+                                //div(flex='33').ml-32
                                     md-checkbox(aria-label='Checkbox 1' md-no-ink ng-model='addRealtyFull.realty.details.penthouse').md-primary.md-subhead.mb-0 Пентхаус
 
                     div(layout='row').mv-16
                         div(flex='45')
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required.zh
-                                    input(required name='floor' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
+                                    input(required name='floor' type='number' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floor' placeholder='Этаж')
                                     span(ng-show='secondForm.floor.$touched && secondForm.floor.$invalid').has-error {{secondForm.floor.$viewValue.length == 0 ? 'Необходимо заполнить' : 'Только цифры'}}
                                     span(ng-show='addRealtyFull.realty.floor > addRealtyFull.realty.floormax').has-error.nowrap Этаж выше, чем указано в доме.
                                 md-input-container(flex).mv-0.ml-32.form-required.zh
-                                    input(required name='floormax' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
+                                    input(required name='floormax' type='number' ng-pattern="/^[0-9]{1,}$/" ng-model='addRealtyFull.realty.floormax' placeholder='Этажей в доме')
                                     span(ng-show='secondForm.floormax.$touched && secondForm.floormax.$invalid').has-error {{secondForm.floormax.$viewValue.length == 0 ? 'Необходимо заполнить' : 'Только цифры'}}
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row' layout-align='start center')
                                 md-input-container(flex).mv-0.form-required.zh
-                                    input(required name='square' type='number' ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
-                                    span(ng-show='secondForm.square.$viewValue.length > 0 && secondForm.square.$touched && secondForm.square.$invalid').has-error Только цифры или запятая
+                                    input(required name='square' type='number' ng-model='addRealtyFull.realty.square' placeholder='Общая площадь м²')
+                                    //span(ng-show='secondForm.square.$viewValue.length > 0 && secondForm.square.$touched && secondForm.square.$invalid').has-error Только цифры или запятая
                                     span(ng-show='addRealtyFull.realty.square < 10 && !secondForm.square.$invalid').has-error.nowrap Площадь меньше 10 м²
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" type='number' name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
-                                    span(ng-show='secondForm.livingSquare.$touched && secondForm.livingSquare.$invalid').has-error Только цифры или запятая
+                                    input(type='number' name='livingSquare' ng-model='addRealtyFull.realty.details.livingSquare' placeholder='Жилая площадь м²')
+                                    //span(ng-show='secondForm.livingSquare.$touched && secondForm.livingSquare.$invalid').has-error Только цифры или запятая
                                     span(ng-show='addRealtyFull.realty.details.livingSquare + addRealtyFull.realty.details.kitchenSquare > addRealtyFull.realty.square && secondForm.livingSquare.$touched && secondForm.kitchenSquare.$touched').has-error.nowrap Сумма площадей больше общей площади
                                 md-input-container(flex).mv-0.ml-32.zh
-                                    input(ng-pattern="/^[0-9]{1,}[,]?([0-9]{1,})?$/" type='number' name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
-                                    span(ng-show='secondForm.kitchenSquare.$touched && secondForm.kitchenSquare.$invalid').has-error Только цифры или запятая
+                                    input(type='number' name='kitchenSquare' ng-model='addRealtyFull.realty.details.kitchenSquare' placeholder='Кухня м²')
+                                    //span(ng-show='secondForm.kitchenSquare.$touched && secondForm.kitchenSquare.$invalid').has-error Только цифры или запятая
                     div(layout='row').mv-16
                         div(flex='70')
                             div(layout='row')
@@ -135,7 +135,7 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                                         md-option(ng-value='elevator.id',
                                         ng-repeat="elevator in addRealtyFull.dictionary.elevator ") {{elevator.name}}
 
-                    div(layout='row').mv-16
+                    div(layout='row' ng-if='addRealtyFull.realty.type != 1').mv-16
                         div(flex='70')
                             div(layout='row' layout-wrap)
                                 realty-conditions(ng-model='addRealtyFull.realty.details.conditions' checkbox="true")
@@ -162,9 +162,19 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                         div(flex='45').mv-16
                             div(layout='row' layout-align='space-between start')
                                 price-mask(ng-if='addRealtyFull.realty' label='"Цена"' price='addRealtyFull.realty.price' optflex='' flex)
-                                md-input-container(flex).mv-0.ml-32.form-required
+                                md-input-container(flex ng-if='addRealtyFull.realty.type != 1').mv-0.ml-32.form-required
                                     md-select(required ng-model='addRealtyFull.realty.details.composition' multiple='true' placeholder='Состав съемщиков')
                                         md-option(ng-value="position.id" ng-repeat='position in addRealtyFull.dictionary.composition') {{position.name}}
+                   
+                    div(layout='row' ng-if='addRealtyFull.realty.type != 1')
+                        div(flex='45').mv-16
+                            div(layout='row' layout-align='space-between start')
+                                price-mask(ng-if='addRealtyFull.realty' label='"Сумма залога"' price='addRealtyFull.realty.details.depositSum' optflex='' flex='45')
+                                div(layout='row' flex='50' flex-offset='5' ng-if='addRealtyFull.realty.details.depositSum')
+                                    p Разбивается на
+                                    md-input-container(flex).mv-0.ml-8
+                                        md-select(required ng-model='addRealtyFull.realty.details.depositTime' placeholder='2 мес.')
+                                            md-option(ng-value="time.id" ng-repeat='time in addRealtyFull.dictionary.depositTime') {{time.name}}
                    
                     div(ng-if='addRealtyFull.realty').mt-16
                         div(layout='row' layout-align='start center' ng-init='addRealtyFull.realty.comissionLoyal = true')

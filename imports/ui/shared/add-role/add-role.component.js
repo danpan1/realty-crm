@@ -25,7 +25,8 @@ class AddRole {
     });
   }
 
-  submit(valid, role) {
+  // НЕТ ПРОВЕРКИ НА PAID И PAIDSALE - НЕ ТРЕБУЕТСЯ И ДОБАВЛЕНИЕ
+  /*submit(valid, role) {
     console.log(valid);
     if (valid) {
       Meteor.call('addUsersToRolePaid', this.email, (err, result)=> {
@@ -56,7 +57,7 @@ class AddRole {
         }
       });
     }
-  }
+  }*/
 
 }
 
