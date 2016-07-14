@@ -59,14 +59,17 @@ export function buyRealtyOcean(realtyId, realtyPrice, setStatus) {
       buyOceanBackwardsCommits(1);
       throw new Meteor.Error('объект добавляется из неизвестного места');
     }
-    if (realty.type === 4 && !Roles.userIsInRole(Meteor.userId(), 'paid')) {
+
+    // УДАЛИТЬ 20.07.2016
+    /*if (realty.type === 4 && !Roles.userIsInRole(Meteor.userId(), 'paid')) {
       buyOceanBackwardsCommits(1);
       throw new Meteor.Error('надо оплатить подписку на аренду');
     }
     if (realty.type === 1 && !Roles.userIsInRole(Meteor.userId(), 'paidSale')) {
       buyOceanBackwardsCommits(1);
       throw new Meteor.Error('надо оплатить подписку на продажу');
-    }
+    }*/
+
     /*   ОПЛАТА  */
     Balance.update({userId: userId}, {$inc: {current: -price}});
     /*проверяем положительный баланс*/

@@ -1,6 +1,6 @@
 div().m-16
     p().md-body-1.mv-8 
-        span(ng-if='realtyNewListFilterOne.filter.subways' ng-repeat='subway in realtyNewListFilterOne.subwaysNames') {{subway}}, 
+        span(ng-if='realtyNewListFilterOne.filter.subways' ng-repeat='subway in realtyNewListFilterOne.subwaysNames') {{subway.name}}, 
         span(ng-if='realtyNewListFilterOne.filter.metroTime && realtyNewListFilterOne.filter.metroTransport') {{realtyNewListFilterOne.filter.metroTime}} мин. {{realtyNewListFilterOne.filter.metroTransport}}, 
         span(ng-if='realtyNewListFilterOne.filter.street') {{realtyNewListFilterOne.filter.street}} 
         span(ng-if='realtyNewListFilterOne.filter.house') {{realtyNewListFilterOne.filter.house}} 

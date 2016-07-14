@@ -37,7 +37,7 @@ class RealtyCard {
         offerta_accept: "true"
       };
     }
-    this.checkUserPaid(false);
+    //this.checkUserPaid(false);
     
 
     
@@ -126,30 +126,34 @@ class RealtyCard {
   onShowDetails (justInfo) {
     if(!this.contacts.realtyPhone){
       let vm = this;
-      if(!justInfo) this.loadingDetails = true;
-      let realtyId = this.realty._id;
-      let userId = this.user._id;
-      Meteor.call('showRealtyDetails', realtyId, userId, (err, result)=> {
-        if (err) {
-          console.log('err: ' + err);
-        } else {
-          this.timeout(()=> {
-            vm.contacts.realtyPhone = result.phone;
-            vm.contacts.realtyName = result.name;
-            vm.contacts.realtyStreet = result.address.street;
-            vm.contacts.realtyHouse = result.address.house;
-            vm.parseDetails = result.parseDetails;
-            if(!justInfo) {
-              this.loadingDetails = false;
-              this.ngShowDescr = true;
-            }
-          }, 0);
-        }
-      });
+      try {
+        if(!justInfo) this.loadingDetails = true;
+        let realtyId = this.realty._id;
+        let userId = this.user._id;
+        Meteor.call('showRealtyDetails', realtyId, userId, (err, result)=> {
+          if (err) {
+            console.log('err: ' + err);
+          } else {
+            this.timeout(()=> {
+              vm.contacts.realtyPhone = result.phone;
+              vm.contacts.realtyName = result.name;
+              vm.contacts.realtyStreet = result.address.street;
+              vm.contacts.realtyHouse = result.address.house;
+              vm.parseDetails = result.parseDetails;
+              if(!justInfo) {
+                this.loadingDetails = false;
+                this.ngShowDescr = true;
+              };
+            }, 0);
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      };
     } else {
       this.ngShowDescr = !this.ngShowDescr;
-    }
-  }
+    };
+  };
 
   returnToCallCenter (id, ev, add) {
     const vm = this;
@@ -185,7 +189,7 @@ class RealtyCard {
                       <div class="md-dialog-content pv-16">
                         <div layout="column">
                           <div layout="row" flex="80">
-                            <h3 class="md-subhead text-center">Вы не сможете вернуться к работе с ним в дальнейшем. Вы уверены, что хотите отказаться от этого объекта?</h3>
+                            <h3 class="md-subhead text-center">Вы уверены, что хотите отказаться от этого объекта?</h3>
                           </div>
                           <div layout='row' layout-align='center center'>
                             <md-button flex class="md-raised md-primary md-mv-16 ph-16" ng-click='dialog.confirm()'>Да</md-button>
@@ -233,9 +237,10 @@ class RealtyCard {
     });
   }
   
-  checkUserPaid (ev) {
+  // УДАЛИТЬ 20.07.2016
+  /*checkUserPaid (ev) {
+    
     this.isUserPaid = false;
-
     if (this.user && this.user.roles){
       if(this.user.roles.indexOf('paid') !== -1 && this.realty.type === 4) {
         this.isUserPaid = true;
@@ -250,7 +255,7 @@ class RealtyCard {
       return false;
     } 
     else return true;
-  }
+  }*/
   
 
   showSlider () {
