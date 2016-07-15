@@ -201,7 +201,7 @@ export default angular.module(moduleName, [
     data: '=',
     contacts: '<',
     realty: '=',
-    userpaid: '=',
+    //userpaid: '=',
     con: '<',
     user: '<',
     parseDetails: '='

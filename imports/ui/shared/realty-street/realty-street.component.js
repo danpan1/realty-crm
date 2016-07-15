@@ -9,7 +9,10 @@ import {name as RealtyStreetHouse} from './realty-street-house/realty-street-hou
 import './realty-street.view.html';
 
 class RealtyStreet {
-  constructor() {
+  /* @ngInject */
+  constructor($scope, $reactive, $timeout) {
+    $reactive(this).attach($scope);
+    this.$timeout = $timeout;
     this.noCache = false;
 
     this.$onChanges = function () {
@@ -24,12 +27,19 @@ class RealtyStreet {
     this.searchTextHouse = '';
   }
 
+  someChanges () {
+    this.$timeout(() => {
+      this.streetChanged();
+    },100)
+  }
+
   querySearch(query) {
     console.log('querySearch: ',query);
     if (!query) {
       console.log('!query')
       return;
     }
+    this.someChanges();
     return AddressService.search({
       'from_bound': {'value': 'street'},
       'to_bound': {'value': 'street'},
@@ -40,6 +50,8 @@ class RealtyStreet {
       this.clearHouse();
       return res.suggestions;
     });
+
+
   }
 
   querySearchHouse(query) {
@@ -62,6 +74,7 @@ class RealtyStreet {
   }
   // в DADATA приходится запрашивать с параметром count : 1, чтобы получить Район и Координаты
   requestFullData(query) {
+    this.someChanges();
     if (query && query.unrestricted_value) {
       return AddressService.search({'query': query.unrestricted_value, count: 1}).then((res)=> {
         this.dataFull = res.suggestions[0];
@@ -85,7 +98,8 @@ export default angular.module(moduleName, [
     house: '=house',
     dataFull: '=dadata',
     isFilter: '<',
-    refresh:'<'
+    refresh:'<',
+    streetChanged: '&'
   },
   controllerAs: moduleName,
   controller: RealtyStreet

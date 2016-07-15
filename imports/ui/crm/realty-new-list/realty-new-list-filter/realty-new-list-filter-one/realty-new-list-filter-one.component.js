@@ -25,35 +25,13 @@ class RealtyNewListFilterOne {
       })
     }
 
-    if(this.filter.subways){
+    /*if(this.filter.subways){
       this.getSubwaysNames();
-    }
+    }*/
 
   }
 
-  getSubwaysNames () {
-    let vm = this;
-    subwaysNames = [];
-    vm.subscribe('subwayChips', ()=> {
-      return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), this.filter.subways];
-    }, {
-      onReady: function () {
-        if (!vm.loaded) {
-          vm.subwaysNames = Locations.find({
-            type: 'subway'
-          }).fetch();
-        }
-      }
-    });
 
-    vm.helpers({
-      subwaysNames () {
-        return Locations.find({
-          type: 'subway'
-        });
-      }
-    });
-  }
 
 }
 

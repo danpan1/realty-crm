@@ -1,5 +1,5 @@
 div().modal
-    div().modal__bg
+    div(ng-click='realtyNewListFilter.modal = false').modal__bg
     div().modal__outer
         div().modal__inner
             div(md-whiteframe='2' style='min-height: 500px;' ng-if='!realtyNewListFilter.loaded').pv-16
@@ -28,76 +28,6 @@ div().modal
                 
                 div(ng-if='realtyNewListFilter.showFilter').realty-filter.pl-32.pr-16
                     realty-filter(refresh='realtyNewListFilter.refresh' parent='"custom"' filter='realtyNewListFilter.newFilter.filter' roomcount='realtyNewListFilter.roomcount')
-                    //div(layout='row', layout-align="space-between center")
-                        div(flex='30').realty-filter__col.mt-16
-                            div(layout='column' layout-align='space-between none')
-                                div(flex).mb-32
-                                    subway-chips(ng-model="realtyNewListFilter.filter.subways"
-                                    subways-embeded='realtyNewListFilter.subwaysEmbeded' flex
-                                    subways-changed='realtyNewListFilter.suitRealty()')
-                                div(flex).mb-16
-                                    district-chips(ng-model="realtyNewListFilter.filter.districts"
-                                    districts-embeded='realtyNewListFilter.districtsEmbeded' flex
-                                    districts-changed='realtyNewListFilter.suitRealty()')
-                                div(layout='row' layout-align='space-between end').mv-32
-                                    label(flex='30') До метро
-                                    md-input-container(flex='20').mv-0.pv-0
-                                        input(ng-model='realtyNewListFilter.filter.metroTime', placeholder='минут' ng-blur='realtyNewListFilter.suitRealty()')
-                                    md-input-container().mv-0.pb-0
-                                        label пешком
-                                        md-select(ng-model='realtyNewListFilter.filter.metroTransport' required='' ng-blur='realtyNewListFilter.suitRealty()')
-                                            md-option(ng-value='transport.id',
-                                            ng-repeat="transport in realtyNewListFilter.dictionary.transport") {{transport.name}}
-                                div(layout='row' layout-align='space-between end').mt-8
-                                    md-input-container(flex='80').mv-0.pv-0
-                                        input(placeholder='Улица')
-                                    md-input-container(flex='20').mv-0.ml-16.pv-0
-                                        input(placeholder='Дом')
-
-                        div(flex='30' flex-offset='10').realty-filter__col.mt-32
-                            div(layout='column' layout-align='space-between none')
-                                div(layout='row' layout-align='space-between end').realty-filter__rooms.mv-16
-                                    label().mr-8 Комнат
-                                    md-checkbox(
-                                    ng-checked='realtyNewListFilter.existsRoomcount(item)',
-                                    ng-repeat='item in realtyNewListFilter.dictionary.roomcount',
-                                    ng-click='realtyNewListFilter.toggleRoomcount(item)',
-                                    ng-blur='realtyNewListFilter.suitRealty()'
-                                    md-no-ink,
-                                    class='md-primary') {{ item.name }}
-                                div(layout='row' layout-align='space-between end').mv-32
-                                    price-mask(ng-if='realtyNewListFilter.filter' label='"цена от"' change='realtyNewListFilter.suitRealty()' price='realtyNewListFilter.filter.priceFrom' optflex='40')
-                                    price-mask(ng-if='realtyNewListFilter.filter' label='"цена до"' change='realtyNewListFilter.suitRealty()' price='realtyNewListFilter.filter.priceTo' optflex='40').ml-32
-                                md-input-container().mv-16
-                                    label Ремонт
-                                    md-select(ng-model='realtyNewListFilter.filter.conditions', multiple='true' ng-blur='realtyNewListFilter.suitRealty()')
-                                        md-option(ng-value='condition.id',
-                                        ng-repeat='condition in realtyNewListFilter.dictionary.conditions') {{condition.name}}
-
-                        div(flex='30' flex-offset='10').realty-filter__col.mt-32
-                            div(layout='column' layout-align='space-between none')
-                                div(layout='row' layout-align='space-between end').mv-16
-                                    label(flex='30') Этаж
-                                    md-input-container(flex='25').mv-0.pv-0
-                                        label от
-                                        input(ng-model='realtyNewListFilter.filter.floorFrom' ng-blur='realtyNewListFilter.suitRealty()')
-                                    span().hyphen
-                                    md-input-container(flex='25').mv-0.pv-0
-                                        label до
-                                        input(ng-model='realtyNewListFilter.filter.floorTo' ng-blur='realtyNewListFilter.suitRealty()')
-                                div(layout='row' layout-align='space-between end').mv-32
-                                    label(flex='30') Площадь
-                                    md-input-container(flex='25').mv-0.pv-0
-                                        label от
-                                        input(ng-model='realtyNewListFilter.filter.floorFrom' ng-blur='realtyNewListFilter.suitRealty()')
-                                    span().hyphen
-                                    md-input-container(flex='25').mv-0.pv-0
-                                        label до
-                                        input(ng-model='realtyNewListFilter.filter.floorTo' ng-blur='realtyNewListFilter.suitRealty()')
-                                div(layout='row' layout-align='space-between end').mt-16
-                                    label().md-subhead.text-bold  {{(realtyNewListFilter.realtyCount !== false) ? realtyNewListFilter.realtyCount !== 0 ? ('Показано ' + (realtyNewListFilter.realtyCount | price) + ' объектов') : 'Объекты не найдены' : 'Ищем объекты'}}
-                                    md-button(aria-label='Очистить число показов' ng-click='realtyNewListFilter.clearFilter()').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
-                                        md-icon(md-svg-icon='svg/icon-delete-forever.svg')
                     div(layout='row').mv-32
                         md-input-container(flex='33').mv-0.pv-0
                             input(placeholder='Название фильтра' ng-model='realtyNewListFilter.newFilter.name')

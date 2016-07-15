@@ -19,7 +19,7 @@ Meteor.methods({
  * @param name
  */
 export function oceanBanAgency(phone, name) {
-  if (Meteor.isServer && Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'paid')) {
+  if (Meteor.isServer && Meteor.userId()/* && Roles.userIsInRole(Meteor.userId(), 'paid')*/) {
     console.log(phone);
     console.log(name);
     // 0. Проверить телефон в Агентствах
