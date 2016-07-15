@@ -8,13 +8,15 @@ import {Accounts} from 'meteor/accounts-base';
 
 import './layout.view.html';
 
+import {RobokassaReplenishController} from '/imports/ui/shared/replenish-balance/robokassa-replenish.controller';
 class Layout {
   /* @ngInject */
-  constructor($scope, $reactive, $mdSidenav, $window) {
+  constructor($scope, $reactive, $mdSidenav, $window, $mdDialog) {
 
     $reactive(this).attach($scope);
     this.$window = $window;
     this.$mdSidenav = $mdSidenav;
+    this.mdDialog = $mdDialog;
     this.sideNavItems = [
       // {name: 'Добавить клиента', uisref: 'crm.clients.add'},
       // {name: 'Объекты', uisref: 'crm.realty.list.new'},
@@ -67,14 +69,16 @@ class Layout {
     Accounts.logout();
   }
 
-  replenishTheBalance(summ) {
+  replenishTheBalance(ev) {
 
-    console.log('replenishTheBalance');
-    let description = 'Пополнение баланса CRM Мир и Недвижимость на ' + summ;
-    Meteor.call('replenishTheBalance', summ, description, (err, res)=> {
-      console.log(err);
-      this.$window.open(res, '_self');
-      console.log(res);
+    this.mdDialog.show({
+      controller: RobokassaReplenishController,
+      controllerAs: 'robokassaDialog',
+      //onsubmit="return __cmsformcheck_order()"
+      templateUrl: 'imports/ui/shared/replenish-balance/replenish-balance.view.html',
+      preserveScope: true,
+      targetEvent: ev,
+      clickOutsideToClose: true
     });
   }
 }
