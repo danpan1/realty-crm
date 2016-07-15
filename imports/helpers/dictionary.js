@@ -138,7 +138,7 @@ export const dictionary = {
   ],
   transport: [
     {id: 0, name: 'пешком'},
-    {id: 1, name: 'транспортом'}
+    {id: 1, name: 'трансп.'}
   ],
   type: [
     {id: 1, name: 'вторичка'},

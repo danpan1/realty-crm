@@ -21,7 +21,7 @@ class OneReviewMeetingExclusive {
     this.isExclusive = trueOrFalse;
     this.$timeout(()=>{
       this.saveReview();
-    },1)
+    },100)
   }
 
 }

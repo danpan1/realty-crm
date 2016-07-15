@@ -14,14 +14,16 @@ import './one-review-meeting.view.html';
 
 class OneReviewMeeting {
   /* @ngInject */
-  constructor($scope, $reactive, $stateParams) {
-
+  constructor($scope, $reactive, $stateParams, $timeout) {
+    this.$timeout = $timeout;
     $reactive(this).attach($scope);
 
   }
   
   saveReview () {
-    this.saveReview({id:this.realty._id})
+    this.$timeout(()=>{
+      this.saveReview({id:this.realty._id})
+    })
   }
     
 }
