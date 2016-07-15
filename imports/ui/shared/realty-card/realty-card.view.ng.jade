@@ -124,7 +124,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
     // Подробное объявление
     div(ng-show="realtyCard.ngShowDescr" ng-class='{"newList__description-blue":realtyCard.realty.realtor.isExclusive, "newList__description-green": realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList__description.ph-32.pb-16
-        div(ng-if='realtyCard.realtyIsTaken' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам. Завершите его проверку
+        div(ng-if='realtyCard.realtyIsTaken' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам.
         p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
         div(ng-if="!realtyCard.realtylisttype").relative
             p 
@@ -134,10 +134,9 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
                 //p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
                 p(ng-if='(realtyCard.reason == "meeting" || realtyCard.reason == "exclusive" || realtyCard.reason == "comission") && realtyCard.minutes >= 5').md-title.text-normal Собственник ждет звонка в течение&nbsp;
-                    span() {{realtyCard.minutes - 5}}:
-                    //span(ng-if='realtyCard.reason == "meeting"') {{realtyCard.minutes}}:
-                    span(ng-if='realtyCard.seconds < 10') 0
-                    span {{realtyCard.seconds}}
+                    span(style='color: #f77e0b; font-weight: bold;') {{realtyCard.minutes - 5}}:
+                    span(ng-if='realtyCard.seconds < 10' style='color: #f77e0b; font-weight: bold;') 0
+                    span(style='color: #f77e0b; font-weight: bold;') {{realtyCard.seconds}}
                 p().md-title.text-normal 1) {{realtyCard.contacts.realtyPhone}} {{realtyCard.contacts.realtyName}}
                 p().md-title.text-normal 2) #[a(ng-href='{{realtyCard.parseDetails.url}}' target='blank') Посмотреть источник объявления]
                 p().md-title.text-normal 3) Хотите продолжить с ним работать?
