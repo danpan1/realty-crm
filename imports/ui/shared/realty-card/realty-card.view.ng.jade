@@ -14,8 +14,8 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                 div(ng-show="(realtyCard.reason == 'meeting' && realtyCard.minutes >= 5) || ((realtyCard.reason == 'exclusive' || realtyCard.reason == 'comission') && realtyCard.minutes >= 10)" ng-if='realtyCard.realty.status == \'ocean\'')
                     div().realty-card__timer-title Объект исчезнет через
                     div().realty-card__timer.mt-8
-                        span(ng-if='realtyCard.reason == "exclusive" || realtyCard.reason == "comission"') {{realtyCard.minutes - 10}}:
-                        span(ng-if='realtyCard.reason == "meeting"') {{realtyCard.minutes - 5}}:
+                        span(ng-if='realtyCard.reason == "exclusive" || realtyCard.reason == "comission" || realtyCard.reason == "meeting"') {{realtyCard.minutes - 10}}:
+                        //span(ng-if='realtyCard.reason == "meeting"') {{realtyCard.minutes - 5}}:
                         span(ng-if='realtyCard.seconds < 10') 0
                         span {{realtyCard.seconds}}
                 div(layout='column' layout-align='space-between center' ng-if = 'realtyCard.relationType === "new"')
@@ -133,9 +133,9 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
                 realty-card-purchase(ng-if='realtyCard.realty' parse-details='realtyCard.parseDetails' user='realtyCard.user' contacts='realtyCard.contacts' data='realtyCard.data' realty='realtyCard.realty')
             div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
                 //p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
-                p(ng-if='(realtyCard.reason == "meeting" && realtyCard.minutes >= 0) || ((realtyCard.reason == "exclusive" || realtyCard.reason == "comission") && realtyCard.minutes >= 5)').md-title.text-normal Собственник ждет звонка в течение&nbsp;
-                    span(ng-if='realtyCard.reason == "exclusive" || realtyCard.reason == "comission"') {{realtyCard.minutes - 5}}:
-                    span(ng-if='realtyCard.reason == "meeting"') {{realtyCard.minutes}}:
+                p(ng-if='(realtyCard.reason == "meeting" || realtyCard.reason == "exclusive" || realtyCard.reason == "comission") && realtyCard.minutes >= 5').md-title.text-normal Собственник ждет звонка в течение&nbsp;
+                    span() {{realtyCard.minutes - 5}}:
+                    //span(ng-if='realtyCard.reason == "meeting"') {{realtyCard.minutes}}:
                     span(ng-if='realtyCard.seconds < 10') 0
                     span {{realtyCard.seconds}}
                 p().md-title.text-normal 1) {{realtyCard.contacts.realtyPhone}} {{realtyCard.contacts.realtyName}}

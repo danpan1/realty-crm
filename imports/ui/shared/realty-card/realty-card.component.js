@@ -63,8 +63,8 @@ class RealtyCard {
                 this.minutes -= 1;
                 this.seconds = 59;
               }
-              if (this.minutes < 10 && this.realty.status != 'taken' && (vm.reason == 'exclusive' || vm.reason == 'comission')) this.updateRealty(this.realty._id, 'skip');
-              else if (this.minutes < 5 && this.realty.status != 'taken' && vm.reason == 'meeting') this.updateRealty(this.realty._id, 'skip');
+              if (this.minutes < 10 && this.realty.status != 'taken'/* && (vm.reason == 'exclusive' || vm.reason == 'comission')*/) this.updateRealty(this.realty._id, 'skip');
+              //else if (this.minutes < 5 && this.realty.status != 'taken' && vm.reason == 'meeting') this.updateRealty(this.realty._id, 'skip');
               else this.timeoutFunc();
             },1000)
           }

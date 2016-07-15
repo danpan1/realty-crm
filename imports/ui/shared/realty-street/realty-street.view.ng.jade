@@ -7,7 +7,7 @@
                     request-full-data='realtyStreet.requestFullData(query)')
 md-autocomplete(flex
 ng-required='!realtyStreet.isFilter',
-ng-class='{"w-100":realtyStreet.nohouse, "m-0":realtyStreet.nohouse, "form-required":!realtyStreet.isFilter, "no-min-width":!realtyStreet.isFilter}'
+ng-class='{"w-100":realtyStreet.nohouse, "flex-70": realtyStreet.isFilter,"m-0":realtyStreet.nohouse, "form-required":!realtyStreet.isFilter, "no-min-width":!realtyStreet.isFilter}'
 md-input-name='autocompleteFieldStreet',
 md-input-minlength='2',
 md-no-cache='realtyStreet.noCache',
@@ -36,11 +36,12 @@ md-input-minlength='1',
 md-no-cache='realtyStreet.noCache',
 md-selected-item='realtyStreet.house',
 md-search-text='realtyStreet.searchTextHouse',
+ng-init='realtyStreet.requestFullData(realtyStreet.house)'
 md-selected-item-change='realtyStreet.requestFullData(realtyStreet.house)',
 md-items='item in realtyStreet.querySearchHouse(realtyStreet.searchTextHouse)',
 md-item-text='item.value',
 md-floating-label='{{realtyStreet.label}}'
-ng-class='{"form-required":!realtyStreet.isFilter, "no-min-width":!realtyStreet.isFilter}')
+ng-class='{"form-required":!realtyStreet.isFilter, "no-min-width":!realtyStreet.isFilter, "flex-30": realtyStreet.isFilter}')
     md-item-template
         span(md-highlight-text='realtyStreet.searchTextHouse') {{item.value}}
     div(ng-messages='searchForm.autocompleteField.$error',

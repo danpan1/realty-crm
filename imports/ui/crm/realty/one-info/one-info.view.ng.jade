@@ -118,8 +118,8 @@ div(layout="column", layout-align="space-around stretch")
                         div(flex='60') Цена:
                         div(flex='40') #[strong {{oneInfo.realty.price | price}}]
                     div(layout='row' ng-if='oneInfo.realty.details.depositSum' layout-align='space-around start').md-subhead.mv-8
-                        div(flex='60') Залог:
-                        div(flex='40') #[strong {{oneInfo.realty.details.depositSum | price}}]
+                        div(flex='60') Сумма залога равна:
+                        div(flex='40') #[strong {{oneInfo.dictionary.depositSum[oneInfo.realty.details.depositSum].name}}]
                     div(layout='row' ng-if='oneInfo.realty.details.depositSum && oneInfo.realty.details.depositTime != 2' layout-align='space-around start').md-subhead.mv-8
                         div(flex='60') Разбивается на:
                         div(flex='40') #[strong {{oneInfo.dictionary.depositTime[oneInfo.realty.details.depositTime].name}}]
