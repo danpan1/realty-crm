@@ -29,7 +29,10 @@ div(md-whiteframe='2')
 
 div().outgoing-call__photo
     div(layout='row')
-        img(ng-repeat='image in outgoingCall.realty.details.images | limitTo:2' ng-src='{{image.url}}')
+        div(layout='row' flex='70')
+            img(ng-repeat='image in outgoingCall.realty.details.images | limitTo:2' ng-src='{{image.url}}')
+        div(flex='30' layout='column' layout-align='center center')
+            md-button(ng-click='outgoingCall.signLamp(outgoingCall.realty.contacts[0].phones[0].phone, outgoingCall.realty._id)').md-warn.md-raised Фонарь
 
 div(md-whiteframe='2')
     div(md-whiteframe='1').ph-32.pv-16
@@ -104,7 +107,7 @@ div(md-whiteframe='2')
                         div(layout='row')
                             div(flex='50')
                                 realty-street(ng-if='outgoingCall.realty' ng-model='outgoingCall.realty.address.street'
-                                house='outgoingCall.realty.address.house')
+                                house='outgoingCall.realty.address.house').w-100
                             div(flex='30' flex-offset='10')
                                 div(layout='row' layout-align='space-between end')
                                     md-input-container(flex='70').mv-0.pb-0.form-required

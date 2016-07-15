@@ -12,9 +12,9 @@ div().modal
                     div(ng-repeat='filter in realtyNewListFilter.myFilters')
                         div(ng-class='{"realty-new-list-filter__selected":filter.show}' ng-init='realtyNewListFilter.checkSmsIsActive()' ).mv-8.ph-16
                             div(layout='row' layout-align='start center')
-                                div(flex='35')
+                                div(flex='30')
                                     span().md-subhead.realty-new-list-filter__col {{$index+1}}. {{filter.name}}
-                                div(flex='45' layout='row' layout-align='space-between none').ml-32
+                                div(flex='50' layout='row' layout-align='space-between none').ml-32
                                     md-button(ng-click='realtyNewListFilter.useFilter($index)').realty-new-list-filter__link показать объекты
                                     md-button(ng-click='filter.shown = !filter.shown').realty-new-list-filter__link критерии
                                     md-button(ng-click='realtyNewListFilter.changeFilter($index)').realty-new-list-filter__link изменить
