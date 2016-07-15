@@ -25,7 +25,6 @@ Meteor.methods({
  */
 export function replenishTheBalance(summ, description) {
   let url;
-  summ = 1;
   console.log(summ, 'sum покупки');
   if (!(Meteor.isServer && this.userId)) {
     throw new Meteor.Error('auth');
@@ -54,7 +53,7 @@ export function replenishTheBalance(summ, description) {
     let order = {id: id, summ: summ, description: description};
     console.log(order);
     let roboUrl = robokassa.merchantUrl(order);
-    console.log(roboUrl);
+    // console.log(roboUrl);
     return roboUrl;
   } catch (e) {
     console.log(e);
