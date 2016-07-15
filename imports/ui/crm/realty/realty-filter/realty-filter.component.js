@@ -92,6 +92,7 @@ class RealtyFilter {
         }
         return val;
       });
+      console.log(window.localStorage["filter"]);
     }
   }
 

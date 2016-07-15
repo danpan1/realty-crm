@@ -15,6 +15,12 @@ realty-filter {
         max-width: 20%;
         margin-left: 16px;
       }
+      &.flex-70{
+        max-width: 70% !important;
+      }
+      &.flex-30{
+        max-width: 30% !important;
+      }
     }
   }
 }

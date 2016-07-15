@@ -28,13 +28,19 @@ class RealtyNewListFilter {
     }, {
       onReady: function () {
         vm.$timeout(()=>{
+          this.myFilters = Filters.find().fetch();
+          for (var i in this.myFilters) {
+            this.getSubwaysNames(i);
+          }
           this.loaded = true;
         })  
       }
     });
 
     this.newFilter = {
-      filter:{},
+      filter:{
+        metroTransport: 0
+      },
       name:'',
       user: {
         id: this.user._id,
@@ -64,6 +70,21 @@ class RealtyNewListFilter {
     if(this.user.profile.getSmsPremiumObjects == undefined) this.user.profile.getSmsPremiumObjects = true;
   }
 
+  getSubwaysNames(index) {
+    let vm = this;
+    this.myFilters[index].filter.subwaysNames = [];
+    vm.subscribe('subwayChips', ()=> {
+      return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), this.myFilters[index].filter.subways];
+    }, {
+      onReady: function () {
+        this.myFilters[index].filter.subwaysNames = Locations.find({
+          type: 'subway'
+        }).fetch();
+        console.log(this.myFilters[index].filter.subwaysNames);
+      }
+    });
+  }
+
   checkSmsIsActive () {
     for(var f in this.myFilters){
       if(this.myFilters[f].isActive == undefined) {
@@ -83,7 +104,9 @@ class RealtyNewListFilter {
   createFilter () {
     this.refresh = !this.refresh;
     this.newFilter = {
-      filter:{},
+      filter:{
+        metroTransport: 0
+      },
       name:'',
       user: {
         id: this.user._id,
