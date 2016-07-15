@@ -47,7 +47,8 @@ export const AddressSchema = new SimpleSchema({
     optional: true
   },
   metroTime: {
-    type: String,
+    //type: String,
+    type: Number,
     optional: true
   },
   street: {
