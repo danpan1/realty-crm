@@ -5,6 +5,8 @@ div().modal
             div(md-whiteframe='2' style='min-height: 500px;' ng-if='!realtyNewListFilter.loaded').pv-16
                 md-progress-circular(md-diameter='150' style='margin:180px auto;')
             div(md-whiteframe='2' ng-if='realtyNewListFilter.loaded').pv-16
+                div realtyNewListFilter.newFilter.filter
+                div {{realtyNewListFilter.newFilter.filter}}
                 div(layout='column' ng-if='!realtyNewListFilter.showFilter')
                     div().text-right.md-body-1.ph-16.pt-32 SMS оповещение
                     div(ng-repeat='filter in realtyNewListFilter.myFilters')

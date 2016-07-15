@@ -41,8 +41,8 @@ div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}")
                     md-no-ink,
                     class='md-primary') {{ item.name }}
                 div(layout='row' layout-align='space-between end').mv-32
-                    price-mask(refresh='realtyFilter.refresh' is-filter='true' ng-if='realtyFilter.filter' no-required='true' label='"цена от"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceFrom' optflex='40')
-                    price-mask(refresh='realtyFilter.refresh' is-filter='true' ng-if='realtyFilter.filter' no-required='true' label='"цена до"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceTo' optflex='40').ml-32
+                    price-mask(refresh='realtyFilter.refresh' is-filter='true' ng-if='realtyFilter.filter' no-required='true' label='"цена от"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceFrom')
+                    price-mask(refresh='realtyFilter.refresh' is-filter='true' ng-if='realtyFilter.filter' no-required='true' label='"цена до"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceTo').ml-32
                 md-input-container().mv-16
                     label Ремонт
                     md-select(ng-model='realtyFilter.filter.renovation', multiple='true' ng-change='realtyFilter.suitRealty()')
@@ -79,7 +79,7 @@ div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}")
                     md-select(ng-model='realtyFilter.filter.materials', multiple='true' ng-change='realtyFilter.suitRealty()')
                         md-option(ng-value='material.id',
                         ng-repeat='material in realtyFilter.dictionary.materials') {{material.name}}
-                div(layout='row' ng-if='realtyFilter.parent == "ocean"' layout-align='space-between end').mt-16
+                div(layout='row' layout-align='space-between end').mt-16
                     label().md-subhead.text-bold {{(realtyFilter.realtyCount !== false) ? realtyFilter.realtyCount !== 0 ? ('Показано ' + (realtyFilter.realtyCount | price) + ' объектов') : 'Объекты не найдены' : 'Ищем объекты'}}
                     md-button(aria-label='Очистить число показов' ng-click='realtyFilter.clearFilter()').md-icon-button.realty-filter__btn-clear-results.m-0.p-0
                         md-icon(md-svg-icon='svg/icon-delete-forever.svg')
