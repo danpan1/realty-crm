@@ -104,8 +104,9 @@ if (Meteor.isServer) {
 
 
           /* ВРЕМЯ ДО МЕТРО и Транспорт до метро */
+          // console.log(search.metroTime);
           if (search.metroTime) {
-            selector['address.metroTime'] = {$lte: search.metroTime};
+            selector['address.metroTime'] = {$lte: +search.metroTime};
             selector['address.metroTransport'] = search.metroTransport;
           }
           /* END ВРЕМЯ ДО МЕТРО */
@@ -189,6 +190,7 @@ if (Meteor.isServer) {
         let count = realty.count();
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});
         CountsDan.find({_id: countId});
+        console.log(selector);
         return [realty, CountsDan.find({_id: this.userId})];
       }
 
