@@ -1,0 +1,17 @@
+//Created by Danpan on 15.07.16.
+md-dialog.subscription-dialog(aria-label='Оплата подписки')
+    md-toolbar
+        .md-toolbar-tools
+            h2 Необходимо пополнить баланс
+            span(flex='')
+            md-button.md-icon-button(ng-click='robokassaDialog.close()')
+                md-icon(md-svg-src='svg/icon-close.svg', aria-label='Закрыть окно оплаты подписки')
+    md-dialog-content
+        .md-dialog-content.pv-16
+            div(layout='column')
+                form(name='connection-purchase')
+                    p  Минимальная сумма пополнения {{robokassaDialog.minAmount}} рублей
+                    p(ng-if='robokassaDialog.error')  Ошибка при пополнении {{robokassaDialog.error}}
+                    md-input-container
+                        input(type='text', ng-model='robokassaDialog.amount')
+                    md-button.md-raised.mv-16.ph-16(flex='', ng-disabled='robokassaDialog.amount < robokassaDialog.minAmount', ng-click='robokassaDialog.refillBalance()') Пополнить

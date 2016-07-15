@@ -6,7 +6,7 @@ md-toolbar(layout='row' layout-align='center center').ph-16
     span(flex).layout__total-amount.md-body-1.text-center Сегодня в системе 52 сделки на сумму 900 000 ₽
     span().md-body-1.mr-0 {{layout.user.profile.name}} {{layout.user.profile.surName}}
     span().md-body-1.layout__balance {{layout.user.profile.balance | price}} ₽
-    md-button(aria-label='Пополнить баланс' ng-click='layout.replenishTheBalance(100)').md-icon-button.mh-0
+    md-button(aria-label='Пополнить баланс' ng-click='layout.replenishTheBalance($event)').md-icon-button.mh-0
         md-icon(md-svg-icon='svg/icon-add-circle-outline.svg')
     md-button(hide-gt-md='', ng-click='layout.toggleList()' aria-label='Открыть меню').md-icon-button.menu.mh-0
         md-icon(md-svg-icon='menu')
@@ -68,3 +68,23 @@ div().welcome-tour__step.welcome-tour__step-animated
 
             div().welcome-tour__step-controls-control.right
                 md-button().md-raised Далее
+
+
+// MdDialog replenish balance
+div(style='visibility: hidden')
+    div#myStaticDialog.md-dialog-container
+        md-dialog#robokassaReplenish.subscription-dialog(aria-label='Оплата подписки')
+            md-toolbar
+                .md-toolbar-tools
+                    h2 Необходимо пополнить баланс
+                    span(flex='')
+                    md-button.md-icon-button(ng-click='dialog.close()')
+                        md-icon(md-svg-src='svg/icon-close.svg', aria-label='Закрыть окно оплаты подписки')
+            md-dialog-content
+                .md-dialog-content.pv-16
+                    div(layout='column')
+                        form(name='connection-purchase')
+                            p  Укажите сумму не меньше 1000 рублей
+                            md-input-container
+                                input(type='text', ng-model='dialog.amount')
+                            md-button.md-raised.mv-16.ph-16(flex='', ng-disabled='dialog.amount < 1000', ng-click='dialog.refillBalance(dialog.amount)') Пополнить
