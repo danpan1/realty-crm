@@ -4,6 +4,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {dictionary} from '/imports/helpers/dictionary';
+import {CountsDan} from '/imports/api/counts';
 import {Locations} from '/imports/api/locations';
 import {name as realtyFilter} from '/imports/ui/crm/realty/realty-filter/realty-filter.component';
 import {name as realtyNewListFilterOne} from './realty-new-list-filter-one/realty-new-list-filter-one.component';
@@ -54,33 +55,68 @@ class RealtyNewListFilter {
       }
     });
 
-    /*vm.$timeout(()=>{
-      for(var f in this.myFilters){
-        console.log(this.myFilters);
-        if(this.myFilters[f].filter.conditions){
-          this.myFilters[f].conditionNames = this.myFilters[f].filter.conditions.map((item) => {
-            for(var d in vm.dictionary){
-              if(vm.dictionary[d].id == item) return vm.dictionary[d].name;
-            }
-          })
+    if(this.user.profile.getSmsPremiumObjects == undefined) this.user.profile.getSmsPremiumObjects = true;
+
+    
+    this.realtyCount = 0;
+    vm.subscribe('newList', () => {
+      return [
+        //фильтр для pagination
+        {},
+        //фильтр клиента
+        {
+          floorFrom: vm.getReactively('newFilter.filter.floorFrom'),
+          floorTo: vm.getReactively('newFilter.filter.floorTo'),
+          squareFrom: vm.getReactively('newFilter.filter.squareFrom'),
+          squareTo: vm.getReactively('newFilter.filter.squareTo'),
+          priceTo: vm.getReactively('newFilter.filter.priceTo'),
+          metroTime: vm.getReactively('newFilter.filter.metroTime'),
+          metroTransport: vm.getReactively('newFilter.filter.metroTransport'),
+          street: vm.getReactively('newFilter.filter.street.value'),
+          house: vm.getReactively('newFilter.filter.house.value'),
+          conditions: vm.getReactively('newFilter.filter.conditions'),
+          renovation: vm.getReactively('newFilter.filter.renovation'),
+          materials: vm.getReactively('newFilter.filter.materials'),
+          priceFrom: vm.getReactively('newFilter.filter.priceFrom'),
+          roomcount: vm.getReactively('roomcount'),
+          type: vm.getReactively('newFilter.filterType'),
+          subways: vm.getReactively('newFilter.filter.subways'),
+          districts: vm.getReactively('newFilter.filter.districts')
+        }
+      ];
+    }, {
+      onReady: function () {}
+    });
+
+    vm.helpers({
+      realtyCount: () => {
+        let с = CountsDan.findOne({});
+        if (с) {
+          return с.count;
+        } else {
+          return '';
         }
       }
-    },1000);*/
+    });
 
-    if(this.user.profile.getSmsPremiumObjects == undefined) this.user.profile.getSmsPremiumObjects = true;
   }
 
   getSubwaysNames(index) {
     let vm = this;
+    vm.foundSubwaysNames = [];
     this.myFilters[index].filter.subwaysNames = [];
     vm.subscribe('subwayChips', ()=> {
-      return [{sort: {name: 1}, limit: 4}, vm.getReactively('query'), this.myFilters[index].filter.subways];
+      return [{}, vm.getReactively('query'), vm.myFilters[index].filter.subways];
     }, {
       onReady: function () {
-        this.myFilters[index].filter.subwaysNames = Locations.find({
+        vm.foundSubwaysNames = Locations.find({
           type: 'subway'
         }).fetch();
-        console.log(this.myFilters[index].filter.subwaysNames);
+        for(var i in vm.foundSubwaysNames){
+          if(vm.myFilters[index].filter.subways.indexOf(vm.foundSubwaysNames[i]._id) > -1) vm.myFilters[index].filter.subwaysNames.push(vm.foundSubwaysNames[i].name)
+        }
+        //this.myFilters[index].filter.subwaysNames = vm.foundSubwaysNames;
+        console.log(vm.myFilters[index].filter.subwaysNames);
       }
     });
   }
@@ -117,12 +153,6 @@ class RealtyNewListFilter {
   }
 
   changeFilter (index) {
-    /*if(this.myFilters[index].filter.roomcount && typeof this.myFilters[index].filter.roomcount[0] == 'number'){
-      this.myFilters[index].filter.roomcount = this.myFilters[index].filter.roomcount.map((item)=>{
-        return this.dictionary.roomcount[item-1];
-      })
-    }*/
-
     this.newFilter = {
       filter: this.myFilters[index].filter,
       name: this.myFilters[index].name,
@@ -192,11 +222,6 @@ class RealtyNewListFilter {
     if (this.newFilter.filter.house == null) { delete this.newFilter.filter.house; }
     else if(this.newFilter.filter.house && typeof this.newFilter.filter.house != 'string') this.newFilter.filter.house = this.newFilter.filter.house.value;
     
-    /*if (this.newFilter.filter.roomcount) {
-      this.newFilter.filter.roomcount = this.newFilter.filter.roomcount.map((item) => {
-        return parseInt(item.name);
-      })
-    }*/
     if (filterIndex) {
       this.changingFilter = filterIndex;
       this.newFilter = {

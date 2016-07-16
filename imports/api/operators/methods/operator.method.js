@@ -2,10 +2,13 @@
 import {Meteor} from 'meteor/meteor';
 import {Roles} from 'meteor/alanning:roles';
 import {Operators} from '../operators.model';
+import {Lamps} from '../lamps.model';
 //import nextAutoincrement from '/imports/helpers/getUniqueId';
 
 Meteor.methods({
-  operatorStat
+  operatorStat,
+  signLamp,
+  checkLamp
 });
 
 export function operatorStat(choice) {
@@ -46,6 +49,28 @@ export function operatorStat(choice) {
 
   } else {
     console.log('no Access');
+  }
+}
+
+export function signLamp (phone) {
+  if (Meteor.isServer && Meteor.userId()) {
+    Lamps.insert({phone:phone}, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(`Lamp added, phone: `+phone);
+      }
+    });
+  }
+}
+
+export function checkLamp (phone) {
+  console.log(phone);
+  if (Meteor.isServer && Meteor.userId()) {
+    let found = Lamps.findOne({phone:phone})
+    console.log(found);
+    if (found) {return true}
+    else {return false};
   }
 }
 

@@ -23,7 +23,8 @@ class AddRealtyFull {
       type: 4,
       address: {},
       details: {
-        roomsSquare: []
+        roomsSquare: [],
+        depositTime : 1
       }
     };
     this.realty.comission = 100;

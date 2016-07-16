@@ -21,7 +21,7 @@ class OneReviewMeetingBrowsing {
     this.isCheckout = trueOrFalse;
     this.$timeout(()=>{
       this.saveReview();
-    },1)
+    },100)
   }
 
 }
