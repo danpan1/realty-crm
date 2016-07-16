@@ -256,29 +256,67 @@ class OutgoingCall {
       }
 
       console.log('loaded ', result);
-      this.$timeout(()=> {
-        vm.realty = result;
-        vm.realty.price = result.price;
-        vm.newObjectRecieved += 1;
-        vm.isLoading = false;
-        vm.operator = {};
-        if (!result) {
-          this.showLoader = false;
-          vm.isLoading = true;
-        } else {
-          this.showLoader = false;
-          if (vm.realty.square === 0) {
-            vm.realty.square = '';
-            //if(vm.realty.realtor) vm.realty.realtor.isExclusive = true; else vm.realty.realtor = {isExclusive:true};
+      this.$timeout(() => {
+        console.log(result.contacts[0].phones[0].phone);
+
+        // Проверяем, не является ли объект ламповым
+        Meteor.call('checkLamp', result.contacts[0].phones[0].phone, (lampError, isItLamp) => {
+          if (lampError) {
+            console.log(lampError);
+          } else {
+            console.log(isItLamp)
+            // Если объект не ламповый
+            if (isItLamp != true) {
+              vm.realty = result;
+              vm.realty.price = result.price;
+              vm.newObjectRecieved += 1;
+              vm.isLoading = false;
+              vm.operator = {};
+              if (!result) {
+                this.showLoader = false;
+                vm.isLoading = true;
+              } else {
+                this.showLoader = false;
+                if (vm.realty.square === 0) {
+                  vm.realty.square = '';
+                  //if(vm.realty.realtor) vm.realty.realtor.isExclusive = true; else vm.realty.realtor = {isExclusive:true};
+                }
+              }
+              this.infoWasCopied = false;
+            } else {
+              console.log('It\'s a lamp!')
+              vm.removeRealty(result._id);
+            }
           }
-        }
-        this.infoWasCopied = false;
+        });
+
       });
 
       this.getList(false);
 
     });
 
+  }
+
+  signLamp (phone, id) {
+    Meteor.call('signLamp', phone, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        this.removeRealty(id);
+      }
+    });
+  }
+
+  removeRealty (id) {
+    console.log('remove '+id)
+    Meteor.call('removeRealty', id, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        this.getNew();
+      }
+    });
   }
 
 }

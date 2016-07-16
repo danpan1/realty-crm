@@ -17,7 +17,8 @@ Meteor.methods({
   addRealty,
   buyRealtyOcean,
   showRealtyDetails,
-  updateRealty
+  updateRealty,
+  removeRealty
 });
 
 /**
@@ -160,6 +161,15 @@ export function updateRealty(id, status, add) {
       return realty;
 
     }
+  } else {
+    return 'Что-то пошло не так';
+  }
+}
+
+export function removeRealty(id) {
+  if (Meteor.isServer && Meteor.userId() && Roles.userIsInRole(this.userId, 'operator')) {
+    Realty.remove({_id: id});
+    console.log('removed: '+id)
   } else {
     return 'Что-то пошло не так';
   }
