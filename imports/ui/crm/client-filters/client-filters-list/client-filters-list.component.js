@@ -32,9 +32,6 @@ class ClientFiltersList {
       onReady: function () {
         vm.$timeout(()=>{
           this.myFilters = Filters.find().fetch();
-          for (var i in this.myFilters) {
-            this.getSubwaysNames(i);
-          }
           this.loaded = true;
         })  
       }
@@ -153,26 +150,6 @@ class ClientFiltersList {
         console.log(error);
       } else {
         console.log(`Filter removed`);
-      }
-    });
-  }
-
-  getSubwaysNames(index) {
-    let vm = this;
-    vm.foundSubwaysNames = [];
-    this.myFilters[index].filter.subwaysNames = [];
-    vm.subscribe('subwayChips', ()=> {
-      return [{}, vm.getReactively('query'), vm.myFilters[index].filter.subways];
-    }, {
-      onReady: function () {
-        vm.foundSubwaysNames = Locations.find({
-          type: 'subway'
-        }).fetch();
-        for(var i in vm.foundSubwaysNames){
-          if(vm.myFilters[index].filter.subways.indexOf(vm.foundSubwaysNames[i]._id) > -1) vm.myFilters[index].filter.subwaysNames.push(vm.foundSubwaysNames[i].name)
-        }
-        //this.myFilters[index].filter.subwaysNames = vm.foundSubwaysNames;
-        console.log(vm.myFilters[index].filter.subwaysNames);
       }
     });
   }

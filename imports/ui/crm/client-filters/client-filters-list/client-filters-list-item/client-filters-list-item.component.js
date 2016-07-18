@@ -14,21 +14,38 @@ class ClientFiltersListItem {
     const vm = this;
     this.dictionary = dictionary;
     
-    if(this.filter.conditions){
-      this.conditionNames = this.filter.conditions.map((item) => {
+    if(this.filter.filter.conditions){
+      this.conditionNames = this.filter.filter.conditions.map((item) => {
         for(var d in vm.dictionary){
           if(vm.dictionary[d].id == item) return vm.dictionary[d].name;
         }
       })
     }
 
-    /*if(this.filter.subways){
+    if(this.filter.filter) {
       this.getSubwaysNames();
-    }*/
+    }
 
   }
 
-
+  getSubwaysNames() {
+    let vm = this;
+    vm.foundSubwaysNames = [];
+    this.filter.filter.subwaysNames = [];
+    vm.subscribe('subwayChips', ()=> {
+      return [{}, vm.getReactively('query'), vm.filter.filter.subways];
+    }, {
+      onReady: function () {
+        vm.foundSubwaysNames = Locations.find({
+          type: 'subway'
+        }).fetch();
+        for(var i in vm.foundSubwaysNames){
+          if(vm.filter.filter.subways.indexOf(vm.foundSubwaysNames[i]._id) > -1) vm.filter.filter.subwaysNames.push(vm.foundSubwaysNames[i].name)
+        }
+        console.log(vm.filter.filter.subwaysNames);
+      }
+    });
+  }
 
 }
 

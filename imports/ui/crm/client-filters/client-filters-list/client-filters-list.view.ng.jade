@@ -14,7 +14,7 @@ div(layout='column' ng-if='!clientFiltersList.showFilter')
                     md-button(ng-click='clientFiltersList.deleteFilter($index, $event)').realty-new-list-filter__link удалить
                 div(layout='row' layout-align='center center' flex flex-offset='5')
                     md-switch(aria-label='Switch 2' ng-change='clientFiltersList.changeFilterSms($index)' ng-model='filter.isActive').md-warn.realty-new-list-filter__sms
-            client-filters-list-item(ng-if='filter.filter && filter.shown' filter='filter.filter').pb-16
+            client-filters-list-item(ng-if='filter.filter && filter.shown' filter='filter').pb-16
     div(layout='row' layout-align='space-between center').mv-32.ph-16
         md-button(ng-click='clientFiltersList.createFilter()').md-primary.md-raised.ph-16.ml-0 Добавить фильтр
     div().mt-8.ph-16
