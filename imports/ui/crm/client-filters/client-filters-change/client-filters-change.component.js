@@ -22,21 +22,22 @@ class ClientFiltersChange {
       if (user) {
         vm.user = user;
         if(this.user.profile.getSmsPremiumObjects == undefined) this.user.profile.getSmsPremiumObjects = true;
-        if (!this.$stateParams.newFilter && window.localStorage["changeFilter"] != undefined) {
+        if (this.$stateParams.newFilter == 'false' && window.localStorage["changeFilter"] != undefined) {
           console.log(JSON.parse(window.localStorage["changeFilter"]));
-          vm.newFilter = JSON.parse(window.localStorage["changeFilter"]); 
+          vm.newFilter = JSON.parse(window.localStorage["changeFilter"]);
+          vm.roomcount = vm.newFilter.filter.roomcount;
         } else {
           vm.newFilter = {
             filter:{
               metroTransport: 0
             },
-            name:'',
-            user: {
-              id: vm.user._id,
-              phone: vm.user.profile.phone
-            }
+            name:''
           };
         }
+        vm.newFilter.user = {
+            id: vm.user._id,
+            phone: vm.user.profile.phone
+        } 
       }
     });
 
@@ -90,7 +91,7 @@ class ClientFiltersChange {
   saveNewFilter (filterIndex) {
     let vm = this;
 
-    this.newFilter.filter.roomcount = this.roomcount; 
+    //this.newFilter.filter.roomcount = this.roomcount; 
 
     if (this.newFilter.filter.street == null) { delete this.newFilter.filter.street; }
     else if(this.newFilter.filter.street && typeof this.newFilter.filter.street != 'string') this.newFilter.filter.street = this.newFilter.filter.street.value;
@@ -98,7 +99,7 @@ class ClientFiltersChange {
     if (this.newFilter.filter.house == null) { delete this.newFilter.filter.house; }
     else if(this.newFilter.filter.house && typeof this.newFilter.filter.house != 'string') this.newFilter.filter.house = this.newFilter.filter.house.value;
     
-    if (filterIndex) {
+    /*if (this.$stateParams.newFilter == 'false') {
       this.changingFilter = filterIndex;
       this.newFilter = {
         filter: this.myFilters[filterIndex].filter,
@@ -110,9 +111,9 @@ class ClientFiltersChange {
         }
       };
     }
-    console.log(this.newFilter);
+    console.log(this.newFilter);*/
 
-    if (this.changingFilter != undefined) { 
+    if (this.$stateParams.newFilter == 'false') { 
       Meteor.call('changeFilter', this.newFilter, (error, result) => {
         if (error) {
           console.log(error);
@@ -149,10 +150,7 @@ export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/client-filters/client-filters-change/client-filters-change.view.html',
-  bindings: {
-    filter: '<',
-    user: '<'
-  },
+  bindings: {},
   controllerAs: moduleName,
   controller: ClientFiltersChange
 });
