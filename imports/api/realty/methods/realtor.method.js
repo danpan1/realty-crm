@@ -145,7 +145,7 @@ export function updateRealty(id, status, add) {
     if (!realty) {
       return 'нет такого объекта';
     }
-
+    console.log(status)
     if (status) {
 
       let modificator = {status: status}
@@ -156,9 +156,11 @@ export function updateRealty(id, status, add) {
 
       Realty.update({_id: id}, {
         $set: modificator
+      }, (error, result) => {
+        console.log(realty);
+        return realty;
       });
 
-      return realty;
 
     }
   } else {

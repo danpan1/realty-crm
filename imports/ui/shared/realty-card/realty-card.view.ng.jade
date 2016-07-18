@@ -6,7 +6,8 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         div(layout='column').newList_ID.md-body-1
             div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-16.pr-8 Эксклюзив
             div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16.pr-8 Платит {{::realtyCard.realty.owner.comission}}% комиссии
-            div(ng-if='::realtyCard.realty.operator.meetingTime').newList__green-label.text-bold.pl-16.pr-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
+            //div(ng-if='::realtyCard.realty.operator.meetingTime').newList__green-label.text-bold.pl-16.pr-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
+            div(ng-if='::realtyCard.realty.operator.meetingTime').newList__green-label.text-bold.pl-16.pr-8 {{::realtyCard.meetingText}}
             div(ng-if='!realtyCard.reason').pl-16.pr-8.pt-8
                 div() {{::realtyCard.realty.createdAt | date:'dd.MM'}}
                 div() id {{::realtyCard.realty._id | price}}

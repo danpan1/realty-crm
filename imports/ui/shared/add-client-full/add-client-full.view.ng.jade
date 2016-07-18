@@ -117,6 +117,6 @@ md-tabs(ng-if='!addClientFull.submitted' md-dynamic-height)
 
                     div(ng-if='!addClientFull.submitted' layout='row').mv-16.mh-32
                         md-button(ng-disabled="secondForm.$invalid || addClientFull.client.need.priceFrom > addClientFull.client.need.priceTo"  ng-click='addClientFull.submit(true)' aria-label='Добавить клиента и найти связи с объектами').md-primary.md-raised Добавить клиента и найти связи с объектами
-                        md-button(md-no-ink nng-click="addClientFull.activeTab = 0" flex-offset='10' aria-label='Вернуться на шаг назад').md-primary.md-body-1 Вернуться на шаг назад
+                        md-button(md-no-ink ng-click="addClientFull.activeTab = 0" flex-offset='10' aria-label='Вернуться на шаг назад').md-primary.md-body-1 Вернуться на шаг назад
 
 
