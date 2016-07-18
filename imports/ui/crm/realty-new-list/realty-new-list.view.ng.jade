@@ -1,11 +1,11 @@
-realty-new-list-filter(filter-modal-opened='realtyNewList.filterModalOpened' use-saved-filter='realtyNewList.useSavedFilter(filter)' user='realtyNewList.user' ng-if='realtyNewList.user && realtyNewList.filterModalOpened' modal='realtyNewList.filterModalOpened')
+//realty-new-list-filter(filter-modal-opened='realtyNewList.filterModalOpened' use-saved-filter='realtyNewList.useSavedFilter(filter)' user='realtyNewList.user' ng-if='realtyNewList.user && realtyNewList.filterModalOpened' modal='realtyNewList.filterModalOpened')
 div(md-whiteframe="1")
     div(layout='row' layout-align='space-between none').ph-16
         div(flex='55' layout='row' layout-align='space-between none')
             md-input-container(flex='40').ml-16
                 md-select(ng-model='realtyNewList.filterType' aria-label='Тип фильтра' ng-change='realtyNewList.suitRealty()')
                     md-option(ng-value='type.id' ng-repeat='type in realtyNewList.dictionary.filterType') {{type.name}}
-            md-button(md-no-ink ng-click='realtyNewList.filterModalOpened = true').realty-new-list__link Сохраненные фильтры
+            md-button(md-no-ink ui-sref='crm.client-filters.list').realty-new-list__link Сохраненные фильтры
         md-input-container(flex='25')
             md-select(ng-model='realtyNewList.filterCity' aria-label='Выбрать город')
                 md-option(ng-value='0') Москва

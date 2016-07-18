@@ -11,7 +11,6 @@ import {dictionary} from '../../../helpers/dictionary';
 import {Locations} from '/imports/api/locations';
 import {name as PaginationButtons} from '/imports/ui/shared/pagination-buttons/pagination-buttons.component';
 import {name as realtyFilter} from '/imports/ui/crm/realty/realty-filter/realty-filter.component';
-import {name as RealtyNewListFilter} from './realty-new-list-filter/realty-new-list-filter.component';
 // import {Meteor} from 'meteor/meteor';
 
 // import {name as realtyFilter} from '../realty/realty-filter/realty-filter.component';
@@ -32,7 +31,7 @@ class RealtyNewList {
     this.state = $state;
     this.filterType = 2;
     this.filterCity = 0;
-    this.filterModalOpened = false;
+    //this.filterModalOpened = false;
     
     /*switch ($stateParams.operation) {
       case 'rent':
@@ -175,8 +174,7 @@ const moduleName = 'realtyNewList';
 export default angular.module(moduleName, [
   angularMeteor,
   realtyFilter,
-  PaginationButtons,
-  RealtyNewListFilter
+  PaginationButtons
 ]).component(moduleName, {
   templateUrl: 'imports/ui/crm/realty-new-list/realty-new-list.view.html',
   bindings: {},
