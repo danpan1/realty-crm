@@ -189,7 +189,7 @@ function sendSms (text, phone) {
 
     //let phoneI = 89600576854;
 
-    let url = 'http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275&to=' + phone + '&text=' + text + ' миринедвижимость.рф';
+    let url = 'http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275&to=' + phone + '&text=' + text + ' миринедвижимость.рф/ocean';
     
     console.log(url);
 

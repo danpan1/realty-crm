@@ -104,12 +104,16 @@ export const dictionary = {
     {id: 2, name: 'Лояльный'}
   ],
   priceList: [
-    {id: 0, price: 60,   descr: 'common'    },  // Обычные объекты
-    {id: 1, price: 250,  descr: 'meetingOrComission'   },  // Встреча ИЛИ платит комиссию
-    {id: 2, price: 400,  descr: 'meetCom'   },  // Встреча + платит комиссию
-    {id: 3, price: 2000, descr: 'exclusive' },  // Эксклюзив
-    {id: 4, price: 2100, descr: 'excMeet'   },  // Эксклюзив + Встреча ИЛИ Эксклюзив + Платит комиссию
-    {id: 5, price: 2200, descr: 'excComMeet'},  // Эксклюзив + Платит комиссию + Встреча
+    {id: 0, price: 60,   descr: 'common'},  // Обычные объекты
+    {id: 1, price: 500,  descr: 'meetingOrComission50'},  // Встреча ИЛИ платит комиссию < 50%
+    {id: 2, price: 750,  descr: 'meetingAndComission50'},  // Встреча + платит комиссию < 50%
+    {id: 3, price: 1000, descr: 'comission100'},  // Комиссия > 50%
+    {id: 4, price: 1250, descr: 'meetingAndComission100'},  // Встреча + платит комиссию > 50%
+    {id: 5, price: 2000, descr: 'exclusive'},  // Эксклюзив
+    {id: 6, price: 2400, descr: 'excMeetOrExcCom50'},  // Эксклюзив + Встреча ИЛИ Эксклюзив + Платит комиссию < 50%
+    {id: 7, price: 2500, descr: 'excMeetCom50'},  // Эксклюзив + Встреча + Платит комиссию < 50%
+    {id: 8, price: 2750, descr: 'excCom100'},  // Эксклюзив + Платит комиссию > 50%
+    {id: 9, price: 3000, descr: 'excMeetCom100'},  // Эксклюзив + Встреча + Платит комиссию > 50%
   ],
   renovation: [
     {id: 0, name: 'Косметический', cianId : 1},
