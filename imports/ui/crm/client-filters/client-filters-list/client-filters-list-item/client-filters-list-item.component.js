@@ -1,15 +1,12 @@
-/**
- * Created by Danpan on 01.06.16.
- */
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Locations} from '/imports/api/locations';
 import {dictionary} from '/imports/helpers/dictionary';
 
 
-import './realty-new-list-filter-one.view.html';
+import './client-filters-list-item.view.html';
 
-class RealtyNewListFilterOne {
+class ClientFiltersListItem {
   /* @ngInject */
   constructor($scope, $reactive, $timeout) {
     $reactive(this).attach($scope);
@@ -35,16 +32,16 @@ class RealtyNewListFilterOne {
 
 }
 
-const moduleName = 'realtyNewListFilterOne';
+const moduleName = 'clientFiltersListItem';
 
 // create a module
 export default angular.module(moduleName, [
   angularMeteor
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/crm/realty-new-list/realty-new-list-filter/realty-new-list-filter-one/realty-new-list-filter-one.view.html',
+  templateUrl: 'imports/ui/crm/client-filters/client-filters-list/client-filters-list-item/client-filters-list-item.view.html',
   bindings: {
     filter: '<'
   },
   controllerAs: moduleName,
-  controller: RealtyNewListFilterOne
+  controller: ClientFiltersListItem
 });

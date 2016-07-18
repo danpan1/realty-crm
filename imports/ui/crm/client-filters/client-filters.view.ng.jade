@@ -1,0 +1,10 @@
+div().modal
+    div(ui-sref='crm.realty-new-list').modal__bg
+    div().modal__outer
+        div().modal__inner
+            div(md-whiteframe='2' style='min-height: 500px;' ng-if='!clientFilters.loaded').pv-16
+                md-progress-circular(md-diameter='150' style='margin:180px auto;')
+            div(md-whiteframe='2' ng-if='clientFilters.loaded').pv-16
+                ui-view
+            md-button(aria-label='Закрыть').md-icon-button.slide__close.m-0.p-0.realty-new-list-filter__btn_close
+                md-icon(ui-sref='crm.realty-new-list' md-svg-icon='svg/icon-close-thin.svg')

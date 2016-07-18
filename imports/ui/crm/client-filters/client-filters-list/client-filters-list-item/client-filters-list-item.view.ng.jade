@@ -1,0 +1,21 @@
+div().m-16
+    p().md-body-1.mv-8 
+        span(ng-if='clientFiltersListItem.filter.subways' ng-repeat='subway in clientFiltersListItem.filter.subwaysNames') {{subway}}, 
+        span(ng-if='clientFiltersListItem.filter.metroTime && clientFiltersListItem.filter.metroTransport') {{clientFiltersListItem.filter.metroTime}} мин. {{clientFiltersListItem.filter.metroTransport}}, 
+        span(ng-if='clientFiltersListItem.filter.street') {{clientFiltersListItem.filter.street}} 
+        span(ng-if='clientFiltersListItem.filter.house') {{clientFiltersListItem.filter.house}} 
+    p().md-body-1.mv-8
+        span(ng-if='clientFiltersListItem.filter.roomcount' ng-repeat='room in clientFiltersListItem.filter.roomcount') {{room.id}} комн., 
+        span(ng-if='clientFiltersListItem.filter.priceFrom') от {{clientFiltersListItem.filter.priceFrom | price}} 
+        span(ng-if='clientFiltersListItem.filter.priceTo') до {{clientFiltersListItem.filter.priceTo | price}} 
+        span(ng-if='clientFiltersListItem.filter.priceTo || clientFiltersListItem.filter.priceFrom') , 
+        span(ng-if='clientFiltersListItem.filter.renovation' ng-repeat='renovation in clientFiltersListItem.filter.renovation') {{clientFiltersListItem.dictionary.renovation[renovation].name}}, 
+        span(ng-if='clientFiltersListItem.conditionNames' ng-repeat='condition in clientFiltersListItem.conditionNames') {{clientFiltersListItem.dictionary.conditions[condition].name}}, 
+    p().md-body-1.mv-8
+        span(ng-if='clientFiltersListItem.filter.floorFrom') от {{clientFiltersListItem.filter.floorFrom}} 
+        span(ng-if='clientFiltersListItem.filter.floorTo') до {{clientFiltersListItem.filter.floorTo}} 
+        span(ng-if='clientFiltersListItem.filter.floorFrom || clientFiltersListItem.filter.floorTo') этажа, 
+        span(ng-if='clientFiltersListItem.filter.squareFrom') от {{clientFiltersListItem.filter.squareFrom}} 
+        span(ng-if='clientFiltersListItem.filter.squareTo') до {{clientFiltersListItem.filter.squareTo}} 
+        span(ng-if='clientFiltersListItem.filter.squareFrom || clientFiltersListItem.filter.squareTo') м#[sup 2], 
+        span(ng-if='clientFiltersListItem.filter.materials' ng-repeat='material in clientFiltersListItem.filter.materials') {{clientFiltersListItem.dictionary.materials[material].name}}, 
