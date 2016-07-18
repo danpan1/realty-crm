@@ -12,6 +12,7 @@ class ClientFiltersChange {
   constructor($scope, $reactive, $timeout, $state, $stateParams) {
     $reactive(this).attach($scope);
     this.$timeout = $timeout;
+    this.$state = $state;
     this.$stateParams = $stateParams;
     const vm = this;
     this.dictionary = dictionary;
@@ -43,10 +44,16 @@ class ClientFiltersChange {
     });
 
     this.realtyCount = 0;
+    //vm.sort = {
+    //  'operator.oceanPrice': -1,
+    //  'createdAt': -1
+    //};
     vm.subscribe('newList', () => {
       return [
         //фильтр для pagination
-        {},
+        {
+          //sort: vm.getReactively('sort')
+        },
         //фильтр клиента
         {
           floorFrom: vm.getReactively('newFilter.filter.floorFrom'),
@@ -102,9 +109,11 @@ class ClientFiltersChange {
           console.log(error);
           console.log('Ошибка!');
           vm.savingInProgress = false;
+          this.$state.go('crm.client-filters.list') ;
         } else {
           console.log(`Filter changed`);
           vm.savingInProgress = false;
+          this.$state.go('crm.client-filters.list') ;
         }
       });
     } else {
@@ -113,9 +122,11 @@ class ClientFiltersChange {
           console.log(error);
           console.log('Ошибка!');
           vm.savingInProgress = false;
+          this.$state.go('crm.client-filters.list') ;
         } else {
           console.log(`Filter added`);
           vm.savingInProgress = false;
+          this.$state.go('crm.client-filters.list') ;
         }
       });
     }

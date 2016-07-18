@@ -1,7 +1,6 @@
 div().realty-filter.pl-32.pr-16
-    p {{clientFiltersChange.newFilter}}
-    realty-filter(parent='"custom"' ng-if='clientFiltersChange.roomcount !== undefined' filter='clientFiltersChange.newFilter.filter' roomcount='clientFiltersChange.roomcount')
-    div(layout='row').mv-32
+    realty-filter(parent='"custom"' ng-if='clientFiltersChange.roomcount !== undefined' filter='clientFiltersChange.newFilter.filter' roomcount='clientFiltersChange.roomcount' realty-count='clientFiltersChange.realtyCount')
+    div(layout='row').mv-321
         md-input-container(flex='33').mv-0.pv-0
             input(placeholder='Название фильтра' ng-model='clientFiltersChange.newFilter.name')
     div(layout='row').mv-32

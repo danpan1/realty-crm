@@ -98,11 +98,7 @@ class RealtyFilter {
 
   toggleRoomcount(item) {
     if(!this.filter.roomcount) this.filter.roomcount = []; 
-    console.log('Item:');
-    console.log(item);
     var idx = this.filter.roomcount.indexOf(item);
-    console.log('idx:');
-    console.log(idx);
     if (idx > -1) {
       this.filter.roomcount.splice(idx, 1);
     }
@@ -110,8 +106,6 @@ class RealtyFilter {
       this.filter.roomcount.push(item);
     }
     this.roomcount = this.filter.roomcount.slice();
-    console.log('roomcount:');
-    console.log(this.roomcount);
     if (this.parent == 'ocean') {
       this.$timeout(()=>{
         this.suitRealty();
