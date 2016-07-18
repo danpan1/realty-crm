@@ -25,11 +25,11 @@ class ClientFiltersChange {
         if (this.$stateParams.newFilter == 'false' && window.localStorage["changeFilter"] != undefined) {
           console.log(JSON.parse(window.localStorage["changeFilter"]));
           vm.newFilter = JSON.parse(window.localStorage["changeFilter"]);
-          vm.roomcount = vm.newFilter.filter.roomcount;
         } else {
           vm.newFilter = {
             filter:{
-              metroTransport: 0
+              metroTransport: 0,
+              roomcount: []
             },
             name:''
           };
@@ -38,6 +38,7 @@ class ClientFiltersChange {
             id: vm.user._id,
             phone: vm.user.profile.phone
         } 
+        vm.roomcount = vm.newFilter.filter.roomcount;
       }
     });
 
@@ -83,12 +84,7 @@ class ClientFiltersChange {
     });
   }
 
-  backToFiltersList () {
-    if(this.changingFilter != undefined) this.changingFilter = undefined;
-    this.showFilter = false;
-  }
-
-  saveNewFilter (filterIndex) {
+  saveNewFilter () {
     let vm = this;
 
     //this.newFilter.filter.roomcount = this.roomcount; 
@@ -99,43 +95,27 @@ class ClientFiltersChange {
     if (this.newFilter.filter.house == null) { delete this.newFilter.filter.house; }
     else if(this.newFilter.filter.house && typeof this.newFilter.filter.house != 'string') this.newFilter.filter.house = this.newFilter.filter.house.value;
     
-    /*if (this.$stateParams.newFilter == 'false') {
-      this.changingFilter = filterIndex;
-      this.newFilter = {
-        filter: this.myFilters[filterIndex].filter,
-        name: this.myFilters[filterIndex].name,
-        id: this.myFilters[filterIndex]._id,
-        user: {
-          id: this.user._id,
-          phone: this.user.profile.phone
-        }
-      };
-    }
-    console.log(this.newFilter);*/
-
-    if (this.$stateParams.newFilter == 'false') { 
+    vm.savingInProgress = true;
+    if (this.$stateParams.newFilter == 'false') {
       Meteor.call('changeFilter', this.newFilter, (error, result) => {
         if (error) {
           console.log(error);
           console.log('Ошибка!');
+          vm.savingInProgress = false;
         } else {
           console.log(`Filter changed`);
-          this.$timeout(()=>{
-            this.showFilter = false;
-          },10)
+          vm.savingInProgress = false;
         }
       });
-      this.changingFilter = undefined;
     } else {
       Meteor.call('addFilter', this.newFilter, (error, result) => {
         if (error) {
           console.log(error);
           console.log('Ошибка!');
+          vm.savingInProgress = false;
         } else {
           console.log(`Filter added`);
-          this.$timeout(()=>{
-            this.showFilter = false;
-          },10)
+          vm.savingInProgress = false;
         }
       });
     }

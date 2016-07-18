@@ -155,9 +155,18 @@ class ClientFiltersList {
   }
 
   useFilter (index) {
-    this.$timeout(()=>{
-      //this.useSavedFilter({filter:this.myFilters[index].filter});
-    },100);
+    
+    console.log(this.myFilters[index]);   
+
+    window.localStorage["filter"] = JSON.stringify(this.myFilters[index].filter, function (key, val) {
+      if (key == '$$hashKey') {
+        return undefined;
+      }
+      return val;
+    });
+
+    this.$state.go('crm.realty-new-list') ;
+
   }
 
 }

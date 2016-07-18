@@ -55,11 +55,17 @@ export function changeFilter(data) {
       name: data.name
     };
     
-    console.log(filter);
-    
-    Filters.update({_id: data.id}, {
+    Filters.update({_id: data._id}, {
       $set: newParams
+    }, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('result');
+        console.log(result);
+      }
     });
+
 
   } else {
 

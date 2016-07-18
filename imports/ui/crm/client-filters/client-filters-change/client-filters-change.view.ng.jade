@@ -5,5 +5,5 @@ div().realty-filter.pl-32.pr-16
         md-input-container(flex='33').mv-0.pv-0
             input(placeholder='Название фильтра' ng-model='clientFiltersChange.newFilter.name')
     div(layout='row').mv-32
-        md-button(ng-disabled='!clientFiltersChange.newFilter.name' ng-click='clientFiltersChange.saveNewFilter()').md-primary.md-raised.ph-16.ml-0 {{clientFiltersChange.$stateParams.newFilter == 'false' ? 'Сохранить фильтр' : 'Добавить фильтр' }}
+        md-button(ng-disabled='!clientFiltersChange.newFilter.name || clientFiltersChange.savingInProgress' ng-click='clientFiltersChange.saveNewFilter()').md-primary.md-raised.ph-16.ml-0 {{clientFiltersChange.$stateParams.newFilter == 'false' ? 'Сохранить фильтр' : 'Добавить фильтр' }}
         md-button(ui-sref='crm.client-filters.list').md-primary.ph-16 Отмена
