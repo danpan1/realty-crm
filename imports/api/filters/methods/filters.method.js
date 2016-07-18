@@ -41,12 +41,13 @@ export function addFilter(filter) {
 export function changeFilter(data) {
 
   console.log('========= changeFilter');
+  console.log(data);
 
   if (Meteor.isServer && Meteor.userId()) {
 
     // Проверки
     if (!this.userId) return 'Пользователь не найден';
-    let filter = Filters.findOne({_id: data.id});
+    let filter = Filters.findOne({_id: data._id});
     if (filter.user.id != this.userId) return 'Это не ваш фильтр';
 
     let newParams = {
@@ -54,14 +55,22 @@ export function changeFilter(data) {
       name: data.name
     };
     
-    console.log(filter);
-    
-    Filters.update({_id: data.id}, {
+    Filters.update({_id: data._id}, {
       $set: newParams
+    }, (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('result');
+        console.log(result);
+      }
     });
 
+
   } else {
+
     console.log('no Access');
+    
   }
 }
 
