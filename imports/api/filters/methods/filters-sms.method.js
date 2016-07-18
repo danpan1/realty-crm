@@ -173,12 +173,12 @@ function sendSms (text, phone) {
     
     console.log(url);
 
-    /*HTTP.post(url, false, function (error, result) {
+    HTTP.post(url, false, function (error, result) {
       if (error) {
         console.log(error);
       } else {
         console.log(result);
       }
-    });*/
+    });
 
 }
