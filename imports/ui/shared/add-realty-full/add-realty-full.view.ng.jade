@@ -169,11 +169,11 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                     div(layout='row' ng-if='addRealtyFull.realty.type != 1')
                         div(flex='45').mv-16
                             div(layout='row' layout-align='space-between start')
-                                md-input-container(flex='50').mv-0.ml-8
+                                md-input-container(flex='50').mv-0.ml-8.form-required
                                     label Сумма залога равна
                                     md-select(required ng-model='addRealtyFull.realty.details.depositSum')
                                         md-option(ng-value="sum.id" ng-repeat='sum in addRealtyFull.dictionary.depositSum') {{sum.name}}
-                                md-input-container(flex='50' ng-if='addRealtyFull.realty.details.depositSum !== 0').mv-0.ml-8
+                                md-input-container(flex='50' ng-if='addRealtyFull.realty.details.depositSum !== 0').mv-0.ml-8.form-required
                                     label Разбивается на
                                     md-select(required ng-model='addRealtyFull.realty.details.depositTime')
                                         md-option(ng-value="time.id" ng-repeat='time in addRealtyFull.dictionary.depositTime') {{time.name}}

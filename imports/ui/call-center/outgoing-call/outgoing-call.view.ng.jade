@@ -31,8 +31,8 @@ div().outgoing-call__photo
     div(layout='row')
         div(layout='row' flex='70')
             img(ng-repeat='image in outgoingCall.realty.details.images | limitTo:2' ng-src='{{image.url}}')
-        div(flex='30' layout='column' layout-align='center center')
-            md-button(ng-click='outgoingCall.signLamp(outgoingCall.realty.contacts[0].phones[0].phone, outgoingCall.realty._id)').md-warn.md-raised Фонарь
+        div(ng-if='outgoingCall.realty.details.images.length' flex='30' layout='column' layout-align='center center')
+            md-button(ng-click='outgoingCall.signLamp(outgoingCall.realty.contacts[0].phones[0].phone, outgoingCall.realty._id)').md-warn Фонарь
 
 div(md-whiteframe='2')
     div(md-whiteframe='1').ph-32.pv-16

@@ -47,7 +47,28 @@ class RealtyCard {
     if((vm.realty.owner && vm.realty.owner.isComission) || (vm.realty.operator && vm.realty.operator.meetingTime) || (vm.realty.realtor && vm.realty.realtor.isExclusive)){
       if (vm.realty.realtor && vm.realty.realtor.isExclusive) vm.reason = 'exclusive';
       else if (vm.realty.owner && vm.realty.owner.isComission) vm.reason = 'comission';
-      else if (vm.realty.operator && vm.realty.operator.meetingTime) vm.reason = 'meeting';
+      else if (vm.realty.operator && vm.realty.operator.meetingTime) {
+        vm.reason = 'meeting';
+        let meet = vm.realty.operator.meetingTime;
+        let meetingMonth = meet.getMonth();
+        let meetingDate = meet.getDate();
+        let meetingHour = meet.getHours();
+        let meetingMinutes = meet.getMinutes();
+        let nowDate = new Date().getDate();
+        if (nowDate > meetingDate) {
+            meetText = meetingDate+'.'+meetingDate+' '+meetingHour+':'+meetingMinutes;
+        } else {
+            var difference = meetingDate - nowDate;
+            if (difference == 0) {
+                meetText = 'сегодня в ' + meetingHour+':'+meetingMinutes;
+            } else if (difference == 1) {
+                meetText = 'завтра в ' + meetingHour+':'+meetingMinutes;
+            } else {
+                meetText = meetingDate+'.'+meetingDate+' '+meetingHour+':'+meetingMinutes;
+            }
+        }
+        vm.meetingText = 'Встреча '+meetText;
+      }
       let newTime = new Date().getTime();
       try {
         let time = (vm.realty.operator.oceanAdd - newTime) / 1000;

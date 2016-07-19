@@ -12,9 +12,9 @@ export class RobokassaReplenishController {
     this.$mdDialog = $mdDialog;
     this.error = null;
     /* Минимальная сумма пополнения */
-    this.minAmount = 1;
+    this.minAmount = 1000;
     /* Сумма по умолчанию стоящая в инпуте */
-    this.defaultAmount = 1;
+    this.defaultAmount = 1000;
     /* amount - input */
     this.amount = this.defaultAmount;
   }

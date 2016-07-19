@@ -103,12 +103,12 @@ div(ng-if="oneInfoEdit.show")
                                 md-select(ng-if='oneInfoEdit.realty.type == 1 || oneInfoEdit.realty.type == 2' ng-model="oneInfoEdit.realty.type")
                                     md-option(ng-value='type.id' ng-if='type.id != 3 && type.id != 4' ng-repeat='type in oneInfoEdit.dictionary.type') {{type.name}}
                             price-mask(ng-if='oneInfoEdit.realty' label='"Цена"' price='oneInfoEdit.realty.price' optflex='')
-                            div(layout='row').mt-16
+                            div(layout='row' ng-if='oneInfoEdit.realty.type == 3 || oneInfoEdit.realty.type == 4').mt-16
                                 md-input-container(flex).mv-0
                                     label Сумма залога равна
                                     md-select(ng-model='oneInfoEdit.realty.details.depositSum')
                                         md-option(ng-value="sum.id" ng-repeat='sum in oneInfoEdit.dictionary.depositSum') {{sum.name}}
-                            div(layout='row').mt-16
+                            div(layout='row' ng-if='oneInfoEdit.realty.type == 3 || oneInfoEdit.realty.type == 4').mt-16
                                 md-input-container(flex ng-if='oneInfoEdit.realty.details.depositSum != 0').mv-0
                                     label Разбивается на 
                                     md-select(ng-model='oneInfoEdit.realty.details.depositTime')

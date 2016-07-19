@@ -8,11 +8,11 @@ realty-filter {
       }
       &:first-of-type {
         min-width: 0;
-        max-width: 80%;
+        //max-width: 50%;
       }
       &:last-of-type {
         min-width: 0;
-        max-width: 20%;
+        //max-width: 50%;
         margin-left: 16px;
       }
       &.flex-70{

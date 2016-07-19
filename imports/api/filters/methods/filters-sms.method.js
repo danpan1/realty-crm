@@ -143,12 +143,30 @@ function setText (filter) {
     if(filter.realtor && filter.realtor.isExclusive) text += 'Эксклюзив. ';
     if(filter.owner && filter.owner.isComission) text += 'Комиссия '+filter.owner.comission+'%. ';
     if(filter.operator && filter.operator.meetingTime) {
-        text += 'Встреча '+filter.operator.meetingTime;
+        let meet = filter.operator.meetingTime;
+        let meetingMonth = meet.getMonth();
+        let meetingDate = meet.getDate();
+        let meetingHour = meet.getHours();
+        let meetingMinutes = meet.getMinutes();
+        let nowDate = new Date().getDate();
+        if (nowDate > meetingDate) {
+            meetText = meetingDate+'.'+meetingDate+' '+meetingHour+':'+meetingMinutes;
+        } else {
+            var difference = meetingDate - nowDate;
+            if (difference == 0) {
+                meetText = 'сегодня в ' + meetingHour+':'+meetingMinutes;
+            } else if (difference == 1) {
+                meetText = 'завтра в ' + meetingHour+':'+meetingMinutes;
+            } else {
+                meetText = meetingDate+'.'+meetingDate+' '+meetingHour+':'+meetingMinutes;
+            }
+        }
+        text += 'Встреча '+meetText+ '. ';
     }
     if(filter.roomcount) text += filter.roomcount+'к., ';
     if(filter.address.subway) {
         console.log(filter.address.subway)
-        text += filter.address.subway.name+' '+filter.address.metroTime+' мин. '+dictionary.transport[filter.address.metroTransport].name+', ';
+        text += 'м.'+filter.address.subway.name+' '+filter.address.metroTime+' мин. '+dictionary.transport[filter.address.metroTransport].name+', ';
     }
     if(filter.details.renovation) text += dictionary.renovation[filter.details.renovation].name+', '
     if(filter.price) {
@@ -169,16 +187,18 @@ function setText (filter) {
 
 function sendSms (text, phone) {
 
-    let url = 'http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275&to=' + phone + '&text=' + text;
+    //let phoneI = 89600576854;
+
+    let url = 'http://sms.ru/sms/send?api_id=EE7347FD-C2D0-0487-C5E0-4FFCD1886275&to=' + phone + '&text=' + text + ' миринедвижимость.рф/ocean';
     
     console.log(url);
 
-    /*HTTP.post(url, false, function (error, result) {
+    HTTP.post(url, false, function (error, result) {
       if (error) {
         console.log(error);
       } else {
         console.log(result);
       }
-    });*/
+    });
 
 }
