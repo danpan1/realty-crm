@@ -35,7 +35,8 @@ export default function routes($stateProvider) {
       template: '<one-connections/>',
       controller: function ($state, $stateParams) {}
     })
-    .state('crm.realty.one.connections.email', {
+    //.state('crm.realty.one.connections.email', {
+    .state('crm.realty.one.email', {
       url: '/email?:clientId',
       template: '<one-email/>',
       controller: function ($state, $stateParams) {}

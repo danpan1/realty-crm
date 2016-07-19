@@ -1,0 +1,25 @@
+div(md-whiteframe="1" ng-if='profile.user' ).mv-16
+    div(layout='row' layout-align='start start')
+         md-input-container(flex='25').ml-32
+            md-select(ng-model='profile.fake' aria-label='Выбрать город')
+                md-option(ng-value='true') Москва
+    div(layout='row' layout-align='start start')
+        phone-mask(flex="20" label='"Личный телефон"' phone='profile.user.profile.phone').ml-32.zh
+        md-input-container(flex-offset='10' flex="25").mv-0
+            label Личный email
+            input(type="email" ng-model='profile.user.emails[0].address')
+    div(layout='row' layout-align='start start')
+        phone-mask(flex="20" label='"Телефон для рекламы"' phone='profile.user.profile.advertPhone').ml-32.zh
+        md-input-container(flex-offset='10' flex="25").mv-0
+            label Email для ответов от клиентов
+            input(type="email" ng-model='profile.user.profile.advertEmail')
+    div(layout='row' layout-align='start start').ph-16.mt-16.mb-32
+        md-button(ng-click='profile.saveInfo()').md-primary.md-raised Сохранить
+    h3.ph-16.mh-8.mb-0 История операций по балансу
+    div(layout='row' layout-align='start start').p-16
+        table(flex='100').table-bordered.profile__table.m-8.w-100
+            tr(ng-repeat='line in profile.hardCode')
+                td {{line.name}}
+                td {{line.id}}
+                td.ta-r {{line.cost | price}}
+                td {{line.descr}}

@@ -143,9 +143,9 @@ div(md-whiteframe='2')
                                 md-checkbox(id="isExclusive" name="isExclusive" ng-model='outgoingCall.realty.realtor.isExclusive' aria-label="Checkbox 1").m-0.md-primary.md-subhead Готов на эксклюзив
                 div(layout='row').mt-16
                     div(flex='55')
-                        md-input-container(md-no-float layout='row').form-required
+                        md-input-container(md-no-float layout='row')
                             label Комментарий о собственнике
-                            input(type="text" required='' ng-model='outgoingCall.realty.operator.comment')
+                            textarea(type="text" ng-model='outgoingCall.realty.operator.comment')
                 div(layout='row')
                     div(flex='55')
                         div(layout='column')

@@ -33,6 +33,7 @@ class Layout {
       {name: 'Видео-инструкции', ngClick: 'layout.videoTutorial = !layout.videoTutorial'},
       //{name:'Помощь', href:'https://vk.com/write19844032'},
       {name: 'Помощь', href: 'https://vk.com/write19844032'},
+      {name: '150 за 6 коуч', uisref: 'crm.training.list'},
       {name: '150 за 6', href: 'http://murigin.ru/intensiv/'},
       //{name: 'О сервисе', uisref: 'crm.feedback'},
       // {name: 'Настройки', uisref:'realty'},

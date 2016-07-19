@@ -1,6 +1,7 @@
 'use strict';
 import {Meteor} from 'meteor/meteor';
 import {Filters} from '../filters.model.js';
+import {Clients} from '/imports/api/clients/clients.model.js';
 import {dictionary} from '/imports/helpers/dictionary';
 import {HTTP} from 'meteor/http';
 
@@ -43,28 +44,32 @@ export function sendFilterSms(filter) {
     // Если же это обычный объект
     } else {
     
-        let params = {isActive:true}
+        let filterParams = {isActive:true};
+        let clientParams = {};
 
         if(filter.address.subway){
             console.log('subway: '+filter.address.subway);
-            params['filter.subways'] = {$in : [filter.address.subway.id, null]};
+            filterParams['filter.subways'] = {$in : [filter.address.subway.id, null]};
+            clientParams['need.subways'] = {$in : [filter.address.subway.id, null]};
         }
         if(filter.address.metroTime){
             console.log(filter.address.metroTime+' min by ' + filter.address.metroTransport);
-            //params['filter.metroTime'] = {$in: [{$lte: filter.address.metroTime}, null]};
-            params['filter.metroTransport'] = {$in : [filter.address.metroTransport, null]};
+            //filterParams['filter.metroTime'] = {$in: [{$lte: filter.address.metroTime}, null]};
+            filterParams['filter.metroTransport'] = {$in : [filter.address.metroTransport, null]};
+            clientParams['need.metroTransport'] = {$in : [filter.address.metroTransport, null]};
         }
         if(filter.district){
             console.log('districts: '+filter.address.districts);
-            params['filter.districts'] = {$in : [filter.districts, null]};
+            filterParams['filter.districts'] = {$in : [filter.districts, null]};
+            clientParams['need.districts'] = {$in : [filter.districts, null]};
         }
         if(filter.address.street){
             console.log('street: '+filter.address.street);
-            params['filter.street'] = {$in : [filter.address.street, null]};
+            filterParams['filter.street'] = {$in : [filter.address.street, null]};
         }
         if(filter.address.house){
             console.log('house: '+filter.address.house);
-            params['filter.house'] = {$in : [filter.address.house, null]};
+            filterParams['filter.house'] = {$in : [filter.address.house, null]};
         }
         if(filter.roomcount){
             console.log(filter.roomcount);
@@ -73,50 +78,47 @@ export function sendFilterSms(filter) {
                 name: ''+filter.roomcount
             }
             console.log('roomcount: '+roomSearch);
-            params['filter.roomcount'] = {$in : [roomSearch, null]};
+            filterParams['filter.roomcount'] = {$in : [roomSearch, null]};
+            clientParams['need.roomcount'] = {$in : [filter.roomcount, null]};
         }
         if(filter.materials){
             console.log('materials: '+filter.materials);
-            params['filter.materials'] = {$in : [filter.materials, null]};
+            filterParams['filter.materials'] = {$in : [filter.materials, null]};
         }
         if(filter.details.renovation){
             console.log('renovation: '+filter.renovation);
-            params['filter.renovation'] = {$in : [filter.details.renovation, null]};
+            filterParams['filter.renovation'] = {$in : [filter.details.renovation, null]};
+            clientParams['need.renovation'] = {$in : [filter.details.renovation, null]};
         }
-        /*if(filter.conditions){
-            console.log('conditions: '+filter.conditions);
-            params['filter.conditions'] = filter.conditions;
-        }*/
-        params.$and = [];
+        filterParams.$and = [];
         if (filter.floor) {
-            params.$and.push(
+            filterParams.$and.push(
                 { $or: [{ 'filter.floorFrom': { $lte: parseInt(filter.floor) }}, {'filter.floorFrom' : null}] },
                 { $or: [{ 'filter.floorTo': { $gte: parseInt(filter.floor) }}, {'filter.floorTo' : null}] }
             )
-
-            //params['filter.floorFrom'] = { $lte: parseInt(filter.floor)};
-            //params['filter.floorTo'] = {$gte : parseInt(filter.floor)};
         }
         if (filter.square) {
-            params.$and.push(
+            filterParams.$and.push(
                 { $or: [{ 'filter.squareFrom': { $lte: parseInt(filter.square) }}, {'filter.squareFrom' : null}] },
                 { $or: [{ 'filter.squareTo': { $gte: parseInt(filter.square) }}, {'filter.squareTo' : null}] }
             )
-
-            //params['filter.squareFrom'] = {$lte : parseInt(filter.square)};
-            //params['filter.squareTo'] = {$gte : parseInt(filter.square)};
         }
+        clientParams.$and = [];
         if (filter.price) {
-            params.$and.push(
+            filterParams.$and.push(
                 { $or: [{ 'filter.priceFrom': { $lte: parseInt(filter.price) }}, {'filter.priceFrom' : null}] },
                 { $or: [{ 'filter.priceTo': { $gte: parseInt(filter.price) }}, {'filter.priceTo' : null}] }
             )
-            //params['filter.priceFrom'] = {$lte : parseInt(filter.price)};
-            //params['filter.priceTo'] = {$gte : parseInt(filter.price)};
+            let clientPrice = parseInt(filter.price) + (parseInt(filter.price) / 10);
+            clientParams.$and.push(
+                { $or: [{ 'need.price': { $lte: parseInt(clientPrice) }}, {'need.price' : null}] }
+            )
         }
 
-        console.log('============= params: ');
-        console.log(params);
+        //console.log('============= filterParams: ');
+        //console.log(filterParams);
+        console.log('============= clientParams: ');
+        console.log(clientParams);
 
         
         let options = {};
@@ -124,9 +126,15 @@ export function sendFilterSms(filter) {
            'user.phone': 1
         };
 
-        let foundFilters = Filters.find(params,options).fetch();
+        let foundFilters = Filters.find(filterParams,options).fetch();
+        let foundClients = Clients.find(clientParams).fetch();
 
-        console.log(foundFilters);
+        console.log('============= foundClients: ');
+        console.log(foundClients);
+
+        Clients.update(clientParams,{
+            $inc: {newObjects:1}
+        })
 
         if (foundFilters) {
             let text = setText(filter);
@@ -144,10 +152,12 @@ function setText (filter) {
     if(filter.owner && filter.owner.isComission) text += 'Комиссия '+filter.owner.comission+'%. ';
     if(filter.operator && filter.operator.meetingTime) {
         let meet = filter.operator.meetingTime;
-        let meetingMonth = meet.getMonth();
+        let meetingMonth = meet.getMonth() + 1;
+        if (meetingMonth < 10) meetingMonth = '0'+meetingMonth;
         let meetingDate = meet.getDate();
         let meetingHour = meet.getHours();
         let meetingMinutes = meet.getMinutes();
+        if (meetingMinutes == 0) meetingMinutes = '00'
         let nowDate = new Date().getDate();
         if (nowDate > meetingDate) {
             meetText = meetingDate+'.'+meetingDate+' '+meetingHour+':'+meetingMinutes;
@@ -158,7 +168,7 @@ function setText (filter) {
             } else if (difference == 1) {
                 meetText = 'завтра в ' + meetingHour+':'+meetingMinutes;
             } else {
-                meetText = meetingDate+'.'+meetingDate+' '+meetingHour+':'+meetingMinutes;
+                meetText = meetingDate+'.'+meetingMonth+' '+meetingHour+':'+meetingMinutes;
             }
         }
         text += 'Встреча '+meetText+ '. ';
@@ -193,12 +203,12 @@ function sendSms (text, phone) {
     
     console.log(url);
 
-    HTTP.post(url, false, function (error, result) {
+    /*HTTP.post(url, false, function (error, result) {
       if (error) {
         console.log(error);
       } else {
         console.log(result);
       }
-    });
+    });*/
 
 }
