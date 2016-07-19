@@ -1,0 +1,8 @@
+.profile{
+    &__table{
+       border-collapse: collapse; 
+       & td{
+           padding: 7px 15px;
+       }
+    }
+}

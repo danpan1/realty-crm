@@ -75,6 +75,10 @@ Clients.Schema = new SimpleSchema({
     type: clientNeedSchema,
     optional: true
   },
+  newObjects: {
+    type: Number,
+    optional: true
+  },
   note: {
     type: String,
     optional: true
