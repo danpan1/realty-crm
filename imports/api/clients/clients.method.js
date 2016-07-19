@@ -8,7 +8,8 @@ import {_} from 'meteor/underscore';
 import {Roles} from 'meteor/alanning:roles';
 import nextAutoincrement from '../../helpers/getUniqueId';
 Meteor.methods({
-  addClient
+  addClient,
+  updateClientInfo
 });
 
 export function addClient(client, notRealtor) {
@@ -29,5 +30,24 @@ export function addClient(client, notRealtor) {
     return nextValue;
 
   }
+};
 
+export function updateClientInfo(info) {
+  if (Meteor.isServer && Meteor.userId()) {
+    Clients.update({"_id":info._id}, {
+      $set: {
+        'profile.phone': info.profile.phone,
+        'emails[0].address': info.emails[0].address,
+        'profile.advertPhone': info.profile.advertPhone,
+        'profile.advertEmail': info.profile.advertEmail
+      }
+    }, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(`Client updated`);
+      }
+    });
+
+  }
 };

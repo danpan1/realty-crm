@@ -24,6 +24,12 @@ layout > md-toolbar {
   background-color: #1e88e5 !important;
 }
 
+.text{
+  &-green{
+    color: green;
+  }
+}
+
 .w-100{
   width: 100% !important;
   max-width: 100% !important;

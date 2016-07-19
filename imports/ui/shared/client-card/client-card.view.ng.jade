@@ -30,14 +30,17 @@ div(md-whiteframe='2').mv-16.client-card
                     md-button(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)').client-card__link.text-left.m-0.p-0 Предложить объект
                 div(ng-if="clientCard.pageFrom == 'my'")
                     md-button(ng-click='clientCard.sendRealtyRelation(clientCard.client._id)' md-no-ink).client-card__link.text-left.m-0.p-0 Выбрать клиента
-                div(ng-if="clientCard.pageFrom == 'listMyClients'" ui-sref="crm.clients.details.info({client:clientCard.client._id, activetab: 'info'})")
-                    md-button().client-card__link.m-0.text-left.p-0 Инфо о клиенте
-                div(ng-if="clientCard.pageFrom == 'listMyClients'" ui-sref="crm.clients.details.relations({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})")
-                    md-button().client-card__link.text-left.m-0.p-0 {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} связей
+                div(ng-if="clientCard.pageFrom == 'listMyClients'")
+                    div(ng-if='clientCard.client.offers.length' ui-sref="crm.clients.details.offers({client:clientCard.client._id})").md-body-1.client-card__right-label.text-bold.text-green.cursor-pointer {{clientCard.client.offers.length}} новых предложений
+                    div(ui-sref="crm.clients.details.relations({client:clientCard.client._id, assort: 'manual', activetab: 'relations'})")
+                        md-button().client-card__link.text-left.m-0.p-0 {{(clientCard.client.relations.my.length || 0) + (clientCard.client.relations.saved.length || 0)}} объектов в обработке
+                    div(ui-sref="crm.clients.details.info({client:clientCard.client._id, activetab: 'info'})")
+                        md-button().client-card__link.m-0.text-left.p-0 Инфо о клиенте
         md-divider
         
         div(layout='row')
             div(flex='25').clientCard-col-1.ph-16.pv-8
+                div(ng-if='clientCard.client.newObjects > 0').md-body-1.client-card__right-label.text-bold.text-green {{clientCard.client.newObjects}} новых объектов
                 div().md-body-1.client-card__right-label На {{clientCard.searchTarget ? (clientCard.client.searchEndDate | date:'MM/dd') : 'сейчас'}}
                 div(ng-if="clientCard.searchDuration > 0").md-body-1.client-card__right-label Ищет {{clientCard.searchDuration}} дней
 

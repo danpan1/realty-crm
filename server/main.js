@@ -13,6 +13,7 @@ import '../imports/api/parsercounters';
 import '../imports/api/relations';
 import '../imports/api/filters';
 import '../imports/api/balance';
+import '../imports/api/balance-history';
 import '../imports/api/balance/createBalance.method';
 import '../imports/startup';
 import '../imports/api/realty';
