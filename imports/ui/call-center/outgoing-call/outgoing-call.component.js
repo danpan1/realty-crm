@@ -164,7 +164,7 @@ class OutgoingCall {
     }
 
     let exclusive = vm.realty.realtor ? vm.realty.realtor.isExclusive : false;
-    let comission = this.realty.owner ? this.realty.owner.isComission : false;
+    let comission = this.realty.owner ? this.realty.owner.comission : false;
     let meeting = vm.realty.operator.meetingTime ? true : false;
 
     if (comission || exclusive || meeting) {
@@ -180,15 +180,25 @@ class OutgoingCall {
     
     let price = 0; // Определяем цену объекта
     if (exclusive) {
-      if (comission) {
-        if (vm.realty.operator.meetingTime) price = 5;
-        else price = 4;
-      } else if (vm.realty.operator.meetingTime) price = 4;
-        else price = 3;
+      if(comission){
+        if (comission > 50) {
+          if (vm.realty.operator.meetingTime) price = 9;
+          else price = 8;
+        } else if (comission <= 50) {
+          if (vm.realty.operator.meetingTime) price = 7;
+          else price = 6;
+        }
+      } else if (vm.realty.operator.meetingTime) price = 6;
+        else price = 5;
     } else if (comission) {
-      if (vm.realty.operator.meetingTime) price = 2;
-      else price = 1;
-    } else if (vm.realty.operator.meetingTime) price = 1
+        if (comission > 50) {
+          if (vm.realty.operator.meetingTime) price = 4;
+          else price = 3;
+        } else if (comission <= 50) {
+          if (vm.realty.operator.meetingTime) price = 2;
+          else price = 1;
+        }
+    } else if (vm.realty.operator.meetingTime) price = 1;
     
     vm.realty.operator.oceanPrice = price;
     console.log(vm.realty.owner)
@@ -260,13 +270,13 @@ class OutgoingCall {
         console.log(result.contacts[0].phones[0].phone);
 
         // Проверяем, не является ли объект ламповым
-        Meteor.call('checkLamp', result.contacts[0].phones[0].phone, (lampError, isItLamp) => {
-          if (lampError) {
-            console.log(lampError);
-          } else {
-            console.log(isItLamp)
-            // Если объект не ламповый
-            if (isItLamp != true) {
+        //Meteor.call('checkLamp', result.contacts[0].phones[0].phone, (lampError, isItLamp) => {
+        //  if (lampError) {
+        //    console.log(lampError);
+        //  } else {
+        //    console.log(isItLamp)
+        //    // Если объект не ламповый
+        //    if (isItLamp != true) {
               vm.realty = result;
               vm.realty.price = result.price;
               vm.newObjectRecieved += 1;
@@ -283,12 +293,12 @@ class OutgoingCall {
                 }
               }
               this.infoWasCopied = false;
-            } else {
-              console.log('It\'s a lamp!')
-              vm.removeRealty(result._id);
-            }
-          }
-        });
+        //    } else {
+        //      console.log('It\'s a lamp!')
+        //      vm.removeRealty(result._id);
+        //    }
+        //  }
+        //});
 
       });
 
@@ -299,13 +309,13 @@ class OutgoingCall {
   }
 
   signLamp (phone, id) {
-    Meteor.call('signLamp', phone, (error, result) => {
-      if (error) {
-        console.log(error);
-      } else {
+    //Meteor.call('signLamp', phone, (error, result) => {
+    //  if (error) {
+    //    console.log(error);
+    //  } else {
         this.removeRealty(id);
-      }
-    });
+    //  }
+    //});
   }
 
   removeRealty (id) {

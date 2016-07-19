@@ -44,13 +44,22 @@ class RealtyCardPurchase {
   takeRealty(id, ev, price, connection) {
     let vm = this;
     console.log(price);
+    if (connection == 'taken') {
+      Meteor.call('updateRealty', id, connection, (err, result) => {
+        if (err) {
+          console.log('err: ', err);
+        } else {
+          console.log(result);
+        }
+      });
     //TODO плохо понятно. надо переделать в связи с отменой оплаты подписки.
-    if (this.user.profile.balance > price) {
-
+    } else if (this.user.profile.balance > price) {
       if (!this.con) {
+        this.takeInProgress = true;
         Meteor.call('buyRealtyOcean', id, price, (err, result) => {
           if (err) {
             console.log('err: ' + err);
+            this.takeInProgress = false;
           } else {
             console.log(result);
             this.timeout(()=> {
@@ -68,9 +77,11 @@ class RealtyCardPurchase {
           this.openPurchaseStart(ev, connection);
           console.log('Open dialog')
         } else {
+          this.takeInProgress = true;
           Meteor.call('buyRealtyOcean', id, price, connection, (err, result) => {
             if (err) {
               console.log('err: ' + err);
+              this.takeInProgress = false;
             } else {
               console.log(result);
               if (connection == 'connection') {

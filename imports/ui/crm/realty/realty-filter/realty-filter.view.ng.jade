@@ -41,8 +41,8 @@ div(ng-class="{'md-whiteframe-2dp pl-32 pr-16':realtyFilter.parent == 'ocean'}")
                     md-no-ink,
                     class='md-primary') {{ item.name }}
                 div(layout='row' layout-align='space-between end').mv-32
-                    price-mask(refresh='realtyFilter.refresh' is-filter='true' ng-if='realtyFilter.filter' no-required='true' label='"цена от"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceFrom')
-                    price-mask(refresh='realtyFilter.refresh' is-filter='true' ng-if='realtyFilter.filter' no-required='true' label='"цена до"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceTo').ml-32
+                    price-mask(refresh='realtyFilter.refreshSublings' is-filter='true' ng-if='realtyFilter.filter' no-required='true' label='"цена от"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceFrom')
+                    price-mask(refresh='realtyFilter.refreshSublings' is-filter='true' ng-if='realtyFilter.filter' no-required='true' label='"цена до"' change='realtyFilter.suitRealty()' price='realtyFilter.filter.priceTo').ml-32
                 md-input-container().mv-16
                     label Ремонт
                     md-select(ng-model='realtyFilter.filter.renovation', multiple='true' ng-change='realtyFilter.suitRealty()')

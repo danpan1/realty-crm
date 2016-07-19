@@ -77,7 +77,9 @@ class RealtyFilter {
   clearFilter () {
     this.filter = {
       //type: this.stateParams.operation == 'sale' ? 1 : 4,
-      roomcount: []
+      roomcount: [],
+      metroTransport: 0
+
     };
     this.suitRealty();
     this.refreshSublings = !this.refreshSublings;
