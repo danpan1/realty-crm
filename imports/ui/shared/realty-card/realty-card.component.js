@@ -72,7 +72,7 @@ class RealtyCard {
       let newTime = new Date().getTime();
       try {
         let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
-        let seconds = 900 + parseInt(time);
+        let seconds = 1500 + parseInt(time);
         if(seconds > 0){
           this.minutes = parseInt(seconds / 60);
           this.seconds = seconds - (this.minutes*60);

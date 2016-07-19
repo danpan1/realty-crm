@@ -190,7 +190,6 @@ if (Meteor.isServer) {
         let count = realty.count();
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});
         CountsDan.find({_id: countId});
-        console.log(selector);
         return [realty, CountsDan.find({_id: this.userId})];
       }
 

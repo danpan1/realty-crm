@@ -21,7 +21,10 @@ class ClientFiltersList {
       let user = Meteor.user();
       if (user) {
         vm.user = user;
-        if(this.user.profile.getSmsPremiumObjects == undefined) this.user.profile.getSmsPremiumObjects = true;
+        if(this.user.profile.getSmsPremiumObjects == undefined) {
+          this.user.profile.getSmsPremiumObjects = true;
+          this.changeUserGetSmsPremium(true);
+        }
       }
     });
 

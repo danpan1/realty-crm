@@ -1,0 +1,12 @@
+div(layout-wrap layout='row').mv-16
+    div(ng-repeat='lesson in trainingList.lessons' ng-class='{"disabled":!lesson.available}' flex='50').p-16
+        div(md-whiteframe='2' layout='row'
+            ui-sref='crm.training.lesson({number:lesson.number})').training__lesson
+            section(flex='60').p-8.pl-16
+                h3.training__lesson-number.mv-4 Занятие №{{lesson.number}}
+                h1.training__lesson-title.md-headline.mv-8 {{lesson.title}}
+                div(layout='row' layout-align='start start')
+                    md-icon()
+                    p.training__lesson-descr.mt-0 Результат: {{lesson.descr}}
+            section(flex='40').p-4.pt-8
+                img(ng-src='{{lesson.picture}}')

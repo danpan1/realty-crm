@@ -15,6 +15,7 @@ import {name as countFilter} from '../../filters/count.filter.js';
 import {name as selectedSubway} from '../../filters/selected-subway.filter.js';
 import {name as Realty}from './realty/realty.component';
 import {name as Feedback}from './feedback/feedback.component';
+import {name as Training}from './training/training.component';
 import {name as clients}from './clients/clients.component';
 import {name as layout} from '/imports/ui/layout/layout.component';
 import {name as Profile} from '/imports/ui/crm/profile/profile.component';
@@ -46,6 +47,7 @@ export default angular.module(moduleName, [
   clients,
   Realty,
   Feedback,
+  Training,
   Profile,
   ClientFilters
 ]).config(routes);

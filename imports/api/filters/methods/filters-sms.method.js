@@ -152,10 +152,12 @@ function setText (filter) {
     if(filter.owner && filter.owner.isComission) text += 'Комиссия '+filter.owner.comission+'%. ';
     if(filter.operator && filter.operator.meetingTime) {
         let meet = filter.operator.meetingTime;
-        let meetingMonth = meet.getMonth();
+        let meetingMonth = meet.getMonth() + 1;
+        if (meetingMonth < 10) meetingMonth = '0'+meetingMonth;
         let meetingDate = meet.getDate();
         let meetingHour = meet.getHours();
         let meetingMinutes = meet.getMinutes();
+        if (meetingMinutes == 0) meetingMinutes = '00'
         let nowDate = new Date().getDate();
         if (nowDate > meetingDate) {
             meetText = meetingDate+'.'+meetingDate+' '+meetingHour+':'+meetingMinutes;
@@ -166,7 +168,7 @@ function setText (filter) {
             } else if (difference == 1) {
                 meetText = 'завтра в ' + meetingHour+':'+meetingMinutes;
             } else {
-                meetText = meetingDate+'.'+meetingDate+' '+meetingHour+':'+meetingMinutes;
+                meetText = meetingDate+'.'+meetingMonth+' '+meetingHour+':'+meetingMinutes;
             }
         }
         text += 'Встреча '+meetText+ '. ';
