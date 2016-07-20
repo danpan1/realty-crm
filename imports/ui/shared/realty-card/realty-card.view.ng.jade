@@ -129,7 +129,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
         p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
         div(ng-if="!realtyCard.realtylisttype").relative
             p 
-                | #[strong Комментарий колцентра:] {{realtyCard.realty.operator.comment}}
+                | #[strong Комментарий колцентра:] {{realtyCard.realty.realtor.comment}}
             div(layout='row')
                 realty-card-purchase(ng-if='realtyCard.realty' parse-details='realtyCard.parseDetails' user='realtyCard.user' contacts='realtyCard.contacts' data='realtyCard.data' realty='realtyCard.realty')
             div(ng-if='realtyCard.contacts.realtyPhone !== undefined')

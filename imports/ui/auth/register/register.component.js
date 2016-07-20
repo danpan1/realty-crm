@@ -24,7 +24,8 @@ class Register {
         name: '',
         phone: '',
         surName: '',
-        urlVk: ''
+        urlVk: '',
+        city: ''
       }
     };
 

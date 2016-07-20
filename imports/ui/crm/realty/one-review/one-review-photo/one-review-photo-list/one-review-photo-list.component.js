@@ -15,7 +15,7 @@ class OneReviewPhotoList {
     let vm = this;
     this.$timeout = $timeout;
     
-    this.subscribe('users');
+    this.subscribe('photographers');
 
     this.helpers({
       photographers() {

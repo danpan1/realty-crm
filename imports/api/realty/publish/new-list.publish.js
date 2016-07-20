@@ -170,6 +170,7 @@ if (Meteor.isServer) {
           'details.images.url': 1,
           'details.conditions': 1,
           'realtor.isExclusive': 1,
+          'realtor.comment': 1,
           'owner.comission': 1,
           'owner.isComission': 1,
           'operator.comment': 1,

@@ -26,12 +26,12 @@ class RegisterPhoto {
         phone: '',
         surName: '',
         urlVk: '',
+        city: '',
         subways: {
           list: [],
           embedded: []
         }
-      },
-      roles:['photo']
+      }
     };
 
     this.error = '';

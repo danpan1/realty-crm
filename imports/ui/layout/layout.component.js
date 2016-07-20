@@ -7,6 +7,7 @@ import angularMeteor from 'angular-meteor';
 import {Accounts} from 'meteor/accounts-base';
 
 import './layout.view.html';
+import './set-city.view.html';
 
 import {RobokassaReplenishController} from '/imports/ui/shared/replenish-balance/robokassa-replenish.controller';
 class Layout {
@@ -14,6 +15,7 @@ class Layout {
   constructor($scope, $reactive, $mdSidenav, $window, $mdDialog, $state) {
 
     $reactive(this).attach($scope);
+    let vm = this;
     this.$window = $window;
     this.$state = $state;
     this.$mdSidenav = $mdSidenav;
@@ -33,8 +35,50 @@ class Layout {
           {name: '150 за 6', uisref: 'crm.training.list', isCouch: this.user.roles && this.user.roles.indexOf('couching') > -1 ? "true" : "false"},
           {name: '150 за 6', href: 'http://murigin.ru/intensiv/', isCouch: this.user.roles && this.user.roles.indexOf('couching') > -1 ? "true" : "false"}
         ];
+
+        if (!user.profile.city) {
+
+          class selectCity {
+
+            constructor() {
+              this.city = 'Москва';
+            }
+
+            setCity (city) {
+              console.log(' ===== setCity START', city);
+              Meteor.call('setCity', vm.user._id, city, (err, result) => {
+                if (err) {
+                  console.log('=== setCity ERR', err);
+                  vm.mdDialog.cancel();
+                } else {
+                  console.log('=== setCity RESULT', result);
+                  vm.mdDialog.cancel();
+                }
+              })
+            }
+
+            close() {
+              vm.mdDialog.cancel();
+            }
+          }
+
+          this.mdDialog.show({
+            controller: selectCity,
+            controllerAs: 'selectCity',
+            templateUrl: 'imports/ui/layout/set-city.view.html',
+            preserveScope: true,
+            //targetEvent: ev,
+            clickOutsideToClose: true
+          });
+        }
+
       }
     });
+  }
+
+  getEvent (ev) {
+    console.log('==== EVENT', ev);
+    this.event = ev;
   }
 
   checkStudent () {

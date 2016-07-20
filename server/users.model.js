@@ -1,6 +1,7 @@
 //// возможно customers и users это одно и то же
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {CouchingSchema} from '../imports/api/users/schemas/couching.schema';
 //import {OperatorSchema} from '../imports/api/users/schemas/operator.schema';
 var Schema = {};
 
@@ -45,6 +46,10 @@ Schema.Users = new SimpleSchema({
   'profile.balance': {
     type: Number,
     decimal: true,
+    optional: true
+  },
+  'profile.city': {
+    type: String,
     optional: true
   },
   'profile.getSmsPremiumObjects': {
@@ -117,6 +122,10 @@ Schema.Users = new SimpleSchema({
   },
   'profile.getResponse.rieltor_guru_clients': {
     type: Boolean,
+    optional: true
+  },
+  'profile.couching': {
+    type: CouchingSchema,
     optional: true
   },
   takenRealty: {

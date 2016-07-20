@@ -1,0 +1,16 @@
+//Created by Danpan on 15.07.16.
+md-dialog.subscription-dialog(aria-label='Оплата подписки')
+    md-toolbar
+        .md-toolbar-tools
+            h2 Выберите ваш город
+            span(flex='')
+            md-button.md-icon-button(ng-click='selectCity.close()')
+                md-icon(md-svg-src='svg/icon-close.svg', aria-label='Закрыть окно оплаты подписки')
+    md-dialog-content
+        .md-dialog-content.pv-16
+            div(layout='column')
+                div(layout='row' layout-align='center center')
+                    md-input-container(flex='80').md-block.form-required.m-0
+                        md-select(required ng-model='selectCity.city' aria-label='Выбрать город')
+                            md-option(ng-value='"Москва"') Москва
+                md-button.md-raised.mv-16.ph-16(flex='', ng-click='selectCity.setCity(selectCity.city)') Сохранить

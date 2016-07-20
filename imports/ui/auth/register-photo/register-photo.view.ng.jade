@@ -28,6 +28,10 @@ md-content
                         input(type='email', ng-model='registerPhoto.credentials.email', required='')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='80').md-block.form-required.m-0
+                        md-select(required ng-model='register.credentials.profile.city' aria-label='Выбрать город')
+                            md-option(ng-value='Москва') Москва
+                div(layout='row' layout-align='center center')
+                    md-input-container(flex='80').md-block.form-required.m-0
                         label Пароль
                         input(type='password', ng-model='registerPhoto.credentials.password', required='')
                 div(layout='row' layout-align='center center' ng-class='{"has-error":registerForm.passwordRepeat.$touched && registerPhoto.passwordrepeat != registerPhoto.credentials.password}')
