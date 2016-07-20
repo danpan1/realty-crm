@@ -2,6 +2,11 @@
  Пришлось сделать с 0 чтобы словари грузились
  раньше схем в которых они используются*/
 export const dictionary = {
+  advertPlans: [
+    {id: 0, name: 'Минимальная', firstWeek : 362, nextWeek : 192, month : 1000},
+    {id: 1, name: 'Эффективная', firstWeek : 1407, nextWeek : 1007, month : 4500},
+    {id: 2, name: 'Максимальная', firstWeek : 4000, nextWeek : 1607, month : 8800}
+  ],
   balcony: [
     {id: 0, name: '0'},
     {id: 1, name: '1'},

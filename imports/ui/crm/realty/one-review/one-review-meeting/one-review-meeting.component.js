@@ -25,6 +25,7 @@ class OneReviewMeeting {
       this.saveReview({id:this.realty._id})
     })
   }
+
     
 }
 

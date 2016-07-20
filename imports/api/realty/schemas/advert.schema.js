@@ -4,44 +4,50 @@
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 /*Тут адрес который показывается на карточках в списках*/
 export const AdvertSchema = new SimpleSchema({
-  avito:{
+
+  avito: {
     type: Object,
-    optional : true
+    optional: true
   },
-  'avito.premium':{
-    type: Boolean,
-    optional : true
+  'avito.dateBegin': {
+    type: Date,
+    optional: true
   },
-  'avito.vip':{
-    type: Boolean,
-    optional : true
+  'avito.dateEnd': {
+    type: Date,
+    optional: true
   },
-  'avito.select':{
-    type: Boolean,
-    optional : true
+  'avito.pushUp': {
+    type: Number,
+    optional: true
   },
-  'avito.up':{
-    type: Boolean,
-    optional : true
-  },
-  'avito.noSetOff':{
-    type: Boolean,
-    optional : true
-  },
-  'avito.longTime':{
-    type: Boolean,
-    optional : true
-  },
-  cian:{
+  currentWeek: {
     type: Object,
-    optional : true
+    optional: true
   },
-  irr:{
-    type: Object,
-    optional : true
+  'currentWeek.paid': {
+    type: Boolean,
+    optional: true
   },
-  yandex:{
+  'currentWeek.date': {
+    type: Date,
+    optional: true
+  },
+  'currentWeek.plan': {
+    type: Number,
+    max : 3,
+    optional: true
+  },
+  nextWeek: {
     type: Object,
-    optional : true
-  }
+    optional: true
+  },
+  'nextWeek.paid': {
+    type: Boolean,
+    optional: true
+  },
+  'nextWeek.plan': {
+    type: Number,
+    optional: true
+  },
 });

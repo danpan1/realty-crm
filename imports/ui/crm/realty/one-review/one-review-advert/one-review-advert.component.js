@@ -44,6 +44,18 @@ class OneReviewAdvert {
       }
     ];
   }
+
+  /**
+   *
+   * @param {number} planId Тарифный план рекламы (1 - минимальный, 2 - эффективный, 3 - максимальный)
+   */
+  choosePlan(planId) {
+    Realty.update({_id: this.realty._id}, {
+      $set: {
+        'advert.currentWeek.plan': planId
+      }
+    });
+  }
 }
 const moduleName = 'oneReviewAdvert';
 export default angular.module(moduleName, [
