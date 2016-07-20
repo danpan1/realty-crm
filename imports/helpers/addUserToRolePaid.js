@@ -13,8 +13,7 @@ Meteor.methods({
   addUsersToRolePaid,
   addUsersToRolePaidSale,
   addUsersToRoleOperator,
-  addUsersToRolePhoto//,
-  //addUsersToRoleCouching
+  addUsersToRoleCouching
 });
 
 /**
@@ -65,17 +64,18 @@ export function addUsersToRolePaidSale(userEmail) {
   }
 }
 
-export function addUsersToRolePhoto(userEmail) {
+export function addUsersToRoleCouching(userEmail) {
 
-  if (Meteor.isServer && Meteor.userId()) {
+  if (Meteor.isServer && Meteor.userId() && Roles.userIsInRole(Meteor.userId(), 'staff')) {
     console.log(userEmail);
     let user = Meteor.users.findOne({'emails.address': userEmail});
     if (user) {
-      Roles.addUsersToRoles(user._id, 'paidSale');
-      console.log('userAddedToPhoto');
+      Roles.addUsersToRoles(user._id, 'couching');
+      console.log('userAddedToCouching');
+      return 'Пользователь добавлен в студенты';//Meteor.users.findOne({'emails.address': userEmail});
     } else {
       console.log('user not found');
-      return 'user not found';
+      return 'Пользователь не найден';
     }
   } else {
     console.log('no Access');

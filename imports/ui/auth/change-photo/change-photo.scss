@@ -7,20 +7,13 @@ register {
     background-color: #bbdefb;
   }
 
-  /*.register-form {
+  .register-form {
     width: 328px;
     max-width: 328px;
-    &-photo{
-      max-width: 400px;
-    }
-  }*/
+  }
 }
 
 .register {
-  &-form {
-    width: 328px !important;
-    max-width: 328px !important;
-  }
   &__btn-submit {
     span {
       display: block;

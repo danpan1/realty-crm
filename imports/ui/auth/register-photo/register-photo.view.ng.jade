@@ -4,8 +4,7 @@ md-content
     div().mt-32.text-center
         img(src='img/logos/brand-logo-medium.png')
     div(layout='column', layout-align='center center').p-32
-        div(md-whiteframe='2').register-form.p-32
-
+        div(md-whiteframe='2').register-form.mb-32.mt-0
             md-toolbar(ng-show='registerPhoto.error', layout='row', layout-align='center center').md-warn.mb-16
                 p(ng-if='registerPhoto.error == 1').md-body-1 Телефон обязателен для регистрации
                 p(ng-if='registerPhoto.error == 2').md-body-1 Этот Email уже зарегистрирован
@@ -35,8 +34,9 @@ md-content
                     md-input-container(flex='80').md-block.form-required.m-0
                         label {{ registerForm.passwordRepeat.$touched ? registerPhoto.passwordrepeat == registerPhoto.credentials.password ? 'Пароли совпадают' : 'Пароли не совпадают' : 'Повторите пароль'}}
                         input(name='passwordRepeat' type='password', ng-model='registerPhoto.passwordrepeat', required='')
-                subway-chips(ng-model='registerPhoto.credentials.subways.list'
-                             subways-embeded = 'registerPhoto.credentials.subways.emedded' flex).zh
+                div(layout='row' layout-align='center center')    
+                    subway-chips(flex='80' ng-model='registerPhoto.credentials.profile.subways.list'
+                             subways-embeded = 'registerPhoto.credentials.profile.subways.embedded').zh
                 div(layout='row' layout-align='center center')
                     md-button(flex='80' type='submit' aria-label='register' ng-disabled='registerForm.$invalid || (registerPhoto.passwordrepeat != registerPhoto.credentials.password) || registerPhoto.credentials.profile.phone.length < 11').md-raised.md-primary.register__btn-submit Зарегистрироваться
                 div(layout='column' layout-align='start center')

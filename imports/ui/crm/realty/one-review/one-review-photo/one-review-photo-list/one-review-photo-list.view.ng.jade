@@ -1,0 +1,22 @@
+div(md-whiteframe='1').p-16
+    h3.md-headline.text-uppercase.mb-8 Список фотографов
+    table(flex='100').table-bordered.profile__table
+        thead
+            tr()
+                td №
+                td Email
+                td Имя
+                td Фамилия
+                td Телефон
+                td Метро
+        tbody
+            tr(ng-repeat='photo in oneReviewPhotoList.photographers')
+                td {{$index + 1}}
+                td {{photo.emails[0].address}}
+                td {{photo.profile.name}}
+                td {{photo.profile.surName}}
+                td {{photo.profile.phone}}
+                td 
+                    span(ng-repeat='subway in photo.profile.subways.embedded') 
+                        span(class='metro-color-{{subway.line}}').metro-color
+                        span {{subway.name}}

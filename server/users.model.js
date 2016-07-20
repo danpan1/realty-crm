@@ -66,6 +66,10 @@ Schema.Users = new SimpleSchema({
     type: String,
     optional: true
   },
+  'profile.photo': {
+    type: Boolean,
+    optional: true
+  },
   'profile.subways': {
     type: Object,
     optional: true
@@ -73,11 +77,16 @@ Schema.Users = new SimpleSchema({
   'profile.subways.list': {
     type: [String],
     optional: true
-  },/*
+  },
   'profile.subways.embedded': {
     type: Array,
     optional: true
-  },*/
+  },
+  'profile.subways.embedded.$': { // ID метро
+    type: Object,
+    optional: true,
+    blackbox: true
+  },
   'profile.surName': {
     type: String,
     optional: true

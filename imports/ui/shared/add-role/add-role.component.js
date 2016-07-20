@@ -16,36 +16,19 @@ class AddRole {
     this.subscribe('users');
 
     this.helpers({
-      paidUsers() {
-        return Meteor.users.find({roles : 'paid'});
+      students() {
+        return Meteor.users.find({roles : 'couching'});
       },
       users() {
         return Meteor.users.find({});
       }
     });
   }
-
-  // НЕТ ПРОВЕРКИ НА PAID И PAIDSALE - НЕ ТРЕБУЕТСЯ И ДОБАВЛЕНИЕ
-  /*submit(valid, role) {
+  
+  submitCouching(valid) {
     console.log(valid);
     if (valid) {
-      Meteor.call('addUsersToRolePaid', this.email, (err, result)=> {
-        if (err) {
-          this.timeout(()=> {
-            this.result = err;
-          }, 0);
-        } else {
-          this.timeout(()=> {
-            this.result = result;
-          }, 0);
-        }
-      });
-    }
-  }
-  submitSale(valid) {
-    console.log(valid);
-    if (valid) {
-      Meteor.call('addUsersToRolePaidSale', this.emailSale, (err, result)=> {
+      Meteor.call('addUsersToRoleCouching', this.studentEmail, (err, result)=> {
         if (err) {
           this.timeout(()=> {
             this.resultSale = err;
@@ -57,7 +40,7 @@ class AddRole {
         }
       });
     }
-  }*/
+  }
 
 }
 
