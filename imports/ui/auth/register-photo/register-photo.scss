@@ -1,0 +1,34 @@
+register {
+  img {
+    max-width: 100%;
+  }
+  
+  md-content {
+    background-color: #bbdefb;
+  }
+
+  .register-form {
+    width: 328px;
+    max-width: 328px;
+  }
+}
+
+.register {
+  &__btn-submit {
+    span {
+      display: block;
+      line-height: 24px;
+      &:first-of-type {
+        padding-top: 10px;
+      }
+      &:last-of-type {
+        padding-bottom: 10px;
+      }
+    }
+  }
+  &__message-text {
+    font-size: 20px;
+    line-height: 32px;
+    color: #2196f3;
+  }
+}

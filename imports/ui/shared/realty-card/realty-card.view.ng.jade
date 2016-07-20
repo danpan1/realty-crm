@@ -125,7 +125,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
     // Подробное объявление
     div(ng-show="realtyCard.ngShowDescr" ng-class='{"newList__description-blue":realtyCard.realty.realtor.isExclusive, "newList__description-green": realtyCard.realty.owner.comission || realtyCard.realty.operator.meetingTime}').newList__description.ph-32.pb-16
-        div(ng-if='realtyCard.realtyIsTaken' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам.
+        div(ng-if='realtyCard.realtyIsTaken' flex).realty-card__object-own.p-8 Объект уже принадлежит только вам
         p(ng-bind-html='realtyCard.realty.details.descr').md-body-1.realty-card__details-text
         div(ng-if="!realtyCard.realtylisttype").relative
             p 

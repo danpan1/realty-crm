@@ -66,6 +66,18 @@ Schema.Users = new SimpleSchema({
     type: String,
     optional: true
   },
+  'profile.subways': {
+    type: Object,
+    optional: true
+  },
+  'profile.subways.list': {
+    type: [String],
+    optional: true
+  },/*
+  'profile.subways.embedded': {
+    type: Array,
+    optional: true
+  },*/
   'profile.surName': {
     type: String,
     optional: true

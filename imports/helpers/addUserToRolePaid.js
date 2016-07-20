@@ -12,7 +12,9 @@ import {Roles} from 'meteor/alanning:roles';
 Meteor.methods({
   addUsersToRolePaid,
   addUsersToRolePaidSale,
-  addUsersToRoleOperator
+  addUsersToRoleOperator,
+  addUsersToRolePhoto//,
+  //addUsersToRoleCouching
 });
 
 /**
@@ -54,6 +56,23 @@ export function addUsersToRolePaidSale(userEmail) {
       Roles.addUsersToRoles(user._id, 'paidSale');
       console.log('userAdded');
       return 'userAdded Sale';
+    } else {
+      console.log('user not found');
+      return 'user not found';
+    }
+  } else {
+    console.log('no Access');
+  }
+}
+
+export function addUsersToRolePhoto(userEmail) {
+
+  if (Meteor.isServer && Meteor.userId()) {
+    console.log(userEmail);
+    let user = Meteor.users.findOne({'emails.address': userEmail});
+    if (user) {
+      Roles.addUsersToRoles(user._id, 'paidSale');
+      console.log('userAddedToPhoto');
     } else {
       console.log('user not found');
       return 'user not found';
