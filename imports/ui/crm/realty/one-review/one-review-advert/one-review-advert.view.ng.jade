@@ -1,14 +1,43 @@
 div(md-whiteframe='1').sub-tabbar
-    md-tabs(md-dynamic-height md-selected='3')
-        md-tab(label='Авито')
-            md-content
-                one-review-advert-avito()
-        md-tab(label='Циан')
-            md-content
-                one-review-advert-cian()
-        md-tab(label='Ирр')
-            md-content
-                one-review-advert-irr()
-        md-tab(label='60 досок')
-            md-content
-                one-review-advert-yandex()
+    div(md-whiteframe='2').one-review-advert.mv-16
+        div(md-whiteframe='1').ph-32.pv-16
+            div().md-subhead Ответ модератора
+            p().md-body-1.mb-0 текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+        div(layout='row' layout-align='space-between start').ph-32.pt-16.pb-8
+            div().one-review-advert__ads-box
+                div().one-review-advert__checkbox-container
+                    md-checkbox(aria-label='Checkbox 1' ng-model='oneReviewAdvertAvito.params.premium').md-primary
+                div().one-review-advert__ads-box-header
+                    img(src='img/icons/icon-avito-ads-1.png')
+                    span().md-headline.text-bold Минимальная
+                div().one-review-advert__content Первая неделя 362Р
+                div().one-review-advert__content Последующие 192Р
+                div().one-review-advert__content За месяц 1000Р
+                md-button().md-primary Выбрать
+            div().one-review-advert__ads-box
+                div().one-review-advert__checkbox-container
+                    md-checkbox(aria-label='Checkbox 1' ng-model='oneReviewAdvertAvito.params.vip').md-primary
+                div().one-review-advert__ads-box-header
+                    img(src='img/icons/icon-avito-ads-2.png')
+                    span().md-headline.text-bold Эффективная
+                div().one-review-advert__content Первая неделя 1407Р
+                div().one-review-advert__content Последующие 1007Р
+                div().one-review-advert__content За месяц 4500Р
+                md-button().md-primary Выбрать
+            div().one-review-advert__ads-box
+                div().one-review-advert__checkbox-container
+                    md-checkbox(aria-label='Checkbox 1' ng-model='oneReviewAdvertAvito.params.select').md-primary
+                div().one-review-advert__ads-box-header
+                    img(src='img/icons/icon-avito-ads-3.png')
+                    span().md-headline.text-bold Максимальная
+                div().one-review-advert__content Первая неделя 4000Р
+                div().one-review-advert__content Последующие 1607Р
+                div().one-review-advert__content За месяц 8800Р
+                md-button().md-primary Выбрать
+        div(layout='row' layout-align='start start').p-16
+            table(flex='100').table-bordered.profile__table.m-8.w-100
+                tr(ng-repeat='line in oneReviewAdvert.hardCode')
+                    td {{line.name}}
+                    td {{line.id}}
+                    td.ta-r {{line.cost | price}}
+                    td {{line.descr}}
