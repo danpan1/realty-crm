@@ -29,6 +29,11 @@ const balanceSchema = new SimpleSchema({
   plus: {
     type: Boolean
   },
+  //если списывается за рекламу
+  realtyId: {
+    type: String,
+    optional: true
+  },
   summ: {
     type: Number
   },

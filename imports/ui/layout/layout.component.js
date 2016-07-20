@@ -18,31 +18,14 @@ class Layout {
     this.$mdSidenav = $mdSidenav;
     this.mdDialog = $mdDialog;
     this.sideNavItems = [
-      // {name: 'Добавить клиента', uisref: 'crm.clients.add'},
-      // {name: 'Объекты', uisref: 'crm.realty.list.new'},
       {name: 'Океан объектов', uisref: 'crm.realty-new-list({operation: \'rent\', page: 1})'},
-      {name: 'Обучение', uisref: 'crm.training.list'},
-      {name: 'Профиль', uisref: 'crm.profile'},
       {name: 'Мои объекты', uisref: 'crm.realty.list.my'},
-      // {name: 'Новые объекты', uisref: 'crm.realty.list.new'},
-      // {name: 'Архив объекты', uisref: 'crm.realty.list.my'+'({status: \'archive\'})'},
       {name: 'Мои клиенты', uisref: 'crm.clients.list.my' + '({status: \'realtor\'})'},
-      // {name: 'Горячие Клиенты', uisref: 'crm.clients.list.my'+'({status: \'hot\'})'},
-      // {name: 'Дела', uisref:'realty'},
-      // {name: 'Отчет', uisref:'realty'},
-      // {name: 'Сообщения', uisref:'realty'},
       {name: 'Документы', uisref: 'crm.documents'},
       {name: 'Видео-инструкции', ngClick: 'layout.videoTutorial = !layout.videoTutorial'},
-      //{name:'Помощь', href:'https://vk.com/write19844032'},
       {name: 'Помощь', href: 'https://vk.com/write19844032'},
       {name: '150 за 6 коуч', uisref: 'crm.training.list'},
-      {name: '150 за 6', href: 'http://murigin.ru/intensiv/'},
-      //{name: 'О сервисе', uisref: 'crm.feedback'},
-      // {name: 'Настройки', uisref:'realty'},
-      // {name: 'Входящие Колл-центр', uisref: 'call-center.incoming'},
-      // {name: 'Исходящие Колл-центр', uisref: 'call-center.outgoing'},
-      // {name: 'Модератор', uisref: 'call-center.moderator'}
-      // {name: 'Задать вопрос', uisref:'crm.feedback'},
+      {name: '150 за 6', href: 'http://murigin.ru/intensiv/'}
     ];
     this.select = 1;
     this.autorun(function () {
