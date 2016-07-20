@@ -1,17 +1,21 @@
 div(ng-if='trainingLesson.lesson' layout-wrap layout='column' md-whiteframe='2').mv-16
     h1.md-headline.m-8.mt-16 Занятие №{{trainingLesson.lesson.number}}: {{trainingLesson.lesson.title}}
-    p(layout='row').mh-8.training__lesson-descr.mv-0
-        md-icon().m-0.p-0
-        span #[b Цель:] {{trainingLesson.lesson.target}}
-    p(layout='row').mh-8.training__lesson-descr.mv-0
-        md-icon().m-0.p-0
-        span #[b Результат:] {{trainingLesson.lesson.result}}
-    p(layout='row').mh-8.training__lesson-descr.mv-0
-        md-icon().m-0.p-0
-        span #[b Продолжительность:] {{trainingLesson.lesson.duration}} дней
-    p {{trainingLesson.lesson.videoLink}}
-    div(ng-if='trainingLesson.video2' layout='row')
-        iframe(width="100%" min-height="315" src='' height='600' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
+    p(layout='row').mh-8.training__lesson-descr.mv-4
+        img(src='img/icons/goal.jpg').training__icon
+        span.ml-8 #[b Цель:] {{trainingLesson.lesson.target}}
+    p(layout='row').mh-8.training__lesson-descr.mv-4
+        img(src='img/icons/kubok.jpg').training__icon
+        span.ml-8 #[b Результат:] {{trainingLesson.lesson.result}}
+    p(layout='row').mh-8.training__lesson-descr.mv-4
+        img(src='img/icons/watch.jpg').training__icon
+        span.ml-8 #[b Продолжительность:] {{trainingLesson.lesson.duration}} дней
+    div(ng-if='trainingLesson.lesson.videoLink' ng-switch='trainingLesson.lesson.videoLink' layout='row').mt-16
+        iframe(ng-switch-when='http://world-invest.pro/training/150za6_3/1.html' width="100%" min-height="315" src='http://world-invest.pro/training/150za6_3/1.html' height='880' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
+        iframe(ng-switch-when='https://www.youtube.com/embed/cRbciSAvI9g?list=RDHr8GQwFBpU0' width="100%" min-height="315" src='https://www.youtube.com/embed/cRbciSAvI9g?list=RDHr8GQwFBpU0' height='880' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
+        iframe(ng-switch-when='https://www.youtube.com/embed/ntZ3KFJupi0?list=RDHr8GQwFBpU0' width="100%" min-height="315" src='https://www.youtube.com/embed/ntZ3KFJupi0?list=RDHr8GQwFBpU0' height='880' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
+        iframe(ng-switch-when='https://www.youtube.com/embed/tCIEhlPmhV4?list=RDUbqLCdk0unI' width="100%" min-height="315" src='https://www.youtube.com/embed/tCIEhlPmhV4?list=RDUbqLCdk0unI' height='880' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
+        iframe(ng-switch-when='https://www.youtube.com/embed/hDNEAT7e9r4?list=RDUbqLCdk0unI' width="100%" min-height="315" src='https://www.youtube.com/embed/hDNEAT7e9r4?list=RDUbqLCdk0unI' height='880' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
+        iframe(ng-switch-when='https://www.youtube.com/embed/VSmrsyA4ipg?list=RDHr8GQwFBpU0' width="100%" min-height="315" src='https://www.youtube.com/embed/Hr8GQwFBpU0?list=RDHr8GQwFBpU0' height='880' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
 
 div(layout-wrap layout='column' md-whiteframe='2' ng-repeat='task in trainingLesson.lesson.tasks').mv-16
     h1.md-headline.m-16 Задание №{{task.id}}: {{task.title}}
@@ -19,7 +23,7 @@ div(layout-wrap layout='column' md-whiteframe='2' ng-repeat='task in trainingLes
     md-switch(ng-model='task.done',
               aria-label='taskDone'
               ng-click="oneInfo.onTaskDoneChange(task.id)").m-16 Выполнено
-    div.m-16 Открываем комменты
+    div(ng-if='task.done').m-16 Открываем комменты
     //div(style="width:665px; margin: 0 auto;")
         div(style="position:absolute; width:25px; height:25px; background:#F7F7F7; z-index: 10000; margin: 112px 0 0 167px;")
         div(id="vk_comments")
