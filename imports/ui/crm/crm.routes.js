@@ -10,8 +10,12 @@ export default function routes($stateProvider) {
       template: '<realty-new-list/>',
       controller: function ($state, $stateParams) {}
     })
+    //.state('crm.add-role', {
+    //  url: '/add-role',
+    //  template: '<add-role/>'
+    //})
     .state('crm.add-role', {
-      url: '/add-role',
+      url: '/add-couching',
       template: '<add-role/>'
     })
     .state('crm.add-operator', {
