@@ -21,6 +21,7 @@ class Layout {
       // {name: 'Добавить клиента', uisref: 'crm.clients.add'},
       // {name: 'Объекты', uisref: 'crm.realty.list.new'},
       {name: 'Океан объектов', uisref: 'crm.realty-new-list({operation: \'rent\', page: 1})'},
+      {name: 'Обучение', uisref: 'crm.training.list'},
       {name: 'Профиль', uisref: 'crm.profile'},
       {name: 'Мои объекты', uisref: 'crm.realty.list.my'},
       // {name: 'Новые объекты', uisref: 'crm.realty.list.new'},

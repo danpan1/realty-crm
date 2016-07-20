@@ -7,9 +7,9 @@ import {Accounts} from 'meteor/accounts-base';
 import {name as PhoneMask} from '/imports/ui/shared/phone-mask/phone-mask.component';
 import {Meteor} from 'meteor/meteor';
 
-import './register.view.html';
+import './register-photo.view.html';
 
-class Register {
+class RegisterPhoto {
   constructor($scope, $reactive, $state) {
     'ngInject';
 
@@ -24,7 +24,11 @@ class Register {
         name: '',
         phone: '',
         surName: '',
-        urlVk: ''
+        urlVk: '',
+        subways: {
+          list: [],
+          embedded: []
+        }
       }
     };
 
@@ -50,6 +54,11 @@ class Register {
           else if (err.reason == 'Email already exists.') this.error = 2;
           else this.error = 3;
         } else {
+          
+          Meteor.call('addUsersToRolePhoto', this.credentials.profile.email, (err, res) => {
+            if(err) {console.log(err);}
+            else {console.log(res);}
+          });
           
           Meteor.call('sendQuestion', {
             phone: this.credentials.profile.phone,
@@ -93,15 +102,15 @@ class Register {
   }
 }
 
-const moduleName = 'register';
+const moduleName = 'registerPhoto';
 
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
   PhoneMask
 ]).component(moduleName, {
-  templateUrl: 'imports/ui/auth/register/register.view.html',
+  templateUrl: 'imports/ui/auth/register-photo/register-photo.view.html',
   bindings: {},
   controllerAs: moduleName,
-  controller: Register
+  controller: RegisterPhoto
 });

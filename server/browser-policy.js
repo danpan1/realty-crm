@@ -20,6 +20,7 @@ const allowFrameOrigin = function () {
 
   BrowserPolicy.content.allowStyleOrigin('cdnjs.cloudflare.com');
   BrowserPolicy.content.allowFrameOrigin('www.youtube.com');
+  BrowserPolicy.content.allowFrameOrigin('world-invest.pro');
 
 };
 

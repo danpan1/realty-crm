@@ -15,7 +15,7 @@ class TrainingLesson {
     let vm = this;
     this.$stateParams = $stateParams;
 
-    this.lesson = lessons[this.$stateParams.number];
+    this.lesson = lessons[this.$stateParams.number - 1];
 
     //jQuery('#youtubeVideo').attr('src',this.lesson.videoLink);
     //$('#youtubeVideo').attr('src',this.lesson.videoLink);

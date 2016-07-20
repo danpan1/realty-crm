@@ -11,6 +11,7 @@ class TrainingList {
   /* @ngInject */
   constructor($scope, $reactive, $http, $timeout, $state, $stateParams) {
     $reactive(this).attach($scope);
+    this.$state = $state;
     let vm = this;
     
     this.lessons = [
@@ -64,6 +65,12 @@ class TrainingList {
       }
     ]
 
+  }
+
+  goToLesson (isAvailable, num) {
+    if(isAvailable){
+     	this.$state.go('crm.training.lesson', {number:num});
+    }
   }
   
 }
