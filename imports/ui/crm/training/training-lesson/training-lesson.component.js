@@ -19,8 +19,8 @@ class TrainingLesson {
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {
-        if (!user.profile.lessons) {
-          user.profile.lessons = [
+        if (!user.profile.couching.lessons) {
+          user.profile.couching.lessons = [
             {num:1, done: false, available: false, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] },
             {num:2, done: false, available: false, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] },
             {num:3, done: false, available: false, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] },
@@ -29,7 +29,7 @@ class TrainingLesson {
             {num:6, done: false, available: false, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] }
           ]
 
-          Meteor.call('setLessons', user.profile.lessons, (err, res) => {
+          Meteor.call('setLessons', user.profile.couching.lessons, (err, res) => {
             if (err) {
               console.log('==== setLessons ERROR', err);
             } else {
