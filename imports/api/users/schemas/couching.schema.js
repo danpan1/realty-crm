@@ -21,7 +21,22 @@ export const CouchingSchema = new SimpleSchema({
     optional: true
   },
   'lessons.$.tasks': {
-    type: [Object],
+    type: [TaskSchema],
+    optional: true
+  }
+});
+
+const TaskSchema = new SimpleSchema({
+  id: {
+    type:Number,
+    optional: true
+  },
+  done: {
+    type:Boolean,
+    optional: true
+  },
+  comment: {
+    type:String,
     optional: true
   }
 });

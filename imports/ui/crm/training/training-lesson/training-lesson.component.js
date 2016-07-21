@@ -76,7 +76,7 @@ class TrainingLesson {
 
   changeTasks () {
     data = {
-      lesson: this.$stateParams.number,
+      lesson: parseInt(this.$stateParams.number),
       fullInfo: this.user.profile.couching.lessons[this.$stateParams.number - 1]
     }
     Meteor.call('saveComment', data, (err, res) => {
