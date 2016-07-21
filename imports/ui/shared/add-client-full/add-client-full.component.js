@@ -40,6 +40,7 @@ class AddClientFull {
         }
       }
     }
+    this.client.newObjects = 0;
     this.client.need.price = price.join('');
     this.client.realtorPhone = Meteor.user().profile.phone;
     this.client.realtorName = Meteor.user().profile.name;
