@@ -8,6 +8,9 @@ Meteor.methods({
 
 export function saveComment(data) {
 
+  console.log('===== DATA:');
+  console.log(data);
+
   if (Meteor.isServer && Meteor.userId()) {
 
     Meteor.users.update({

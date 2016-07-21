@@ -1,4 +1,8 @@
 div(ng-if='trainingLesson.lesson' layout-wrap layout='column' md-whiteframe='2').mv-16
+    div(layout='flex' layout-align='start center').topbar
+        md-button(aria-label='Вернуться назад' ui-sref="crm.training.list").btn-back.mh-16
+            md-icon(md-svg-src='svg/icon-arrow-left.svg')
+        h3.md-title.m-0 К списку занятий
     h1.md-headline.m-8.mt-16 Занятие №{{trainingLesson.lesson.number}}: {{trainingLesson.lesson.title}}
     p(layout='row').mh-8.training__lesson-descr.mv-4
         img(src='img/icons/goal.jpg').training__icon
@@ -9,7 +13,7 @@ div(ng-if='trainingLesson.lesson' layout-wrap layout='column' md-whiteframe='2')
     p(layout='row').mh-8.training__lesson-descr.mv-4
         img(src='img/icons/watch.jpg').training__icon
         span.ml-8 #[b Продолжительность:] {{trainingLesson.lesson.duration}} дней
-    ///div(ng-if='trainingLesson.lesson.videoLink' ng-switch='trainingLesson.lesson.videoLink' layout='row').mt-16
+    div(ng-if='trainingLesson.lesson.videoLink' ng-switch='trainingLesson.lesson.videoLink' layout='row').mt-16
         iframe(ng-switch-when='http://world-invest.pro/training/150za6_3/1.html' width="100%" min-height="315" src='http://world-invest.pro/training/150za6_3/1.html' height='880' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
         iframe(ng-switch-when='https://www.youtube.com/embed/cRbciSAvI9g?list=RDHr8GQwFBpU0' width="100%" min-height="315" src='https://www.youtube.com/embed/cRbciSAvI9g?list=RDHr8GQwFBpU0' height='880' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
         iframe(ng-switch-when='https://www.youtube.com/embed/ntZ3KFJupi0?list=RDHr8GQwFBpU0' width="100%" min-height="315" src='https://www.youtube.com/embed/ntZ3KFJupi0?list=RDHr8GQwFBpU0' height='880' frameborder="0" allowfullscreen flex='100' id='youtubeVideo').m-0.p-0
