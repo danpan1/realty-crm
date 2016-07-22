@@ -3,14 +3,14 @@ div(ng-if='trainingLesson.lesson' layout-wrap layout='column' md-whiteframe='2')
         md-button(aria-label='Вернуться назад' ui-sref="crm.training.list").btn-back.mh-16
             md-icon(md-svg-src='svg/icon-arrow-left.svg')
         h3.md-title.m-0 К списку занятий
-    h1.md-headline.m-8.mt-16 Занятие №{{trainingLesson.lesson.lessonNumber}}: {{trainingLesson.lesson.title}}
-    p(layout='row').mh-8.training__lesson-descr.mv-4
+    h1.md-headline.m-16.mt-16 Занятие №{{trainingLesson.lesson.lessonNumber}}: {{trainingLesson.lesson.title}}
+    p(layout='row').mh-16.training__lesson-descr.mv-4
         img(src='img/icons/goal.jpg').training__icon
         span.ml-8 #[b Цель:] {{trainingLesson.lesson.target}}
-    p(layout='row').mh-8.training__lesson-descr.mv-4
+    p(layout='row').mh-16.training__lesson-descr.mv-4
         img(src='img/icons/kubok.jpg').training__icon
         span.ml-8 #[b Результат:] {{trainingLesson.lesson.result}}
-    p(layout='row').mh-8.training__lesson-descr.mv-4
+    p(layout='row').mh-16.training__lesson-descr.mv-4
         img(src='img/icons/watch.jpg').training__icon
         span.ml-8 #[b Продолжительность:] {{trainingLesson.lesson.duration}} дней
     div(ng-if='trainingLesson.lesson.videoLink' ng-switch='trainingLesson.lesson.videoLink' layout='row').mt-16
