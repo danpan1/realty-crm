@@ -13,36 +13,25 @@ class TrainingLesson {
   constructor($scope, $reactive, $http, $mdDialog, $timeout, $state, $stateParams) {
     $reactive(this).attach($scope);
     let vm = this;
+    vm.lessonData = {};
     this.$stateParams = $stateParams;
     this.mdDialog = $mdDialog;
     this.$state = $state;
     this.lessonNumber = this.$stateParams.number - 1;
     
     this.autorun(function () {
+
       let user = Meteor.user();
       if (user) {
-        if (!user.profile.couching.lessons) {
-          this.noAccessShow();
-          user.profile.couching.lessons = [
-            {num:1, done: false, available: true, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] },
-            {num:2, done: false, available: false, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] },
-            {num:3, done: false, available: false, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] },
-            {num:4, done: false, available: false, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] },
-            {num:5, done: false, available: false, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] },
-            {num:6, done: false, available: false, tasks: [{id:1,done: false,comment: ''},{id:2,done: false,comment: ''}] }
-          ]
-
-          Meteor.call('setLessons', user.profile.couching.lessons, (err, res) => {
-            if (err) {
-              console.log('==== setLessons ERROR', err);
-            } else {
-              console.log('==== setLessons RESULT', res);
-            }
-          })
-        } else {
-          if (user.profile.couching.lessons[this.lessonNumber].available != true) this.noAccessShow();
-        }
-        this.user = user;
+        Meteor.call('checkLessonAccess', this.$stateParams.number, (err, lesson) => {
+          if (err) {
+            console.log('==== checkLessonAccess ERROR', err);
+          } else {
+            console.log(lesson)
+            if (!lesson.available) vm.noAccessShow();
+            vm.lessonData = lesson;
+          }
+        });
       }
 
     });
@@ -75,10 +64,7 @@ class TrainingLesson {
   }
 
   changeTasks () {
-    data = {
-      lesson: parseInt(this.$stateParams.number),
-      fullInfo: this.user.profile.couching.lessons[this.$stateParams.number - 1]
-    }
+    data = this.lessonData;
     Meteor.call('saveComment', data, (err, res) => {
       if (err) {
         console.log('==== saveComment ERROR', err);

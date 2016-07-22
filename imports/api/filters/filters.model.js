@@ -17,7 +17,8 @@ Schema.Filters = new SimpleSchema({
     type: Boolean
   },
   name: {
-    type: String
+    type: String,
+    optional: true
   },
   user: {
     type: Object
@@ -27,6 +28,34 @@ Schema.Filters = new SimpleSchema({
   },
   'user.phone':{
     type: String
+  },
+  isBullet: {
+    type: Boolean,
+    optional: true
+  },
+  bullet: {
+    type: Object,
+    optional: true
+  },
+  'bullet.type': {
+    type: Number,
+    optional: true
+  },
+  'bullet.warhead': {
+    type: Number,
+    optional: true
+  },
+  'bullet.dealSpeed': {
+    type: Number,
+    optional: true
+  },
+  'bullet.price': {
+    type: Number,
+    optional: true
+  },
+  'bullet.qty': {
+    type: Number,
+    optional: true
   }
 });
 

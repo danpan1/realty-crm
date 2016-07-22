@@ -1,7 +1,7 @@
 //// возможно customers и users это одно и то же
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {CouchingSchema} from '../imports/api/users/schemas/couching.schema';
+//import {CouchingSchema} from '../imports/api/users/schemas/couching.schema';
 //import {OperatorSchema} from '../imports/api/users/schemas/operator.schema';
 var Schema = {};
 
@@ -124,10 +124,10 @@ Schema.Users = new SimpleSchema({
     type: Boolean,
     optional: true
   },
-  'profile.couching': {
-    type: CouchingSchema,
-    optional: true
-  },
+  //'profile.couching': {
+  //  type: CouchingSchema,
+  //  optional: true
+  //},
   takenRealty: {
     type: Number,
     optional: true

@@ -6,8 +6,33 @@ Meteor.methods({
   addFilter,
   removeFilter,
   changeFilter,
-  changeFilterSms
+  changeFilterSms,
+  findUserBullets
 });
+
+export function findUserBullets() {
+
+  if (Meteor.isServer && this.userId) {
+
+    let bullets = Filters.find({
+      'user.id': this.userId,
+      'isBullet': true
+    }).fetch();
+
+    console.log('bullets');
+    console.log(bullets);
+
+    if (bullets) {
+      return bullets;
+    } else {
+      return false;
+    }
+    
+  } else {
+   console.log('no Access');
+  }
+
+}
 
 export function addFilter(filter) {
 
@@ -38,6 +63,7 @@ export function addFilter(filter) {
   }
 
 }
+
 export function changeFilter(data) {
 
   console.log('========= changeFilter');
@@ -54,6 +80,10 @@ export function changeFilter(data) {
       filter: data.filter,
       name: data.name
     };
+    if (data.bullet) { // Если это пуля, обновляем данные
+      console.log(data.bullet);
+      newParams.bullet = data.bullet
+    }
     
     Filters.update({_id: data._id}, {
       $set: newParams

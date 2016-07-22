@@ -72,7 +72,10 @@ export function addUsersToRoleCouching(userEmail) {
     if (user) {
       Roles.addUsersToRoles(user._id, 'couching');
       console.log('userAddedToCouching');
-      return 'Пользователь добавлен в студенты';//Meteor.users.findOne({'emails.address': userEmail});
+      return {
+        text: 'Пользователь добавлен в студенты',
+        id:user._id //Meteor.users.findOne({'emails.address': userEmail});
+      }
     } else {
       console.log('user not found');
       return 'Пользователь не найден';

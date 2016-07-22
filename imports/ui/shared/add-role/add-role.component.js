@@ -35,7 +35,14 @@ class AddRole {
           }, 0);
         } else {
           this.timeout(()=> {
-            this.resultSale = result;
+            this.resultSale = result.text;
+            Meteor.call('insertLessons', result.id, (err, result)=> {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log(result);
+              }
+            });
           }, 0);
         }
       });

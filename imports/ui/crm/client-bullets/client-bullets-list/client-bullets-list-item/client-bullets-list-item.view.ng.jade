@@ -1,0 +1,7 @@
+div().m-16
+    p().md-body-1.mv-8 
+        span(ng-if='clientBulletsListItem.bullet.filter.subways' ng-repeat='subway in clientBulletsListItem.bullet.filter.subwaysNames') {{subway}}
+            span(ng-if='$index < clientBulletsListItem.bullet.filter.subways.length - 1') ,
+        span(ng-if='clientBulletsListItem.bullet.filter.districts' ng-repeat='district in clientBulletsListItem.bullet.filter.districtsNames') {{district}}
+            span(ng-if='$index < clientBulletsListItem.bullet.filter.districts.length - 1') ,
+         
