@@ -32,11 +32,12 @@ class ClientBulletsChange {
             name: '',
             bullet: {
               qty: 5,
-              dealSpeed: 0,
+              dealSpeed: 1,
               type: 0,
               warhead: 0
             }
           }
+          this.bulletCost();
         // }
       }
     });
@@ -46,13 +47,16 @@ class ClientBulletsChange {
     let bulletPrice = 0; // Определяем цену
     console.log(this.oneBullet.bullet.dealSpeed);
     console.log(this.oneBullet.bullet.warhead);
-    switch (this.oneBullet.bullet.dealSpeed) {
-      case '0': bulletPrice += 150; break;
-      case '1': bulletPrice += 500; break;
-      case '2': bulletPrice += 1000; break;
+    switch (parseInt(this.oneBullet.bullet.dealSpeed)) {
+      case 0: bulletPrice += 150; break;
+      case 1: bulletPrice += 500; break;
+      case 2: bulletPrice += 1000; break;
     }
     bulletPrice += this.oneBullet.bullet.warhead == 0 ? 100 : 500;
     this.oneBullet.bullet.price = bulletPrice;
+
+    this.fullPrice = (bulletPrice + 150) * this.oneBullet.bullet.qty;
+
   }
 
   fillHolder () {
@@ -62,12 +66,12 @@ class ClientBulletsChange {
 
     //this.oneBullet.bullet.qty = 0; // Количество пуль по умолчанию
 
-    this.oneBullet.name = 'Экономки ';
+    this.oneBullet.name = `${this.oneBullet.bullet.type+1}-к экономки `;
     this.oneBullet.name += this.oneBullet.bullet.warhead == 0 ? 'с встречей' : 'с комиссией';
-    switch (this.oneBullet.bullet.dealSpeed) {
-      case '0': this.oneBullet.name += ' на стандартной'; break;
-      case '1': this.oneBullet.name += ' на быстрой'; break;
-      case '2': this.oneBullet.name += ' на максимальной'; break;
+    switch (parseInt(this.oneBullet.bullet.dealSpeed)) {
+      case 0: this.oneBullet.name += ' на стандартной'; break;
+      case 1: this.oneBullet.name += ' на быстрой'; break;
+      case 2: this.oneBullet.name += ' на максимальной'; break;
     }
     this.oneBullet.name += ' скорости';
 

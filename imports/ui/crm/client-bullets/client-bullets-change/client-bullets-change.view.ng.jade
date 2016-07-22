@@ -10,7 +10,7 @@ div().realty-filter.pl-32.pr-16
         districts-embeded='clientBulletsChange.oneBullet.filter.districtsEmbeded' flex)
     div(layout='row')
         div(layout='column' flex='30' layout-align='start start')
-            div.text-bold.mv-16 Скорость сделки
+            div.text-bold.mv-16 Выберите количество комнат
             md-radio-group(ng-change='clientBulletsChange.bulletCost()' ng-model="clientBulletsChange.oneBullet.bullet.type")
                 md-radio-button(value="0").md-primary 
                     span 1-к 
@@ -22,12 +22,12 @@ div().realty-filter.pl-32.pr-16
                     span 3-к 
                     span.ml-16 45000 - 90000
         div(layout='column' flex='30' flex-offset='5' layout-align='start start').pb-16
-            div.text-bold.mv-16 Скорость сделки
+            div.text-bold.mv-16 Выберите боеголовку
             md-radio-group(ng-change='clientBulletsChange.bulletCost()' ng-model="clientBulletsChange.oneBullet.bullet.warhead")
                 md-radio-button(value="0").md-primary Собственник готов на встречу - 100Р
                 md-radio-button(value="1").md-primary Собственник платит комиссию - 500Р
         div(layout='column' flex='30' flex-offset='5' layout-align='start start')
-            div.text-bold.mv-16 Скорость сделки
+            div.text-bold.mv-16 Выберите скорость сделки
             md-radio-group(ng-change='clientBulletsChange.bulletCost()' ng-model="clientBulletsChange.oneBullet.bullet.dealSpeed")
                 md-radio-button(value="0").md-primary Стандартная - 150Р
                 md-radio-button(value="1").md-primary Быстраяя - 500Р
@@ -38,8 +38,11 @@ div().realty-filter.pl-32.pr-16
             md-input-container(flex='15').md-block.form-required.m-0
                 md-select(ng-model='clientBulletsChange.oneBullet.bullet.qty' aria-label='Количество пуль')
                     md-option(ng-repeat='qty in [1,2,3,4,5,6,7,8,9,10]' ng-value='qty') {{qty}}
+        div(layout='row')
+            p(flex='50') На звонки и SMS 
+            P(flex='50') 150Р
         div(layout='column' layout-align='center center')
-            div.md-title.mv-16 Итого: {{clientBulletsChange.oneBullet.bullet.qty * clientBulletsChange.oneBullet.bullet.price || 0}}
+            div.md-title.mv-16 Итого: {{clientBulletsChange.fullPrice}}
         div(layout='column').mv-8
             md-button(ng-disabled='clientBulletsChange.savingInProgress' ng-click='clientBulletsChange.fillHolder()').w-100.md-warn.md-raised.ph-16.ml-0 Зарядить обойму
             md-button(ui-sref='crm.client-bullets.list').w-100.md-primary.ph-16 Отмена

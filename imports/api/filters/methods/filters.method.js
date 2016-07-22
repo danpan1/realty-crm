@@ -6,11 +6,11 @@ Meteor.methods({
   addFilter,
   removeFilter,
   changeFilter,
-  changeFilterSms,
-  findUserBullets
+  changeFilterSms/*,
+  findUserBullets*/
 });
 
-export function findUserBullets() {
+/*export function findUserBullets() {
 
   if (Meteor.isServer && this.userId) {
 
@@ -32,7 +32,7 @@ export function findUserBullets() {
    console.log('no Access');
   }
 
-}
+}*/
 
 export function addFilter(filter) {
 

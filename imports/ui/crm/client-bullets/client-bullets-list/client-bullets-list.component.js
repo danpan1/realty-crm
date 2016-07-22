@@ -26,30 +26,27 @@ class ClientBulletsList {
       console.log('user: ', user)
       if (user) {
         vm.user = user;
-        Meteor.call('findUserBullets', (err, userBullets) => {
-          if (err) console.log('err:',err);
-          else {
-            this.$timeout( () => {
-              this.bullets = userBullets;
-            },100)
-            /*for(var ub in userBullets){
-              for (var i in this.bullets) {
-                console.log(userBullets[ub].name + ' ? ' + this.bullets[i].name)
-                if (userBullets[ub].name == this.bullets[i].name) {
-                  this.$timeout(() => {
-                    this.bullets[i].filter = userBullets[ub].filter;
-                    this.bullets[i].bullet = userBullets[ub].bullet;
-                    this.bullets[i].isBullet = userBullets[ub].isBullet;
-                    this.bullets[i].isActive = userBullets[ub].bullet.qty > 0 ? true : false;
-                    this.bullets[i]._id = userBullets[ub]._id;
-                    console.log(this.bullets[i]._id);
-                  },10)
-                }
-              }
-            }*/
-          }
-        })
+        //Meteor.call('findUserBullets', (err, userBullets) => {
+        //  if (err) console.log('err:',err);
+        //  else {
+        //    this.$timeout( () => {
+        //      this.bullets = userBullets;
+        //    },100)
+        //  }
+        //})
 
+      }
+    });
+
+    vm.subscribe('myBullets', () => {
+      this.loaded = false;
+      return [];
+    }, {
+      onReady: function () {
+        vm.$timeout(()=>{
+          this.bullets = Filters.find().fetch();
+          this.loaded = true;
+        })  
       }
     });
 
