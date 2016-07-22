@@ -64,7 +64,7 @@ export function saveComment(data) {
     
     Couching.update({
       userId: Meteor.userId(), 
-      number: data.number
+      lessonNumber: data.lessonNumber
     }, {
       $set: {
         done: data.done,
