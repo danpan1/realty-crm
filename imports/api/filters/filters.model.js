@@ -1,4 +1,3 @@
-
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
@@ -23,10 +22,10 @@ Schema.Filters = new SimpleSchema({
   user: {
     type: Object
   },
-  'user.id':{
+  'user.id': {
     type: String
   },
-  'user.phone':{
+  'user.phone': {
     type: String
   },
   isBullet: {
@@ -55,6 +54,10 @@ Schema.Filters = new SimpleSchema({
   },
   'bullet.qty': {
     type: Number,
+    optional: true
+  },
+  payDate: {
+    type: Date,
     optional: true
   }
 });
