@@ -13,7 +13,7 @@ div(md-whiteframe='1').sub-tabbar
                 div().one-review-advert__content Первая неделя 362Р
                 div().one-review-advert__content Последующие 192Р
                 div().one-review-advert__content За месяц 1000Р
-                md-button(ng-click='oneReviewAdvert.choosePlan(1)').md-primary {{(oneReviewAdvert.realty.advert.currentWeek.plan === 1) ? 'Выбрано Выбрано' : "Выбрать" }}
+                md-button(ng-click='oneReviewAdvert.choosePlan(0)').md-primary {{(oneReviewAdvert.realty.advert.currentWeek.plan === 1) ? 'Выбрано Выбрано' : "Выбрать" }}
             div().one-review-advert__ads-box
                 div().one-review-advert__checkbox-container
                     md-checkbox(aria-label='Checkbox 1' ng-model='oneReviewAdvertAvito.params.vip').md-primary
@@ -23,7 +23,7 @@ div(md-whiteframe='1').sub-tabbar
                 div().one-review-advert__content Первая неделя 1407Р
                 div().one-review-advert__content Последующие 1007Р
                 div().one-review-advert__content За месяц 4500Р
-                md-button(ng-click='oneReviewAdvert.choosePlan(2)').md-primary {{(oneReviewAdvert.realty.advert.currentWeek.plan === 2) ? 'Выбрано Выбрано' : "Выбрать" }}
+                md-button(ng-click='oneReviewAdvert.choosePlan(1)').md-primary {{(oneReviewAdvert.realty.advert.currentWeek.plan === 2) ? 'Выбрано Выбрано' : "Выбрать" }}
             div().one-review-advert__ads-box
                 div().one-review-advert__checkbox-container
                     md-checkbox(aria-label='Checkbox 1' ng-model='oneReviewAdvertAvito.params.select').md-primary
@@ -33,7 +33,7 @@ div(md-whiteframe='1').sub-tabbar
                 div().one-review-advert__content Первая неделя 4000Р
                 div().one-review-advert__content Последующие 1607Р
                 div().one-review-advert__content За месяц 8800Р
-                md-button(ng-click='oneReviewAdvert.choosePlan(3)').md-primary {{(oneReviewAdvert.realty.advert.currentWeek.plan === 3) ? 'Выбрано Выбрано' : "Выбрать" }}
+                md-button(ng-click='oneReviewAdvert.choosePlan(2)').md-primary {{(oneReviewAdvert.realty.advert.currentWeek.plan === 3) ? 'Выбрано Выбрано' : "Выбрать" }}
         div(layout='row' layout-align='start start').p-16
             table(flex='100').table-bordered.profile__table.m-8.w-100
                 tr(ng-repeat='line in oneReviewAdvert.hardCode')
