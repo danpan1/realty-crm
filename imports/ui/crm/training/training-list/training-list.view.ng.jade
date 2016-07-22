@@ -9,7 +9,7 @@ div(layout-wrap layout='row').mv-16
                     img(src='img/icons/kubok.jpg').training__icon
                     div().training__lesson-descr.mt-0.ml-8 
                         div Результат: 
-                        ul.p-0.mt-8
+                        ul.card.p-0.mt-8
                             li(ng-repeat='result in lesson.tasks') {{result.title}}
             section(flex='40').p-4.pt-8
                 img(ng-src='{{lesson.picture}}')

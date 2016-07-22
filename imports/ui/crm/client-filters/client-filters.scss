@@ -53,6 +53,9 @@ realty-new-list-filter {
     margin: 0 auto;
     padding: 0;
     overflow-y: auto;
+    &-bullets{
+      position: absolute !important;
+    }
   }
   &__inner {
   }
