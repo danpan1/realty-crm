@@ -12,7 +12,7 @@ Schema.Couching = new SimpleSchema({
   userId:{
     type: String
   },
-  number: {
+  lessonNumber: {
     type: Number,
     optional: true
   },

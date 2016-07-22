@@ -36,7 +36,7 @@ div().realty-filter.pl-32.pr-16
         div(layout='row') 
             p(flex='50') Количество пуль
             md-input-container(flex='15').md-block.form-required.m-0
-                md-select(ng-model='clientBulletsChange.oneBullet.bullet.qty' aria-label='Количество пуль')
+                md-select(ng-change='clientBulletsChange.bulletCost()' ng-model='clientBulletsChange.oneBullet.bullet.qty' aria-label='Количество пуль')
                     md-option(ng-repeat='qty in [1,2,3,4,5,6,7,8,9,10]' ng-value='qty') {{qty}}
         div(layout='row')
             p(flex='50') На звонки и SMS 

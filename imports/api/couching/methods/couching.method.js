@@ -23,7 +23,7 @@ export function insertLessons (id) {
       for(var i = 1; i < 7; i++) {
         Couching.insert({
           userId: id, 
-          number: i,
+          lessonNumber: i,
           done: false,
           available: i == 1 ? true : false,
           tasks: [{
@@ -32,6 +32,18 @@ export function insertLessons (id) {
             comment: ''
           }, {
             id: 2,
+            done: false,
+            comment: ''
+          }, {
+            id: 3,
+            done: false,
+            comment: ''
+          }, {
+            id: 4,
+            done: false,
+            comment: ''
+          }, {
+            id: 5,
             done: false,
             comment: ''
           }]
@@ -74,7 +86,7 @@ export function checkLessonAccess(num) {
 
     let lesson = Couching.findOne({
       userId: Meteor.userId(), 
-      number: parseInt(num)
+      lessonNumber: parseInt(num)
     });
 
     console.log(lesson);

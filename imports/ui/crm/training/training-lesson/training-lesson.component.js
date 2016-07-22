@@ -4,7 +4,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
-import {lessons} from './training-lessons-array.js'
+import {lessons} from '../training-array.js'
 
 import './training-lesson.view.html';
 
