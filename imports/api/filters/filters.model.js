@@ -37,7 +37,7 @@ Schema.Filters = new SimpleSchema({
     type: Object,
     optional: true
   },
-  'bullet.type': {
+  'bullet.type': { // 1,2,3 (количество комнат)
     type: Number,
     optional: true
   },
@@ -49,7 +49,7 @@ Schema.Filters = new SimpleSchema({
     type: Number,
     optional: true
   },
-  'bullet.price': {
+  'bullet.price': { // Цена Одной пули для пополнения через список
     type: Number,
     optional: true
   },

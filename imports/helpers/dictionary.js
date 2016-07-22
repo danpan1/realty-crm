@@ -25,6 +25,11 @@ export const dictionary = {
     {id: 1, name: '2-к 35000 - 60000'},
     {id: 2, name: '3-к 45000 - 90000'}
   ],
+  bulletPrice: [
+    {id: 0, name: '1-к 30000 - 50000'},
+    {id: 1, name: '2-к 35000 - 60000'},
+    {id: 2, name: '3-к 45000 - 90000'}
+  ],
   clientStatuses: ['archive', 'realtor', 'hot'],
   composition: [
     {id: 0, name: 'Для всех', cianId : 1},
