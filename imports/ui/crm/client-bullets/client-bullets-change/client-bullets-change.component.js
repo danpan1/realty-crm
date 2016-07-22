@@ -33,10 +33,10 @@ class ClientBulletsChange {
           filter: {},
           name: '',
           bullet: {
-            qty: 5,
+            qty: 3,
             dealSpeed: 1,
             type: 0,
-            warhead: 0
+            warhead: 1
           }
         }
         this.bulletCost();
