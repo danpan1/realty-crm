@@ -13,6 +13,7 @@ class TrainingLesson {
   constructor($scope, $reactive, $http, $mdDialog, $timeout, $state, $stateParams) {
     $reactive(this).attach($scope);
     let vm = this;
+    this.$timeout = $timeout;
     vm.lessonData = {};
     this.$stateParams = $stateParams;
     this.mdDialog = $mdDialog;
@@ -29,7 +30,9 @@ class TrainingLesson {
           } else {
             console.log(lesson)
             if (!lesson.available) vm.noAccessShow();
-            vm.lessonData = lesson;
+            this.$timeout(()=>{
+              vm.lessonData = lesson;
+            },100)
           }
         });
       }
