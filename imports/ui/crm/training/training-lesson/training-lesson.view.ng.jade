@@ -40,6 +40,9 @@ div(ng-if='trainingLesson.lessonData.lessonNumber')
             md-input-container(flex='100').mv-0.zh
                 label Опишите Ваш результат
                 textarea(ng-model='task.comment', required='' ng-blur='trainingLesson.changeTasks()')
+        div(ng-if='task.done' layout='row').m-16
+            md-button(ng-click='trainingLesson.changeTasks()').md-raised.md-primary Сохранить
+
     //div(style="width:665px; margin: 0 auto;")
         div(style="position:absolute; width:25px; height:25px; background:#F7F7F7; z-index: 10000; margin: 112px 0 0 167px;")
         div(id="vk_comments")
