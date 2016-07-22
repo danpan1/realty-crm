@@ -5,7 +5,7 @@ div(md-whiteframe="1")
             md-input-container(flex='40').ml-16
                 md-select(ng-model='realtyNewList.filterType' aria-label='Тип фильтра' ng-change='realtyNewList.suitRealty()')
                     md-option(ng-value='type.id' ng-repeat='type in realtyNewList.dictionary.filterType') {{type.name}}
-            md-button(md-no-ink ui-sref='crm.client-bullets.list').realty-new-list__link Сохраненные пули
+            md-button(md-no-ink ui-sref='crm.client-bullets.list').realty-new-list__link Купить ПУЛИ
         md-input-container(flex='25')
             md-select(ng-model='realtyNewList.filterCity' aria-label='Выбрать город')
                 md-option(ng-value='0') Москва

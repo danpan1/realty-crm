@@ -24,18 +24,9 @@ class ClientBulletsList {
 
     this.autorun(function () {
       let user = Meteor.user();
-      console.log('user: ', user)
+      console.log('user: ', user);
       if (user) {
         vm.user = user;
-        //Meteor.call('findUserBullets', (err, userBullets) => {
-        //  if (err) console.log('err:',err);
-        //  else {
-        //    this.$timeout( () => {
-        //      this.bullets = userBullets;
-        //    },100)
-        //  }
-        //})
-
       }
     });
 
@@ -64,26 +55,11 @@ class ClientBulletsList {
         this.bulletCost = bullet.bullet.price;
       }
 
-      /*bulletCost () {
-        let bulletPrice = 0; // Определяем цену
-        console.log(bullet.bullet.dealSpeed);
-        console.log(bullet.bullet.warhead);
-        switch (parseInt(bullet.bullet.dealSpeed)) {
-          case 0: bulletPrice += 150; break;
-          case 1: bulletPrice += 500; break;
-          case 2: bulletPrice += 1000; break;
-        }
-        bulletPrice += bullet.bullet.warhead == 0 ? 100 : 500;
-
-        return (bulletPrice + 150) * this.oneBullet.bullet.qty;
-
-      }*/
-
       buyBullets(qty) {
 
         let type = 2;
         let filterId = bullet._id;
-        let summ = bullet.bullet.price * qty;
+        let summ = bullet.bullet.price * qty + 150 * qty;
 
         console.log('Request to RoboKassa: пополнить пули ' + qty + ' rubles');
         let description = 'пополнить пули на ' + qty;

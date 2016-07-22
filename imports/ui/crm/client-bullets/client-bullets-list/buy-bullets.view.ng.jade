@@ -18,5 +18,5 @@ md-dialog.subscription-dialog(aria-label='Оплата подписки')
                 div(layout='row' layout-align='center center')
                     h3.p-8 Смс и телефон : 150р за пулю
                 div(layout='row' layout-align='center center')
-                    h3.p-8 Итого {{buyBullets.bulletsQty * buyBullets.bulletCost }}
+                    h3.p-8 Итого {{buyBullets.bulletsQty * buyBullets.bulletCost + buyBullets.bulletsQty*150 }}
                 md-button.md-raised.mv-16.ph-16(flex='', ng-click='buyBullets.buyBullets(buyBullets.bulletsQty)') Оплатить
