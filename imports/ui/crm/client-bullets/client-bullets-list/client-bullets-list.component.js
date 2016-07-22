@@ -36,12 +36,16 @@ class ClientBulletsList {
     }, {
       onReady: function () {
         vm.$timeout(()=> {
-          this.bullets = Filters.find().fetch();
           this.loaded = true;
-        })
+        });
       }
     });
 
+    vm.helpers({
+      bullets: () => {
+        return Filters.find();
+      }
+    });
   }
 
   fillHolder(bullet) {
