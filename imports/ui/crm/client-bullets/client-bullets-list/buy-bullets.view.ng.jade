@@ -9,14 +9,14 @@ md-dialog.subscription-dialog(aria-label='Оплата подписки')
         .md-dialog-content.pv-16
             div(layout='column')
                 div(layout='row' layout-align='center center')
-                    h3.p-8 Стоимость пули: {{buyBullets.bulletCost}}₽
+                    h3.m-0 Стоимость пули: {{buyBullets.bulletCost}}₽
                 div(layout='row' layout-align='center center')
-                    md-input-container(flex='65').md-block.form-required.m-0
+                    h3.m-0 Смс и телефон: 150₽
+                div(layout='row' layout-align='center center')
+                    md-input-container(flex='70').md-block.form-required.mt-32
                         label Количество пуль
                         md-select(required ng-model='buyBullets.bulletsQty' aria-label='Количество пуль')
                             md-option(ng-repeat='qty in [1,2,3,4,5,6,7,8,9,10]' ng-value='qty') {{qty}}
                 div(layout='row' layout-align='center center')
-                    h3.p-8 Смс и телефон : 150₽ за пулю
-                div(layout='row' layout-align='center center')
-                    h3.p-8 Итого: {{buyBullets.bulletsQty * buyBullets.bulletCost + buyBullets.bulletsQty*150 }}₽
+                    h3(style = 'font-size : 20px').p-8 Итого: {{buyBullets.bulletsQty * buyBullets.bulletCost + buyBullets.bulletsQty*150 }}₽
                 md-button.md-raised.mv-16.ph-16(flex='', ng-click='buyBullets.buyBullets(buyBullets.bulletsQty)') Оплатить
