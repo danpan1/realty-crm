@@ -4,7 +4,7 @@
     height: 18px;
   }
   &__lesson{
-    height: 165px;
+    min-height: 163px;
     overflow: hidden;
     cursor: pointer;
     &-descr{
@@ -21,6 +21,13 @@
       margin: 8px 0 !important;
       line-height: 31px;
       min-height: 38px;
+    }
+    & ul {
+      & li {
+        font-size: 12px;
+        line-height: 20px;
+        white-space: nowrap;
+      }
     }
   }
 }

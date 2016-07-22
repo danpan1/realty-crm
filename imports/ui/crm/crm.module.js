@@ -25,6 +25,7 @@ import {name as addRole} from '/imports/ui/shared/add-role/add-role.component';
 import {name as addRoleOperator} from '/imports/ui/shared/add-role/add-role-operator.component';
 import {name as videoTutorial} from '/imports/ui/crm/video-tutorial/video-tutorial.component';
 import {name as ClientFilters} from '/imports/ui/crm/client-filters/client-filters.component';
+import {name as ClientBullets} from '/imports/ui/crm/client-bullets/client-bullets.component';
 
 const moduleName = 'app.crm';
 // create a module
@@ -49,5 +50,6 @@ export default angular.module(moduleName, [
   Feedback,
   Training,
   Profile,
-  ClientFilters
+  ClientFilters,
+  ClientBullets
 ]).config(routes);

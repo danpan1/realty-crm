@@ -4,6 +4,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
+import {lessons} from '../training-array.js'
 
 import './training-list.view.html';
 
@@ -14,56 +15,7 @@ class TrainingList {
     this.$state = $state;
     let vm = this;
     
-    this.lessons = [
-      {
-        number:1,
-        title:'Быстрый старт',
-        descr:'Текст текст текст текст текст текст текст текст текст текст текст текст текст',
-        picture:'img/common/training1.jpg',
-        done: false,
-        available: true
-      },
-      {
-        number:2,
-        title:'Поиск объектов',
-        descr:'Текст текст текст текст текст текст текст текст текст текст текст текст текст',
-        picture:'img/common/training2.jpg',
-        done: false,
-        available: false
-      },
-      {
-        number:3,
-        title:'Реклама',
-        descr:'Текст текст текст текст текст текст текст текст текст текст текст текст текст',
-        picture:'img/common/training3.jpg',
-        done: false,
-        available: false
-      },
-      {
-        number:4,
-        title:'Эффективные действия',
-        descr:'Текст текст текст текст текст текст текст текст текст текст текст текст текст',
-        picture:'img/common/training4.jpg',
-        done: false,
-        available: false
-      },
-      {
-        number:5,
-        title:'Встречи и заключение сделок',
-        descr:'Текст текст текст текст текст текст текст текст текст текст текст текст текст',
-        picture:'img/common/training5.jpg',
-        done: false,
-        available: false
-      },
-      {
-        number:6,
-        title:'Регулярный рост и системные действия',
-        descr:'Текст текст текст текст текст текст текст текст текст текст текст текст текст',
-        picture:'img/common/training6.jpg',
-        done: false,
-        available: false
-      }
-    ]
+    this.lessons = lessons;
 
   }
 

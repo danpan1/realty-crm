@@ -36,4 +36,17 @@ if (Meteor.isServer) {
 
       return Filters.find(selector, options);
   });
+
+  Meteor.publish('myBullets', function () {
+
+      let selector = {
+        'user.id': this.userId,
+        'isBullet': true
+      };
+      
+      let options = {}
+
+      return Filters.find(selector, options);
+  });
+  
 }

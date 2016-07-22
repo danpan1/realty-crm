@@ -1,4 +1,3 @@
-
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
@@ -17,16 +16,49 @@ Schema.Filters = new SimpleSchema({
     type: Boolean
   },
   name: {
-    type: String
+    type: String,
+    optional: true
   },
   user: {
     type: Object
   },
-  'user.id':{
+  'user.id': {
     type: String
   },
-  'user.phone':{
+  'user.phone': {
     type: String
+  },
+  isBullet: {
+    type: Boolean,
+    optional: true
+  },
+  bullet: {
+    type: Object,
+    optional: true
+  },
+  'bullet.type': { // 1,2,3 (количество комнат)
+    type: Number,
+    optional: true
+  },
+  'bullet.warhead': {
+    type: Number,
+    optional: true
+  },
+  'bullet.dealSpeed': {
+    type: Number,
+    optional: true
+  },
+  'bullet.price': { // Цена Одной пули для пополнения через список
+    type: Number,
+    optional: true
+  },
+  'bullet.qty': {
+    type: Number,
+    optional: true
+  },
+  payDate: {
+    type: Date,
+    optional: true
   }
 });
 
