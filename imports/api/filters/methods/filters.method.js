@@ -44,19 +44,21 @@ export function addFilter(filter) {
     
     let newFilter = filter;
     newFilter.isActive = true;
+    newFilter.bullet.qty = 0;
 
     // get userId
     if (!this.userId || this.userId != filter.user.id) return 'Пользователь не найден';
 
     console.log(newFilter);
 
-    Filters.insert(newFilter, (error, result) => {
+    let id = Filters.insert(newFilter, (error, result) => {
       if (error) {
         console.log(error);
       } else {
         console.log(`Filter added`);
       }
     });
+    return id;
     
   } else {
     console.log('no Access');

@@ -37,6 +37,7 @@ export function replenishTheBalance(summ, description, bulletQty, type, filterId
     let invoice = {
       _id: id,
       createDate: new Date(),
+      balanceSmsPhone: bulletQty * 150,
       bulletQty: bulletQty,
       type: type,
       filterId: filterId,
