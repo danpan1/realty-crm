@@ -9,6 +9,18 @@ const roboSchema = new SimpleSchema({
   _id: {
     type: String
   },
+  balanceSmsPhone: {
+    type: Number,
+    optional: true,
+  },
+  bulletQty: {
+    type: Number,
+    optional: true,
+  },
+  filterId: {
+    type: String,
+    optional: true,
+  },
   createDate: {
     type: Date
   },
@@ -18,6 +30,10 @@ const roboSchema = new SimpleSchema({
   summ: {
     type: Number,
     decimal: true
+  },
+  type: { //2 это Зарядить обойму
+    type: Number,
+    optional: true,
   },
   userId: {
     type: String

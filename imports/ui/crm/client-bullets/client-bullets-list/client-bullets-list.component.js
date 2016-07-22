@@ -4,6 +4,7 @@ import {Locations} from '/imports/api/locations';
 import {dictionary} from '/imports/helpers/dictionary';
 import {Filters} from '/imports/api/filters'
 import {name as ClientBulletsListItem} from './client-bullets-list-item/client-bullets-list-item.component';
+import {Meteor} from 'meteor/meteor';
 
 //import {bullets} from '../client-bullets-array.js'
 
@@ -20,7 +21,7 @@ class ClientBulletsList {
     const vm = this;
     this.dictionary = dictionary;
     this.bullets = [];
-    
+
     this.autorun(function () {
       let user = Meteor.user();
       console.log('user: ', user)
@@ -43,29 +44,57 @@ class ClientBulletsList {
       return [];
     }, {
       onReady: function () {
-        vm.$timeout(()=>{
+        vm.$timeout(()=> {
           this.bullets = Filters.find().fetch();
           this.loaded = true;
-        })  
+        })
       }
     });
 
   }
 
-  fillHolder (num) {
+  fillHolder(bullet) {
+    console.log(bullet);
     let vm = this;
-
     class bulletsPurchasing {
 
-      constructor() {
+      constructor($window) {
+        this.$window = $window
         this.bulletsQty = 5;
-        this.bulletCost = vm.bullets[num].bullet.price;
-      }   
+        this.bulletCost = bullet.bullet.price;
+      }
 
-      buyBullets (qty) {
-        
-        alert('Вы решили купить ' + qty + ' пуль');
-        vm.mdDialog.cancel();
+      /*bulletCost () {
+        let bulletPrice = 0; // Определяем цену
+        console.log(bullet.bullet.dealSpeed);
+        console.log(bullet.bullet.warhead);
+        switch (parseInt(bullet.bullet.dealSpeed)) {
+          case 0: bulletPrice += 150; break;
+          case 1: bulletPrice += 500; break;
+          case 2: bulletPrice += 1000; break;
+        }
+        bulletPrice += bullet.bullet.warhead == 0 ? 100 : 500;
+
+        return (bulletPrice + 150) * this.oneBullet.bullet.qty;
+
+      }*/
+
+      buyBullets(qty) {
+
+        let type = 2;
+        let filterId = bullet._id;
+        let summ = bullet.bullet.price * qty;
+
+        console.log('Request to RoboKassa: пополнить пули ' + qty + ' rubles');
+        let description = 'пополнить пули на ' + qty;
+        Meteor.call('replenishTheBalance', summ, description, qty, type, filterId, (err, res)=> {
+          if (err) {
+            this.error = err;
+            return;
+          }
+          console.log(res);
+          this.$window.open(res, '_self');
+        });
       }
 
       close() {
@@ -73,6 +102,7 @@ class ClientBulletsList {
       }
 
     }
+    bulletsPurchasing.$inject = ['$window'];
 
     this.mdDialog.show({
       controller: bulletsPurchasing,
@@ -84,17 +114,17 @@ class ClientBulletsList {
 
   }
 
-  changeBulletActive () {
+  changeBulletActive() {
 
   }
 
-  newHolder () {
+  newHolder() {
     window.localStorage["changeBullet"] = undefined;
     this.$state.go('crm.client-bullets.change')
   }
 
-  changeHolder (num) {
-    
+  changeHolder(num) {
+
     window.localStorage["changeBullet"] = JSON.stringify(this.bullets[num], function (key, val) {
       if (key == '$$hashKey') {
         return undefined;

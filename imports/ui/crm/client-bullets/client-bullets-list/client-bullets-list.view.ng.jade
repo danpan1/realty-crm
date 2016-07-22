@@ -1,16 +1,16 @@
 div(layout='column')
-    div().text-right.md-body-1.ph-16.pt-32 Получать пули
+    //div().text-right.md-body-1.ph-16.pt-32 Получать пули
     div(ng-repeat='bullet in clientBulletsList.bullets')
         div(ng-class='{"realty-new-list-filter__selected":bullet.show}' ng-init='clientBulletsList.checkSmsIsActive()' ).mv-8.ph-16
             div(layout='row' layout-align='start center')
                 div(flex='40')
                     span().md-subhead.realty-new-list-filter__col {{$index+1}}. {{bullet.name}}
                 div(flex='40' layout='row' layout-align='space-between none').ml-32
-                    md-button(ng-disabled='!bullet.isBullet' ng-click='clientBulletsList.fillHolder($index)').realty-new-list-filter__link пополнить обойму
+                    md-button(ng-disabled='!bullet.isBullet' ng-click='clientBulletsList.fillHolder(bullet)').realty-new-list-filter__link пополнить обойму
                     md-button(ng-click='').realty-new-list-filter__link пуль: {{bullet.bullet.qty || 0}}
                     md-button(ng-click='bullet.shown = !bullet.shown').realty-new-list-filter__link География
                     //md-button(ng-disabled='bullet.bullet.qty > 0' ng-click='clientBulletsList.changeHolder($index)').realty-new-list-filter__link изменить
-                div(layout='row' layout-align='center center' flex flex-offset='5')
+                //div(layout='row' layout-align='center center' flex flex-offset='5')
                     md-switch(aria-label='Switch 2' ng-disabled='true' ng-change='clientBulletsList.changeBulletActive($index)' ng-model='bullet.isActive').md-warn.realty-new-list-filter__sms
             client-bullets-list-item(bullet='bullet' ng-if='bullet.shown')
     div(ng-click='clientBulletsList.newHolder()')
