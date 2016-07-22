@@ -20,6 +20,8 @@ div(md-whiteframe='1').mv-16.ph-32.pv-16
             p(ng-if='oneReviewPhoto.realty.moderator.comment.photo').md-body-1 {{oneReviewPhoto.realty.moderator.comment.photo}}
             p(ng-if='oneReviewPhoto.realty.moderator.percent.photo && oneReviewPhoto.realty.moderator.percent.photo < 60').md-body-1 Закажите профессиональные #[a(href='#') в 2 клика]
 
+one-review-photo-list()
+
 div(md-whiteframe='1' ng-if='oneReviewPhoto.realty.details.images && oneReviewPhoto.realty.details.thumbnails').mv-16
     div(layout='row' layout-wrap ng-init='oneReviewPhoto.findMainImage(oneReviewPhoto.realty.image)')
         div(flex='25' ng-repeat='image in oneReviewPhoto.realty.details.thumbnails')

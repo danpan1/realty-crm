@@ -12,10 +12,11 @@ import './one-info.view.html';
 
 class OneInfo {
   /* @ngInject */
-  constructor($scope, $reactive, $state, $stateParams, $mdDialog, $mdToast) {
+  constructor($scope, $reactive, $state, $timeout, $stateParams, $mdDialog, $mdToast) {
     $reactive(this).attach($scope);
     this.dictionary = dictionary;
     this.state = $state;
+    this.$timeout = $timeout;
     this.mdDialog = $mdDialog;
     //this.mdToast = $mdToast;
     this.realty = Realty.findOne({_id: $stateParams.realtyId});
@@ -26,31 +27,28 @@ class OneInfo {
     };
     this.editDialogShow = false;
     this.currentConditions = [];
-    for (var i in dictionary.conditions) {
-      this.currentConditions[i] = {};
-    }
-
-    if (this.realty.details.conditions) {
-      this.setActiveConditions(this.realty.details.conditions);
-    }
 
     this.helpers({
       realty: () => {
         return Realty.findOne({_id: $stateParams.realtyId});
       }
     });
+    function setConditions () {
+      if (this.realty) {
+        for (var i in dictionary.conditions) {
+          this.currentConditions[i] = {};
+        }
+        if (this.realty.details.conditions) {
+          this.setActiveConditions(this.realty.details.conditions);
+        }
+      } else {
+        this.$timeout(() => {
+          setConditions();
+        }, 100);
+      }
+    }
     
   }
-  
-  /*showSimpleToast () {
-    this.mdToast.show(
-      this.mdToast.simple()
-        .textContent('Готово!')
-        .position('top right')
-        .hideDelay(3000)
-        .action('ОК')
-    );
-  };*/
 
   archive(realty) {
     if (realty == this.realty) {

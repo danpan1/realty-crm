@@ -1,6 +1,7 @@
 //// возможно customers и users это одно и то же
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {CouchingSchema} from '../imports/api/users/schemas/couching.schema';
 //import {OperatorSchema} from '../imports/api/users/schemas/operator.schema';
 var Schema = {};
 
@@ -47,6 +48,10 @@ Schema.Users = new SimpleSchema({
     decimal: true,
     optional: true
   },
+  'profile.city': {
+    type: String,
+    optional: true
+  },
   'profile.getSmsPremiumObjects': {
     type: Boolean,
     optional: true
@@ -66,6 +71,10 @@ Schema.Users = new SimpleSchema({
     type: String,
     optional: true
   },
+  'profile.photo': {
+    type: Boolean,
+    optional: true
+  },
   'profile.subways': {
     type: Object,
     optional: true
@@ -73,11 +82,16 @@ Schema.Users = new SimpleSchema({
   'profile.subways.list': {
     type: [String],
     optional: true
-  },/*
+  },
   'profile.subways.embedded': {
     type: Array,
     optional: true
-  },*/
+  },
+  'profile.subways.embedded.$': { // ID метро
+    type: Object,
+    optional: true,
+    blackbox: true
+  },
   'profile.surName': {
     type: String,
     optional: true
@@ -108,6 +122,10 @@ Schema.Users = new SimpleSchema({
   },
   'profile.getResponse.rieltor_guru_clients': {
     type: Boolean,
+    optional: true
+  },
+  'profile.couching': {
+    type: CouchingSchema,
     optional: true
   },
   takenRealty: {

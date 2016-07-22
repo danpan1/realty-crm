@@ -34,7 +34,7 @@ export const lessons = [
         title:'Поиск объектов',
         descr:'Текст текст текст текст текст текст текст текст текст текст текст текст текст',
         picture:'img/common/training2.jpg',
-        videoLink:'https://www.youtube.com/embed/Hr8GQwFBpU0?list=RDHr8GQwFBpU0',
+        videoLink:'https://www.youtube.com/embed/cRbciSAvI9g?list=RDHr8GQwFBpU0',
         done: false,
         available: false,
         tasks: [

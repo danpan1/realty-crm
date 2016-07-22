@@ -54,7 +54,7 @@ function moderatorSave(realty) {
       if (error) {
         console.log(error);
       } else {
-        console.log('operator save success');
+        
       }
     });
   }

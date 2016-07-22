@@ -33,9 +33,6 @@ class RealtyOneLayout {
     });
     console.log($state);
     switch ($state.current.name) {
-      // case '/demonstrations':
-      //   this.selectedTab = 0;
-      //   break;
       case 'crm.realty.one.find':
         this.selectedTab = 2;
         break;

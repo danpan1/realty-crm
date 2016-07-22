@@ -19,7 +19,7 @@ export function operatorStat(choice) {
 
     // set operation Id
     //newCallResult.id = nextAutoincrement(Operators);
-    console.log('newCallResult.operatorId: '+newCallResult.operatorId);
+    //console.log('newCallResult.operatorId: '+newCallResult.operatorId);
 
     // get userId
     if (this.userId) newCallResult.operatorId = this.userId; else return 'Пользователь не найден';
@@ -35,14 +35,14 @@ export function operatorStat(choice) {
     //newCallResult.result.comission = comission || false;
 
 
-    console.log(' === newCallResult ==== ');
-    console.log(newCallResult);
+    //console.log(' === newCallResult ==== ');
+    //console.log(newCallResult);
     if (newCallResult.createdAt && newCallResult.result){ 
       Operators.insert(newCallResult, (error, result) => {
         if (error) {
           console.log(error);
         } else {
-          console.log(`Client added : id=${newCallResult.id}`);
+          //console.log(`Operator object added : id=${newCallResult.id}`);
         }
       });
     }

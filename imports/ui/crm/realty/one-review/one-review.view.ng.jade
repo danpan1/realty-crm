@@ -1,19 +1,19 @@
 loader(ng-if="oneReview.showLoader == true")
 
-md-tabs(md-selected="0" md-dynamic-height)
-    md-tab(label='1. Встреча')
+md-tabs(md-selected="oneReview.selectedTab" md-dynamic-height)
+    md-tab(ng-click='oneReview.setActiveTab("meeting")' label='1. Встреча')
         md-content
             one-review-meeting(realty='oneReview.realty' save-review='oneReview.saveNewDescription(id)')
-    md-tab(label='2. Фотографии')
+    md-tab(ng-click='oneReview.setActiveTab("photo")' label='2. Фотографии')
         md-content
             one-review-photo(thumbcontrol='oneReview.uploadThumbnailsLength' imagecontrol='oneReview.uploadImagesNormalLength' realty='oneReview.realty' savereview='oneReview.saveNewDescription(id)')
-    md-tab(label='3. Объявление')
+    md-tab(ng-click='oneReview.setActiveTab("desc")' label='3. Объявление')
         md-content
             one-review-desc(realty='oneReview.realty' save-review='oneReview.saveNewDescription(id)')
-    md-tab(label='4. Реклама')
+    md-tab(ng-click='oneReview.setActiveTab("advert")' label='4. Реклама')
         md-content
             one-review-advert(realty='oneReview.realty')
-    md-tab(label='5. Модератор')
+    md-tab(ng-click='oneReview.setActiveTab("moderator")' label='5. Модератор')
         md-content
             one-review-moderator(realty='oneReview.realty')
 

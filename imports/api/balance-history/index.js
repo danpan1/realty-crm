@@ -1,6 +1,2 @@
-/**
- * Created by Danpan on 30.06.16.
- */
-
-// import './balance.me thods';
+import './balance-history.method';
 export * from './balance-history.model';

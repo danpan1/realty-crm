@@ -24,20 +24,25 @@ div(flex, layout='row' layout-align='center none')
                     md-option( ng-value='1' ng-click='layout.toggleList()' ui-sref='crm.realty.add') Объект
                     md-option( ng-value='2' ng-click='layout.toggleList()' ui-sref='crm.clients.add') Клиента
 
-                md-list
+                md-list(ng-if='layout.user')
                     div(ng-repeat="item in layout.sideNavItems").sideNav__item
-                        md-list-item(ng-if='item.uisref'
+                        md-list-item(ng-if='item.uisref && item-sref !== "crm.training.list" && !item.isCouch'
                                      ui-sref='{{item.uisref}}',
                                      ui-sref-active="active",
                                      layout="row",
                                      layout-align='start',
                                      ng-click='layout.toggleList()',
                                      md-ink-ripple="#bbdefb") {{item.name}}
-                        md-list-item(ng-if='item.href'
+                        md-list-item(ng-if='item.href && item.isCouch === "false"'
                                      layout="row",
                                      ng-click='layout.goToPage(item.href)',
                                      layout-align='start',
                                      md-ink-ripple="#bbdefb").m-8 {{item.name}}
+                        md-list-item(ng-if='item.uisref=="crm.training.list" && item.isCouch === "true"'
+                                     layout="row",
+                                     ui-sref='{{item.uisref}}',
+                                     layout-align='start',
+                                     md-ink-ripple="#bbdefb").m-0 {{item.name}}
             div().layout__logout-item
                 a(ng-click='layout.logout()', ui-sref='auth.login').md-button.md-ink-ripple.layout__btn-logout-text
                     div().layout__btn-logout-text-inner Выход

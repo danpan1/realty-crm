@@ -1,0 +1,21 @@
+md-toolbar.md-primary(layout='row' layout-align='end center')
+    //span().md-body-1.mr-32 +7 (925) 075-95-87
+md-content
+    div().mt-32.text-center
+        img(src='img/logos/brand-logo-medium.png')
+    div(layout='column', layout-align='center center').p-32
+        div(md-whiteframe='2').register-form.p-32
+            h2.md-subhead.text-bold.mb-32.mt-0 Здесь вы можете изменить станции метро, по которым работаете
+            div(layout='row' layout-align='center center')
+                md-input-container(flex='80').md-block.form-required.m-0
+                    label Имя
+                    input(type='text' disabled required='' ng-model='changePhoto.user.profile.name')
+            div(layout='row' layout-align='center center')
+                md-input-container(flex='80').md-block.form-required.m-0
+                    label Фамилия
+                    input(type='text' disabled required='' ng-model='changePhoto.user.profile.surName')
+            div(layout='row' ng-if='changePhoto.user.profile.subways.list' layout-align='center center')    
+                subway-chips(flex='80' ng-model='changePhoto.user.profile.subways.list'
+                         subways-embeded='changePhoto.user.profile.subways.embedded').zh
+            div(layout='row' layout-align='center center')
+                md-button(flex='80' ng-click='changePhoto.changeSubways()').md-raised.md-primary.register__btn-submit Сохранить изменения

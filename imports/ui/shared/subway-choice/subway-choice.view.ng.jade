@@ -6,8 +6,11 @@ md-autocomplete(md-selected-item="subwayChoice.selectedSubway"
                 md-search-text-change='subwayChoice.searchTextChange(subwayChoice.searchText)',
                 md-selected-item-change="subwayChoice.changeChoice()")
   md-item-template
-    span(md-highlight-text="subwayChoice.searchText") {{subway.name}}
+    span()
+        span(ng-if='subwayChoice.selectedSubway.meta.line' class='metro-color-{{subwayChoice.selectedSubway.meta.line}}').metro-color 
+        span {{subway.name}}
   md-not-found No matches found.
+//md-highlight-text="subwayChoice.searchText"
 //div().metro.mt-16
     md-chips(ng-model='subwayChips.subwaysInForm',
     md-autocomplete-snap='',
