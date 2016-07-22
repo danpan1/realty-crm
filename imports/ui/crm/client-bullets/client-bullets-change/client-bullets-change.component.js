@@ -74,7 +74,7 @@ class ClientBulletsChange {
 
     //this.oneBullet.bullet.qty = 0; // Количество пуль по умолчанию
 
-    this.oneBullet.name = `${this.oneBullet.bullet.type + 1}-к экономки `;
+    this.oneBullet.name = `${+this.oneBullet.bullet.type + 1}-к экономки `;
     this.oneBullet.name += this.oneBullet.bullet.warhead == 0 ? 'с встречей' : 'с комиссией';
     switch (parseInt(this.oneBullet.bullet.dealSpeed)) {
       case 0:
