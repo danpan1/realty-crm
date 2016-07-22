@@ -18,7 +18,9 @@ class OneReview {
   constructor($scope, $reactive, $stateParams, $timeout) {
     $reactive(this).attach($scope);
     this.$timeout = $timeout;
+    this.$stateParams = $stateParams;
     let vm = this;
+    this.selectedTab = 0;
     this.uploadImagesNormalLength = 0;
     this.uploadThumbnailsLength = 0;
     this.subscribe('oneInfo', () => {
@@ -36,6 +38,30 @@ class OneReview {
         return Realty.findOne({_id: $stateParams.realtyId});
       }
     });
+    switch (window.localStorage["oneReviewActiveTab"]) {
+      case 'meeting':
+        this.selectedTab = 0;
+        break;
+      case 'photo':
+        this.selectedTab = 1;
+        break;
+      case 'desc':
+        this.selectedTab = 2;
+        break;
+      case 'advert':
+        this.selectedTab = 3;
+        break;
+      case 'moderator':
+        this.selectedTab = 4;
+        break;
+      default:
+        this.selectedTab = 0;
+    }
+
+  }
+
+  setActiveTab (activeTab) {
+    window.localStorage["oneReviewActiveTab"] = activeTab;
   }
 
   sendToModerator() {

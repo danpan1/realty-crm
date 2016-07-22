@@ -200,7 +200,7 @@ export function amoCrmNewContact(info) {
       result = error;
       return error;
     }
-    console.log(result.data.response);
+    //console.log(result.data.response);
     uniqueId = result.data.response.contacts.add[0].id;
     timestamp = result.data.response.server_time;
     if(uniqueId){

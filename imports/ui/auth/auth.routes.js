@@ -17,6 +17,10 @@ export default function routes($stateProvider) {
       url: '/register-photo',
       template: '<register-photo/>'
     })
+    .state('auth.change-photo', {
+      url: '/change-photo',
+      template: '<change-photo/>'
+    })
     .state('auth.resetpw', {
       url: '/resetpw',
       template: '<resetpw/>'

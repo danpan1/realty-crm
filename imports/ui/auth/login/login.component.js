@@ -24,23 +24,20 @@ class Login {
 
   login() {
     Meteor.loginWithPassword(this.credentials.email, this.credentials.password,
-      this.$bindToContext((err) => {
+      this.$bindToContext((err, res) => {
         if (err) {
           this.error = 'Неверно указан Email или пароль';
-          // console.log(err);
-          // switch (err.reason) {
-          //   case 'User not found':
-          //     this.error = 'Неверно указан Email';
-          //     break;
-          //   case 'Incorrect password':
-          //     this.error = 'Неверно указан пароль';
-          //     break;
-          //   default:
-          //     this.error = err.reason;
-          //     break;
-          // }
         } else {
-          this.$state.go('crm.realty.list.my');
+          console.log('loginSuccess', res);
+
+          Meteor.call('checkPhoto', this.credentials.email, (error, isPhoto) => {
+            if (error) console.log(error);
+            else {
+              if (isPhoto == true) this.$state.go('auth.change-photo');
+              else this.$state.go('crm.realty.list.my');
+            }
+          })
+
         }
       })
     );

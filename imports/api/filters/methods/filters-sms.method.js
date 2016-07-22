@@ -46,6 +46,7 @@ export function sendFilterSms(filter) {
     
         let filterParams = {isActive:true};
         let clientParams = {};
+        clientParams.$and = [];
 
         if(filter.address.subway){
             console.log('subway: '+filter.address.subway);
@@ -56,12 +57,16 @@ export function sendFilterSms(filter) {
             console.log(filter.address.metroTime+' min by ' + filter.address.metroTransport);
             //filterParams['filter.metroTime'] = {$in: [{$lte: filter.address.metroTime}, null]};
             filterParams['filter.metroTransport'] = {$in : [filter.address.metroTransport, null]};
-            clientParams['need.metroTransport'] = {$in : [filter.address.metroTransport, null]};
+            clientParams.$and.push(
+                { $or: [{ 'need.metroTime': { $gte: parseInt(filter.address.metroTime) }}, {'need.metroTime' : null}] }
+            )
+            // metroTransport не работает, потому что у клиентов тип метро забит строкой.
+            //clientParams['need.metroTransport'] = {$in : [filter.address.metroTransport, null]};
         }
         if(filter.district){
             console.log('districts: '+filter.address.districts);
             filterParams['filter.districts'] = {$in : [filter.districts, null]};
-            clientParams['need.districts'] = {$in : [filter.districts, null]};
+            //clientParams['need.districts'] = {$in : [filter.districts, null]};
         }
         if(filter.address.street){
             console.log('street: '+filter.address.street);
@@ -103,7 +108,6 @@ export function sendFilterSms(filter) {
                 { $or: [{ 'filter.squareTo': { $gte: parseInt(filter.square) }}, {'filter.squareTo' : null}] }
             )
         }
-        clientParams.$and = [];
         if (filter.price) {
             filterParams.$and.push(
                 { $or: [{ 'filter.priceFrom': { $lte: parseInt(filter.price) }}, {'filter.priceFrom' : null}] },
@@ -111,7 +115,7 @@ export function sendFilterSms(filter) {
             )
             let clientPrice = parseInt(filter.price) + (parseInt(filter.price) / 10);
             clientParams.$and.push(
-                { $or: [{ 'need.price': { $lte: parseInt(clientPrice) }}, {'need.price' : null}] }
+                { $or: [{ 'need.price': { $gte: parseInt(clientPrice) }}, {'need.price' : null}] }
             )
         }
 
@@ -143,6 +147,8 @@ export function sendFilterSms(filter) {
             }
         }
     }
+  } else {
+      throw new Meteor.Error('No access, some mistakes in sendFilterSms access method');
   }
 }
 

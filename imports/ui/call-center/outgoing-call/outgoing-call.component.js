@@ -158,6 +158,7 @@ class OutgoingCall {
       vm.realty.address.areaId = vm.realty.address.area._id;
       vm.realty.address.areaName = vm.realty.address.area.name;
     }
+    if (!vm.realty.operator) vm.realty.operator = {};
     if(vm.meetingTime){
       vm.realty.operator.meetingTime = vm.meetingTime;
       vm.meetingTime = undefined;

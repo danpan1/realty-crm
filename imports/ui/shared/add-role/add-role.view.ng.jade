@@ -1,36 +1,45 @@
-form(md-whiteframe='1'
-ng-submit='addRole.submit(addRoleForm.$valid)'
-name='addRoleForm'
-layout-align='center start'
-layout='column')
-    md-input-container
-        label Аренда
-        input(ng-model="addRole.email" type="email" required='')
-    md-button(type='submit').md-raised.md-primary Добавить Аренда
-div(md-whiteframe='2') {{addRole.result || 'Введите email'}}
+//form(md-whiteframe='1'
+//ng-submit='addRole.submit(addRoleForm.$valid)'
+//name='addRoleForm'
+//layout-align='center start'
+//layout='column')
+//    md-input-container
+//        label Аренда
+//        input(ng-model="addRole.email" type="email" required='')
+//    md-button(type='submit').md-raised.md-primary Добавить Аренда
+//div(md-whiteframe='2') {{addRole.result || 'Введите email'}}
 
-form(md-whiteframe='1'
-ng-submit='addRole.submitSale(addRoleFormSale.$valid)'
-name='addRoleFormSale'
-layout-align='center start'
-layout='column')
-    md-input-container
-        label Продажа
-        input(ng-model="addRole.emailSale" type="email" required='')
-    md-button(type='submit').md-raised.md-primary Добавить Продажа
-
-div(md-whiteframe='2') {{addRole.resultSale || 'Введите email'}}
-div(md-whiteframe='2')
-div(md-whiteframe='2')
-div(md-whiteframe='2') Оплаченных юзеров - {{addRole.paidUsers.length}}
-div(md-whiteframe='2') Зарегистрированных - {{addRole.users.length}}
-div(md-whiteframe='2') Процент {{(addRole.paidUsers.length / addRole.users.length * 100).toFixed(2)}}%
-table
-    tr(ng-repeat='user in addRole.users')
-        td {{$index + 1}}
-        td {{user.emails[0].address}}
-        td {{user.profile.name}}
-        td {{user.profile.surName}}
-        td {{user.profile.phone}}
-        td {{(user.roles && user.roles.indexOf('paid') != -1) ? 'Платный' : ''}}
-        td {{user.roles}}
+div(md-whiteframe='2').p-16.m-8
+    form(ng-submit='addRole.submitCouching(addRoleFormCouching.$valid)'
+        name='addRoleFormCouching'
+        layout-align='center start'
+        layout='column')
+        md-input-container
+            label Введите email ученика
+            input(ng-model="addRole.studentEmail" type="email" required='')
+        md-button(type='submit').md-raised.md-primary Добавить ученика
+    div() {{addRole.resultSale || ''}}
+//div(md-whiteframe='2')
+//div(md-whiteframe='2')
+//div(md-whiteframe='2') Оплаченных юзеров - {{addRole.paidUsers.length}}
+//div(md-whiteframe='2') Зарегистрированных - {{addRole.users.length}}
+//div(md-whiteframe='2') Процент {{(addRole.paidUsers.length / addRole.users.length * 100).toFixed(2)}}%
+div(md-whiteframe='2').p-16.m-8  
+    h3 Список студентов
+    table
+        thead
+            tr()
+                td №
+                td Email
+                td Имя
+                td Фамилия
+                td Телефон
+                td ?
+        tbody
+            tr(ng-repeat='user in addRole.students')
+                td {{$index + 1}}
+                td {{user.emails[0].address}}
+                td {{user.profile.name}}
+                td {{user.profile.surName}}
+                td {{user.profile.phone}}
+                td {{user.roles.indexOf("couching")}}

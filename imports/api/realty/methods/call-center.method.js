@@ -108,7 +108,7 @@ function operatorSave(realty) {
           console.log(' === operatorSave ERROR === ')
         }, 100);
       } else {
-        console.log('operator save success');
+        
       }
     });
   }
