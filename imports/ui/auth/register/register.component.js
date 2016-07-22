@@ -71,9 +71,9 @@ class Register {
             if (error) {
               console.log(error);
             } else {
-              this.timeout(()=>{
-                console.log(result);
-              },100)
+              // this.timeout(()=>{
+              //   console.log(result);
+              // },100)
             }
           });
           
@@ -81,9 +81,9 @@ class Register {
             if (error) {
               console.log(error);
             } else {
-              this.timeout(()=>{
-                console.log(result);
-              },100)
+              // this.timeout(()=>{
+              //   console.log(result);
+              // },100)
             }
           });
           
