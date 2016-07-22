@@ -23,7 +23,7 @@ Meteor.methods({
  * @param {string} description описание ( Пополнение баланса)
  * return {string} url ссылка для перехода в робокассу
  */
-export function replenishTheBalance(summ, description) {
+export function replenishTheBalance(summ, description, bulletQty, type, filterId) {
   let url;
   console.log(summ, 'sum покупки');
   if (!(Meteor.isServer && this.userId)) {
@@ -34,13 +34,18 @@ export function replenishTheBalance(summ, description) {
   console.log('no ereror');
   try {
     let id = nextAutoincrement(RoboInvoices) + '';
-    RoboInvoices.insert({
+    let invoice = {
       _id: id,
       createDate: new Date(),
+      balanceSmsPhone: bulletQty * 150,
+      bulletQty: bulletQty,
+      type: type,
+      filterId: filterId,
       description: description,
       userId: this.userId,
       summ: summ
-    });
+    };
+    RoboInvoices.insert(invoice);
     /*
      *  --- order data ---
      * order.id
@@ -51,6 +56,9 @@ export function replenishTheBalance(summ, description) {
      *
      */
     let order = {id: id, summ: summ, description: description};
+    console.log('our invoice = ');
+    console.log(invoice);
+    console.log('roboOrder = ');
     console.log(order);
     let roboUrl = robokassa.merchantUrl(order);
     // console.log(roboUrl);
