@@ -11,6 +11,9 @@ md-dialog.subscription-dialog(aria-label='Оплата подписки')
             div(layout='column')
                 div(layout='row' layout-align='center center')
                     md-input-container(flex='80').md-block.form-required.m-0
+                        label Выбрать город
                         md-select(required ng-model='selectCity.city' aria-label='Выбрать город')
-                            md-option(ng-value='"Москва"') Москва
+                            md-option(value='Москва') Москва
+                            md-option(value='Московская область') Московская область
+                            md-option(value='Другой город') Другой город
                 md-button.md-raised.mv-16.ph-16(flex='', ng-click='selectCity.setCity(selectCity.city)') Сохранить
