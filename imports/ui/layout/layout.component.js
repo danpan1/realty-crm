@@ -31,7 +31,7 @@ class Layout {
           {name: 'Мои объекты', uisref: 'crm.realty.list.my'},
           {name: 'Мои клиенты', uisref: 'crm.clients.list.my' + '({status: \'realtor\'})'},
           {name: 'Документы', uisref: 'crm.documents'},
-          {name: 'Помощь', href: 'https://vk.com/write19844032'},
+          {name: 'Помощь', href: 'https://vk.com/write19844032', isCouch : 'false'},
           {name: '150 за 6', uisref: 'crm.training.list', isCouch: this.user.roles && this.user.roles.indexOf('couching') > -1 ? "true" : "false"},
           {name: '150 за 6', href: 'http://murigin.ru/intensiv/', isCouch: this.user.roles && this.user.roles.indexOf('couching') > -1 ? "true" : "false"}
         ];
