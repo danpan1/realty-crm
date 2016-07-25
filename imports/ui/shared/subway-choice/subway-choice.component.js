@@ -21,10 +21,20 @@ class SubwayChoice {
       return [{sort: {name: 1}, limit: 4}, vm.getReactively('query')];
     }, {
       onReady: function () {
-        vm.subwaysSuggestionList = Locations.find({
-          type: 'subway'
-        }).fetch();
+        this.$timeout(()=>{
+          vm.subwaysSuggestionList = Locations.find({
+            type: 'subway'
+          }).fetch();
+        },10)
         console.log(vm.subwaysSuggestionList);
+      }
+    });
+
+    vm.helpers({
+      subwaysSuggestionList () {
+        return Locations.find({
+          type: 'subway'
+        });
       }
     });
 

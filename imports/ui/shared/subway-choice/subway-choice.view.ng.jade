@@ -2,13 +2,15 @@ md-autocomplete(md-selected-item="subwayChoice.selectedSubway"
                 md-search-text="subwayChoice.searchText" 
                 md-items="subway in subwayChoice.subwaysSuggestionList" 
                 md-item-text="subway.name"
+                md-input-minlength="2"
+                md-no-cache='true'
                 placeholder='Метро'
                 md-search-text-change='subwayChoice.searchTextChange(subwayChoice.searchText)',
                 md-selected-item-change="subwayChoice.changeChoice()")
   md-item-template
-    span()
-        span(ng-if='subwayChoice.selectedSubway.meta.line' class='metro-color-{{subwayChoice.selectedSubway.meta.line}}').metro-color 
-        span {{subway.name}}
+    span(md-highlight-text="subwayChoice.searchText") {{subway.name}}
+        //span(ng-if='subwayChoice.selectedSubway.meta.line' class='metro-color-{{subwayChoice.selectedSubway.meta.line}}').metro-color 
+        //span {{subway.name}}
   md-not-found No matches found.
 //md-highlight-text="subwayChoice.searchText"
 //div().metro.mt-16
