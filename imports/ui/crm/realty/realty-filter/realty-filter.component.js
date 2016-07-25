@@ -20,6 +20,7 @@ class RealtyFilter {
     this.location = $location;
     this.stateParams = $stateParams;
     this.state = $state;
+    this.filter = {};
     this.fake = true;
     if(this.parent == 'ocean') {
       //this.filter = {};
