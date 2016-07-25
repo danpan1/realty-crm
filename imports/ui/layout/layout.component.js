@@ -26,14 +26,23 @@ class Layout {
       if (user) {
         console.log(user, 'user');
         this.user = user;
+        // debugger
         this.sideNavItems = [
-          {name: 'Океан объектов', uisref: 'crm.realty-new-list({operation: \'rent\', page: 1})'},
-          {name: 'Мои объекты', uisref: 'crm.realty.list.my'},
-          {name: 'Мои клиенты', uisref: 'crm.clients.list.my' + '({status: \'realtor\'})'},
-          {name: 'Документы', uisref: 'crm.documents'},
-          {name: 'Помощь', href: 'https://vk.com/write3296627', isCouch : 'false'},
-          {name: '150 за 6', uisref: 'crm.training.list', isCouch: this.user.roles && this.user.roles.indexOf('couching') > -1 ? "true" : "false"},
-          {name: '150 за 6', href: 'http://murigin.ru/intensiv/', isCouch: this.user.roles && this.user.roles.indexOf('couching') > -1 ? "true" : "false"}
+          {name: 'Океан объектов', uisref: 'crm.realty-new-list({operation: \'rent\', page: 1})', visible: true},
+          {name: 'Мои объекты', uisref: 'crm.realty.list.my', visible: true},
+          {name: 'Мои клиенты', uisref: 'crm.clients.list.my' + '({status: \'realtor\'})', visible: true},
+          {name: 'Документы', uisref: 'crm.documents', visible: true},
+          {name: 'Помощь', href: 'https://vk.com/write3296627', visible: true},
+          {
+            name: '150 за 6',
+            uisref: 'crm.training.list',
+            visible: !(user.roles && user.roles.indexOf('couching') === -1)
+          },
+          {
+            name: '150 за 6',
+            href: 'http://murigin.ru/intensiv/',
+            visible: (user.roles && user.roles.indexOf('couching') === -1)
+          }
         ];
 
         if (!user.profile.city) {
@@ -44,17 +53,16 @@ class Layout {
               this.city = 'Москва';
             }
 
-            setCity (city) {
+            setCity(city) {
               console.log(' ===== setCity START', city);
               Meteor.call('setCity', vm.user._id, city, (err, result) => {
                 if (err) {
                   console.log('=== setCity ERR', err);
-                  vm.mdDialog.cancel();
                 } else {
                   console.log('=== setCity RESULT', result);
-                  vm.mdDialog.cancel();
                 }
-              })
+                vm.mdDialog.cancel();
+              });
             }
 
             close() {
@@ -76,20 +84,8 @@ class Layout {
     });
   }
 
-  getEvent (ev) {
-    console.log('==== EVENT', ev);
-    this.event = ev;
-  }
-
-  checkStudent () {
-    if (this.user.roles.indexOf('couching') > -1) {
-      this.$state.go(crm.training.list);
-    } else {
-      goToPage('http://murigin.ru/intensiv/');
-    }
-  }
-
-  goToPage (url) {
+  goToPage(url) {
+    this.toggleList();
     console.log(url);
     window.open(url);
   }
