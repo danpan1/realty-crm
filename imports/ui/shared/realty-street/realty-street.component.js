@@ -19,7 +19,11 @@ class RealtyStreet {
       this.searchTextHouse = '';
       this.searchTextStreet = '';
     }
-
+    if(typeof this.street == 'string') {
+      this.findStreetAtCallCenter = true;
+      this.querySearch(this.street);
+    }
+    console.log(this.street);
     this.label = this.isFilter ? 'Дом' : 'Дом и корпус'
   }
 
@@ -47,10 +51,12 @@ class RealtyStreet {
       'restrict_value': true,
       'query': query, count: 10
     }).then((res)=> {
-      this.clearHouse();
+      if(this.findStreetAtCallCenter){
+        this.street = res.suggestions[0];
+        this.querySearchHouse(this.house);
+      } else this.clearHouse();
       return res.suggestions;
     });
-
 
   }
 
@@ -68,6 +74,10 @@ class RealtyStreet {
         'restrict_value': true,
         'query': query, count: 10
       }).then((res)=> {
+        if(this.findStreetAtCallCenter){
+          this.house = res.suggestions[0];
+          this.findStreetAtCallCenter = false;
+        }
         return res.suggestions;
       });
     }

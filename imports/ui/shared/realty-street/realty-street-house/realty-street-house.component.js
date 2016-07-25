@@ -9,6 +9,7 @@ import './realty-street-house.view.html';
 class RealtyStreetHouse {
   constructor() {
     this.noCache = false;
+    console.log(this.house)
   }
 
   querySearchHouse(query) {

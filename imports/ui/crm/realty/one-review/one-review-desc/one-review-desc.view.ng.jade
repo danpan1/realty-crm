@@ -1,11 +1,10 @@
 div(md-whiteframe='1').mv-16.p-32
     div(layout="row")
         div(flex="50")
-            h3.md-headline.text-uppercase Качество рекламы 50%
+            h3.md-headline.text-uppercase Качество рекламы {{oneReviewDesc.realty.moderator.percent.description}}%
         div(flex='50')
             h3().md-headline Ответ от модератора:
-            p().md-body-1 Текст
-            p().md-body-1 Вторая строка
+            p().md-body-1 {{oneReviewDesc.realty.moderator.comment.description}}
     one-review-desc-title(ng-model="oneReviewDesc.realty" ng-if='oneReviewDesc.realty')
     one-review-desc-content(ng-model="oneReviewDesc.realty" ng-if='oneReviewDesc.realty.details')
     md-button( ng-click='oneReviewDesc.saveReviewDesc(oneReviewDesc.realty._id, true)' ng-class='{"md-success":oneReviewDesc.descriptionSaved,"md-primary":!oneReviewDesc.descriptionSaved}' aria-label='Сохранить объявление').md-raised.one-review__btn-desc-save.ml-0 {{oneReviewDesc.descriptionSaved ? 'Сохранено'  : 'Сохранить объявление'}}

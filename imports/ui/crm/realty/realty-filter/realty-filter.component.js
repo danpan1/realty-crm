@@ -52,6 +52,14 @@ class RealtyFilter {
         this.suitRealty();
       }
     }
+
+    this.$timeout(()=>{
+      let inputs = document.getElementsByTagName("input");
+      for(var i in inputs){
+        if(inputs[i].addEventListener) inputs[i].addEventListener("mousewheel", function(event){ this.blur() })
+      }
+    },1000)
+
   }
   
   checkRooms () {

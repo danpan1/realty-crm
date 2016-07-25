@@ -31,8 +31,8 @@ class Layout {
           {name: 'Океан объектов', uisref: 'crm.realty-new-list({operation: \'rent\', page: 1})', visible: true},
           {name: 'Мои объекты', uisref: 'crm.realty.list.my', visible: true},
           {name: 'Мои клиенты', uisref: 'crm.clients.list.my' + '({status: \'realtor\'})', visible: true},
-          {name: 'Документы', uisref: 'crm.documents', visible: true},
-          {name: 'Помощь', href: 'https://vk.com/write3296627', visible: true},
+          {name: 'Документы', uisref: 'crm.documents', visible: (user.roles && user.roles.indexOf('staff') === -1)},
+          {name: 'Помощь', href: 'https://vk.com/write3296627', visible: (user.roles && user.roles.indexOf('staff') === -1)},
           {
             name: '150 за 6',
             uisref: 'crm.training.list',
@@ -82,6 +82,7 @@ class Layout {
 
       }
     });
+
   }
 
   goToPage(url) {
@@ -93,6 +94,16 @@ class Layout {
   selectText() {
     this.select = 1;
     return 'Добавить';
+  }
+
+  selectCallCenter() {
+    this.selectCallCenter = 1;
+    return 'Колл-центр';
+  }
+
+  selectAddRole() {
+    this.selectAddRole = 1;
+    return 'Добавить роль';
   }
 
   toggleList() {

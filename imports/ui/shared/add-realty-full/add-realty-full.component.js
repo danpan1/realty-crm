@@ -13,8 +13,9 @@ import './add-realty-full.view.html';
 
 class AddRealtyFull {
   /* @ngInject */
-  constructor($state) {
-    this.state = $state;
+  constructor($state, $timeout) {
+    this.state = $state; 
+    this.$timeout = $timeout;
     this.dictionary = dictionary;
     this.realty = {
       contacts: [
@@ -34,6 +35,14 @@ class AddRealtyFull {
     //fake selects Аренда Москва Квартиры
     this.fake = true;
     this.submitted = false;
+    
+    this.$timeout(()=>{
+      let inputs = document.getElementsByTagName("input");
+      for(var i in inputs){
+        if(inputs[i].addEventListener) inputs[i].addEventListener("mousewheel", function(event){ this.blur() })
+      }
+    },1000)
+
   }
 
   changeRoomCount() {

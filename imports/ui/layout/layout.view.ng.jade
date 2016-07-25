@@ -20,9 +20,16 @@ div(flex, layout='row' layout-align='center none')
         div(layout='column' layout-align='space-between none' layout-fill)
             div
                 menu-toggle(section="layout.actions")
-                md-select(ng-model='layout.select' md-selected-text = 'layout.selectText()' aria-label='Добавить объект или клиента').sideNav-btn-add
+                md-select(ng-model='layout.select' md-selected-text='layout.selectText()' aria-label='Добавить объект или клиента').sideNav-btn-add
                     md-option( ng-value='1' ng-click='layout.toggleList()' ui-sref='crm.realty.add') Объект
                     md-option( ng-value='2' ng-click='layout.toggleList()' ui-sref='crm.clients.add') Клиента
+                
+                md-select(ng-model='layout.selectCallCenter' md-selected-text='layout.selectCallCenter()' ng-if='layout.user.roles && layout.user.roles.indexOf("staff") > -1').sideNav-btn-add.mv-8
+                    md-option( ng-value='1' ng-click='layout.toggleList()' ui-sref='call-center.outgoing') Исходящие
+                    
+                md-select(ng-model='layout.selectAddRole' md-selected-text='layout.selectAddRole()' ng-if='layout.user.roles && layout.user.roles.indexOf("staff") > -1').sideNav-btn-add.mt-8.pb-0
+                    md-option( ng-value='1' ng-click='layout.toggleList()' ui-sref='crm.add-operator') Оператора
+                    md-option( ng-value='2' ng-click='layout.toggleList()' ui-sref='crm.add-role') Ученика
 
                 md-list(ng-if='layout.user')
                     div(ng-repeat="item in layout.sideNavItems").sideNav__item

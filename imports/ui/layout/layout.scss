@@ -1,7 +1,11 @@
 // Убираем стрелочки в input[type='button']
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
-  -webkit-appearance: none; margin: 0px;
+  -webkit-appearance: none; 
+  margin: 0px;
+}
+input[type='number'] {
+    -moz-appearance: textfield !important;
 }
 
 img {
