@@ -24,10 +24,6 @@ class OutgoingCallDetails {
     this.type = 4;
     this.newBuilding = 1;
     this.rentDuration = 0;
-    this.newObjectRecieved = 1;
-    this.stat = '';
-    this.currentConditions = [];
-    this.objectsType = 0;
   }
 }
 
@@ -44,7 +40,9 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
   templateUrl: 'imports/ui/call-center/outgoing-call/outgoing-call-details/outgoing-call-details.view.html',
   bindings: {
-    realty: '='
+    realty: '=',
+    newObjectRecieved: '<',
+    showLoader: '<'
   },
   controllerAs: moduleName,
   controller: OutgoingCallDetails

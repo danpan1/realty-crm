@@ -74,7 +74,6 @@ function operatorGet(isType) {
       }
       if (isType == 0) {selector.$or = [{type:3},{type:4}]}
       else if (isType == 1) {selector.$or = [{type:1},{type:2}]};
-      console.log(selector);
       one = Realty.findOne(selector, {
         sort: {createdAt: -1}
       });
@@ -83,7 +82,6 @@ function operatorGet(isType) {
         let selector = {status: 'new'};
         if (isType == 0) {selector.$or = [{type:3},{type:4}]}
         else if (isType == 1) {selector.$or = [{type:1},{type:2}]};
-        console.log(selector);
         one = Realty.findOne(selector, {sort: {createdAt: -1}});
       }
     }
@@ -119,7 +117,6 @@ function operatorSave(realty) {
         }, 100);
       } else {
           console.log(' === operatorSave RESULT === ');
-          console.log(result);
       }
     });
   }

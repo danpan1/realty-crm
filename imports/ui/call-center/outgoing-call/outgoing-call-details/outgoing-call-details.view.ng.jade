@@ -21,7 +21,7 @@ div(flex='100')
                         ng-repeat="transport in outgoingCallDetails.dictionary.transport") {{transport.name}}
     div(layout='row').mt-32
         div(flex='40')
-            realty-street(ng-if='outgoingCallDetails.realty' ng-model='outgoingCallDetails.realty.address.street'
+            realty-street(ng-if='!outgoingCallDetails.showLoader' ng-model='outgoingCallDetails.realty.address.street'
             house='outgoingCallDetails.realty.address.house').w-100
         div(flex='15' flex-offset='5')
             div(layout='row' layout-align='space-between end')
@@ -31,8 +31,8 @@ div(flex='100')
                 md-input-container(flex='33').mv-0.pb-0.form-required
                     input(ng-model='outgoingCallDetails.realty.floormax' required='') 
         div(flex='35' layout='row' flex-offset='5' layout-align='center center')
-            label(flex='33').md-subhead.mh-16 Собственников
-            md-radio-group(required='' ng-model="outgoingCallDetails.realty.owner.qty" layout='row' layout-align='center start' flex='66').form-required
+            label(flex='33').md-subhead.mh-16.form-required Собственников
+            md-radio-group(required='' ng-model="outgoingCallDetails.realty.owner.qty" layout='row' layout-align='center start' flex='66')
                 md-radio-button(value="0").md-primary 1
                 md-radio-button(value="1").md-primary 2
                 md-radio-button(value="2").md-primary 3+
@@ -82,8 +82,8 @@ div(flex='100')
                     md-option(ng-value='outgoingCallDetails.dictionary.renovation.length + 1' ng-repeat="renovation in outgoingCallDetails.dictionary.renovation") {{renovation.name}}
     div(layout='row').mt-32
         div(flex='45 ' layout='row' layout-align='start start' )
-            label(flex='40').md-subhead.mh-16 Санузел
-            md-radio-group(ng-model="outgoingCallDetails.realty.details.bathQty" layout-align='start start' layout='row' flex='60' required).form-required
+            label(flex='40').md-subhead.mh-16.form-required Санузел
+            md-radio-group(ng-model="outgoingCallDetails.realty.details.bathQty" layout-align='start start' layout='row' flex='60' required)
                 md-radio-button(ng-value="0").md-primary 1
                 md-radio-button(ng-value="1").md-primary 2
                 md-radio-button(ng-value="2").md-primary 3
@@ -91,8 +91,8 @@ div(flex='100')
             md-checkbox(ng-model='outgoingCallDetails.realty.details.bathCombined' aria-label="Combined bathroom").m-0.md-primary.md-subhead Совмещенный
     div(layout='row').mt-16
         div(flex='45' layout='row' layout-align='start start' )
-            label(flex='40').md-subhead.mh-16 Балкон / Лоджия
-            md-radio-group(ng-model="outgoingCallDetails.realty.details.balcony" layout-align='start start' layout='row' flex='60' required).form-required
+            label(flex='40').md-subhead.mh-16.form-required Балкон / Лоджия
+            md-radio-group(ng-model="outgoingCallDetails.realty.details.balcony" layout-align='start start' layout='row' flex='60' required)
                 md-radio-button(ng-value="0").md-primary 0
                 md-radio-button(ng-value="1").md-primary 1
                 md-radio-button(ng-value="2").md-primary 2
