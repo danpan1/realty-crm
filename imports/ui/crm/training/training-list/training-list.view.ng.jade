@@ -13,7 +13,7 @@ div(layout-wrap layout='row').mv-16
             section(flex='60').p-8.pl-16
                 h3(ng-if='!lesson.intensiv').training__lesson-number.mv-4 Занятие №{{lesson.number}}
                 h1(ng-if='!lesson.intensiv').training__lesson-title.md-headline.mv-8 {{lesson.title}}
-                h1(ng-if='lesson.intensiv').training__lesson-title.md-headline.mv-8 Интенсив {{lesson.number}} день
+                h1(ng-if='lesson.intensiv').training__lesson-title.md-headline.mv-8 Интенсив {{lesson.day}} день
                 div(ng-if=' lesson.tasks.length > 0' layout='row' layout-align='start start')
                     img(src='img/icons/kubok.jpg').training__icon
                     div().training__lesson-descr.mt-0.ml-8 
