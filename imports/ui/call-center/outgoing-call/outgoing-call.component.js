@@ -197,7 +197,7 @@ class OutgoingCall {
     this.showLoader = true;
     this.isLoading = true;
     const vm = this;
-    Meteor.call('operatorGet', (error, result)=> {
+    Meteor.call('operatorGet', this.objectsType, (error, result)=> {
       // vm.realty.address.subways = ['FRmpz68NzBxzoPQJ7'];
 
       if (error) {

@@ -8,7 +8,9 @@ div(layout='row')
             div(flex).mt-8.ml-16
                 div(layout='column' layout-align='space-between start').outgoing-call__header-col-1
                     div().md-title.text-bold {{outgoingCallInfo.realty.contacts[0].phones[0].phone}}
-                    div().md-title.text-bold {{outgoingCallInfo.realty.contacts[0].name}}
+                    div().md-title.text-bold
+                        md-input-container()
+                            input(name='contactsName' type='number' ng-model='outgoingCallDetails.realty.contacts[0].name' placeholder='Имя')
     div(flex='20').outgoing-call__inner.pv-16
         div(layout='column' layout-align='space-between center').outgoing-call__header-col
             div(layout='row')

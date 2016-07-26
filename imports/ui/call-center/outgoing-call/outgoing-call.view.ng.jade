@@ -191,12 +191,12 @@ div(md-whiteframe='2')
                     div(flex='55')
                         div(layout='column')
                             div(layout='row').mv-8
-                                md-button(type='submit' flex ng-disabled='realtyCallForm.$invalid').outgoing-call__btn-save.md-success.md-raised.md-title.mh-0 Сохранить
+                                md-button(type='submit' flex ng-disabled='realtyCallForm.$invalid || !outgoingCall.realty.contacts[0].name').outgoing-call__btn-save.md-success.md-raised.md-title.mh-0 Сохранить
                             div().mv-8
                                 div().outgoing-call__num-ads.md-title.text-center {{outgoingCall.fullList}}
                                 div().outgoing-call__text-ads.md-body-1.text-center объявлений в очереди
                     div(flex='45' layout='row' layout-align='end end')
-                        md-input-container()
+                        md-input-container(flex='10')
                             label Тип
                             md-select(ng-model='outgoingCall.objectsType')
                                 md-option(ng-value='0') А
