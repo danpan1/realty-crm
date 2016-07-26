@@ -179,11 +179,11 @@ md-tabs(ng-if='!addRealtyFull.submitted' md-dynamic-height md-border-bottom)
                                         md-option(ng-value="time.id" ng-repeat='time in addRealtyFull.dictionary.depositTime') {{time.name}}
                    
                     div(ng-if='addRealtyFull.realty').mt-16
-                        div(layout='row' layout-align='start center' ng-init='addRealtyFull.realty.comissionLoyal = true')
-                            md-checkbox(id="comissionloyal" name="comissionloyal" ng-model='addRealtyFull.realty.comissionLoyal' aria-label="Checkbox 1").m-0.md-primary.md-subhead {{ addRealtyFull.realty.comissionLoyal ? 'Готов' : 'Не готов'}} платить комиссию
-                            md-input-container(md-no-float layout='row' ng-class='{ "vHidden" : !addRealtyFull.realty.comissionLoyal }').add-realty-full__comission-percent.ml-8
-                                input(type="text" ng-model='addRealtyFull.realty.comission')
-                            span(ng-if ='addRealtyFull.realty.comissionLoyal').md-subhead %
+                        div(layout='row' layout-align='start center' ng-init='addRealtyFull.realty.isComission = true')
+                            md-checkbox(id="isComission" name="isComission" ng-model='addRealtyFull.realty.isComission' aria-label="Checkbox 1").m-0.md-primary.md-subhead {{ addRealtyFull.realty.isComission ? 'Готов' : 'Не готов'}} платить комиссию
+                            md-input-container(md-no-float layout='row' ng-class='{ "vHidden" : !addRealtyFull.realty.isComission }').add-realty-full__comission-percent.ml-8
+                                input(type='number' ng-model='addRealtyFull.realty.owner.comission')
+                            span(ng-if ='addRealtyFull.realty.owner.isComission').md-subhead %
                     
                     div().mt-32
                         p().md-subhead.add-realty-full-text Какой процент стоимости аренды вы хотите получить?

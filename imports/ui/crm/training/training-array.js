@@ -1,5 +1,20 @@
 export const lessons = [
       {
+        number:7,
+        picture:'img/common/training8.jpg',
+        videoLink:'http://world-invest.pro/training/150za6_3/0_1.html',
+        available:true,
+        day:1,
+        intensiv: true
+      },{
+        number:8,
+        picture:'img/common/training7.jpg',
+        videoLink:'http://world-invest.pro/training/150za6_3/0_2.html',
+        available:true,
+        day:2,
+        intensiv: true
+      },
+      {
         number:1, 
         duration: 6, 
         result:['Декларация с ценой слова','Команда из 5 человек','Прописанные 100 целей','10 пуль зарядить в обойму','1 сделка по Аренде или Продаже'],

@@ -28,8 +28,10 @@ class AddRealtyFull {
         depositTime : 1
       }
     };
-    this.realty.comission = 100;
-    this.realty.comissionLoyal = true;
+    this.realty.owner = {
+      comission: 100,
+      isComission: true
+    }
     this.metroTransport = 0;
     this.activeTab = 0;
     //fake selects Аренда Москва Квартиры
@@ -72,7 +74,7 @@ class AddRealtyFull {
     console.log(this.realty.price);
     console.log(this.realty.contacts[0].phones[0].phone);
 
-    if (!this.realty.comissionLoyal) this.realty.comission = '';
+    if (!this.realty.owner.isComission) this.realty.owner.comission = '';
 
     //4 - Аренда - Квартиры
     const vm = this;
@@ -121,7 +123,8 @@ class AddRealtyFull {
       if (error) {
         console.log(error);
       } else {
-        console.log(`Realty added : cleintSide, ${vm.realty}`);
+        console.log('result', result);
+        console.log(`Realty added : cleintSide`, vm.realty);
         this.state.go('crm.realty.one.info', {realtyId: result});
       }
     });

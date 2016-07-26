@@ -24,22 +24,28 @@ class TrainingLesson {
 
       let user = Meteor.user();
       if (user) {
-        Meteor.call('checkLessonAccess', this.$stateParams.number, (err, lesson) => {
-          if (err) {
-            console.log('==== checkLessonAccess ERROR', err);
-          } else {
-            console.log(lesson)
-            if (!lesson.available) vm.noAccessShow();
-            this.$timeout(()=>{
-              vm.lessonData = lesson;
-            },100)
-          }
-        });
+
+        if (this.$stateParams.number <= 6) {
+          Meteor.call('checkLessonAccess', this.$stateParams.number, (err, lesson) => {
+            if (err) {
+              console.log('==== checkLessonAccess ERROR', err);
+            } else {
+              console.log(lesson)
+              if (!lesson.available) vm.noAccessShow();
+              this.$timeout(()=>{
+                vm.lessonData = lesson;
+              },100)
+            }
+          });
+        }
+
       }
 
     });
-
-    this.lesson = lessons[this.$stateParams.number - 1];
+    
+    if (this.$stateParams.number <= 6) this.lesson = lessons[this.$stateParams.number - 1];
+    else if (this.$stateParams.number == 7) this.lesson = lessons[0];
+    else if (this.$stateParams.number == 8) this.lesson = lessons[1];
 
   }
 

@@ -17,6 +17,8 @@ class TrainingList {
     
     this.lessons = lessons;
 
+    //this.intensivLessons = []
+
   }
 
   goToLesson (isAvailable, num) {
