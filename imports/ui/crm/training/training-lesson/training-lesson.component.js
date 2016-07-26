@@ -43,7 +43,7 @@ class TrainingLesson {
 
     });
     
-    if (this.$stateParams.number <= 6) this.lesson = lessons[this.$stateParams.number + 1];
+    if (this.$stateParams.number <= 6) this.lesson = lessons[parseInt(this.$stateParams.number) + 1];
     else if (this.$stateParams.number == 7) this.lesson = lessons[0];
     else if (this.$stateParams.number == 8) this.lesson = lessons[1];
 
