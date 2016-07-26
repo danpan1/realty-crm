@@ -31,6 +31,11 @@ export const dictionary = {
     {id: 2, name: '3-к 45000 - 90000'}
   ],
   clientStatuses: ['archive', 'realtor', 'hot'],
+  communal: [
+    {id: 0, name: 'включены в стоимость'},
+    {id: 1, name: 'плюс коммунальные'},
+    {id: 2, name: 'сверх только вода и свет'}
+  ],
   composition: [
     {id: 0, name: 'Для всех', cianId : 1},
     {id: 1, name: 'Семейная пара', cianId : 2},
@@ -63,8 +68,9 @@ export const dictionary = {
     {id: 2, name: 'Горячий'}
   ],
   deposit: [
-    {id: 0, name: 'с залогом'},
-    {id: 1, name: 'без залога'}
+    {id: 0, name: 'Есть'},
+    {id: 1, name: 'Нет'},
+    {id: 2, name: 'Готов разбить'}
   ],
   depositSum: [
     {id: 0, name: 'Без залога'},
@@ -112,6 +118,11 @@ export const dictionary = {
     {id: 0, name: 'Аренда'},
     {id: 1, name: 'Продажа'}
   ],
+  ownerQty: [
+    {id: 0, name: '1'},
+    {id: 1, name: '2'},
+    {id: 2, name: '3+'}
+  ],
   //квалификация собственника от колл-центра
   qualification: [
     {id: 0, name: 'Плохой'},
@@ -154,6 +165,11 @@ export const dictionary = {
     {id: 8, name: '8'},
     {id: 9, name: '9'},
     {id: 98, name: '10+'}
+  ],
+  showTime: [
+    {id: 0, name: 'По договоренности'},
+    {id: 1, name: 'В любое время'},
+    {id: 2, name: 'Только вечером'}
   ],
   transport: [
     {id: 0, name: 'пешком'},

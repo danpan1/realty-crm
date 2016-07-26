@@ -1,0 +1,26 @@
+div(layout='row')
+    div(flex='25').outgoing-call__inner.outgoing-call__contacts.pl-32.pv-16
+        div(layout='row')
+            div(flex='20' ng-click='outgoingCallInfo.copyInfo()').mt-8
+                md-icon(md-svg-src='svg/icon-copy.svg' aria-label='Телефон' ng-class='{"outgoing-call__info-copied":outgoingCallInfo.infoWasCopied}').cursor-pointer
+            div(style='opacity:0;position:fixed;left:-100%;')
+                input(value='{{outgoingCallInfo.realty.contacts[0].phones[0].phone}}' id="hiddenInfo")
+            div(flex).mt-8.ml-16
+                div(layout='column' layout-align='space-between start').outgoing-call__header-col-1
+                    div().md-title.text-bold {{outgoingCallInfo.realty.contacts[0].phones[0].phone}}
+                    div().md-title.text-bold {{outgoingCallInfo.realty.contacts[0].name}}
+    div(flex='20').outgoing-call__inner.pv-16
+        div(layout='column' layout-align='space-between center').outgoing-call__header-col
+            div(layout='row')
+                md-button(ng-click="outgoingCallInfo.setResolution('later', 'notAvailable')").outgoing-call__btn-not-available.md-cyan.md-raised.ph-16 Не доступен
+            div(layout='row')
+                md-button(ng-click="outgoingCallInfo.agency('agency')").outgoing-call__btn-agency.md-block.md-amber.md-raised.ph-16 Агентство
+    div(flex='35').outgoing-call__inner.pv-16
+        div(layout='column' layout-align='space-between center')
+            date-time-picker(ng-model="outgoingCallInfo.datePicked" total-days = "14" start-date='outgoingCallInfo.today')
+            div
+                md-button(aria-label='Перезвонить' ng-click="outgoingCallInfo.setResolution('later', 'laterDatePicked')").md-primary.md-raised.ph-16.outgoing-call__btn-call Перезвонить
+    div(flex='20').pr-32.pv-16
+        div(layout='column' layout-align='space-between center').outgoing-call__header-col
+            md-button(ng-click="outgoingCallInfo.setResolution('archive')").mr-0 Не актуально
+            md-button(ng-click="outgoingCallInfo.setResolution('analyze')").mr-0 Не согласился

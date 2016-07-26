@@ -4,6 +4,10 @@ import {dictionary} from '../../../helpers/dictionary';
 
 export const OwnerSchema = new SimpleSchema({
   
+  comment: {
+    type: String, 
+    optional: true
+  },
   // Комиссия, которую платит собственник объекта риелтору.
   comission: {
     type: Number, 
@@ -17,7 +21,19 @@ export const OwnerSchema = new SimpleSchema({
     type: Boolean, 
     optional: true
   },
+  showTime: {
+    type: Number,
+    optional: true
+  },
+  meetingOk: {
+    type: Boolean,
+    optional: true
+  },
   deposit: {
+    type: Number, 
+    optional: true
+  },
+  qty: {
     type: Number, 
     optional: true
   }

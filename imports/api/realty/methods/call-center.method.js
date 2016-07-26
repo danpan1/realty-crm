@@ -101,14 +101,15 @@ function operatorSave(realty) {
     realty.status = 'ocean';
     Realty.update({_id: realty._id}, {
       $set: realty
-    }, (error) => {
+    }, (error, result) => {
       if (error) {
         console.log(error);
         setTimeout(function () {
           console.log(' === operatorSave ERROR === ')
         }, 100);
       } else {
-        
+          console.log(' === operatorSave RESULT === ');
+          console.log(result);
       }
     });
   }

@@ -9,11 +9,17 @@ import {name as subwayChips} from '/imports/ui/shared/subway-chips/subway-chips.
 import {name as subwayChoice} from '/imports/ui/shared/subway-choice/subway-choice.component';
 import {name as realtyStreet} from '/imports/ui/shared/realty-street/realty-street.component';
 import {name as districtSingle} from '/imports/ui/shared/district-single/district-single.component';
-import {name as dateTimepPicker} from '/imports/ui/shared/date-time-picker/date-time-picker.component';
+//import {name as dateTimepPicker} from '/imports/ui/shared/date-time-picker/date-time-picker.component';
 import {name as PriceMask} from '/imports/ui/shared/price-mask/price-mask.component';
 import {dictionary} from '/imports/helpers/dictionary';
 import {Realty} from '/imports/api/realty';
 import {Agents} from '/imports/api/agents';
+
+import {name as OutgoingCallInfo} from './outgoing-call-info/outgoing-call-info.component';
+import {name as OutgoingCallDetails} from './outgoing-call-details/outgoing-call-details.component';
+import {name as OutgoingCallComments} from './outgoing-call-comments/outgoing-call-comments.component';
+import {name as OutgoingCallOwner} from './outgoing-call-owner/outgoing-call-owner.component';
+
 import './outgoing-call.view.html';
 
 class OutgoingCall {
@@ -30,6 +36,7 @@ class OutgoingCall {
     this.rentDuration = 0;
     this.newObjectRecieved = 1;
     this.stat = '';
+    this.currentConditions = [];
 
     this.autorun(function () {
       let user = Meteor.user();
@@ -52,69 +59,6 @@ class OutgoingCall {
     input.select();
     document.execCommand("copy");
     this.infoWasCopied = true;
-  }
-
-  setResolution(status, laterCall) {
-    this.showLoader = true;
-    const vm = this;
-    let notAvailable = '';
-    vm.isLoading = true;
-    let data = {
-      _id: vm.realty._id,
-      status: status,
-      operator: vm.operator
-    };
-    if (laterCall) {
-      if (laterCall == 'laterDatePicked') {
-        data.laterCall = vm.datePicked;
-        vm.stat = 'objectsDelayed';
-      }
-      else if (laterCall == 'notAvailable') {
-        notAvailable = 'notAvailable';
-        vm.stat = 'objectsNotAvailable';
-      }
-    } 
-    else if(status == 'archive') vm.stat = 'objectsNoActual';
-    else if(status == 'analyze') vm.stat = 'objectsSkipped';
-    else if(status == 'agency') vm.stat = 'objectsAgency';
-
-    console.log(status, data);
-
-    Meteor.call('operatorSet', data, notAvailable, (error)=> {
-      if (error) {
-        this.showLoader = false;
-        console.log('error', error);
-      } else {
-        Meteor.call('operatorStat', vm.stat, (error, result) => {
-          if (error) console.log(error)
-          else console.log(result);
-        });
-      }
-      vm.getNew();
-    });
-
-    this.infoWasCopied = false;
-
-  }
-
-  agency() {
-    this.showLoader = true;
-    const vm = this;
-    //добавляем телефон из объявления
-    Agents.insert({
-      phone: vm.realty.contacts[0].phones[0].phone,
-      name: vm.realty.contacts[0].name
-    });
-    //добавляем телефон с картинки
-    if (vm.agencyTel) {
-      Agents.insert({
-        phone: vm.agencyTel,
-        name: 'AgencyFromPhoto'
-      });
-      vm.agencyTel = '';
-    }
-
-    vm.setResolution('agency');
   }
 
   save (valid) {
@@ -202,20 +146,20 @@ class OutgoingCall {
     } else if (vm.realty.operator.meetingTime) price = 1;
     
     vm.realty.operator.oceanPrice = price;
-    console.log(vm.realty.owner)
+    console.log(vm.realty);
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {
         this.showLoader = false;
         console.log('error', error);
-        this.continue();
+        this.getNew();
       } else {
         vm.newObjectRecieved = (vm.newObjectRecieved + 1);
         Meteor.call('operatorStat', vm.stat, (error, result) => {
           if (error) {
             console.log(error);
-            this.continue();
+            this.getNew();
           } else {
-            this.continue();
+            this.getNew();
           }
         });
         Meteor.call('sendFilterSms', vm.realty, (error, result) => {
@@ -226,12 +170,6 @@ class OutgoingCall {
         });
       }
     });
-  }
-  continue () {
-    console.log('continue');
-    this.realty = {
-    };
-    this.getNew();
   }
   
 
@@ -254,6 +192,7 @@ class OutgoingCall {
   }
 
   getNew() {
+    this.realty = {};
     console.log('getNew');
     this.showLoader = true;
     this.isLoading = true;
@@ -306,28 +245,6 @@ class OutgoingCall {
       this.getList(false);
 
     });
-
-  }
-
-  signLamp (phone, id) {
-    //Meteor.call('signLamp', phone, (error, result) => {
-    //  if (error) {
-    //    console.log(error);
-    //  } else {
-        this.removeRealty(id);
-    //  }
-    //});
-  }
-
-  removeRealty (id) {
-    console.log('remove '+id)
-    Meteor.call('removeRealty', id, (error, result) => {
-      if (error) {
-        console.log(error);
-      } else {
-        this.getNew();
-      }
-    });
   }
 
 }
@@ -337,9 +254,12 @@ const moduleName = 'outgoingCall';
 // create a module
 export default angular.module(moduleName, [
   angularMeteor,
+  OutgoingCallInfo,
+  OutgoingCallDetails,
+  OutgoingCallComments,
+  OutgoingCallOwner,
   realtyConditions,
   realtyStreet,
-  dateTimepPicker,
   districtSingle,
   subwayChips,
   subwayChoice,
@@ -350,31 +270,3 @@ export default angular.module(moduleName, [
   controllerAs: moduleName,
   controller: OutgoingCall
 })
-  .filter('dateMonthRu', function () {
-    return function (input) {
-      if (typeof input !== 'string') {
-        input = new Date(input);
-      }
-      else {
-        console.log('wrong input date format. not time');
-      }
-
-      let date;
-
-      try {
-        date = new Date(input);
-      } catch (error) {
-        console.error(error);
-      }
-
-      return date.getDate() + ' ' + getMonthName(date.getMonth());
-    };
-  });
-
-function getMonthName(m) {
-  let monthNames = [
-    'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня',
-    'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
-  ];
-  return monthNames[m];
-}

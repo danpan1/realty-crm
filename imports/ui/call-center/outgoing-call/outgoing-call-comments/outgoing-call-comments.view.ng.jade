@@ -1,0 +1,20 @@
+div().outgoing-call__photo
+    div(layout='row')
+        div(layout='row' flex='70')
+            img(ng-repeat='image in outgoingCallComments.realty.details.images | limitTo:2' ng-src='{{image.url}}')
+        div(ng-if='outgoingCallComments.realty.details.images.length' flex='30' layout='column' layout-align='center end')
+            md-button(ng-click='outgoingCallComments.signLamp(outgoingCallComments.realty.contacts[0].phones[0].phone, outgoingCallComments.realty._id)').md-warn Фонарь
+
+div(md-whiteframe='2').mt-0.mb-16
+    div(md-whiteframe='1' layout='row').ph-16.pv-8
+        div(flex='100')
+            md-input-container(md-no-float layout='row').form-required
+                label Комментарий оператора
+                textarea(type="text" required ng-model='outgoingCallComments.realty.operator.comment')
+
+div(md-whiteframe='2').mv-16
+    div(md-whiteframe='1' layout='row').ph-16.pv-8
+        div(flex='100')
+            md-input-container(md-no-float layout='row').form-required
+                label Комментарий риелтора
+                textarea(type="text" required ng-model='outgoingCallComments.realty.realtor.comment')
