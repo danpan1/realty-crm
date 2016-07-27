@@ -23,12 +23,13 @@ Meteor.methods({
  * @param {string} description описание ( Пополнение баланса)
  * return {string} url ссылка для перехода в робокассу
  */
-export function replenishTheBalance(summ, description, bulletQty, type, filterId) {
+export function replenishTheBalance(summ, description) {
   let url;
   console.log(summ, 'sum покупки');
   if (!(Meteor.isServer && this.userId)) {
     throw new Meteor.Error('auth');
   }
+  summ = parseInt(summ);
   check(summ, Number);
   check(description, String);
   console.log('no ereror');
@@ -37,10 +38,6 @@ export function replenishTheBalance(summ, description, bulletQty, type, filterId
     let invoice = {
       _id: id,
       createDate: new Date(),
-      balanceSmsPhone: bulletQty * 150,
-      bulletQty: bulletQty,
-      type: type,
-      filterId: filterId,
       description: description,
       userId: this.userId,
       summ: summ
