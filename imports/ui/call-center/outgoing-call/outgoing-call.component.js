@@ -52,13 +52,14 @@ class OutgoingCall {
       }
     });
 
-  }
+    
+    this.$timeout(()=>{
+      let inputs = document.getElementsByTagName("input");
+      for(var i in inputs){
+        if(inputs[i].addEventListener) inputs[i].addEventListener("mousewheel", function(event){ this.blur() })
+      }
+    },1000)
 
-  copyInfo() {
-    var input = document.getElementById("hiddenInfo");
-    input.select();
-    document.execCommand("copy");
-    this.infoWasCopied = true;
   }
 
   save (valid) {
@@ -116,9 +117,6 @@ class OutgoingCall {
       var d = new Date().getTime();
       vm.realty.operator.oceanAdd = d;
     }
-    /*if (vm.newBuilding === 1) {
-      vm.realty.type = 2;
-    }*/
 
     vm.realty.status = 'list';
     vm.stat = comission ? exclusive ? 'objectsSavedComAndExc' : 'objectsSavedCom' : exclusive ? 'objectsSavedExc' : 'objectsSaved';
@@ -198,13 +196,10 @@ class OutgoingCall {
     this.isLoading = true;
     const vm = this;
     Meteor.call('operatorGet', this.objectsType, (error, result)=> {
-      // vm.realty.address.subways = ['FRmpz68NzBxzoPQJ7'];
-
       if (error) {
         this.showLoader = false;
         console.log('error', error);
       }
-
       console.log('loaded ', result);
       this.$timeout(() => {
         console.log(result.contacts[0].phones[0].phone);
@@ -219,7 +214,7 @@ class OutgoingCall {
         //    if (isItLamp != true) {
               vm.realty = result;
               vm.realty.price = result.price;
-              vm.newObjectRecieved += 1;
+              //vm.newObjectRecieved += 1;
               vm.isLoading = false;
               vm.operator = {};
               if (!result) {
@@ -257,13 +252,13 @@ export default angular.module(moduleName, [
   OutgoingCallInfo,
   OutgoingCallDetails,
   OutgoingCallComments,
-  OutgoingCallOwner,
-  realtyConditions,
-  realtyStreet,
-  districtSingle,
-  subwayChips,
-  subwayChoice,
-  PriceMask
+  OutgoingCallOwner
+  //realtyConditions,
+  //realtyStreet,
+  //districtSingle,
+  //subwayChips,
+  //subwayChoice,
+  //PriceMask
 ]).component(moduleName, {
   templateUrl: 'imports/ui/call-center/outgoing-call/outgoing-call.view.html',
   bindings: {},

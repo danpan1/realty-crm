@@ -29,6 +29,13 @@ class OutgoingCallOwner {
       }
     }
 
+    
+    this.$onChanges = function () {
+      this.currentConditions = [];
+    }
+
+
+
   }
   
   onConditionsChange(condition) {
@@ -69,7 +76,8 @@ export default angular.module(moduleName, [
 ]).component(moduleName, {
   templateUrl: 'imports/ui/call-center/outgoing-call/outgoing-call-owner/outgoing-call-owner.view.html',
   bindings: {
-    realty: '='
+    realty: '=',
+    showLoader: '<'
   },
   controllerAs: moduleName,
   controller: OutgoingCallOwner

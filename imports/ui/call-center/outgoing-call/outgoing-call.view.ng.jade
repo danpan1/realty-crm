@@ -159,7 +159,7 @@ div(md-whiteframe='2')
                                     md-radio-button(ng-value="3").md-primary 3
                             div(flex='15')
                                 md-checkbox(ng-model='outgoingCall.realty.details.balconGlassed' aria-label="Glassed").m-0.md-primary.md-subhead Застеклен       
-                outgoing-call-owner(ng-if='outgoingCall.realty' realty='outgoingCall.realty').mt-32
+                outgoing-call-owner(ng-if='outgoingCall.realty' show-loader='outgoingCall.showLoader' realty='outgoingCall.realty').mt-32
                 //div(layout='row') 
                     div(flex='55').p-16
                         div(layout='row' layout-align='space-around start' layout-wrap) {{oneInfo.currentConditions[$index].presence}}
