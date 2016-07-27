@@ -47,7 +47,7 @@ function callList() {
 
 }
 
-function operatorGet() {
+function operatorGet(isType) {
   /*
   db.realty.findOne({
     status: 'later', 'operator.laterCall': {'$lte': new Date()}
@@ -68,16 +68,24 @@ function operatorGet() {
     } else {
       console.log('find object status = later');
       //сначала ищем в статусе отложенного звонка
-      one = Realty.findOne({
-        status: 'later', 'operator.laterCall': {'$lte': currentTime}
-      }, {
+      let selector = {
+        status: 'later',
+        'operator.laterCall': {'$lte': currentTime}
+      }
+      if (isType == 0) {selector.$or = [{type:3},{type:4}]}
+      else if (isType == 1) {selector.$or = [{type:1},{type:2}]};
+      one = Realty.findOne(selector, {
         sort: {createdAt: -1}
       });
       if (!one) {
         console.log('find object status = new');
-        one = Realty.findOne({status: 'new'}, {sort: {createdAt: -1}});
+        let selector = {status: 'new'};
+        if (isType == 0) {selector.$or = [{type:3},{type:4}]}
+        else if (isType == 1) {selector.$or = [{type:1},{type:2}]};
+        one = Realty.findOne(selector, {sort: {createdAt: -1}});
       }
     }
+
 
     Realty.update({_id: one._id}, {
       $set: {status: 'call', 'operator.id': this.userId}
@@ -101,14 +109,14 @@ function operatorSave(realty) {
     realty.status = 'ocean';
     Realty.update({_id: realty._id}, {
       $set: realty
-    }, (error) => {
+    }, (error, result) => {
       if (error) {
         console.log(error);
         setTimeout(function () {
           console.log(' === operatorSave ERROR === ')
         }, 100);
       } else {
-        
+          console.log(' === operatorSave RESULT === ');
       }
     });
   }

@@ -6,7 +6,8 @@ export const lessons = [
         available:true,
         day:1,
         intensiv: true
-      },{
+      },
+      {
         number:8,
         picture:'img/common/training7.jpg',
         videoLink:'http://world-invest.pro/training/150za6_3/0_2.html',

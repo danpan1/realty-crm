@@ -1,0 +1,28 @@
+div(layout='row') 
+    div(flex='55').p-16
+        div(layout='row' layout-align='space-around start' layout-wrap) {{outgoingCallOwner.currentConditions[$index].presence}}
+            md-switch(flex='40' ng-model='outgoingCallOwner.currentConditions[$index].presence',
+            aria-label='Switch 2'
+            ng-repeat="condition in outgoingCallOwner.dictionary.conditions"
+            ng-click="outgoingCallOwner.onConditionsChange(condition.id)").md-warn.m-0 {{condition.name}}
+    div(flex='45' layout='row')
+        div(flex='100').bg-egg.p-8
+            div(layout='column' layout-align='start start').pl-16
+                md-input-container().form-required
+                    label Время показа
+                    md-select(ng-model='outgoingCallOwner.realty.owner.showTime' required='')
+                        md-option(ng-value='show.id' ng-repeat="show in outgoingCallOwner.dictionary.showTime") {{show.name}}
+            div(flex='50' layout='row' layout-align='center center')
+                md-checkbox(aria-label='meetingOk' md-no-ink ng-model='addRealtyFull.realty.owner.meetingOk').md-primary.md-subhead.mb-0 Готов на встречу
+                //date-time-picker(ng-model="outgoingCallOwner.meetingTime" meeting='true' restart='outgoingCallOwner.newObjectRecieved' total-days="7" start-date='outgoingCallOwner.today')
+            div(layout='row').pl-16
+                div(layout='row' flex='90' layout-align='start center')
+                    span().md-subhead Готов платить комиссию
+                    md-input-container().add-realty-full__comission-percent.ml-16
+                        input(type="text" ng-model='outgoingCallOwner.realty.owner.comission')
+                    span().md-subhead.ml-16 %
+div(layout='row').mt-16
+    div(flex='55')
+        md-input-container(md-no-float layout='row').form-required
+            label Комментарий о собственнике
+            textarea(type="text" require='' ng-model='outgoingCallOwner.realty.owner.comment')

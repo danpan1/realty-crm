@@ -19,6 +19,21 @@ class TrainingLesson {
     this.mdDialog = $mdDialog;
     this.$state = $state;
     this.lessonNumber = this.$stateParams.number - 1;
+    this.lessons = lessons;
+    console.log(this.lessons);
+    console.log('this.$stateParams.number: ');
+    console.log(this.$stateParams.number);
+    
+    if (parseInt(this.$stateParams.number) <= 6) {
+      this.lesson = this.lessons[parseInt(this.$stateParams.number) + 1];
+    }
+    else if (parseInt(this.$stateParams.number) == 7) {
+      this.lesson = this.lessons[0];
+    }
+    else if (parseInt(this.$stateParams.number) == 8) {
+      this.lesson = this.lessons[1];
+    }
+    console.log(this.lesson);
     
     this.autorun(function () {
 
@@ -42,10 +57,6 @@ class TrainingLesson {
       }
 
     });
-    
-    if (this.$stateParams.number <= 6) this.lesson = lessons[parseInt(this.$stateParams.number) + 1];
-    else if (this.$stateParams.number == 7) this.lesson = lessons[0];
-    else if (this.$stateParams.number == 8) this.lesson = lessons[1];
 
   }
 

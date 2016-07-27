@@ -19,6 +19,10 @@ export const RentDetailsSchema = new SimpleSchema({
     }),
     optional: true
   },
+  balconGlassed: {
+    type: Boolean,
+    optional: true
+  },
   //Саунзел
   bathroom: {
     type: Number,
@@ -26,6 +30,19 @@ export const RentDetailsSchema = new SimpleSchema({
     allowedValues: dictionary.bathroom.map(function (item) {
       return item.id;
     }),
+    optional: true
+  },
+  bathQty: {
+    type: Number,
+    optional: true
+  },
+  bathCombined: {
+    type: Boolean,
+    optional: true
+  },
+  //Коммунальные услуги
+  communal: {
+    type: Number,
     optional: true
   },
   //Состав съемщиков
@@ -169,10 +186,14 @@ export const RentDetailsSchema = new SimpleSchema({
   },
   // площадь комнат
   roomsSquare: {
-    type: [roomSquareSchema],
-    label: 'roomsSquare',
+    type: String,
     optional: true
   },
+  //roomsSquare: {
+  //  type: [roomSquareSchema],
+  //  label: 'roomsSquare',
+  //  optional: true
+  //},
   //Вид из окна в фильтре
   windowView: {
     type: Number,
