@@ -36,12 +36,12 @@ class Layout {
           {
             name: '150 за 6',
             uisref: 'crm.training.list',
-            visible: !(user.roles && user.roles.indexOf('couching') === -1)
+            visible: (user.roles && user.roles.indexOf('couching') !== -1)
           },
           {
             name: '150 за 6',
             href: 'http://murigin.ru/intensiv/',
-            visible: (user.roles && user.roles.indexOf('couching') === -1)
+            visible: !(user.roles && user.roles.indexOf('couching') !== -1)
           }
         ];
 
