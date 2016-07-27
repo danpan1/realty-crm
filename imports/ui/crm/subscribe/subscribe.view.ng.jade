@@ -1,0 +1,8 @@
+div(md-whiteframe='2')
+    md-tabs(md-selected="subscribe.selectedTab" md-dynamic-height).subscribe__center-tabs
+        md-tab(ng-click='subscribe.setActiveTab("rent")' label='Аренда')
+            md-content
+                subscribe-rent()
+        md-tab(ng-click='subscribe.setActiveTab("sell")' label='Продажа')
+            md-content
+                subscribe-sell()

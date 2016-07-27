@@ -1,0 +1,33 @@
+div(layout='row' layout-align='space-between start').p-16
+    div(ng-repeat='segment in subscribeRent.segments' flex='30').p-0.md-whiteframe-2dp
+        h2.ph-8.mt-16 Сегмент
+        h1.ph-8.mt-8 {{segment.name}}
+        hr.blue-line
+        div.ph-8.mt-8 1 собственник = {{segment.price}} ₽
+        div.ph-8.mt-8 + не показывается другим в океане
+        div(layout='row' layout-align='space-between start').ph-8.mt-16
+            div Выбранное количество
+            md-input-container().add-realty-full__comission-percent.ml-16
+                input(type="number" ng-model='segment.qty' ng-change='subscribeRent.onCountCost()')
+div(layout='row' layout-align='center center')
+    span Пополнить баланс на сумму 6500Р или любую другую
+    md-input-container().add-realty-full__comission-percent.ml-16
+        input(type="number" ng-model='subscribeRent.fillBalance')
+    span Р
+    md-button(ng-cilck='subscribeRent.onFillBalance()').md-raised.md-success Пополнить
+hr.mt-16.mb-32
+div
+    h1 Пакеты с подпиской на месяц
+    div(layout='row' layout-align='space-between start').p-16.mt-32
+        div(ng-repeat='segment in subscribeRent.monthSegments' flex='25').p-0.md-whiteframe-2dp
+            h2.ph-8.mt-16 Сегмент
+            h1.ph-8.mt-8 {{segment.name}}
+            hr
+            div.ph-8.mt-16 {{segment.owners}} Собственников
+            hr
+            div Не показывать другим
+            div В океане 1 шт. - {{segment.price}}Р
+            hr
+            div(layout='row' layout-align='space-between start').ph-8.mt-16
+                md-checkbox(md-no-ink ng-change='subscribeRent.onCountCost()' ng-model='segment.subscribed').md-primary.md-subhead.mb-0 {{segment.subscribePrice}} Р
+md-button(ng-cilck='subscribeRent.onSubscribe()').md-raised.md-success Приобрести на сумму {{subscribeRent.fullCost}} Р
