@@ -21,6 +21,8 @@ class Layout {
     this.$mdSidenav = $mdSidenav;
     this.mdDialog = $mdDialog;
     this.select = 1;
+    this.selectCallCenter = 1;
+    this.selectAddRole = 1;
     this.autorun(function () {
       let user = Meteor.user();
       if (user) {
@@ -28,6 +30,8 @@ class Layout {
         this.user = user;
         // debugger
         this.sideNavItems = [
+          {name: 'Колл-центр', uisref: 'call-center.outgoing', visible: user.roles && user.roles.indexOf("staff") > -1},
+          {name: 'Добавить ученика', uisref: 'crm.add-role', visible: user.roles && user.roles.indexOf("staff") > -1},
           {name: 'Океан объектов', uisref: 'crm.realty-new-list({operation: \'rent\', page: 1})', visible: true},
           {name: 'Мои объекты', uisref: 'crm.realty.list.my', visible: true},
           {name: 'Мои клиенты', uisref: 'crm.clients.list.my' + '({status: \'realtor\'})', visible: true},
@@ -96,15 +100,15 @@ class Layout {
     return 'Добавить';
   }
 
-  selectCallCenter() {
-    this.selectCallCenter = 1;
-    return 'Колл-центр';
-  }
+  // onSelectCallCenter() {
+  //   this.selectCallCenter = 1;
+  //   return 'Колл-центр';
+  // }
 
-  selectAddRole() {
-    this.selectAddRole = 1;
-    return 'Добавить роль';
-  }
+  // onSelectAddRole() {
+  //   this.selectAddRole = 1;
+  //   return 'Добавить роль';
+  // }
 
   toggleList() {
     this.$mdSidenav('right').toggle();

@@ -45,9 +45,9 @@ class RealtyCard {
     if(this.realty.type < 3) this.salePrice = parseInt(this.realty.price /100 * (this.realty.price > 7000000 ? 3 : 4));
     
     if((vm.realty.owner && vm.realty.owner.isComission) || (vm.realty.operator && vm.realty.operator.meetingTime) || (vm.realty.realtor && vm.realty.realtor.isExclusive)){
-      if (vm.realty.realtor && vm.realty.realtor.isExclusive) vm.reason = 'exclusive';
-      else if (vm.realty.owner && vm.realty.owner.isComission) vm.reason = 'comission';
-      else if (vm.realty.operator && vm.realty.operator.meetingTime) {
+      //if (vm.realty.realtor && vm.realty.realtor.isExclusive) vm.reason = 'exclusive';
+      //else if (vm.realty.owner && vm.realty.owner.isComission) vm.reason = 'comission';
+      /*else*/ if (vm.realty.operator && vm.realty.operator.meetingTime) {
         vm.reason = 'meeting';
         let meet = vm.realty.operator.meetingTime;
         let meetingMonth = meet.getMonth();
@@ -69,7 +69,7 @@ class RealtyCard {
         }
         vm.meetingText = 'Встреча '+meetText;
       }
-      let newTime = new Date().getTime();
+      /*let newTime = new Date().getTime();
       try {
         let time = (vm.realty.operator.oceanAdd - newTime) / 1000;
         let seconds = 1500 + parseInt(time);
@@ -84,7 +84,7 @@ class RealtyCard {
                 this.minutes -= 1;
                 this.seconds = 59;
               }
-              if (this.minutes < 10 && this.realty.status != 'taken'/* && (vm.reason == 'exclusive' || vm.reason == 'comission')*/) this.updateRealty(this.realty._id, 'skip');
+              if (this.minutes < 10 && this.realty.status != 'taken') this.updateRealty(this.realty._id, 'skip');
               //else if (this.minutes < 5 && this.realty.status != 'taken' && vm.reason == 'meeting') this.updateRealty(this.realty._id, 'skip');
               else this.timeoutFunc();
             },1000)
@@ -96,7 +96,7 @@ class RealtyCard {
         }
       } catch (error) {
         console.log(error);
-      }
+      }*/
     }
 
   }

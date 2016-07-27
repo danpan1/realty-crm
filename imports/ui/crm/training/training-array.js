@@ -57,7 +57,7 @@ export const lessons = [
         title:'Поиск объектов',
         descr:'',
         picture:'img/common/training2.jpg',
-        videoLink:'https://www.youtube.com/embed/cRbciSAvI9g?list=RDHr8GQwFBpU0',
+        videoLink:'http://world-invest.pro/training/150za6_3/2.html',
         done: false,
         available: false,
         tasks: [
