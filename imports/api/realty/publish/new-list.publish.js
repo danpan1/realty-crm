@@ -198,7 +198,7 @@ if (Meteor.isServer) {
           }
 
           if (query && !_.isEmpty(query)) {
-            selector.$and.push(query);
+            selector.$and.push({$or : query});
           }
           /* END РАЙОНЫ МЕТРО */
 
