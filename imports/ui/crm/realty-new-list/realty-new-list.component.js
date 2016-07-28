@@ -39,15 +39,10 @@ class RealtyNewList {
       } else {
         console.log(res.rent);
         if (res.rent) {
-          if (res.rent.all && res.rent.all.qty > 0) {
-            this.filterTypeList = [this.dictionary.filterType[3]];
-            this.filterTypeList[0].qty = res.rent.all.qty;
-          } else {
-            for(let property in res.rent) {
-              console.log(property);
-              for(let type of this.filterTypeList) {
-                if (type.codename == property) type.qty = res.rent[property].qty;
-              }
+          for(let property in res.rent) {
+            console.log(property);
+            for(let type of this.filterTypeList) {
+              if (type.codename == property) type.qty = res.rent[property].qty;
             }
           }
         }
@@ -114,7 +109,8 @@ class RealtyNewList {
           type: vm.getReactively('filterType'),
           subways: vm.getReactively('filter.subways'),
           districts: vm.getReactively('filter.districts')
-        }
+        },
+        this.filterType
       ];
     }, {
       onReady: function () {

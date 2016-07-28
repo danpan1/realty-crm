@@ -22,8 +22,11 @@ class RealtyCardPurchase {
       this.price = this.dictionary.priceList[this.realty.operator.oceanPrice].price;
       this.userBalance = this.user.profile.balance;
       this.change = (this.price - this.userBalance > 0) ? (this.price - this.userBalance < 1000) ? 1000 : this.price - this.userBalance : false;
-
     }
+    for (let subscribtion of this.subscribtion.userSubscribtions) {
+      if(subscribtion.name == this.subscribtion.objectType && subscribtion.qty > 0) this.objectType = subscribtion.name;
+    }
+
   }
   /**
    * @param ev - event
@@ -38,6 +41,16 @@ class RealtyCardPurchase {
       preserveScope: true,
       targetEvent: ev,
       clickOutsideToClose: true
+    });
+  }
+
+  takeObjectViaSubscribtion () {
+    Meteor.call('takeObjectViaSubscribtion', this.realty._id, this.objectType, (err, result) => {
+      if (err) {
+        console.log('err: ', err);
+      } else {
+        console.log(result);
+      }
     });
   }
 
@@ -115,7 +128,8 @@ export default angular.module(moduleName, [
     //userpaid: '=',
     con: '<',
     user: '<',
-    parseDetails: '='
+    parseDetails: '=',
+    subscribtion: '<'
   },
   controllerAs: moduleName,
   controller: RealtyCardPurchase

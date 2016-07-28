@@ -1,6 +1,7 @@
 //realty-new-list-filter(filter-modal-opened='realtyNewList.filterModalOpened' use-saved-filter='realtyNewList.useSavedFilter(filter)' user='realtyNewList.user' ng-if='realtyNewList.user && realtyNewList.filterModalOpened' modal='realtyNewList.filterModalOpened')
 div(md-whiteframe="1")
     div(layout='row' layout-align='space-between none').ph-16
+        div realtyNewList.filterType {{realtyNewList.filterType}}
         div(flex='55' layout='row' layout-align='space-between none')
             md-input-container(flex='60').ml-16
                 md-select(ng-model='realtyNewList.filterType' multiple='true' aria-label='Тип фильтра' ng-change='realtyNewList.suitRealty()')
@@ -34,5 +35,6 @@ div(ng-if='realtyNewList.loaded')
                     page-from='realtyNewList'
                     realty='realty'
                     slider='realtyNewList.setSliderImages(images)'
-                    user='realtyNewList.user')
+                    user='realtyNewList.user'
+                    subscribtion='realtyNewList.filterTypeList')
     pagination-buttons(ng-if='realtyNewList.loaded' uisref='\'crm.realty-new-list\'' page='realtyNewList.page' pagescount='realtyNewList.pagesCount')

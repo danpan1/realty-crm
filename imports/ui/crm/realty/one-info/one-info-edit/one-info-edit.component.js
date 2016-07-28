@@ -25,32 +25,33 @@ class OneInfoEdit {
         this.compositionSelected[this.realty.details.composition[i]] = true;
     }
   }
-  
+  /*
   addRoomSquare () {
     console.log(this.realty.details.roomsSquare.length)
     this.realty.details.roomsSquare.push(0);
   }
-  
+  */
   ngOnInit(price) {
     if(!this.realty.details.composition) this.realty.details.composition = new Array(this.dictionary.composition.length);
   }
   
   onChangeRealty (realtyId) {
-      this.realty.address.street = this.realty.address.street.value || this.realty.address.street; 
-      this.realty.address.house = this.realty.address.house.value || this.realty.address.house;
-      this.showLoader = true;
-      
-      Realty.update({_id: realtyId}, {
-        $set: this.realty
-      }, (error) => {
-        if(error) {
-          console.log(error)
-          this.showLoader, this.show = false;
-        } else {
-          console.log('call recieved newObj');
-          this.showLoader, this.show = false;
-        }
-      });
+    if (typeof this.realty.details.roomsSquare != 'string') this.realty.details.roomsSquare = '';
+    this.realty.address.street = this.realty.address.street.value || this.realty.address.street; 
+    this.realty.address.house = this.realty.address.house.value || this.realty.address.house;
+    this.showLoader = true;
+    
+    Realty.update({_id: realtyId}, {
+      $set: this.realty
+    }, (error) => {
+      if(error) {
+        console.log(error)
+        this.showLoader, this.show = false;
+      } else {
+        console.log('call recieved newObj');
+        this.showLoader, this.show = false;
+      }
+    });
   }  
   
 }

@@ -74,6 +74,7 @@ class OneReview {
 
   /* Сохранение описания и заголовка на сервер */
   saveNewDescription(id) {
+    if (typeof this.realty.details.roomsSquare != 'string') this.realty.details.roomsSquare = '';
     console.log(id);
     if (this.uploadImagesNormalLength !== 0 || this.uploadThumbnailsLength !== 0) {
       console.log(this.uploadImagesNormalLength);

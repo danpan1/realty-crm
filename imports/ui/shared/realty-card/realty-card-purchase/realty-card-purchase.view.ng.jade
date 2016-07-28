@@ -1,5 +1,6 @@
 md-button(ng-if='!realtyCardPurchase.cardContacts.realtyPhone && !realtyCardPurchase.con' ng-disabled='realtyCardPurchase.takeInProgress' ng-click='realtyCardPurchase.takeRealty(realtyCardPurchase.realty._id, $event, realtyCardPurchase.price)').md-raised.md-warn.ml-0.mr-16.ph-16.mt-8 
     | {{realtyCardPurchase.takeInProgress ? 'Взятие...' : 'Взять за ' + realtyCardPurchase.price + ' рублей' }}
+md-button(ng-click='realtyCardPurchase.takeObjectViaSubscribtion()' ng-if='realtyCardPurchase.objectType') Взять по подписке "{{realtyCardPurchase.objectType}}"
 div(ng-if='realtyCardPurchase.con')
     //md-button(ng-if='!realtyCardPurchase.userpaid' ng-click='realtyCardPurchase.takeRealty(realtyCardPurchase.realty._id, $event)').md-primary.mh-0.mt-0 Показать телефон
     md-button(ng-if='realtyCardPurchase.realty.status != "connection" && realtyCardPurchase.realty.status != "taken"' ng-disabled='realtyCardPurchase.takeInProgress' ng-click='realtyCardPurchase.takeRealty(realtyCardPurchase.realty._id, $event, realtyCardPurchase.price, "connection")').ml-0.mr-16.ph-16.mt-8 {{realtyCardPurchase.takeInProgress ? 'Взятие...' : realtyCardPurchase.purchaseText || 'Взять объект'}}
