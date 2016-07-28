@@ -24,14 +24,14 @@ class AddRealtyFull {
       type: 4,
       address: {},
       details: {
-        roomsSquare: [],
+        // roomsSquare: [],
         depositTime : 1
       }
     };
     this.realty.owner = {
       comission: 100,
       isComission: true
-    }
+    };
     this.metroTransport = 0;
     this.activeTab = 0;
     //fake selects Аренда Москва Квартиры
