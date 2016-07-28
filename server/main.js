@@ -7,6 +7,7 @@ import '../imports/api/counts';
 import '../imports/api/users';
 import '../imports/api/locations';
 import '../imports/api/couching';
+import '../imports/api/subscribe';
 import '../imports/api/agents';
 import '../imports/api/robo-invoices';
 import '../imports/api/robo-invoices/robokassa.method';

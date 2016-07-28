@@ -29,8 +29,31 @@ class RealtyNewList {
     this.dictionary = dictionary;
     this.stateParams = $stateParams;
     this.state = $state;
-    this.filterType = 2;
+    //this.filterType = 2;
     this.filterCity = 0;
+    this.filterTypeList = this.dictionary.filterType;
+
+    Meteor.call('checkSubscribe', (err, res) => {
+      if (err) {
+        console.log('==== insertSubscribe ERROR', err);
+      } else {
+        console.log(res.rent);
+        if (res.rent) {
+          if (res.rent.all && res.rent.all.qty > 0) {
+            this.filterTypeList = [this.dictionary.filterType[3]];
+            this.filterTypeList[0].qty = res.rent.all.qty;
+          } else {
+            for(let property in res.rent) {
+              console.log(property);
+              for(let type of this.filterTypeList) {
+                if (type.codename == property) type.qty = res.rent[property].qty;
+              }
+            }
+          }
+        }
+      }
+    });
+
     //this.filterModalOpened = false;
     
     /*switch ($stateParams.operation) {

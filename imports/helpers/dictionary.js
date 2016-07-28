@@ -92,9 +92,12 @@ export const dictionary = {
     {id: 4, name: '4'}
   ],
   filterType: [
-    {id: 0, name: 'Аренда'},
-    {id: 1, name: 'Продажа'},
-    {id: 2, name: 'Аренда и Продажа'},
+    {id: 0, name: 'Аренда "Эконом"', codename: 'econom', max: 25},
+    {id: 1, name: 'Аренда "Бизнес"', codename: 'business', max: 25},
+    {id: 2, name: 'Аренда "Премиум"', codename: 'premium', max: 25},
+    {id: 3, name: 'Аренда "Я все могу"', codename: 'all', max: 75}
+    /*{id: 1, name: 'Продажа'},
+    {id: 2, name: 'Аренда и Продажа'},*/
   ],
   isNewBuilding: [
     {id: 0, name: 'Вторичка'},
