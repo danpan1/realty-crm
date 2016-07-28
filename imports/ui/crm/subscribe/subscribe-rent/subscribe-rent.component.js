@@ -23,7 +23,7 @@ class SubscribeRent {
       price += segment.price * segment.qty;
     }
     for (let segment of this.monthSegments) {
-      if (segment.subscribed) price += segment.price;
+      if (segment.subscribed) price += segment.subscribePrice;
     }
     this.fullCost = price;
     console.log(this.fullCost);

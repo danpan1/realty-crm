@@ -1,16 +1,19 @@
 export const segments = [
   {
-    name: 'Эконом',
+    visualName: 'Эконом',
+    name: 'econom',
     price: 90,
     qty: 0
   },
   {
-    name: 'Бизнес',
+    visualName: 'Бизнес',
+    name: 'business',
     price: 180,
     qty: 0
   },
   {
-    name: 'Премиум',
+    visualName: 'Премиум',
+    name: 'premium',
     price: 270,
     qty: 0
   }
@@ -18,28 +21,32 @@ export const segments = [
 
 export const monthSegments = [
   {
-    name: 'Эконом',
+    visualName: 'Эконом',
+    name: 'econom',
     owners: 25,
     price: 30,
     subscribePrice: 990,
     subscribed: false
   },
   {
-    name: 'Бизнес',
+    visualName: 'Бизнес',
+    name: 'business',
     owners: 25,
     subscribePrice: 1990,
     price: 60,
     subscribed: false
   },
   {
-    name: 'Премиум',
+    visualName: 'Премиум',
+    name: 'premium',
     owners: 25,
     subscribePrice: 2990,
     price: 90,
     subscribed: false
   },
   {
-    name: 'Я все могу',
+    visualName: 'Я все могу',
+    name: 'all',
     owners: 75,
     subscribePrice: 4990,
     price: 60,

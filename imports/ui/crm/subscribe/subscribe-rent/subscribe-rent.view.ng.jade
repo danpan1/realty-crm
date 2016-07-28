@@ -1,7 +1,7 @@
 div(layout='row' layout-align='space-between start').p-16
     div(ng-repeat='segment in subscribeRent.segments' flex='30').p-0.md-whiteframe-2dp
         h2.ph-8.mt-16 Сегмент
-        h1.ph-8.mt-8 {{segment.name}}
+        h1.ph-8.mt-8 {{segment.visualName}}
         hr.blue-line
         div.ph-8.mt-8 1 собственник = {{segment.price}} ₽
         div.ph-8.mt-8 + не показывается другим в океане
@@ -21,13 +21,14 @@ div
     div(layout='row' layout-align='space-between start').p-16.mt-32
         div(ng-repeat='segment in subscribeRent.monthSegments' flex='25').p-0.md-whiteframe-2dp
             h2.ph-8.mt-16 Сегмент
-            h1.ph-8.mt-8 {{segment.name}}
+            h1.ph-8.mt-8 {{segment.visualName}}
             hr
             div.ph-8.mt-16 {{segment.owners}} Собственников
             hr
             div Не показывать другим
-            div В океане 1 шт. - {{segment.price}}Р
+            div в океане 1 шт. - {{segment.price}}Р
             hr
             div(layout='row' layout-align='space-between start').ph-8.mt-16
                 md-checkbox(md-no-ink ng-change='subscribeRent.onCountCost()' ng-model='segment.subscribed').md-primary.md-subhead.mb-0 {{segment.subscribePrice}} Р
-md-button(ng-cilck='subscribeRent.onSubscribe()').md-raised.md-success Приобрести на сумму {{subscribeRent.fullCost}} Р
+div(layout='row' layout-align='ceenter center').mv-16
+    md-button(ng-cilck='subscribeRent.onSubscribe()').md-raised.md-success Приобрести на сумму {{subscribeRent.fullCost}} Р
