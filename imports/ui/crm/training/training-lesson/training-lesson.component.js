@@ -46,7 +46,7 @@ class TrainingLesson {
               console.log('==== checkLessonAccess ERROR', err);
             } else {
               console.log(lesson)
-              if (!lesson.available) vm.noAccessShow();
+              if (lesson.lessonNumber > 1) vm.noAccessShow();
               this.$timeout(()=>{
                 vm.lessonData = lesson;
               },100)
