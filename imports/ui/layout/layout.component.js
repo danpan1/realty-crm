@@ -33,10 +33,11 @@ class Layout {
           {name: 'Колл-центр', uisref: 'call-center.outgoing', visible: user.roles && user.roles.indexOf("staff") > -1},
           {name: 'Добавить ученика', uisref: 'crm.add-role', visible: user.roles && user.roles.indexOf("staff") > -1},
           {name: 'Океан объектов', uisref: 'crm.realty-new-list({operation: \'rent\', page: 1})', visible: true},
+          {name: 'Подписка', uisref: 'crm.subscribe', visible: true},
           {name: 'Мои объекты', uisref: 'crm.realty.list.my', visible: true},
           {name: 'Мои клиенты', uisref: 'crm.clients.list.my' + '({status: \'realtor\'})', visible: true},
-          {name: 'Документы', uisref: 'crm.documents', visible: true},
-          {name: 'Помощь', href: 'https://vk.com/write3296627', visible: true},
+          {name: 'Документы', uisref: 'crm.documents', visible: !user.roles || user.roles.indexOf("staff") < 0},
+          {name: 'Помощь', href: 'https://vk.com/write3296627', visible: !user.roles || user.roles.indexOf("staff") < 0},
           {
             name: '150 за 6',
             uisref: 'crm.training.list',
