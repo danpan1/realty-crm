@@ -2,6 +2,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {SubscribeTypeSchema} from './schemas/type.schema';
 export const Subscribe = new Mongo.Collection('subscribe');
 
 var Schema = {};
@@ -10,15 +11,16 @@ Schema.Subscribe = new SimpleSchema({
     type: String
   },
   rent: {
-    type: SubscribeType,
+    type: SubscribeTypeSchema,
     optional: true
   },
   sell: {
-    type: SubscribeType,
+    type: SubscribeTypeSchema,
     optional: true
   },
 });
 
+/*
 const SubscribeType = new SimpleSchema({
   econom:{
     type: SubscribeDetails,
@@ -41,14 +43,17 @@ const SubscribeType = new SimpleSchema({
 
 const SubscribeDetails = new SimpleSchema({
   qty:{
-    type: Number
+    type: Number,
+    optional: true
   },
   payDate: {
-    type: Date
+    type: Date,
+    optional: true
   },
   paid: {
-    type: Boolean
+    type: Boolean,
+    optional: true
   }
-});
+});*/
 
 Subscribe.attachSchema(Schema.Subscribe);

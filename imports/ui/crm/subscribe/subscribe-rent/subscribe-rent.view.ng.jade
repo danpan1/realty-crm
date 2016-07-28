@@ -8,13 +8,13 @@ div(layout='row' layout-align='space-between start').p-16
         div(layout='row' layout-align='space-between start').ph-8.mt-16
             div Выбранное количество
             md-input-container().add-realty-full__comission-percent.ml-16
-                input(type="number" ng-model='segment.qty' ng-change='subscribeRent.onCountCost()')
+                input(type="number" ng-model='segment.qty' ng-change='subscribeRent.onBalanceCount()')
 div(layout='row' layout-align='center center')
     span Пополнить баланс на сумму 6500Р или любую другую
     md-input-container().add-realty-full__comission-percent.ml-16
         input(type="number" ng-model='subscribeRent.fillBalance')
     span Р
-    md-button(ng-cilck='subscribeRent.onFillBalance()').md-raised.md-success Пополнить
+    md-button(ng-click='subscribeRent.onFillBalance()').md-raised.md-success Пополнить
 hr.mt-16.mb-32
 div
     h1 Пакеты с подпиской на месяц
@@ -28,7 +28,7 @@ div
             div Не показывать другим
             div в океане 1 шт. - {{segment.price}}Р
             hr
-            div(layout='row' layout-align='space-between start').ph-8.mt-16
-                md-checkbox(md-no-ink ng-change='subscribeRent.onCountCost()' ng-model='segment.subscribed').md-primary.md-subhead.mb-0 {{segment.subscribePrice}} Р
-div(layout='row' layout-align='ceenter center').mv-16
-    md-button(ng-cilck='subscribeRent.onSubscribe()').md-raised.md-success Приобрести на сумму {{subscribeRent.fullCost}} Р
+            div(layout='row' layout-align='space-between start').ph-16.mv-16
+                md-checkbox(ng-disabled='segment.disabled' md-no-ink ng-change='subscribeRent.onCountCost()' ng-model='segment.subscribed').md-primary.md-subhead.mb-0 {{segment.subscribePrice}} Р
+div(layout='row' layout-align='center center').mv-16
+    md-button(ng-click='subscribeRent.onSubscribe()').md-raised.md-success Приобрести на сумму {{subscribeRent.fullCost}} Р

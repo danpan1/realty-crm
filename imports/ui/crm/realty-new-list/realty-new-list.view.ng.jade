@@ -2,9 +2,11 @@
 div(md-whiteframe="1")
     div(layout='row' layout-align='space-between none').ph-16
         div(flex='55' layout='row' layout-align='space-between none')
-            md-input-container(flex='40').ml-16
-                md-select(ng-model='realtyNewList.filterType' aria-label='Тип фильтра' ng-change='realtyNewList.suitRealty()')
-                    md-option(ng-value='type.id' ng-repeat='type in realtyNewList.dictionary.filterType') {{type.name}}
+            md-input-container(flex='60').ml-16
+                md-select(ng-model='realtyNewList.filterType' multiple='true' aria-label='Тип фильтра' ng-change='realtyNewList.suitRealty()')
+                    md-option(ng-value='type.id' flex='100' layout='row' layout-align='space-between center' ng-repeat='type in realtyNewList.filterTypeList').realty-new-list__special-option
+                        span {{type.name}} 
+                        span {{type.qty || 0}}/{{type.max}}
             //md-button(md-no-ink ui-sref='crm.client-bullets.list').realty-new-list__link Купить ПУЛИ
         md-input-container(flex='25')
             md-select(ng-model='realtyNewList.filterCity' aria-label='Выбрать город')
