@@ -6,6 +6,7 @@ import angularMeteor from 'angular-meteor';
 import {Realty} from '/imports/api/realty';
 import {CountsDan} from '/imports/api/counts';
 import {Clients} from '/imports/api/clients';
+import {Subscribe} from '/imports/api/subscribe';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import {dictionary} from '../../../helpers/dictionary';
 import {Locations} from '/imports/api/locations';
@@ -32,6 +33,26 @@ class RealtyNewList {
     //this.filterType = 2;
     this.filterCity = 0;
     this.filterTypeList = this.dictionary.filterType;
+
+    /*
+    vm.subscribe('mySubscribes', () => {
+      return [];
+    }, {
+      onReady: function (res) {
+        vm.$timeout(()=> {
+          console.log(res.rent);
+          if (res.rent) {
+            for(let property in res.rent) {
+              console.log(property);
+              for(let type of this.filterTypeList) {
+                if (type.codename == property) type.qty = res.rent[property].qty;
+              }
+            }
+          }
+        });
+      }
+    });
+    */
 
     Meteor.call('checkSubscribe', (err, res) => {
       if (err) {
@@ -128,6 +149,9 @@ class RealtyNewList {
     });
 
     vm.helpers({
+      /*subscribes: () => {
+        return Subscribe.findOne();
+      },*/
       realty: () => {
         return Realty.find({}, {
           sort: vm.getReactively('sort')

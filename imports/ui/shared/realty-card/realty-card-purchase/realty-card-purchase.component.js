@@ -24,7 +24,7 @@ class RealtyCardPurchase {
       this.change = (this.price - this.userBalance > 0) ? (this.price - this.userBalance < 1000) ? 1000 : this.price - this.userBalance : false;
     }
     for (let subscribtion of this.subscribtion.userSubscribtions) {
-      if(subscribtion.name == this.subscribtion.objectType && subscribtion.qty > 0) this.objectType = subscribtion.name;
+      if(subscribtion.codename == this.subscribtion.subscribeType && subscribtion.qty > 0) this.subscribeType = subscribtion.name;
     }
 
   }
@@ -45,7 +45,7 @@ class RealtyCardPurchase {
   }
 
   takeObjectViaSubscribtion () {
-    Meteor.call('takeObjectViaSubscribtion', this.realty._id, this.objectType, (err, result) => {
+    Meteor.call('takeObjectViaSubscribtion', this.realty._id, this.subscribeType, this.realty.type, (err, result) => {
       if (err) {
         console.log('err: ', err);
       } else {
