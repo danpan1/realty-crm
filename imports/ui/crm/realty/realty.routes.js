@@ -30,17 +30,17 @@ export default function routes($stateProvider) {
       url: '/info',
       template: '<one-info/>'
     })
-    .state('crm.realty.one.connections', {
-      url: '/connections?:assort',
-      template: '<one-connections/>',
-      controller: function ($state, $stateParams) {}
-    })
+    // .state('crm.realty.one.connections', {
+    //   url: '/connections?:assort',
+    //   template: '<one-connections/>',
+    //   controller: function ($state, $stateParams) {}
+    // })
     //.state('crm.realty.one.connections.email', {
-    .state('crm.realty.one.email', {
-      url: '/email?:clientId',
-      template: '<one-email/>',
-      controller: function ($state, $stateParams) {}
-    })
+    // .state('crm.realty.one.email', {
+    //   url: '/email?:clientId',
+    //   template: '<one-email/>',
+    //   controller: function ($state, $stateParams) {}
+    // })
     .state('crm.realty.list.new', {
       url: '/new',
       template: '<new-list/>'
@@ -54,8 +54,8 @@ export default function routes($stateProvider) {
       url: '/archive?:page',
       template: '<list-archive/>'
     })
-    .state('crm.realty.one.find', {
-      url: '/find?:searchType',
-      template: '<one-find/>'
-    });
+    // .state('crm.realty.one.find', {
+    //   url: '/find?:searchType',
+    //   template: '<one-find/>'
+    // });
 }
