@@ -68,10 +68,10 @@ export const RealtyRealtorSchema = new SimpleSchema({
     type: Number,
     optional: true
   },
-  /*clientpercent: {
+  clientpercent: {
     type: Number,
     optional: true
-  },*/
+  },
   partnerpercent: {
     type: Number,
     optional: true

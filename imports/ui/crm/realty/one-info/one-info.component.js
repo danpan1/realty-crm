@@ -14,6 +14,7 @@ class OneInfo {
   /* @ngInject */
   constructor($scope, $reactive, $state, $timeout, $stateParams, $mdDialog, $mdToast) {
     $reactive(this).attach($scope);
+    let vm = this;
     this.dictionary = dictionary;
     this.state = $state;
     this.$timeout = $timeout;
@@ -34,19 +35,20 @@ class OneInfo {
       }
     });
     function setConditions () {
-      if (this.realty) {
+      if (vm.realty) {
         for (var i in dictionary.conditions) {
-          this.currentConditions[i] = {};
+          vm.currentConditions[i] = {};
         }
-        if (this.realty.details.conditions) {
-          this.setActiveConditions(this.realty.details.conditions);
+        if (vm.realty.details.conditions) {
+          vm.setActiveConditions(vm.realty.details.conditions);
         }
       } else {
-        this.$timeout(() => {
+        vm.$timeout(() => {
           setConditions();
         }, 100);
       }
     }
+    setConditions();
     
   }
 
@@ -88,6 +90,7 @@ class OneInfo {
 
   realtyUpdate() {
 
+    if (typeof this.realty.details.roomsSquare != 'string') this.realty.details.roomsSquare = '';
 
     let value = this.realty.contacts[0].phones[0].phone.split('');
     for (var i in [1, 2, 3]) {

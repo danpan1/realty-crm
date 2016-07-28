@@ -43,11 +43,27 @@ if (Meteor.isServer) {
           price: {$gte: 150000},
           roomcount: 3
         }];
-
-        if (!segmentsClient) {
+        
+        if (!segmentsClient || !segmentsClient[0] || segmentsClient.indexOf(3) > -1 ) {
           segments = segments.concat(econom);
           segments = segments.concat(business);
           segments = segments.concat(premium);
+          console.log('segments none or 3');
+          console.log(segments);
+        } else {
+          for (var i in segmentsClient) {
+            if(parseInt(segmentsClient[i]) == 0) {
+              segments = segments.concat(econom);
+            }
+            if(parseInt(segmentsClient[i]) == 1) {
+              segments = segments.concat(business);
+            }
+            if(parseInt(segmentsClient[i]) == 2) {
+              segments = segments.concat(premium);
+            }
+          }
+          console.log('segments 0,1,2');
+          console.log(segments);
         }
 
         selector = {
@@ -67,7 +83,7 @@ if (Meteor.isServer) {
         ;
         if (search) {
 
-          if (search.type !== undefined) {
+          /*if (search.type !== undefined) {
             selector.type = search.type;
             if (search.type === 0) {
               selector.type = {$in: [3, 4]};
@@ -78,7 +94,7 @@ if (Meteor.isServer) {
             else if (search.type === 2) {
               selector.type = {$in: [1, 2, 3, 4]};
             }
-          }
+          }*/
 
           /* КОЛИЧЕСТВО КОМНАТ */
           if (search.roomcount && !_.isEmpty(search.roomcount)) {
@@ -234,6 +250,8 @@ if (Meteor.isServer) {
           status: 1,
           type: 1
         };
+        console.log('SELECTOR:');
+        console.log(selector);
         let realty = Realty.find(selector, options);
         let count = realty.count();
         let countId = CountsDan.upsert({_id: this.userId}, {count: count});

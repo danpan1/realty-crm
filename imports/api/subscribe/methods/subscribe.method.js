@@ -4,9 +4,22 @@ import {Subscribe} from '../subscribe.model.js';
 
 Meteor.methods({
   checkSubscribe,
-  insertSubscribe
+  insertSubscribe,
+  takeObjectViaSubscribtion
 });
 
+
+export function takeObjectViaSubscribtion (id, type) {
+
+  if (Meteor.isServer && Meteor.userId()) {
+
+    console.log('======= takeObjectViaSubscribtion =======');
+    console.log('id: '+id);
+    console.log('type: '+type);
+
+  }
+
+}
 
 export function checkSubscribe () {
 

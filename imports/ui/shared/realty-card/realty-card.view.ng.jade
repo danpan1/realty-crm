@@ -4,6 +4,8 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
 
         // 1-ая колонка - ID и Новая
         div(layout='column').newList_ID.md-body-1
+            div realtyCard.subscribeType {{realtyCard.subscribeType}}
+            div(ng-if='realtyCard.subscribeType != false') {{realtyCard.subscribeType == 'econom' ? 'Эконом' : realtyCard.subscribeType == 'business' ? 'Бизнес' : 'Премиум' }}
             div(ng-if='::realtyCard.realty.realtor.isExclusive').newList__blue-label.text-bold.pl-16.pr-8 Эксклюзив
             div(ng-if='::realtyCard.realty.owner.comission').newList__green-label.text-bold.pl-16.pr-8 Платит {{::realtyCard.realty.owner.comission}}% комиссии
             //div(ng-if='::realtyCard.realty.operator.meetingTime').newList__green-label.text-bold.pl-16.pr-8 Встреча {{::realtyCard.realty.operator.meetingTime | date:'dd.MM, HH:mm'}}
@@ -131,7 +133,7 @@ div(ng-class='{"newList__blue":realtyCard.realty.realtor.isExclusive, "newList__
             p 
                 | #[strong Комментарий колцентра:] {{realtyCard.realty.realtor.comment}}
             div(layout='row')
-                realty-card-purchase(ng-if='realtyCard.realty' parse-details='realtyCard.parseDetails' user='realtyCard.user' contacts='realtyCard.contacts' data='realtyCard.data' realty='realtyCard.realty')
+                realty-card-purchase(subscribtion='{objectType:realtyCard.subscribeType,userSubscribtions:realtyCard.subscribtion}' ng-if='realtyCard.realty' parse-details='realtyCard.parseDetails' user='realtyCard.user' contacts='realtyCard.contacts' data='realtyCard.data' realty='realtyCard.realty')
             div(ng-if='realtyCard.contacts.realtyPhone !== undefined')
                 //p(ng-if='!realtyCard.realtyIsTaken').md-title.text-normal Объект сохранен в раздел #[a(href='justa.html') «Мои объекты»]
                 p(ng-if='(realtyCard.reason == "meeting" || realtyCard.reason == "exclusive" || realtyCard.reason == "comission") && realtyCard.minutes >= 5').md-title.text-normal Собственник ждет звонка в течение&nbsp;
