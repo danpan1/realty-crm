@@ -6,28 +6,77 @@ import {_} from 'meteor/underscore';
 // import {Counts} from 'meteor/tmeasday:publish-counts';
 
 if (Meteor.isServer) {
-  Meteor.publish('newList', function (options, search) {
+  Meteor.publish('newList', function (options, search, segmentsClient) {
       let selector;
       if (this.userId) {
+        let segments = [];
+
+        let econom = [{
+          price: {$gte: 25000, $lt: 50000},
+          roomcount: 1
+        }, {
+          price: {$gte: 30000, $lt: 60000},
+          roomcount: 2
+        }, {
+          price: {$gte: 35000, $lt: 75000},
+          roomcount: 3
+        }];
+
+        let business = [{
+          price: {$gte: 50000, $lt: 75000},
+          roomcount: 1
+        }, {
+          price: {$gte: 60000, $lt: 120000},
+          roomcount: 2
+        }, {
+          price: {$gte: 70000, $lt: 150000},
+          roomcount: 3
+        }];
+
+        let premium = [{
+          price: {$gte: 75000},
+          roomcount: 1
+        }, {
+          price: {$gte: 120000},
+          roomcount: 2
+        }, {
+          price: {$gte: 150000},
+          roomcount: 3
+        }];
+
+        if (!segmentsClient) {
+          segments = segments.concat(econom);
+          segments = segments.concat(business);
+          segments = segments.concat(premium);
+        }
+
         selector = {
-          $or: [
-            {status: 'ocean'},
-            {status: 'transaction', transactionUser: this.userId},
-            {status: 'taken', 'realtor.id': this.userId}
+          $and: [
+            {
+              $or: [
+                {status: 'ocean'},
+                {status: 'transaction', transactionUser: this.userId},
+                {status: 'taken', 'realtor.id': this.userId}
+              ]
+            },
+            {
+              $or: segments
+            }
           ]
-        };
+        }
+        ;
         if (search) {
 
           if (search.type !== undefined) {
             selector.type = search.type;
-            if (search.type == 0) {
-              selector.type = {$in: [3,4]};
+            if (search.type === 0) {
+              selector.type = {$in: [3, 4]};
             }
-            else if (search.type == 1) {
-              selector.type = {$in: [1,2]};
+            else if (search.type === 1) {
+              selector.type = {$in: [1, 2]};
             }
-            else if (search.type == 2) {
-              selector.type = {$in: [1,2,3,4]};
+            else if (search.type === 2) {
+              selector.type = {$in: [1, 2, 3, 4]};
             }
           }
 
@@ -90,8 +139,8 @@ if (Meteor.isServer) {
 
           /* ТИП ОПЕРАЦИИ 1-продажа квартир вторичных 2-долгосрочная аренда квартир */
           /*if (search.type) {
-            selector.type = search.type;
-          }*/
+           selector.type = search.type;
+           }*/
           if (search.status) {
             selector.status = search.status;
           }
@@ -142,16 +191,14 @@ if (Meteor.isServer) {
           }
 
           if (search.street) {
-            query.push({'address.street' : search.street});
+            query.push({'address.street': search.street});
             if (search.house) {
-              query.push({'address.house' : search.house});
+              query.push({'address.house': search.house});
             }
           }
 
           if (query && !_.isEmpty(query)) {
-            selector.$or[0].$or = query;
-            selector.$or[1].$or = query;
-            selector.$or[2].$or = query;
+            selector.$and.push({$or : query});
           }
           /* END РАЙОНЫ МЕТРО */
 
@@ -195,5 +242,6 @@ if (Meteor.isServer) {
       }
 
     }
-  );
+  )
+  ;
 }
