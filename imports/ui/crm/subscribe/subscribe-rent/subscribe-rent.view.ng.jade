@@ -1,34 +1,34 @@
-div(layout='row' layout-align='space-between start').p-16
+div(layout='row' layout-align='space-around start').p-16
     div(ng-repeat='segment in subscribeRent.segments' flex='30').p-0.md-whiteframe-2dp
-        h2.ph-8.mt-16 Сегмент
-        h1.ph-8.mt-8 {{segment.visualName}}
-        hr.blue-line
-        div.ph-8.mt-8 1 собственник = {{segment.price}} ₽
-        div.ph-8.mt-8 + не показывается другим в океане
-        div(layout='row' layout-align='space-between start').ph-8.mt-16
-            div Выбранное количество
-            md-input-container().add-realty-full__comission-percent.ml-16
-                input(type="number" ng-model='segment.qty' ng-change='subscribeRent.onBalanceCount()')
-div(layout='row' layout-align='center center')
-    span Пополнить баланс на сумму 6500Р или любую другую
-    md-input-container().add-realty-full__comission-percent.ml-16
-        input(type="number" ng-model='subscribeRent.fillBalance')
-    span Р
-    md-button(ng-click='subscribeRent.onFillBalance()').md-raised.md-success Пополнить
-hr.mt-16.mb-32
+        h3.ph-16.mt-16.mb-0.pt-8.subscribe__calc-segment Сегмент
+        h1.ph-16.mt-4.mb-0.subscribe__calc-name {{segment.visualName}}
+        hr.blue-line.subscribe__calc-line
+        div.ph-16.mt-16.subscribe__calc-text 1 собственник = {{segment.price}} ₽
+        div.ph-16.mt-8.subscribe__calc-text + не показывается другим в океане
+        div(layout='row' layout-align='space-between start').ph-16.mv-16.subscribe__calc-container
+            div(flex='80').subscribe__calc-qty.mt-8 Выбранное количество
+            md-input-container(flex='20').subscribe__calc-comission-percent.mv-0
+                input(type="number" ng-model='segment.qty' ng-change='subscribeRent.onBalanceCount()').ta-c
+div(layout='row' layout-align='center start').mt-16
+    span.subscribe__calc-fillbalance-text Пополнить баланс на сумму {{subscribeRent.fillBalance}}Р или любую другую
+    md-input-container().subscribe__calc-fillbalance-input.ml-16.mv-0
+        input(type="number" ng-model='subscribeRent.fillBalance').mv-0
+    span.subscribe__calc-fillbalance-text Р
+    md-button(ng-click='subscribeRent.onFillBalance()').md-raised.md-success.mt-0.ml-16 Пополнить баланс
+hr.mt-16.mb-32.subscribe__hr
 div
-    h1 Пакеты с подпиской на месяц
-    div(layout='row' layout-align='space-between start').p-16.mt-32
-        div(ng-repeat='segment in subscribeRent.monthSegments' flex='25').p-0.md-whiteframe-2dp
-            h2.ph-8.mt-16 Сегмент
-            h1.ph-8.mt-8 {{segment.visualName}}
-            hr
-            div.ph-8.mt-16 {{segment.owners}} Собственников
-            hr
-            div Не показывать другим
-            div в океане 1 шт. - {{segment.price}}Р
-            hr
-            div(layout='row' layout-align='space-between start').ph-16.mv-16
-                md-checkbox(ng-disabled='segment.disabled' md-no-ink ng-change='subscribeRent.onCountCost(segment.name, segment.subscribed)' ng-model='segment.subscribed').md-primary.md-subhead.mb-0 {{segment.subscribePrice}} Р
+    h1.subscribe__month-title.ta-c.mb-0 Пакеты с подпиской на месяц
+    div(layout='row' layout-align='space-between start').p-16.mt-16
+        div(ng-repeat='segment in subscribeRent.monthSegments' flex='25').p-0.subscribe__month-block
+            h3.ph-32.mb-0.mt-8.subscribe__calc-segment {{ $index == 3 ? 'Все сегменты' : 'Сегмент' }}
+            h1.ph-32.mv-0.subscribe__calc-name {{segment.visualName}}
+            hr.subscribe__month-line
+            div.ph-32.mv-16.subscribe__month-text {{segment.owners}} Собственников
+            hr.subscribe__month-line
+            div.ph-32.mt-16.subscribe__month-text Не показывается другим в океане
+            hr.subscribe__month-line
+            div(layout='row' layout-align='space-between start').ph-32.mv-16
+                md-checkbox(ng-disabled='segment.disabled' md-no-ink ng-change='subscribeRent.onCountCost(segment.name, segment.subscribed)' ng-model='segment.subscribed').md-primary.md-subhead.mb-0 
+                    span.subscribe__month-price {{segment.subscribePrice}} Р
 div(layout='row' layout-align='center center').mv-16
-    md-button(ng-click='subscribeRent.onSubscribe()').md-raised.md-success Приобрести на сумму {{subscribeRent.fullCost}} Р
+    md-button(ng-click='subscribeRent.onSubscribe()').md-raised.md-success Приобрести подписку на сумму {{subscribeRent.fullCost}} Р

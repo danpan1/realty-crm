@@ -11,4 +11,63 @@
       }
     }
   }
+  &__calc{
+    &-segment {
+      color: #676767;
+      font-weight: 400;
+      font-size: 16px;
+    }
+    &-name {
+      color: rgb(33,150,243);
+      font-weight: 400;
+    }
+    &-line{
+      background: rgb(33,150,243);
+      color: rgb(33,150,243);
+      height: 2px;
+      border-style: none;
+    }
+    &-text {
+      font-size: 14px;
+    }
+    &-qty{
+      font-weight: 600;
+      color: rgb(33,150,243);
+      font-size: 14px;
+    }
+    &-container{
+      max-height: 38px;
+    }
+    &-fillbalance {
+      &-text{
+        margin-top: 8px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      &-input{
+        width: 80px;
+      }
+    }
+  }
+  &__hr{
+    height: 2px;
+    background: #dedede;
+    border-style: none;
+  }
+  &__month{
+    &-line{
+      height: 1px;
+      background: #dedede;
+      border-style: none;
+    }
+    &-title{
+      font-weight: 400;
+    }
+    &-block{
+      border: 1px solid #dedede;
+      &:nth-child(2), &:nth-child(3){
+        border-left: 0px;
+      }
+    }
+  }
 }

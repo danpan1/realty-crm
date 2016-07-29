@@ -20,7 +20,7 @@ form(ng-submit='outgoingCall.save(realtyCallForm.$valid)' name='realtyCallForm')
                                 div().outgoing-call__num-ads.md-title.text-center {{outgoingCall.fullList}}
                                 div().outgoing-call__text-ads.md-body-1.text-center объявлений в очереди
                     div(flex='45' layout='row' layout-align='end end')
-                        md-input-container(flex='10')
+                        //md-input-container(flex='10')
                             label Тип
                             md-select(ng-disabled='outgoingCall.objectsType == 0' ng-model='outgoingCall.objectsType')
                                 md-option(ng-value='0') А

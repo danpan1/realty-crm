@@ -14,6 +14,7 @@ class Subscribe {
   constructor($scope, $reactive, $http, $timeout) {
     $reactive(this).attach($scope);
     let vm = this;
+    this.disabled = true;
 
     switch (window.localStorage["subscribeActiveTab"]) {
       case 'rent': this.selectedTab = 0; break;
