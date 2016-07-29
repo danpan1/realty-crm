@@ -29,6 +29,6 @@ div
             div в океане 1 шт. - {{segment.price}}Р
             hr
             div(layout='row' layout-align='space-between start').ph-16.mv-16
-                md-checkbox(ng-disabled='segment.disabled' md-no-ink ng-change='subscribeRent.onCountCost()' ng-model='segment.subscribed').md-primary.md-subhead.mb-0 {{segment.subscribePrice}} Р
+                md-checkbox(ng-disabled='segment.disabled' md-no-ink ng-change='subscribeRent.onCountCost(segment.name, segment.subscribed)' ng-model='segment.subscribed').md-primary.md-subhead.mb-0 {{segment.subscribePrice}} Р
 div(layout='row' layout-align='center center').mv-16
     md-button(ng-click='subscribeRent.onSubscribe()').md-raised.md-success Приобрести на сумму {{subscribeRent.fullCost}} Р

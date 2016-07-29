@@ -12,7 +12,10 @@ Meteor.methods({
 
 export function takeObjectViaSubscribtion (id, subscribtionType, objectType) {
 
-  if (Meteor.isServer && Meteor.userId()) {
+  if (!(Meteor.isServer && this.userId)) {
+    throw new Meteor.Error('logged-out', 'The user must be logged in to take realty.');
+  }
+    let object = Realty.findOne({_id: id});
 
     console.log('======= takeObjectViaSubscribtion =======');
     console.log('id: '+id);
@@ -32,7 +35,7 @@ export function takeObjectViaSubscribtion (id, subscribtionType, objectType) {
              takeObject();
            }
          })
-      } else if (subscribtionType = 'econom') {
+      } else if (subscribtionType == 'econom') {
         Subscribe.update({userId:this.userId},{
            $inc: { 'rent.econom.qty': -1 }
          }, (err, result) => {
@@ -42,7 +45,7 @@ export function takeObjectViaSubscribtion (id, subscribtionType, objectType) {
              takeObject();
            }
          })
-      } else if (subscribtionType = 'business') {
+      } else if (subscribtionType == 'business') {
         Subscribe.update({userId:this.userId},{
            $inc: { 'rent.business.qty': -1 }
          }, (err, result) => {
@@ -52,7 +55,7 @@ export function takeObjectViaSubscribtion (id, subscribtionType, objectType) {
              takeObject();
            }
          })
-      } else if (subscribtionType = 'primary') {
+      } else if (subscribtionType == 'primary') {
         Subscribe.update({userId:this.userId},{
            $inc: { 'rent.primary.qty': -1 }
          }, (err, result) => {
@@ -66,12 +69,37 @@ export function takeObjectViaSubscribtion (id, subscribtionType, objectType) {
     }
 
     function takeObject () {
-      console.log('TAKE OBJECT')
-      Realty.update({_id: id}, {$set: {status: 'taken', 'realtor.id': this.userId}});
+
+      if (object) {
+        let newDetails = {status: 'taken'};
+        if (!object.realtor) {
+          newDetails.realtor = {
+            id: Meteor.userId()
+          }
+        } else {
+          newDetails.realtor.id = Meteor.userId();
+        }
+        Realty.update({_id: id}, {$set: newDetails}, (err, res) => {
+          if (err) {
+            console.log(err);
+            throw new Meteor.Error('TAKE OBJEC err', err);
+          } else {
+            console.log(res);
+            console.log(object.contacts[0]);
+          }
+        });
+      } else {
+        return 'Такого объекта нет';
+      }
     }
 
-  }
-
+    return {
+      name: object.contacts[0].name,
+      phone: object.contacts[0].phones[0].phone,
+      address: {street: object.address.street, house: object.address.house},
+      parseDetails: object.parseDetails
+    };
+    
 }
 
 export function checkSubscribe () {

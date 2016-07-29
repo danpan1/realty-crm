@@ -12,22 +12,28 @@ class OutgoingCallOwner {
   constructor($scope, $reactive, $timeout, $state) {
     $reactive(this).attach($scope);
     let vm = this;
+    this.$timeout = $timeout;
     this.dictionary = dictionary;
+    this.currentConditions = [];
 
     function setConditions () {
-      if (this.realty) {
-        for (var i in dictionary.conditions) {
-          this.currentConditions[i] = {};
-        }
-        if (this.realty.details.conditions) {
-          this.setActiveConditions(this.realty.details.conditions);
+      if (vm.realty) {
+        if (vm.realty.details && vm.realty.details.conditions) {
+          console.log('vm.realty.details'.toUpperCase(), vm.realty.details);
+          for (var i in dictionary.conditions) {
+            vm.currentConditions[i] = {};
+          }
+          if (vm.realty.details.conditions) {
+            vm.setActiveConditions(vm.realty.details.conditions);
+          }
         }
       } else {
-        this.$timeout(() => {
+        vm.$timeout(() => {
           setConditions();
         }, 100);
       }
     }
+    setConditions();
 
     
     this.$onChanges = function () {

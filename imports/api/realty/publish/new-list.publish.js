@@ -83,6 +83,8 @@ if (Meteor.isServer) {
         ;
         if (search) {
 
+          selector.type = {$in: [3, 4]};
+
           /*if (search.type !== undefined) {
             selector.type = search.type;
             if (search.type === 0) {
@@ -152,22 +154,11 @@ if (Meteor.isServer) {
             selector.roomcount = {$in: rooms};
           }
           /* END КОЛИЧЕСТВО КОМНАТ */
-
-          /* ТИП ОПЕРАЦИИ 1-продажа квартир вторичных 2-долгосрочная аренда квартир */
-          /*if (search.type) {
-           selector.type = search.type;
-           }*/
+          
           if (search.status) {
             selector.status = search.status;
           }
-          /*if (search.type == 1) {
-           selector.type = {$in: [1,2]};
-           } else {
-           selector.type = {$in: [3,4]};
-           }*/
-          /* END ТИП ОПЕРАЦИИ */
-
-
+          
           /* ВРЕМЯ ДО МЕТРО и Транспорт до метро */
           // console.log(search.metroTime);
           if (search.metroTime) {

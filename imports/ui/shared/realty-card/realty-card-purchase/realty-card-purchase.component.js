@@ -45,11 +45,19 @@ class RealtyCardPurchase {
   }
 
   takeObjectViaSubscribtion () {
-    Meteor.call('takeObjectViaSubscribtion', this.realty._id, this.subscribeType, this.realty.type, (err, result) => {
+    let vm = this;
+    Meteor.call('takeObjectViaSubscribtion', this.realty._id, this.subscribtion.subscribeType, this.realty.type, (err, result) => {
       if (err) {
         console.log('err: ', err);
       } else {
         console.log(result);
+        this.timeout(()=> {
+          vm.cardContacts.realtyPhone = result.phone,
+          vm.cardContacts.realtyName = result.name;
+          vm.cardContacts.realtyStreet = result.address.street;
+          vm.cardContacts.realtyHouse = result.address.house;
+          vm.parseDetails = result.parseDetails;
+        }, 0);
       }
     });
   }
@@ -77,7 +85,7 @@ class RealtyCardPurchase {
             console.log(result);
             this.timeout(()=> {
               vm.cardContacts.realtyPhone = result.phone,
-                vm.cardContacts.realtyName = result.name;
+              vm.cardContacts.realtyName = result.name;
               vm.cardContacts.realtyStreet = result.address.street;
               vm.cardContacts.realtyHouse = result.address.house;
               vm.parseDetails = result.parseDetails;
