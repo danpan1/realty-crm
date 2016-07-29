@@ -1,7 +1,7 @@
 div(layout='row') 
-    div(flex='55').p-16
+    div(flex='50').p-16
         div(layout='row' layout-align='space-around start' layout-wrap) {{outgoingCallOwner.currentConditions[$index].presence}}
-            md-switch(flex='40' ng-model='outgoingCallOwner.currentConditions[$index].presence',
+            md-switch(flex='45' ng-model='outgoingCallOwner.currentConditions[$index].presence',
             aria-label='Switch 2'
             ng-repeat="condition in outgoingCallOwner.dictionary.conditions"
             ng-click="outgoingCallOwner.onConditionsChange(condition.id)").md-warn.m-0 {{condition.name}}

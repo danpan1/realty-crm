@@ -47,17 +47,17 @@ export const dictionary = {
   ],
   conditions: [
     // {id: 'phone', name: 'Телефон', cian : 'телефон'},
-    {id: 'animal', name: 'С животными', cian: 'можно с животными', avito : 'Можно с питомцами', cianId : 'pets'},
-    {id: 'balcony', name: 'Балкон', cian: 'балкон', avito : 'Балкон / лоджия', cianId : 'balcon'},
-    {id: 'bathroom', name: 'Ванна', cian: '', avito : '', cianId : 'bath'},
-    {id: 'children', name: 'С детьми', cian: 'можно с детьми', avito : 'Можно с детьми', cianId : 'kids'},
+    {id: 'animal', name: 'Можно с животными', cian: 'можно с животными', avito : 'Можно с питомцами', cianId : 'pets'},
+    //{id: 'balcony', name: 'Балкон', cian: 'балкон', avito : 'Балкон / лоджия', cianId : 'balcon'},
+    //{id: 'bathroom', name: 'Ванна', cian: '', avito : '', cianId : 'bath'},
+    {id: 'children', name: 'Можно с детьми', cian: 'можно с детьми', avito : 'Можно с детьми', cianId : 'kids'},
     {id: 'conditioner', name: 'Кондиционер', cian: 'кондиционер', avito : 'Кондиционер', cianId : 'conditioner'},
-    {id: 'dishWasher', name: 'Посудомойка', cian: 'посудомоечная машина', avito : '', cianId : 'dishwasher'},
-    {id: 'elevator', name: 'Лифт', cian: '', avito : '', cianId : ''},
-    {id: 'furniture', name: 'Мебель', cian: 'жилая мебель', avito : '', cianId : 'mebel'},
-    {id: 'kitchen_furniture', name: 'Кух. мебель', cian: 'кухонная мебель', avito : '', cianId : 'mebel_kitchen'},
+    {id: 'dishWasher', name: 'Посуд. машина', cian: 'посудомоечная машина', avito : '', cianId : 'dishwasher'},
+    //{id: 'elevator', name: 'Лифт', cian: '', avito : '', cianId : ''},
+    {id: 'furniture', name: 'Мебель в комнатах', cian: 'жилая мебель', avito : '', cianId : 'mebel'},
+    {id: 'kitchen_furniture', name: 'Мебель на кухне', cian: 'кухонная мебель', avito : '', cianId : 'mebel_kitchen'},
     {id: 'refrigerator', name: 'Холодильник', cian: 'холодильник', avito : 'Холодильник', cianId : 'rfgr'},
-    {id: 'shower', name: 'Душевая кабина', cian: '', avito : '', cianId : 'shower'},
+    //{id: 'shower', name: 'Душевая кабина', cian: '', avito : '', cianId : 'shower'},
     {id: 'tv', name: 'Телевизор', cian: 'телевизор', avito : 'Телевизор', cianId : 'tv	'},
     {id: 'washer', name: 'Стир. машина', cian: 'стиральная машина', avito : 'Стиральная машина', cianId : 'wm'},
     {id: 'wifi', name: 'Интернет', cian: 'интернет', avito :'Wi-Fi', cianId : 'internet'}
@@ -70,7 +70,8 @@ export const dictionary = {
   deposit: [
     {id: 0, name: 'Есть'},
     {id: 1, name: 'Нет'},
-    {id: 2, name: 'Готов разбить'}
+    {id: 2, name: 'Готов разбить'},
+    {id: 3, name: '50% месячной ставки'}
   ],
   depositSum: [
     {id: 0, name: 'Без залога'},
@@ -149,7 +150,9 @@ export const dictionary = {
     {id: 1, name: 'Евроремонт', cianId : 2},
     {id: 2, name: 'Дизайнерский', cianId : 3},
     {id: 3, name: 'Чистовая отделка', cianId : 1},
-    {id: 4, name: 'Бабушкин ремонт', cianId : 1}
+    {id: 4, name: 'Бабушкин ремонт', cianId : 1},
+    {id: 5, name: 'Вторичка', cianId : 1},
+    {id: 6, name: 'Новостройка', cianId : 2}
   ],
   roomcount: [
     {id: 1, name: '1'},

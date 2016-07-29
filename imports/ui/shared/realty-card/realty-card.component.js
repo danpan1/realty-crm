@@ -27,19 +27,19 @@ class RealtyCard {
     if (this.realty.status == 'connection' || this.realty.status == 'taken') this.onShowDetails(true); 
 
     if (this.realty.roomcount == 1) {
-      if((this.realty.price >= 25000 && this.realty.price < 50000) ||
-         (this.realty.price >= 50000 && this.realty.price < 75000) ||
-         (this.realty.price >= 75000)) this.subscribeType = 'econom';
+      if (this.realty.price >= 25000 && this.realty.price < 50000) this.subscribeType = 'econom';
+      else if (this.realty.price >= 50000 && this.realty.price < 75000) this.subscribeType = 'business';
+      else if (this.realty.price >= 75000) this.subscribeType = 'premium';
     }
     else if (this.realty.roomcount == 2) {
-      if ((this.realty.price >= 30000 && this.realty.price < 60000) ||
-          (this.realty.price >= 60000 && this.realty.price < 120000) ||
-          (this.realty.price >= 120000)) this.subscribeType = 'business';
+      if (this.realty.price >= 30000 && this.realty.price < 60000) this.subscribeType = 'econom';
+      else if (this.realty.price >= 60000 && this.realty.price < 120000) this.subscribeType = 'business';
+      else if (this.realty.price >= 120000) this.subscribeType = 'premium';
     }
     else if (this.realty.roomcount == 3) {
-      if ((this.realty.price >= 35000 && this.realty.price < 70000) ||
-          (this.realty.price >= 70000 && this.realty.price < 150000) ||
-          (this.realty.price >= 150000)) this.subscribeType = 'premium';
+      if (this.realty.price >= 35000 && this.realty.price < 70000) this.subscribeType = 'econom';
+      else if (this.realty.price >= 70000 && this.realty.price < 150000) this.subscribeType = 'business';
+      else if (this.realty.price >= 150000) this.subscribeType = 'premium';
     } else this.subscribeType = false;
 
     if(this.realty.status == 'taken') this.realtyIsTaken = true;

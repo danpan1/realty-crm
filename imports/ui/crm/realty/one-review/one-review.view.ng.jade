@@ -1,5 +1,4 @@
 loader(ng-if="oneReview.showLoader == true")
-
 //md-tabs(md-selected="oneReview.selectedTab" md-dynamic-height)
     //md-tab(ng-click='oneReview.setActiveTab("meeting")' label='1. Встреча')
         md-content
@@ -17,7 +16,7 @@ one-review-desc(realty='oneReview.realty' save-review='oneReview.saveNewDescript
         md-content
             one-review-moderator(realty='oneReview.realty')
 
-div(layout='column' layout-align='center center')
+//div(layout='column' layout-align='center center')
     div(flex='30')
         md-button(ng-click='oneReview.sendToModerator()'
         ng-disabled='!oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000 || oneReview.realty.realtor.isExclusive === undefined || oneReview.realty.realtor.isCheckout === undefined || !oneReview.realty.details.images.length' ng-if='!oneReview.realty.moderator.status || oneReview.realty.moderator.status === "done"' aria-label='Отправить на проверку модератору').md-success.md-raised.md-title.mv-16.big-button {{ !oneReview.realty.title || !oneReview.realty.details.descr || oneReview.realty.title.length >= 65 || oneReview.realty.details.descr.length >= 2000 || oneReview.realty.realtor.isExclusive === undefined || oneReview.realty.realtor.isCheckout === undefined || !oneReview.realty.details.images.length ? 'Подготовьте объект по всем пунктам' : 'Отправить на проверку модератору'}}

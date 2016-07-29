@@ -5,9 +5,10 @@ div()
                 md-icon(md-svg-src='svg/icon-arrow-left.svg')
             h3(ng-if='realtyOneLayout.infoRealty.address').md-headline г Москва, {{realtyOneLayout.infoRealty.address.street}}, {{realtyOneLayout.infoRealty.address.house}}, кв {{realtyOneLayout.infoRealty.address.flat}}
     div(md-whiteframe='1').tabbar
-        md-tabs(md-selected="realtyOneLayout.selectedTab")
-            md-tab(label='1. Инфо об объекте' ui-sref='crm.realty.one.info')
-            md-tab(label='2. Подготовка {{realtyOneLayout.infoRealty.moderator.percent.total || 0}}%' ui-sref='crm.realty.one.review')
+        md-tabs(md-dynamic-height='true' md-selected="realtyOneLayout.selectedTab")
+            md-tab(label='Инфо об объекте' ui-sref='crm.realty.one.info')
+            md-tab(label='Подготовка' ui-sref='crm.realty.one.review')
+                //{{realtyOneLayout.infoRealty.moderator.percent.total || 0}}%
             //md-tab(label='3. Подбор клиентов' ui-sref='crm.realty.one.find({searchType:\'my\'})')
             //md-tab(label='3. Отправить на Email' ui-sref='crm.realty.one.email')
             //md-tab(label='4. Обработка клиентов' ui-sref='crm.realty.one.connections()')

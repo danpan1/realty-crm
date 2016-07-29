@@ -24,7 +24,7 @@ class RealtyCardPurchase {
       this.change = (this.price - this.userBalance > 0) ? (this.price - this.userBalance < 1000) ? 1000 : this.price - this.userBalance : false;
     }
     for (let subscribtion of this.subscribtion.userSubscribtions) {
-      if(subscribtion.name == this.subscribtion.objectType && subscribtion.qty > 0) this.objectType = subscribtion.name;
+      if(subscribtion.codename == this.subscribtion.subscribeType && subscribtion.qty > 0) this.subscribeType = subscribtion.name;
     }
 
   }
@@ -45,11 +45,19 @@ class RealtyCardPurchase {
   }
 
   takeObjectViaSubscribtion () {
-    Meteor.call('takeObjectViaSubscribtion', this.realty._id, this.objectType, (err, result) => {
+    let vm = this;
+    Meteor.call('takeObjectViaSubscribtion', this.realty._id, this.subscribtion.subscribeType, this.realty.type, (err, result) => {
       if (err) {
         console.log('err: ', err);
       } else {
         console.log(result);
+        this.timeout(()=> {
+          vm.cardContacts.realtyPhone = result.phone,
+          vm.cardContacts.realtyName = result.name;
+          vm.cardContacts.realtyStreet = result.address.street;
+          vm.cardContacts.realtyHouse = result.address.house;
+          vm.parseDetails = result.parseDetails;
+        }, 0);
       }
     });
   }
@@ -77,7 +85,7 @@ class RealtyCardPurchase {
             console.log(result);
             this.timeout(()=> {
               vm.cardContacts.realtyPhone = result.phone,
-                vm.cardContacts.realtyName = result.name;
+              vm.cardContacts.realtyName = result.name;
               vm.cardContacts.realtyStreet = result.address.street;
               vm.cardContacts.realtyHouse = result.address.house;
               vm.parseDetails = result.parseDetails;
