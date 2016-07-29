@@ -4,7 +4,7 @@ div(md-whiteframe="1")
         //div realtyNewList.filterType {{realtyNewList.filterType}}
         div(flex='55' layout='row' layout-align='space-between none')
             md-input-container(flex='60').ml-16
-                md-select(ng-model='realtyNewList.filterType' multiple='true' aria-label='Тип фильтра' ng-change='realtyNewList.suitRealty()')
+                md-select(placeholder='Выбор сегмента' ng-model='realtyNewList.filterType' multiple='true' aria-label='Тип фильтра' ng-change='realtyNewList.suitRealty()')
                     md-option(ng-value='type.id' flex='100' layout='row' layout-align='space-between center' ng-repeat='type in realtyNewList.filterTypeList').realty-new-list__special-option
                         span {{type.name}} 
                         span {{type.qty || 0}}/{{type.max}}
