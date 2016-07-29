@@ -22,6 +22,6 @@ form(ng-submit='outgoingCall.save(realtyCallForm.$valid)' name='realtyCallForm')
                     div(flex='45' layout='row' layout-align='end end')
                         md-input-container(flex='10')
                             label Тип
-                            md-select(ng-disabled='outgoingCall.objectsType = 0' ng-model='outgoingCall.objectsType')
+                            md-select(ng-disabled='outgoingCall.objectsType == 0' ng-model='outgoingCall.objectsType')
                                 md-option(ng-value='0') А
                                 md-option(ng-value='1') П

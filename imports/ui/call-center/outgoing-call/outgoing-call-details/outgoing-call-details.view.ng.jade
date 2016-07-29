@@ -41,7 +41,7 @@ div(flex='100')
             label Комнат
             md-select(ng-model='outgoingCallDetails.realty.roomcount' required='')
                 md-option(ng-value='room.id' ng-repeat="room in outgoingCallDetails.dictionary.roomcount") {{room.name}}
-        div(flex='15' layout='row' layout-align='center center')
+        div(flex='10' layout='row' layout-align='center center')
             md-checkbox(aria-label='penthouse' md-no-ink ng-model='addRealtyFull.realty.details.penthouse').md-primary.md-subhead.mb-0 Студия
         div(flex='15' layout='row' layout-align='center center')
             md-checkbox(aria-label='apartaments' md-no-ink ng-model='addRealtyFull.realty.details.apartaments').md-primary.md-subhead.mb-0 Апартаменты
