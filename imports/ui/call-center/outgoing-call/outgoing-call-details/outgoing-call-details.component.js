@@ -24,6 +24,10 @@ class OutgoingCallDetails {
     this.type = 4;
     this.newBuilding = 1;
     this.rentDuration = 0;
+    if (this.realty.owner) this.realty.owner.qty = 0; // Собственников по умолчанию - 1
+      else this.realty.owner = {qty: 0}
+    if (this.realty.details) this.realty.details.bathQty = 0; // Санузлов по умолчанию - 1
+      else this.realty.details = {bathQty: 0}
   }
 }
 

@@ -25,7 +25,7 @@ class SubscribeRent {
           for(let property in res.rent) {
             console.log(property);
             for(let segment of this.monthSegments){
-              if (segment.name == property) segment.disabled = true;
+              if (segment.name == property) { segment.disabled = true; segment.subscribed = true; }
             }
           }
         }
@@ -39,10 +39,17 @@ class SubscribeRent {
     console.log(this.fillBalance);
   }
 
-  onCountCost () {
+  onCountCost (name, subscribed) {
+    if (name == 'all' && subscribed == true) {
+      for (let segment of this.monthSegments) {
+        if (segment.name != 'all' && !segment.disabled) segment.subscribed = false;
+      }
+    } else if (name != 'all' && subscribed == true) {
+      if (!this.monthSegments[3].disabled) this.monthSegments[3].subscribed = false;
+    }
     let price = 0;
     for (let segment of this.monthSegments) {
-      if (segment.subscribed) price += segment.subscribePrice;
+      if (segment.subscribed && !segment.disabled) price += segment.subscribePrice;
     }
     this.fullCost = price;
   }
@@ -61,7 +68,7 @@ class SubscribeRent {
       rent:{}
     }
     for(let segment of this.monthSegments) {
-      if (segment.subscribed) {
+      if (segment.subscribed && !segment.disabled) {
         subscribe.rent[segment.name] = {
           qty: segment.owners,
           payDate: newDate,
@@ -75,6 +82,9 @@ class SubscribeRent {
         console.log('==== insertSubscribe ERROR', err);
       } else {
         console.log('==== insertSubscribe RESULT', res);
+        for(let segment of this.monthSegments) {
+          if (segment.subscribed) segment.disabled = true;
+        };
       }
     });
   }

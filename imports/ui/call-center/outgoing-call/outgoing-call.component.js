@@ -37,6 +37,7 @@ class OutgoingCall {
     this.newObjectRecieved = 1;
     this.stat = '';
     this.currentConditions = [];
+    this.objectsType = 0;
 
     this.autorun(function () {
       let user = Meteor.user();
@@ -144,7 +145,6 @@ class OutgoingCall {
     } else if (vm.realty.operator.meetingTime) price = 1;
     
     vm.realty.operator.oceanPrice = price;
-    console.log(vm.realty);
     Meteor.call('operatorSave', vm.realty, (error)=> {
       if (error) {
         this.showLoader = false;
@@ -191,7 +191,6 @@ class OutgoingCall {
 
   getNew() {
     this.realty = {};
-    console.log('getNew');
     this.showLoader = true;
     this.isLoading = true;
     const vm = this;
@@ -200,9 +199,9 @@ class OutgoingCall {
         this.showLoader = false;
         console.log('error', error);
       }
-      console.log('loaded ', result);
+      //console.log('loaded ', result);
       this.$timeout(() => {
-        console.log(result.contacts[0].phones[0].phone);
+        //console.log(result.contacts[0].phones[0].phone);
 
         // Проверяем, не является ли объект ламповым
         //Meteor.call('checkLamp', result.contacts[0].phones[0].phone, (lampError, isItLamp) => {

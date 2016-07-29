@@ -15,7 +15,6 @@ class SubwayChoice {
     this.stateParams = $stateParams;
     this.searchText = this.subway ? this.subway.name : '';
     this.query = this.searchText;
-    console.log(this.query);
     vm.subwaysSuggestionList = [];
     vm.subscribe('subwayChips', ()=> {
       return [{sort: {name: 1}, limit: 4}, vm.getReactively('query')];
@@ -26,7 +25,6 @@ class SubwayChoice {
             type: 'subway'
           }).fetch();
         },10)
-        console.log(vm.subwaysSuggestionList);
       }
     });
 
@@ -43,12 +41,7 @@ class SubwayChoice {
         if(vm.subway){
           vm.searchText = vm.subway.name;
           vm.query = vm.searchText;
-        }/* else {
-          console.log('no way!')
-          vm.$timeout(()=>{
-            checkRealty();
-          },200)
-        }*/
+        }
       }
       checkRealty();
     }
@@ -57,8 +50,6 @@ class SubwayChoice {
 
   changeChoice () {
     if(this.selectedSubway){
-      console.log(this.subwaysSuggestionList);
-      console.log(this.selectedSubway);
       this.subway = {
         id: this.selectedSubway._id,
         name: this.selectedSubway.name,

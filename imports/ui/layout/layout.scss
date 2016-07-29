@@ -32,6 +32,11 @@ layout > md-toolbar {
   &-green{
     color: green;
   }
+  &-bold{
+    input {
+      font-weight: bold !important;
+    }
+  }
 }
 
 .w-100{

@@ -1,6 +1,7 @@
 'use strict';
 import {Meteor} from 'meteor/meteor';
 import {Subscribe} from '../subscribe.model.js';
+import {Realty} from '/imports/api/realty/realty.model.js';
 
 Meteor.methods({
   checkSubscribe,
@@ -9,16 +10,96 @@ Meteor.methods({
 });
 
 
-export function takeObjectViaSubscribtion (id, type) {
+export function takeObjectViaSubscribtion (id, subscribtionType, objectType) {
 
-  if (Meteor.isServer && Meteor.userId()) {
+  if (!(Meteor.isServer && this.userId)) {
+    throw new Meteor.Error('logged-out', 'The user must be logged in to take realty.');
+  }
+    let object = Realty.findOne({_id: id});
 
     console.log('======= takeObjectViaSubscribtion =======');
     console.log('id: '+id);
-    console.log('type: '+type);
+    console.log('subscribtionType: '+subscribtionType);
+    console.log('objectType: '+objectType);
 
-  }
+    let oldSubscribe = Subscribe.findOne({userId:this.userId});
 
+    if (objectType >= 3) {
+      if (oldSubscribe.rent.all && oldSubscribe.rent.all.qty > 0) {
+         Subscribe.update({userId:this.userId},{
+           $inc: { 'rent.all.qty': -1 }
+         }, (err, result) => {
+           if (err) { console.log('SUBSCRIBE UPDATE ALL ERROR'); console.log(err); }
+           else {
+             console.log('SUBSCRIBE UPDATE ALL SUCCESS');
+             takeObject();
+           }
+         })
+      } else if (subscribtionType == 'econom') {
+        Subscribe.update({userId:this.userId},{
+           $inc: { 'rent.econom.qty': -1 }
+         }, (err, result) => {
+           if (err) { console.log('SUBSCRIBE UPDATE ECONOM ERROR'); console.log(err); }
+           else {
+             console.log('SUBSCRIBE UPDATE ECONOM SUCCESS');
+             takeObject();
+           }
+         })
+      } else if (subscribtionType == 'business') {
+        Subscribe.update({userId:this.userId},{
+           $inc: { 'rent.business.qty': -1 }
+         }, (err, result) => {
+           if (err) { console.log('SUBSCRIBE UPDATE BUSINESS ERROR'); console.log(err); }
+           else {
+             console.log('SUBSCRIBE UPDATE BUSINESS SUCCESS');
+             takeObject();
+           }
+         })
+      } else if (subscribtionType == 'primary') {
+        Subscribe.update({userId:this.userId},{
+           $inc: { 'rent.primary.qty': -1 }
+         }, (err, result) => {
+           if (err) { console.log('SUBSCRIBE UPDATE PRIMARY ERROR'); console.log(err); }
+           else {
+             console.log('SUBSCRIBE UPDATE PRIMARY SUCCESS');
+             takeObject();
+           }
+         })
+      }
+    }
+
+    function takeObject () {
+
+      if (object) {
+        let newDetails = {status: 'taken'};
+        if (!object.realtor) {
+          newDetails.realtor = {
+            id: Meteor.userId()
+          }
+        } else {
+          newDetails.realtor.id = Meteor.userId();
+        }
+        Realty.update({_id: id}, {$set: newDetails}, (err, res) => {
+          if (err) {
+            console.log(err);
+            throw new Meteor.Error('TAKE OBJEC err', err);
+          } else {
+            console.log(res);
+            console.log(object.contacts[0]);
+          }
+        });
+      } else {
+        return 'Такого объекта нет';
+      }
+    }
+
+    return {
+      name: object.contacts[0].name,
+      phone: object.contacts[0].phones[0].phone,
+      address: {street: object.address.street, house: object.address.house},
+      parseDetails: object.parseDetails
+    };
+    
 }
 
 export function checkSubscribe () {
