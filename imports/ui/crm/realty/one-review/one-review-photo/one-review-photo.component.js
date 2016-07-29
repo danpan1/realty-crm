@@ -41,24 +41,28 @@ class OneReviewPhoto {
   }
 
   setMainImage(image, index) {
-    if (image) {
-      this.realty.image = image.url;
-      this.findMainImage(image.url, index);
-      this.savePhotos();
+    if(index){
+      if(this.realty.details.thumbnails && this.realty.details.images){
+        for(let thumbnail of this.realty.details.thumbnails){
+          if (thumbnail.originalName == image.originalName) this.realty.image = thumbnail.url;
+        }
+      }
+      this.mainImage = image.url;
     }
+    this.savePhotos();
   }
 
   findMainImage(imageUrl, index) {
     if (!imageUrl) {
       return;
     }
-    if(this.realty.details.thumbnails.length){
-      let imageIndexThumbs = index || this.realty.details.thumbnails.findIndex((item)=> {
-        return (item.url === imageUrl);
-      });
-      this.mainImage = this.realty.details.thumbnails[imageIndexThumbs].url;
+    let imageIndexThumbs = this.realty.details.thumbnails.findIndex((item)=> {
+      return (item.url === imageUrl);
+    });
+    console.log(imageIndexThumbs);
+    for(let image of this.realty.details.images){
+      if (image.originalName == this.realty.details.thumbnails[imageIndexThumbs].originalName) this.mainImage = image.url;
     }
-
   }
   
   
