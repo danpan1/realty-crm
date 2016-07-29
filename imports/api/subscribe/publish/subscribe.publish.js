@@ -4,7 +4,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Subscribe} from '../subscribe.model';
 
-if (Meteor.isServer) {
+if (Meteor.isServer && this.userId) {
   Meteor.publish('mySubscribes', function () {
 
       let selector = {

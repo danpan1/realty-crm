@@ -1,7 +1,7 @@
 'use strict';
 import {Meteor} from 'meteor/meteor';
 import {Subscribe} from '../subscribe.model.js';
-import {Realty} from '/imports/api/realty/realty.model.js'
+import {Realty} from '/imports/api/realty/realty.model.js';
 
 Meteor.methods({
   checkSubscribe,
