@@ -49,8 +49,8 @@ class OutgoingCallInfo {
 
   
   setResolution(status, laterCall) {
-    console.log('status: ', status);
-    console.log('laterCall: ', laterCall);
+    //console.log('status: ', status);
+    //console.log('laterCall: ', laterCall);
     this.showLoader = true;
     const vm = this;
     let notAvailable = '';

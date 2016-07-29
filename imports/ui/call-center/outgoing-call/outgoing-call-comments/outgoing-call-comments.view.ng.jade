@@ -2,7 +2,7 @@ div().outgoing-call__photo
     div(layout='row')
         div(layout='row' flex='70')
             img(ng-repeat='image in outgoingCallComments.realty.details.images | limitTo:2' ng-src='{{image.url}}')
-        div(ng-if='outgoingCallComments.realty.details.images.length' flex='30' layout='column' layout-align='center end')
+        div(flex='30' layout='column' layout-align='center end')
             md-button(ng-click='outgoingCallComments.signLamp(outgoingCallComments.realty.contacts[0].phones[0].phone, outgoingCallComments.realty._id)').md-primary.md-raised Фонарь
 
 div(md-whiteframe='2').mt-0.mb-16

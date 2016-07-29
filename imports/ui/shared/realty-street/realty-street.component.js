@@ -23,7 +23,7 @@ class RealtyStreet {
       this.findStreetAtCallCenter = true;
       this.querySearch(this.street);
     }
-    console.log(this.street);
+    //console.log(this.street);
     this.label = this.isFilter ? 'Дом' : 'Дом и корпус'
   }
 
@@ -38,9 +38,9 @@ class RealtyStreet {
   }
 
   querySearch(query) {
-    console.log('querySearch: ',query);
+    //console.log('querySearch: ',query);
     if (!query) {
-      console.log('!query')
+      //console.log('!query')
       return;
     }
     this.someChanges();
@@ -63,7 +63,7 @@ class RealtyStreet {
   querySearchHouse(query) {
     this.dataFull = null;
     if (!query) {
-      console.log('house !query')
+      //console.log('house !query')
       return;
     }
     if (this.street && this.street.data) {

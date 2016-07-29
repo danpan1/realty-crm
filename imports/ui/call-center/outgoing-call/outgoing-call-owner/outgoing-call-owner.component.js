@@ -18,7 +18,9 @@ class OutgoingCallOwner {
 
     function setConditions () {
       if (vm.realty) {
+        console.log('setConditions')
         if (vm.realty.details && vm.realty.details.conditions) {
+          console.log(vm.realty.details.conditions);
           console.log('vm.realty.details'.toUpperCase(), vm.realty.details);
           for (var i in dictionary.conditions) {
             vm.currentConditions[i] = {};
@@ -37,7 +39,9 @@ class OutgoingCallOwner {
 
     
     this.$onChanges = function () {
+      console.log('outgoing-call-owner. $onChanges')
       this.currentConditions = [];
+      setConditions();
     }
 
 
