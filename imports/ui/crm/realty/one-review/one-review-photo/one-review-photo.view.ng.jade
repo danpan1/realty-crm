@@ -23,8 +23,8 @@ div(md-whiteframe='1').mv-16.ph-32.pv-16
 one-review-photo-list()
 
 div(md-whiteframe='1' ng-if='oneReviewPhoto.realty.details.images && oneReviewPhoto.realty.details.thumbnails').mv-16
-    div(layout='row' layout-wrap ng-init='oneReviewPhoto.findMainImage(oneReviewPhoto.realty.image)')
-        div(flex='25' ng-repeat='image in oneReviewPhoto.realty.details.thumbnails')
+    div(layout='row' layout-wrap)
+        div(flex='25' ng-repeat='image in oneReviewPhoto.realty.details.images')
             md-card
                 md-button(ng-if='image.url == oneReviewPhoto.mainImage' aria-label='Выбрать в качестве главного фото').md-success.md-raised.btn-set-photo.btn-set-photo-active Главное фото
                 md-button(ng-if='image.url != oneReviewPhoto.mainImage' ng-click='oneReviewPhoto.setMainImage(image, $index)' aria-label='Сделать главным фото').md-primary.md-raised.btn-set-photo.one-review-btn-set-photo Сделать главным фото

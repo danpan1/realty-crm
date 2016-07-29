@@ -65,9 +65,9 @@ export const RentDetailsSchema = new SimpleSchema({
   'conditions.$': {
     type: String,
     label: 'Conditions.[]',
-    allowedValues: dictionary.conditions.map(function (item) {
-      return item.id;
-    }),
+    //allowedValues: dictionary.conditions.map(function (item) {
+    //  return item.id;
+    //}),
     optional: true
   },
   depositSum: {
