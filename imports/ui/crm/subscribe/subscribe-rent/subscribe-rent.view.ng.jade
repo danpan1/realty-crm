@@ -20,7 +20,7 @@ div
     h1.subscribe__month-title.ta-c.mb-0 Пакеты с подпиской на месяц
     div(layout='row' layout-align='space-between start').p-16.mt-16
         div(ng-repeat='segment in subscribeRent.monthSegments' flex='25').p-0.subscribe__month-block
-            h3.ph-32.mb-0.mt-8.subscribe__calc-segment Сегмент
+            h3.ph-32.mb-0.mt-8.subscribe__calc-segment {{ $index == 3 ? 'Все сегменты' : 'Сегмент' }}
             h1.ph-32.mv-0.subscribe__calc-name {{segment.visualName}}
             hr.subscribe__month-line
             div.ph-32.mv-16.subscribe__month-text {{segment.owners}} Собственников
