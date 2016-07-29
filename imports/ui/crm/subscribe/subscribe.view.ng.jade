@@ -3,6 +3,6 @@ div(md-whiteframe='2')
         md-tab(ng-click='subscribe.setActiveTab("rent")' label='Аренда')
             md-content
                 subscribe-rent()
-        md-tab(ng-click='subscribe.setActiveTab("sell")' label='Продажа')
+        md-tab(ng-click='subscribe.setActiveTab("sell")' label='Продажа' ng-disabled='subscribe.disabled')
             md-content
                 subscribe-sell()

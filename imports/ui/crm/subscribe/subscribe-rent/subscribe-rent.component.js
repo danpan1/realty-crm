@@ -32,6 +32,7 @@ class SubscribeRent {
       }
     });
 
+    this.monthSegments[1].subscribed = true;
 
   }
 
