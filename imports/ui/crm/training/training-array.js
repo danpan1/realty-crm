@@ -59,7 +59,7 @@ export const lessons = [
         picture:'img/common/training2.jpg',
         videoLink:'http://world-invest.pro/training/150za6_3/2.html',
         done: false,
-        available: false,
+        available: true,
         tasks: [
           {
             id:1,
