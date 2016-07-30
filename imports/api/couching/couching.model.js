@@ -6,10 +6,12 @@ export const Couching = new Mongo.Collection('couching', {
     let user = Meteor.users.findOne({
       _id: doc.userId
     });
-    doc.userInfo = {
-      email : user.emails[0].address,
-      profile : user.profile
-    };
+    if (user) {
+      doc.userInfo = {
+        // email: user.emails[0].address,
+        profile: user.profile
+      };
+    }
     return doc;
   }
 });
