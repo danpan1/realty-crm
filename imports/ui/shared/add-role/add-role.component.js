@@ -14,7 +14,7 @@ class AddRole {
     $reactive(this).attach($scope);
     this.timeout = $timeout;
 
-    // this.subscribe('users');
+    this.subscribe('users');
     this.subscribe('couching');
 
     this.helpers({

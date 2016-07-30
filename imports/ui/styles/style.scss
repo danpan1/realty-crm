@@ -55,3 +55,17 @@
 @import "../shared/client-card/client-card";
 @import "../shared/realty-card/realty-card";
 @import "print";
+
+.wid-20{
+  max-width : 300px;
+}
+.couchingTable{
+  border-collapse: collapse !important;
+  border: 1px solid black;
+  td{
+    border: 1px solid black
+  }
+  th{
+    border: 1px solid black
+  }
+}
