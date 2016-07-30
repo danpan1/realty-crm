@@ -38,8 +38,9 @@ div(md-whiteframe='2').p-16.m-8
         tbody
             tr(ng-repeat='couching in addRole.couching')
                 td {{$index + 1}}
-                td {{couching.userInfo.email}}
+                //td {{couching.userInfo.email}}
                 td {{couching.userInfo.profile.name}}
                 td {{couching.userInfo.profile.surName}}
                 td {{couching.userInfo.profile.phone}}
-                td(ng-repeat='task in couching.tasks') Задание №{{$index + 1}}: {{task.comment}}
+                td(ng-repeat='task in couching.tasks') Задание №{{$index + 1}}:
+                    | {{task.comment}}
