@@ -42,7 +42,8 @@ export default angular.module(moduleName, [
   bindings: {},
   controllerAs: moduleName,
   controller: Subscribe
-}).config(config);
+})
+  // .config(config);
 
 function config($stateProvider) {
   'ngInject';
