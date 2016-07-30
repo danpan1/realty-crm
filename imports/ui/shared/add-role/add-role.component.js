@@ -4,6 +4,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {Meteor} from 'meteor/meteor';
+import {Couching} from '../../../api/couching';
 
 import './add-role.view.html';
 
@@ -13,9 +14,15 @@ class AddRole {
     $reactive(this).attach($scope);
     this.timeout = $timeout;
 
-    this.subscribe('users');
+    // this.subscribe('users');
+    this.subscribe('couching');
 
     this.helpers({
+      couching() {
+        let couching  = Couching.find({}).fetch();
+        console.log(couching);
+        return couching;
+      },
       students() {
         return Meteor.users.find({roles : 'couching'});
       },

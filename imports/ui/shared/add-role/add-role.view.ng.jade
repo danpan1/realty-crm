@@ -36,10 +36,11 @@ div(md-whiteframe='2').p-16.m-8
                 td Телефон
                 td ?
         tbody
-            tr(ng-repeat='user in addRole.students')
+            tr(ng-repeat='couching in addRole.couching')
                 td {{$index + 1}}
-                td {{user.emails[0].address}}
-                td {{user.profile.name}}
-                td {{user.profile.surName}}
-                td {{user.profile.phone}}
-                td {{user.roles.indexOf("couching")}}
+                //td {{couching.userInfo.email}}
+                td {{couching.userInfo.profile.name}}
+                td {{couching.userInfo.profile.surName}}
+                td {{couching.userInfo.profile.phone}}
+                td(ng-repeat='task in couching.tasks') Задание №{{$index + 1}}:
+                    | {{task.comment}}

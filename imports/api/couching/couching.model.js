@@ -1,35 +1,45 @@
-
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-export const Couching = new Mongo.Collection('couching');
+export const Couching = new Mongo.Collection('couching', {
+  transform: function (doc) {
+    let user = Meteor.users.findOne({
+      _id: doc.userId
+    });
+    doc.userInfo = {
+      email : user.emails[0].address,
+      profile : user.profile
+    };
+    return doc;
+  }
+});
 
 var Schema = {};
 Schema.Couching = new SimpleSchema({
   _id: {
     type: String
   },
-  userId:{
+  userId: {
     type: String
   },
   lessonNumber: {
     type: Number,
     optional: true
   },
-  tasks:{
+  tasks: {
     type: [Object],
     optional: true
   },
   'tasks.$.id': {
-    type:Number,
+    type: Number,
     optional: true
   },
   'tasks.$.done': {
-    type:Boolean,
+    type: Boolean,
     optional: true
   },
   'tasks.$.comment': {
-    type:String,
+    type: String,
     optional: true
   },
   available: {
@@ -44,15 +54,15 @@ Schema.Couching = new SimpleSchema({
 
 const Task = new SimpleSchema({
   id: {
-    type:Number,
+    type: Number,
     optional: true
   },
   done: {
-    type:Boolean,
+    type: Boolean,
     optional: true
   },
   comment: {
-    type:String,
+    type: String,
     optional: true
   }
 });
