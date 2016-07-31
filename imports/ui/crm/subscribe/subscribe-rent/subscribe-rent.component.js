@@ -13,8 +13,12 @@ class SubscribeRent {
     let vm = this;
 
     this.segments = helpers.segments;
+    this.segments[1].qty = 25;
     this.monthSegments = helpers.monthSegments;
-
+    this.onBalanceCount();
+    //TODO переделать подсчет дефолтной суммы подписки
+    this.fullCost = 1990;
+    // this.onCountCost
     
     Meteor.call('checkSubscribe', (err, res) => {
       if (err) {
@@ -56,6 +60,7 @@ class SubscribeRent {
   }
 
   onBalanceCount () {
+    console.log(this.segments);
     let price = 0;
     for (let segment of this.segments) {
      price += segment.price * segment.qty;
