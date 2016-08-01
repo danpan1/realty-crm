@@ -116,7 +116,8 @@ class RealtyCardPurchase {
         }
       }
     } else {
-      this.openPurchaseStart(ev);
+      this.state.go('crm.subscribe');
+      //this.openPurchaseStart(ev);
     }
   }
 

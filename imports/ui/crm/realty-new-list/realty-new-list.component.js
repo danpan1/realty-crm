@@ -127,11 +127,11 @@ class RealtyNewList {
           materials: vm.getReactively('filter.materials'),
           priceFrom: vm.getReactively('filter.priceFrom'),
           roomcount: vm.getReactively('roomcount'),
-          type: vm.getReactively('filterType'),
+          //type: vm.getReactively('filterType'),
           subways: vm.getReactively('filter.subways'),
           districts: vm.getReactively('filter.districts')
         },
-        this.filterType
+        vm.getReactively('filterType')
       ];
     }, {
       onReady: function () {
@@ -141,6 +141,7 @@ class RealtyNewList {
         vm.$timeout(()=>{
           vm.loaded = true;
         },100)    
+        vm.typesOldvalue = vm.filterType;
         let timeLoaded = new Date();
         let timeRender = new Date();
         //console.log('время на закгрузку = ', ((timeLoaded - timeTestLoadData) / 1000));
@@ -175,6 +176,19 @@ class RealtyNewList {
       }
     });
 
+  }
+
+  onSegmentsChanged (types) {
+
+    if ((types.indexOf(0) < 0 || types.indexOf(1) < 0 || types.indexOf(2) < 0) && this.typesOldvalue.indexOf(3) > -1) {
+      this.filterType.splice(types.indexOf(3),1);
+    }
+    if (types.indexOf(3) > -1) {
+      this.filterType = [0,1,2,3];
+    }
+    this.typesOldvalue = this.filterType;
+
+    this.suitRealty();
   }
 
   suitRealty () {

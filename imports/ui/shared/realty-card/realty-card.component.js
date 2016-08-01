@@ -158,8 +158,6 @@ class RealtyCard {
     Meteor.call('changeRelationTypeInClient', type, realtyId, clientId, isNew);
   }
   
-  
-  
   onShowDetails (justInfo) {
     if(!this.contacts.realtyPhone){
       let vm = this;

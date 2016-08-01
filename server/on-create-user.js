@@ -5,6 +5,13 @@ import nextAutoincrement from '/imports/helpers/getUniqueId';
 import {Accounts} from 'meteor/accounts-base';
 import {Meteor} from 'meteor/meteor';
 const onCreateUser = function (options, user) {
+
+  let userPhoneIsExist = Meteor.users.findOne({'profile.phone' : options.profile.phone});
+  console.log(userPhoneIsExist);
+  if (userPhoneIsExist) {
+    throw new Meteor.Error('Phone is exist');
+  }
+
   console.log(user._id);
   user.profile = options.profile;
   if (user.profile) {
