@@ -50,7 +50,7 @@ div(flex='100')
         div(flex='10' layout='row' layout-align='center center')
             md-checkbox(aria-label='isTrade' md-no-ink ng-model='addRealtyFull.realty.owner.isTrade').md-primary.md-subhead.mb-0 Торг
         div(flex='20')
-            md-input-container().form-required
+            md-input-container().form-required.w-100
                 label Коммунальные
                 md-select(ng-model='outgoingCallDetails.realty.details.communal' required='')
                     md-option(ng-value='communal.id' ng-repeat="communal in outgoingCallDetails.dictionary.communal") {{communal.name}}
@@ -76,7 +76,7 @@ div(flex='100')
                     md-input-container(ng-class='{"form-required":outgoingCallDetails.realty.roomcount != 1}')
                         input(name='roomsSquare' ng-model='outgoingCallDetails.realty.details.roomsSquare' ng-required='outgoingCallDetails.realty.roomcount != 1' placeholder='Площадь комнат')
                 div(flex='30' flex-offset='5')
-                    md-input-container().form-required
+                    md-input-container().form-required.w-100
                         label Ремонт
                         md-select(ng-model='outgoingCallDetails.realty.details.renovation' required='').outgoing-call__remont
                             md-option(ng-value='renovation.id' ng-repeat="renovation in outgoingCallDetails.dictionary.renovation") {{renovation.name}}

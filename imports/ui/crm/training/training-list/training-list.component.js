@@ -21,8 +21,8 @@ class TrainingList {
 
   }
 
-  goToLesson (isAvailable, num) {
-    if(isAvailable){
+  goToLesson (index, num) {
+    if(index < 4){
      	this.$state.go('crm.training.lesson', {number:num});
     }
   }

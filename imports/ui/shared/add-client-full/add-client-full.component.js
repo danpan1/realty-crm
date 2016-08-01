@@ -69,7 +69,7 @@ class AddClientFull {
         console.log(error);
       } else {
         console.log(result);
-        this.state.go('crm.clients.details.suit', {client: result, suitby: 'my'});
+        this.state.go('crm.clients.details.info', {client: result, activetab: 'info'});
       }
     });
     this.resetClient();

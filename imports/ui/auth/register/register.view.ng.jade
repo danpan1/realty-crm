@@ -13,10 +13,11 @@ md-content
     div(layout='column', layout-align='center center').p-32
         div(md-whiteframe='2').register-form.p-32
 
-            md-toolbar(ng-show='register.error', layout='row', layout-align='center center').md-warn.mb-16
+            md-toolbar(ng-show='register.error', layout='row', layout-align='center center').md-warn.mb-16.ph-16
                 p(ng-if='register.error == 1').md-body-1 Телефон обязателен для регистрации
                 p(ng-if='register.error == 2').md-body-1 Этот Email уже зарегистрирован
-                p(ng-if='register.error == 3').md-body-1 Неизвестная ошибка. Попробуйте позже
+                p(ng-if='register.error == 3').md-body-1 Этот телефон уже используется в системе
+                p(ng-if='register.error == 4').md-body-1 Неизвестная ошибка. Попробуйте позже
             form(name='registerForm' ng-submit='register.register()')
                 div(layout='row' layout-align='center center')
                     phone-mask(layout='row' flex='80' ng-if='register.credentials.profile' label='"Телефон"' phone='register.credentials.profile.phone').mt-16
@@ -34,7 +35,7 @@ md-content
                     md-input-container(flex='80').md-block.form-required.m-0
                         label Email
                         input(type='email', ng-model='register.credentials.email', required='')
-                div(layout='row' layout-align='center center')
+                div(layout='row' layout-align='center center').mb-16.pb-8
                     md-input-container(flex='80').md-block.form-required.m-0
                         label Выбрать город
                         md-select(required ng-model='register.credentials.profile.city' aria-label='Выбрать город')

@@ -7,6 +7,10 @@ import {_} from 'meteor/underscore';
 
 if (Meteor.isServer) {
   Meteor.publish('newList', function (options, search, segmentsClient) {
+
+      console.log('==== segmentsClient ====');
+      console.log(segmentsClient);
+
       let selector;
       if (this.userId) {
         let segments = [];
@@ -44,7 +48,7 @@ if (Meteor.isServer) {
           roomcount: 3
         }];
         
-        if (!segmentsClient || !segmentsClient[0] || segmentsClient.indexOf(3) > -1 ) {
+        if (!segmentsClient || segmentsClient[0] == undefined || segmentsClient.indexOf(3) > -1 ) {
           segments = segments.concat(econom);
           segments = segments.concat(business);
           segments = segments.concat(premium);

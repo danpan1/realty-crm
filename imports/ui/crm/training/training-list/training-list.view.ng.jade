@@ -7,9 +7,9 @@ div(layout-wrap layout='row').mv-16
     //            h1.training__lesson-title.md-headline.mv-8 Интенсив {{lesson.number}} день
     //        section(flex='40' layout='column' layout-align='center center').p-4.pt-8
     //            img(ng-src='{{lesson.picture}}')
-    div(ng-repeat='lesson in trainingList.lessons' ng-class='{"disabled":!lesson.available}' flex='50').p-16
+    div(ng-repeat='lesson in trainingList.lessons' ng-class='{"disabled":$index > 3}' flex='50').p-16
         div(md-whiteframe='2' layout='row'
-            ng-click='trainingList.goToLesson(lesson.available, lesson.number)').training__lesson
+            ng-click='trainingList.goToLesson($index, lesson.number)').training__lesson
             section(flex='60').p-8.pl-16
                 h3(ng-if='!lesson.intensiv').training__lesson-number.mv-4 Занятие №{{lesson.number}}
                 h1(ng-if='!lesson.intensiv').training__lesson-title.md-headline.mv-8 {{lesson.title}}
