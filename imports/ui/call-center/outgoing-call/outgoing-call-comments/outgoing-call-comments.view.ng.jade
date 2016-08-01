@@ -8,13 +8,13 @@ div().outgoing-call__photo
 div(md-whiteframe='2').mt-0.mb-16
     div(md-whiteframe='1' layout='row').ph-16.pv-8
         div(flex='100')
-            md-input-container(md-no-float layout='row').form-required
+            md-input-container(md-no-float layout='row')
                 label Комментарий оператора
-                textarea(type="text" required ng-model='outgoingCallComments.realty.operator.comment')
+                textarea(type="text" ng-model='outgoingCallComments.realty.operator.comment')
 
 div(md-whiteframe='2').mv-16
     div(md-whiteframe='1' layout='row').ph-16.pv-8
         div(flex='100')
-            md-input-container(md-no-float layout='row').form-required
+            md-input-container(md-no-float layout='row')
                 label Комментарий риелтора
-                textarea(type="text" required ng-model='outgoingCallComments.realty.realtor.comment')
+                textarea(type="text" ng-model='outgoingCallComments.realty.realtor.comment')

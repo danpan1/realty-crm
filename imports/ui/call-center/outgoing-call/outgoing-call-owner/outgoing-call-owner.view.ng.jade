@@ -23,6 +23,6 @@ div(layout='row')
                     span().md-subhead.ml-16 %
 div(layout='row').mt-16
     div(flex='55')
-        md-input-container(md-no-float layout='row').form-required
+        md-input-container(md-no-float layout='row')
             label Комментарий о собственнике
-            textarea(type="text" require='' ng-model='outgoingCallOwner.realty.owner.comment')
+            textarea(type="text" ng-model='outgoingCallOwner.realty.owner.comment')
