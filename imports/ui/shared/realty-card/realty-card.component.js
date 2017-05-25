@@ -23,6 +23,11 @@ class RealtyCard {
     this.specNumber = 0;
     var vm = this;
 
+    // if(!this.realty) return;
+
+    console.log('RealtyCard');
+    console.log(this.realty);
+
     this.contacts = {};   
     if (this.realty.status == 'connection' || this.realty.status == 'taken') this.onShowDetails(true); 
 

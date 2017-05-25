@@ -71,18 +71,18 @@ if (Meteor.isServer) {
         }
 
         selector = {
-          $and: [
-            {
-              $or: [
-                {status: 'ocean'},
-                {status: 'transaction', transactionUser: this.userId},
-                {status: 'taken', 'realtor.id': this.userId}
-              ]
-            },
-            {
-              $or: segments
-            }
-          ]
+          // $and: [
+          //   {
+          //     $or: [
+                // {status: 'ocean'},
+                // {status: 'transaction', transactionUser: this.userId},
+                // {status: 'taken', 'realtor.id': this.userId}
+              // ]
+            // }
+          //   {
+          //     $or: segments
+          //   }
+          // ]
         }
         ;
         if (search) {

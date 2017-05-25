@@ -154,6 +154,7 @@ class RealtyNewList {
         return Subscribe.findOne();
       },*/
       realty: () => {
+        console.log(Realty.find({}).fetch());
         return Realty.find({}, {
           sort: vm.getReactively('sort')
         });
